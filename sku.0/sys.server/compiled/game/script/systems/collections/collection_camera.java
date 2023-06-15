@@ -1,5 +1,11 @@
 package script.systems.collections;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.utils;
 
@@ -15,6 +21,7 @@ public class collection_camera extends script.base_script
     public static final string_id MUST_DISMOUNT = new string_id("collection", "must_dismount");
     public static final string_id CREATURE_IS_DEAD = new string_id("collection", "creature_is_dead");
     public static final String PHOTO_COLLECTION = "col_photo_durni_01";
+
     public collection_camera()
     {
     }
@@ -147,6 +154,5 @@ public class collection_camera extends script.base_script
     public void photoSlotComplete(obj_id player) throws InterruptedException
     {
         sendSystemMessage(player, SID_PHOTO_SLOT_COMPLETE);
-        return;
     }
 }

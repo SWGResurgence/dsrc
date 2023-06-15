@@ -1,5 +1,11 @@
 package script.systems.crafting.furniture.specific_item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.draft_schematic;
 import script.library.craftinglib;
 import script.obj_id;
@@ -46,6 +52,7 @@ public class panel2 extends script.systems.crafting.furniture.crafting_base_furn
                                     new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
                             })
             };
+
     public panel2()
     {
     }

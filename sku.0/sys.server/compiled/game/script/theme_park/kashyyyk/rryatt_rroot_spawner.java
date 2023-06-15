@@ -1,5 +1,11 @@
 package script.theme_park.kashyyyk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -10,9 +16,6 @@ import script.obj_id;
 
 public class rryatt_rroot_spawner extends script.base_script
 {
-    public rryatt_rroot_spawner()
-    {
-    }
     public static final String triggerName = "triggerVolumeSpawnRroot";
     public static final float triggerRange = 100.0f;
     public static final String rrootSpawned = "spawned.rrootSpawned";
@@ -20,16 +23,22 @@ public class rryatt_rroot_spawner extends script.base_script
     public static final String rrootOwner = "spawned.rrootOwner";
     public static final String rrootParent = "spawned.rrootParent";
     public static final boolean doLogging = false;
+    public rryatt_rroot_spawner()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         establishTriggerVolume(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         establishTriggerVolume(self);
         return SCRIPT_CONTINUE;
     }
+
     public void establishTriggerVolume(obj_id self) throws InterruptedException
     {
         if (!hasTriggerVolume(self, triggerName))
@@ -40,6 +49,7 @@ public class rryatt_rroot_spawner extends script.base_script
         }
         doLogging("establishTriggerVolume", "Trigger Volume(" + triggerName + "/" + triggerRange + ") already established");
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (volumeName.equals(triggerName))
@@ -54,6 +64,7 @@ public class rryatt_rroot_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (volumeName.equals(triggerName))
@@ -68,10 +79,12 @@ public class rryatt_rroot_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasRrootQuest(obj_id player) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "ep3_kymayrr_rescue_rroot");
     }
+
     public void generateRroot(obj_id self, obj_id player) throws InterruptedException
     {
         location spawnLoc = getLocation(self);
@@ -84,21 +97,24 @@ public class rryatt_rroot_spawner extends script.base_script
         utils.setScriptVar(rroot, rrootParent, self);
         messageTo(rroot, "destroyRroot", null, 300, false);
     }
+
     public boolean ownsThisSpawn(obj_id self, obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(self, rrootOwner))
         {
             return (utils.getObjIdScriptVar(self, rrootOwner) == player);
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public boolean isGettingKey(obj_id player) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_kymayrr_rescue_rroot", "taskRecoverCode");
     }
+
     public void handlePlayerDepart(obj_id self) throws InterruptedException
     {
         destroyObject(utils.getObjIdScriptVar(self, rrootId));
@@ -106,10 +122,12 @@ public class rryatt_rroot_spawner extends script.base_script
         utils.removeScriptVar(self, rrootId);
         utils.removeScriptVar(self, rrootOwner);
     }
+
     public boolean isRrootAvailable(obj_id self) throws InterruptedException
     {
         return (!utils.hasScriptVar(self, rrootSpawned));
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (doLogging)
@@ -117,11 +135,13 @@ public class rryatt_rroot_spawner extends script.base_script
             LOG("debug/rryatt_rroot_spawner/" + section, message);
         }
     }
+
     public int destroyRroot(obj_id self, dictionary params) throws InterruptedException
     {
         handlePlayerDepart(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (doLogging)

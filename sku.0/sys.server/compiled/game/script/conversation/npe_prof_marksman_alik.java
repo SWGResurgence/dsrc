@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,78 +14,67 @@ import script.*;
 
 public class npe_prof_marksman_alik extends script.base_script
 {
+    public static String c_stringFile = "conversation/npe_prof_marksman_alik";
+
     public npe_prof_marksman_alik()
     {
     }
-    public static String c_stringFile = "conversation/npe_prof_marksman_alik";
+
     public boolean npe_prof_marksman_alik_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean npe_prof_marksman_alik_condition_completeDalyrakes(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/npe_prof_marksman", "npe_prof_marksman_kill_dalyrakes"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/npe_prof_marksman", "npe_prof_marksman_kill_dalyrakes");
     }
+
     public boolean npe_prof_marksman_alik_condition_completeDroids(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/npe_prof_marksman", "npe_prof_marksman_kill_droids"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/npe_prof_marksman", "npe_prof_marksman_kill_droids");
     }
+
     public boolean npe_prof_marksman_alik_condition_completeSmugglers(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/npe_prof_marksman", "npe_prof_marksman_kill_droids"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/npe_prof_marksman", "npe_prof_marksman_kill_droids");
     }
+
     public boolean npe_prof_marksman_alik_condition_isOnTask1(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/npe_prof_marksman", "npe_prof_marksman_kill_dalyrakes"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/npe_prof_marksman", "npe_prof_marksman_kill_dalyrakes");
     }
+
     public boolean npe_prof_marksman_alik_condition_isOnTask2(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/npe_prof_marksman", "npe_prof_marksman_kill_droids"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/npe_prof_marksman", "npe_prof_marksman_kill_droids");
     }
+
     public boolean npe_prof_marksman_alik_condition_isOnTask3(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/npe_prof_marksman", "npe_prof_marksman_kill_smugglers"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/npe_prof_marksman", "npe_prof_marksman_kill_smugglers");
     }
+
     public void npe_prof_marksman_alik_action_grantQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/npe_prof_marksman");
     }
+
     public void npe_prof_marksman_alik_action_startTaskThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "start_task_3");
     }
+
     public void npe_prof_marksman_alik_action_startTaskTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "start_task_2");
     }
+
     public void npe_prof_marksman_alik_action_Reward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "marksman_weapons_reward");
     }
+
     public int npe_prof_marksman_alik_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_122"))
@@ -95,6 +90,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_100"))
@@ -115,7 +111,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -124,7 +120,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -151,7 +147,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -160,7 +156,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -183,6 +179,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_104"))
@@ -202,7 +199,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_108");
@@ -211,7 +208,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -222,6 +219,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_108"))
@@ -241,7 +239,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_112");
@@ -250,7 +248,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -261,6 +259,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_112"))
@@ -278,6 +277,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_70"))
@@ -298,7 +298,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -307,7 +307,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -334,7 +334,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -343,7 +343,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -366,6 +366,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_74"))
@@ -385,7 +386,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -394,7 +395,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -405,6 +406,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -431,7 +433,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82");
@@ -444,7 +446,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -455,6 +457,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_82"))
@@ -475,7 +478,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_86");
@@ -484,7 +487,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -511,7 +514,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_86");
@@ -520,7 +523,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -531,6 +534,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_86"))
@@ -547,6 +551,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_74"))
@@ -566,7 +571,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -575,7 +580,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -586,6 +591,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38"))
@@ -612,7 +618,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -625,7 +631,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -659,7 +665,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -672,7 +678,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -706,7 +712,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_125");
@@ -719,7 +725,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -730,6 +736,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -750,7 +757,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -759,7 +766,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -782,6 +789,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -809,7 +817,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -822,7 +830,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -833,6 +841,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50"))
@@ -852,7 +861,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -861,7 +870,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -887,7 +896,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_89");
@@ -896,7 +905,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -907,6 +916,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_54"))
@@ -927,7 +937,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -936,7 +946,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -947,6 +957,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_58"))
@@ -974,7 +985,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -987,7 +998,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -998,6 +1009,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_62"))
@@ -1018,7 +1030,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_66");
@@ -1027,7 +1039,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -1054,7 +1066,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_66");
@@ -1063,7 +1075,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -1074,6 +1086,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_66"))
@@ -1090,6 +1103,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_66"))
@@ -1106,6 +1120,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_89"))
@@ -1126,7 +1141,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -1135,7 +1150,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -1146,6 +1161,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_109"))
@@ -1166,7 +1182,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -1175,7 +1191,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -1198,6 +1214,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_prof_marksman_alik_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_125"))
@@ -1218,7 +1235,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -1227,7 +1244,7 @@ public class npe_prof_marksman_alik extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_prof_marksman_alik.branchId");
                     chat.chat(npc, player, message);
@@ -1250,6 +1267,7 @@ public class npe_prof_marksman_alik extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1260,11 +1278,13 @@ public class npe_prof_marksman_alik extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1273,18 +1293,21 @@ public class npe_prof_marksman_alik extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.npe_prof_marksman_alik");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1330,7 +1353,7 @@ public class npe_prof_marksman_alik extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_122");
@@ -1338,7 +1361,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_prof_marksman_alik.branchId", 4);
                 npcStartConversation(player, npc, "npe_prof_marksman_alik", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1374,7 +1397,7 @@ public class npe_prof_marksman_alik extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -1390,7 +1413,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_prof_marksman_alik.branchId", 6);
                 npcStartConversation(player, npc, "npe_prof_marksman_alik", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1426,7 +1449,7 @@ public class npe_prof_marksman_alik extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_70");
@@ -1442,7 +1465,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_prof_marksman_alik.branchId", 11);
                 npcStartConversation(player, npc, "npe_prof_marksman_alik", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1478,7 +1501,7 @@ public class npe_prof_marksman_alik extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_38");
@@ -1494,7 +1517,7 @@ public class npe_prof_marksman_alik extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_prof_marksman_alik.branchId", 18);
                 npcStartConversation(player, npc, "npe_prof_marksman_alik", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1503,6 +1526,7 @@ public class npe_prof_marksman_alik extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("npe_prof_marksman_alik"))

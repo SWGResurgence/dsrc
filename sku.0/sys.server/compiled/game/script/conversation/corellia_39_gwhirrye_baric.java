@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,34 +14,42 @@ import script.*;
 
 public class corellia_39_gwhirrye_baric extends script.base_script
 {
+    public static String c_stringFile = "conversation/corellia_39_gwhirrye_baric";
+
     public corellia_39_gwhirrye_baric()
     {
     }
-    public static String c_stringFile = "conversation/corellia_39_gwhirrye_baric";
+
     public boolean corellia_39_gwhirrye_baric_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean corellia_39_gwhirrye_baric_condition_seekCouncilActive(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "corellia_39_chirq_council_01") && groundquests.hasCompletedTask(player, "corellia_39_chirq_council_01", "chirq_council_01_05");
     }
+
     public boolean corellia_39_gwhirrye_baric_condition_seekCouncilLast(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_39_chirq_council_01", "chirq_council_01_08") || groundquests.hasCompletedTask(player, "corellia_39_chirq_council_01", "chirq_council_01_08");
     }
+
     public boolean corellia_39_gwhirrye_baric_condition_questComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "corellia_39_chirq_council_01");
     }
+
     public boolean corellia_39_gwhirrye_baric_condition_seekCouncilFirst(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_39_chirq_council_01", "chirq_council_01_05");
     }
+
     public void corellia_39_gwhirrye_baric_action_seekCouncilFirstSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "chirq_council_01_05");
     }
+
     public int corellia_39_gwhirrye_baric_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -55,7 +69,7 @@ public class corellia_39_gwhirrye_baric extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -64,7 +78,7 @@ public class corellia_39_gwhirrye_baric extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_39_gwhirrye_baric.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -74,6 +88,7 @@ public class corellia_39_gwhirrye_baric extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_39_gwhirrye_baric_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44"))
@@ -89,6 +104,7 @@ public class corellia_39_gwhirrye_baric extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -98,11 +114,13 @@ public class corellia_39_gwhirrye_baric extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -111,18 +129,21 @@ public class corellia_39_gwhirrye_baric extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.corellia_39_gwhirrye_baric");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -163,7 +184,7 @@ public class corellia_39_gwhirrye_baric extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -171,7 +192,7 @@ public class corellia_39_gwhirrye_baric extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_39_gwhirrye_baric.branchId", 4);
                 npcStartConversation(player, npc, "corellia_39_gwhirrye_baric", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -186,6 +207,7 @@ public class corellia_39_gwhirrye_baric extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("corellia_39_gwhirrye_baric"))

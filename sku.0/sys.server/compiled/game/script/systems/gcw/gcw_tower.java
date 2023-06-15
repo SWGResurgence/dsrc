@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -132,7 +138,6 @@ public class gcw_tower extends script.base_script
         setInvulnerable(self, true);
         messageTo(self, "destroyGCWTower", null, 1.0f, false);
         gcw.gcwInvasionCreditForDestroy(killer);
-        return;
     }
 
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
@@ -159,7 +164,7 @@ public class gcw_tower extends script.base_script
         {
             faction = utils.getIntScriptVar(self, "faction");
         }
-        if (objects != null && objects.length > 0)
+        if (objects != null)
         {
             for (obj_id object : objects)
             {

@@ -1,5 +1,11 @@
 package script.item.comestible;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.player_stomach;
 import script.library.utils;
 import script.*;
@@ -9,6 +15,7 @@ public class dead_eye extends script.base_script
     public static final string_id SID_DEAD_EYE_ACTIVE = new string_id("combat_effects", "dead_eye_active");
     public static final string_id SID_DEAD_EYE_ALREADY = new string_id("combat_effects", "dead_eye_already");
     public static final string_id SID_DEAD_EYE_WAIT = new string_id("combat_effects", "dead_eye_wait");
+
     public dead_eye()
     {
     }

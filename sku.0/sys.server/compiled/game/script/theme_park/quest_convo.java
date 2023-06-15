@@ -1,5 +1,11 @@
 package script.theme_park;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.location;
 import script.obj_id;
@@ -10,12 +16,14 @@ public class quest_convo extends script.base_script
     public quest_convo()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -62,20 +70,20 @@ public class quest_convo extends script.base_script
             String response1 = "player_reset";
             String response2 = "player_sorry";
             string_id greeting = new string_id(CONVO, npcGreet);
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, response1);
             response[1] = new string_id(CONVO, response2);
             npcStartConversation(speaker, self, "questConvo", greeting, response);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             String npcGreet = "npc_1_" + questNum;
             String response1 = "player_1_" + questNum;
             String response2 = "player_2_" + questNum;
             String response3 = "player_3_" + questNum;
             string_id greeting = new string_id(CONVO, npcGreet);
-            string_id response[] = new string_id[3];
+            string_id[] response = new string_id[3];
             response[0] = new string_id(CONVO, response1);
             response[1] = new string_id(CONVO, response2);
             response[2] = new string_id(CONVO, response3);
@@ -83,6 +91,7 @@ public class quest_convo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -100,7 +109,7 @@ public class quest_convo extends script.base_script
         {
             home = getLocation(self);
         }
-        else 
+        else
         {
             home = getLocation(npcOrBldg);
         }
@@ -121,7 +130,7 @@ public class quest_convo extends script.base_script
                 npcEndConversation(player);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 String npcAnswer1 = "npc_2_" + questNum;
                 string_id message = new string_id(CONVO, npcAnswer1);
@@ -179,6 +188,7 @@ public class quest_convo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getQuestNumber(int gating, int minGating) throws InterruptedException
     {
         int questNum = gating - minGating;
@@ -188,6 +198,7 @@ public class quest_convo extends script.base_script
         }
         return questNum;
     }
+
     public void giveReward(obj_id self, obj_id player, int questNum) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -213,7 +224,7 @@ public class quest_convo extends script.base_script
             money.bankTo(money.ACCT_JABBA, player, 100);
             factions.addFactionStanding(player, "Hutt", factionReward);
         }
-        else 
+        else
         {
             sendSystemMessage(player, "Your reward has been placed in your backpack.", null);
             createObject(reward, playerInv, "");
@@ -226,8 +237,8 @@ public class quest_convo extends script.base_script
         {
             detachScript(player, playerScript);
         }
-        return;
     }
+
     public void resetPlayer(obj_id self, obj_id player, int questNum) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -248,6 +259,5 @@ public class quest_convo extends script.base_script
         {
             detachScript(player, playerScript);
         }
-        return;
     }
 }

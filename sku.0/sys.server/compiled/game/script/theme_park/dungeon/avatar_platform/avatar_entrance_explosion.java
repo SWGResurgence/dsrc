@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.location;
@@ -8,12 +14,13 @@ import script.string_id;
 
 public class avatar_entrance_explosion extends script.base_script
 {
-    public avatar_entrance_explosion()
-    {
-    }
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id OPENING = new string_id(STF, "trando_chat_01");
     public static final string_id RESPONSE = new string_id(STF, "trando_chat_02");
+    public avatar_entrance_explosion()
+    {
+    }
+
     public int OnReceivedItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -31,14 +38,17 @@ public class avatar_entrance_explosion extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void startExplosionFinal(obj_id player, obj_id self) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
         obj_id[] items = getContents(self);
-        if (items != null && items.length > 0)
+        if (items != null)
         {
-            for (obj_id item : items) {
-                if (isPlayer(item)) {
+            for (obj_id item : items)
+            {
+                if (isPlayer(item))
+                {
                     startExplosionSequence(player, self);
                     setObjVar(structure, "avatar_platform.explosion_sequence_hall", 1);
                     return;
@@ -49,8 +59,8 @@ public class avatar_entrance_explosion extends script.base_script
         {
             removeObjVar(structure, "avatar_platform.explosion_sequence_hall");
         }
-        return;
     }
+
     public void startExplosionSequence(obj_id player, obj_id self) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -62,8 +72,8 @@ public class avatar_entrance_explosion extends script.base_script
         location explosionPnt = new location(91.1f, 0.0f, 24.4f, planet, entrance);
         playClientEffectLoc(player, "clienteffect/avatar_hallway_explosion.cef", explosionPnt, 0.0f);
         messageTo(self, "handleMoreExplosion01", info, 2.0f, false);
-        return;
     }
+
     public int handleMoreExplosion01(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -78,6 +88,7 @@ public class avatar_entrance_explosion extends script.base_script
         messageTo(self, "handleMoreExplosion02", info, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMoreExplosion02(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -92,6 +103,7 @@ public class avatar_entrance_explosion extends script.base_script
         messageTo(self, "handleMoreExplosion03", info, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMoreExplosion03(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -106,6 +118,7 @@ public class avatar_entrance_explosion extends script.base_script
         messageTo(self, "handleMoreExplosion04", info, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMoreExplosion04(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -120,6 +133,7 @@ public class avatar_entrance_explosion extends script.base_script
         messageTo(self, "handleMoreExplosion05", info, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMoreExplosion05(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -134,6 +148,7 @@ public class avatar_entrance_explosion extends script.base_script
         messageTo(self, "handleMoreExplosion06", info, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMoreExplosion06(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -148,6 +163,7 @@ public class avatar_entrance_explosion extends script.base_script
         messageTo(self, "handleMoreExplosion07", info, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMoreExplosion07(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -162,14 +178,17 @@ public class avatar_entrance_explosion extends script.base_script
         messageTo(self, "handlePlayerCheck", info, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerCheck(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
         obj_id[] items = getContents(self);
-        if (items != null && items.length > 0)
+        if (items != null)
         {
-            for (obj_id item : items) {
-                if (isPlayer(item)) {
+            for (obj_id item : items)
+            {
+                if (isPlayer(item))
+                {
                     startExplosionSequence(item, self);
                     setObjVar(structure, "avatar_platform.explosion_sequence_hall", 1);
                     return SCRIPT_CONTINUE;

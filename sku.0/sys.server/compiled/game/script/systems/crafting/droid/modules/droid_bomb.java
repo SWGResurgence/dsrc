@@ -1,5 +1,11 @@
 package script.systems.crafting.droid.modules;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.combat_engine.hit_result;
 import script.combat_engine.weapon_data;
 import script.*;
@@ -219,6 +225,5 @@ public class droid_bomb extends script.base_script
             }
         }
         destroyObject(pet_control);
-        return;
     }
 }

@@ -1,5 +1,11 @@
 package script.theme_park.meatlump.hideout;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.buff;
 import script.library.structure;
@@ -10,22 +16,25 @@ import java.util.Vector;
 
 public class hideout_angry_meatlump_spawner extends script.base_script
 {
-    public hideout_angry_meatlump_spawner()
-    {
-    }
     public static final String ELIGIBLE_OBJVAR = "angryMeatlumpsEligible";
     public static final String ANGRY_MEATLUMPS_LIST_SCRIPTVAR = "angryMeatlumpsList";
     public static final String HIDEOUT_ID_OBJVAR = "angryMeatlump.hideout";
     public static final int MAX_NUM_ANGRY_MEATLUMPS = 19;
+    public hideout_angry_meatlump_spawner()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitializeAngryMeatlumps", null, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleInitializeAngryMeatlumps(obj_id self, dictionary params) throws InterruptedException
     {
         Vector angryMeatlumps = new Vector();
@@ -36,7 +45,7 @@ public class hideout_angry_meatlump_spawner extends script.base_script
             while (angryMeatlumps.size() < MAX_NUM_ANGRY_MEATLUMPS && eligibleMeatlumps.size() > 0)
             {
                 int index = rand(0, eligibleMeatlumps.size() - 1);
-                obj_id chosenMeatlump = ((obj_id)eligibleMeatlumps.get(index));
+                obj_id chosenMeatlump = ((obj_id) eligibleMeatlumps.get(index));
                 if (isIdValid(chosenMeatlump))
                 {
                     buff.applyBuff(chosenMeatlump, "mtp_meatlump_angry");
@@ -56,6 +65,7 @@ public class hideout_angry_meatlump_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int makeNewAngryMeatlump(obj_id self, dictionary params) throws InterruptedException
     {
         Vector angryMeatlumps = new Vector();
@@ -83,7 +93,7 @@ public class hideout_angry_meatlump_spawner extends script.base_script
         if (eligibleMeatlumps != null && eligibleMeatlumps.size() > 0)
         {
             int index = rand(0, eligibleMeatlumps.size() - 1);
-            obj_id chosenMeatlump = ((obj_id)eligibleMeatlumps.get(index));
+            obj_id chosenMeatlump = ((obj_id) eligibleMeatlumps.get(index));
             if (isIdValid(chosenMeatlump))
             {
                 buff.applyBuff(chosenMeatlump, "mtp_meatlump_angry");
@@ -101,20 +111,27 @@ public class hideout_angry_meatlump_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public Vector findEligibleMeatlumps(obj_id hideout) throws InterruptedException
     {
         Vector eligibleMeatlumps = new Vector();
         eligibleMeatlumps.setSize(0);
         obj_id[] cellList = getContents(hideout);
-        if (cellList != null && cellList.length > 0)
+        if (cellList != null)
         {
-            for (obj_id cell : cellList) {
-                if ((getTemplateName(cell)).equals(structure.TEMPLATE_CELL)) {
+            for (obj_id cell : cellList)
+            {
+                if ((getTemplateName(cell)).equals(structure.TEMPLATE_CELL))
+                {
                     obj_id[] cellContents = getContents(cell);
-                    if (cellContents != null && cellContents.length > 0) {
-                        for (obj_id thing : cellContents) {
-                            if (isMob(thing) && !isPlayer(thing)) {
-                                if (hasObjVar(thing, ELIGIBLE_OBJVAR) && !buff.hasBuff(thing, "mtp_meatlump_angry") && !buff.hasBuff(thing, "mtp_meatlump_happy")) {
+                    if (cellContents != null)
+                    {
+                        for (obj_id thing : cellContents)
+                        {
+                            if (isMob(thing) && !isPlayer(thing))
+                            {
+                                if (hasObjVar(thing, ELIGIBLE_OBJVAR) && !buff.hasBuff(thing, "mtp_meatlump_angry") && !buff.hasBuff(thing, "mtp_meatlump_happy"))
+                                {
                                     utils.addElement(eligibleMeatlumps, thing);
                                 }
                             }

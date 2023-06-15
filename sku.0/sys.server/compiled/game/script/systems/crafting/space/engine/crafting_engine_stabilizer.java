@@ -1,5 +1,11 @@
 package script.systems.crafting.space.engine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -64,6 +70,7 @@ public class crafting_engine_stabilizer extends script.systems.crafting.space.en
                                     new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
                             })
             };
+
     public crafting_engine_stabilizer()
     {
     }

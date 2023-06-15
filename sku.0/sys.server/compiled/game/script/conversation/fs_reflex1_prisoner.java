@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -8,66 +14,54 @@ import script.library.quests;
 
 public class fs_reflex1_prisoner extends script.base_script
 {
+    public static String c_stringFile = "conversation/fs_reflex1_prisoner";
+
     public fs_reflex1_prisoner()
     {
     }
-    public static String c_stringFile = "conversation/fs_reflex1_prisoner";
+
     public boolean fs_reflex1_prisoner_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean fs_reflex1_prisoner_condition_combatNotReady(obj_id player, obj_id npc) throws InterruptedException
     {
         if (ai_lib.isInCombat(npc))
         {
             return true;
         }
-        if (!hasObjVar(npc, "player"))
-        {
-            return true;
-        }
-        return false;
+        return !hasObjVar(npc, "player");
     }
+
     public boolean fs_reflex1_prisoner_condition_notCorrectPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "player"))
         {
             obj_id target = getObjIdObjVar(npc, "player");
-            if (target != player)
-            {
-                return true;
-            }
+            return target != player;
         }
-        else 
+        else
         {
             return true;
         }
-        return false;
     }
+
     public boolean fs_reflex1_prisoner_condition_isSafe(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(npc, "safe"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(npc, "safe");
     }
+
     public boolean fs_reflex1_prisoner_condition_isInProgress(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(npc, "in_progress"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(npc, "in_progress");
     }
+
     public boolean fs_reflex1_prisoner_condition_hasFailed(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(player, "quest.fs_reflex1.failed"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "quest.fs_reflex1.failed");
     }
+
     public void fs_reflex1_prisoner_action_complete_quest(obj_id player, obj_id npc) throws InterruptedException
     {
         setInvulnerable(npc, false);
@@ -76,6 +70,7 @@ public class fs_reflex1_prisoner extends script.base_script
         quests.complete("fs_reflex_rescue_quest_02", player, true);
         setObjVar(npc, "in_progress", 1);
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -87,6 +82,7 @@ public class fs_reflex1_prisoner extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         factions.setFaction(self, "fs_villager", false);
@@ -94,6 +90,7 @@ public class fs_reflex1_prisoner extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -102,34 +99,40 @@ public class fs_reflex1_prisoner extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.fs_reflex1_prisoner");
         return SCRIPT_CONTINUE;
     }
+
     public int handleTaskDestroyOnArrival(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTaskArrived(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "safe", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetupPrisoner(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
         setObjVar(self, "player", player);
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -176,6 +179,7 @@ public class fs_reflex1_prisoner extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("fs_reflex1_prisoner"))

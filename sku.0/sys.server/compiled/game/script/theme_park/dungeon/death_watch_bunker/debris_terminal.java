@@ -1,18 +1,27 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class debris_terminal extends script.base_script
 {
+    public static final String MSGS = "dungeon/death_watch";
+
     public debris_terminal()
     {
     }
-    public static final String MSGS = "dungeon/death_watch";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Clearance Terminal");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -23,6 +32,7 @@ public class debris_terminal extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -31,13 +41,14 @@ public class debris_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void destroyDebris(obj_id self) throws InterruptedException
     {
         obj_id debris = getObjIdObjVar(self, "mom");
         destroyObject(debris);
         messageTo(self, "cleanUpTime", null, 30, false);
-        return;
     }
+
     public int cleanUpTime(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

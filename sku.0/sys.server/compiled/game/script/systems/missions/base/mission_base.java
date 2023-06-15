@@ -1,5 +1,11 @@
 package script.systems.missions.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -32,6 +38,7 @@ public class mission_base extends script.base_script
     public static final int INFORMANT_MEDIUM = 2;
     public static final int INFORMANT_HARD = 3;
     public static final float SPAWN_OVERLOAD_DIFFICULTY_MODIFIER = 0.50f;
+
     public mission_base()
     {
     }
@@ -40,7 +47,7 @@ public class mission_base extends script.base_script
     {
         int intMin;
         int intMax;
-        intMin = 0 - intVariance;
+        intMin = -intVariance;
         intMax = intVariance;
         locCenter.x = locCenter.x + rand(intMin, intMax);
         locCenter.z = locCenter.x + rand(intMin, intMax);
@@ -54,7 +61,6 @@ public class mission_base extends script.base_script
 
     public void addListener(obj_id objListener, obj_id objTarget) throws InterruptedException
     {
-        return;
     }
 
     public int getMissionBondAmount(obj_id objMission) throws InterruptedException
@@ -69,12 +75,10 @@ public class mission_base extends script.base_script
 
     public void removeListener(obj_id objListener, obj_id objTarget) throws InterruptedException
     {
-        return;
     }
 
     public void messageListeners(obj_id objOwner, String strMessageName, dictionary dctParams) throws InterruptedException
     {
-        return;
     }
 
     public void deliverReward(obj_id objMission) throws InterruptedException
@@ -281,7 +285,6 @@ public class mission_base extends script.base_script
                 }
             }
         }
-        return;
     }
 
     public obj_id getValidPayTarget(obj_id player, int money) throws InterruptedException
@@ -307,17 +310,14 @@ public class mission_base extends script.base_script
 
     public void setupBountyMissionObject(obj_id objMission) throws InterruptedException
     {
-        return;
     }
 
     public void cleanupBountyMission(obj_id objMission) throws InterruptedException
     {
-        return;
     }
 
     public void returnReward(obj_id objMission) throws InterruptedException
     {
-        return;
     }
 
     public int getBountyDifficulty(obj_id objPlayer) throws InterruptedException

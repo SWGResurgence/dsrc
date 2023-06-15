@@ -5,6 +5,12 @@
 
 package script;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 
 import java.io.File;
@@ -659,274 +665,6 @@ public class base_class
     public static final int TRIG_ON_RATING_FINISHED = 301;
     public static final int TRIG_ON_ABANDON_PLAYER_QUEST = 302;
     public static final int TRIG_ON_GCW_SCORE_CATEGORY_PERCENTILE_CHANGE = 303;
-
-
-    /**
-     * @}
-     * @defgroup gameObjectTypes Game Object Types from GameObjectType.def
-     * @{
-     */
-    private static int private_GOT_counter = 0;
-    public static final int GOT_none = private_GOT_counter = 0x00000000;
-    public static final int GOT_corpse = ++private_GOT_counter;
-    public static final int GOT_group = ++private_GOT_counter;
-    public static final int GOT_guild = ++private_GOT_counter;
-    public static final int GOT_lair = ++private_GOT_counter;
-    public static final int GOT_static = ++private_GOT_counter;
-    public static final int GOT_camp = ++private_GOT_counter;
-    public static final int GOT_vendor = ++private_GOT_counter;
-    public static final int GOT_armor = private_GOT_counter = 0x00000100;
-    public static final int GOT_armor_body = ++private_GOT_counter;
-    public static final int GOT_armor_head = ++private_GOT_counter;
-    public static final int GOT_armor_misc = ++private_GOT_counter;
-    public static final int GOT_armor_leg = ++private_GOT_counter;
-    public static final int GOT_armor_arm = ++private_GOT_counter;
-    public static final int GOT_armor_hand = ++private_GOT_counter;
-    public static final int GOT_armor_foot = ++private_GOT_counter;
-    public static final int GOT_armor_shield = ++private_GOT_counter;
-    public static final int GOT_armor_layer = ++private_GOT_counter;
-    public static final int GOT_armor_segment = ++private_GOT_counter;
-    public static final int GOT_armor_core = ++private_GOT_counter;
-    public static final int GOT_armor_psg = ++private_GOT_counter;
-    public static final int GOT_beastmaster_misc = ++private_GOT_counter;
-    public static final int GOT_beastmaster_pet = ++private_GOT_counter;
-    public static final int GOT_building = private_GOT_counter = 0x00000200;
-    public static final int GOT_building_municipal = ++private_GOT_counter;
-    public static final int GOT_building_player = ++private_GOT_counter;
-    public static final int GOT_building_factional = ++private_GOT_counter;
-    public static final int GOT_creature = private_GOT_counter = 0x00000400;
-    public static final int GOT_creature_character = ++private_GOT_counter;
-    public static final int GOT_creature_droid = ++private_GOT_counter;
-    public static final int GOT_creature_droid_probe = ++private_GOT_counter;
-    public static final int GOT_creature_monster = ++private_GOT_counter;
-    public static final int GOT_data = private_GOT_counter = 0x00000800;
-    public static final int GOT_data_draft_schematic = ++private_GOT_counter;
-    public static final int GOT_data_manufacturing_schematic = ++private_GOT_counter;
-    public static final int GOT_data_mission_object = ++private_GOT_counter;
-    public static final int GOT_data_token = ++private_GOT_counter;
-    public static final int GOT_data_waypoint = ++private_GOT_counter;
-    public static final int GOT_data_fictional = ++private_GOT_counter;
-    public static final int GOT_data_pet_control_device = ++private_GOT_counter;
-    public static final int GOT_data_vehicle_control_device = ++private_GOT_counter;
-    public static final int GOT_data_draft_schematic_read_only = ++private_GOT_counter;
-    public static final int GOT_data_ship_control_device = ++private_GOT_counter;
-    public static final int GOT_data_droid_control_device = ++private_GOT_counter;
-    public static final int GOT_data_house_control_device = ++private_GOT_counter;
-    public static final int GOT_data_vendor_control_device = ++private_GOT_counter;
-    public static final int GOT_data_player_quest_object = ++private_GOT_counter;
-    public static final int GOT_installation = private_GOT_counter = 0x00001000;
-    public static final int GOT_installation_factory = ++private_GOT_counter;
-    public static final int GOT_installation_generator = ++private_GOT_counter;
-    public static final int GOT_installation_harvester = ++private_GOT_counter;
-    public static final int GOT_installation_turret = ++private_GOT_counter;
-    public static final int GOT_installation_minefield = ++private_GOT_counter;
-    public static final int GOT_misc = private_GOT_counter = 0x00002000;
-    public static final int GOT_misc_ammunition = ++private_GOT_counter;
-    public static final int GOT_misc_chemical = ++private_GOT_counter;
-    public static final int GOT_misc_clothing_DUMMY = ++private_GOT_counter;
-    public static final int GOT_misc_component_DUMMY = ++private_GOT_counter;
-    public static final int GOT_misc_container = ++private_GOT_counter;
-    public static final int GOT_misc_crafting_station = ++private_GOT_counter;
-    public static final int GOT_misc_deed_DUMMY = ++private_GOT_counter;
-    public static final int GOT_misc_electronics = ++private_GOT_counter;
-    public static final int GOT_misc_flora = ++private_GOT_counter;
-    public static final int GOT_misc_food = ++private_GOT_counter;
-    public static final int GOT_misc_furniture = ++private_GOT_counter;
-    public static final int GOT_misc_instrument = ++private_GOT_counter;
-    public static final int GOT_misc_pharmaceutical = ++private_GOT_counter;
-    public static final int GOT_misc_resource_container_DUMMY = ++private_GOT_counter;
-    public static final int GOT_misc_sign = ++private_GOT_counter;
-    public static final int GOT_misc_counter = ++private_GOT_counter;
-    public static final int GOT_misc_factory_crate = ++private_GOT_counter;
-    public static final int GOT_misc_ticket_travel = ++private_GOT_counter;
-    public static final int GOT_misc_item = ++private_GOT_counter;
-    public static final int GOT_misc_trap = ++private_GOT_counter;
-    public static final int GOT_misc_container_wearable = ++private_GOT_counter;
-    public static final int GOT_misc_fishing_pole = ++private_GOT_counter;
-    public static final int GOT_misc_fishing_bait = ++private_GOT_counter;
-    public static final int GOT_misc_drink = ++private_GOT_counter;
-    public static final int GOT_misc_firework = ++private_GOT_counter;
-    public static final int GOT_misc_item_usable = ++private_GOT_counter;
-    public static final int GOT_misc_petmed = ++private_GOT_counter;
-    public static final int GOT_misc_firework_show = ++private_GOT_counter;
-    public static final int GOT_misc_clothing_attachment = ++private_GOT_counter;
-    public static final int GOT_misc_live_sample = ++private_GOT_counter;
-    public static final int GOT_misc_armor_attachment = ++private_GOT_counter;
-    public static final int GOT_misc_community_crafting_project = ++private_GOT_counter;
-    public static final int GOT_misc_force_crystal = ++private_GOT_counter;
-    public static final int GOT_misc_droid_programming_chip = ++private_GOT_counter;
-    public static final int GOT_misc_misc_asteroid = ++private_GOT_counter;
-    public static final int GOT_misc_pob_ship_pilot_chair = ++private_GOT_counter;
-    public static final int GOT_misc_operations_chair = ++private_GOT_counter;
-    public static final int GOT_misc_turret_access_ladder = ++private_GOT_counter;
-    public static final int GOT_misc_container_ship_loot = ++private_GOT_counter;
-    public static final int GOT_misc_armor_noequip = ++private_GOT_counter;
-    public static final int GOT_misc_enzyme = ++private_GOT_counter;
-    public static final int GOT_misc_food_pet = ++private_GOT_counter;
-    public static final int GOT_misc_collection = ++private_GOT_counter;
-    public static final int GOT_misc_container_public = ++private_GOT_counter;
-    public static final int GOT_misc_ground_target = ++private_GOT_counter;
-    public static final int GOT_misc_blueprint = ++private_GOT_counter;
-    public static final int GOT_misc_enzyme_isomerase = ++private_GOT_counter;
-    public static final int GOT_misc_enzyme_lyase = ++private_GOT_counter;
-    public static final int GOT_misc_enzyme_hydrolase = ++private_GOT_counter;
-    public static final int GOT_misc_tcg_card = ++private_GOT_counter;
-    public static final int GOT_misc_appearance_only = ++private_GOT_counter;
-    public static final int GOT_misc_appearance_only_invisible = ++private_GOT_counter;
-    public static final int GOT_terminal = private_GOT_counter = 0x00004000;
-    public static final int GOT_terminal_bank = ++private_GOT_counter;
-    public static final int GOT_terminal_bazaar = ++private_GOT_counter;
-    public static final int GOT_terminal_cloning = ++private_GOT_counter;
-    public static final int GOT_terminal_insurance = ++private_GOT_counter;
-    public static final int GOT_terminal_manage = ++private_GOT_counter;
-    public static final int GOT_terminal_mission = ++private_GOT_counter;
-    public static final int GOT_terminal_permissions = ++private_GOT_counter;
-    public static final int GOT_terminal_player_structure = ++private_GOT_counter;
-    public static final int GOT_terminal_shipping = ++private_GOT_counter;
-    public static final int GOT_terminal_travel = ++private_GOT_counter;
-    public static final int GOT_terminal_space = ++private_GOT_counter;
-    public static final int GOT_terminal_misc = ++private_GOT_counter;
-    public static final int GOT_terminal_space_npe = ++private_GOT_counter;
-    public static final int GOT_tool = private_GOT_counter = 0x00008000;
-    public static final int GOT_tool_crafting = ++private_GOT_counter;
-    public static final int GOT_tool_survey = ++private_GOT_counter;
-    public static final int GOT_tool_repair = ++private_GOT_counter;
-    public static final int GOT_tool_camp_kit = ++private_GOT_counter;
-    public static final int GOT_tool_ship_component_repair = ++private_GOT_counter;
-    public static final int GOT_vehicle = private_GOT_counter = 0x00010000;
-    public static final int GOT_vehicle_hover = ++private_GOT_counter;
-    public static final int GOT_vehicle_hover_ai = ++private_GOT_counter;
-    public static final int GOT_weapon = private_GOT_counter = 0x00020000;
-    public static final int GOT_weapon_melee_misc = ++private_GOT_counter;
-    public static final int GOT_weapon_ranged_misc = ++private_GOT_counter;
-    public static final int GOT_weapon_ranged_thrown = ++private_GOT_counter;
-    public static final int GOT_weapon_heavy_misc = ++private_GOT_counter;
-    public static final int GOT_weapon_heavy_mine = ++private_GOT_counter;
-    public static final int GOT_weapon_heavy_special = ++private_GOT_counter;
-    public static final int GOT_weapon_melee_1h = ++private_GOT_counter;
-    public static final int GOT_weapon_melee_2h = ++private_GOT_counter;
-    public static final int GOT_weapon_melee_polearm = ++private_GOT_counter;
-    public static final int GOT_weapon_melee_pike = ++private_GOT_counter;
-    public static final int GOT_weapon_ranged_pistol = ++private_GOT_counter;
-    public static final int GOT_weapon_ranged_carbine = ++private_GOT_counter;
-    public static final int GOT_weapon_ranged_rifle = ++private_GOT_counter;
-    public static final int GOT_component = private_GOT_counter = 0x00040000;
-    public static final int GOT_component_armor = ++private_GOT_counter;
-    public static final int GOT_component_chemistry = ++private_GOT_counter;
-    public static final int GOT_component_clothing = ++private_GOT_counter;
-    public static final int GOT_component_droid = ++private_GOT_counter;
-    public static final int GOT_component_electronics = ++private_GOT_counter;
-    public static final int GOT_component_munition = ++private_GOT_counter;
-    public static final int GOT_component_structure = ++private_GOT_counter;
-    public static final int GOT_component_weapon_melee = ++private_GOT_counter;
-    public static final int GOT_component_weapon_ranged = ++private_GOT_counter;
-    public static final int GOT_component_tissue = ++private_GOT_counter;
-    public static final int GOT_component_genetic = ++private_GOT_counter;
-    public static final int GOT_component_saber_crystal = ++private_GOT_counter;
-    public static final int GOT_component_community_crafting = ++private_GOT_counter;
-    public static final int GOT_component_new_armor = ++private_GOT_counter;
-    public static final int GOT_powerup_weapon = private_GOT_counter = 0x00080000;
-    public static final int GOT_powerup_weapon_melee = ++private_GOT_counter;
-    public static final int GOT_powerup_weapon_ranged = ++private_GOT_counter;
-    public static final int GOT_powerup_weapon_thrown = ++private_GOT_counter;
-    public static final int GOT_powerup_weapon_heavy = ++private_GOT_counter;
-    public static final int GOT_powerup_weapon_mine = ++private_GOT_counter;
-    public static final int GOT_powerup_weapon_heavy_special = ++private_GOT_counter;
-    public static final int GOT_powerup_armor = private_GOT_counter = 0x00100000;
-    public static final int GOT_powerup_armor_body = ++private_GOT_counter;
-    public static final int GOT_powerup_armor_head = ++private_GOT_counter;
-    public static final int GOT_powerup_armor_misc = ++private_GOT_counter;
-    public static final int GOT_powerup_armor_leg = ++private_GOT_counter;
-    public static final int GOT_powerup_armor_arm = ++private_GOT_counter;
-    public static final int GOT_powerup_armor_hand = ++private_GOT_counter;
-    public static final int GOT_powerup_armor_foot = ++private_GOT_counter;
-    public static final int GOT_powerup_armor_layer = ++private_GOT_counter;
-    public static final int GOT_powerup_armor_segment = ++private_GOT_counter;
-    public static final int GOT_powerup_armor_core = ++private_GOT_counter;
-    public static final int GOT_jewelry = private_GOT_counter = 0x00200000;
-    public static final int GOT_jewelry_ring = ++private_GOT_counter;
-    public static final int GOT_jewelry_bracelet = ++private_GOT_counter;
-    public static final int GOT_jewelry_necklace = ++private_GOT_counter;
-    public static final int GOT_jewelry_earring = ++private_GOT_counter;
-    public static final int GOT_resource_container = private_GOT_counter = 0x00400000;
-    public static final int GOT_resource_container_energy_gas = ++private_GOT_counter;
-    public static final int GOT_resource_container_energy_liquid = ++private_GOT_counter;
-    public static final int GOT_resource_container_energy_radioactive = ++private_GOT_counter;
-    public static final int GOT_resource_container_energy_solid = ++private_GOT_counter;
-    public static final int GOT_resource_container_inorganic_chemicals = ++private_GOT_counter;
-    public static final int GOT_resource_container_inorganic_gas = ++private_GOT_counter;
-    public static final int GOT_resource_container_inorganic_minerals = ++private_GOT_counter;
-    public static final int GOT_resource_container_inorganic_water = ++private_GOT_counter;
-    public static final int GOT_resource_container_organic_food = ++private_GOT_counter;
-    public static final int GOT_resource_container_organic_hide = ++private_GOT_counter;
-    public static final int GOT_resource_container_organic_structure = ++private_GOT_counter;
-    public static final int GOT_resource_container_pseudo = ++private_GOT_counter;
-    public static final int GOT_deed = private_GOT_counter = 0x00800000;
-    public static final int GOT_deed_building = ++private_GOT_counter;
-    public static final int GOT_deed_installation = ++private_GOT_counter;
-    public static final int GOT_deed_pet = ++private_GOT_counter;
-    public static final int GOT_deed_droid = ++private_GOT_counter;
-    public static final int GOT_deed_vehicle = ++private_GOT_counter;
-    public static final int GOT_clothing = private_GOT_counter = 0x01000000;
-    public static final int GOT_clothing_bandolier = ++private_GOT_counter;
-    public static final int GOT_clothing_belt = ++private_GOT_counter;
-    public static final int GOT_clothing_bodysuit = ++private_GOT_counter;
-    public static final int GOT_clothing_cape = ++private_GOT_counter;
-    public static final int GOT_clothing_cloak = ++private_GOT_counter;
-    public static final int GOT_clothing_foot = ++private_GOT_counter;
-    public static final int GOT_clothing_dress = ++private_GOT_counter;
-    public static final int GOT_clothing_hand = ++private_GOT_counter;
-    public static final int GOT_clothing_eye = ++private_GOT_counter;
-    public static final int GOT_clothing_head = ++private_GOT_counter;
-    public static final int GOT_clothing_jacket = ++private_GOT_counter;
-    public static final int GOT_clothing_pants = ++private_GOT_counter;
-    public static final int GOT_clothing_robe = ++private_GOT_counter;
-    public static final int GOT_clothing_shirt = ++private_GOT_counter;
-    public static final int GOT_clothing_vest = ++private_GOT_counter;
-    public static final int GOT_clothing_wookiee = ++private_GOT_counter;
-    public static final int GOT_clothing_misc = ++private_GOT_counter;
-    public static final int GOT_clothing_skirt = ++private_GOT_counter;
-    public static final int GOT_ship_component = private_GOT_counter = 0x40000000;
-    public static final int GOT_ship_component_reactor = ++private_GOT_counter;
-
-    //add space-specific GOTS at the "end" to make merging easier
-    public static final int GOT_ship_component_engine = ++private_GOT_counter;
-    public static final int GOT_ship_component_shield = ++private_GOT_counter;
-    public static final int GOT_ship_component_armor = ++private_GOT_counter;
-    public static final int GOT_ship_component_weapon = ++private_GOT_counter;
-    public static final int GOT_ship_component_capacitor = ++private_GOT_counter;
-    public static final int GOT_ship_component_booster = ++private_GOT_counter;
-    public static final int GOT_ship_component_droid_interface = ++private_GOT_counter;
-    public static final int GOT_ship_component_hangar = ++private_GOT_counter;
-    public static final int GOT_ship_component_targeting_station = ++private_GOT_counter;
-    public static final int GOT_ship_component_bridge = ++private_GOT_counter;
-    public static final int GOT_ship_component_chassis = ++private_GOT_counter;
-    public static final int GOT_ship_component_missilepack = ++private_GOT_counter;
-    public static final int GOT_ship_component_countermeasurepack = ++private_GOT_counter;
-    public static final int GOT_ship_component_missilelauncher = ++private_GOT_counter;
-    public static final int GOT_ship_component_countermeasurelauncher = ++private_GOT_counter;
-    public static final int GOT_ship_component_cargo_hold = ++private_GOT_counter;
-    public static final int GOT_ship_component_modification = ++private_GOT_counter;
-    public static final int GOT_ship = private_GOT_counter = 0x20000000;
-    public static final int GOT_ship_fighter = ++private_GOT_counter;
-    public static final int GOT_ship_capital = ++private_GOT_counter;
-    public static final int GOT_ship_station = ++private_GOT_counter;
-    public static final int GOT_ship_transport = ++private_GOT_counter;
-    public static final int GOT_ship_mining_asteroid_static = ++private_GOT_counter;
-    public static final int GOT_ship_mining_asteroid_dynamic = ++private_GOT_counter;
-    public static final int GOT_cybernetic = private_GOT_counter = 0x20000100;
-    public static final int GOT_cybernetic_arm = ++private_GOT_counter;
-    public static final int GOT_cybernetic_legs = ++private_GOT_counter;
-    public static final int GOT_cybernetic_torso = ++private_GOT_counter;
-    public static final int GOT_cybernetic_forearm = ++private_GOT_counter;
-    public static final int GOT_cybernetic_hand = ++private_GOT_counter;
-    public static final int GOT_cybernetic_component = ++private_GOT_counter;
-    public static final int GOT_chronicles = private_GOT_counter = 0x00001100;
-    public static final int GOT_chronicles_relic = ++private_GOT_counter;
-    public static final int GOT_chronicles_chronicle = ++private_GOT_counter;
-    public static final int GOT_chronicles_quest_holocron = ++private_GOT_counter;
-    public static final int GOT_chronicles_quest_holocron_recipe = ++private_GOT_counter;
-    public static final int GOT_chronicles_relic_fragment = ++private_GOT_counter;
     /**
      * id for health attribute
      *
@@ -939,8 +677,6 @@ public class base_class
      * @see #getAttrib(obj_id, int)
      */
     public static final int CONSTITUTION = 1;
-
-    //note that 0x80000000 is currently a reserved value and unavailable for use
     /**
      * id for action attribute
      *
@@ -953,15 +689,6 @@ public class base_class
      * @see #getAttrib(obj_id, int)
      */
     public static final int STAMINA = 3;
-
-    ;
-
-    /**
-     * @}
-     * @defgroup attributeConstants Attribute contants
-     * @{
-     */
-    // Attributes.def
     /**
      * id for mind attribute
      *
@@ -1018,7 +745,6 @@ public class base_class
      */
     public static final int GENDER_MALE = 0;
     public static final float MENTAL_ERROR = -34359738368.0f; // this is an unlikely, exactly representable floating point number
-
     /**
      * @}
      * @defgroup behaviorConstants Behavior constants from Behaviors.def
@@ -1033,13 +759,8 @@ public class base_class
     public static final int BEHAVIOR_ATTACK = 5;
     public static final int BEHAVIOR_FRENZY = 6;
     /**
-     * @}
-     * @defgroup weaponModConstants Weapon attribute modifier constants from WeaponObjectTemplate.h
-     * @{
-     */
-    /**
      * @return if target1 and target2 are the same gender
-     * Note: For CreatureObjects/PlayerObjects only, otherwise this will throw an error
+     *         Note: For CreatureObjects/PlayerObjects only, otherwise this will throw an error
      */
     //private static native int _getGender(long target);
     public static final int GENDER_FEMALE = 1;
@@ -1305,8 +1026,17 @@ public class base_class
     public static final int SPECIES_WOMP_RAT = 199;
     public static final int SPECIES_WOOLAMANDER = 200;
     public static final int SPECIES_WORRT = 201;
+
+    //note that 0x80000000 is currently a reserved value and unavailable for use
     public static final int SPECIES_ZUCCA_BOAR = 202;
     public static final int SPECIES_ASSASSINDROID = 203;
+
+    /**
+     * @}
+     * @defgroup attributeConstants Attribute contants
+     * @{
+     */
+    // Attributes.def
     public static final int SPECIES_ASTROMECH = 204;
     public static final int SPECIES_BARTENDERDROID = 205;
     public static final int SPECIES_BUGDROID = 206;
@@ -1330,6 +1060,11 @@ public class base_class
     public static final int SPECIES_EV9D9 = 224;
     public static final int SPECIES_MAUL_PROBE_DROID = 225;
     public static final int SPECIES_ATST = 226;
+    /**
+     * @}
+     * @defgroup weaponModConstants Weapon attribute modifier constants from WeaponObjectTemplate.h
+     * @{
+     */
     public static final int SPECIES_ATAT = 227;
     public static final int SPECIES_GEONOSIAN = 228;
     public static final int SPECIES_VERACTYLE = 229;
@@ -1368,7 +1103,6 @@ public class base_class
 
     // Postures.def
     public static final int POSTURE_NONE = -1;   // for script use only, do not send to C code!
-
     /**
      * @}
      * @defgroup venueConstants Venue type constants from VenueObjectTemplate.h
@@ -1600,7 +1334,6 @@ public class base_class
     public static final int TIMER_COOLDOWN = 2;
     public static final int TIMERSTATE_INVALID = -1;
     public static final int TIMERSTATE_WAITING = 0;
-
     /* @}*/
     public static final int TIMERSTATE_DELAYED = 1;
     public static final int TIMERSTATE_WARMUP = 2;
@@ -1639,7 +1372,6 @@ public class base_class
     public static final int CONDITION_ON = 0x00000001;
     public static final int CONDITION_VENDOR = 0x00000002;
     public static final int CONDITION_INSURED = 0x00000004;
-
     /**
      * @}
      * @defgroup defines cybernetics UI constants
@@ -1649,11 +1381,9 @@ public class base_class
     public static final int CYBERNETICS_UI_OPENTYPE_UNINSTALL = 1;
     public static final int CYBERNETICS_UI_OPENTYPE_REPAIR = 2;
     public static final int CYBERNETICS_UI_OPENTYPE_VIEW = 3;
-
     public static final int CYBERNETICS_UI_CHANGETYPE_INSTALL = 0;
     public static final int CYBERNETICS_UI_CHANGETYPE_UNINSTALL = 1;
     public static final int CYBERNETICS_UI_CHANGETYPE_REPAIR = 2;
-
     /**
      * @}
      * @defgroup xpConstants Experience point constants.
@@ -1664,7 +1394,6 @@ public class base_class
     public static final int NOTE_ICON_STYLE_NONE = 0;
     public static final int NOTE_ICON_STYLE_EXCLAMATION = 1;
     public static final int NOTE_ICON_STYLE_QUESTION = 2;
-
     /**
      * @}
      * @defgroup flyTextFlag Fly text flags
@@ -1681,7 +1410,6 @@ public class base_class
     public static final int FLY_TEXT_FLAG_IS_BLEED = 256;
     public static final int FLY_TEXT_FLAG_IS_HEAL = 512;
     public static final int FLY_TEXT_FLAG_IS_FREESHOT = 1024;
-
     /**
      * @}
      * @defgroup holgram types
@@ -1692,7 +1420,6 @@ public class base_class
     public static final int HOLOGRAM_TYPE1_QUALITY2 = 1;
     public static final int HOLOGRAM_TYPE1_QUALITY3 = 2;
     public static final int HOLOGRAM_TYPE1_QUALITY4 = 3;
-
     /**
      * Faction Codes (as crc hash)
      * Used by many methods that check or return the faction of an object
@@ -1709,7 +1436,6 @@ public class base_class
     public static final int FACTION_HASH_BOUNTY_TARGET = 84709322;
     public static final int FACTION_HASH_GUILDWAR_COOLDOWN = -1526926610;
     public static final int FACTION_HASH_BUBBLE_COMBAT = -377582139;
-
     /**
      * Datatable Column Data Types
      * Returned by datatableGetColumnType (uses basic types only)
@@ -1721,11 +1447,6 @@ public class base_class
     public static final int DATATABLE_TYPE_UNKNOWN = -1; // returned for columns with errors or unknown type
     public static final int CONDITION_CONVERSABLE = 0x00000008;
     public static final int CONDITION_HIBERNATING = 0x00000010;
-
-    //*********************************************************************
-    // native methods
-    //*********************************************************************
-
     /**
      * @defgroup debuggingMethods Debugging methods.
      * @{
@@ -1775,12 +1496,6 @@ public class base_class
     public static final int WEAPON_TYPE_UNARMED = 6;
     /** weapon attack type for polearms */
     public static final int WEAPON_TYPE_POLEARM = 7;
-
-    /**
-     * @}
-     * @defgroup objvarMethods Object variable methods
-     * @{
-     **/
     /** weapon attack type for thrown weapons */
     public static final int WEAPON_TYPE_THROWN = 8;
     /** weapon attack types for lightsabers */
@@ -1945,9 +1660,6 @@ public class base_class
     // this must be kept in sync with TravelPoint::TravelPointType in C++
     // *****WARNING*****
     public static final int TPT_Unknown = 0x00000000;
-
-    /*@}*/
-
     /**
      * @defgroup scriptMethods Script methods
      */
@@ -1993,16 +1705,25 @@ public class base_class
     public final static int MSC_CREATURE_MOUNTABLE = 0;
     public final static int MSC_SPECIES_UNMOUNTABLE = 1;
     public final static int MSC_SPECIES_MOUNTABLE_SEATING_CAPACITY_UNSUPPORTED = 2;
-
-    /*@}*/
-
-
     /**
      * @defgroup messageMethods Messaging methods
      * @{
      */
     public final static int MSC_SPECIES_MOUNTABLE_SCALE_OUT_OF_RANGE = 3;
     public final static int MSC_SPECIES_MOUNTABLE_MISSING_RIDER_SLOT = 4;
+    // returns a string array containing the page name, collection name, and music for the collection slot
+    // null is a valid return value
+    public static final int COLLECTION_INFO_INDEX_BOOK = 0;
+    public static final int COLLECTION_INFO_INDEX_PAGE = 1;
+    public static final int COLLECTION_INFO_INDEX_COLLECTION = 2;
+    public static final int COLLECTION_INFO_INDEX_MUSIC = 3;
+    public static final int COLLECTION_INFO_ARRAY_SIZE = 4;
+    public static final int JEDI_STATE_FORCE_RANKED_LIGHT = 0x00000004;
+    public static final int IGNORE_JEDI_STAT = Integer.MAX_VALUE;
+    // returns NULL or int[] of length 3
+    public static final int PGC_INFO_INDEX_TOTAL_RATING_COUNT = 0;
+    public static final int PGC_INFO_INDEX_TOTAL_RATING_VALUE = 1;
+    public static final int PGC_INFO_INDEX_MOST_RECENT_RATING_TIME = 2;
     // info about an object listening for a message
     /*
     private class listener_data
@@ -2014,6 +1735,288 @@ public class base_class
     */
     // Collection of scripts that are listening for broadcast messages
     private static final Hashtable m_listeners = new Hashtable();
+    public static String GALAXY_LIVE = "Apotheosis";
+    public static String GALAXY_TC = "Insurgency";
+    public static String GALAXY_LOCAL = "swg";
+    /**
+     * @}
+     * @defgroup gameObjectTypes Game Object Types from GameObjectType.def
+     * @{
+     */
+    private static int private_GOT_counter = 0;
+    public static final int GOT_none = private_GOT_counter = 0x00000000;
+    public static final int GOT_corpse = ++private_GOT_counter;
+    public static final int GOT_group = ++private_GOT_counter;
+    public static final int GOT_guild = ++private_GOT_counter;
+    public static final int GOT_lair = ++private_GOT_counter;
+    public static final int GOT_static = ++private_GOT_counter;
+    public static final int GOT_camp = ++private_GOT_counter;
+    public static final int GOT_vendor = ++private_GOT_counter;
+    public static final int GOT_armor = private_GOT_counter = 0x00000100;
+    public static final int GOT_armor_body = ++private_GOT_counter;
+    public static final int GOT_armor_head = ++private_GOT_counter;
+    public static final int GOT_armor_misc = ++private_GOT_counter;
+    public static final int GOT_armor_leg = ++private_GOT_counter;
+    public static final int GOT_armor_arm = ++private_GOT_counter;
+    public static final int GOT_armor_hand = ++private_GOT_counter;
+    public static final int GOT_armor_foot = ++private_GOT_counter;
+    public static final int GOT_armor_shield = ++private_GOT_counter;
+    public static final int GOT_armor_layer = ++private_GOT_counter;
+    public static final int GOT_armor_segment = ++private_GOT_counter;
+    public static final int GOT_armor_core = ++private_GOT_counter;
+    public static final int GOT_armor_psg = ++private_GOT_counter;
+    public static final int GOT_beastmaster_misc = ++private_GOT_counter;
+    public static final int GOT_beastmaster_pet = ++private_GOT_counter;
+    public static final int GOT_building = private_GOT_counter = 0x00000200;
+    public static final int GOT_building_municipal = ++private_GOT_counter;
+    public static final int GOT_building_player = ++private_GOT_counter;
+    public static final int GOT_building_factional = ++private_GOT_counter;
+    public static final int GOT_creature = private_GOT_counter = 0x00000400;
+    public static final int GOT_creature_character = ++private_GOT_counter;
+    public static final int GOT_creature_droid = ++private_GOT_counter;
+    public static final int GOT_creature_droid_probe = ++private_GOT_counter;
+    public static final int GOT_creature_monster = ++private_GOT_counter;
+    public static final int GOT_data = private_GOT_counter = 0x00000800;
+    public static final int GOT_data_draft_schematic = ++private_GOT_counter;
+    public static final int GOT_data_manufacturing_schematic = ++private_GOT_counter;
+    public static final int GOT_data_mission_object = ++private_GOT_counter;
+    public static final int GOT_data_token = ++private_GOT_counter;
+    public static final int GOT_data_waypoint = ++private_GOT_counter;
+    public static final int GOT_data_fictional = ++private_GOT_counter;
+    public static final int GOT_data_pet_control_device = ++private_GOT_counter;
+    public static final int GOT_data_vehicle_control_device = ++private_GOT_counter;
+    public static final int GOT_data_draft_schematic_read_only = ++private_GOT_counter;
+    public static final int GOT_data_ship_control_device = ++private_GOT_counter;
+    public static final int GOT_data_droid_control_device = ++private_GOT_counter;
+    public static final int GOT_data_house_control_device = ++private_GOT_counter;
+    public static final int GOT_data_vendor_control_device = ++private_GOT_counter;
+    public static final int GOT_data_player_quest_object = ++private_GOT_counter;
+    public static final int GOT_installation = private_GOT_counter = 0x00001000;
+    public static final int GOT_installation_factory = ++private_GOT_counter;
+    public static final int GOT_installation_generator = ++private_GOT_counter;
+    public static final int GOT_installation_harvester = ++private_GOT_counter;
+    public static final int GOT_installation_turret = ++private_GOT_counter;
+    public static final int GOT_installation_minefield = ++private_GOT_counter;
+    public static final int GOT_misc = private_GOT_counter = 0x00002000;
+    public static final int GOT_misc_ammunition = ++private_GOT_counter;
+    public static final int GOT_misc_chemical = ++private_GOT_counter;
+    public static final int GOT_misc_clothing_DUMMY = ++private_GOT_counter;
+    public static final int GOT_misc_component_DUMMY = ++private_GOT_counter;
+    public static final int GOT_misc_container = ++private_GOT_counter;
+    public static final int GOT_misc_crafting_station = ++private_GOT_counter;
+    public static final int GOT_misc_deed_DUMMY = ++private_GOT_counter;
+    public static final int GOT_misc_electronics = ++private_GOT_counter;
+    public static final int GOT_misc_flora = ++private_GOT_counter;
+    public static final int GOT_misc_food = ++private_GOT_counter;
+    public static final int GOT_misc_furniture = ++private_GOT_counter;
+    public static final int GOT_misc_instrument = ++private_GOT_counter;
+    public static final int GOT_misc_pharmaceutical = ++private_GOT_counter;
+    public static final int GOT_misc_resource_container_DUMMY = ++private_GOT_counter;
+    public static final int GOT_misc_sign = ++private_GOT_counter;
+    public static final int GOT_misc_counter = ++private_GOT_counter;
+    public static final int GOT_misc_factory_crate = ++private_GOT_counter;
+    public static final int GOT_misc_ticket_travel = ++private_GOT_counter;
+    public static final int GOT_misc_item = ++private_GOT_counter;
+    public static final int GOT_misc_trap = ++private_GOT_counter;
+    public static final int GOT_misc_container_wearable = ++private_GOT_counter;
+    public static final int GOT_misc_fishing_pole = ++private_GOT_counter;
+    public static final int GOT_misc_fishing_bait = ++private_GOT_counter;
+    public static final int GOT_misc_drink = ++private_GOT_counter;
+    public static final int GOT_misc_firework = ++private_GOT_counter;
+    public static final int GOT_misc_item_usable = ++private_GOT_counter;
+    public static final int GOT_misc_petmed = ++private_GOT_counter;
+    public static final int GOT_misc_firework_show = ++private_GOT_counter;
+    public static final int GOT_misc_clothing_attachment = ++private_GOT_counter;
+    public static final int GOT_misc_live_sample = ++private_GOT_counter;
+    public static final int GOT_misc_armor_attachment = ++private_GOT_counter;
+    public static final int GOT_misc_community_crafting_project = ++private_GOT_counter;
+    public static final int GOT_misc_force_crystal = ++private_GOT_counter;
+    public static final int GOT_misc_droid_programming_chip = ++private_GOT_counter;
+    public static final int GOT_misc_misc_asteroid = ++private_GOT_counter;
+    public static final int GOT_misc_pob_ship_pilot_chair = ++private_GOT_counter;
+    public static final int GOT_misc_operations_chair = ++private_GOT_counter;
+    public static final int GOT_misc_turret_access_ladder = ++private_GOT_counter;
+    public static final int GOT_misc_container_ship_loot = ++private_GOT_counter;
+    public static final int GOT_misc_armor_noequip = ++private_GOT_counter;
+
+    //*********************************************************************
+    // native methods
+    //*********************************************************************
+    public static final int GOT_misc_enzyme = ++private_GOT_counter;
+    public static final int GOT_misc_food_pet = ++private_GOT_counter;
+    public static final int GOT_misc_collection = ++private_GOT_counter;
+    public static final int GOT_misc_container_public = ++private_GOT_counter;
+    public static final int GOT_misc_ground_target = ++private_GOT_counter;
+    public static final int GOT_misc_blueprint = ++private_GOT_counter;
+    public static final int GOT_misc_enzyme_isomerase = ++private_GOT_counter;
+    public static final int GOT_misc_enzyme_lyase = ++private_GOT_counter;
+    public static final int GOT_misc_enzyme_hydrolase = ++private_GOT_counter;
+    public static final int GOT_misc_tcg_card = ++private_GOT_counter;
+    public static final int GOT_misc_appearance_only = ++private_GOT_counter;
+    public static final int GOT_misc_appearance_only_invisible = ++private_GOT_counter;
+    public static final int GOT_terminal = private_GOT_counter = 0x00004000;
+    public static final int GOT_terminal_bank = ++private_GOT_counter;
+    public static final int GOT_terminal_bazaar = ++private_GOT_counter;
+    public static final int GOT_terminal_cloning = ++private_GOT_counter;
+    public static final int GOT_terminal_insurance = ++private_GOT_counter;
+    public static final int GOT_terminal_manage = ++private_GOT_counter;
+    public static final int GOT_terminal_mission = ++private_GOT_counter;
+    public static final int GOT_terminal_permissions = ++private_GOT_counter;
+    public static final int GOT_terminal_player_structure = ++private_GOT_counter;
+    public static final int GOT_terminal_shipping = ++private_GOT_counter;
+    public static final int GOT_terminal_travel = ++private_GOT_counter;
+    public static final int GOT_terminal_space = ++private_GOT_counter;
+    public static final int GOT_terminal_misc = ++private_GOT_counter;
+    public static final int GOT_terminal_space_npe = ++private_GOT_counter;
+    public static final int GOT_tool = private_GOT_counter = 0x00008000;
+    public static final int GOT_tool_crafting = ++private_GOT_counter;
+    public static final int GOT_tool_survey = ++private_GOT_counter;
+    public static final int GOT_tool_repair = ++private_GOT_counter;
+    public static final int GOT_tool_camp_kit = ++private_GOT_counter;
+    public static final int GOT_tool_ship_component_repair = ++private_GOT_counter;
+    public static final int GOT_vehicle = private_GOT_counter = 0x00010000;
+    public static final int GOT_vehicle_hover = ++private_GOT_counter;
+
+    /**
+     * @}
+     * @defgroup objvarMethods Object variable methods
+     * @{
+     **/
+    public static final int GOT_vehicle_hover_ai = ++private_GOT_counter;
+    public static final int GOT_weapon = private_GOT_counter = 0x00020000;
+    public static final int GOT_weapon_melee_misc = ++private_GOT_counter;
+    public static final int GOT_weapon_ranged_misc = ++private_GOT_counter;
+    public static final int GOT_weapon_ranged_thrown = ++private_GOT_counter;
+    public static final int GOT_weapon_heavy_misc = ++private_GOT_counter;
+    public static final int GOT_weapon_heavy_mine = ++private_GOT_counter;
+    public static final int GOT_weapon_heavy_special = ++private_GOT_counter;
+    public static final int GOT_weapon_melee_1h = ++private_GOT_counter;
+    public static final int GOT_weapon_melee_2h = ++private_GOT_counter;
+    public static final int GOT_weapon_melee_polearm = ++private_GOT_counter;
+    public static final int GOT_weapon_melee_pike = ++private_GOT_counter;
+    public static final int GOT_weapon_ranged_pistol = ++private_GOT_counter;
+    public static final int GOT_weapon_ranged_carbine = ++private_GOT_counter;
+    public static final int GOT_weapon_ranged_rifle = ++private_GOT_counter;
+    public static final int GOT_component = private_GOT_counter = 0x00040000;
+    public static final int GOT_component_armor = ++private_GOT_counter;
+    public static final int GOT_component_chemistry = ++private_GOT_counter;
+    public static final int GOT_component_clothing = ++private_GOT_counter;
+    public static final int GOT_component_droid = ++private_GOT_counter;
+    public static final int GOT_component_electronics = ++private_GOT_counter;
+    public static final int GOT_component_munition = ++private_GOT_counter;
+    public static final int GOT_component_structure = ++private_GOT_counter;
+    public static final int GOT_component_weapon_melee = ++private_GOT_counter;
+    public static final int GOT_component_weapon_ranged = ++private_GOT_counter;
+    public static final int GOT_component_tissue = ++private_GOT_counter;
+    public static final int GOT_component_genetic = ++private_GOT_counter;
+    public static final int GOT_component_saber_crystal = ++private_GOT_counter;
+    public static final int GOT_component_community_crafting = ++private_GOT_counter;
+    public static final int GOT_component_new_armor = ++private_GOT_counter;
+    public static final int GOT_powerup_weapon = private_GOT_counter = 0x00080000;
+    public static final int GOT_powerup_weapon_melee = ++private_GOT_counter;
+    public static final int GOT_powerup_weapon_ranged = ++private_GOT_counter;
+    public static final int GOT_powerup_weapon_thrown = ++private_GOT_counter;
+    public static final int GOT_powerup_weapon_heavy = ++private_GOT_counter;
+    public static final int GOT_powerup_weapon_mine = ++private_GOT_counter;
+    public static final int GOT_powerup_weapon_heavy_special = ++private_GOT_counter;
+    public static final int GOT_powerup_armor = private_GOT_counter = 0x00100000;
+    public static final int GOT_powerup_armor_body = ++private_GOT_counter;
+    public static final int GOT_powerup_armor_head = ++private_GOT_counter;
+    public static final int GOT_powerup_armor_misc = ++private_GOT_counter;
+    public static final int GOT_powerup_armor_leg = ++private_GOT_counter;
+    public static final int GOT_powerup_armor_arm = ++private_GOT_counter;
+    public static final int GOT_powerup_armor_hand = ++private_GOT_counter;
+    public static final int GOT_powerup_armor_foot = ++private_GOT_counter;
+    public static final int GOT_powerup_armor_layer = ++private_GOT_counter;
+    public static final int GOT_powerup_armor_segment = ++private_GOT_counter;
+    public static final int GOT_powerup_armor_core = ++private_GOT_counter;
+    public static final int GOT_jewelry = private_GOT_counter = 0x00200000;
+    public static final int GOT_jewelry_ring = ++private_GOT_counter;
+    public static final int GOT_jewelry_bracelet = ++private_GOT_counter;
+    public static final int GOT_jewelry_necklace = ++private_GOT_counter;
+    public static final int GOT_jewelry_earring = ++private_GOT_counter;
+    public static final int GOT_resource_container = private_GOT_counter = 0x00400000;
+    public static final int GOT_resource_container_energy_gas = ++private_GOT_counter;
+    public static final int GOT_resource_container_energy_liquid = ++private_GOT_counter;
+    public static final int GOT_resource_container_energy_radioactive = ++private_GOT_counter;
+    public static final int GOT_resource_container_energy_solid = ++private_GOT_counter;
+    public static final int GOT_resource_container_inorganic_chemicals = ++private_GOT_counter;
+    public static final int GOT_resource_container_inorganic_gas = ++private_GOT_counter;
+    public static final int GOT_resource_container_inorganic_minerals = ++private_GOT_counter;
+    public static final int GOT_resource_container_inorganic_water = ++private_GOT_counter;
+    public static final int GOT_resource_container_organic_food = ++private_GOT_counter;
+    public static final int GOT_resource_container_organic_hide = ++private_GOT_counter;
+    public static final int GOT_resource_container_organic_structure = ++private_GOT_counter;
+    public static final int GOT_resource_container_pseudo = ++private_GOT_counter;
+    public static final int GOT_deed = private_GOT_counter = 0x00800000;
+    public static final int GOT_deed_building = ++private_GOT_counter;
+    public static final int GOT_deed_installation = ++private_GOT_counter;
+    public static final int GOT_deed_pet = ++private_GOT_counter;
+    public static final int GOT_deed_droid = ++private_GOT_counter;
+    public static final int GOT_deed_vehicle = ++private_GOT_counter;
+    public static final int GOT_clothing = private_GOT_counter = 0x01000000;
+    public static final int GOT_clothing_bandolier = ++private_GOT_counter;
+    public static final int GOT_clothing_belt = ++private_GOT_counter;
+    public static final int GOT_clothing_bodysuit = ++private_GOT_counter;
+    public static final int GOT_clothing_cape = ++private_GOT_counter;
+    public static final int GOT_clothing_cloak = ++private_GOT_counter;
+    public static final int GOT_clothing_foot = ++private_GOT_counter;
+    public static final int GOT_clothing_dress = ++private_GOT_counter;
+    public static final int GOT_clothing_hand = ++private_GOT_counter;
+    public static final int GOT_clothing_eye = ++private_GOT_counter;
+    public static final int GOT_clothing_head = ++private_GOT_counter;
+    public static final int GOT_clothing_jacket = ++private_GOT_counter;
+    public static final int GOT_clothing_pants = ++private_GOT_counter;
+    public static final int GOT_clothing_robe = ++private_GOT_counter;
+    public static final int GOT_clothing_shirt = ++private_GOT_counter;
+    public static final int GOT_clothing_vest = ++private_GOT_counter;
+    public static final int GOT_clothing_wookiee = ++private_GOT_counter;
+    public static final int GOT_clothing_misc = ++private_GOT_counter;
+    public static final int GOT_clothing_skirt = ++private_GOT_counter;
+    public static final int GOT_ship_component = private_GOT_counter = 0x40000000;
+    public static final int GOT_ship_component_reactor = ++private_GOT_counter;
+    //add space-specific GOTS at the "end" to make merging easier
+    public static final int GOT_ship_component_engine = ++private_GOT_counter;
+    public static final int GOT_ship_component_shield = ++private_GOT_counter;
+    public static final int GOT_ship_component_armor = ++private_GOT_counter;
+    public static final int GOT_ship_component_weapon = ++private_GOT_counter;
+    public static final int GOT_ship_component_capacitor = ++private_GOT_counter;
+    public static final int GOT_ship_component_booster = ++private_GOT_counter;
+    public static final int GOT_ship_component_droid_interface = ++private_GOT_counter;
+
+    /*@}*/
+    public static final int GOT_ship_component_hangar = ++private_GOT_counter;
+    public static final int GOT_ship_component_targeting_station = ++private_GOT_counter;
+    public static final int GOT_ship_component_bridge = ++private_GOT_counter;
+    public static final int GOT_ship_component_chassis = ++private_GOT_counter;
+    public static final int GOT_ship_component_missilepack = ++private_GOT_counter;
+    public static final int GOT_ship_component_countermeasurepack = ++private_GOT_counter;
+    public static final int GOT_ship_component_missilelauncher = ++private_GOT_counter;
+    public static final int GOT_ship_component_countermeasurelauncher = ++private_GOT_counter;
+    public static final int GOT_ship_component_cargo_hold = ++private_GOT_counter;
+    public static final int GOT_ship_component_modification = ++private_GOT_counter;
+    public static final int GOT_ship = private_GOT_counter = 0x20000000;
+    public static final int GOT_ship_fighter = ++private_GOT_counter;
+    public static final int GOT_ship_capital = ++private_GOT_counter;
+    public static final int GOT_ship_station = ++private_GOT_counter;
+
+    /*@}*/
+    public static final int GOT_ship_transport = ++private_GOT_counter;
+    public static final int GOT_ship_mining_asteroid_static = ++private_GOT_counter;
+    public static final int GOT_ship_mining_asteroid_dynamic = ++private_GOT_counter;
+    public static final int GOT_cybernetic = private_GOT_counter = 0x20000100;
+    public static final int GOT_cybernetic_arm = ++private_GOT_counter;
+    public static final int GOT_cybernetic_legs = ++private_GOT_counter;
+    public static final int GOT_cybernetic_torso = ++private_GOT_counter;
+    public static final int GOT_cybernetic_forearm = ++private_GOT_counter;
+    public static final int GOT_cybernetic_hand = ++private_GOT_counter;
+    public static final int GOT_cybernetic_component = ++private_GOT_counter;
+    public static final int GOT_chronicles = private_GOT_counter = 0x00001100;
+    public static final int GOT_chronicles_relic = ++private_GOT_counter;
+    public static final int GOT_chronicles_chronicle = ++private_GOT_counter;
+    public static final int GOT_chronicles_quest_holocron = ++private_GOT_counter;
+    public static final int GOT_chronicles_quest_holocron_recipe = ++private_GOT_counter;
+    public static final int GOT_chronicles_relic_fragment = ++private_GOT_counter;
     private static boolean m_traceLoggingEnabled;
     private static String galaxyName = "toodles";
     /**
@@ -2024,7 +2027,7 @@ public class base_class
      * @param maxRange          the mid-range value of the weapon
      * @return true on success, false if there was an error
      */
-    private static range_info _dummyRangeInfo = new range_info();
+    private static final range_info _dummyRangeInfo = new range_info();
     /**
      * Returns the list of GCW Region Defender imperial cities
      * Returns the list of GCW Region Defender rebel cities
@@ -2043,6 +2046,21 @@ public class base_class
      * returned from getGcwDefenderRegions()
      */
     private static String[] gcwDefenderRegionsGuildsImperial = null; // cache the list
+    /**
+     * Returns the list of GCW regions that can be a GCW defender region
+     * for the player city/guild GCW Region Defender system
+     */
+    private static String[] gcwDefenderRegions = null; // cache the list, since it doesn't change
+    private static String[] gcwDefenderRegionsCitiesRebel = null; // cache the list
+    private static int gcwDefenderRegionsCitiesVersion = -1; // version number to detect stale cache
+    private static String[] gcwDefenderRegionsGuildsRebel = null; // cache the list
+    private static int gcwDefenderRegionsGuildsVersion = -1; // version number to detect stale cache
+
+    /** \internal */
+    public base_class()
+    {
+        m_traceLoggingEnabled = false;
+    }
 
     /**
      * Gets the object id of a cell at a given world coordinate
@@ -2050,7 +2068,7 @@ public class base_class
      * @param building
      *         the coordinates to query
      * @param cellName
-     *          the cell name (r1, entry, r3, etc)
+     *         the cell name (r1, entry, r3, etc)
      * @return the id of the cell corresponding to the coordinates or nil if it cannot be found.
      */
     public static obj_id getCellId(obj_id building, String cellName)
@@ -2063,15 +2081,12 @@ public class base_class
         if (typeToTest == typeToTestAgainst)
             return true;
 
-        if ((typeToTest & 0xffffff00) == typeToTestAgainst)
-            return true;
-
-        return false;
+        return (typeToTest & 0xffffff00) == typeToTestAgainst;
     }
 
     /**
      * @return Gender of given Object
-     * Note: For CreatureObjects/PlayerObjects only, otherwise this will throw an error
+     *         Note: For CreatureObjects/PlayerObjects only, otherwise this will throw an error
      */
     public static Gender getGender(obj_id target)
     {
@@ -2166,7 +2181,9 @@ public class base_class
 
     /**
      * Send a webhook to the discord channel informing of an action..
-     * @param msg     What to send
+     *
+     * @param msg
+     *         What to send
      */
     public static void notifyGalacticFeed(String msg)
     {
@@ -2181,6 +2198,7 @@ public class base_class
         }*/
         sendSystemMessageGalaxyTestingOnly(msg);
     }
+
     public static void notifyServerEvents(String msg)
     {
         ///disabled until i can update d4j
@@ -2197,7 +2215,9 @@ public class base_class
 
     /**
      * On the fly webhook functionality. Be sure to reference the apiKey inside a datatable or as a local var.
-     * @param msg     What to send
+     *
+     * @param msg
+     *         What to send
      */
     public static void pushWebhookByApiKey(String apiKey, String msg, String username, boolean useTTS)
     {
@@ -2287,24 +2307,26 @@ public class base_class
     /**
      * Creates a messageTo which is triggered only once per day at the given time.
      *
+     * @param receiver
+     *         the Object to receive the message.
+     * @param messageName
+     *         the handler triggered when the message is received.
+     * @param params
+     *         an optional dictionary of params.
+     * @param time
+     *         the Java LocalTime object containing the Hour, Minute, and Second
      * @implNote LocalTime will be read by SRC as GMT so specify the time you want in GMT.
-     * @see #recurringMessageTo use instead for a frequency greater than daily (e.g. hourly).
-     *
-     * @param receiver the Object to receive the message.
-     * @param messageName the handler triggered when the message is received.
-     * @param params an optional dictionary of params.
-     * @param time the Java LocalTime object containing the Hour, Minute, and Second
-     *
-     * @since SWG Source 3.1 - September 2021
      * @author Aconite
-     *
-     * Replaces "createDailyAlarmClock" to enable cleaner scripting and to adhere to ISO-8601
+     *         <p>
+     *         Replaces "createDailyAlarmClock" to enable cleaner scripting and to adhere to ISO-8601
+     * @see #recurringMessageTo use instead for a frequency greater than daily (e.g. hourly).
+     * @since SWG Source 3.1 - September 2021
      */
     public static int timedMessageToDaily(obj_id receiver, String messageName, dictionary params, LocalTime time)
     {
-        if(!isIdValid(receiver) || messageName == null || messageName.length() > 50 || time == null)
+        if (!isIdValid(receiver) || messageName == null || messageName.length() > 50 || time == null)
         {
-            WARNING("timedMessageToDaily() failed to create daily message because validation failed from "+
+            WARNING("timedMessageToDaily() failed to create daily message because validation failed from " +
                     Thread.currentThread().getStackTrace()[2].getClassName());
             return -1;
         }
@@ -2315,24 +2337,27 @@ public class base_class
     /**
      * Creates a messageTo which is triggered only once per week on the given day, at the given time.
      *
+     * @param receiver
+     *         the Object to receive the message.
+     * @param messageName
+     *         the handler triggered when the message is received.
+     * @param params
+     *         an optional dictionary of params.
+     * @param day
+     *         the Java DayOfWeek object which specifies the targeted day of the week
+     * @param time
+     *         the Java LocalTime object containing the Hour, Minute, and Second
      * @implNote LocalTime will be read by SRC as GMT so specify the time you want in GMT.
-     *
-     * @param receiver the Object to receive the message.
-     * @param messageName the handler triggered when the message is received.
-     * @param params an optional dictionary of params.
-     * @param day the Java DayOfWeek object which specifies the targeted day of the week
-     * @param time the Java LocalTime object containing the Hour, Minute, and Second
-     *
-     * @since SWG Source 3.1 - September 2021
      * @author Aconite
-     *
-     * Replaces "createWeeklyAlarmClock" to enable cleaner scripting and to adhere to ISO-8601
+     *         <p>
+     *         Replaces "createWeeklyAlarmClock" to enable cleaner scripting and to adhere to ISO-8601
+     * @since SWG Source 3.1 - September 2021
      */
     public static int timedMessageToWeekly(obj_id receiver, String messageName, dictionary params, DayOfWeek day, LocalTime time)
     {
-        if (!isIdValid(receiver) || messageName == null || messageName.length() >= 50 || day == null  ||time == null)
+        if (!isIdValid(receiver) || messageName == null || messageName.length() >= 50 || day == null || time == null)
         {
-            WARNING("timedMessageToWeekly() failed to create weekly message because validation failed from "+
+            WARNING("timedMessageToWeekly() failed to create weekly message because validation failed from " +
                     Thread.currentThread().getStackTrace()[2].getClassName());
             return -1;
         }
@@ -2344,10 +2369,9 @@ public class base_class
      * Runs a timedMessageToWeekly but defaulted to the normal weekly reset
      * cycle for all other game systems (Thursdays at 19:00 GMT).
      *
-     * @see #timedMessageToWeekly
-     *
-     * @since SWG Source 3.1 - September 2021
      * @author Aconite
+     * @see #timedMessageToWeekly
+     * @since SWG Source 3.1 - September 2021
      */
     public static int timedMessageToWeeklyOnCycle(obj_id receiver, String messageName, dictionary params)
     {
@@ -2357,24 +2381,26 @@ public class base_class
     /**
      * Creates a messageTo which is triggered on the first day of each month at the given time.
      *
+     * @param receiver
+     *         the Object to receive the message.
+     * @param messageName
+     *         the handler triggered when the message is received.
+     * @param params
+     *         an optional dictionary of params.
+     * @param time
+     *         the Java LocalTime object containing the Hour, Minute, and Second
      * @implNote LocalTime will be read by SRC as GMT so specify the time you want in GMT.
      * @implNote last day of the month triggers are best achieved by just using this method at 0:0:0.
-     *
-     * @param receiver the Object to receive the message.
-     * @param messageName the handler triggered when the message is received.
-     * @param params an optional dictionary of params.
-     * @param time the Java LocalTime object containing the Hour, Minute, and Second
-     *
-     * @since SWG Source 3.1 - September 2021
      * @author Aconite
-     *
-     * Replaces "createMonthlyAlarmClock" to enable cleaner scripting and to adhere to ISO-8601
+     *         <p>
+     *         Replaces "createMonthlyAlarmClock" to enable cleaner scripting and to adhere to ISO-8601
+     * @since SWG Source 3.1 - September 2021
      */
     public static int timedMessageToMonthlyFirstDay(obj_id receiver, String messageName, dictionary params, LocalTime time)
     {
-        if(!isIdValid(receiver) || messageName == null || messageName.length() > 50 || time == null)
+        if (!isIdValid(receiver) || messageName == null || messageName.length() > 50 || time == null)
         {
-            WARNING("timedMessageToMonthlyFirstDay() failed to create daily message because validation failed from "+
+            WARNING("timedMessageToMonthlyFirstDay() failed to create daily message because validation failed from " +
                     Thread.currentThread().getStackTrace()[2].getClassName());
             return -1;
         }
@@ -2385,23 +2411,25 @@ public class base_class
     /**
      * Creates a messageTo which is triggered at the exactly specified time by month, day of month, and hour/min/sec.
      *
+     * @param receiver
+     *         the Object to receive the message.
+     * @param messageName
+     *         the handler triggered when the message is received.
+     * @param params
+     *         an optional dictionary of params.
+     * @param dateTime
+     *         the Java LocalDateTime object containing the Month, Day of Month, Hour, Minute, and Second
      * @implNote LocalTime will be read by SRC as GMT so specify the time you want in GMT.
-     *
-     * @param receiver the Object to receive the message.
-     * @param messageName the handler triggered when the message is received.
-     * @param params an optional dictionary of params.
-     * @param dateTime the Java LocalDateTime object containing the Month, Day of Month, Hour, Minute, and Second
-     *
-     * @since SWG Source 3.1 - September 2021
      * @author Aconite
-     *
-     * Replaces "createYearlyAlarmClock" to enable cleaner scripting and to adhere to ISO-8601
+     *         <p>
+     *         Replaces "createYearlyAlarmClock" to enable cleaner scripting and to adhere to ISO-8601
+     * @since SWG Source 3.1 - September 2021
      */
     public static int timedMessageToSpecificDateTime(obj_id receiver, String messageName, dictionary params, LocalDateTime dateTime)
     {
-        if(!isIdValid(receiver) || messageName == null || messageName.length() > 50 || dateTime == null)
+        if (!isIdValid(receiver) || messageName == null || messageName.length() > 50 || dateTime == null)
         {
-            WARNING("timedMessageToSpecificDateTime() failed to create daily message because validation failed from "+
+            WARNING("timedMessageToSpecificDateTime() failed to create daily message because validation failed from " +
                     Thread.currentThread().getStackTrace()[2].getClassName());
             return -1;
         }
@@ -2410,12 +2438,13 @@ public class base_class
     }
 
     /**
-     * @param day Java.time.DayOfWeek object
+     * @param day
+     *         Java.time.DayOfWeek object
      * @return DayOfWeek transposed for SRC handling
-     *
-     * DayOfWeek uses ISO-8601 but SRC doesn't, so to balance
-     * portability and scripting standards, we'll just convert
-     * the value internally here.
+     *         <p>
+     *         DayOfWeek uses ISO-8601 but SRC doesn't, so to balance
+     *         portability and scripting standards, we'll just convert
+     *         the value internally here.
      */
     private static int convertDay(DayOfWeek day)
     {
@@ -2506,6 +2535,7 @@ public class base_class
     public static native long queryPerformanceCounter();
 
     public static native long queryPerformanceCounterFrequency();
+
     /**
      * @}
      * @defgroup triggerVolumeMethods Trigger volume methods
@@ -2518,7 +2548,6 @@ public class base_class
      * and the corresponding setAttributeAttained() is set on the breaching NPC.
      * Refer to library/attrib.scriptlib for the attributes you can set as interested.
      */
-
     public static void TRACE_LOG(String channel, String msg)
     {
         if (m_traceLoggingEnabled)
@@ -2621,7 +2650,7 @@ public class base_class
                 newArray[i] = new Integer(array[i]);
             return new Vector(Arrays.asList(newArray));
             */
-            return new Vector(Arrays.asList(array));
+            return new Vector(List.of(array));
         }
         return null;
     }
@@ -2636,6 +2665,17 @@ public class base_class
      * @return the float, or 0 if not found
      */
     private static native float _getFloatObjVar(long object, String name);
+
+
+    /**
+     * @}
+     * @defgroup timeMethods Time and Clock methods
+     * @{
+     */
+
+    /****************************************************************
+     *  Server Clock
+     ****************************************************************/
 
     public static float getFloatObjVar(obj_id object, String name)
     {
@@ -2678,7 +2718,7 @@ public class base_class
                 newArray[i] = new Float(array[i]);
             return new Vector(Arrays.asList(newArray));
             */
-            return new Vector(Arrays.asList(array));
+            return new Vector(List.of(array));
         }
         return null;
     }
@@ -2714,6 +2754,14 @@ public class base_class
     {
         return _getStringArrayObjVar(getLongWithNull(object), name);
     }
+
+    /****************************************************************
+     *  Chat API
+     ****************************************************************/
+    /** @}
+     @defgroup chatSystemMethods Chat System API
+     @{
+     */
 
     /**
      * Finds a string array obj_var with a given name on an object.
@@ -2838,17 +2886,6 @@ public class base_class
         return null;
     }
 
-
-    /**
-     * @}
-     * @defgroup timeMethods Time and Clock methods
-     * @{
-     */
-
-    /****************************************************************
-     *  Server Clock
-     ****************************************************************/
-
     /**
      * Finds a string_id obj_var with a given name on an object.
      *
@@ -2913,14 +2950,6 @@ public class base_class
         return _getTransformArrayObjVar(getLongWithNull(object), name);
     }
 
-    /****************************************************************
-     *  Chat API
-     ****************************************************************/
-    /** @}
-     @defgroup chatSystemMethods Chat System API
-     @{
-     */
-
     /**
      * Finds a vector obj_var with a given name on an object.
      *
@@ -2967,6 +2996,9 @@ public class base_class
     {
         return getIntObjVar(object, name) != 0;
     }
+
+    //--------------------------------------------------------------
+    //--------------------------------------------------------------
 
     /**
      * Finds an attrib_mod obj_var with a given name on an object.
@@ -3121,6 +3153,9 @@ public class base_class
         return _setObjVar(getLongWithNull(object), name, data);
     }
 
+    //--------------------------------------------------------------
+    //--------------------------------------------------------------
+
     /**
      * Adds/changes a float obj_var on an object.
      *
@@ -3191,6 +3226,9 @@ public class base_class
      */
     private static native boolean _setObjVar(long object, String name, String[] data);
 
+    //--------------------------------------------------------------
+    //--------------------------------------------------------------
+
     public static boolean setObjVar(obj_id object, String name, String[] data)
     {
         return _setObjVar(getLongWithNull(object), name, data);
@@ -3226,6 +3264,9 @@ public class base_class
      * @return true on success, false on fail
      */
     private static native boolean _setObjVar(long object, String name, long[] data);
+
+    //--------------------------------------------------------------
+    //--------------------------------------------------------------
 
     public static boolean setObjVar(obj_id object, String name, obj_id[] data)
     {
@@ -3306,9 +3347,6 @@ public class base_class
      */
     private static native boolean _setObjVar(long object, String name, string_id[] data);
 
-    //--------------------------------------------------------------
-    //--------------------------------------------------------------
-
     public static boolean setObjVar(obj_id object, String name, string_id[] data)
     {
         return _setObjVar(getLongWithNull(object), name, data);
@@ -3332,9 +3370,6 @@ public class base_class
         return _setObjVar(getLongWithNull(object), name, data);
     }
 
-    //--------------------------------------------------------------
-    //--------------------------------------------------------------
-
     /**
      * Adds/changes a transform array obj_var on an object.
      *
@@ -3353,6 +3388,9 @@ public class base_class
         return _setObjVar(getLongWithNull(object), name, data);
     }
 
+    //--------------------------------------------------------------
+    //--------------------------------------------------------------
+
     /**
      * Adds/changes a vector obj_var on an object.
      *
@@ -3370,9 +3408,6 @@ public class base_class
     {
         return _setObjVar(getLongWithNull(object), name, data);
     }
-
-    //--------------------------------------------------------------
-    //--------------------------------------------------------------
 
     /**
      * Adds/changes a vector array obj_var on an object.
@@ -3438,9 +3473,6 @@ public class base_class
         }
         return setObjVar(object, name, newData);
     }
-
-    //--------------------------------------------------------------
-    //--------------------------------------------------------------
 
     /**
      * Adds/changes an attrib_mod obj_var on an object. Note that since we don't have
@@ -3655,6 +3687,10 @@ public class base_class
         return false;
     }
 
+
+    //--------------------------------------------------------------
+    //--------------------------------------------------------------
+
     /**
      * Sets an obj_var of an unknown type on an object.
      *
@@ -3722,6 +3758,9 @@ public class base_class
      */
     private static native boolean _setObjVarList(long object, String name);
 
+    //--------------------------------------------------------------
+    //--------------------------------------------------------------
+
     public static boolean setObjVarList(obj_id object, String name)
     {
         return _setObjVarList(getLongWithNull(object), name);
@@ -3740,10 +3779,14 @@ public class base_class
      */
     private static native boolean _copyObjVar(long from, long to, String name);
 
+    //--------------------------------------------------------------
+
     public static boolean copyObjVar(obj_id from, obj_id to, String name)
     {
         return _copyObjVar(getLongWithNull(from), getLongWithNull(to), name);
     }
+
+    //--------------------------------------------------------------
 
     /**
      * Packs all objvars from an object into a string.
@@ -3790,9 +3833,6 @@ public class base_class
      */
     private static native void _setPackedObjvars(long target, String packedVars);
 
-    //--------------------------------------------------------------
-    //--------------------------------------------------------------
-
     public static void setPackedObjvars(obj_id target, String packedVars)
     {
         _setPackedObjvars(getLongWithNull(target), packedVars);
@@ -3824,6 +3864,12 @@ public class base_class
      * @return true if the script was detached, false if not
      */
     private static native boolean _detachScript(long object, String scriptName);
+
+    /**
+     * @}
+     * @defgroup creatureMovementMonitoring Methods for monitoring creature movement
+     * @{
+     */
 
     public static boolean detachScript(obj_id object, String scriptName)
     {
@@ -3889,10 +3935,6 @@ public class base_class
      */
     private static native int _triggerScript(long object, String script, int triggerId, Object[] params);
 
-
-    //--------------------------------------------------------------
-    //--------------------------------------------------------------
-
     public static int triggerScript(obj_id object, String script, int triggerId, Object[] params)
     {
         return _triggerScript(getLongWithNull(object), script, triggerId, params);
@@ -3920,9 +3962,43 @@ public class base_class
         }
         return false;
     }
+    /**
+     * Quantize a bearing into an octant
+     *
+     * @param bearing The angle in degrees where 0=straight ahead
+     *
+    public static int quantizeBearing(float bearing)
+    {
+    if (bearing < -157.5f)
+    return BEARING_B;
+    else if (bearing > 157.5f)
+    return BEARING_B;
+    else if (bearing < -112.5f)
+    return BEARING_BL;
+    else if (bearing > 112.5f)
+    return BEARING_BR;
+    else if (bearing < -67.5f)
+    return BEARING_L;
+    else if (bearing > 67.5f)
+    return BEARING_R;
+    else if (bearing < -22.5f)
+    return BEARING_FL;
+    else if (bearing > 22.5f)
+    return BEARING_FR;
+    else
+    return BEARING_F;
+    }
 
-    //--------------------------------------------------------------
-    //--------------------------------------------------------------
+
+    /**
+     * @}
+     * @defgroup skillMethods Skill system methods
+     * @{
+     */
+
+    /****************************************************************
+     *  SKILL SYSTEM SUPPORT
+     ****************************************************************/
 
     /**
      * Forces the current script to stop running.
@@ -3955,11 +4031,7 @@ public class base_class
         Thread.dumpStack();
     }
 
-    //--------------------------------------------------------------
-
     public static native boolean reloadScript(String scriptName);
-
-    //--------------------------------------------------------------
 
     /** \internal internal function */
     private static native boolean _localMessageTo(long receiver, String messageName, dictionary params);
@@ -3990,12 +4062,6 @@ public class base_class
     {
         _internalRecurringMessageTo(getLongWithNull(receiver), messageName, params, time);
     }
-
-    /**
-     * @}
-     * @defgroup creatureMovementMonitoring Methods for monitoring creature movement
-     * @{
-     */
 
     /****************************************************************
      *  Movement Monitoring Support
@@ -4059,43 +4125,6 @@ public class base_class
             _listenToMessage(getLongWithNull(self), getLongWithNull(emitter), messageHandlerName);
         }
     }
-    /**
-     * Quantize a bearing into an octant
-     *
-     * @param bearing The angle in degrees where 0=straight ahead
-     *
-    public static int quantizeBearing(float bearing)
-    {
-    if (bearing < -157.5f)
-    return BEARING_B;
-    else if (bearing > 157.5f)
-    return BEARING_B;
-    else if (bearing < -112.5f)
-    return BEARING_BL;
-    else if (bearing > 112.5f)
-    return BEARING_BR;
-    else if (bearing < -67.5f)
-    return BEARING_L;
-    else if (bearing > 67.5f)
-    return BEARING_R;
-    else if (bearing < -22.5f)
-    return BEARING_FL;
-    else if (bearing > 22.5f)
-    return BEARING_FR;
-    else
-    return BEARING_F;
-    }
-
-
-    /**
-     * @}
-     * @defgroup skillMethods Skill system methods
-     * @{
-     */
-
-    /****************************************************************
-     *  SKILL SYSTEM SUPPORT
-     ****************************************************************/
 
     /**
      * @param emitter
@@ -4162,7 +4191,7 @@ public class base_class
         params.put("idSender", self);
 
         obj_id[] listeners = getMessageListeners(messageHandlerName);
-        if (listeners != null && listeners.length > 0)
+        if (listeners != null)
         {
             for (obj_id listener : listeners)
             {
@@ -4669,6 +4698,62 @@ public class base_class
 
     public static native String getCalendarTimeStringGMT_YYYYMMDDHHMMSS(int calendarTime);
 
+    /**
+     * @}
+     * @defgroup tokenMethods Token system methods
+     * @{
+     */
+
+    /****************************************************************
+     *  TOKEN SYSTEM SUPPORT
+     ****************************************************************/
+    /** @brief create a virtual token that contains template and/or
+    location information without referring to a real instance of
+    an object.
+
+     @param templateName   The name of the object template that
+     this token refers to (e.g. good for using
+     the token to create multiple things
+     "like" the template name)
+     @param loc            A location that indicates the last "known"
+     position of an object.
+
+     @return an obj_id that may be used whever a token is valid.
+
+     @see createToken(obj_id target)
+
+     */
+//  public static native obj_id createToken(String templateName, location loc);
+
+    /** @brief create a token from an object
+
+     @param target  The object from which a token is created
+
+     @return The newly created token
+     */
+//  public static native obj_id   createToken                 (obj_id target);
+
+    /** @brief gets a location from a token
+
+    Tokens only store the location of an object at the time of the
+    token's creation, or if the location is explicitly set later. Never
+    assume that a token location value is the *current* value of the real
+    object it refers to.
+
+     @param tokenId  The object id of the token
+
+     @return a Mocha location object containing location data about the token.
+
+     */
+//  public static native location getTokenTargetLocation      (obj_id tokenId);
+
+    /** @brief get the object to which a token refers */
+//  public static native obj_id   getTokenTargetObject        (obj_id tokenId);
+
+    /** @brief get the template name of the object referred to by this token
+     */
+//  public static native String   getTokenTargetTemplateName  (obj_id tokenId);
+
     // converts a calendar time value in seconds (i.e. the Epoch) to a display calendar string in the local time zone
     public static native String getCalendarTimeStringLocal(int calendarTime);
 
@@ -4846,65 +4931,8 @@ public class base_class
         _chatSendPersistentMessage(from, to, localizedMessageText, outOfBand, subject);
     }
 
-    /**
-     * @}
-     * @defgroup tokenMethods Token system methods
-     * @{
-     */
-
-    /****************************************************************
-     *  TOKEN SYSTEM SUPPORT
-     ****************************************************************/
-    /** @brief create a virtual token that contains template and/or
-    location information without referring to a real instance of
-    an object.
-
-     @param templateName   The name of the object template that
-     this token refers to (e.g. good for using
-     the token to create multiple things
-     "like" the template name)
-     @param loc            A location that indicates the last "known"
-     position of an object.
-
-     @return an obj_id that may be used whever a token is valid.
-
-     @see createToken(obj_id target)
-
-     */
-//  public static native obj_id createToken(String templateName, location loc);
-
-    /** @brief create a token from an object
-
-     @param target  The object from which a token is created
-
-     @return The newly created token
-     */
-//  public static native obj_id   createToken                 (obj_id target);
-
-    /** @brief gets a location from a token
-
-    Tokens only store the location of an object at the time of the
-    token's creation, or if the location is explicitly set later. Never
-    assume that a token location value is the *current* value of the real
-    object it refers to.
-
-     @param tokenId  The object id of the token
-
-     @return a Mocha location object containing location data about the token.
-
-     */
-//  public static native location getTokenTargetLocation      (obj_id tokenId);
-
-    /** @brief get the object to which a token refers */
-//  public static native obj_id   getTokenTargetObject        (obj_id tokenId);
-
-    /** @brief get the template name of the object referred to by this token
-     */
-//  public static native String   getTokenTargetTemplateName  (obj_id tokenId);
-
     /** @brief get the waypoint associated with this token */
 //  public static native obj_id   getTokenWaypoint            (obj_id tokenId);
-
     public static String chatMakePersistentMessageOutOfBandBody(String target, string_id bodyId)
     {
         prose_package pp = new prose_package();
@@ -5005,7 +5033,7 @@ public class base_class
     /**
      * Send a system message to an individual
      */
-    
+
     //artifact !pure
     public static void sendSystemMessageTestingOnly(String to, String localizedMessageText)
     {
@@ -5240,6 +5268,12 @@ public class base_class
     }
 
     /**
+     * @}
+     * @defgroup missionMethods Mission system methods
+     * @{
+     */
+
+    /**
      * Send a oob message to a player in the combat spam window.
      */
     private static native void _sendCombatSpamMessageOob(long player, long defender, String oob, boolean sendToAttacker, boolean sendToDefender, boolean sendToBystanders, int spamType);
@@ -5268,141 +5302,6 @@ public class base_class
      */
 
     private static native String __packOutOfBandWaypoint(long waypoint, String outOfBand, int position);
-
-    public static String _packOutOfBandWaypoint(obj_id waypoint, String outOfBand, int position)
-    {
-        return __packOutOfBandWaypoint(getLongWithNull(waypoint), outOfBand, position);
-    }
-
-    /**
-     * Pack enough information to reconstruct a waypoint later
-     *
-     * @param outOfBand
-     *         the oob buffer to pack into, may be null
-     * @param position
-     * @param planet
-     *         the canonical name of the planet.  may be null to use the current planet
-     * @param nameId
-     *         the string_id to use as the display name for the waypoint
-     * @param name
-     *         the string to use as the display name.  Overrides nameId.  Either nameId or name must be non-null.
-     */
-
-    public static native String _packOutOfBandWaypointData(String outOfBand, int position, String planet, float x, float z, string_id nameId, String name);
-
-    private static native String __packOutOfBandProsePackage(String target, int position, string_id stringId, long objActor, long objTarget, long objOther, string_id nameIdActor, string_id nameIdTarget, string_id nameIdOther, String nameActor, String nameTarget, String nameOther, int digitInteger, float digitFloat, boolean complexGrammar);
-
-    public static String _packOutOfBandProsePackage(String target, int position, string_id stringId, obj_id objActor, obj_id objTarget, obj_id objOther, string_id nameIdActor, string_id nameIdTarget, string_id nameIdOther, String nameActor, String nameTarget, String nameOther, int digitInteger, float digitFloat, boolean complexGrammar)
-    {
-        return __packOutOfBandProsePackage(target, position, stringId, getLongWithNull(objActor), getLongWithNull(objTarget), getLongWithNull(objOther), nameIdActor, nameIdTarget, nameIdOther, nameActor, nameTarget, nameOther, digitInteger, digitFloat, complexGrammar);
-    }
-
-    public static String packOutOfBandProsePackage(String target, prose_package pp)
-    {
-        return packOutOfBandProsePackage(target, -1, pp);
-    }
-
-    public static String packOutOfBandProsePackage(String target, int position, prose_package pp)
-    {
-        return _packOutOfBandProsePackage(target,
-                position,
-                pp.stringId,
-                pp.actor.id,
-                pp.target.id,
-                pp.other.id,
-                pp.actor.nameId,
-                pp.target.nameId,
-                pp.other.nameId,
-                pp.actor.name,
-                pp.target.name,
-                pp.other.name,
-                pp.digitInteger,
-                pp.digitFloat,
-                pp.complexGrammar);
-    }
-
-    /**
-     * Gets an emote name from its crc value.
-     *
-     * @param crc
-     *         the emote crc
-     * @return the emote name, or null on error
-     */
-    public static native String getEmoteFromCrc(int crc);
-
-    /**
-     * Prints a message to the console of the player with given id.
-     *
-     * @param object
-     *         the object(controller) to print to
-     * @param msg
-     *         the message to print
-     */
-    private static native void _sendConsoleMessage(long object, String msg);
-
-    public static void sendConsoleMessage(obj_id object, String msg)
-    {
-        _sendConsoleMessage(getLongWithNull(object), msg);
-    }
-
-    /**
-     * @}
-     * @defgroup serverSystemMethods Base server system methods
-     * @{
-     */
-
-    //--------------------------------------------------------------
-    public static native String getGameObjectTypeName(int type);
-
-    /**
-     * Returns the GOT type integer, or 0 if the name is not found
-     */
-    public static native int getGameObjectTypeFromName(String gameObjectTypeName);
-
-    public static string_id getGameObjectTypeStringId(int type)
-    {
-        return new string_id("got_n", getGameObjectTypeName(type));
-    }
-
-    private static native int _getGameObjectType(long obj);
-
-    public static int getGameObjectType(obj_id obj)
-    {
-        return _getGameObjectType(getLongWithNull(obj));
-    }
-
-    /**
-     * @}
-     * @defgroup missionMethods Mission system methods
-     * @{
-     */
-
-    /****************************************************************
-     *  MISSION SYSTEM SUPPORT
-     ****************************************************************/
-
-    public static native int getGameObjectTypeFromTemplate(String templateName);
-
-    public static native int getGameObjectTypeFromTemplate(int templateCrc);
-
-    /**
-     * Test game object type
-     */
-
-    public static boolean isGameObjectTypeOf(obj_id obj, int typeToTestAgainst)
-    {
-        return isGameObjectTypeOf(getGameObjectType(obj), typeToTestAgainst);
-    }
-
-    /****************************************************************
-     *  Server System Support
-     ****************************************************************/
-    private static native boolean _sendConsoleCommand(String command, long target);
-
-    public static boolean sendConsoleCommand(String command, obj_id target)
-    {
-        return _sendConsoleCommand(command, getLongWithNull(target));
-    }
 
     /** @brief create a new MissionData object suitable for posting to
     the mission board or making field assignments.
@@ -5458,6 +5357,138 @@ public class base_class
 
      */
 //  public static native obj_id    createMissionData                (float efficiencyRequirement, int expireTimeDelay, obj_id missionCreator, String missionType, String rootScriptName);
+
+    public static String _packOutOfBandWaypoint(obj_id waypoint, String outOfBand, int position)
+    {
+        return __packOutOfBandWaypoint(getLongWithNull(waypoint), outOfBand, position);
+    }
+
+    /**
+     * Pack enough information to reconstruct a waypoint later
+     *
+     * @param outOfBand
+     *         the oob buffer to pack into, may be null
+     * @param position
+     * @param planet
+     *         the canonical name of the planet.  may be null to use the current planet
+     * @param nameId
+     *         the string_id to use as the display name for the waypoint
+     * @param name
+     *         the string to use as the display name.  Overrides nameId.  Either nameId or name must be non-null.
+     */
+
+    public static native String _packOutOfBandWaypointData(String outOfBand, int position, String planet, float x, float z, string_id nameId, String name);
+
+    private static native String __packOutOfBandProsePackage(String target, int position, string_id stringId, long objActor, long objTarget, long objOther, string_id nameIdActor, string_id nameIdTarget, string_id nameIdOther, String nameActor, String nameTarget, String nameOther, int digitInteger, float digitFloat, boolean complexGrammar);
+
+    public static String _packOutOfBandProsePackage(String target, int position, string_id stringId, obj_id objActor, obj_id objTarget, obj_id objOther, string_id nameIdActor, string_id nameIdTarget, string_id nameIdOther, String nameActor, String nameTarget, String nameOther, int digitInteger, float digitFloat, boolean complexGrammar)
+    {
+        return __packOutOfBandProsePackage(target, position, stringId, getLongWithNull(objActor), getLongWithNull(objTarget), getLongWithNull(objOther), nameIdActor, nameIdTarget, nameIdOther, nameActor, nameTarget, nameOther, digitInteger, digitFloat, complexGrammar);
+    }
+
+    public static String packOutOfBandProsePackage(String target, prose_package pp)
+    {
+        return packOutOfBandProsePackage(target, -1, pp);
+    }
+
+    public static String packOutOfBandProsePackage(String target, int position, prose_package pp)
+    {
+        return _packOutOfBandProsePackage(target,
+                position,
+                pp.stringId,
+                pp.actor.id,
+                pp.target.id,
+                pp.other.id,
+                pp.actor.nameId,
+                pp.target.nameId,
+                pp.other.nameId,
+                pp.actor.name,
+                pp.target.name,
+                pp.other.name,
+                pp.digitInteger,
+                pp.digitFloat,
+                pp.complexGrammar);
+    }
+//  public static native obj_id[]  getDynamicMissionObjects         (obj_id playerCharacter);
+
+//  public static native void      sendMissionsToClient(obj_id player, obj_id[] missions);
+
+    /**
+     * Gets an emote name from its crc value.
+     *
+     * @param crc
+     *         the emote crc
+     * @return the emote name, or null on error
+     */
+    public static native String getEmoteFromCrc(int crc);
+
+    /**
+     * Prints a message to the console of the player with given id.
+     *
+     * @param object
+     *         the object(controller) to print to
+     * @param msg
+     *         the message to print
+     */
+    private static native void _sendConsoleMessage(long object, String msg);
+
+    public static void sendConsoleMessage(obj_id object, String msg)
+    {
+        _sendConsoleMessage(getLongWithNull(object), msg);
+    }
+
+    /**
+     * @}
+     * @defgroup serverSystemMethods Base server system methods
+     * @{
+     */
+
+    //--------------------------------------------------------------
+    public static native String getGameObjectTypeName(int type);
+
+    /**
+     * Returns the GOT type integer, or 0 if the name is not found
+     */
+    public static native int getGameObjectTypeFromName(String gameObjectTypeName);
+
+    public static string_id getGameObjectTypeStringId(int type)
+    {
+        return new string_id("got_n", getGameObjectTypeName(type));
+    }
+
+    private static native int _getGameObjectType(long obj);
+
+    public static int getGameObjectType(obj_id obj)
+    {
+        return _getGameObjectType(getLongWithNull(obj));
+    }
+
+    /****************************************************************
+     *  MISSION SYSTEM SUPPORT
+     ****************************************************************/
+
+    public static native int getGameObjectTypeFromTemplate(String templateName);
+
+    public static native int getGameObjectTypeFromTemplate(int templateCrc);
+
+    /**
+     * Test game object type
+     */
+
+    public static boolean isGameObjectTypeOf(obj_id obj, int typeToTestAgainst)
+    {
+        return isGameObjectTypeOf(getGameObjectType(obj), typeToTestAgainst);
+    }
+
+    /****************************************************************
+     *  Server System Support
+     ****************************************************************/
+    private static native boolean _sendConsoleCommand(String command, long target);
+
+    public static boolean sendConsoleCommand(String command, obj_id target)
+    {
+        return _sendConsoleCommand(command, getLongWithNull(target));
+    }
 
     /**
      * Returns the value of a config file key.
@@ -5538,9 +5569,6 @@ public class base_class
      * @return the approach speed in x, the radial speed in y, and the distance in z.
      */
     private static native location _getApproachSpeed(long mob, location mobDelta, long target, location targetDelta, float time);
-//  public static native obj_id[]  getDynamicMissionObjects         (obj_id playerCharacter);
-
-//  public static native void      sendMissionsToClient(obj_id player, obj_id[] missions);
 
     public static location getApproachSpeed(obj_id mob, location mobDelta, obj_id target, location targetDelta, float time)
     {
@@ -5944,6 +5972,14 @@ public class base_class
      */
     private static native boolean _hasCommand(long target, String commandName);
 
+    /**
+     * @}
+     * @defgroup stringMethods String manipulation methods
+     * @{
+     */
+
+    // string methods
+
     public static boolean hasCommand(obj_id target, String commandName)
     {
         return _hasCommand(getLongWithNull(target), commandName);
@@ -5994,6 +6030,11 @@ public class base_class
      *         script is intended to do.
      */
     private static native void _revokeCommand(long target, String commandName);
+
+
+    //*********************************************************************
+    // string functions
+    //*********************************************************************
 
     public static void revokeCommand(obj_id target, String commandName)
     {
@@ -6115,14 +6156,6 @@ public class base_class
     }
 
     /**
-     * @}
-     * @defgroup stringMethods String manipulation methods
-     * @{
-     */
-
-    // string methods
-
-    /**
      * Removes a schematic from a creature.
      *
      * @param target
@@ -6149,15 +6182,12 @@ public class base_class
      */
     private static native boolean _hasSchematic(long target, String schematicName);
 
+    /*@}*/
+
     public static boolean hasSchematic(obj_id target, String schematicName)
     {
         return _hasSchematic(getLongWithNull(target), schematicName);
     }
-
-
-    //*********************************************************************
-    // string functions
-    //*********************************************************************
 
     /**
      * Tests if a creature has a given schematic.
@@ -6286,14 +6316,10 @@ public class base_class
      */
     private static native String _getTemplateName(long id);
 
-    /*@}*/
-
-
     /**
      * @defgroup objectMethods Object creation and destruction methods
      */
     /*@{*/
-
     public static String getTemplateName(obj_id id)
     {
         return _getTemplateName(getLongWithNull(id));
@@ -6475,7 +6501,9 @@ public class base_class
 
     /**
      * Permanently removes an object from the game.
-     * @param target        the object to delete
+     *
+     * @param target
+     *         the object to delete
      * @return true on success, false on fail
      */
 
@@ -7012,6 +7040,14 @@ public class base_class
         _setMissionCreator(getLongWithNull(missionData), creator);
     }
 
+    /*@}*/
+
+    /* deprecated Do not use.*/
+//  public static native boolean addObjectToWorld(obj_id target);
+    /*@}*/
+
+//-----------------------------------------------------------------------------------------
+
     /**
      * @brief set the string_id that describes the mission
      */
@@ -7167,19 +7203,10 @@ public class base_class
      */
     private static native void _setMissionType(long missionData, String typeName);
 
-    /*@}*/
-
-    /* deprecated Do not use.*/
-//  public static native boolean addObjectToWorld(obj_id target);
-    /*@}*/
-
-//-----------------------------------------------------------------------------------------
-
     /**
      * @defgroup containerMethods Container access methods
      */
     /*@{*/
-
     public static void setMissionType(obj_id missionData, String typeName)
     {
         _setMissionType(getLongWithNull(missionData), typeName);
@@ -7699,6 +7726,9 @@ public class base_class
         return getObjIdWithNull(_createObject(templateCrc, transform, getLongWithNull(cell)));
     }
 
+    /*@}*/
+//-----------------------------------------------------------------------------------------
+
     /**
      * Creates a new object, based on another object's template, in the world. Note the object will not be persisted unless it's template says to.
      *
@@ -7862,14 +7892,10 @@ public class base_class
      */
     private static native long _createObjectAt(String template, long target);
 
-    /*@}*/
-//-----------------------------------------------------------------------------------------
-
-/**
- * @defgroup cellMethods Cell/Interior methods
- */
+    /**
+     * @defgroup cellMethods Cell/Interior methods
+     */
     /*@{*/
-
     public static obj_id createObjectAt(String template, obj_id target)
     {
         return getObjIdWithNull(_createObjectAt(template, getLongWithNull(target)));
@@ -8057,6 +8083,9 @@ public class base_class
         return _persistObject(getLongWithNull(target));
     }
 
+    /*@}*/
+//-----------------------------------------------------------------------------------------
+
     /**
      * Checks if an object has been persisted to the database.
      *
@@ -8174,14 +8203,10 @@ public class base_class
         return createTheater(datatable, getSelf(), null, locationType);
     }
 
-    /*@}*/
-//-----------------------------------------------------------------------------------------
-
     /**
      * @defgroup attributeMethods Attribute methods
      */
     /*@{*/
-
     public static obj_id createTheater(String datatable)
     {
         return createTheater(datatable, getSelf(), null, TLT_getGoodLocation);
@@ -8941,6 +8966,7 @@ public class base_class
     {
         return _canPutIn(getLongWithNull(item), getLongWithNull(container));
     }
+    /*@} attributeMethods */
 
     /**
      * @param item
@@ -9081,7 +9107,6 @@ public class base_class
      * @return the obj_id of the created object, or null on error
      */
     private static native long _createObjectInCell(String template, long building, String cellName, location pos);
-    /*@} attributeMethods */
 
     /**
      * @defgroup mentalStateMethods Methods used for querying and setting mental states and targetted mental states.
@@ -9401,6 +9426,12 @@ public class base_class
      * @return true if no more content load requests should be made
      */
     public static native boolean isAtPendingLoadRequestLimit();
+    /// @}
+
+    /**
+     * @defgroup actionStates Methods to make the creature do smart looking stuff
+     * @{
+     */
 
     /**
      * Gets an attribute of a creature.
@@ -9579,12 +9610,6 @@ public class base_class
     {
         return _addToAttrib(getLongWithNull(target), attrib, value);
     }
-    /// @}
-
-    /**
-     * @defgroup actionStates Methods to make the creature do smart looking stuff
-     * @{
-     */
 
     /**
      * Adds a delta to a max attribute of a creature.
@@ -9804,6 +9829,8 @@ public class base_class
         return _getAllAttribModifiers(getLongWithNull(target));
     }
 
+//  /**
+
     /**
      * Removes the attrib/skill mod(s) with a given name.
      *
@@ -9931,6 +9958,12 @@ public class base_class
      */
     private static native boolean _setMaxAttribs(long target, attribute[] values);
 
+    /*@}*/
+    /**
+     * @defgroup nameMethods Name methods
+     */
+    /*@{*/
+
     public static boolean setMaxAttribs(obj_id target, attribute[] values)
     {
         return _setMaxAttribs(getLongWithNull(target), values);
@@ -9946,8 +9979,6 @@ public class base_class
      * @return true on success, false on fail
      */
     private static native boolean _addToAttribs(long target, attribute[] values);
-
-//  /**
 
     public static boolean addToAttribs(obj_id target, attribute[] values)
     {
@@ -10075,12 +10106,6 @@ public class base_class
     {
         return _getShockWound(getLongWithNull(target));
     }
-
-    /*@}*/
-    /**
-     * @defgroup nameMethods Name methods
-     */
-    /*@{*/
 
     /**
      * Sets the shock wound value of a creature.
@@ -10668,6 +10693,14 @@ public class base_class
      * @return a success code
      */
     private static native boolean _addToMentalStateToward(long creature, long target, int state, float value);
+    /*@}*/
+
+    /**
+     * @defgroup objectInfoMethods Generic Object information methods
+     */
+    /*@{*/
+
+    // object generic info methods
 
     public static boolean addToMentalStateToward(obj_id creature, obj_id target, int state, float value)
     {
@@ -10883,14 +10916,6 @@ public class base_class
         }
         return _addMentalStateModifierToward(getLongWithNull(creature), _target, state, value, duration, attackTime, decayTime);
     }
-    /*@}*/
-
-    /**
-     * @defgroup objectInfoMethods Generic Object information methods
-     */
-    /*@{*/
-
-    // object generic info methods
 
     /**
      * Sets a number of  mental states toward a list of other creatures.  If the sum of the targetted and base
@@ -10957,6 +10982,12 @@ public class base_class
     {
         return _getBehavior(getLongWithNull(creature));
     }
+    /**
+     * Returns the venue type of an object.
+     * @param target        the object
+     * @return the venue type, or -1 on error
+     */
+//      public static native int getVenueType(obj_id target);
 
     /**
      * Gets the behavior toward a specific creature.
@@ -11137,12 +11168,6 @@ public class base_class
     {
         patrol(ai, targets, false, false, false, startPoint);
     }
-    /**
-     * Returns the venue type of an object.
-     * @param target        the object
-     * @return the venue type, or -1 on error
-     */
-//      public static native int getVenueType(obj_id target);
 
     /**
      * Causes an AI to move along a series of points. The order of points it moves to will be random.
@@ -11282,6 +11307,13 @@ public class base_class
     {
         patrol(ai, targetNames, false, false, false, startPoint);
     }
+    /**
+     * Kills a player.
+     * @param player        the player
+     * @param killer        who killed the player (may be null)
+     * @return the corpse id of the player, or null on error
+     */
+//      public static native obj_id killPlayer(obj_id player, obj_id killer);
 
     /**
      * Causes an AI to move along a series of points. The order of points it moves to will be random.
@@ -11457,6 +11489,8 @@ public class base_class
         return wanderAngleDelay(creature, minDist, maxDist, getWanderAngleMin(creature), getWanderAngleMax(creature), getWanderDelayMin(creature), getWanderDelayMax(creature));
     }
 
+    // object movement methods
+
     /**
      * Makes the creature wander around.
      * He will choose a leg at any point within the loiter range and pathfind to it.
@@ -11540,13 +11574,6 @@ public class base_class
     {
         return wanderAngleDelay(creature, minDist, maxDist, getWanderAngleMin(creature), getWanderAngleMax(creature), minDelay, maxDelay);
     }
-    /**
-     * Kills a player.
-     * @param player        the player
-     * @param killer        who killed the player (may be null)
-     * @return the corpse id of the player, or null on error
-     */
-//      public static native obj_id killPlayer(obj_id player, obj_id killer);
 
     /**
      * Makes the creature wander around.
@@ -11683,6 +11710,7 @@ public class base_class
     {
         _setDescriptionStringId(getLongWithNull(target), new string_id(description));
     }
+
     /**
      * Returns the name of an object.
      *
@@ -11691,8 +11719,6 @@ public class base_class
      * @return the object's name, or null on error
      */
     private static native String _getName(long target);
-
-    // object movement methods
 
     public static String getName(obj_id target)
     {
@@ -12316,7 +12342,7 @@ public class base_class
 
         final string_id sid = getNameStringId(target);
         if (sid != null && !sid.isEmpty())
-            return "@" + sid.toString();
+            return "@" + sid;
 
         return "";
     }
@@ -12982,6 +13008,12 @@ public class base_class
      */
     private static native boolean _faceToBehavior(long mob, long target);
 
+    // these MUST be reflected in:
+    // //depot/swg/current/dsrc/sku.0/sys.server/compiled/game/object/tangible_object_template.tdf
+    // //depot/swg/current/dsrc/sku.0/sys.server/compiled/game/script/base_class.java
+    // //depot/swg/current/src/engine/client/library/clientGame/src/shared/object/TangibleObject.h
+    // //depot/swg/current/src/engine/server/library/serverGame/src/shared/object/TangibleObject.h
+
     public static boolean faceToBehavior(obj_id mob, obj_id target)
     {
         return _faceToBehavior(getLongWithNull(mob), getLongWithNull(target));
@@ -13068,12 +13100,6 @@ public class base_class
     {
         _setBaseRunSpeed(getLongWithNull(object), speed);
     }
-
-    // these MUST be reflected in:
-    // //depot/swg/current/dsrc/sku.0/sys.server/compiled/game/object/tangible_object_template.tdf
-    // //depot/swg/current/dsrc/sku.0/sys.server/compiled/game/script/base_class.java
-    // //depot/swg/current/src/engine/client/library/clientGame/src/shared/object/TangibleObject.h
-    // //depot/swg/current/src/engine/server/library/serverGame/src/shared/object/TangibleObject.h
 
     private static native float _getBaseRunSpeed(long object);
 
@@ -13593,6 +13619,14 @@ public class base_class
         return getObjIdWithNull(_getGroupLeaderId(getLongWithNull(group)));
     }
 
+    /*@} objectInfoMethods */
+
+    // object pathing/steering methods
+    /**
+     * @defgroup steering Steering Methods
+     * @{
+     */
+
     /**
      * Get the number of members in a group.
      *
@@ -13730,22 +13764,15 @@ public class base_class
      */
     private static native void _setPerformanceStartTime(long target, int performanceStartTime);
 
-    /*@} objectInfoMethods */
-
-    // object pathing/steering methods
-    /**
-     * @defgroup steering Steering Methods
-     * @{
-     */
     /**
      * Resets all of the explicit steering commands given to the creature.
      * There may be implicit steering commands (follow in particular may add them) that are not reset.
      *
-     * @param creature The ID of the creature
+     * @param creature
+     *         The ID of the creature
      * @return a success code
      */
 //  public static native boolean resetSteering(obj_id creature);
-
     public static void setPerformanceStartTime(obj_id target, int performanceStartTime)
     {
         _setPerformanceStartTime(getLongWithNull(target), performanceStartTime);
@@ -13793,6 +13820,43 @@ public class base_class
     {
         return getObjIdWithNull(_getPerformanceWatchTarget(getLongWithNull(actor)));
     }
+    /**
+     * Sets the terrain type preference for steering and pathfinding.
+     * Positive values indicate a preference for that type of terrain, and negative values indicate an aversion.
+     * The suggested range is -10/10 intense dislike/preference, -3/3 mild dislike/preference.
+     *
+     * @param creature The ID of the creature
+     * @param terrain_type The desired terrain type
+     * @param preference The preference for the terrain type
+     */
+//  public static native boolean preferTerrainType(obj_id creature, int terrain_type, float preference);
+    /**
+     * Causes the creature to seek or avoid another object.
+     * If direction equals STEER_TOWARD, then the creature will prefer to move toward the target.
+     * If he is less than minDistance away, he will be happy, and if he is more than maxDistance then he
+     * will be unaware of the target.  If he is inbetween, he will move toward the target.
+     * If the direction equals STEER_AWAY, then the creature will prefer to move away from the target.
+     * He will try really hard to stay more than minDistance away, will move away until he is at maxDistance,
+     * and will ignore if he is greater than maxDistance away.
+     *
+     * @param creature The ID of the creature
+     * @param target The ID of the object we are steering toward or away from.
+     * @param minDistance The minimum distance to the target
+     * @param maxDistance The maximum distance to the target
+     * @param direction STEER_TOWARD or STEER_AWAY to move toward or away from the target.
+     * @return a success code
+     */
+//  public static native boolean seekObject(obj_id creature, obj_id target, float minDistance, float maxDistance, int direction);
+    /**
+     * Makes the creature seek all similar creatures (same species).  Parameters and behavior is similar to seekObject.
+     *
+     * @param creature The ID of the creature
+     * @param minDistance The minimum distance to the target
+     * @param maxDistance The maximum distance to the target
+     * @param direction STEER_TOWARD or STEER_AWAY to move toward or away from the target.
+     * @return a success code
+     */
+//  public static native boolean seekSimilarCreatures(obj_id creature, float minDistance, float maxDistance, int direction);
 
     /**
      * Set a creature's current performance watch target.
@@ -13923,58 +13987,29 @@ public class base_class
      * @return level in the range [0,32768] for creature objects
      */
     private static native int _getLevel(long target);
-    /**
-     * Sets the terrain type preference for steering and pathfinding.
-     * Positive values indicate a preference for that type of terrain, and negative values indicate an aversion.
-     * The suggested range is -10/10 intense dislike/preference, -3/3 mild dislike/preference.
-     *
-     * @param creature The ID of the creature
-     * @param terrain_type The desired terrain type
-     * @param preference The preference for the terrain type
-     */
-//  public static native boolean preferTerrainType(obj_id creature, int terrain_type, float preference);
-    /**
-     * Causes the creature to seek or avoid another object.
-     * If direction equals STEER_TOWARD, then the creature will prefer to move toward the target.
-     * If he is less than minDistance away, he will be happy, and if he is more than maxDistance then he
-     * will be unaware of the target.  If he is inbetween, he will move toward the target.
-     * If the direction equals STEER_AWAY, then the creature will prefer to move away from the target.
-     * He will try really hard to stay more than minDistance away, will move away until he is at maxDistance,
-     * and will ignore if he is greater than maxDistance away.
-     *
-     * @param creature The ID of the creature
-     * @param target The ID of the object we are steering toward or away from.
-     * @param minDistance The minimum distance to the target
-     * @param maxDistance The maximum distance to the target
-     * @param direction STEER_TOWARD or STEER_AWAY to move toward or away from the target.
-     * @return a success code
-     */
-//  public static native boolean seekObject(obj_id creature, obj_id target, float minDistance, float maxDistance, int direction);
-    /**
-     * Makes the creature seek all similar creatures (same species).  Parameters and behavior is similar to seekObject.
-     *
-     * @param creature The ID of the creature
-     * @param minDistance The minimum distance to the target
-     * @param maxDistance The maximum distance to the target
-     * @param direction STEER_TOWARD or STEER_AWAY to move toward or away from the target.
-     * @return a success code
-     */
-//  public static native boolean seekSimilarCreatures(obj_id creature, float minDistance, float maxDistance, int direction);
+
     /**
      * Makes the creature seek all different creatures (different species).  Parameters and behavior is similar to seekObject.
      *
-     * @param creature The ID of the creature
-     * @param minDistance The minimum distance to the target
-     * @param maxDistance The maximum distance to the target
-     * @param direction STEER_TOWARD or STEER_AWAY to move toward or away from the target.
+     * @param creature
+     *         The ID of the creature
+     * @param minDistance
+     *         The minimum distance to the target
+     * @param maxDistance
+     *         The maximum distance to the target
+     * @param direction
+     *         STEER_TOWARD or STEER_AWAY to move toward or away from the target.
      * @return a success code
      */
 //  public static native boolean seekDifferentCreatures(obj_id creature, float minDistance, float maxDistance, int direction);
-
     public static int getLevel(obj_id target)
     {
         return _getLevel(getLongWithNull(target));
     }
+//  public static native float getSlopeAversion(obj_id mob);
+//  public static native float getSlopeAversionMin(obj_id mob);
+//  public static native float getSlopeAversionMax(obj_id mob);
+    /// @}
 
     /**
      * Set the level of a creature for the duration of the current session
@@ -14123,16 +14158,11 @@ public class base_class
             int initialCreatureColorIndex,
             String creatureTemplateName
     );
-//  public static native float getSlopeAversion(obj_id mob);
-//  public static native float getSlopeAversionMin(obj_id mob);
-//  public static native float getSlopeAversionMax(obj_id mob);
-    /// @}
 
     /**
      * @defgroup weaponMethods weapon methods
      */
     /*@{*/
-
     public static void incubatorStart(
             int sessionNumber,
             obj_id playerId,
@@ -14567,6 +14597,12 @@ public class base_class
      *         the obj_id to associate with the name
      */
     private static native void _registerNamedObject(String name, long namedObject);
+    /*@}*/
+
+/**
+ * @defgroup combat Constants and methods related to combat
+ * @{
+ */
 
     public static void registerNamedObject(String name, obj_id namedObject)
     {
@@ -14581,6 +14617,18 @@ public class base_class
      * @return the named object
      */
     private static native long _getNamedObject(String name);
+    /*@}*/
+    /* combatStructures */
+
+    /**
+     * @defgroup combatConstants Combat constants
+     * @{
+     */
+
+    /**
+     * @defgroup combatMiss Miss types
+     * @{
+     */
 
     public static obj_id getNamedObject(String name)
     {
@@ -14603,6 +14651,13 @@ public class base_class
      *         The object id to receive the foundObject message on success
      */
     private static native void _findObjectAnywhere(long target, long objectToNotify);
+    /*@}*/
+    /* combatMiss*/
+
+    /**
+     * @defgroup weaponTypeConstants Weapon type constants from WeaponObjectTemplate.h
+     * @{
+     */
 
     public static void findObjectAnywhere(obj_id target, obj_id objectToNotify)
     {
@@ -14711,17 +14766,18 @@ public class base_class
      * @return true or false
      */
     private static native boolean _isNoTradeShared(long target);
+    /*@}*/
+    /*weaponTypeConstants*/
+
+    /**
+     * @defgroup weaponAttackConstants Weapon attack type constants from WeaponObjectTemplate.h
+     * @{
+     */
 
     public static boolean isNoTradeShared(obj_id target)
     {
         return _isNoTradeShared(getLongWithNull(target));
     }
-    /*@}*/
-
-/**
- * @defgroup combat Constants and methods related to combat
- * @{
- */
 
     /**
      * Sets a bio-link on an object. If the object is equippable, only the player that
@@ -14741,17 +14797,7 @@ public class base_class
         return _setBioLink(getLongWithNull(target), getLongWithNull(link));
     }
     /*@}*/
-    /* combatStructures */
-
-    /**
-     * @defgroup combatConstants Combat constants
-     * @{
-     */
-
-    /**
-     * @defgroup combatMiss Miss types
-     * @{
-     */
+    /*weaponAttackConstants*/
 
     /**
      * Removes a bio-link from an object.
@@ -14766,13 +14812,6 @@ public class base_class
     {
         return _clearBioLink(getLongWithNull(target));
     }
-    /*@}*/
-    /* combatMiss*/
-
-    /**
-     * @defgroup weaponTypeConstants Weapon type constants from WeaponObjectTemplate.h
-     * @{
-     */
 
     /**
      * Returns the bio-link attached to an object.
@@ -14877,6 +14916,8 @@ public class base_class
     {
         return _getSlopeModPercent(getLongWithNull(creature));
     }
+    /*@}*/
+    /*weaponDamageConstants*/
 
     /**
      * Sets the slope aversion Percent for a creature.
@@ -14895,13 +14936,6 @@ public class base_class
     {
         return _getTemplateSlopeModPercent(getLongWithNull(creature));
     }
-    /*@}*/
-    /*weaponTypeConstants*/
-
-    /**
-     * @defgroup weaponAttackConstants Weapon attack type constants from WeaponObjectTemplate.h
-     * @{
-     */
 
     /**
      * Sets the slope aversion Percent for a creature.
@@ -14933,8 +14967,6 @@ public class base_class
      *         the maximum comfortable Water for the creature
      */
     private static native float _getWaterModPercent(long creature);
-    /*@}*/
-    /*weaponAttackConstants*/
 
     public static float getWaterModPercent(obj_id creature)
     {
@@ -14958,6 +14990,8 @@ public class base_class
     {
         return _getTemplateWaterModPercent(getLongWithNull(creature));
     }
+    /*@}*/
+    /*actionConstants*/
 
     /**
      * Sets the movement speed mod for a creature.
@@ -15001,6 +15035,8 @@ public class base_class
     {
         return _setAccelPercent(getLongWithNull(creature), value);
     }
+    /*@}*/
+    /*hitLocations*/
 
     /**
      * Get the acceleration mod for a creature
@@ -15037,8 +15073,6 @@ public class base_class
     }
 
     private static native float _getTurnRate(long mob, int movementType);
-    /*@}*/
-    /*weaponDamageConstants*/
 
     /**
      * @defgroup actionConstants Combat action constants
@@ -15078,8 +15112,6 @@ public class base_class
     {
         return 3;
     }
-    /*@}*/
-    /*actionConstants*/
 
     public static float getLoiterDelayMax(obj_id mob)
     {
@@ -15101,6 +15133,18 @@ public class base_class
         return 0;
     }
 
+
+    /*@}*/
+    /*combatResults*/
+
+    /*@}*/
+    /*combatConstants*/
+
+    /**
+     * @defgroup combatMethods Combat methods
+     *@{
+     */
+
     public static float getWanderAngleMax(obj_id mob)
     {
         return 90;
@@ -15110,8 +15154,6 @@ public class base_class
     {
         return 4;
     }
-    /*@}*/
-    /*hitLocations*/
 
     public static float getWanderDelayMax(obj_id mob)
     {
@@ -15233,18 +15275,6 @@ public class base_class
     {
         return _isDefaultWeapon(getLongWithNull(target));
     }
-
-
-    /*@}*/
-    /*combatResults*/
-
-    /*@}*/
-    /*combatConstants*/
-
-    /**
-     * @defgroup combatMethods Combat methods
-     *@{
-     */
 
     /**
      * Returns the minimum range of a weapon.
@@ -15431,6 +15461,11 @@ public class base_class
      */
     private static native boolean _setWeaponAttackSpeed(long weapon, float speed);
 
+    /*@}*/
+    /*combatMethods */
+    /*@}*/
+    /*combat */
+
     public static boolean setWeaponAttackSpeed(obj_id weapon, float speed)
     {
         return _setWeaponAttackSpeed(getLongWithNull(weapon), speed);
@@ -15568,16 +15603,10 @@ public class base_class
      */
     private static native boolean _setWeaponAttackCost(long weapon, int cost);
 
-    /*@}*/
-    /*combatMethods */
-    /*@}*/
-    /*combat */
-
     /**
      * @defgroup conversationMethods NPC conversation methods
      */
     /*@{*/
-
     public static boolean setWeaponAttackCost(obj_id weapon, int cost)
     {
         return _setWeaponAttackCost(getLongWithNull(weapon), cost);
@@ -15696,6 +15725,8 @@ public class base_class
      */
     public static native boolean isCombatEnabled();
 
+    /*@}*/
+
     /**
      * Returns the current target of an object.
      *
@@ -15788,6 +15819,24 @@ public class base_class
      * @return true on success, false on fail
      */
     private static native boolean _damage(long center, float radius, int type, int amount);
+
+    /*@}*/
+
+    /**
+     * @defgroup installationMethods installation methods
+     */
+    /*@{*/
+
+    /**
+     * Cause the harvester object to package up its resource data and send it to the
+     * specified player.
+     *
+     * @param player          the player object to which to send the data
+     * @param harvester       the harvester object in question
+     * @param resourceIds     an array of networkids for the resource objects
+     *
+     */
+//  public static native void sendHarvesterResourceData (obj_id player, obj_id harvester, obj_id[] resourceIds);
 
     public static boolean damage(obj_id center, float radius, int type, int amount)
     {
@@ -15910,8 +15959,6 @@ public class base_class
         }
         return __getCombatData(_attackers, _defenders, attackerData, defenderData, weaponData);
     }
-
-    /*@}*/
 
     /**
      * Gets combat related info for given attackers and defenders.
@@ -16079,33 +16126,15 @@ public class base_class
      */
     private static native boolean __doDamageNoWeapon(long attacker, long defender, int damage, int hitLocation);
 
-    /*@}*/
-
-    /**
-     * @defgroup installationMethods installation methods
-     */
-    /*@{*/
-
-    /**
-     * Cause the harvester object to package up its resource data and send it to the
-     * specified player.
-     *
-     * @param player          the player object to which to send the data
-     * @param harvester       the harvester object in question
-     * @param resourceIds     an array of networkids for the resource objects
-     *
-     */
-//  public static native void sendHarvesterResourceData (obj_id player, obj_id harvester, obj_id[] resourceIds);
-
     /**
      * Cause the harvester object to package up its status and send it to the player
      *
-     * @param player          the player object to which to send the data
-     * @param harvester       the harvester object in question
-     *
+     * @param player
+     *         the player object to which to send the data
+     * @param harvester
+     *         the harvester object in question
      */
 //  public static native void sendHarvesterStatus (obj_id player, obj_id harvester);
-
     public static boolean doDamage(obj_id attacker, obj_id defender, combat_engine.hit_result hitResult)
     {
         return __doDamageNoWeapon(getLongWithNull(attacker), getLongWithNull(defender), (hitResult.damage + hitResult.elementalDamage), hitResult.hitLocation);
@@ -16490,6 +16519,12 @@ public class base_class
     {
         return _npcStartConversationWithOverrideAppearance(player, npc, convoName, greeting, null, responses.toArray(), appearanceOverrideServerTemplate);
     }
+    /*@}*/
+
+    /**
+     * @defgroup resourceMethods resource methods
+     */
+    /*@{*/
 
     /**
      * Starts a conversation between a player and an NPC.
@@ -16702,12 +16737,6 @@ public class base_class
         String oob = packOutOfBandProsePackage(null, -1, pp);
         return _npcAddConversationResponse(player, null, oob);
     }
-    /*@}*/
-
-    /**
-     * @defgroup resourceMethods resource methods
-     */
-    /*@{*/
 
     /**
      * Removes a response from the available responses for a player to select in a conversation with an NPC.
@@ -16949,6 +16978,10 @@ public class base_class
      *         the harvester object in question
      */
     private static native boolean _setMaxHopperAmount(long installation, int value);
+    /*@}*/
+
+    /** @defgroup crafting data and functions used in the crafting and manufacturing processes
+     *@{ */
 
     public static boolean setMaxHopperAmount(obj_id installation, int value)
     {
@@ -17089,10 +17122,6 @@ public class base_class
     {
         return _requestResourceListForSurvey(getLongWithNull(player), getLongWithNull(tool), parentResourceClass);
     }
-    /*@}*/
-
-    /** @defgroup crafting data and functions used in the crafting and manufacturing processes
-     *@{ */
 
     /**
      * Take a survey.
@@ -17124,6 +17153,7 @@ public class base_class
      * @return Object id of the ResourceTypeObject
      */
     private static native long _pickRandomNonDepeletedResource(String parentResourceClass);
+    /*@}*/
 
     public static obj_id pickRandomNonDepeletedResource(String parentResourceClass)
     {
@@ -17178,6 +17208,7 @@ public class base_class
      *         The amount to remove
      */
     private static native boolean _removeResourceFromContainer(long resourceContainer, long resourceType, int amount);
+    /*@}*/
 
     public static boolean removeResourceFromContainer(obj_id resourceContainer, obj_id resourceType, int amount)
     {
@@ -17276,7 +17307,6 @@ public class base_class
     {
         return _getResourceEfficiency(getLongWithNull(resourceType), where);
     }
-    /*@}*/
 
     /**
      * Return true if the resource type is derived from the specified class
@@ -17325,7 +17355,6 @@ public class base_class
      * @return The name of the crate that holds the specified type of resource
      */
     private static native String _getResourceContainerForType(long resourceType);
-    /*@}*/
 
     public static String getResourceContainerForType(obj_id resourceType)
     {
@@ -18249,6 +18278,8 @@ public class base_class
     {
         return _getManufactureStationSchematic(getLongWithNull(station));
     }
+    /*@}  craftingArmorMethods*/
+    /*@}  craftingMethods*/
 
     /**
      * Gets a list of manufacture schematics that could be used at a given manufacturing station.
@@ -18352,6 +18383,10 @@ public class base_class
         _getRepairableObjectsForTool(getLongWithNull(player), getLongWithNull(tool), objects);
     }
 
+    //*********************************************************************
+    // collection methods
+    //*********************************************************************
+
     /**
      * Returns the attribute bonuses an object grants when equipped.
      *
@@ -18410,8 +18445,6 @@ public class base_class
      * @return true on success, false on error
      */
     private static native boolean _setAttributeBonuses(long target, int[] bonuses);
-    /*@}  craftingArmorMethods*/
-    /*@}  craftingMethods*/
 
     public static native String _getSkillTemplate(long player);
 
@@ -18454,10 +18487,6 @@ public class base_class
     {
         _resetExpertises((player == null) ? 0 : player.getValue());
     }
-
-    //*********************************************************************
-    // collection methods
-    //*********************************************************************
 
     // modify the value of a certain collection slot on a player by the
     // specified delta amount; if the slot is a bit-type slot, a positive
@@ -18600,14 +18629,6 @@ public class base_class
         return _getCompletedCollectionBooks(getLongWithNull(player));
     }
 
-    // returns a string array containing the page name, collection name, and music for the collection slot
-    // null is a valid return value
-    public static final int COLLECTION_INFO_INDEX_BOOK = 0;
-    public static final int COLLECTION_INFO_INDEX_PAGE = 1;
-    public static final int COLLECTION_INFO_INDEX_COLLECTION = 2;
-    public static final int COLLECTION_INFO_INDEX_MUSIC = 3;
-    public static final int COLLECTION_INFO_ARRAY_SIZE = 4;
-
     public static native String[] getCollectionSlotInfo(String slotName);
 
     // returns true if the specified collection slot is marked as a title
@@ -18640,9 +18661,22 @@ public class base_class
     // null is a valid return value
     public static native String[] getAllCollectionSlotsInPage(String pageName);
 
+    //*********************************************************************
+    // base class methods
+    //*********************************************************************
+
     // get the list of all the possible collections in a collection page
     // null is a valid return value
     public static native String[] getAllCollectionsInPage(String pageName);
+
+    /**
+     * @defgroup randomNumberMethods Random number methods
+     */
+    /*@{*/
+
+    //*********************************************************************
+    // random number functions
+    //*********************************************************************
 
     // get the list of all the possible collection slots in a collection book
     // null is a valid return value
@@ -18680,6 +18714,17 @@ public class base_class
     // null is a valid return value
     public static native String[] getAllCollectionSlotCategoriesInCollection(String collectionName);
 
+    /*@}*/
+
+    /**
+     * @defgroup dataCheckingMethods Data checking methods
+     */
+    /*@{*/
+
+    //*********************************************************************
+    // data checking functions
+    //*********************************************************************
+
     // get the list of all the possible collection categories in a collection page
     // null is a valid return value
     public static native String[] getAllCollectionSlotCategoriesInPage(String pageName);
@@ -18696,25 +18741,6 @@ public class base_class
     {
         return _setAttributeBonuses(getLongWithNull(target), bonuses);
     }
-
-    //*********************************************************************
-    // base class methods
-    //*********************************************************************
-
-    /** \internal */
-    public base_class()
-    {
-        m_traceLoggingEnabled = false;
-    }
-
-    /**
-     * @defgroup randomNumberMethods Random number methods
-     */
-    /*@{*/
-
-    //*********************************************************************
-    // random number functions
-    //*********************************************************************
 
     /**
      * Computes a random number in the range [0,1)
@@ -18787,21 +18813,23 @@ public class base_class
      */
     private static native boolean _setSkillModBonuses(long target, String[] skillMod, int[] bonus);
 
-    public static boolean setSkillModBonuses(obj_id target, String[] skillMod, int[] bonus)
-    {
-        return _setSkillModBonuses(getLongWithNull(target), skillMod, bonus);
-    }
 
     /*@}*/
 
     /**
-     * @defgroup dataCheckingMethods Data checking methods
+     * @defgroup creatureAttributeMethods Creature attribute methods
      */
     /*@{*/
 
+
     //*********************************************************************
-    // data checking functions
+    // attribute functions
     //*********************************************************************
+
+    public static boolean setSkillModBonuses(obj_id target, String[] skillMod, int[] bonus)
+    {
+        return _setSkillModBonuses(getLongWithNull(target), skillMod, bonus);
+    }
 
     /**
      * Sets the base skill mod bonus an object applies when equipped.
@@ -18914,19 +18942,6 @@ public class base_class
     {
         return random.rand(seed);
     }   // rand(int)
-
-
-    /*@}*/
-
-    /**
-     * @defgroup creatureAttributeMethods Creature attribute methods
-     */
-    /*@{*/
-
-
-    //*********************************************************************
-    // attribute functions
-    //*********************************************************************
 
     /**
      * Computes a random integer in the range [minVal, maxVal]
@@ -19097,7 +19112,7 @@ public class base_class
     public static String getDataType(Object data)
     {
         String result = data.getClass().toString();
-        if (result.startsWith("java.lang.", 0))
+        if (result.startsWith("java.lang."))
             result = result.substring(10);
         return result;
     }   // getDataType
@@ -19697,6 +19712,13 @@ public class base_class
         return getMentalStateDecay(target, FEAR);
     }   // getFear()
 
+    /*@}*/
+
+    /**
+     * @defgroup worldInfo Methods used for querying objects around a location in the world.
+     * @{
+     */
+
     /**
      * Returns a creature's max fear.
      *
@@ -19884,13 +19906,6 @@ public class base_class
         return addMentalStateModifier(target, ANGER, value, duration, attackRate,
                 decayRate);
     }   // addAngerModifier()
-
-    /*@}*/
-
-    /**
-     * @defgroup worldInfo Methods used for querying objects around a location in the world.
-     * @{
-     */
 
     /**
      * Returns the anger modifiers on a creature.
@@ -21347,6 +21362,16 @@ public class base_class
     {
         return _getFloorHeightAtRelativePointOnSameFloorAsObject(getLongWithNull(scriptObject), relativeXLocation, relativeZLocation);
     }
+    /*@}*/
+
+    /**
+     * @defgroup appearanceCustomization Appearance customization methods
+     *
+     * Methods used for querying and modifying customization data associated
+     * with a specified tangible object.
+     *
+     * @{
+     */
 
     private static native boolean _isOnAFloor(long scriptObject);
 
@@ -21452,16 +21477,6 @@ public class base_class
     {
         return getObjIdWithNull(_getFirstObjectWithTemplate(loc, range, templateName));
     }
-    /*@}*/
-
-    /**
-     * @defgroup appearanceCustomization Appearance customization methods
-     *
-     * Methods used for querying and modifying customization data associated
-     * with a specified tangible object.
-     *
-     * @{
-     */
 
     /**
      * Get all the objects within range that have a particular script.
@@ -21488,6 +21503,8 @@ public class base_class
         }
         return _ret_obj_id;
     }
+
+    /*@}*/
 
     /**
      * Get all the objects within range that have a particular object variable.
@@ -21625,8 +21642,6 @@ public class base_class
      * @return true if the source can see the target, false otherwise
      */
     private static native boolean _canSee(long source, location target);
-
-    /*@}*/
 
     /**
      * @defgroup money Methods for dealing with money
@@ -22106,6 +22121,8 @@ public class base_class
 
     private static native void _updateVendorValue(long container);
 
+    //
+
     public static void updateVendorValue(obj_id container)
     {
         _updateVendorValue(getLongWithNull(container));
@@ -22155,9 +22172,10 @@ public class base_class
         _setEntranceCharge(getLongWithNull(vendor), entranceCharge);
     }
 
-    //
-
     private static native void _setAttributeAttained(long serverObjectId, int attribute);
+
+
+    /*@}*/
 
     public static void setAttributeAttained(obj_id serverObjectId, int attribute)
     {
@@ -22206,9 +22224,6 @@ public class base_class
         return _isInterested(getLongWithNull(serverObjectId1), getLongWithNull(serverObjectId2));
     }
 
-
-    /*@}*/
-
     /**
      * @param category
      *         must not be null
@@ -22221,8 +22236,6 @@ public class base_class
      */
 
     private static native boolean _addPlanetaryMapLocation(long locationId, String locationName, int xLoc, int yLoc, String category, String subCategory, int mapLocationType, byte flags);
-
-    ;
 
     public static boolean addPlanetaryMapLocation(obj_id locationId, String locationName, int xLoc, int yLoc, String category, String subCategory, int mapLocationType, byte flags)
     {
@@ -22330,6 +22343,9 @@ public class base_class
         return pid;
     }
 
+
+    //-----------------------------------------------------------------------
+
     /**
      * Clear the given datasource for the SUI page.  New values can then be set into the datasource with addSUIDataItem
      */
@@ -22403,9 +22419,6 @@ public class base_class
      * Show a SUI page.  After creating and filling out the page, call this to commit the page and send it to the client.
      */
     public static native boolean showSUIPage(int pageId);
-
-
-    //-----------------------------------------------------------------------
 
     /**
      * Flush changes to an active SUI page.  Call this after setting properties on an active page.
@@ -23341,6 +23354,12 @@ public class base_class
         return _newbieTutorialRequest(getLongWithNull(player), request);
     }
 
+    /*@}*/
+/**
+ * @defgroup dataTable Methods for working with custom data tables
+ * @{
+ */
+
     /**
      * Ask the client to enable/disable a hud element
      *
@@ -23426,12 +23445,6 @@ public class base_class
     {
         _newbieTutorialSendStartingLocationsToPlayer(getLongWithNull(player), locations);
     }
-
-    /*@}*/
-/**
- * @defgroup dataTable Methods for working with custom data tables
- * @{
- */
 
     /**
      * Tell the player if their selection was valid or not
@@ -23719,6 +23732,14 @@ public class base_class
 
     public static native float[] dataTableGetFloatColumnNoDefaults(String table, int column);
 
+
+    /*@}*/
+
+    /**
+     * @defgroup commandQueue Methods for dealing with command queues
+     * @{
+     */
+
     /**
      * Get a string array from a column in a data table compiled with the DataTableTool
      *
@@ -23828,14 +23849,6 @@ public class base_class
      */
     public static native int dataTableSearchColumnForString(String entry, String column, String table);
 
-
-    /*@}*/
-
-    /**
-     * @defgroup commandQueue Methods for dealing with command queues
-     * @{
-     */
-
     /**
      * Search for a row in a datatable that contains a specified int.
      *
@@ -23879,6 +23892,8 @@ public class base_class
      * @return the row number that contains that entry.
      */
     public static native int dataTableSearchColumnForInt(int entry, int column, String table);
+
+    /*@}*/
 
     /**
      * Find the column index for a column name.
@@ -23998,8 +24013,6 @@ public class base_class
      */
     private static native int _getCurrentCommand(long actor);
 
-    /*@}*/
-
     /**
      * @defgroup permissions Cell/Building permission methods
      */
@@ -24105,6 +24118,10 @@ public class base_class
      */
     private static native boolean _permissionsIsAllowed(long target, long who);
 
+
+
+    /*@}*/
+
     public static void permissionsAddBanned(obj_id target, String name)
     {
         _permissionsAddBanned(getLongWithNull(target), name);
@@ -24126,6 +24143,7 @@ public class base_class
     {
         _permissionsRemoveAllBanned(getLongWithNull(target));
     }
+    // }@
 
     /**
      * add someone to a cell or building's allowed list
@@ -24193,10 +24211,6 @@ public class base_class
      */
     private static native void _permissionsMakePrivate(long target);
 
-
-
-    /*@}*/
-
     public static void permissionsMakePrivate(obj_id target)
     {
         _permissionsMakePrivate(getLongWithNull(target));
@@ -24214,7 +24228,6 @@ public class base_class
     {
         _expelFromBuilding(getLongWithNull(target));
     }
-    public static final int JEDI_STATE_FORCE_RANKED_LIGHT = 0x00000004;
 
     /**
      * Sends a dirty cell permissions update message directly to a player's client to forcibly
@@ -24232,9 +24245,6 @@ public class base_class
     {
         _sendDirtyCellPermissionsUpdateToClient(getLongWithNull(cell), getLongWithNull(player), isAllowed);
     }
-    // }@
-
-    public static final int IGNORE_JEDI_STAT = Integer.MAX_VALUE;
 
     /**
      * Returns if new Jedi tracking is enabled.
@@ -24594,6 +24604,13 @@ public class base_class
         return _removeJediBounty(getLongWithNull(target), getLongWithNull(hunter));
     }
 
+    /*@} jedi*/
+
+    /**
+     * @defgroup pvp Pvp methods
+     */
+    /*@{*/
+
     /**
      * Removes all the bounties on a Jedi.
      *
@@ -24689,13 +24706,6 @@ public class base_class
     {
         _removeJediScriptData(getLongWithNull(target), name);
     }
-
-    /*@} jedi*/
-
-    /**
-     * @defgroup pvp Pvp methods
-     */
-    /*@{*/
 
     /**
      * Removes data about a Jedi from the Jedi manager.
@@ -25744,12 +25754,6 @@ public class base_class
         return _getGcwContributionTrackingTableDictionary(getLongWithNull(player));
     }
 
-    /**
-     * Returns the list of GCW regions that can be a GCW defender region
-     * for the player city/guild GCW Region Defender system
-     */
-    private static String[] gcwDefenderRegions = null; // cache the list, since it doesn't change
-
     private static native String[] _getGcwDefenderRegions();
 
     public static String[] getGcwDefenderRegions()
@@ -25773,8 +25777,6 @@ public class base_class
      * as there are columns in the SUI table (i.e. column.length)
      */
     private static native dictionary _getGcwContributionTrackingTableDictionary(long player);
-    private static String[] gcwDefenderRegionsCitiesRebel = null; // cache the list
-    private static int gcwDefenderRegionsCitiesVersion = -1; // version number to detect stale cache
 
     private static native String[] _getGcwDefenderRegionsCitiesImperial();
 
@@ -25816,8 +25818,6 @@ public class base_class
      * @return the id of the master object
      */
     private static native long _getBattlefieldRegionMasterObject(region battlefieldRegion);
-    private static String[] gcwDefenderRegionsGuildsRebel = null; // cache the list
-    private static int gcwDefenderRegionsGuildsVersion = -1; // version number to detect stale cache
 
     private static native String[] _getGcwDefenderRegionsGuildsImperial();
 
@@ -25864,6 +25864,7 @@ public class base_class
     public static native int[] getGcwDefenderRegionGuildsImperial(String gcwCategory);
 
     public static native int[] getGcwDefenderRegionGuildsRebel(String gcwCategory);
+    /*@}*/
 
     /**
      * Returns the current bonus % for each imperial city/guild defending the GCW region
@@ -25901,13 +25902,11 @@ public class base_class
      * @return the guild id or 0 if none
      */
     private static native int _getGuildId(long target);
-    /*@}*/
 
     /**
      * @defgroup guild guild methods
      */
     /*@{*/
-
     public static int getGuildId(obj_id target)
     {
         return _getGuildId(getLongWithNull(target));
@@ -26484,6 +26483,7 @@ public class base_class
      *         the new name for the guild
      */
     public static native void guildSetName(int guildId, String name);
+    /*@}*/
 
     /**
      * If necessary, update the guild war kill
@@ -26529,7 +26529,6 @@ public class base_class
      *         information
      */
     private static native String _cityGetCitizenProfession(int cityId, long citizenId);
-    /*@}*/
 
     /**
      * @defgroup city player city methods
@@ -26883,6 +26882,12 @@ public class base_class
     {
         _citySetStructureInfo(cityId, getLongWithNull(structureId), structureType, structureValid);
     }
+    /*@}*/
+
+    /**
+     * @defgroup account PlayerObject/account methods
+     */
+    /*@{*/
 
     private static native void _cityRemoveCitizen(int cityId, long citizenId);
 
@@ -26901,12 +26906,6 @@ public class base_class
     public static native boolean cityIsInactivePackupActive();
 
     public static native int cityGetInactivePackupInactiveTimeSeconds();
-    /*@}*/
-
-    /**
-     * @defgroup account PlayerObject/account methods
-     */
-    /*@{*/
 
     /**
      * Check if a player is ignoring someone
@@ -27196,6 +27195,8 @@ public class base_class
      */
     private static native void _renameCharacter(long player, String newName);
 
+    /*@}*/
+
     public static void renameCharacter(obj_id player, String newName)
     {
         _renameCharacter(getLongWithNull(player), newName);
@@ -27240,6 +27241,7 @@ public class base_class
     {
         return _getAccountTimeData(getLongWithNull(player));
     }
+    /*@}*/
 
     /**
      * Get a player's id given their lowercase first name
@@ -27250,13 +27252,10 @@ public class base_class
      */
     private static native long _getPlayerIdFromFirstName(String lowerFirstName);
 
-    /*@}*/
-
     /**
      * @defgroup query Global query methods
      */
     /*@{*/
-
     public static obj_id getPlayerIdFromFirstName(String lowerFirstName)
     {
         return getObjIdWithNull(_getPlayerIdFromFirstName(lowerFirstName));
@@ -27303,7 +27302,6 @@ public class base_class
      *         description of the item
      */
     private static native void _auctionCreatePermanent(String ownerName, long item, long auctionContainer, int cost, String userDescription);
-    /*@}*/
 
     public static void auctionCreatePermanent(String ownerName, obj_id item, obj_id auctionContainer, int cost, String userDescription)
     {
@@ -27332,6 +27330,12 @@ public class base_class
     }
 
     private static native boolean _sendScriptVarsToProxies(long obj, byte[] deltaBuffer);
+    /*@}*/
+
+    /**
+     * @defgroup Text output support methods.
+     */
+    /*@{*/
 
     public static boolean sendScriptVarsToProxies(obj_id obj, byte[] deltaBuffer)
     {
@@ -27416,12 +27420,6 @@ public class base_class
     {
         _showFlyText(getLongWithNull(emitterId), outputTextId, scale, r, g, b);
     }
-    /*@}*/
-
-    /**
-     * @defgroup Text output support methods.
-     */
-    /*@{*/
 
     /**
      * Generate fly text over the head of a specified object visible only on
@@ -27655,6 +27653,8 @@ public class base_class
         _showFlyTextPrivateProseWithFlags(getLongWithNull(emitterId), getLongWithNull(defenderId), oob, scale, textColor.getR(), textColor.getG(), textColor.getB(), flags);
     }
 
+    /*@}*/
+
     public static void showFlyTextPrivateProseWithFlags(obj_id emitterId, obj_id defenderId, String oob, float scale, color textColor, int flags)
     {
         _showFlyTextPrivateProseWithFlags(getLongWithNull(emitterId), getLongWithNull(defenderId), oob, scale, textColor.getR(), textColor.getG(), textColor.getB(), flags);
@@ -27687,6 +27687,7 @@ public class base_class
      *         commands that work on multiple riders per mount.
      */
     public static native boolean getMountsMultiSeaterEnabled();
+    /*@}*/
 
     /**
      * Mark the specified pet as being mountable.
@@ -27713,8 +27714,6 @@ public class base_class
      *         fails for that reason.
      */
     private static native boolean _makePetMountable(long petId);
-
-    /*@}*/
 
     public static boolean makePetMountable(obj_id petId)
     {
@@ -27759,11 +27758,9 @@ public class base_class
      *         equipment change.
      */
     private static native void _updateMountWearableVisuals(long mountId);
-    /*@}*/
 
     /**
      * @defgroup Mountable creature support methods.
-     *
      * @{
      */
 
@@ -27950,6 +27947,8 @@ public class base_class
      */
     private static native void _sendDirtyObjectMenuNotification(long target);
 
+    /*@}*/ // end of mounts/vehicles-related functions
+
     public static void sendDirtyObjectMenuNotification(obj_id target)
     {
         _sendDirtyObjectMenuNotification(getLongWithNull(target));
@@ -27990,8 +27989,6 @@ public class base_class
     {
         _saveTextOnClient(getLongWithNull(client), filename, filetext);
     }
-
-    /*@}*/ // end of mounts/vehicles-related functions
 
     private static native void _saveBytesOnClient(long client, String filename, byte[] bytes);
 
@@ -28121,6 +28118,9 @@ public class base_class
 
     private static native boolean _isQuestComplete(long player, int questId);
 
+    // ----------------------------------------------------------------------
+    //-- New quest system
+
     public static boolean isQuestComplete(obj_id player, int questId)
     {
         return _isQuestComplete(getLongWithNull(player), questId);
@@ -28141,9 +28141,6 @@ public class base_class
     }
 
     private static native void _completeQuest(long player, int questId);
-
-    // ----------------------------------------------------------------------
-    //-- New quest system
 
     public static void completeQuest(obj_id player, int questId)
     {
@@ -28177,6 +28174,8 @@ public class base_class
 
     private static native boolean _questIsQuestComplete(int questId, long playerId);
 
+    // ----------------------------------------------------------------------
+
     public static boolean questIsQuestComplete(int questId, obj_id playerId)
     {
         return _questIsQuestComplete(questId, getLongWithNull(playerId));
@@ -28197,8 +28196,6 @@ public class base_class
     }
 
     private static native int _questActivateQuest(int questId, long playerId, long questGiver);
-
-    // ----------------------------------------------------------------------
 
     public static int questActivateQuest(int questId, obj_id playerId, obj_id questGiver)
     {
@@ -28337,6 +28334,8 @@ public class base_class
 
     private static native void _showLootBox(long player, long[] objectIds);
 
+    // ----------------------------------------------------------------------
+
     public static void showLootBox(obj_id player, obj_id[] objectIds)
     {
         long[] _objectIds = null;
@@ -28364,6 +28363,8 @@ public class base_class
      */
     private static native boolean _pilotShip(long pilotId, long shipId);
 
+    // ----------------------------------------------------------------------
+
     public static boolean pilotShip(obj_id pilotId, obj_id shipId)
     {
         return _pilotShip(getLongWithNull(pilotId), getLongWithNull(shipId));
@@ -28378,6 +28379,8 @@ public class base_class
      *         a ship.
      */
     private static native boolean _unpilotShip(long pilotId);
+
+    // ----------------------------------------------------------------------
 
     public static boolean unpilotShip(obj_id pilotId)
     {
@@ -28395,8 +28398,6 @@ public class base_class
      */
     private static native long _getPilotId(long shipId);
 
-    // ----------------------------------------------------------------------
-
     public static obj_id getPilotId(obj_id shipId)
     {
         return getObjIdWithNull(_getPilotId(getLongWithNull(shipId)));
@@ -28413,8 +28414,6 @@ public class base_class
      */
     private static native long _getShipPilot(long shipId);
 
-    // ----------------------------------------------------------------------
-
     public static obj_id getShipPilot(obj_id shipId)
     {
         return getObjIdWithNull(_getShipPilot(getLongWithNull(shipId)));
@@ -28429,8 +28428,6 @@ public class base_class
      *         being flown by a pilot; NULL if the ship is not being piloted.
      */
     private static native long _getPilotedShip(long pilotId);
-
-    // ----------------------------------------------------------------------
 
     public static obj_id getPilotedShip(obj_id pilotId)
     {
@@ -28825,6 +28822,8 @@ public class base_class
         return _getShipMaximumChassisHitPoints(getLongWithNull(shipId));
     }
 
+    // Hate List management
+
     private static native void _setAggroImmuneDuration(long player, int duration);
 
     public static void setAggroImmuneDuration(obj_id player, int duration)
@@ -28845,8 +28844,6 @@ public class base_class
     {
         return _getCombatDuration(getLongWithNull(object));
     }
-
-    // Hate List management
 
     private static native void _addHate(long object, long hateTarget, float hate);
 
@@ -28926,6 +28923,9 @@ public class base_class
         return _isOnHateList(getLongWithNull(object), getLongWithNull(target));
     }
 
+
+    // General AI
+
     /**
      * Do not call this function unless you know what you are doing!
      * Explicitly keeps an AI in combat by resetting its hate timer.
@@ -28937,6 +28937,7 @@ public class base_class
         _resetHateTimer(getLongWithNull(object));
     }
 
+    // Ground AI only
 
     private static native void _setAILeashTime(long object, float time);
 
@@ -28952,17 +28953,12 @@ public class base_class
         return _getAILeashTime(getLongWithNull(object));
     }
 
-
-    // General AI
-
     private static native boolean _aiLoggingEnabled(long ai);
 
     public static boolean aiLoggingEnabled(obj_id ai)
     {
         return _aiLoggingEnabled(getLongWithNull(ai));
     }
-
-    // Ground AI only
 
     private static native boolean _aiIsFrozen(long ai);
 
@@ -29127,6 +29123,9 @@ public class base_class
 
     private static native float _getShipActualPitchAccelerationRateDegrees(long shipId);
 
+    // Space AI only
+    // Use the wrapper methods in ship_ai
+
     public static int aiGetMovementState(obj_id ai)
     {
         return _aiGetMovementState(getLongWithNull(ai));
@@ -29161,9 +29160,6 @@ public class base_class
     {
         return _aiGetKnockDownRecoveryTime(getLongWithNull(ai));
     }
-
-    // Space AI only
-    // Use the wrapper methods in ship_ai
 
     private static native int __spaceUnitGetBehavior(long unit);
 
@@ -29447,6 +29443,8 @@ public class base_class
 
     public static native void _spaceSquadClearPatrolPath(int squadId);
 
+    //-- component physics system
+
     private static native void __spaceSquadFollow(int squadId, long followedUnit, vector direction_o, float distance);
 
     public static void _spaceSquadFollow(int squadId, obj_id followedUnit, vector direction_o, float distance)
@@ -29461,8 +29459,6 @@ public class base_class
     public static native void _spaceSquadRemoveGuardTarget(int squad);
 
     public static native boolean _spaceSquadIsSquadIdValid(int squad);
-
-    //-- component physics system
 
     public static float getShipActualPitchAccelerationRateDegrees(obj_id shipId)
     {
@@ -29520,6 +29516,10 @@ public class base_class
 
     private static native float _getChassisComponentMassCurrent(long shipId);
 
+    //--
+    //-- new component system
+    //-- jww
+
     public static float getChassisComponentMassCurrent(obj_id shipId)
     {
         return _getChassisComponentMassCurrent(getLongWithNull(shipId));
@@ -29541,27 +29541,17 @@ public class base_class
 
     private static native boolean _isShipSlotInstalled(long shipId, int chassisSlot);
 
-    //--
-    //-- new component system
-    //-- jww
-
     public static boolean isShipSlotInstalled(obj_id shipId, int chassisSlot)
     {
         return _isShipSlotInstalled(getLongWithNull(shipId), chassisSlot);
     }
 
-    ;
-
     private static native boolean _isShipComponentDisabled(long shipId, int chassisSlot);
-
-    ;
 
     public static boolean isShipComponentDisabled(obj_id shipId, int chassisSlot)
     {
         return _isShipComponentDisabled(getLongWithNull(shipId), chassisSlot);
     }
-
-    ;
 
     private static native boolean _isShipComponentLowPower(long shipId, int chassisSlot);
 
@@ -30010,6 +30000,9 @@ public class base_class
         _setShipComponentEfficiencyGeneral(getLongWithNull(shipId), chassisSlot, componentEfficiencyGeneral);
     }
 
+
+    //-- setters for all components
+
     private static native void _setShipComponentEfficiencyEnergy(long shipId, int chassisSlot, float componentEfficiencyEnergy);
 
     public static void setShipComponentEfficiencyEnergy(obj_id shipId, int chassisSlot, float componentEfficiencyEnergy)
@@ -30030,9 +30023,6 @@ public class base_class
     {
         _setShipComponentMass(getLongWithNull(shipId), chassisSlot, componentMass);
     }
-
-
-    //-- setters for all components
 
     private static native void _setShipComponentHitpointsCurrent(long shipId, int chassisSlot, float componentHitpointsCurrent);
 
@@ -30427,6 +30417,8 @@ public class base_class
     /** this function creates a new component in containerTarget */
     private static native long _shipUninstallComponent(long uninstallerId, long shipId, int chassisSlot, long containerTarget);
 
+    //-- component support
+
     public static obj_id shipUninstallComponent(obj_id uninstallerId, obj_id shipId, int chassisSlot, obj_id containerTarget)
     {
         return getObjIdWithNull(_shipUninstallComponent(getLongWithNull(uninstallerId), getLongWithNull(shipId), chassisSlot, getLongWithNull(containerTarget)));
@@ -30459,8 +30451,6 @@ public class base_class
     {
         return _getShipChassisSlots(getLongWithNull(shipId));
     }
-
-    //-- component support
 
     private static native void _setShipSlotTargetable(long shipId, int chassisSlot, boolean targetable);
 
@@ -31247,8 +31237,6 @@ public class base_class
 
     private static native long __getBuffStackCount(long target, int nameCrc);
 
-    ;
-
     public static long _getBuffStackCount(obj_id target, int nameCrc)
     {
         return __getBuffStackCount(getLongWithNull(target), nameCrc);
@@ -31276,7 +31264,6 @@ public class base_class
     {
         return _getDynamicMiningAsteroidVelocity(getLongWithNull(asteroidId));
     }
-
 
     /**
      *
@@ -31438,7 +31425,6 @@ public class base_class
     {
         return _getPassiveRevealList(getLongWithNull(object));
     }
-
 
     /**
      * request that an update containing this object's position be sent
@@ -31839,7 +31825,6 @@ public class base_class
         return _getCurrentUniverseWideEvents();
     }
 
-
     private static native boolean _isCreatureStatic(long object);
 
     public static boolean isCreatureStatic(obj_id object)
@@ -31903,57 +31888,15 @@ public class base_class
         return _setOverrideMapColor(getLongWithNull(target), r, g, b);
     }
 
-    public int dispatchTriggerVolumeEvents(obj_id self, boolean[] isEnter, String[] names, obj_id[] sources, obj_id[] targets) throws internal_script_error
-    {
-
-        PROFILER_START("dispatchTriggerVolumeEvents");
-
-        int count = isEnter.length;
-        if (count > 0)
-        {
-            Object[] params = new Object[3];
-            for (int iter = 0; iter < count; iter++)
-            {
-                params[0] = targets[iter];
-                params[1] = names[iter];
-                params[2] = sources[iter];
-                if (isEnter[iter])
-                    script_entry.runScripts("OnTriggerVolumeEntered", params);
-                else
-                    script_entry.runScripts("OnTriggerVolumeExited", params);
-            }
-        }
-
-        PROFILER_STOP("dispatchTriggerVolumeEvents");
-
-        return 0;
-    }
-
     public static boolean clearOverrideMapColor(obj_id target)
     {
         return _clearOverrideMapColor(getLongWithNull(target));
-    }
-
-    public int setGalaxyName(obj_id self, String newName)
-    {
-        galaxyName = newName;
-        return 0;
     }
 
     public static color getOverrideMapColor(obj_id target)
     {
         return _getOverrideMapColor(getLongWithNull(target));
     }
-
-    /**
-     * Send a message to the channel-based output.
-     *
-     * @param channel
-     *         the name of the channel to use
-     * @param message
-     *         the text to send
-     */
-    public native void printChannelMessage(String channel, String message);
 
     public static boolean setForceShowHam(obj_id target, boolean show)
     {
@@ -32071,7 +32014,6 @@ public class base_class
         return _clearUserAccessList(getLongWithNull(object));
     }
 
-
     // Adds a Guild to the access list of a Tangible object.
     private static native boolean _addGuildToAccessList(long object, int guild);
 
@@ -32135,29 +32077,6 @@ public class base_class
     public static boolean addPlayerQuestTask(obj_id questObject, String title, String description, int taskCounterMax, location waypointLoc)
     {
         return _addPlayerQuestTask(getLongWithNull(questObject), title, description, taskCounterMax, waypointLoc);
-    }
-
-
-    /**
-     * Readable string for string_id required casts.
-     *
-     * @see dummy_string_table
-     */
-    public string_id unlocalized(String str)
-    {
-        return new string_id(str);
-    }
-
-    /**
-     * id for female gender
-     *
-     * @see #getGender(obj_id)
-     */
-    public enum Gender
-    {
-        MALE,
-        FEMALE,
-        OTHER
     }
 
     // Gets the status of all tasks.
@@ -32240,16 +32159,16 @@ public class base_class
 
     private static native String _getPlayerQuestWaypoint(long questObject, int index);
 
-    public static String getPlayerQuestWaypoint(obj_id questObject, int index)
-    {
-        return _getPlayerQuestWaypoint(getLongWithNull(questObject), index);
-    }
-
     //private static native void _setPlayerQuestWaypoint(long questObject, int index, location loc);
     //public static void setPlayerQuestWaypoint(obj_id questObject, int index, location loc)
     //{
     //	_setPlayerQuestWaypoint(getLongWithNull(questObject), index, loc);
     //}
+
+    public static String getPlayerQuestWaypoint(obj_id questObject, int index)
+    {
+        return _getPlayerQuestWaypoint(getLongWithNull(questObject), index);
+    }
 
     private static native boolean _isPlayerQuestTaskComplete(long questObject, int index);
 
@@ -32371,11 +32290,6 @@ public class base_class
         return _pgcGetChroniclerName(getLongWithNull(chroniclerId));
     }
 
-    // returns NULL or int[] of length 3
-    public static final int PGC_INFO_INDEX_TOTAL_RATING_COUNT = 0;
-    public static final int PGC_INFO_INDEX_TOTAL_RATING_VALUE = 1;
-    public static final int PGC_INFO_INDEX_MOST_RECENT_RATING_TIME = 2;
-
     private static native int[] _pgcGetRating(long chroniclerId);
 
     public static int[] pgcGetRating(obj_id chroniclerId)
@@ -32396,6 +32310,116 @@ public class base_class
     public static int[] pgcGetRatingData(obj_id chroniclerId)
     {
         return _pgcGetRatingData(getLongWithNull(chroniclerId));
+    }
+
+    public static native String filterText(String text);
+
+    private static native void _resetAllPlayerQuestData(long questID);
+
+    public static void resetAllPlayerQuestData(obj_id questID)
+    {
+        _resetAllPlayerQuestData(getLongWithNull(questID));
+    }
+
+    private static native void _openExamineWindow(long player, long item);
+
+    public static void openExamineWindow(obj_id player, obj_id item)
+    {
+        _openExamineWindow(getLongWithNull(player), getLongWithNull(item));
+    }
+
+    private static native void _addObjectEffect(long obj, String effectFile, String hardpoint, vector offset, float scale, String label);
+
+    public static void addObjectEffect(obj_id obj, String effectFile, String hardpoint, vector offset, float scale, String label)
+    {
+        _addObjectEffect(getLongWithNull(obj), effectFile, hardpoint, offset, scale, label);
+    }
+
+    private static native void _removeObjectEffect(long obj, String label);
+
+    public static void removeObjectEffect(obj_id obj, String label)
+    {
+        _removeObjectEffect(getLongWithNull(obj), label);
+    }
+
+    private static native void _removeAllObjectEffects(long obj);
+
+    public static void removeAllObjectEffects(obj_id obj)
+    {
+        _removeAllObjectEffects(getLongWithNull(obj));
+    }
+
+    private static native boolean _hasObjectEffect(long obj, String label);
+
+    public static boolean hasObjectEffect(obj_id obj, String label)
+    {
+        return _hasObjectEffect(getLongWithNull(obj), label);
+    }
+
+    public static native String _getPlayerUsernameDoNotUse(long player);
+
+    public int dispatchTriggerVolumeEvents(obj_id self, boolean[] isEnter, String[] names, obj_id[] sources, obj_id[] targets) throws internal_script_error
+    {
+
+        PROFILER_START("dispatchTriggerVolumeEvents");
+
+        int count = isEnter.length;
+        if (count > 0)
+        {
+            Object[] params = new Object[3];
+            for (int iter = 0; iter < count; iter++)
+            {
+                params[0] = targets[iter];
+                params[1] = names[iter];
+                params[2] = sources[iter];
+                if (isEnter[iter])
+                    script_entry.runScripts("OnTriggerVolumeEntered", params);
+                else
+                    script_entry.runScripts("OnTriggerVolumeExited", params);
+            }
+        }
+
+        PROFILER_STOP("dispatchTriggerVolumeEvents");
+
+        return 0;
+    }
+
+    public int setGalaxyName(obj_id self, String newName)
+    {
+        galaxyName = newName;
+        return 0;
+    }
+
+    /**
+     * Send a message to the channel-based output.
+     *
+     * @param channel
+     *         the name of the channel to use
+     * @param message
+     *         the text to send
+     */
+    public native void printChannelMessage(String channel, String message);
+
+    /**
+     * Readable string for string_id required casts.
+     *
+     * @see dummy_string_table
+     */
+    public string_id unlocalized(String str)
+    {
+        return new string_id(str);
+    }
+
+    /**
+     * id for female gender
+     *
+     * @see #getGender(obj_id)
+     */
+    public enum Gender
+    {
+        MALE,
+        FEMALE,
+        OTHER
     }
 
     public static class waypoint_colors
@@ -32497,7 +32521,7 @@ public class base_class
 
     public static class sui_event_type
     {
-        public static String names[] =
+        public static String[] names =
                 {
                         "none",
                         "onButton",
@@ -32527,50 +32551,6 @@ public class base_class
         public static int SET_numEventTypes = private_index++;
     }
 
-    public static native String filterText(String text);
-
-    private static native void _resetAllPlayerQuestData(long questID);
-
-    public static void resetAllPlayerQuestData(obj_id questID)
-    {
-        _resetAllPlayerQuestData(getLongWithNull(questID));
-    }
-
-    private static native void _openExamineWindow(long player, long item);
-
-    public static void openExamineWindow(obj_id player, obj_id item)
-    {
-        _openExamineWindow(getLongWithNull(player), getLongWithNull(item));
-    }
-
-    private static native void _addObjectEffect(long obj, String effectFile, String hardpoint, vector offset, float scale, String label);
-
-    public static void addObjectEffect(obj_id obj, String effectFile, String hardpoint, vector offset, float scale, String label)
-    {
-        _addObjectEffect(getLongWithNull(obj), effectFile, hardpoint, offset, scale, label);
-    }
-
-    private static native void _removeObjectEffect(long obj, String label);
-
-    public static void removeObjectEffect(obj_id obj, String label)
-    {
-        _removeObjectEffect(getLongWithNull(obj), label);
-    }
-
-    private static native void _removeAllObjectEffects(long obj);
-
-    public static void removeAllObjectEffects(obj_id obj)
-    {
-        _removeAllObjectEffects(getLongWithNull(obj));
-    }
-
-    private static native boolean _hasObjectEffect(long obj, String label);
-
-    public static boolean hasObjectEffect(obj_id obj, String label)
-    {
-        return _hasObjectEffect(getLongWithNull(obj), label);
-    }
-
     /**
      * The range data associated with a weapon.
      */
@@ -32584,8 +32564,7 @@ public class base_class
             try
             {
                 return super.clone();
-            }
-            catch (CloneNotSupportedException err)
+            } catch (CloneNotSupportedException err)
             {
                 System.out.print("Exception called!");
             }
@@ -32948,8 +32927,6 @@ public class base_class
         }
     }
 
-    public static native String _getPlayerUsernameDoNotUse(long player);
-
     public static class ship_component_flags
     {
         public static final int SCF_disabled = 0x0001;
@@ -32976,10 +32953,6 @@ public class base_class
         public static final int HT_chassis = 3;
         public static final int HT_numTypes = 4;
     }
-    
-    public static String GALAXY_LIVE = "Apotheosis";
-    public static String GALAXY_TC = "Insurgency";
-    public static String GALAXY_LOCAL = "swg";
-    
-    
+
+
 }// class base_class

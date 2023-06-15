@@ -1,5 +1,11 @@
 package script.systems.crafting.weapon;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.craftinglib;
 import script.library.prose;
@@ -10,6 +16,7 @@ public class crafting_base_weapon extends script.systems.crafting.crafting_base
 {
     public static final String VERSION = "v1.00.00";
     public static final float MAX_STAT_INTENSITY = 1.00f;
+
     public crafting_base_weapon()
     {
     }

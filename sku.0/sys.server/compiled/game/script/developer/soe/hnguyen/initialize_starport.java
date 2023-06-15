@@ -1,5 +1,11 @@
 package script.developer.soe.hnguyen;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.player_structure;
 import script.library.travel;
 import script.library.utils;
@@ -13,6 +19,7 @@ public class initialize_starport extends script.base_script
     public initialize_starport()
     {
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (objSpeaker != self)
@@ -30,14 +37,14 @@ public class initialize_starport extends script.base_script
                 {
                     broadcast(self, "object " + starportOid + " doesn't have script structure.municipal.starport");
                 }
-                else 
+                else
                 {
                     broadcast(self, "inializing starport " + starportOid);
                     if (player_structure.isCivic(starportOid))
                     {
                         broadcast(self, "starport " + starportOid + " is civic");
                     }
-                    else 
+                    else
                     {
                         String planet = getCurrentSceneName();
                         String travel_point = travel.getTravelPointName(starportOid);
@@ -46,14 +53,14 @@ public class initialize_starport extends script.base_script
                         {
                             broadcast(self, "starport " + starportOid + " has null travel point or travel cost of -1");
                         }
-                        else 
+                        else
                         {
                             location loc = getPlanetTravelPointLocation(planet, travel_point);
                             if (loc != null)
                             {
                                 broadcast(self, "starport " + starportOid + " is already registered with the travel system");
                             }
-                            else 
+                            else
                             {
                                 travel.initializeStarport(starportOid, travel_point, travel_cost, false);
                             }

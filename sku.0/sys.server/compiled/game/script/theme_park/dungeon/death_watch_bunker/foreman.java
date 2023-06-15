@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -9,14 +15,15 @@ import script.string_id;
 
 public class foreman extends script.base_script
 {
-    public foreman()
-    {
-    }
     public static final String FACETO_VOLUME_NAME = "faceToTriggerVolume";
     public static final string_id BATTERY_CLEANED = new string_id("dungeon/death_watch", "battery_cleaned");
     public static final string_id NEED_BATTERY = new string_id("dungeon/death_watch", "need_battery");
     public static final string_id NOT_AUTHORIZED = new string_id("dungeon/death_watch", "not_authorized");
     public static final String CONVO = "dungeon/death_watch";
+    public foreman()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "conversation.death_watch_foreman");
@@ -27,6 +34,7 @@ public class foreman extends script.base_script
         messageTo(self, "handleMissionCleanUp", null, 30.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -38,6 +46,7 @@ public class foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnHaldo(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -90,6 +99,7 @@ public class foreman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMissionCleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);

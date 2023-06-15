@@ -1,5 +1,11 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.colors;
 import script.library.sui;
@@ -7,20 +13,22 @@ import script.library.utils;
 
 public class passkey_terminal extends script.base_script
 {
-    public passkey_terminal()
-    {
-    }
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public static final String CONVO_FILE = "theme_park/warren/warren";
     public static final String ACTIVE = "turret_pass_active";
     public static final String INACTIVE = "turret_pass_inactive";
     public static final String DEACTIVATE = "turret_pass_deactivated";
+    public passkey_terminal()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setName(self, "");
         setName(self, new string_id(SYSTEM_MESSAGES, "turret_term_on"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         location here = getLocation(player);
@@ -40,6 +48,7 @@ public class passkey_terminal extends script.base_script
         sui.msgbox(player, new string_id(SYSTEM_MESSAGES, stringName));
         return SCRIPT_OVERRIDE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!isPlayer(speaker))
@@ -74,6 +83,7 @@ public class passkey_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int reactivateTurret(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id bldg = getTopMostContainer(self);

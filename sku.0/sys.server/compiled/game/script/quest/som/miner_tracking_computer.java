@@ -1,19 +1,26 @@
 package script.quest.som;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 
 public class miner_tracking_computer extends script.base_script
 {
-    public miner_tracking_computer()
-    {
-    }
     public static final String STF = "som/som_quest";
     public static final string_id ACTIVATE = new string_id(STF, "tracking_computer_activate");
     public static final string_id WAIT = new string_id(STF, "tracking_computer_working");
     public static final string_id FINISHED = new string_id(STF, "tracking_computer_done");
     public static final string_id SUCCESS = new string_id(STF, "tracking_computer_success");
     public static final string_id SEARCHING = new string_id(STF, "tracking_computer_searching");
+    public miner_tracking_computer()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, "som_poison_miners"))
@@ -28,6 +35,7 @@ public class miner_tracking_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -48,7 +56,7 @@ public class miner_tracking_computer extends script.base_script
                 sendSystemMessage(player, WAIT);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, FINISHED);
                 return SCRIPT_CONTINUE;
@@ -56,6 +64,7 @@ public class miner_tracking_computer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMinerTrack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("target");

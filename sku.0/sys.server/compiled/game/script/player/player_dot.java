@@ -1,5 +1,11 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.buff;
 import script.library.dot;
@@ -12,14 +18,17 @@ public class player_dot extends script.base_script
     public player_dot()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String[] dot_ids = dot.getAllDots(self);
         if (dot_ids != null)
         {
-            for (String dot_id : dot_ids) {
+            for (String dot_id : dot_ids)
+            {
                 String type = dot.getDotType(self, dot_id);
-                if (!type.equals(dot.DOT_DISEASE)) {
+                if (!type.equals(dot.DOT_DISEASE))
+                {
                     int pulse = dot.getDotPulse(self, dot_id);
                     dictionary d = new dictionary();
                     d.put("dot_id", dot_id);
@@ -28,12 +37,13 @@ public class player_dot extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             detachScript(self, dot.SCRIPT_PLAYER_DOT);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, dot.SCRIPT_VAR_DOT_GRACE))
@@ -46,6 +56,7 @@ public class player_dot extends script.base_script
         setState(self, STATE_ON_FIRE, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnterSwimming(obj_id self) throws InterruptedException
     {
         if (dot.isOnFire(self))
@@ -54,6 +65,7 @@ public class player_dot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttribModDone(obj_id self, String modName, boolean isDead) throws InterruptedException
     {
         if (false)
@@ -68,6 +80,7 @@ public class player_dot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDotPulse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -79,7 +92,7 @@ public class player_dot extends script.base_script
         {
             dot_id = params.getString("dot_id");
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
@@ -88,7 +101,7 @@ public class player_dot extends script.base_script
         {
             pulse = params.getInt("pulse");
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
@@ -104,6 +117,7 @@ public class player_dot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnBuffDotPulse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -136,10 +150,12 @@ public class player_dot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int bleedingStopped(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnDotGraceEnd(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, dot.SCRIPT_VAR_DOT_GRACE))

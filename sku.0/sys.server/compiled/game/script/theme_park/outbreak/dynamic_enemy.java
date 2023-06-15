@@ -1,5 +1,11 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.utils;
@@ -8,21 +14,25 @@ import script.obj_id;
 
 public class dynamic_enemy extends script.base_script
 {
+    public static final int MAXDISTANCE = 60;
+
     public dynamic_enemy()
     {
     }
-    public static final int MAXDISTANCE = 60;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "dynamic_enemy.OnAttach() initialized.");
         messageTo(self, "startVerificationLoop", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "dynamic_enemy.OnDeath() Undead NPC " + self + " has died at the hands of " + killer);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitateTarget(obj_id self, obj_id victim) throws InterruptedException
     {
         if (ai_lib.isDead(self))
@@ -33,6 +43,7 @@ public class dynamic_enemy extends script.base_script
         messageTo(self, "destroySelf", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (ai_lib.isDead(self))
@@ -42,6 +53,7 @@ public class dynamic_enemy extends script.base_script
         messageTo(self, "destroySelf", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startVerificationLoop(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "dynamic_enemy.startVerificationLoop() Handler initialized");
@@ -63,12 +75,13 @@ public class dynamic_enemy extends script.base_script
             CustomerServiceLog("outbreak_themepark", "dynamic_enemy.startVerificationLoop() boss mob (" + self + ") has moved too far from creation location. Moving back to creation location.");
             messageTo(self, "destroySelf", null, 1, false);
         }
-        else 
+        else
         {
             messageTo(self, "startVerificationLoop", null, 3, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))

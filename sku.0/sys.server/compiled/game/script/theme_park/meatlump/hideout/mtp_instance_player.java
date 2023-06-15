@@ -1,5 +1,11 @@
 package script.theme_park.meatlump.hideout;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.library.utils;
 import script.location;
@@ -10,6 +16,7 @@ public class mtp_instance_player extends script.base_script
     public mtp_instance_player()
     {
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -31,6 +38,7 @@ public class mtp_instance_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNewbieTutorialResponse(obj_id self, String action) throws InterruptedException
     {
         if (action.equals("clientReady"))
@@ -56,6 +64,7 @@ public class mtp_instance_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "mtp_rescuedMeatlump"))
@@ -68,6 +77,7 @@ public class mtp_instance_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "mtp_rescuedMeatlump"))

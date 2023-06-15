@@ -1,5 +1,11 @@
 package script.event.gcwraids;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -8,35 +14,36 @@ import script.string_id;
 
 public class cheerleader extends script.base_script
 {
+    public static final String STF_FILE = "event/gcw_raids";
+    public static final String DATATABLE = "datatables/event/gcwraid/city_data.iff";
+    private static final int NUMSPEECHES = 1;
+    private static final float MY_VISIT_TIME = 60 * 15;
+    private static final String[] SHUTTLETYPE =
+            {
+                    "object/creature/npc/theme_park/lambda_shuttle.iff",
+                    "object/creature/npc/theme_park/player_shuttle.iff"
+            };
+    private static final String[] CELEB =
+            {
+                    "darth_vader",
+                    "luke_skywalker"
+            };
+    private static final String[] ESCORT =
+            {
+                    "fbase_dark_trooper_extreme",
+                    "rebel_commando"
+            };
     public cheerleader()
     {
     }
-    private static final int NUMSPEECHES = 1;
-    public static final String STF_FILE = "event/gcw_raids";
-    private static final float MY_VISIT_TIME = 60 * 15;
-    public static final String DATATABLE = "datatables/event/gcwraid/city_data.iff";
-    private static final String[] SHUTTLETYPE =
-    {
-        "object/creature/npc/theme_park/lambda_shuttle.iff",
-        "object/creature/npc/theme_park/player_shuttle.iff"
-    };
-    private static final String[] CELEB =
-    {
-        "darth_vader",
-        "luke_skywalker"
-    };
-    private static final String[] ESCORT =
-    {
-        "fbase_dark_trooper_extreme",
-        "rebel_commando"
-    };
+
     public int startCheerleaderEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (gcw.getRebelRatio(self) > gcw.getImperialRatio(self))
         {
             setObjVar(self, "event.gcwraids.cheerleader_type", 1);
         }
-        else 
+        else
         {
             setObjVar(self, "event.gcwraids.cheerleader_type", 0);
         }
@@ -53,6 +60,7 @@ public class cheerleader extends script.base_script
         removeObjVar(self, "auto_invasion.next_invasion_time");
         return SCRIPT_CONTINUE;
     }
+
     public int createShuttle(obj_id self, dictionary params) throws InterruptedException
     {
         int type = getIntObjVar(self, "event.gcwraids.cheerleader_type");
@@ -71,14 +79,16 @@ public class cheerleader extends script.base_script
         }
         messageTo(self, "landShuttle", null, 6, false);
         obj_id[] objPlayers = getPlayerCreaturesInRange(self, 256.0f);
-        if (objPlayers != null && objPlayers.length > 0)
+        if (objPlayers != null)
         {
-            for (obj_id objPlayer : objPlayers) {
+            for (obj_id objPlayer : objPlayers)
+            {
                 sendSystemMessage(objPlayer, new string_id(STF_FILE, "areabroadcast_" + type));
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int landShuttle(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id shuttle = getObjIdObjVar(self, "event.gcwraids.shuttle");
@@ -96,11 +106,12 @@ public class cheerleader extends script.base_script
         messageTo(self, "spawnEscortsAndCeleb", null, 30, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnEscortsAndCeleb(obj_id self, dictionary params) throws InterruptedException
     {
         int type = getIntObjVar(self, "event.gcwraids.cheerleader_type");
         location here = getLocation(self);
-        location celebSpot = (location)here.clone();
+        location celebSpot = (location) here.clone();
         celebSpot.z -= 12;
         obj_id celeb = create.object(CELEB[type], celebSpot);
         setObjVar(celeb, "event.gcwraids.type", type);
@@ -123,13 +134,16 @@ public class cheerleader extends script.base_script
         }
         clearCondition(celeb, CONDITION_CONVERSABLE);
         obj_id[] objPlayers = getPlayerCreaturesInRange(self, 100.0f);
-        if (objPlayers != null && objPlayers.length > 0)
+        if (objPlayers != null)
         {
-            for (obj_id objPlayer : objPlayers) {
-                if (type == 0) {
+            for (obj_id objPlayer : objPlayers)
+            {
+                if (type == 0)
+                {
                     playMusic(objPlayer, "sound/music_emperor_theme_stereo.snd");
                 }
-                else if (type == 1) {
+                else if (type == 1)
+                {
                     playMusic(objPlayer, "sound/music_ambience_desert_stereo.snd");
                 }
             }
@@ -147,6 +161,7 @@ public class cheerleader extends script.base_script
         messageTo(self, "walkForwardCeleb", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int walkForwardCeleb(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id celeb = getObjIdObjVar(self, "event.gcwraids.celeb");
@@ -158,7 +173,7 @@ public class cheerleader extends script.base_script
         {
             setMovementWalk(celeb);
         }
-        else 
+        else
         {
             setMovementRun(celeb);
         }
@@ -167,6 +182,7 @@ public class cheerleader extends script.base_script
         messageTo(self, "engageInJingoisticRhetoric", null, 8, false);
         return SCRIPT_CONTINUE;
     }
+
     public int engageInJingoisticRhetoric(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id celeb = getObjIdObjVar(self, "event.gcwraids.celeb");
@@ -179,8 +195,10 @@ public class cheerleader extends script.base_script
         }
         string_id myLine = new string_id(STF_FILE, "cheerleader_" + type + "_" + utils.getIntScriptVar(self, "dialogue_set") + "_" + dialogueStep);
         chat.chat(celeb, chat.CHAT_SAY, chat.MOOD_NONE, myLine);
-        if(type == 0){
-            switch(dialogueStep){
+        if (type == 0)
+        {
+            switch (dialogueStep)
+            {
                 case 3:
                     doAnimationAction(celeb, "pound_fist_palm");
                     break;
@@ -195,8 +213,10 @@ public class cheerleader extends script.base_script
                     break;
             }
         }
-        else{
-            switch(dialogueStep){
+        else
+        {
+            switch (dialogueStep)
+            {
                 case 3:
                     doAnimationAction(celeb, "point_right");
                     break;
@@ -215,6 +235,7 @@ public class cheerleader extends script.base_script
         messageTo(self, "engageInJingoisticRhetoric", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int celebStartGivingQuests(obj_id self, dictionary params) throws InterruptedException
     {
         int type = getIntObjVar(self, "event.gcwraids.cheerleader_type");
@@ -231,6 +252,7 @@ public class cheerleader extends script.base_script
         messageTo(self, "everyoneWalkBack", null, MY_VISIT_TIME, false);
         return SCRIPT_CONTINUE;
     }
+
     public int everyoneWalkBack(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
@@ -244,7 +266,7 @@ public class cheerleader extends script.base_script
             {
                 setMovementWalk(celeb);
             }
-            else 
+            else
             {
                 setMovementRun(celeb);
             }
@@ -261,6 +283,7 @@ public class cheerleader extends script.base_script
         messageTo(self, "endEvent", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int endEvent(obj_id self, dictionary params) throws InterruptedException
     {
         int type = getIntObjVar(self, "event.gcwraids.cheerleader_type");
@@ -289,6 +312,7 @@ public class cheerleader extends script.base_script
         messageTo(self, "cleanupShuttleAndStuff", null, 20, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupShuttleAndStuff(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "event.gcwraids.shuttle"));
@@ -299,9 +323,10 @@ public class cheerleader extends script.base_script
             removeObjVar(self, "event.gcwraids.escort" + i);
         }
         obj_id[] objPlayers = getPlayerCreaturesInRange(self, 256.0f);
-        if (objPlayers != null && objPlayers.length > 0)
+        if (objPlayers != null)
         {
-            for (obj_id objPlayer : objPlayers) {
+            for (obj_id objPlayer : objPlayers)
+            {
                 sendSystemMessage(objPlayer, new string_id(STF_FILE, "closingbroadcast_" + getIntObjVar(self, "event.gcwraids.cheerleader_type")));
             }
         }
@@ -319,6 +344,7 @@ public class cheerleader extends script.base_script
         messageTo(self, "invasionTimerPing", null, 2700, false);
         return SCRIPT_CONTINUE;
     }
+
     public int escortDied(obj_id self, dictionary params) throws InterruptedException
     {
         if (getIntObjVar(self, "auto_invasion.invasion_active") != 1)

@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -18,6 +24,7 @@ public class pet_control_device extends script.base_script
     public static final string_id SID_NO_MOUNT_WHILE_STEALTH = new string_id(pet_lib.MENU_FILE, "no_mount_stealth");
     public static final string_id SHAPECHANGE = new string_id("spam", "not_while_shapechanged");
     public static final boolean debug = false;
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (debug)
@@ -69,11 +76,11 @@ public class pet_control_device extends script.base_script
                 int maxSlots = pet_lib.getMaxAbilitySlots(level);
                 if (hasObjVar(self, "pet.crafted"))
                 {
-                    maxSlots = (int)(maxSlots * 0.7f);
+                    maxSlots = (int) (maxSlots * 0.7f);
                 }
-                else 
+                else
                 {
-                    maxSlots = (int)(maxSlots * 0.9f);
+                    maxSlots = (int) (maxSlots * 0.9f);
                 }
                 setObjVar(self, "ai.petAbility.toBeEarned", maxSlots);
                 setObjVar(self, "ai.petAbility.available", 0);
@@ -92,6 +99,7 @@ public class pet_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (ai_lib.aiIsDead(player))
@@ -129,7 +137,7 @@ public class pet_control_device extends script.base_script
                     destroyObject(currentPet);
                     callable.setCDCallable(self, null);
                 }
-                else 
+                else
                 {
                     messageTo(currentPet, "handlePackRequest", null, 1, false);
                 }
@@ -140,7 +148,7 @@ public class pet_control_device extends script.base_script
                 mi.addRootMenu(menu_info_types.PET_CALL, new string_id(pet_lib.MENU_FILE, "menu_call"));
             }
         }
-        else 
+        else
         {
             if (currentPet.isLoaded() && exists(currentPet))
             {
@@ -149,7 +157,7 @@ public class pet_control_device extends script.base_script
                     mi.addRootMenu(menu_info_types.PET_CALL, new string_id(pet_lib.MENU_FILE, "menu_store"));
                 }
             }
-            else 
+            else
             {
                 mi.addRootMenu(menu_info_types.PET_CALL, new string_id(pet_lib.MENU_FILE, "menu_store"));
             }
@@ -184,6 +192,7 @@ public class pet_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (ai_lib.aiIsDead(player) || getPerformanceType(player) != 0)
@@ -246,7 +255,7 @@ public class pet_control_device extends script.base_script
                     sendSystemMessage(player, pet_lib.SID_SYS_CANT_CALL_ANOTHER_RIDEABLE);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     if (pet_lib.isMountedOnCreatureQueried(currentPet, player))
                     {
@@ -272,7 +281,7 @@ public class pet_control_device extends script.base_script
                 callable.storeCallable(player, callable.getCDCallable(self));
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (ai_lib.isInCombat(player))
                 {
@@ -288,7 +297,7 @@ public class pet_control_device extends script.base_script
                     sendSystemMessage(player, pet_lib.SID_SYS_CANT_CALL_ANOTHER_FAMILIAR);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     destroyCurrentPet(self);
                 }
@@ -386,7 +395,7 @@ public class pet_control_device extends script.base_script
                     consumable.decrementCharges(pet_med, player);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(self, SID_NO_VALID_MEDICINE);
             }
@@ -402,6 +411,7 @@ public class pet_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetMountName(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -433,6 +443,7 @@ public class pet_control_device extends script.base_script
         pet_lib.setMountName(self, mountName);
         return SCRIPT_CONTINUE;
     }
+
     public int delayCreatePet(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -514,6 +525,7 @@ public class pet_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int delayMountPet(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -545,6 +557,7 @@ public class pet_control_device extends script.base_script
         pet_lib.setMountedMovementRate(player, pet);
         return SCRIPT_CONTINUE;
     }
+
     public void destroyCurrentPet(obj_id petControlDevice) throws InterruptedException
     {
         obj_id datapad = getContainedBy(petControlDevice);
@@ -560,7 +573,7 @@ public class pet_control_device extends script.base_script
                     return;
                 }
             }
-            else 
+            else
             {
                 messageTo(currentPet, "handlePackRequest", null, 1, false);
             }
@@ -568,6 +581,7 @@ public class pet_control_device extends script.base_script
         setTimeStored(petControlDevice);
         callable.setCDCallable(petControlDevice, null);
     }
+
     public int handleStorePetRequest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id currentPet = callable.getCDCallable(self);
@@ -591,6 +605,7 @@ public class pet_control_device extends script.base_script
         destroyCurrentPet(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (hasScript(item, "ai.pet_control_device"))
@@ -603,6 +618,7 @@ public class pet_control_device extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "pet.releasingPet"))
@@ -640,6 +656,7 @@ public class pet_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (!exists(self))
@@ -649,6 +666,7 @@ public class pet_control_device extends script.base_script
         destroyCurrentPet(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGrowthChoice(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -673,7 +691,7 @@ public class pet_control_device extends script.base_script
         {
             growthStage = 10;
         }
-        else 
+        else
         {
             growthStage = getIntObjVar(petControlDevice, "ai.petAdvance.growthStage");
         }
@@ -683,6 +701,7 @@ public class pet_control_device extends script.base_script
         pet_lib.createPetFromData(petControlDevice);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id datapad = getContainedBy(self);
@@ -698,6 +717,7 @@ public class pet_control_device extends script.base_script
         sendSystemMessage(master, new string_id("pet/pet_menu", "device_added"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (!exists(self))
@@ -738,9 +758,9 @@ public class pet_control_device extends script.base_script
             }
             if (adultLevel != level)
             {
-                attribs[idx] = Integer.toString(level) + " (" + Integer.toString(adultLevel) + ")";
+                attribs[idx] = level + " (" + adultLevel + ")";
             }
-            else 
+            else
             {
                 attribs[idx] = Integer.toString(level);
             }
@@ -758,7 +778,7 @@ public class pet_control_device extends script.base_script
                 {
                     attribs[idx] = utils.packStringId(new string_id("obj_attr_n", "ability_slot_max"));
                 }
-                else 
+                else
                 {
                     attribs[idx] = String.valueOf(available);
                     idx++;
@@ -815,7 +835,7 @@ public class pet_control_device extends script.base_script
                     {
                         attribs[idx] = pet_lib.getReducedStatValue(health, vitality) + "/";
                     }
-                    else 
+                    else
                     {
                         attribs[idx] = "";
                     }
@@ -835,7 +855,7 @@ public class pet_control_device extends script.base_script
                     {
                         attribs[idx] = pet_lib.getReducedStatValue(regen, vitality) + "/";
                     }
-                    else 
+                    else
                     {
                         attribs[idx] = "";
                     }
@@ -886,7 +906,7 @@ public class pet_control_device extends script.base_script
                     {
                         names[idx] = "pet_stats.creature_state_resist";
                         float value = getFloatObjVar(self, "creature_attribs.stateResist");
-                        attribs[idx] = String.valueOf(value * 100) + "%";
+                        attribs[idx] = value * 100 + "%";
                         idx++;
                         if (idx >= names.length)
                         {
@@ -897,7 +917,7 @@ public class pet_control_device extends script.base_script
                     {
                         names[idx] = "pet_stats.creature_crit_chance";
                         float value = getFloatObjVar(self, "creature_attribs.critChance");
-                        attribs[idx] = String.valueOf(value * 100) + "%";
+                        attribs[idx] = value * 100 + "%";
                         idx++;
                         if (idx >= names.length)
                         {
@@ -908,7 +928,7 @@ public class pet_control_device extends script.base_script
                     {
                         names[idx] = "pet_stats.creature_crit_save";
                         float value = getFloatObjVar(self, "creature_attribs.critSave");
-                        attribs[idx] = String.valueOf(value * 100) + "%";
+                        attribs[idx] = value * 100 + "%";
                         idx++;
                         if (idx >= names.length)
                         {
@@ -919,7 +939,7 @@ public class pet_control_device extends script.base_script
                     {
                         names[idx] = "pet_stats.creature_aggro_bonus";
                         float value = getFloatObjVar(self, "creature_attribs.aggroBonus");
-                        attribs[idx] = String.valueOf(value * 100) + "%";
+                        attribs[idx] = value * 100 + "%";
                         idx++;
                         if (idx >= names.length)
                         {
@@ -952,7 +972,7 @@ public class pet_control_device extends script.base_script
                         {
                             attribs[idx] = "No";
                         }
-                        else 
+                        else
                         {
                             attribs[idx] = "Yes";
                         }
@@ -966,9 +986,9 @@ public class pet_control_device extends script.base_script
                 if (niche == NICHE_DROID || niche == NICHE_ANDROID)
                 {
                     int powerLevel = getIntObjVar(self, "ai.pet.powerLevel");
-                    float percentRemaining = (((float)pet_lib.OUT_OF_POWER - powerLevel) / pet_lib.OUT_OF_POWER) * 100.0f;
+                    float percentRemaining = (((float) pet_lib.OUT_OF_POWER - powerLevel) / pet_lib.OUT_OF_POWER) * 100.0f;
                     names[idx] = "pet_stats.battery_power";
-                    attribs[idx] = " " + (int)percentRemaining + "%";
+                    attribs[idx] = " " + (int) percentRemaining + "%";
                     idx++;
                     if (idx >= names.length)
                     {
@@ -979,7 +999,7 @@ public class pet_control_device extends script.base_script
                 {
                     names[idx] = "pet_stats.medpower";
                     float med = getFloatObjVar(self, "medpower");
-                    attribs[idx] = " " + ((int)(med * 100));
+                    attribs[idx] = " " + ((int) (med * 100));
                     idx++;
                     if (idx >= names.length)
                     {
@@ -1048,13 +1068,16 @@ public class pet_control_device extends script.base_script
                             {
                                 return SCRIPT_CONTINUE;
                             }
-                            for (obj_id loadedDroidCommand : loadedDroidCommands) {
-                                if (hasObjVar(loadedDroidCommand, "strDroidCommand")) {
+                            for (obj_id loadedDroidCommand : loadedDroidCommands)
+                            {
+                                if (hasObjVar(loadedDroidCommand, "strDroidCommand"))
+                                {
                                     String programName = getStringObjVar(loadedDroidCommand, "strDroidCommand");
                                     names[idx] = "pet_stats.droid_program";
                                     attribs[idx] = " " + localize(new string_id("space/droid_commands", programName));
                                     idx++;
-                                    if (idx >= names.length) {
+                                    if (idx >= names.length)
+                                    {
                                         return SCRIPT_CONTINUE;
                                     }
                                 }
@@ -1288,11 +1311,13 @@ public class pet_control_device extends script.base_script
                     String[] effects = pet_lib.getLightingEffects(self);
                     if (effects != null)
                     {
-                        for (String effect : effects) {
+                        for (String effect : effects)
+                        {
                             names[idx] = "pet_stats." + effect;
                             attribs[idx] = " installed";
                             idx++;
-                            if (idx >= names.length) {
+                            if (idx >= names.length)
+                            {
                                 return SCRIPT_CONTINUE;
                             }
                         }
@@ -1435,7 +1460,7 @@ public class pet_control_device extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 dictionary creatureDict = utils.dataTableGetRow(create.CREATURE_TABLE, creatureName);
                 if (creatureDict == null)
@@ -1474,7 +1499,7 @@ public class pet_control_device extends script.base_script
                 {
                     attribs[idx] = pet_lib.getReducedStatValue(myHealth, vitality) + "/";
                 }
-                else 
+                else
                 {
                     attribs[idx] = "";
                 }
@@ -1486,7 +1511,7 @@ public class pet_control_device extends script.base_script
                 }
                 names[idx] = "pet_stats.creature_attack";
                 float attackSpeed = creatureDict.getInt("attackSpeed");
-                attackSpeed = (float)((int)(attackSpeed * 100) / 100.0f);
+                attackSpeed = (int) (attackSpeed * 100) / 100.0f;
                 attribs[idx] = String.valueOf(attackSpeed);
                 idx++;
                 if (idx >= names.length)
@@ -1566,12 +1591,15 @@ public class pet_control_device extends script.base_script
                     {
                         return SCRIPT_CONTINUE;
                     }
-                    for (int i1 : abilityList) {
-                        if (i1 != 0) {
+                    for (int i1 : abilityList)
+                    {
+                        if (i1 != 0)
+                        {
                             names[idx] = "pet_ability." + pet_lib.getPetAbilityFromCrc(i1);
                             attribs[idx] = " ";
                             idx++;
-                            if (idx >= names.length) {
+                            if (idx >= names.length)
+                            {
                                 return SCRIPT_CONTINUE;
                             }
                         }
@@ -1642,7 +1670,8 @@ public class pet_control_device extends script.base_script
                     if (hasObjVar(self, "mount_type"))
                     {
                         int mountType = getIntObjVar(self, "mount_type");
-                        switch (mountType) {
+                        switch (mountType)
+                        {
                             case 0:
                                 names[idx] = "walkspeed";
                                 attribs[idx++] = Float.toString(fltBaseWalkSpeed);
@@ -1663,7 +1692,7 @@ public class pet_control_device extends script.base_script
                                 break;
                         }
                     }
-                    else 
+                    else
                     {
                         names[idx] = "walkspeed";
                         attribs[idx++] = Float.toString(fltBaseWalkSpeed);
@@ -1680,6 +1709,7 @@ public class pet_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isSameFaction(obj_id petControlDevice) throws InterruptedException
     {
         obj_id datapad = getContainedBy(petControlDevice);
@@ -1720,6 +1750,7 @@ public class pet_control_device extends script.base_script
         }
         return true;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id newMaster = getContainedBy(destContainer);
@@ -1764,6 +1795,7 @@ public class pet_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getLevelFromPetControlDevice(obj_id petControlDevice) throws InterruptedException
     {
         int growthStage = 10;
@@ -1787,6 +1819,7 @@ public class pet_control_device extends script.base_script
         }
         return maxDiff;
     }
+
     public int handlePetDeathblow(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "lastDeathBlow"))
@@ -1812,15 +1845,18 @@ public class pet_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setTimeStored(obj_id PCD) throws InterruptedException
     {
         setObjVar(PCD, "pet.timeStored", getGameTime());
     }
+
     public int handleFlagDeadCreature(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "pet.isDead", true);
         return SCRIPT_CONTINUE;
     }
+
     public boolean petIsDead(obj_id petControlDevice, obj_id player, int petType) throws InterruptedException
     {
         if (hasObjVar(petControlDevice, "pet.isDead"))
@@ -1835,6 +1871,7 @@ public class pet_control_device extends script.base_script
         }
         return false;
     }
+
     public boolean canBeTransferred(obj_id petControlDevice, obj_id newMaster, obj_id transferer) throws InterruptedException
     {
         String creatureName = getStringObjVar(petControlDevice, "pet.creatureName");
@@ -1877,11 +1914,12 @@ public class pet_control_device extends script.base_script
             sendSystemMessage(transferer, new string_id("pet/pet_menu", "no_xfer_command"));
             return false;
         }
-        else 
+        else
         {
             return true;
         }
     }
+
     public boolean validatePetStats(obj_id pcd, obj_id player) throws InterruptedException
     {
         if (!hasObjVar(pcd, "pet.crafted") || hasObjVar(pcd, "ai.pet.trainedMount"))
@@ -1896,12 +1934,9 @@ public class pet_control_device extends script.base_script
             sendSystemMessage(player, pet_lib.SID_INVALID_CRAFTED_PET);
             return false;
         }
-        if (!bio_engineer.validatePcdLevel(pcd, player))
-        {
-            return false;
-        }
-        return true;
+        return bio_engineer.validatePcdLevel(pcd, player);
     }
+
     public int handleValidatePet(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id currentPet = callable.getCDCallable(self);
@@ -1914,7 +1949,7 @@ public class pet_control_device extends script.base_script
                 {
                     destroyObject(calledPet);
                 }
-                else 
+                else
                 {
                     messageTo(calledPet, "handlePackRequest", null, 1, false);
                 }
@@ -1940,13 +1975,14 @@ public class pet_control_device extends script.base_script
             {
                 destroyObject(calledPet);
             }
-            else 
+            else
             {
                 messageTo(calledPet, "handlePackRequest", null, 1, false);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeGallop(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPet = callable.getCDCallable(self);
@@ -1959,7 +1995,7 @@ public class pet_control_device extends script.base_script
             LOG("pet", "sending System Message of " + strSpam + " to " + objRider);
             sendSystemMessage(objRider, strSpam);
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
@@ -1969,12 +2005,13 @@ public class pet_control_device extends script.base_script
             pet_lib.setMountCombatMoveSpeed(objRider, objPet);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             pet_lib.setMountedMovementRate(objRider, objPet);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeGallopTired(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "mount.intTired");
@@ -1987,6 +2024,7 @@ public class pet_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void listAllCommands(obj_id petControlDevice, obj_id player) throws InterruptedException
     {
         if (!hasObjVar(petControlDevice, "ai.pet.command"))
@@ -2013,7 +2051,7 @@ public class pet_control_device extends script.base_script
                     String display = pet_lib.createLearnCommandListEntry(new string_id("obj_attr_n", "pet_command_" + command), " -  " + ov.getStringData());
                     commandList = utils.addElement(commandList, display);
                 }
-                else 
+                else
                 {
                     String display = pet_lib.createLearnCommandListEntry(new string_id("obj_attr_n", pet_lib.getPetAbilityFromCrc(commandNum)), " -  " + ov.getStringData());
                     abilityList = utils.addElement(abilityList, display);
@@ -2023,6 +2061,7 @@ public class pet_control_device extends script.base_script
             sui.listbox(player, player, "", displayList);
         }
     }
+
     public int handleStatUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         int[] mainAttribs = params.getIntArray("attribs");
@@ -2031,6 +2070,7 @@ public class pet_control_device extends script.base_script
         setObjVar(self, "pet.timeStored", timeStored);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRemoveCurrentPet(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id sendingPetId = params.getObjId(MESSAGE_PET_ID);
@@ -2050,13 +2090,14 @@ public class pet_control_device extends script.base_script
             {
                 callable.setCDCallable(self, null);
             }
-            else 
+            else
             {
                 LOG("pcd", "pet_control_device.handleRemoveCurrentPet(): vcd id=[" + self + "]: ignoring request from pet id=[" + sendingPetId + "]: PCD thinks it is controlling a different pet, id=[" + controlledPetId + "]");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePetFixDialog(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -2069,21 +2110,22 @@ public class pet_control_device extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            if (revert != null && !revert.isEmpty())
-            {
-                bio_engineer.adjustBrokenPetLevel(self, player);
-            }
-            else 
-            {
-                bio_engineer.adjustBrokenPetStats(self, player);
-            }
-            return SCRIPT_CONTINUE;
+                if (revert != null && !revert.isEmpty())
+                {
+                    bio_engineer.adjustBrokenPetLevel(self, player);
+                }
+                else
+                {
+                    bio_engineer.adjustBrokenPetStats(self, player);
+                }
+                return SCRIPT_CONTINUE;
             case sui.BP_CANCEL:
-            sendSystemMessage(player, pet_lib.SID_INVALID_CRAFTED_PET);
-            return SCRIPT_CONTINUE;
+                sendSystemMessage(player, pet_lib.SID_INVALID_CRAFTED_PET);
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isOnMaintRun(obj_id pet) throws InterruptedException
     {
         if (hasObjVar(pet, "module_data.maint_run_time"))
@@ -2098,10 +2140,12 @@ public class pet_control_device extends script.base_script
         }
         return false;
     }
+
     public boolean isVetRewardPet(String creatureName) throws InterruptedException
     {
         return creatureName.equals("ep3_mount_varactyl");
     }
+
     public int respawnDroid(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("master");
@@ -2115,7 +2159,7 @@ public class pet_control_device extends script.base_script
                     destroyObject(currentPet);
                     callable.setCDCallable(self, null);
                 }
-                else 
+                else
                 {
                     messageTo(currentPet, "handlePackRequest", null, 1, false);
                 }
@@ -2127,6 +2171,7 @@ public class pet_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleConvertPetSui(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -2146,12 +2191,13 @@ public class pet_control_device extends script.base_script
             destroyObject(self);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             CustomerServiceLog("BeastPetConversion: ", "Player (" + player + ") tried to convert Old Pcd (" + self + ")." + " Conversion was not a success. New Item was NOT created and pcd was NOT destroyed.");
             return SCRIPT_CONTINUE;
         }
     }
+
     public int dancingDroidSoundObjectDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "dancingDroid.soundObject");

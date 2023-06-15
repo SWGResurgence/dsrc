@@ -1,5 +1,11 @@
 package script.structure;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -13,6 +19,7 @@ public class custom_sign extends script.base_script
     public static final string_id SID_USE = new string_id(SPAM, "change_sign");
     public static final string_id CANT_USE = new string_id(SPAM, "not_sign");
     public static final string_id CANT_DROP = new string_id(SPAM, "cant_drop_sign");
+
     public custom_sign()
     {
     }

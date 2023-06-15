@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class beast_inventory extends script.base_script
@@ -7,6 +13,7 @@ public class beast_inventory extends script.base_script
     public beast_inventory()
     {
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(transferer))
@@ -15,6 +22,7 @@ public class beast_inventory extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;

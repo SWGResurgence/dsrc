@@ -1,13 +1,16 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class fs_crafting4_tracking_device extends script.base_script
 {
-    public fs_crafting4_tracking_device()
-    {
-    }
     public static final string_id SID_MENU_USE_TRACKING = new string_id("quest/force_sensitive/fs_crafting", "tracking_device_menu_use");
     public static final string_id SID_NEEDS_TRACKING_DATA = new string_id("quest/force_sensitive/fs_crafting", "tracking_device_needs_data");
     public static final string_id SID_WRONG_PLANET_MSG = new string_id("quest/force_sensitive/fs_crafting", "tracking_device_wrong_planet");
@@ -22,11 +25,16 @@ public class fs_crafting4_tracking_device extends script.base_script
     public static final String TARGET_LOC_OBJVAR = "fs_crafting4.tracking.targetLoc";
     public static final String TARGET_WAYPOINT_OBJVAR = "fs_crafting4.tracking.targetWaypoint";
     public static final String FS_CRAFTING4_PLAYER_SCRIPT = "quest.force_sensitive.fs_crafting4_player";
+    public fs_crafting4_tracking_device()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitialSetup", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleInitialSetup(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, NEEDS_TRACKING_DATA_OBJVAR, true);
@@ -38,12 +46,13 @@ public class fs_crafting4_tracking_device extends script.base_script
             String custLogMsg = "FS Phase 4 Crafting Quest: Player %TU has completed the tracking device loot kit and now has the tracking device.";
             CustomerServiceLog("FS_Phase4_Crafting", custLogMsg, owner);
         }
-        else 
+        else
         {
             destroyObject(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "cleaningUp"))
@@ -57,7 +66,7 @@ public class fs_crafting4_tracking_device extends script.base_script
                     {
                         sendSystemMessage(owner, SID_TRACKING_DEVICE_DESTROYED);
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(owner, SID_TRACKING_DEVICE_DESTROYED_OVER);
                     }
@@ -83,6 +92,7 @@ public class fs_crafting4_tracking_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id owner = getObjIdObjVar(self, "owner");
@@ -97,6 +107,7 @@ public class fs_crafting4_tracking_device extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_MENU_USE_TRACKING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -114,13 +125,13 @@ public class fs_crafting4_tracking_device extends script.base_script
             {
                 sendSystemMessage(player, SID_NOT_ON_QUEST);
             }
-            else 
+            else
             {
                 if (hasObjVar(self, NEEDS_TRACKING_DATA_OBJVAR))
                 {
                     sendSystemMessage(player, SID_NEEDS_TRACKING_DATA);
                 }
-                else 
+                else
                 {
                     location here = getLocation(player);
                     String curPlanet = here.area;
@@ -155,17 +166,17 @@ public class fs_crafting4_tracking_device extends script.base_script
                                 messageTo(player, "handleSetLocationTarget", null, 1, false);
                                 sendSystemMessage(player, SID_TARGET_LOCATED);
                             }
-                            else 
+                            else
                             {
                                 sendSystemMessage(player, SID_CANNOT_FIND_LOC);
                             }
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(player, SID_CANNOT_FIND_LOC);
                         }
                     }
-                    else 
+                    else
                     {
                         if (hasObjVar(player, TARGET_WAYPOINT_OBJVAR))
                         {
@@ -192,18 +203,21 @@ public class fs_crafting4_tracking_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isOnQuest(obj_id self, obj_id player) throws InterruptedException
     {
         if (hasScript(player, FS_CRAFTING4_PLAYER_SCRIPT))
         {
             boolean hasQuest = false;
-            String[] validQuests = 
+            String[] validQuests =
+                    {
+                            "fs_crafting4_quest_03",
+                            "fs_crafting4_quest_04"
+                    };
+            for (String validQuest : validQuests)
             {
-                "fs_crafting4_quest_03",
-                "fs_crafting4_quest_04"
-            };
-            for (String validQuest : validQuests) {
-                if (quests.isActive(validQuest, player)) {
+                if (quests.isActive(validQuest, player))
+                {
                     return true;
                 }
             }

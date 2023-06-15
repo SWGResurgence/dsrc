@@ -1,5 +1,11 @@
 package script.structure.buffs.regular_buffs;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.base_script;
 import script.library.buff;
 import script.obj_id;

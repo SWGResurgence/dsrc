@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.static_item;
 import script.library.utils;
 import script.location;
@@ -7,10 +13,12 @@ import script.obj_id;
 
 public class ai_rsitton extends script.base_script
 {
+    public static final String s_logLabel = "ai_rsitton";
+
     public ai_rsitton()
     {
     }
-    public static final String s_logLabel = "ai_rsitton";
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))

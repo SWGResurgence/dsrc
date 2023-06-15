@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Vector;
@@ -174,6 +180,7 @@ public class sui extends script.base_script
     public static final String TABLE_BTN_EXPORT = "btnExport";
     public static final String TABLE_PROP_OTHER_PRESSED = "otherPressed";
     public static final String TABLE_PROP_EXPORT_PRESSED = "exportPressed";
+
     public sui()
     {
     }

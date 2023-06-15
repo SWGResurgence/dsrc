@@ -1,13 +1,16 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class destroy_weapon_cache extends script.base_script
 {
-    public destroy_weapon_cache()
-    {
-    }
     public static final boolean LOGGING_ON = false;
     public static final String VAR_PREFIX = "meatlump_weapon_cache";
     public static final String PID_NAME = VAR_PREFIX + ".pid";
@@ -33,38 +36,43 @@ public class destroy_weapon_cache extends script.base_script
     public static final string_id YOU_NEED_DEVICE = new string_id("meatlump/meatlump", "you_need_device");
     public static final int DEFAULT_TRIES = 10;
     public static final int BUFF_TRIES_INCREASE = 10;
-    public static final String[] CONFIG_PLAYER_BUTTONS = 
+    public static final String[] CONFIG_PLAYER_BUTTONS =
+            {
+                    "top.triangles.player.right.1",
+                    "top.triangles.player.right.2",
+                    "top.triangles.player.right.3",
+                    "top.triangles.player.left.2",
+                    "top.triangles.player.left.3",
+                    "top.triangles.player.left.1"
+            };
+    public static final String[] CONFIG_SERVER_BUTTONS =
+            {
+                    "top.triangles.server.right.1",
+                    "top.triangles.server.right.2",
+                    "top.triangles.server.right.3",
+                    "top.triangles.server.left.2",
+                    "top.triangles.server.left.3",
+                    "top.triangles.server.left.1"
+            };
+    public static final int[] DEFAULT_GOAL_CURRENT_ARRAY =
+            {
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+            };
+    public destroy_weapon_cache()
     {
-        "top.triangles.player.right.1",
-        "top.triangles.player.right.2",
-        "top.triangles.player.right.3",
-        "top.triangles.player.left.2",
-        "top.triangles.player.left.3",
-        "top.triangles.player.left.1"
-    };
-    public static final String[] CONFIG_SERVER_BUTTONS = 
-    {
-        "top.triangles.server.right.1",
-        "top.triangles.server.right.2",
-        "top.triangles.server.right.3",
-        "top.triangles.server.left.2",
-        "top.triangles.server.left.3",
-        "top.triangles.server.left.1"
-    };
-    public static final int[] DEFAULT_GOAL_CURRENT_ARRAY = 
-    {
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-    };
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_OPEN);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -95,6 +103,7 @@ public class destroy_weapon_cache extends script.base_script
         createConfigUI(collectionItem, player);
         return SCRIPT_CONTINUE;
     }
+
     public boolean createConfigUI(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         blog("createConfigUI - INIT");
@@ -140,7 +149,8 @@ public class destroy_weapon_cache extends script.base_script
             setSUIProperty(pid, CONFIG_PLAYER_BUTTONS[i], "IsCancelButton", "false");
         }
         setSUIProperty(pid, "bg.mmc.close", "IsCancelButton", "true");
-        for (String configPlayerButton : CONFIG_PLAYER_BUTTONS) {
+        for (String configPlayerButton : CONFIG_PLAYER_BUTTONS)
+        {
             subscribeToSUIEvent(pid, sui_event_type.SET_onButton, configPlayerButton, "configProcessorPuzzleCallback");
         }
         subscribeToSUIEvent(pid, sui_event_type.SET_onClosedCancel, "%button0%", "closeSui");
@@ -149,6 +159,7 @@ public class destroy_weapon_cache extends script.base_script
         showSUIPage(pid);
         return true;
     }
+
     public boolean initializeCalibration(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         blog("initializeCalibration - INIT");
@@ -184,6 +195,7 @@ public class destroy_weapon_cache extends script.base_script
                 if (goal[j] != current[j])
                 {
                     mixed = true;
+                    break;
                 }
             }
         }
@@ -203,6 +215,7 @@ public class destroy_weapon_cache extends script.base_script
         utils.setScriptVar(player, CALIBRATION_MAX_TRIES, calibrationMaxTries);
         return true;
     }
+
     public int[] toggleButton(int[] config, int button) throws InterruptedException
     {
         if (config == null || button < 0)
@@ -215,29 +228,29 @@ public class destroy_weapon_cache extends script.base_script
         switch (button)
         {
             case 0:
-            secondary1 = 3;
-            secondary2 = 4;
-            break;
+                secondary1 = 3;
+                secondary2 = 4;
+                break;
             case 1:
-            secondary1 = 4;
-            secondary2 = 5;
-            break;
+                secondary1 = 4;
+                secondary2 = 5;
+                break;
             case 2:
-            secondary1 = 3;
-            secondary2 = 5;
-            break;
+                secondary1 = 3;
+                secondary2 = 5;
+                break;
             case 3:
-            secondary1 = 0;
-            secondary2 = 2;
-            break;
+                secondary1 = 0;
+                secondary2 = 2;
+                break;
             case 4:
-            secondary1 = 0;
-            secondary2 = 1;
-            break;
+                secondary1 = 0;
+                secondary2 = 1;
+                break;
             case 5:
-            secondary1 = 1;
-            secondary2 = 2;
-            break;
+                secondary1 = 1;
+                secondary2 = 2;
+                break;
         }
         if (secondary1 == -1 || secondary2 == -1)
         {
@@ -253,7 +266,7 @@ public class destroy_weapon_cache extends script.base_script
         {
             config[button] = 1;
         }
-        else 
+        else
         {
             config[button] = 0;
         }
@@ -261,7 +274,7 @@ public class destroy_weapon_cache extends script.base_script
         {
             config[secondary1] = 1;
         }
-        else 
+        else
         {
             config[secondary1] = 0;
         }
@@ -269,13 +282,14 @@ public class destroy_weapon_cache extends script.base_script
         {
             config[secondary2] = 1;
         }
-        else 
+        else
         {
             config[secondary2] = 0;
         }
         blog("toggleButton - returning config");
         return config;
     }
+
     public int configProcessorPuzzleCallback(obj_id self, dictionary params) throws InterruptedException
     {
         blog("configProcessorPuzzleCallback - INIT");
@@ -297,9 +311,9 @@ public class destroy_weapon_cache extends script.base_script
             blog("configProcessorPuzzleCallback widgetName = null ");
             if (buff.applyBuff(player, "weapons_cache_puzzle_downer"))
             {
-                
+
             }
-            
+
             {
                 sendSystemMessage(player, YOU_CANCELED_EARLY);
             }
@@ -346,13 +360,13 @@ public class destroy_weapon_cache extends script.base_script
                 blog("configProcessorPuzzleCallback setting to BLACK: " + CONFIG_PLAYER_BUTTONS[i]);
                 setSUIProperty(pid, CONFIG_PLAYER_BUTTONS[i], "Color", "#000000");
             }
-            else 
+            else
             {
                 setSUIProperty(pid, CONFIG_PLAYER_BUTTONS[i], "Color", "#FFFFFF");
             }
         }
         tries--;
-        int integrity = (int)(((float)tries / max_tries) * 100);
+        int integrity = (int) (((float) tries / max_tries) * 100);
         blog("configProcessorPuzzleCallback integrity: " + integrity);
         boolean win = true;
         for (int i = 0; i < current.length; i++)
@@ -360,6 +374,7 @@ public class destroy_weapon_cache extends script.base_script
             if (current[i] != goal[i])
             {
                 win = false;
+                break;
             }
         }
         blog("configProcessorPuzzleCallback win: " + win);
@@ -367,7 +382,8 @@ public class destroy_weapon_cache extends script.base_script
         {
             blog("configProcessorPuzzleCallback THE WIN ");
             setSUIProperty(pid, "top.description.desc", "Text", CALIBRATION_SUCCESS);
-            for (String configPlayerButton : CONFIG_PLAYER_BUTTONS) {
+            for (String configPlayerButton : CONFIG_PLAYER_BUTTONS)
+            {
                 subscribeToSUIEvent(pid, sui_event_type.SET_onButton, configPlayerButton, "noCallback");
                 setSUIProperty(pid, configPlayerButton, "GetsInput", "false");
             }
@@ -377,23 +393,24 @@ public class destroy_weapon_cache extends script.base_script
         {
             if (buff.applyBuff(player, "weapons_cache_puzzle_downer"))
             {
-                
+
             }
-            
+
             {
                 sendSystemMessage(player, YOU_FAILED);
             }
             blog("configProcessorPuzzleCallback YOU LOSE ");
             setSUIProperty(pid, "top.description.attempts", "Text", CALIBRATION_ATTEMPTS_REMAINING + " " + integrity + "%");
             setSUIProperty(pid, "top.description.desc", "Text", CALIBRATION_FAILURE);
-            for (String configPlayerButton : CONFIG_PLAYER_BUTTONS) {
+            for (String configPlayerButton : CONFIG_PLAYER_BUTTONS)
+            {
                 subscribeToSUIEvent(pid, sui_event_type.SET_onButton, configPlayerButton, "noCallback");
                 setSUIProperty(pid, configPlayerButton, "GetsInput", "false");
             }
             closeOldWindow(player);
             removePlayerVars(player);
         }
-        else 
+        else
         {
             blog("configProcessorPuzzleCallback DECREMENT ");
             setSUIProperty(pid, "top.description.attempts", "Text", CALIBRATION_ATTEMPTS_REMAINING + " " + integrity + "%");
@@ -403,6 +420,7 @@ public class destroy_weapon_cache extends script.base_script
         flushSUIPage(pid);
         return SCRIPT_CONTINUE;
     }
+
     public boolean rewardPlayer(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         blog("rewardPlayer - init");
@@ -427,6 +445,7 @@ public class destroy_weapon_cache extends script.base_script
         removePlayerVars(player);
         return true;
     }
+
     public int closeSui(obj_id self, dictionary params) throws InterruptedException
     {
         blog("closeSui - init");
@@ -437,9 +456,9 @@ public class destroy_weapon_cache extends script.base_script
         }
         if (buff.applyBuff(player, "weapons_cache_puzzle_downer"))
         {
-            
+
         }
-        
+
         {
             blog("closeSui applying weapon_cache_puzzle_downer");
             sendSystemMessage(player, YOU_CANCELED_EARLY);
@@ -449,6 +468,7 @@ public class destroy_weapon_cache extends script.base_script
         removePlayerVars(player);
         return SCRIPT_CONTINUE;
     }
+
     public void closeOldWindow(obj_id player) throws InterruptedException
     {
         blog("closeOldWindow - init");
@@ -461,11 +481,13 @@ public class destroy_weapon_cache extends script.base_script
             sui.removePid(player, PID_NAME);
         }
     }
+
     public void removePlayerVars(obj_id player) throws InterruptedException
     {
         utils.removeScriptVarTree(player, VAR_PREFIX);
         utils.removeObjVar(player, VAR_PREFIX);
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

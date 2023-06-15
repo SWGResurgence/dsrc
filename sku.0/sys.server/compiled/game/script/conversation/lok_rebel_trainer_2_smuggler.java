@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.space_flags;
@@ -8,42 +14,42 @@ import script.*;
 
 public class lok_rebel_trainer_2_smuggler extends script.base_script
 {
+    public static String c_stringFile = "conversation/lok_rebel_trainer_2_smuggler";
+
     public lok_rebel_trainer_2_smuggler()
     {
     }
-    public static String c_stringFile = "conversation/lok_rebel_trainer_2_smuggler";
+
     public boolean lok_rebel_trainer_2_smuggler_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean lok_rebel_trainer_2_smuggler_condition_isRightPlayer1(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.getIntSpaceFlag(player, "viopaSmuggler") == 1)
-        {
-            return true;
-        }
-        return false;
+        return space_flags.getIntSpaceFlag(player, "viopaSmuggler") == 1;
     }
+
     public boolean lok_rebel_trainer_2_smuggler_condition_isRightPlayer2(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.getIntSpaceFlag(player, "viopaSmuggler") == 3)
-        {
-            return true;
-        }
-        return false;
+        return space_flags.getIntSpaceFlag(player, "viopaSmuggler") == 3;
     }
+
     public void lok_rebel_trainer_2_smuggler_action_face(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void lok_rebel_trainer_2_smuggler_action_addSmuggler2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.setSpaceFlag(player, "viopaSmuggler", 4);
     }
+
     public void lok_rebel_trainer_2_smuggler_action_addSmuggler1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.setSpaceFlag(player, "viopaSmuggler", 2);
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fca23d59"))
@@ -65,7 +71,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6bb0cb94");
@@ -74,7 +80,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -101,7 +107,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b9280ab0");
@@ -110,7 +116,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -120,6 +126,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6bb0cb94"))
@@ -141,7 +148,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_50e93f2d");
@@ -150,7 +157,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -160,6 +167,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50e93f2d"))
@@ -177,6 +185,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b9280ab0"))
@@ -198,7 +207,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d5132e66");
@@ -207,7 +216,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -217,6 +226,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d5132e66"))
@@ -238,7 +248,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6541ff8b");
@@ -247,7 +257,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -257,6 +267,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6541ff8b"))
@@ -278,7 +289,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3103c633");
@@ -287,7 +298,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -297,6 +308,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3103c633"))
@@ -314,6 +326,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_88fb9bcb"))
@@ -342,7 +355,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73e609b7");
@@ -355,7 +368,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -389,7 +402,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -402,7 +415,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -412,6 +425,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_73e609b7"))
@@ -439,7 +453,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d7fe1a24");
@@ -452,7 +466,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -485,7 +499,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -498,7 +512,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -508,6 +522,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d7fe1a24"))
@@ -528,7 +543,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2387d3d7");
@@ -537,7 +552,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -565,7 +580,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6789e90e");
@@ -574,7 +589,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -584,6 +599,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2387d3d7"))
@@ -605,7 +621,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6789e90e");
@@ -614,7 +630,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -624,6 +640,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6789e90e"))
@@ -651,7 +668,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b5dd2ed8");
@@ -664,7 +681,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -674,6 +691,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b5dd2ed8"))
@@ -707,7 +725,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6b133072");
@@ -716,7 +734,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -726,6 +744,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6b133072"))
@@ -741,6 +760,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -761,7 +781,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -770,7 +790,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -798,7 +818,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6789e90e");
@@ -807,7 +827,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -817,6 +837,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -838,7 +859,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6789e90e");
@@ -847,7 +868,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -857,6 +878,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -883,7 +905,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -896,7 +918,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -930,7 +952,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -943,7 +965,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -953,6 +975,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_56"))
@@ -973,7 +996,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60");
@@ -982,7 +1005,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1010,7 +1033,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6789e90e");
@@ -1019,7 +1042,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1029,6 +1052,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
@@ -1050,7 +1074,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6789e90e");
@@ -1059,7 +1083,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1069,6 +1093,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -1089,7 +1114,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_72");
@@ -1098,7 +1123,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1126,7 +1151,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6789e90e");
@@ -1135,7 +1160,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1145,6 +1170,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lok_rebel_trainer_2_smuggler_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_72"))
@@ -1166,7 +1192,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6789e90e");
@@ -1175,7 +1201,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1185,6 +1211,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1198,6 +1225,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         setCondition(self, CONDITION_SPACE_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1207,6 +1235,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         setCondition(self, CONDITION_SPACE_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1215,18 +1244,21 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.lok_rebel_trainer_2_smuggler");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1257,7 +1289,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_fca23d59");
@@ -1269,7 +1301,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 utils.setScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId", 1);
                 npcStartConversation(player, npc, "lok_rebel_trainer_2_smuggler", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1299,7 +1331,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_88fb9bcb");
@@ -1311,7 +1343,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
                 utils.setScriptVar(player, "conversation.lok_rebel_trainer_2_smuggler.branchId", 10);
                 npcStartConversation(player, npc, "lok_rebel_trainer_2_smuggler", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1328,6 +1360,7 @@ public class lok_rebel_trainer_2_smuggler extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("lok_rebel_trainer_2_smuggler"))

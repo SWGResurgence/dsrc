@@ -1,5 +1,11 @@
 package script.developer.soe.debug;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.deltadictionary;
 import script.dictionary;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class test_message_to extends script.base_script
     public test_message_to()
     {
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (!isGod(self))
@@ -16,14 +23,20 @@ public class test_message_to extends script.base_script
             return SCRIPT_CONTINUE;
         }
         boolean handled = true;
-        switch (text) {
-            case "startmessagetest": {
+        switch (text)
+        {
+            case "startmessagetest":
+            {
                 obj_id target = getLookAtTarget(self);
-                if (isIdValid(target)) {
-                    if (!target.hasScript("debug.test_message_to")) {
+                if (isIdValid(target))
+                {
+                    if (!target.hasScript("debug.test_message_to"))
+                    {
                         attachScript(target, "debug.test_message_to");
                     }
-                } else {
+                }
+                else
+                {
                     target = self;
                 }
                 deltadictionary scriptVars = self.getScriptVars();
@@ -32,19 +45,22 @@ public class test_message_to extends script.base_script
                 runTest(self, target, 1);
                 break;
             }
-            case "stopmessagetest": {
+            case "stopmessagetest":
+            {
                 deltadictionary scriptVars = self.getScriptVars();
                 scriptVars.remove("messagetestcount");
                 scriptVars.remove("messagetesttest");
                 scriptVars.remove("messagetestspam");
                 break;
             }
-            case "messagetestinfo": {
+            case "messagetestinfo":
+            {
                 deltadictionary scriptVars = self.getScriptVars();
                 debugServerConsoleMsg(null, "messagetest count = " + scriptVars.getInt("messagetestcount") + ", current test = " + scriptVars.getInt("messagetesttest"));
                 break;
             }
-            case "messagetestspam": {
+            case "messagetestspam":
+            {
                 deltadictionary scriptVars = self.getScriptVars();
                 boolean spam = scriptVars.getBoolean("messagetestspam");
                 scriptVars.put("messagetestspam", !spam);
@@ -60,6 +76,7 @@ public class test_message_to extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean runTest(obj_id self, obj_id target, int test) throws InterruptedException
     {
         deltadictionary scriptVars = self.getScriptVars();
@@ -79,37 +96,38 @@ public class test_message_to extends script.base_script
         switch (test)
         {
             case 1:
-            params.put("delay", 0.0f);
-            params.put("persist", false);
-            break;
+                params.put("delay", 0.0f);
+                params.put("persist", false);
+                break;
             case 2:
-            params.put("delay", 5.0f);
-            params.put("persist", false);
-            break;
+                params.put("delay", 5.0f);
+                params.put("persist", false);
+                break;
             case 3:
-            params.put("delay", 120.0f);
-            params.put("persist", false);
-            break;
+                params.put("delay", 120.0f);
+                params.put("persist", false);
+                break;
             case 4:
-            params.put("delay", 0.0f);
-            params.put("persist", true);
-            break;
+                params.put("delay", 0.0f);
+                params.put("persist", true);
+                break;
             case 5:
-            params.put("delay", 5.0f);
-            params.put("persist", true);
-            break;
+                params.put("delay", 5.0f);
+                params.put("persist", true);
+                break;
             case 6:
-            params.put("delay", 120.0f);
-            params.put("persist", true);
-            break;
+                params.put("delay", 120.0f);
+                params.put("persist", true);
+                break;
             default:
-            return false;
+                return false;
         }
         scriptVars.put("messagetestcount", scriptVars.getInt("messagetestcount") + 1);
         scriptVars.put("messagetesttest", test);
         messageTo(target, "testHandler", params, params.getFloat("delay"), params.getBoolean("persist"));
         return true;
     }
+
     public int testHandler(obj_id self, dictionary params) throws InterruptedException
     {
         int currentTime = getGameTime();
@@ -138,7 +156,7 @@ public class test_message_to extends script.base_script
                 runTest(self, self, 1);
             }
         }
-        else 
+        else
         {
             dictionary newParams = new dictionary();
             newParams.put("target", self);
@@ -148,6 +166,7 @@ public class test_message_to extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nextTestHandler(obj_id self, dictionary params) throws InterruptedException
     {
         deltadictionary scriptVars = self.getScriptVars();

@@ -1,5 +1,11 @@
 package script.planet_map;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.planetary_map;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class map_loc_attach extends script.planet_map.map_loc_base
     public map_loc_attach()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!planetary_map.addMapLocation(self))
@@ -20,10 +27,11 @@ public class map_loc_attach extends script.planet_map.map_loc_base
             LOG("planetaryMapLocation", "trigger OnAttach()");
             LOG("planetaryMapLocation", "WARNING: unable to add self (" + self + ") as planetary map location!");
             LOG("planetaryMapLocation", "template = " + template);
-            LOG("planetaryMapLocation", "here = " + here.toString());
+            LOG("planetaryMapLocation", "here = " + here);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         planetary_map.removeMapLocation(self);

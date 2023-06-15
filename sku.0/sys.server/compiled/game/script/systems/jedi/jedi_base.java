@@ -1,5 +1,11 @@
 package script.systems.jedi;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.combat_engine.weapon_data;
 import script.*;
 import script.library.*;
@@ -30,6 +36,7 @@ public class jedi_base extends script.base_script
                     "damage",
                     "wounds"
             };
+
     public jedi_base()
     {
     }
@@ -149,7 +156,6 @@ public class jedi_base extends script.base_script
                 }
             }
         }
-        return;
     }
 
     public dictionary modifyJediHealDataFromAlignment(obj_id objPlayer, dictionary dctJediInfo) throws InterruptedException
@@ -571,6 +577,5 @@ public class jedi_base extends script.base_script
         setObjVar(self, "jedi.locTrainerLocation", locFinalLocation);
         string_id strSpam = new string_id("jedi_spam", "trainer_updated");
         sendSystemMessage(self, strSpam);
-        return;
     }
 }

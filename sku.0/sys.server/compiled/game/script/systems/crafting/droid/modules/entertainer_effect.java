@@ -1,5 +1,11 @@
 package script.systems.crafting.droid.modules;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -20,6 +26,7 @@ public class entertainer_effect extends script.base_script
     public static final String VAR_EFFECTS = "module_data.entertainer_effects";
     public static final String VAR_PROGRAMMED_EFFECTS = "module_data.programmed_effects";
     public static final String VAR_PROGRAMMED_EFFECT_DELAYS = "module_data.programmed_effect_delays";
+
     public entertainer_effect()
     {
     }
@@ -471,7 +478,6 @@ public class entertainer_effect extends script.base_script
         }
         int pid = sui.listbox(droid, master, "Select an effect slot that you which to change.", sui.OK_CANCEL, "Effect Configuration", dsrc, "msgEntertainerDroidEffectChange");
         utils.setScriptVar(master, SCRIPT_VAR_EFFECTS_SUI, pid);
-        return;
     }
 
     public void closeAllEffectSUI(obj_id player) throws InterruptedException
@@ -497,7 +503,6 @@ public class entertainer_effect extends script.base_script
             forceCloseSUIPage(utils.getIntScriptVar(player, SCRIPT_VAR_EFFECTS_SUI_DELAY));
             utils.removeScriptVar(player, SCRIPT_VAR_EFFECTS_SUI_DELAY);
         }
-        return;
     }
 
     public void closeEffectSelectSUI(obj_id player) throws InterruptedException
@@ -518,7 +523,6 @@ public class entertainer_effect extends script.base_script
             forceCloseSUIPage(utils.getIntScriptVar(player, SCRIPT_VAR_EFFECTS_SUI_DELAY));
             utils.removeScriptVar(player, SCRIPT_VAR_EFFECTS_SUI_DELAY);
         }
-        return;
     }
 
     public void closeEffectDelaySUI(obj_id player) throws InterruptedException
@@ -532,7 +536,6 @@ public class entertainer_effect extends script.base_script
             forceCloseSUIPage(utils.getIntScriptVar(player, SCRIPT_VAR_EFFECTS_SUI_DELAY));
             utils.removeScriptVar(player, SCRIPT_VAR_EFFECTS_SUI_DELAY);
         }
-        return;
     }
 
     public String[] getProgrammedEffects(obj_id droid) throws InterruptedException
@@ -585,6 +588,5 @@ public class entertainer_effect extends script.base_script
         String cef_name = "clienteffect/" + effect + ".cef";
         location loc = getLocation(droid);
         playClientEffectLoc(master, cef_name, loc, 0.0f);
-        return;
     }
 }

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,14 +14,17 @@ import script.*;
 
 public class wod_ns_witch_herbs extends script.base_script
 {
+    public static String c_stringFile = "conversation/wod_ns_witch_herbs";
+
     public wod_ns_witch_herbs()
     {
     }
-    public static String c_stringFile = "conversation/wod_ns_witch_herbs";
+
     public boolean wod_ns_witch_herbs_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean wod_ns_witch_herbs_condition_IsIndifferent(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "wod_prologue_quests"))
@@ -23,12 +32,9 @@ public class wod_ns_witch_herbs extends script.base_script
             return false;
         }
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if ((status > 0) && (status < 8))
-        {
-            return true;
-        }
-        return false;
+        return (status > 0) && (status < 8);
     }
+
     public boolean wod_ns_witch_herbs_condition_IsSM(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "wod_prologue_quests"))
@@ -36,44 +42,34 @@ public class wod_ns_witch_herbs extends script.base_script
             return false;
         }
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if (status < 1)
-        {
-            return true;
-        }
-        return false;
+        return status < 1;
     }
+
     public boolean wod_ns_witch_herbs_condition_hasPreqComplete(obj_id player, obj_id npc) throws InterruptedException
     {
-        if ((hasObjVar(player, "wod_prologue_quests")) && (groundquests.hasCompletedQuest(player, "wod_rubina_goto_ns")))
-        {
-            return true;
-        }
-        return false;
+        return (hasObjVar(player, "wod_prologue_quests")) && (groundquests.hasCompletedQuest(player, "wod_rubina_goto_ns"));
     }
+
     public boolean wod_ns_witch_herbs_condition_onReturnTPHerbsNSOnce(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_themepark_ns_herb_gathering", "returnForTreat");
     }
+
     public boolean wod_ns_witch_herbs_condition_QuestIsActiveTPHerbsNS(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "wod_themepark_ns_herb_gathering") || groundquests.isQuestActive(player, "wod_themepark_sm_herb_gathering");
     }
+
     public boolean wod_ns_witch_herbs_condition_hasAlreadyCompletedOnceTPHerbsNS(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (((hasObjVar(player, "wod_prologue_quests")) && (groundquests.hasCompletedQuest(player, "wod_rubina_goto_ns")) && ((hasObjVar(player, "wod_themepark_ns_herbs")))))
-        {
-            return true;
-        }
-        return false;
+        return (hasObjVar(player, "wod_prologue_quests")) && (groundquests.hasCompletedQuest(player, "wod_rubina_goto_ns")) && ((hasObjVar(player, "wod_themepark_ns_herbs")));
     }
+
     public boolean wod_ns_witch_herbs_condition_onReturnTPHerbsNS(obj_id player, obj_id npc) throws InterruptedException
     {
-        if ((hasObjVar(player, "wod_themepark_ns_herbs")) && (groundquests.isTaskActive(player, "wod_themepark_ns_herb_gathering", "returnForTreat")))
-        {
-            return true;
-        }
-        return false;
+        return (hasObjVar(player, "wod_themepark_ns_herbs")) && (groundquests.isTaskActive(player, "wod_themepark_ns_herb_gathering", "returnForTreat"));
     }
+
     public void wod_ns_witch_herbs_action_sendSignalReturnedTPHerbsNSOnce(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "wod_themepark_ns_herbs"))
@@ -82,6 +78,7 @@ public class wod_ns_witch_herbs extends script.base_script
         }
         groundquests.sendSignal(player, "hasBeenGivenNsTreat");
     }
+
     public void wod_ns_witch_herbs_action_grantTPHerbsNS(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.hasCompletedQuest(player, "wod_themepark_ns_herb_gathering"))
@@ -90,10 +87,12 @@ public class wod_ns_witch_herbs extends script.base_script
         }
         groundquests.grantQuest(player, "quest/wod_themepark_ns_herb_gathering");
     }
+
     public void wod_ns_witch_herbs_action_sendSignalReturnedTPHerbsNS(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasBeenGivenNsTreat");
     }
+
     public int wod_ns_witch_herbs_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50"))
@@ -109,6 +108,7 @@ public class wod_ns_witch_herbs extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_ns_witch_herbs_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_23"))
@@ -124,6 +124,7 @@ public class wod_ns_witch_herbs extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_ns_witch_herbs_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -138,6 +139,7 @@ public class wod_ns_witch_herbs extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_ns_witch_herbs_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_19"))
@@ -163,6 +165,7 @@ public class wod_ns_witch_herbs extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_ns_witch_herbs_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_35"))
@@ -182,7 +185,7 @@ public class wod_ns_witch_herbs extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_39");
@@ -191,7 +194,7 @@ public class wod_ns_witch_herbs extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_ns_witch_herbs.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -201,6 +204,7 @@ public class wod_ns_witch_herbs extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_ns_witch_herbs_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_39"))
@@ -220,7 +224,7 @@ public class wod_ns_witch_herbs extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_43");
@@ -229,7 +233,7 @@ public class wod_ns_witch_herbs extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_ns_witch_herbs.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -239,6 +243,7 @@ public class wod_ns_witch_herbs extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_ns_witch_herbs_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_43"))
@@ -258,7 +263,7 @@ public class wod_ns_witch_herbs extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -267,7 +272,7 @@ public class wod_ns_witch_herbs extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_ns_witch_herbs.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -277,6 +282,7 @@ public class wod_ns_witch_herbs extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_ns_witch_herbs_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -292,6 +298,7 @@ public class wod_ns_witch_herbs extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -301,11 +308,13 @@ public class wod_ns_witch_herbs extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -314,18 +323,21 @@ public class wod_ns_witch_herbs extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.wod_ns_witch_herbs");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -360,7 +372,7 @@ public class wod_ns_witch_herbs extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -368,7 +380,7 @@ public class wod_ns_witch_herbs extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_ns_witch_herbs.branchId", 3);
                 npcStartConversation(player, npc, "wod_ns_witch_herbs", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -389,7 +401,7 @@ public class wod_ns_witch_herbs extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_23");
@@ -397,7 +409,7 @@ public class wod_ns_witch_herbs extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_ns_witch_herbs.branchId", 5);
                 npcStartConversation(player, npc, "wod_ns_witch_herbs", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -418,7 +430,7 @@ public class wod_ns_witch_herbs extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -426,7 +438,7 @@ public class wod_ns_witch_herbs extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_ns_witch_herbs.branchId", 7);
                 npcStartConversation(player, npc, "wod_ns_witch_herbs", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -454,7 +466,7 @@ public class wod_ns_witch_herbs extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_19");
@@ -466,7 +478,7 @@ public class wod_ns_witch_herbs extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_ns_witch_herbs.branchId", 9);
                 npcStartConversation(player, npc, "wod_ns_witch_herbs", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -487,7 +499,7 @@ public class wod_ns_witch_herbs extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_35");
@@ -495,7 +507,7 @@ public class wod_ns_witch_herbs extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_ns_witch_herbs.branchId", 12);
                 npcStartConversation(player, npc, "wod_ns_witch_herbs", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -510,6 +522,7 @@ public class wod_ns_witch_herbs extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("wod_ns_witch_herbs"))

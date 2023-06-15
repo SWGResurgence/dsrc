@@ -1,5 +1,11 @@
 package script.item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.prose;
 import script.library.trial;
 import script.library.utils;
@@ -97,7 +103,6 @@ public class heroic_token extends script.base_script
                 }
             }
         }
-        return;
     }
 
     public int findMyId(obj_id self) throws InterruptedException
@@ -134,7 +139,6 @@ public class heroic_token extends script.base_script
                 sendSystemMessage(player, new string_id("spam", "heroic_token_box_error"));
             }
         }
-        return;
     }
 
     public void updateTokenCount(int[] currentHeroicTokens, int myId, obj_id self, obj_id tokenBox, obj_id player, int amount) throws InterruptedException
@@ -142,7 +146,6 @@ public class heroic_token extends script.base_script
         currentHeroicTokens[myId] += amount;
         setObjVar(tokenBox, "item.set.tokens_held", currentHeroicTokens);
         decrementTokenCount(self, player, amount);
-        return;
     }
 
     public void decrementTokenCount(obj_id self, obj_id player, int amount) throws InterruptedException

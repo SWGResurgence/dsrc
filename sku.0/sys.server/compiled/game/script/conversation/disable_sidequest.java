@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.space_quest;
@@ -7,57 +13,44 @@ import script.*;
 
 public class disable_sidequest extends script.base_script
 {
+    public static String c_stringFile = "conversation/disable_sidequest";
+
     public disable_sidequest()
     {
     }
-    public static String c_stringFile = "conversation/disable_sidequest";
+
     public boolean disable_sidequest_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean disable_sidequest_condition_hasReward(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasReceivedReward(player, "inspect", "robot_sidequest"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasReceivedReward(player, "inspect", "robot_sidequest");
     }
+
     public boolean disable_sidequest_condition_hasWonMission1(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "inspect", "robot_sidequest"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "inspect", "robot_sidequest");
     }
+
     public boolean disable_sidequest_condition_readyForMission2(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasReceivedReward(player, "destroy_surpriseattack", "tatooine_imperial_1_surprise"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasReceivedReward(player, "destroy_surpriseattack", "tatooine_imperial_1_surprise");
     }
+
     public void disable_sidequest_action_grantMission1(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         space_quest.grantQuest(player, "inspect", "robot_sidequest");
     }
+
     public void disable_sidequest_action_animExplain(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         doAnimationAction(npc, "explain");
     }
+
     public void disable_sidequest_action_giveRewardMission1(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -66,6 +59,7 @@ public class disable_sidequest extends script.base_script
             space_quest.giveReward(player, "inspect", "robot_sidequest", 3000);
         }
     }
+
     public void disable_sidequest_action_animNodHead(obj_id player, obj_id npc) throws InterruptedException
     {
         setName(npc, "CSSD-7");
@@ -73,72 +67,86 @@ public class disable_sidequest extends script.base_script
         faceTo(npc, player);
         doAnimationAction(npc, "nod_head_once");
     }
+
     public void disable_sidequest_action_animConverse(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         doAnimationAction(npc, "conversation_1");
     }
+
     public void disable_sidequest_action_animStop(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         doAnimationAction(npc, "stop");
     }
+
     public void disable_sidequest_action_animSalute(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         doAnimationAction(npc, "salute1");
     }
+
     public void disable_sidequest_action_animBye(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         doAnimationAction(npc, "goodbye");
     }
+
     public void disable_sidequest_action_animBothSalute(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         doAnimationAction(npc, "salute1");
         doAnimationAction(player, "salute1");
     }
+
     public void disable_sidequest_action_animDisgust(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         doAnimationAction(npc, "shake_head_disgust");
     }
+
     public void disable_sidequest_action_animGestureWild(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         doAnimationAction(npc, "gesticulate_wildly");
     }
+
     public void disable_sidequest_action_animPointAway(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "point_away");
     }
+
     public void disable_sidequest_action_animPoundFist(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         doAnimationAction(npc, "pound_fist_palm");
     }
+
     public void disable_sidequest_action_animRubChin(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         doAnimationAction(npc, "rub_chin_thoughtful");
     }
+
     public void disable_sidequest_action_animPoliteApplause(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         doAnimationAction(player, "salute1");
         doAnimationAction(npc, "applause_polite");
     }
+
     public void disable_sidequest_action_animWaveFinger(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         doAnimationAction(npc, "wave_finger_warning");
     }
+
     public void disable_sidequest_action_animRaiseFist(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         doAnimationAction(npc, "standing_raise_fist");
     }
+
     public int disable_sidequest_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c9e7c48f"))
@@ -158,7 +166,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_26966a66");
@@ -167,7 +175,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -178,6 +186,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_26966a66"))
@@ -198,7 +207,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1224b289");
@@ -207,7 +216,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -218,6 +227,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1224b289"))
@@ -238,7 +248,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6a5944bd");
@@ -247,7 +257,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -258,6 +268,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6a5944bd"))
@@ -277,7 +288,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a54ac5ac");
@@ -286,7 +297,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -297,6 +308,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a54ac5ac"))
@@ -317,7 +329,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d28c8e75");
@@ -326,7 +338,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -337,6 +349,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d28c8e75"))
@@ -356,7 +369,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_72b585f7");
@@ -365,7 +378,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -376,6 +389,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_72b585f7"))
@@ -391,6 +405,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6b12b256"))
@@ -411,7 +426,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6ea28bdf");
@@ -420,7 +435,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -431,6 +446,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6ea28bdf"))
@@ -451,7 +467,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a4f3fede");
@@ -460,7 +476,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -471,6 +487,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a4f3fede"))
@@ -490,7 +507,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a017debb");
@@ -499,7 +516,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -510,6 +527,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a017debb"))
@@ -529,7 +547,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46712ca3");
@@ -538,7 +556,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -549,6 +567,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46712ca3"))
@@ -568,7 +587,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9eee12c7");
@@ -577,7 +596,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -588,6 +607,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9eee12c7"))
@@ -607,7 +627,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c5495de6");
@@ -616,7 +636,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -627,6 +647,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c5495de6"))
@@ -646,7 +667,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_907d29f3");
@@ -655,7 +676,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -666,6 +687,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_907d29f3"))
@@ -685,7 +707,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d92cbbea");
@@ -694,7 +716,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -705,6 +727,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5d0b3789"))
@@ -724,7 +747,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d92cbbea");
@@ -733,7 +756,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -744,6 +767,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d92cbbea"))
@@ -763,7 +787,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_192752ed");
@@ -772,7 +796,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -783,6 +807,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_192752ed"))
@@ -803,7 +828,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2b9397ba");
@@ -812,7 +837,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -823,6 +848,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2b9397ba"))
@@ -842,7 +868,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_16148f5c");
@@ -851,7 +877,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -862,6 +888,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_16148f5c"))
@@ -881,7 +908,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_376a2b9c");
@@ -890,7 +917,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -901,6 +928,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_376a2b9c"))
@@ -920,7 +948,7 @@ public class disable_sidequest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3b78667c");
@@ -929,7 +957,7 @@ public class disable_sidequest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.disable_sidequest.branchId");
                     npcSpeak(player, message);
@@ -940,6 +968,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disable_sidequest_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3b78667c"))
@@ -955,6 +984,7 @@ public class disable_sidequest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -966,6 +996,7 @@ public class disable_sidequest extends script.base_script
         setCondition(self, CONDITION_SPACE_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -973,6 +1004,7 @@ public class disable_sidequest extends script.base_script
         setCondition(self, CONDITION_SPACE_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -981,18 +1013,21 @@ public class disable_sidequest extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.disable_sidequest");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1023,7 +1058,7 @@ public class disable_sidequest extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_c9e7c48f");
@@ -1031,7 +1066,7 @@ public class disable_sidequest extends script.base_script
                 setObjVar(player, "conversation.disable_sidequest.branchId", 2);
                 npcStartConversation(player, npc, "disable_sidequest", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1053,7 +1088,7 @@ public class disable_sidequest extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6b12b256");
@@ -1061,7 +1096,7 @@ public class disable_sidequest extends script.base_script
                 setObjVar(player, "conversation.disable_sidequest.branchId", 10);
                 npcStartConversation(player, npc, "disable_sidequest", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1082,7 +1117,7 @@ public class disable_sidequest extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_5d0b3789");
@@ -1090,7 +1125,7 @@ public class disable_sidequest extends script.base_script
                 setObjVar(player, "conversation.disable_sidequest.branchId", 18);
                 npcStartConversation(player, npc, "disable_sidequest", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1099,6 +1134,7 @@ public class disable_sidequest extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("disable_sidequest"))

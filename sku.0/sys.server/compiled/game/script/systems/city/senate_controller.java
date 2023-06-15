@@ -1,5 +1,11 @@
 package script.systems.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class senate_controller extends script.base_script
@@ -43,6 +49,5 @@ public class senate_controller extends script.base_script
             }
             attachScript(cellId, "systems.city.senate_cell");
         }
-        return;
     }
 }

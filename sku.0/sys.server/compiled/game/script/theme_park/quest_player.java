@@ -1,5 +1,11 @@
 package script.theme_park;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.quests;
@@ -11,6 +17,7 @@ public class quest_player extends script.base_script
     public quest_player()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -26,6 +33,7 @@ public class quest_player extends script.base_script
         addLocationTarget("spawnGuy", questLoc, 100);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -70,6 +78,7 @@ public class quest_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int finishQuest(obj_id self, dictionary params) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -84,6 +93,7 @@ public class quest_player extends script.base_script
         quests.addThemeParkWaypoint(self, null, "home", home, 190, questID, file, entry);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnExtras(obj_id self, location spawn) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -102,6 +112,7 @@ public class quest_player extends script.base_script
             x = x + 1;
         }
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

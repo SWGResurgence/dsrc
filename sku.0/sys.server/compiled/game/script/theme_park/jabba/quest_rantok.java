@@ -1,5 +1,11 @@
 package script.theme_park.jabba;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.factions;
@@ -13,6 +19,7 @@ public class quest_rantok extends script.base_script
     public quest_rantok()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -32,6 +39,7 @@ public class quest_rantok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -67,6 +75,7 @@ public class quest_rantok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int finishRantokQuest(obj_id self, dictionary params) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -91,6 +100,7 @@ public class quest_rantok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void createGuards(obj_id bldg) throws InterruptedException
     {
         location g1 = getLocation(bldg);
@@ -124,12 +134,12 @@ public class quest_rantok extends script.base_script
         enemies.put("guard4", guard4);
         enemies.put("player", getSelf());
         messageTo(getSelf(), "makeEnemyAttack", enemies, 3, true);
-        return;
     }
+
     public void setUpNpc(obj_id newNpc) throws InterruptedException
     {
-        return;
     }
+
     public int OnWaypointGetAttributes(obj_id self, obj_id waypoint, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         String questId = getStringObjVar(player, "questID");
@@ -142,7 +152,7 @@ public class quest_rantok extends script.base_script
             return SCRIPT_OVERRIDE;
         }
         string_id detail = new string_id(file, entry);
-        String questDetails = "@" + detail.toString();
+        String questDetails = "@" + detail;
         int idx = 0;
         while (idx >= 0)
         {
@@ -153,13 +163,14 @@ public class quest_rantok extends script.base_script
                 attribs[idx] = questDetails;
                 idx = -1;
             }
-            else 
+            else
             {
                 idx = idx + 1;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnWaypointDestroyed(obj_id self, obj_id waypoint) throws InterruptedException
     {
         String questID = getStringObjVar(self, "questID");
@@ -167,7 +178,7 @@ public class quest_rantok extends script.base_script
         {
             return SCRIPT_OVERRIDE;
         }
-        else 
+        else
         {
             int stringCheck = questID.indexOf("jabbas_palace");
             if (stringCheck > -1)
@@ -177,12 +188,13 @@ public class quest_rantok extends script.base_script
                 messageTo(self, "removeJabbaQuestInfo", questBook, 2, true);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 return SCRIPT_OVERRIDE;
             }
         }
     }
+
     public int makeEnemyAttack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id guard1 = params.getObjId("guard1");
@@ -196,6 +208,7 @@ public class quest_rantok extends script.base_script
         startCombat(guard4, player);
         return SCRIPT_CONTINUE;
     }
+
     public int removeJabbaQuestInfo(obj_id self, dictionary params) throws InterruptedException
     {
         String questID = params.getString("questID");
@@ -217,7 +230,7 @@ public class quest_rantok extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (type.equals("rescue") || type.equals("arrest") || type.equals("escort"))
             {

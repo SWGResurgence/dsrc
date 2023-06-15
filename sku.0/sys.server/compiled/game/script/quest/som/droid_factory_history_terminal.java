@@ -1,5 +1,11 @@
 package script.quest.som;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,9 +14,6 @@ import script.string_id;
 
 public class droid_factory_history_terminal extends script.base_script
 {
-    public droid_factory_history_terminal()
-    {
-    }
     public static final String STF = "som/som_quest";
     public static final string_id ACCESS = new string_id(STF, "df_terminal_use");
     public static final string_id SLICE = new string_id(STF, "df_terminal_slice");
@@ -19,11 +22,16 @@ public class droid_factory_history_terminal extends script.base_script
     public static final string_id DATAPAD = new string_id(STF, "df_terminal_datapad");
     public static final string_id UNSKILLED = new string_id(STF, "df_terminal_unskilled");
     public static final string_id NOT_READY = new string_id(STF, "df_terminal_not_ready");
+    public droid_factory_history_terminal()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, ACCESS);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -34,13 +42,13 @@ public class droid_factory_history_terminal extends script.base_script
                 sendSystemMessage(player, DATAPAD);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, NOT_READY);
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, CHOOSE);
         }

@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_utils;
 import script.location;
@@ -10,11 +16,13 @@ public class recovery_target extends script.base_script
     public recovery_target()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "pendingWarp", null, 3600.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int pendingWarp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id quest = getObjIdObjVar(self, "quest");
@@ -25,16 +33,19 @@ public class recovery_target extends script.base_script
         destroyObjectHyperspace(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnShipDisabled(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id quest = getObjIdObjVar(self, "quest");
         space_utils.notifyObject(quest, "recoverShipDisabled", null);
         return SCRIPT_CONTINUE;
     }
+
     public int selfDestruct(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;
     }
+
     public int objectDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id quest = getObjIdObjVar(self, "quest");
@@ -44,11 +55,13 @@ public class recovery_target extends script.base_script
         space_utils.notifyObject(quest, "recoveryFailed", outparams);
         return SCRIPT_CONTINUE;
     }
+
     public int missionAbort(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObjectHyperspace(self);
         return SCRIPT_CONTINUE;
     }
+
     public int registerDestination(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -68,6 +81,7 @@ public class recovery_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         obj_id quest = getObjIdObjVar(self, "quest");
@@ -86,6 +100,7 @@ public class recovery_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id quest = getObjIdObjVar(self, "quest");

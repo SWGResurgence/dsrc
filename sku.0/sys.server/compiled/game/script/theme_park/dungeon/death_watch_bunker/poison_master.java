@@ -1,16 +1,23 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.string_id;
 
 public class poison_master extends script.base_script
 {
+    public static final String SCRIPT_POISON = "theme_park.dungeon.death_watch_bunker.death_watch_poison_player";
+    public static final string_id ALLUM_WARNING = new string_id("dungeon/death_watch", "allum_warning");
     public poison_master()
     {
     }
-    public static final String SCRIPT_POISON = "theme_park.dungeon.death_watch_bunker.death_watch_poison_player";
-    public static final string_id ALLUM_WARNING = new string_id("dungeon/death_watch", "allum_warning");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "death_watch.air_vent_on"))
@@ -19,6 +26,7 @@ public class poison_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -46,6 +54,7 @@ public class poison_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAirVentOff(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "death_watch.air_vent_on");

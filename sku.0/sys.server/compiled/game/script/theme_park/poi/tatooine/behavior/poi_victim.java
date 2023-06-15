@@ -1,5 +1,11 @@
 package script.theme_park.poi.tatooine.behavior;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.obj_id;
@@ -9,11 +15,13 @@ public class poi_victim extends script.base_script
     public poi_victim()
     {
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         detachScript(self, "theme_park.tatooine.behavior.poi_victim");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         stop(self);
@@ -21,6 +29,7 @@ public class poi_victim extends script.base_script
         messageTo(self, "playAnimation", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int playAnimation(obj_id self, dictionary params) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -31,17 +40,17 @@ public class poi_victim extends script.base_script
             switch (move)
             {
                 case 1:
-                action = "shrug_shoulders";
-                break;
+                    action = "shrug_shoulders";
+                    break;
                 case 2:
-                action = "shrug_hands";
-                break;
+                    action = "shrug_hands";
+                    break;
                 case 3:
-                action = "slump_head";
-                break;
+                    action = "slump_head";
+                    break;
                 case 4:
-                action = "implore";
-                break;
+                    action = "implore";
+                    break;
             }
             doAnimationAction(self, action);
             if (anims < 10)
@@ -51,13 +60,14 @@ public class poi_victim extends script.base_script
                 anims = anims + 1;
                 setObjVar(self, "animsLeft", anims);
             }
-            else 
+            else
             {
                 removeObjVar(self, "animsLeft");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doFacing(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id face = params.getObjId("target");

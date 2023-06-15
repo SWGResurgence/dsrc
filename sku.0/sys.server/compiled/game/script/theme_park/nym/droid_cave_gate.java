@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.obj_id;
 import script.string_id;
@@ -9,6 +15,7 @@ public class droid_cave_gate extends script.base_script
     public droid_cave_gate()
     {
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -21,7 +28,7 @@ public class droid_cave_gate extends script.base_script
             sendSystemMessage(item, warning);
             return SCRIPT_OVERRIDE;
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }

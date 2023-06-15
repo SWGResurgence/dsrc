@@ -1,5 +1,11 @@
 package script.poi.interior_spawner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -12,9 +18,6 @@ import java.util.Vector;
 
 public class interior_spawner extends script.base_script
 {
-    public interior_spawner()
-    {
-    }
     public static final String TABLE_BEGIN = "datatables/spawning/poi_spawner/";
     public static final String TYPE = "TYPE";
     public static final String POP = "POP";
@@ -27,6 +30,10 @@ public class interior_spawner extends script.base_script
     public static final String SCRIPTVAR_TIMERS = "respawnTimes";
     public static final String SCRIPTVAR_LAST_LEVEL = "lastLevel";
     public static final float CAP_SPAWN_TIME = 86400.0f;
+    public interior_spawner()
+    {
+    }
+
     public void checkFactionalSpawners(obj_id self) throws InterruptedException
     {
         obj_id objContainer = getTopMostContainer(self);
@@ -46,12 +53,14 @@ public class interior_spawner extends script.base_script
             }
         }
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         checkFactionalSpawners(self);
         createTriggerVolume("spawnNpcs", 100.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volName, obj_id who) throws InterruptedException
     {
         if (isIdValid(who) && exists(who) && isPlayer(who) && volName.equals("spawnNpcs"))
@@ -60,6 +69,7 @@ public class interior_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npcDied(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id deadNpc = params.getObjId("object");
@@ -74,7 +84,7 @@ public class interior_spawner extends script.base_script
         {
             if (spawnedList[i] == deadNpc)
             {
-                int tableDelay = (int)getDelay(self);
+                int tableDelay = (int) getDelay(self);
                 int curTime = getGameTime();
                 int delayTime = curTime + tableDelay;
                 npcRespawnTimes[i] = delayTime;
@@ -86,12 +96,13 @@ public class interior_spawner extends script.base_script
         messageTo(self, "spawnNpcs", null, delay, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnNpcs(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
         String planet = here.area;
         String table = TABLE_BEGIN + planet + ".iff";
-        String spawner = "" + self;
+        String spawner = String.valueOf(self);
         dictionary row = dataTableGetRow(table, spawner);
         String npcType = getType(row, self);
         if (row == null)
@@ -125,7 +136,7 @@ public class interior_spawner extends script.base_script
             utils.setScriptVar(self, SCRIPTVAR_CREATIONS, npcList);
             utils.setScriptVar(self, SCRIPTVAR_TIMERS, npcRespawnTimes);
         }
-        else 
+        else
         {
             npcList = utils.getObjIdArrayScriptVar(self, SCRIPTVAR_CREATIONS);
             npcRespawnTimes = utils.getIntArrayScriptVar(self, SCRIPTVAR_TIMERS);
@@ -141,7 +152,7 @@ public class interior_spawner extends script.base_script
                     int validCreateTime = npcRespawnTimes[i];
                     if (getGameTime() < validCreateTime)
                     {
-                        int delayTime = (int)getDelay(self);
+                        int delayTime = (int) getDelay(self);
                         delayTime = delayTime / 2;
                         messageTo(self, "spawnNpcs", null, delayTime, false);
                         return SCRIPT_CONTINUE;
@@ -157,6 +168,7 @@ public class interior_spawner extends script.base_script
         utils.setScriptVar(self, SCRIPTVAR_LAST_LEVEL, lastLevel);
         return SCRIPT_CONTINUE;
     }
+
     public void npcScriptAttacher(obj_id creature, String scriptList) throws InterruptedException
     {
         if (scriptList == null || scriptList.equals(""))
@@ -164,10 +176,12 @@ public class interior_spawner extends script.base_script
             return;
         }
         String[] scriptArray = split(scriptList, ',');
-        for (String s : scriptArray) {
+        for (String s : scriptArray)
+        {
             attachScript(creature, s);
         }
     }
+
     public String getType(dictionary row, obj_id self) throws InterruptedException
     {
         if (row == null)
@@ -181,12 +195,13 @@ public class interior_spawner extends script.base_script
         }
         return type;
     }
+
     public float getDelay(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
         String planet = here.area;
         String table = TABLE_BEGIN + planet + ".iff";
-        String spawner = "" + self;
+        String spawner = String.valueOf(self);
         dictionary row = dataTableGetRow(table, spawner);
         if (row == null)
         {
@@ -200,6 +215,7 @@ public class interior_spawner extends script.base_script
         }
         return delay;
     }
+
     public int getCurrentPop(obj_id self) throws InterruptedException
     {
         int current = 0;
@@ -214,6 +230,7 @@ public class interior_spawner extends script.base_script
         }
         return current;
     }
+
     public boolean isNpcSentinel(dictionary row, obj_id self) throws InterruptedException
     {
         int isSentinel = 0;
@@ -221,12 +238,9 @@ public class interior_spawner extends script.base_script
         {
             isSentinel = row.getInt(SENTINEL);
         }
-        if (isSentinel > 0)
-        {
-            return true;
-        }
-        return false;
+        return isSentinel > 0;
     }
+
     public int getMaxPop(dictionary row, obj_id self) throws InterruptedException
     {
         int pop = row.getInt(POP);
@@ -236,6 +250,7 @@ public class interior_spawner extends script.base_script
         }
         return pop;
     }
+
     public float getRadius(dictionary row, obj_id self, int max) throws InterruptedException
     {
         if (row == null)
@@ -253,6 +268,7 @@ public class interior_spawner extends script.base_script
         }
         return radius;
     }
+
     public String getScripts(dictionary row, obj_id self) throws InterruptedException
     {
         if (row == null)
@@ -262,6 +278,7 @@ public class interior_spawner extends script.base_script
         String scripts = row.getString(SCRIPTS);
         return scripts;
     }
+
     public boolean usePlanetLevel(dictionary row, obj_id self) throws InterruptedException
     {
         if (row == null)
@@ -271,6 +288,7 @@ public class interior_spawner extends script.base_script
         int useLevel = row.getInt(PLANET_LEVEL);
         return (useLevel == 1);
     }
+
     public obj_id spawnMob(obj_id spawner, int max, int level, location here, dictionary row) throws InterruptedException
     {
         if (!isIdValid(spawner) || !exists(spawner))
@@ -296,14 +314,16 @@ public class interior_spawner extends script.base_script
             here.z = here.z + newZ;
         }
         obj_id npc = create.object(npcType, here, level);
-        LOG("POI_SPAWNER","---Spawn egg ("+spawner.toString()+") at location ("+here.x+","+here.y+","+here.z+") just spawned a level "+level+" NPC ("+npc+").");
+        LOG("POI_SPAWNER", "---Spawn egg (" + spawner.toString() + ") at location (" + here.x + "," + here.y + "," + here.z + ") just spawned a level " + level + " NPC (" + npc + ").");
         create.addDestroyMessage(npc, "npcDied", 3, spawner);
         float npcYaw;
-        if(hasObjVar(spawner, "intRandomYaw") && getIntObjVar(spawner, "intRandomYaw") > 0){
-            npcYaw = rand(0,360);
+        if (hasObjVar(spawner, "intRandomYaw") && getIntObjVar(spawner, "intRandomYaw") > 0)
+        {
+            npcYaw = rand(0, 360);
             LOG("POI_SPAWNER", "Setting NPC (" + npc + ") Yaw to Random value of: " + npcYaw);
         }
-        else{
+        else
+        {
             npcYaw = getYaw(spawner);
             LOG("POI_SPAWNER", "Setting NPC (" + npc + ") Yaw to Spawner (" + spawner + ") value of: " + npcYaw);
         }
@@ -315,7 +335,7 @@ public class interior_spawner extends script.base_script
             ai_lib.setDefaultCalmBehavior(npc, ai_lib.BEHAVIOR_SENTINEL);
             LOG("POI_SPAWNER", "Setting NPC (" + npc + ") Behavior to SENTINEL.");
         }
-        else 
+        else
         {
             setObjVar(npc, "LOITER", 1);
             ai_lib.setDefaultCalmBehavior(npc, ai_lib.BEHAVIOR_LOITER);
@@ -327,6 +347,7 @@ public class interior_spawner extends script.base_script
         }
         return npc;
     }
+
     public int getRandomPlanetCreatureLevel(obj_id spawner, String npcType, int lastLevel, location here, dictionary row) throws InterruptedException
     {
         int minLevel = locations.getMinDifficultyForPlanet(here.area);

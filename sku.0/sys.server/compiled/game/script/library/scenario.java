@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Vector;
@@ -80,6 +86,7 @@ public class scenario extends script.base_script
     public static final int ONLINE = 1;
     public static final String DEFAULT_CONVO = "poi/default";
     public static final String VAR_UNLOAD_NUKE = "nukeOnUnload";
+
     public scenario()
     {
     }

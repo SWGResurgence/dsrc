@@ -1,13 +1,16 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class tutorial_base extends script.base_script
 {
-    public tutorial_base()
-    {
-    }
     public static final String NEWBIE_STRING_FILE = "newbie_tutorial/system_messages";
     public static final String NEWBIE_CONVO = "newbie_tutorial/newbie_convo";
     public static final String NEWBIE_SCRIPT = "theme_park.newbie_tutorial.newbie";
@@ -18,18 +21,18 @@ public class tutorial_base extends script.base_script
     public static final String STARTING_EQUIPMENT_FILE = "datatables/equipment/newbie_equipment.iff";
     public static final String NEWBIE_WEAPON = "object/weapon/ranged/pistol/pistol_cdef.iff";
     public static final String PIRATE_WEAPON = "object/weapon/ranged/pistol/pistol_d18.iff";
-    public static final String[] COLLECTOR_EDITION_ITEMS = 
-    {
-        "object/tangible/wearables/goggles/goggles_s01.iff",
-        "object/tangible/wearables/goggles/goggles_s02.iff",
-        "object/tangible/wearables/goggles/goggles_s03.iff"
-    };
-    public static final String[] JP_COLLECTOR_EDITION_ITEMS = 
-    {
-        "object/tangible/wearables/goggles/goggles_s04.iff",
-        "object/tangible/wearables/goggles/goggles_s05.iff",
-        "object/tangible/wearables/goggles/goggles_s06.iff"
-    };
+    public static final String[] COLLECTOR_EDITION_ITEMS =
+            {
+                    "object/tangible/wearables/goggles/goggles_s01.iff",
+                    "object/tangible/wearables/goggles/goggles_s02.iff",
+                    "object/tangible/wearables/goggles/goggles_s03.iff"
+            };
+    public static final String[] JP_COLLECTOR_EDITION_ITEMS =
+            {
+                    "object/tangible/wearables/goggles/goggles_s04.iff",
+                    "object/tangible/wearables/goggles/goggles_s05.iff",
+                    "object/tangible/wearables/goggles/goggles_s06.iff"
+            };
     public static final String NEWBIE_PLAYER = "newbie.player";
     public static final int SHORT_DELAY = 10;
     public static final int MEDIUM_DELAY = 15;
@@ -105,11 +108,11 @@ public class tutorial_base extends script.base_script
     public static final String CRATE_LOCATION_CELL = "r2";
     public static final String CRATE_TEMPLATE = "object/tangible/container/drum/tatt_drum_1.iff";
     public static final String CRATE_SCRIPT = "theme_park.newbie_tutorial.box_of_stuff";
-    public static final String[] BOX_CONTENTS = 
-    {
-        "object/tangible/skill_buff/skill_buff_pistol_accuracy.iff",
-        "object/tangible/food/foraged/foraged_fruit_s1.iff"
-    };
+    public static final String[] BOX_CONTENTS =
+            {
+                    "object/tangible/skill_buff/skill_buff_pistol_accuracy.iff",
+                    "object/tangible/food/foraged/foraged_fruit_s1.iff"
+            };
     public static final String BOX_ITEM_SCRIPT = "theme_park.newbie_tutorial.box_item";
     public static final String BAZAAR = "newbie.bazaar";
     public static final float BAZAAR_LOCATION_X = 54.95f;
@@ -302,54 +305,54 @@ public class tutorial_base extends script.base_script
     public static final string_id DROID_NAME = new string_id(NEWBIE_STRING_FILE, "droid_name");
     public static final String NERVOUS_GUY = "newbie.nervousGuys";
     public static final String NERVOUS_GUY_TYPE = "commoner";
-    public static final float[] NERVOUS_GUY_X = 
-    {
-        43.13f,
-        37.51f,
-        39.01f
-    };
-    public static final float[] NERVOUS_GUY_Y = 
-    {
-        -7.0f,
-        -7.0f,
-        -7.0f
-    };
-    public static final float[] NERVOUS_GUY_Z = 
-    {
-        -70.37f,
-        -70.02f,
-        -79.65f
-    };
-    public static final float[] NERVOUS_GUY_YAW = 
-    {
-        -163.0f,
-            108.0f,
-            15.0f
-    };
+    public static final float[] NERVOUS_GUY_X =
+            {
+                    43.13f,
+                    37.51f,
+                    39.01f
+            };
+    public static final float[] NERVOUS_GUY_Y =
+            {
+                    -7.0f,
+                    -7.0f,
+                    -7.0f
+            };
+    public static final float[] NERVOUS_GUY_Z =
+            {
+                    -70.37f,
+                    -70.02f,
+                    -79.65f
+            };
+    public static final float[] NERVOUS_GUY_YAW =
+            {
+                    -163.0f,
+                    108.0f,
+                    15.0f
+            };
     public static final String NERVOUS_GUY_CELL = "r7";
     public static final String NERVOUS_GUY_SCRIPT = "theme_park.newbie_tutorial.nervous_guy";
     public static final String CELEB_GUY = "newbie.celebGuys";
     public static final String CELEB_GUY_TYPE = "commoner";
-    public static final float[] CELEB_GUY_X = 
-    {
-        7.6f,
-        1.76f
-    };
-    public static final float[] CELEB_GUY_Y = 
-    {
-        -4.2f,
-        -4.2f
-    };
-    public static final float[] CELEB_GUY_Z = 
-    {
-        -105.5f,
-        -108.22f
-    };
-    public static final float[] CELEB_GUY_YAW = 
-    {
-        -173.0f,
-            134.0f
-    };
+    public static final float[] CELEB_GUY_X =
+            {
+                    7.6f,
+                    1.76f
+            };
+    public static final float[] CELEB_GUY_Y =
+            {
+                    -4.2f,
+                    -4.2f
+            };
+    public static final float[] CELEB_GUY_Z =
+            {
+                    -105.5f,
+                    -108.22f
+            };
+    public static final float[] CELEB_GUY_YAW =
+            {
+                    -173.0f,
+                    134.0f
+            };
     public static final String CELEB_GUY_CELL = "r9";
     public static final String CELEB_GUY_SCRIPT = "theme_park.newbie_tutorial.celeb_guy";
     public static final String TRAPPED_GUY = "newbie.trappedGuy";
@@ -361,33 +364,42 @@ public class tutorial_base extends script.base_script
     public static final String TRAPPED_GUY_CELL = "r10";
     public static final String TRAPPED_GUY_SCRIPT = "theme_park.newbie_tutorial.trapped_guy";
     public static final String NEW_PLAYER_QUESTS_SCRIPT = "theme_park.new_player.new_player";
+    public tutorial_base()
+    {
+    }
+
     public void sysMessageToPlayer(obj_id box, String text) throws InterruptedException
     {
     }
+
     public obj_id getPlayer(obj_id box) throws InterruptedException
     {
         if (hasObjVar(box, "newbie.player"))
         {
             return getObjIdObjVar(box, "newbie.player");
         }
-        else 
+        else
         {
             obj_id player = getObjIdObjVar(getTopMostContainer(box), "newbie.player");
             setObjVar(box, "newbie.player", player);
             return player;
         }
     }
+
     public void sysMessage(obj_id player, String text) throws InterruptedException
     {
     }
+
     public void flyText(obj_id item, String text, float size, color flyTextColor) throws InterruptedException
     {
         showFlyText(item, new string_id(NEWBIE_STRING_FILE, text), size, flyTextColor);
     }
+
     public obj_id getBuilding(obj_id item) throws InterruptedException
     {
         return getTopMostContainer(item);
     }
+
     public boolean isInRoom(obj_id player, String roomName) throws InterruptedException
     {
         if (detachNewbieTutorialScript(player))
@@ -408,21 +420,21 @@ public class tutorial_base extends script.base_script
             {
                 transferBankToInventory(player);
             }
-            if (!hasCompletedRoom(player, roomName))
-            {
-                return true;
-            }
+            return !hasCompletedRoom(player, roomName);
         }
         return false;
     }
+
     public void flagRoomComplete(obj_id player, String roomName) throws InterruptedException
     {
         utils.setScriptVar(player, "newbie.roomComplete." + roomName, true);
     }
+
     public boolean hasCompletedRoom(obj_id player, String roomName) throws InterruptedException
     {
         return (utils.hasScriptVar(player, "newbie.roomComplete." + roomName));
     }
+
     public boolean detachNewbieTutorialScript(obj_id player) throws InterruptedException
     {
         if (hasObjVar(player, "newbie.detachScript"))
@@ -432,6 +444,7 @@ public class tutorial_base extends script.base_script
         }
         return false;
     }
+
     public String getProfessionName(obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "newbie.profession"))
@@ -453,8 +466,10 @@ public class tutorial_base extends script.base_script
             }
             int startingSkillIndex = skillList.length - 1;
             String skillName = null;
-            for (String s : skillList) {
-                if (s.endsWith("_novice")) {
+            for (String s : skillList)
+            {
+                if (s.endsWith("_novice"))
+                {
                     skillName = s;
                 }
             }
@@ -474,6 +489,7 @@ public class tutorial_base extends script.base_script
         utils.setScriptVar(player, "newbie.profession", profession);
         return profession;
     }
+
     public String getTrainerType(obj_id player) throws InterruptedException
     {
         String profession = getProfessionName(player);
@@ -616,13 +632,14 @@ public class tutorial_base extends script.base_script
         LOG("newbie", "WARNING: UNABLE TO DETERMINE PLAYER STARTING PROFESSION");
         return "trainer_pistol";
     }
+
     public void fillbank(obj_id player) throws InterruptedException
     {
         if (hasObjVar(player, "newbie.youGotBank"))
         {
             return;
         }
-        else 
+        else
         {
             setObjVar(player, "newbie.youGotBank", true);
         }
@@ -647,37 +664,51 @@ public class tutorial_base extends script.base_script
         {
             LOG("newbie", "no items");
         }
-        for (String item : items) {
+        for (String item : items)
+        {
             LOG("newbie", "NEWBIE STARTING EQUIP MAKING: " + item);
             obj_id newItem = null;
-            if (item.startsWith("object/weapon/")) {
+            if (item.startsWith("object/weapon/"))
+            {
                 newItem = weapons.createWeapon(item, bank, 0.75f);
-            } else if (item.startsWith("object/tangible/medicine")) {
+            }
+            else if (item.startsWith("object/tangible/medicine"))
+            {
                 newItem = createObject("object/tangible/medicine/instant_stimpack/stimpack_noob.iff", bank, "");
-                if (isIdValid(newItem)) {
+                if (isIdValid(newItem))
+                {
                     setCount(newItem, 5);
                     setObjVar(newItem, "healing.power", 250);
                 }
-            } else {
+            }
+            else
+            {
                 newItem = createObject(item, bank, "");
             }
-            if (!isIdValid(newItem)) {
+            if (!isIdValid(newItem))
+            {
                 LOG("newbie", "BAD: could not create newbie equipment item " + item);
-            } else {
+            }
+            else
+            {
                 pclib.autoInsureItem(newItem);
             }
         }
     }
+
     public void transferBankToInventory(obj_id player) throws InterruptedException
     {
         obj_id bank = utils.getPlayerBank(player);
         obj_id playerInv = utils.getInventoryContainer(player);
         obj_id[] invContents = getContents(playerInv);
-        if (invContents != null && invContents.length > 0)
+        if (invContents != null)
         {
-            for (obj_id invContent : invContents) {
-                if (hasObjVar(invContent, "newbie.item")) {
-                    if (hasScript(invContent, BOX_ITEM_SCRIPT)) {
+            for (obj_id invContent : invContents)
+            {
+                if (hasObjVar(invContent, "newbie.item"))
+                {
+                    if (hasScript(invContent, BOX_ITEM_SCRIPT))
+                    {
                         detachScript(invContent, BOX_ITEM_SCRIPT);
                     }
                     destroyObject(invContent);
@@ -685,13 +716,18 @@ public class tutorial_base extends script.base_script
             }
         }
         obj_id[] contents = getContents(bank);
-        if (contents != null && contents.length > 0)
+        if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (!hasObjVar(content, "newbie.item")) {
+            for (obj_id content : contents)
+            {
+                if (!hasObjVar(content, "newbie.item"))
+                {
                     putIn(content, playerInv);
-                } else {
-                    if (hasScript(content, BOX_ITEM_SCRIPT)) {
+                }
+                else
+                {
+                    if (hasScript(content, BOX_ITEM_SCRIPT))
+                    {
                         detachScript(content, BOX_ITEM_SCRIPT);
                     }
                     destroyObject(content);
@@ -699,19 +735,23 @@ public class tutorial_base extends script.base_script
             }
         }
     }
+
     public boolean containsPlayer(obj_id bldg) throws InterruptedException
     {
         obj_id[] contents = getContents(bldg);
         if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (isPlayer(content) || containsPlayer(content)) {
+            for (obj_id content : contents)
+            {
+                if (isPlayer(content) || containsPlayer(content))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public void grantNewbieStartingMoney(obj_id player) throws InterruptedException
     {
         int amt = NEWBIE_STARTING_MONEY;
@@ -730,19 +770,21 @@ public class tutorial_base extends script.base_script
         transferBankCreditsFromNamedAccount(money.ACCT_NEWBIE_TUTORIAL, player, amt, "timeToWithdraw", "xferFailed", d);
         utils.moneyInMetric(player, money.ACCT_NEWBIE_TUTORIAL, amt);
     }
+
     public void sendStartingMessage(obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "newbie.mailSent"))
         {
             return;
         }
-        else 
+        else
         {
             utils.setScriptVar(player, "newbie.mailSent", true);
         }
         attachScript(player, NEWBIE_SCRIPT_EMAIL);
         messageTo(player, "handleSendStartingMail", null, 10, true);
     }
+
     public void sendStartingMessageToPlayer(obj_id player) throws InterruptedException
     {
         string_id subject = null;
@@ -752,7 +794,7 @@ public class tutorial_base extends script.base_script
             subject = new string_id("jedi_spam", "welcome_subject");
             body = new string_id("jedi_spam", "welcome_body");
         }
-        else 
+        else
         {
             subject = new string_id("newbie_tutorial/newbie_mail", "welcome_subject");
             body = new string_id("newbie_tutorial/newbie_mail", "welcome_body");
@@ -764,11 +806,15 @@ public class tutorial_base extends script.base_script
             subject = new string_id("newbie_tutorial/newbie_mail", "collector_subject");
             body = new string_id("newbie_tutorial/newbie_mail", "collector_body");
             utils.sendMail(subject, body, player, "system");
-            for (String collectorEditionItem : COLLECTOR_EDITION_ITEMS) {
+            for (String collectorEditionItem : COLLECTOR_EDITION_ITEMS)
+            {
                 obj_id newItem = createObject(collectorEditionItem, playerInv, "");
-                if (!isIdValid(newItem)) {
+                if (!isIdValid(newItem))
+                {
                     LOG("newbie", "WARNING: PLAYER " + player + " did not receive his collector's edition item: " + collectorEditionItem);
-                } else {
+                }
+                else
+                {
                     setObjVar(newItem, "notrade", true);
                 }
             }
@@ -785,13 +831,14 @@ public class tutorial_base extends script.base_script
                 {
                     LOG("newbie", "WARNING: PLAYER " + player + " did not receive his collector's edition item: " + COLLECTOR_EDITION_ITEMS[i]);
                 }
-                else 
+                else
                 {
                     setObjVar(newItem, "notrade", true);
                 }
             }
         }
     }
+
     public void deleteInventory(obj_id player) throws InterruptedException
     {
         if (!hasObjVar(player, "newbie.itemsHosed"))
@@ -803,11 +850,13 @@ public class tutorial_base extends script.base_script
             }
             setObjVar(player, "newbie.itemsHosed", true);
             obj_id[] contents = getContents(playerInv);
-            for (obj_id content : contents) {
+            for (obj_id content : contents)
+            {
                 destroyObject(content);
             }
         }
     }
+
     public void makeStaticWaypoint(obj_id object) throws InterruptedException
     {
         if (!isIdValid(object))
@@ -819,6 +868,7 @@ public class tutorial_base extends script.base_script
         obj_id newWaypoint = createObject(STATIC_WAYPOINT_TEMPLATE, getLocation(object));
         setObjVar(bldg, STATIC_WAYPOINT, newWaypoint);
     }
+
     public void removeStaticWaypoint(obj_id object) throws InterruptedException
     {
         if (!isIdValid(object))
@@ -832,6 +882,7 @@ public class tutorial_base extends script.base_script
             destroyObject(oldWaypoint);
         }
     }
+
     public void givePlayerSpaceTrainerWaypoints(obj_id player) throws InterruptedException
     {
         if (!hasObjVar(player, "chosenStartTrack"))
@@ -853,6 +904,7 @@ public class tutorial_base extends script.base_script
         utils.setScriptVar(player, "jtlNewbieStartLoc", origin);
         utils.setScriptVar(player, "jtlNewbieTrainerLoc", destination);
     }
+
     public void sendToStartLocation(obj_id self, String name) throws InterruptedException
     {
         boolean available = true;
@@ -879,12 +931,13 @@ public class tutorial_base extends script.base_script
             {
                 warpPlayer(self, loc.area, 0.0f, 0.0f, 0.0f, loc.cell, loc.x, loc.y, loc.z);
             }
-            else 
+            else
             {
                 warpPlayer(self, loc.area, loc.x, loc.y, loc.z, null, 0.0f, 0.0f, 0.0f);
             }
         }
     }
+
     public void sendThoseStartLocs(obj_id player) throws InterruptedException
     {
         String limitStartingLocations = getConfigSetting("New_Player", "LimitStartingLocations");
@@ -902,6 +955,7 @@ public class tutorial_base extends script.base_script
         String[] startLocs = getStartingLocations();
         newbieTutorialSendStartingLocationsToPlayer(player, startLocs);
     }
+
     public void grantAllNoviceSkills(obj_id player) throws InterruptedException
     {
         skill.grantSkillToPlayer(player, "combat_marksman_novice");

@@ -8,6 +8,12 @@
 
 package script.event.lifeday;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.static_item;
 import script.library.utils;
 import script.menu_info;
@@ -31,16 +37,19 @@ public class lifeday_gift_22 extends script.base_script
     public lifeday_gift_22()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Life Day Gift");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mainMenu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Unwrap Gift"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

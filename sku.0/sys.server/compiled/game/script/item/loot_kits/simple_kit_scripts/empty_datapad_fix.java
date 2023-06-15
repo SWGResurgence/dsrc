@@ -1,5 +1,11 @@
 package script.item.loot_kits.simple_kit_scripts;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class empty_datapad_fix extends script.base_script

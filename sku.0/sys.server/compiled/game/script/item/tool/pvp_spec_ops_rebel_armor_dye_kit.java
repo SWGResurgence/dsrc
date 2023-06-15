@@ -1,5 +1,11 @@
 package script.item.tool;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -31,6 +37,7 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
                     "helmet",
                     "leggings"
             };
+
     public pvp_spec_ops_rebel_armor_dye_kit()
     {
     }
@@ -73,7 +80,7 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
         Vector wornItems = new Vector();
         Vector items = new Vector();
         obj_id[] equippedItems = metrics.getWornItems(player);
-        if (equippedItems != null && equippedItems.length > 0)
+        if (equippedItems != null)
         {
             for (obj_id equippedItem : equippedItems)
             {
@@ -89,7 +96,7 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
             }
         }
         obj_id[] invItems = utils.getContents(utils.getInventoryContainer(player), true);
-        if (invItems != null && invItems.length > 0)
+        if (invItems != null)
         {
             for (obj_id invItem : invItems)
             {
@@ -269,7 +276,7 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
         utils.removeScriptVar(self, "rebpvp_armor");
         utils.removeScriptVar(self, "rebpvp_piece");
         obj_id[] equippedItems = metrics.getWornItems(player);
-        if (equippedItems != null && equippedItems.length > 0)
+        if (equippedItems != null)
         {
             for (obj_id equippedItem : equippedItems)
             {

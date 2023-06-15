@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -7,14 +13,40 @@ import script.library.utils;
 
 public class kusak extends script.base_script
 {
+    public static final String[] ALL_WEED_TEMPLATES =
+            {
+                    "object/tangible/collection/col_nym_weed_01.iff",
+                    "object/tangible/collection/col_nym_weed_02.iff",
+                    "object/tangible/collection/col_nym_weed_03.iff",
+                    "object/tangible/collection/col_nym_weed_04.iff",
+                    "object/tangible/collection/col_nym_weed_05.iff",
+                    "object/tangible/collection/col_nym_weed_06.iff",
+                    "object/tangible/collection/col_nym_weed_07.iff",
+                    "object/tangible/collection/col_nym_weed_08.iff",
+                    "object/tangible/collection/col_nym_weed_09.iff",
+                    "object/tangible/collection/col_nym_weed_10.iff"
+            };
+    public static final int WEEDTYPE01 = 1;
+    public static final int WEEDTYPE02 = 2;
+    public static final int WEEDTYPE03 = 3;
+    public static final int WEEDTYPE04 = 4;
+    public static final int WEEDTYPE05 = 5;
+    public static final int WEEDTYPE06 = 6;
+    public static final int WEEDTYPE07 = 7;
+    public static final int WEEDTYPE08 = 8;
+    public static final int WEEDTYPE09 = 9;
+    public static final int WEEDTYPE10 = 10;
+    public static String c_stringFile = "conversation/kusak";
+
     public kusak()
     {
     }
-    public static String c_stringFile = "conversation/kusak";
+
     public boolean kusak_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean kusak_condition_hasWeed(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "alreadyFed"))
@@ -36,54 +68,67 @@ public class kusak extends script.base_script
             LOG("kusak", "hasWeed player has slot");
             return false;
         }
-        for (String allWeedTemplate : ALL_WEED_TEMPLATES) {
+        for (String allWeedTemplate : ALL_WEED_TEMPLATES)
+        {
             obj_id object = utils.getItemByTemplateInInventoryOrEquipped(player, allWeedTemplate);
-            if (isValidId(object)) {
+            if (isValidId(object))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public boolean kusak_condition_hasWeedType1(obj_id player, obj_id npc) throws InterruptedException
     {
         return isValidId(utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[0])) && hasCompletedCollectionSlot(player, "icon_nyms_duty_01");
     }
+
     public boolean kusak_condition_hasWeedType10(obj_id player, obj_id npc) throws InterruptedException
     {
         return isValidId(utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[9])) && hasCompletedCollectionSlot(player, "icon_nyms_duty_10");
     }
+
     public boolean kusak_condition_hasWeedType9(obj_id player, obj_id npc) throws InterruptedException
     {
         return isValidId(utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[8])) && hasCompletedCollectionSlot(player, "icon_nyms_duty_09");
     }
+
     public boolean kusak_condition_hasWeedType8(obj_id player, obj_id npc) throws InterruptedException
     {
         return isValidId(utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[7])) && hasCompletedCollectionSlot(player, "icon_nyms_duty_08");
     }
+
     public boolean kusak_condition_hasWeedType7(obj_id player, obj_id npc) throws InterruptedException
     {
         return isValidId(utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[6])) && hasCompletedCollectionSlot(player, "icon_nyms_duty_07");
     }
+
     public boolean kusak_condition_hasWeedType6(obj_id player, obj_id npc) throws InterruptedException
     {
         return isValidId(utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[5])) && hasCompletedCollectionSlot(player, "icon_nyms_duty_06");
     }
+
     public boolean kusak_condition_hasWeedType4(obj_id player, obj_id npc) throws InterruptedException
     {
         return isValidId(utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[3])) && hasCompletedCollectionSlot(player, "icon_nyms_duty_04");
     }
+
     public boolean kusak_condition_hasWeedType3(obj_id player, obj_id npc) throws InterruptedException
     {
         return isValidId(utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[2])) && hasCompletedCollectionSlot(player, "icon_nyms_duty_03");
     }
+
     public boolean kusak_condition_hasWeedType2(obj_id player, obj_id npc) throws InterruptedException
     {
         return isValidId(utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[1])) && hasCompletedCollectionSlot(player, "icon_nyms_duty_02");
     }
+
     public boolean kusak_condition_hasWeedType5(obj_id player, obj_id npc) throws InterruptedException
     {
         return isValidId(utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[4])) && hasCompletedCollectionSlot(player, "icon_nyms_duty_05");
     }
+
     public void kusak_action_validateWeedOne(obj_id player, obj_id npc) throws InterruptedException
     {
         LOG("kusak", "validateWeedOne init");
@@ -103,6 +148,7 @@ public class kusak extends script.base_script
         setObjVar(npc, "weedObj", utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[0]));
         kusak_action_awardPlayer(player, npc);
     }
+
     public void kusak_action_validateWeedTen(obj_id player, obj_id npc) throws InterruptedException
     {
         LOG("kusak", "validateWeedTen init");
@@ -122,6 +168,7 @@ public class kusak extends script.base_script
         setObjVar(npc, "weedObj", utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[9]));
         kusak_action_awardPlayer(player, npc);
     }
+
     public void kusak_action_validateWeedNine(obj_id player, obj_id npc) throws InterruptedException
     {
         LOG("kusak", "validateWeedNine init");
@@ -141,6 +188,7 @@ public class kusak extends script.base_script
         setObjVar(npc, "weedObj", utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[8]));
         kusak_action_awardPlayer(player, npc);
     }
+
     public void kusak_action_validateWeedEight(obj_id player, obj_id npc) throws InterruptedException
     {
         LOG("kusak", "validateWeedEight init");
@@ -160,6 +208,7 @@ public class kusak extends script.base_script
         setObjVar(npc, "weedObj", utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[7]));
         kusak_action_awardPlayer(player, npc);
     }
+
     public void kusak_action_validateWeedSeven(obj_id player, obj_id npc) throws InterruptedException
     {
         LOG("kusak", "validateWeedSeven init");
@@ -179,6 +228,7 @@ public class kusak extends script.base_script
         setObjVar(npc, "weedObj", utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[6]));
         kusak_action_awardPlayer(player, npc);
     }
+
     public void kusak_action_validateWeedSix(obj_id player, obj_id npc) throws InterruptedException
     {
         LOG("kusak", "validateWeedSix init");
@@ -198,6 +248,7 @@ public class kusak extends script.base_script
         setObjVar(npc, "weedObj", utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[5]));
         kusak_action_awardPlayer(player, npc);
     }
+
     public void kusak_action_validateWeedFive(obj_id player, obj_id npc) throws InterruptedException
     {
         LOG("kusak", "validateWeedFive init");
@@ -217,6 +268,7 @@ public class kusak extends script.base_script
         setObjVar(npc, "weedObj", utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[4]));
         kusak_action_awardPlayer(player, npc);
     }
+
     public void kusak_action_validateWeedFour(obj_id player, obj_id npc) throws InterruptedException
     {
         LOG("kusak", "validateWeedFour init");
@@ -236,6 +288,7 @@ public class kusak extends script.base_script
         setObjVar(npc, "weedObj", utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[3]));
         kusak_action_awardPlayer(player, npc);
     }
+
     public void kusak_action_validateWeedThree(obj_id player, obj_id npc) throws InterruptedException
     {
         LOG("kusak", "validateWeedThree init");
@@ -255,6 +308,7 @@ public class kusak extends script.base_script
         setObjVar(npc, "weedObj", utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[2]));
         kusak_action_awardPlayer(player, npc);
     }
+
     public void kusak_action_validateWeedTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         LOG("kusak", "validateWeedTwo init");
@@ -274,6 +328,7 @@ public class kusak extends script.base_script
         setObjVar(npc, "weedObj", utils.getItemByTemplateInInventoryOrEquipped(player, ALL_WEED_TEMPLATES[1]));
         kusak_action_awardPlayer(player, npc);
     }
+
     public void kusak_action_awardPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(npc, "kusak"))
@@ -307,6 +362,7 @@ public class kusak extends script.base_script
             }
         }
     }
+
     public int kusak_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6"))
@@ -389,7 +445,7 @@ public class kusak extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_20");
@@ -434,7 +490,7 @@ public class kusak extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.kusak.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -444,6 +500,7 @@ public class kusak extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int kusak_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_20"))
@@ -558,29 +615,7 @@ public class kusak extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public static final String[] ALL_WEED_TEMPLATES = 
-    {
-        "object/tangible/collection/col_nym_weed_01.iff",
-        "object/tangible/collection/col_nym_weed_02.iff",
-        "object/tangible/collection/col_nym_weed_03.iff",
-        "object/tangible/collection/col_nym_weed_04.iff",
-        "object/tangible/collection/col_nym_weed_05.iff",
-        "object/tangible/collection/col_nym_weed_06.iff",
-        "object/tangible/collection/col_nym_weed_07.iff",
-        "object/tangible/collection/col_nym_weed_08.iff",
-        "object/tangible/collection/col_nym_weed_09.iff",
-        "object/tangible/collection/col_nym_weed_10.iff"
-    };
-    public static final int WEEDTYPE01 = 1;
-    public static final int WEEDTYPE02 = 2;
-    public static final int WEEDTYPE03 = 3;
-    public static final int WEEDTYPE04 = 4;
-    public static final int WEEDTYPE05 = 5;
-    public static final int WEEDTYPE06 = 6;
-    public static final int WEEDTYPE07 = 7;
-    public static final int WEEDTYPE08 = 8;
-    public static final int WEEDTYPE09 = 9;
-    public static final int WEEDTYPE10 = 10;
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -590,12 +625,14 @@ public class kusak extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         messageTo(self, "setupWeedVar", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -604,12 +641,14 @@ public class kusak extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.kusak");
         return SCRIPT_CONTINUE;
     }
+
     public int setupWeedVar(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -619,6 +658,7 @@ public class kusak extends script.base_script
         setObjVar(self, "weed_type", rand(1, 10));
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -629,12 +669,14 @@ public class kusak extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -657,7 +699,7 @@ public class kusak extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6");
@@ -665,7 +707,7 @@ public class kusak extends script.base_script
                 utils.setScriptVar(player, "conversation.kusak.branchId", 1);
                 npcStartConversation(player, npc, "kusak", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -680,6 +722,7 @@ public class kusak extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("kusak"))

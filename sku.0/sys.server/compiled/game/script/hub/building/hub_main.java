@@ -1,5 +1,11 @@
 package script.hub.building;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class hub_main extends script.base_script
@@ -11,6 +17,7 @@ public class hub_main extends script.base_script
     public static int MAX_PLAYERS = 30;
     public static int MIN_PLAYERS_PER_BUILDOUT = 10;
     public static String HUB_SCENE = "dungeon2";
+
     public hub_main()
     {
     }

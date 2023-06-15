@@ -5,6 +5,12 @@
  */
 package script.item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.static_item;
 import script.obj_id;
 
@@ -26,6 +32,7 @@ public class wardrobe extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!getTemplateName(item).contains("object/tangible/wearables/"))

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,19 +14,23 @@ import script.*;
 
 public class c_newbie_mentor extends script.base_script
 {
+    public static String c_stringFile = "conversation/c_newbie_mentor";
+
     public c_newbie_mentor()
     {
     }
-    public static String c_stringFile = "conversation/c_newbie_mentor";
+
     public boolean c_newbie_mentor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean c_newbie_mentor_condition_questActiveOrComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest1");
         return questIsQuestActive(questId1, player) || questIsQuestComplete(questId1, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnBankStep(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest1");
@@ -29,17 +39,20 @@ public class c_newbie_mentor extends script.base_script
         int bankbox2 = groundquests.getTaskId(questId1, "bankbox2");
         return questIsTaskActive(questId1, bankstep, player) || questIsTaskActive(questId1, bankbox1, player) || questIsTaskActive(questId1, bankbox2, player);
     }
+
     public boolean c_newbie_mentor_condition_playerDidNewTutorial(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_hall_jedi");
         return questIsQuestComplete(questId1, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnBankReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest1");
         int bankreturn = groundquests.getTaskId(questId1, "bankreturn");
         return questIsTaskActive(questId1, bankreturn, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnBazaarStep(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest1");
@@ -48,12 +61,14 @@ public class c_newbie_mentor extends script.base_script
         int bazaarbox2 = groundquests.getTaskId(questId1, "bazaarbox2");
         return questIsTaskActive(questId1, bazaarstep, player) || questIsTaskActive(questId1, bazaarbox1, player) || questIsTaskActive(questId1, bazaarbox2, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnBazaarReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest1");
         int bazaarreturn = groundquests.getTaskId(questId1, "bazaarreturn");
         return questIsTaskActive(questId1, bazaarreturn, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnCloneStep(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest1");
@@ -61,18 +76,21 @@ public class c_newbie_mentor extends script.base_script
         int clonebox1 = groundquests.getTaskId(questId1, "clonebox1");
         return questIsTaskActive(questId1, clonestep, player) || questIsTaskActive(questId1, clonebox1, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnCloneReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest1");
         int clonereturn = groundquests.getTaskId(questId1, "clonereturn");
         return questIsTaskActive(questId1, clonereturn, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnHealingLearned(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest2");
         int healinglearned = groundquests.getTaskId(questId1, "healinglearned");
         return questIsTaskActive(questId1, healinglearned, player);
     }
+
     public boolean c_newbie_mentor_condition_playerLearnDroid(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest4");
@@ -80,6 +98,7 @@ public class c_newbie_mentor extends script.base_script
         int droidbox1 = groundquests.getTaskId(questId1, "droidbox1");
         return questIsTaskActive(questId1, groupbox1, player) || questIsTaskActive(questId1, droidbox1, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnKill(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest2");
@@ -90,12 +109,14 @@ public class c_newbie_mentor extends script.base_script
         int combatbox3 = groundquests.getTaskId(questId1, "combatbox3");
         return questIsTaskActive(questId1, kill, player) || questIsTaskActive(questId1, killstep, player) || questIsTaskActive(questId1, combatbox1, player) || questIsTaskActive(questId1, combatbox2, player) || questIsTaskActive(questId1, combatbox3, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnKillReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest2");
         int killreturn = groundquests.getTaskId(questId1, "killreturn");
         return questIsTaskActive(questId1, killreturn, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnHarvestStep(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest2");
@@ -104,12 +125,14 @@ public class c_newbie_mentor extends script.base_script
         int harveststep3 = groundquests.getTaskId(questId1, "harveststep3");
         return questIsTaskActive(questId1, harveststep1, player) || questIsTaskActive(questId1, harveststep2, player) || questIsTaskActive(questId1, harveststep3, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnHarvestReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest2");
         int harvestreturn = groundquests.getTaskId(questId1, "harvestreturn");
         return questIsTaskActive(questId1, harvestreturn, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnProfessionStep(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest3");
@@ -119,12 +142,14 @@ public class c_newbie_mentor extends script.base_script
         int professionbox3 = groundquests.getTaskId(questId1, "professionbox3");
         return questIsTaskActive(questId1, professionstep, player) || questIsTaskActive(questId1, professionbox1, player) || questIsTaskActive(questId1, professionbox2, player) || questIsTaskActive(questId1, professionbox3, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnProfessionReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest3");
         int professionreturn = groundquests.getTaskId(questId1, "professionreturn");
         return questIsTaskActive(questId1, professionreturn, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnCantinaStep(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest3");
@@ -132,18 +157,21 @@ public class c_newbie_mentor extends script.base_script
         int cantinabox1 = groundquests.getTaskId(questId1, "cantinabox1");
         return questIsTaskActive(questId1, cantinastep, player) || questIsTaskActive(questId1, cantinabox1, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnVehicleInfo(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest4");
         int vehiclebox1 = groundquests.getTaskId(questId1, "vehiclebox1");
         return questIsTaskActive(questId1, vehiclebox1, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnCantinaPerform(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest3");
         int cantinaperform = groundquests.getTaskId(questId1, "cantinaperform");
         return questIsTaskActive(questId1, cantinaperform, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnMedCenterStep(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest3");
@@ -151,12 +179,14 @@ public class c_newbie_mentor extends script.base_script
         int medbox1 = groundquests.getTaskId(questId1, "medbox1");
         return questIsTaskActive(questId1, medcenterstep, player) || questIsTaskActive(questId1, medbox1, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnMedCenterReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest3");
         int medcenterreturn = groundquests.getTaskId(questId1, "medcenterreturn");
         return questIsTaskActive(questId1, medcenterreturn, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnJunkStep(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest3");
@@ -164,12 +194,14 @@ public class c_newbie_mentor extends script.base_script
         int junkbox1 = groundquests.getTaskId(questId1, "junkbox1");
         return questIsTaskActive(questId1, junkstep, player) || questIsTaskActive(questId1, junkbox1, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnJunkReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest3");
         int junkreturn = groundquests.getTaskId(questId1, "junkreturn");
         return questIsTaskActive(questId1, junkreturn, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnSurveyStep(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest4");
@@ -178,12 +210,14 @@ public class c_newbie_mentor extends script.base_script
         int surveybox2 = groundquests.getTaskId(questId1, "surveybox2");
         return questIsTaskActive(questId1, surveystep, player) || questIsTaskActive(questId1, surveybox1, player) || questIsTaskActive(questId1, surveybox2, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnSurveyReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest4");
         int surveyreturn = groundquests.getTaskId(questId1, "surveyreturn");
         return questIsTaskActive(questId1, surveyreturn, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnCraftStep(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest4");
@@ -191,12 +225,14 @@ public class c_newbie_mentor extends script.base_script
         int craftreturn = groundquests.getTaskId(questId1, "craftreturn");
         return (questIsTaskActive(questId1, craftstep, player) || questIsTaskActive(questId1, craftreturn, player));
     }
+
     public boolean c_newbie_mentor_condition_playerOnLearnGroup(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest4");
         int learngroup = groundquests.getTaskId(questId1, "learngroup");
         return questIsTaskActive(questId1, learngroup, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnShuttleStep(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest5");
@@ -206,42 +242,49 @@ public class c_newbie_mentor extends script.base_script
         int shuttlestep4 = groundquests.getTaskId(questId1, "shuttlestep4");
         return questIsTaskActive(questId1, shuttlestep1, player) || questIsTaskActive(questId1, shuttlestep2, player) || questIsTaskActive(questId1, shuttlestep3, player) || questIsTaskActive(questId1, shuttlestep4, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnAssociateStep(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest5");
         int associatestep = groundquests.getTaskId(questId1, "associatestep");
         return questIsTaskActive(questId1, associatestep, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnLastStep(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest5");
         int laststep = groundquests.getTaskId(questId1, "laststep");
         return questIsTaskActive(questId1, laststep, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnCantinaReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest3");
         int cantinareturn = groundquests.getTaskId(questId1, "cantinareturn");
         return questIsTaskActive(questId1, cantinareturn, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnVehicleAcquired(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest4");
         int vehicleacquired = groundquests.getTaskId(questId1, "vehicleacquired");
         return questIsTaskActive(questId1, vehicleacquired, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnCraftReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest4");
         int craftreturn = groundquests.getTaskId(questId1, "craftreturn");
         return questIsTaskActive(questId1, craftreturn, player);
     }
+
     public boolean c_newbie_mentor_condition_playerOnHealingBox1(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest2");
         int healingbox1 = groundquests.getTaskId(questId1, "healingbox1");
         return questIsTaskActive(questId1, healingbox1, player);
     }
+
     public void c_newbie_mentor_action_giveQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_newbie_quest1");
@@ -249,42 +292,51 @@ public class c_newbie_mentor extends script.base_script
         detachScript(player, "theme_park.newbie_tutorial.new_player_ribbon");
         destroyClientPath(player);
     }
+
     public void c_newbie_mentor_action_faceplayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void c_newbie_mentor_action_signalBankReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_newbie_bankreturn");
     }
+
     public void c_newbie_mentor_action_signalBazaarReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_newbie_bazaarreturn");
     }
+
     public void c_newbie_mentor_action_signalCloneReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_newbie_quest2");
         groundquests.sendSignal(player, "c_newbie_clonereturn");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void c_newbie_mentor_action_signalHealingLearned(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_newbie_healinglearned");
     }
+
     public void c_newbie_mentor_action_signalKillReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_newbie_killreturn");
     }
+
     public void c_newbie_mentor_action_signalProfessionReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_newbie_professionreturn");
     }
+
     public void c_newbie_mentor_action_signalHarvestReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_newbie_quest3");
         groundquests.sendSignal(player, "c_newbie_harvestreturn");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void c_newbie_mentor_action_signalCantinaReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_newbie_cantinareturn");
@@ -292,6 +344,7 @@ public class c_newbie_mentor extends script.base_script
         String templateName = "object/tangible/loot/simple_kit/viewscreen_reader.iff";
         createObject(templateName, playerInventory, "");
     }
+
     public void c_newbie_mentor_action_signalJunkReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_newbie_quest4");
@@ -301,6 +354,7 @@ public class c_newbie_mentor extends script.base_script
         String templateName = "object/tangible/deed/vehicle_deed/landspeeder_x31_deed.iff";
         createObject(templateName, playerInventory, "");
     }
+
     public void c_newbie_mentor_action_signalMedCenterReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_newbie_medcenterreturn");
@@ -308,28 +362,34 @@ public class c_newbie_mentor extends script.base_script
         String templateName = "object/tangible/loot/tool/datapad_broken.iff";
         createObject(templateName, playerInventory, "");
     }
+
     public void c_newbie_mentor_action_signalVehicleAcquired(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_newbie_vehicleacquired");
     }
+
     public void c_newbie_mentor_action_signalCraftDone(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_newbie_craftdone");
     }
+
     public void c_newbie_mentor_action_signalLearnGroup(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_newbie_quest5");
         groundquests.sendSignal(player, "c_newbie_learngroup");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void c_newbie_mentor_action_signalSurveyReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_newbie_surveyreturn");
     }
+
     public void c_newbie_mentor_action_signalLastStep(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_newbie_laststep");
     }
+
     public void c_newbie_mentor_action_giveWaypointImpTat(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -342,6 +402,7 @@ public class c_newbie_mentor extends script.base_script
         setWaypointName(waypoint, "Lt. Akal Colzet (Imperial Pilot Trainer)");
         setWaypointActive(waypoint, true);
     }
+
     public void c_newbie_mentor_action_giveWaypointImpNab(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -354,6 +415,7 @@ public class c_newbie_mentor extends script.base_script
         setWaypointName(waypoint, "Lt. Barn Sinkko (Imperial Pilot Trainer)");
         setWaypointActive(waypoint, true);
     }
+
     public void c_newbie_mentor_action_giveWaypointImpTalus(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -366,6 +428,7 @@ public class c_newbie_mentor extends script.base_script
         setWaypointName(waypoint, "Hakasha Sireen (Imperial Pilot Trainer)");
         setWaypointActive(waypoint, true);
     }
+
     public void c_newbie_mentor_action_giveWaypointRebTat(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -378,6 +441,7 @@ public class c_newbie_mentor extends script.base_script
         setWaypointName(waypoint, "Commander Da'la Socuna (Rebel Pilot Trainer)");
         setWaypointActive(waypoint, true);
     }
+
     public void c_newbie_mentor_action_giveWaypointRebNab(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -390,6 +454,7 @@ public class c_newbie_mentor extends script.base_script
         setWaypointName(waypoint, "V3-FX (Rebel Pilot Training Droid)");
         setWaypointActive(waypoint, true);
     }
+
     public void c_newbie_mentor_action_giveWaypointRebCore(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -402,6 +467,7 @@ public class c_newbie_mentor extends script.base_script
         setWaypointName(waypoint, "Captain Kreezo (Rebel Pilot Trainer)");
         setWaypointActive(waypoint, true);
     }
+
     public void c_newbie_mentor_action_giveWaypointNeuTat(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -414,6 +480,7 @@ public class c_newbie_mentor extends script.base_script
         setWaypointName(waypoint, "Dravis (Privateer Pilot Trainer)");
         setWaypointActive(waypoint, true);
     }
+
     public void c_newbie_mentor_action_giveWaypointNeuNab(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -426,6 +493,7 @@ public class c_newbie_mentor extends script.base_script
         setWaypointName(waypoint, "Captain Dinge (RSF Pilot Trainer)");
         setWaypointActive(waypoint, true);
     }
+
     public void c_newbie_mentor_action_giveWaypointNeuCore(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -438,11 +506,13 @@ public class c_newbie_mentor extends script.base_script
         setWaypointName(waypoint, "Sergeant Rhea (CorSec Pilot Trainer)");
         setWaypointActive(waypoint, true);
     }
+
     public void c_newbie_mentor_action_giveMayorQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_newbie_quest6");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public int c_newbie_mentor_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_305"))
@@ -471,7 +541,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_309");
@@ -488,7 +558,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     prose_package pp = new prose_package();
@@ -502,6 +572,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_309"))
@@ -523,7 +594,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_313");
@@ -532,7 +603,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -566,7 +637,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_321");
@@ -579,7 +650,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -589,6 +660,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_313"))
@@ -616,7 +688,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_321");
@@ -629,7 +701,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -639,6 +711,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_321"))
@@ -660,7 +733,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_329");
@@ -669,7 +742,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -696,7 +769,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_329");
@@ -705,7 +778,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -715,6 +788,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_321"))
@@ -736,7 +810,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_329");
@@ -745,7 +819,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -772,7 +846,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_329");
@@ -781,7 +855,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -791,6 +865,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_329"))
@@ -817,7 +892,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_333");
@@ -830,7 +905,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -840,6 +915,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_329"))
@@ -866,7 +942,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_333");
@@ -879,7 +955,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -889,6 +965,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_333"))
@@ -917,7 +994,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_337");
@@ -930,7 +1007,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -951,6 +1028,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_337"))
@@ -979,6 +1057,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_353"))
@@ -1000,7 +1079,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_361");
@@ -1009,7 +1088,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1036,7 +1115,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_361");
@@ -1045,7 +1124,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1055,6 +1134,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_361"))
@@ -1075,7 +1155,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_365");
@@ -1084,7 +1164,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1094,6 +1174,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_361"))
@@ -1114,7 +1195,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_365");
@@ -1123,7 +1204,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1133,6 +1214,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_365"))
@@ -1147,6 +1229,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_373"))
@@ -1167,7 +1250,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_385");
@@ -1176,7 +1259,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1202,7 +1285,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_385");
@@ -1211,7 +1294,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1237,7 +1320,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_385");
@@ -1246,7 +1329,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1256,6 +1339,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_385"))
@@ -1276,7 +1360,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_389");
@@ -1285,7 +1369,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1295,6 +1379,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_385"))
@@ -1315,7 +1400,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_389");
@@ -1324,7 +1409,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1334,6 +1419,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_385"))
@@ -1354,7 +1440,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_389");
@@ -1363,7 +1449,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1373,6 +1459,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_389"))
@@ -1394,7 +1481,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_393");
@@ -1403,7 +1490,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1413,6 +1500,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_393"))
@@ -1433,7 +1521,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_397");
@@ -1442,7 +1530,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1452,6 +1540,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_397"))
@@ -1468,6 +1557,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_405"))
@@ -1487,7 +1577,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_413");
@@ -1496,7 +1586,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1521,7 +1611,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_413");
@@ -1530,7 +1620,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1540,6 +1630,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_413"))
@@ -1559,7 +1650,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_417");
@@ -1568,7 +1659,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1578,6 +1669,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_413"))
@@ -1597,7 +1689,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_417");
@@ -1606,7 +1698,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1616,6 +1708,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_417"))
@@ -1632,6 +1725,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_425"))
@@ -1651,7 +1745,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_429");
@@ -1660,7 +1754,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1686,7 +1780,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_440");
@@ -1695,7 +1789,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1705,6 +1799,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_429"))
@@ -1720,6 +1815,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_440"))
@@ -1737,6 +1833,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_451"))
@@ -1758,7 +1855,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_456");
@@ -1767,7 +1864,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1795,7 +1892,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_467");
@@ -1804,7 +1901,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1814,6 +1911,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_456"))
@@ -1829,6 +1927,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_467"))
@@ -1844,6 +1943,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_477"))
@@ -1864,7 +1964,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_483");
@@ -1873,7 +1973,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1899,7 +1999,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_493");
@@ -1908,7 +2008,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1918,6 +2018,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_483"))
@@ -1933,6 +2034,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_493"))
@@ -1949,6 +2051,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_504"))
@@ -1969,7 +2072,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_510");
@@ -1978,7 +2081,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2010,7 +2113,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_526");
@@ -2023,7 +2126,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2033,6 +2136,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_510"))
@@ -2049,6 +2153,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_526"))
@@ -2077,6 +2182,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_545"))
@@ -2103,7 +2209,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_551");
@@ -2116,7 +2222,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2126,6 +2232,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_551"))
@@ -2145,7 +2252,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_556");
@@ -2154,7 +2261,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2180,7 +2287,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_556");
@@ -2189,7 +2296,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2199,6 +2306,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_556"))
@@ -2214,6 +2322,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_569"))
@@ -2233,7 +2342,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_575");
@@ -2242,7 +2351,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2267,7 +2376,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_591");
@@ -2276,7 +2385,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2286,6 +2395,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch67(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_575"))
@@ -2306,7 +2416,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_580");
@@ -2315,7 +2425,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2325,6 +2435,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_580"))
@@ -2340,6 +2451,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_591"))
@@ -2360,7 +2472,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_596");
@@ -2369,7 +2481,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2379,6 +2491,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_596"))
@@ -2394,6 +2507,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_606"))
@@ -2413,7 +2527,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_611");
@@ -2422,7 +2536,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2447,7 +2561,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_621");
@@ -2456,7 +2570,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2466,6 +2580,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_611"))
@@ -2483,6 +2598,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_621"))
@@ -2502,7 +2618,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_627");
@@ -2511,7 +2627,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2521,6 +2637,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_627"))
@@ -2537,6 +2654,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch81(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_637"))
@@ -2557,7 +2675,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_643");
@@ -2566,7 +2684,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2592,7 +2710,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_653");
@@ -2601,7 +2719,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2611,6 +2729,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_643"))
@@ -2625,6 +2744,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch84(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_653"))
@@ -2640,6 +2760,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch87(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_664"))
@@ -2659,7 +2780,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_669");
@@ -2668,7 +2789,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2678,6 +2799,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch88(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_669"))
@@ -2697,7 +2819,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_675");
@@ -2706,7 +2828,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2716,6 +2838,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch89(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_675"))
@@ -2731,6 +2854,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch91(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_683"))
@@ -2758,7 +2882,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_688");
@@ -2771,7 +2895,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2791,6 +2915,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch92(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_688"))
@@ -2811,7 +2936,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_693");
@@ -2820,7 +2945,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2846,7 +2971,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_704");
@@ -2855,7 +2980,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2865,6 +2990,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch93(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_693"))
@@ -2879,6 +3005,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch95(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_704"))
@@ -2893,6 +3020,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch99(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_721"))
@@ -2912,7 +3040,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_727");
@@ -2921,7 +3049,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2931,6 +3059,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch100(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_727"))
@@ -2951,7 +3080,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_734");
@@ -2960,7 +3089,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2970,6 +3099,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch101(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_734"))
@@ -2984,6 +3114,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch105(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_749"))
@@ -3031,7 +3162,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -3056,7 +3187,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3066,6 +3197,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch106(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -3099,7 +3231,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -3116,7 +3248,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3141,7 +3273,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -3150,7 +3282,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3175,7 +3307,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -3184,7 +3316,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3209,7 +3341,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -3218,7 +3350,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3245,7 +3377,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -3254,7 +3386,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3264,6 +3396,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch107(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_759"))
@@ -3297,7 +3430,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_764");
@@ -3314,7 +3447,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3353,7 +3486,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_859");
@@ -3370,7 +3503,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3409,7 +3542,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_963");
@@ -3426,7 +3559,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3436,6 +3569,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch108(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_764"))
@@ -3469,7 +3603,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_768");
@@ -3486,7 +3620,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3525,7 +3659,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_795");
@@ -3542,7 +3676,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3581,7 +3715,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_827");
@@ -3598,7 +3732,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3608,6 +3742,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch109(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_768"))
@@ -3656,7 +3791,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -3681,7 +3816,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3720,7 +3855,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_764");
@@ -3737,7 +3872,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3790,7 +3925,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -3815,7 +3950,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3825,6 +3960,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch110(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -3858,7 +3994,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -3875,7 +4011,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3900,7 +4036,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -3909,7 +4045,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3934,7 +4070,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -3943,7 +4079,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3968,7 +4104,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -3977,7 +4113,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4004,7 +4140,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -4013,7 +4149,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4023,6 +4159,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch111(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_764"))
@@ -4056,7 +4193,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_768");
@@ -4073,7 +4210,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4112,7 +4249,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_795");
@@ -4129,7 +4266,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4168,7 +4305,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_827");
@@ -4185,7 +4322,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4195,6 +4332,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch112(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -4228,7 +4366,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -4245,7 +4383,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4270,7 +4408,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -4279,7 +4417,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4304,7 +4442,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -4313,7 +4451,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4338,7 +4476,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -4347,7 +4485,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4374,7 +4512,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -4383,7 +4521,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4393,6 +4531,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch113(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_795"))
@@ -4441,7 +4580,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -4466,7 +4605,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4505,7 +4644,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_764");
@@ -4522,7 +4661,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4575,7 +4714,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -4600,7 +4739,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4610,6 +4749,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch114(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -4643,7 +4783,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -4660,7 +4800,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4685,7 +4825,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -4694,7 +4834,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4719,7 +4859,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -4728,7 +4868,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4753,7 +4893,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -4762,7 +4902,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4789,7 +4929,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -4798,7 +4938,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4808,6 +4948,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch115(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_764"))
@@ -4841,7 +4982,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_768");
@@ -4858,7 +4999,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4897,7 +5038,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_795");
@@ -4914,7 +5055,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4953,7 +5094,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_827");
@@ -4970,7 +5111,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4980,6 +5121,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch116(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -5013,7 +5155,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -5030,7 +5172,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5055,7 +5197,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -5064,7 +5206,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5089,7 +5231,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -5098,7 +5240,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5123,7 +5265,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -5132,7 +5274,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5159,7 +5301,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -5168,7 +5310,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5178,6 +5320,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch117(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_827"))
@@ -5226,7 +5369,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -5251,7 +5394,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5290,7 +5433,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_764");
@@ -5307,7 +5450,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5360,7 +5503,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -5385,7 +5528,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5395,6 +5538,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch118(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -5428,7 +5572,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -5445,7 +5589,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5470,7 +5614,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -5479,7 +5623,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5504,7 +5648,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -5513,7 +5657,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5538,7 +5682,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -5547,7 +5691,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5574,7 +5718,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -5583,7 +5727,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5593,6 +5737,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch119(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_764"))
@@ -5626,7 +5771,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_768");
@@ -5643,7 +5788,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5682,7 +5827,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_795");
@@ -5699,7 +5844,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5738,7 +5883,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_827");
@@ -5755,7 +5900,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5765,6 +5910,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch120(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -5798,7 +5944,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -5815,7 +5961,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5840,7 +5986,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -5849,7 +5995,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5874,7 +6020,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -5883,7 +6029,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5908,7 +6054,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -5917,7 +6063,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5944,7 +6090,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -5953,7 +6099,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5963,6 +6109,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch121(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_859"))
@@ -5996,7 +6143,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_867");
@@ -6013,7 +6160,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6052,7 +6199,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_899");
@@ -6069,7 +6216,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6108,7 +6255,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_931");
@@ -6125,7 +6272,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6135,6 +6282,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch122(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_867"))
@@ -6183,7 +6331,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -6208,7 +6356,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6247,7 +6395,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_859");
@@ -6264,7 +6412,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6317,7 +6465,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -6342,7 +6490,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6352,6 +6500,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch123(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -6385,7 +6534,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -6402,7 +6551,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6427,7 +6576,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -6436,7 +6585,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6461,7 +6610,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -6470,7 +6619,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6495,7 +6644,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -6504,7 +6653,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6531,7 +6680,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -6540,7 +6689,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6550,6 +6699,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch124(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_859"))
@@ -6583,7 +6733,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_867");
@@ -6600,7 +6750,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6639,7 +6789,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_899");
@@ -6656,7 +6806,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6695,7 +6845,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_931");
@@ -6712,7 +6862,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6722,6 +6872,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch125(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -6755,7 +6906,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -6772,7 +6923,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6797,7 +6948,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -6806,7 +6957,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6831,7 +6982,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -6840,7 +6991,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6865,7 +7016,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -6874,7 +7025,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6901,7 +7052,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -6910,7 +7061,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6920,6 +7071,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch126(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_899"))
@@ -6968,7 +7120,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -6993,7 +7145,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7032,7 +7184,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_859");
@@ -7049,7 +7201,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7102,7 +7254,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -7127,7 +7279,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7137,6 +7289,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch127(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -7170,7 +7323,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -7187,7 +7340,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7212,7 +7365,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -7221,7 +7374,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7246,7 +7399,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -7255,7 +7408,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7280,7 +7433,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -7289,7 +7442,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7316,7 +7469,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -7325,7 +7478,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7335,6 +7488,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch128(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_859"))
@@ -7368,7 +7522,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_867");
@@ -7385,7 +7539,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7424,7 +7578,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_899");
@@ -7441,7 +7595,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7480,7 +7634,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_931");
@@ -7497,7 +7651,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7507,6 +7661,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch129(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -7540,7 +7695,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -7557,7 +7712,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7582,7 +7737,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -7591,7 +7746,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7616,7 +7771,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -7625,7 +7780,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7650,7 +7805,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -7659,7 +7814,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7686,7 +7841,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -7695,7 +7850,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7705,6 +7860,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch130(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_931"))
@@ -7753,7 +7909,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -7778,7 +7934,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7817,7 +7973,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_859");
@@ -7834,7 +7990,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7887,7 +8043,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -7912,7 +8068,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7922,6 +8078,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch131(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -7955,7 +8112,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -7972,7 +8129,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7997,7 +8154,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -8006,7 +8163,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8031,7 +8188,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -8040,7 +8197,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8065,7 +8222,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -8074,7 +8231,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8101,7 +8258,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -8110,7 +8267,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8120,6 +8277,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch132(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_859"))
@@ -8153,7 +8311,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_867");
@@ -8170,7 +8328,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8209,7 +8367,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_899");
@@ -8226,7 +8384,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8265,7 +8423,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_931");
@@ -8282,7 +8440,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8292,6 +8450,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch133(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -8325,7 +8484,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -8342,7 +8501,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8367,7 +8526,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -8376,7 +8535,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8401,7 +8560,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -8410,7 +8569,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8435,7 +8594,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -8444,7 +8603,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8471,7 +8630,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -8480,7 +8639,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8490,6 +8649,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch134(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_963"))
@@ -8523,7 +8683,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_971");
@@ -8540,7 +8700,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8579,7 +8739,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1003");
@@ -8596,7 +8756,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8635,7 +8795,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1035");
@@ -8652,7 +8812,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8662,6 +8822,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch135(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_971"))
@@ -8710,7 +8871,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -8735,7 +8896,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8774,7 +8935,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_963");
@@ -8791,7 +8952,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8844,7 +9005,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -8869,7 +9030,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8879,6 +9040,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch136(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -8912,7 +9074,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -8929,7 +9091,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8954,7 +9116,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -8963,7 +9125,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8988,7 +9150,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -8997,7 +9159,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9022,7 +9184,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -9031,7 +9193,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9058,7 +9220,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -9067,7 +9229,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9077,6 +9239,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch137(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_963"))
@@ -9110,7 +9273,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_971");
@@ -9127,7 +9290,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9166,7 +9329,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1003");
@@ -9183,7 +9346,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9222,7 +9385,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1035");
@@ -9239,7 +9402,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9249,6 +9412,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch138(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -9282,7 +9446,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -9299,7 +9463,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9324,7 +9488,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -9333,7 +9497,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9358,7 +9522,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -9367,7 +9531,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9392,7 +9556,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -9401,7 +9565,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9428,7 +9592,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -9437,7 +9601,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9447,6 +9611,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch139(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1003"))
@@ -9495,7 +9660,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -9520,7 +9685,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9559,7 +9724,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_963");
@@ -9576,7 +9741,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9629,7 +9794,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -9654,7 +9819,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9664,6 +9829,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch140(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -9697,7 +9863,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -9714,7 +9880,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9739,7 +9905,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -9748,7 +9914,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9773,7 +9939,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -9782,7 +9948,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9807,7 +9973,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -9816,7 +9982,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9843,7 +10009,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -9852,7 +10018,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9862,6 +10028,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch141(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_963"))
@@ -9895,7 +10062,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_971");
@@ -9912,7 +10079,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9951,7 +10118,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1003");
@@ -9968,7 +10135,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10007,7 +10174,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1035");
@@ -10024,7 +10191,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10034,6 +10201,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch142(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -10067,7 +10235,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -10084,7 +10252,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10109,7 +10277,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -10118,7 +10286,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10143,7 +10311,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -10152,7 +10320,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10177,7 +10345,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -10186,7 +10354,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10213,7 +10381,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -10222,7 +10390,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10232,6 +10400,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch143(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1035"))
@@ -10280,7 +10449,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -10305,7 +10474,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10344,7 +10513,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_963");
@@ -10361,7 +10530,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10414,7 +10583,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -10439,7 +10608,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10449,6 +10618,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch144(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -10482,7 +10652,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -10499,7 +10669,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10524,7 +10694,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -10533,7 +10703,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10558,7 +10728,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -10567,7 +10737,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10592,7 +10762,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -10601,7 +10771,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10628,7 +10798,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -10637,7 +10807,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10647,6 +10817,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch145(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_963"))
@@ -10680,7 +10851,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_971");
@@ -10697,7 +10868,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10736,7 +10907,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1003");
@@ -10753,7 +10924,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10792,7 +10963,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1035");
@@ -10809,7 +10980,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10819,6 +10990,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch146(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -10852,7 +11024,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -10869,7 +11041,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10894,7 +11066,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -10903,7 +11075,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10928,7 +11100,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -10937,7 +11109,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10962,7 +11134,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -10971,7 +11143,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10998,7 +11170,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -11007,7 +11179,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11017,6 +11189,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch147(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1067"))
@@ -11064,7 +11237,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -11089,7 +11262,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11099,6 +11272,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch148(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -11132,7 +11306,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -11149,7 +11323,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11174,7 +11348,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -11183,7 +11357,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11208,7 +11382,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -11217,7 +11391,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11242,7 +11416,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -11251,7 +11425,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11278,7 +11452,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -11287,7 +11461,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11297,6 +11471,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch149(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1083"))
@@ -11344,7 +11519,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -11369,7 +11544,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11379,6 +11554,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch150(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -11412,7 +11588,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -11429,7 +11605,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11454,7 +11630,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -11463,7 +11639,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11488,7 +11664,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -11497,7 +11673,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11522,7 +11698,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -11531,7 +11707,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11558,7 +11734,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -11567,7 +11743,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11577,6 +11753,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch151(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1099"))
@@ -11624,7 +11801,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -11649,7 +11826,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11659,6 +11836,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch152(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -11692,7 +11870,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -11709,7 +11887,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11734,7 +11912,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -11743,7 +11921,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11768,7 +11946,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -11777,7 +11955,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11802,7 +11980,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -11811,7 +11989,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11838,7 +12016,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1115");
@@ -11847,7 +12025,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11857,6 +12035,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch153(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1115"))
@@ -11876,7 +12055,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1123");
@@ -11885,7 +12064,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11895,6 +12074,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch154(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1123"))
@@ -11911,6 +12091,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_newbie_mentor_handleBranch156(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1135"))
@@ -11944,7 +12125,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -11961,7 +12142,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11986,7 +12167,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -11995,7 +12176,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12020,7 +12201,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -12029,7 +12210,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12054,7 +12235,7 @@ public class c_newbie_mentor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -12063,7 +12244,7 @@ public class c_newbie_mentor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_newbie_mentor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12094,6 +12275,7 @@ public class c_newbie_mentor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -12107,6 +12289,7 @@ public class c_newbie_mentor extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -12116,6 +12299,7 @@ public class c_newbie_mentor extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -12124,18 +12308,21 @@ public class c_newbie_mentor extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.c_newbie_mentor");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -12160,7 +12347,7 @@ public class c_newbie_mentor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_305");
@@ -12168,7 +12355,7 @@ public class c_newbie_mentor extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_mentor.branchId", 1);
                 npcStartConversation(player, npc, "c_newbie_mentor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12205,7 +12392,7 @@ public class c_newbie_mentor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_353");
@@ -12217,7 +12404,7 @@ public class c_newbie_mentor extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_mentor.branchId", 14);
                 npcStartConversation(player, npc, "c_newbie_mentor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12261,7 +12448,7 @@ public class c_newbie_mentor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_373");
@@ -12277,7 +12464,7 @@ public class c_newbie_mentor extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_mentor.branchId", 20);
                 npcStartConversation(player, npc, "c_newbie_mentor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12314,7 +12501,7 @@ public class c_newbie_mentor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_405");
@@ -12326,7 +12513,7 @@ public class c_newbie_mentor extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_mentor.branchId", 29);
                 npcStartConversation(player, npc, "c_newbie_mentor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12361,7 +12548,7 @@ public class c_newbie_mentor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_425");
@@ -12373,7 +12560,7 @@ public class c_newbie_mentor extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_mentor.branchId", 35);
                 npcStartConversation(player, npc, "c_newbie_mentor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12409,7 +12596,7 @@ public class c_newbie_mentor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_451");
@@ -12421,7 +12608,7 @@ public class c_newbie_mentor extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_mentor.branchId", 41);
                 npcStartConversation(player, npc, "c_newbie_mentor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12459,7 +12646,7 @@ public class c_newbie_mentor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_477");
@@ -12471,7 +12658,7 @@ public class c_newbie_mentor extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_mentor.branchId", 47);
                 npcStartConversation(player, npc, "c_newbie_mentor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12506,7 +12693,7 @@ public class c_newbie_mentor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_504");
@@ -12518,7 +12705,7 @@ public class c_newbie_mentor extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_mentor.branchId", 53);
                 npcStartConversation(player, npc, "c_newbie_mentor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12554,7 +12741,7 @@ public class c_newbie_mentor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_545");
@@ -12562,7 +12749,7 @@ public class c_newbie_mentor extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_mentor.branchId", 61);
                 npcStartConversation(player, npc, "c_newbie_mentor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12598,7 +12785,7 @@ public class c_newbie_mentor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_569");
@@ -12610,7 +12797,7 @@ public class c_newbie_mentor extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_mentor.branchId", 66);
                 npcStartConversation(player, npc, "c_newbie_mentor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12646,7 +12833,7 @@ public class c_newbie_mentor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_606");
@@ -12658,7 +12845,7 @@ public class c_newbie_mentor extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_mentor.branchId", 74);
                 npcStartConversation(player, npc, "c_newbie_mentor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12693,7 +12880,7 @@ public class c_newbie_mentor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_637");
@@ -12705,7 +12892,7 @@ public class c_newbie_mentor extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_mentor.branchId", 81);
                 npcStartConversation(player, npc, "c_newbie_mentor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12734,7 +12921,7 @@ public class c_newbie_mentor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_664");
@@ -12742,7 +12929,7 @@ public class c_newbie_mentor extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_mentor.branchId", 87);
                 npcStartConversation(player, npc, "c_newbie_mentor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12771,7 +12958,7 @@ public class c_newbie_mentor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_683");
@@ -12783,7 +12970,7 @@ public class c_newbie_mentor extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_mentor.branchId", 91);
                 npcStartConversation(player, npc, "c_newbie_mentor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12811,7 +12998,7 @@ public class c_newbie_mentor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_721");
@@ -12819,7 +13006,7 @@ public class c_newbie_mentor extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_mentor.branchId", 99);
                 npcStartConversation(player, npc, "c_newbie_mentor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12855,7 +13042,7 @@ public class c_newbie_mentor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_749");
@@ -12863,7 +13050,7 @@ public class c_newbie_mentor extends script.base_script
                 utils.setScriptVar(player, "conversation.c_newbie_mentor.branchId", 105);
                 npcStartConversation(player, npc, "c_newbie_mentor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12920,7 +13107,7 @@ public class c_newbie_mentor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1135");
@@ -12952,7 +13139,7 @@ public class c_newbie_mentor extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "c_newbie_mentor", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -12965,6 +13152,7 @@ public class c_newbie_mentor extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("c_newbie_mentor"))

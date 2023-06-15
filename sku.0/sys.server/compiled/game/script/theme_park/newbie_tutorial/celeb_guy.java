@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.anims;
 import script.library.chat;
@@ -12,16 +18,19 @@ public class celeb_guy extends script.theme_park.newbie_tutorial.tutorial_base
     public celeb_guy()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleSpamming", null, rand(20, 30), false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         chat.chat(self, new string_id(NEWBIE_CONVO, "celeb_guy" + rand(1, 5)));
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpamming(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getPlayer(self);
@@ -32,6 +41,7 @@ public class celeb_guy extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleSpamming", null, rand(20, 30), false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerEnteredRoom(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getPlayer(self);
@@ -40,17 +50,17 @@ public class celeb_guy extends script.theme_park.newbie_tutorial.tutorial_base
         switch (rand(1, 4))
         {
             case 1:
-            anim = anims.PLAYER_CELEBRATE;
-            break;
+                anim = anims.PLAYER_CELEBRATE;
+                break;
             case 2:
-            anim = anims.PLAYER_CLAP_ROUSING;
-            break;
+                anim = anims.PLAYER_CLAP_ROUSING;
+                break;
             case 3:
-            anim = anims.PLAYER_CELEBRATE1;
-            break;
+                anim = anims.PLAYER_CELEBRATE1;
+                break;
             case 4:
-            anim = anims.PLAYER_WAVE2;
-            break;
+                anim = anims.PLAYER_WAVE2;
+                break;
         }
         doAnimationAction(self, anim);
         messageTo(self, "handlePlayerEnteredRoom", null, rand(5, 10), false);

@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.player_structure;
 import script.library.utils;
@@ -9,48 +15,58 @@ import script.string_id;
 
 public class death_watch_poison_player extends script.base_script
 {
-    public death_watch_poison_player()
-    {
-    }
     public static final String SCRIPT_POISON = "theme_park.dungeon.death_watch_bunker.death_watch_poison_player";
     public static final string_id BAD_AIR = new string_id("dungeon/death_watch", "bad_air");
     public static final int HEALTH_COST = 5000;
     public static final int ACTION_COST = 2000;
+    public death_watch_poison_player()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         poisonAir(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         poisonAirLogIn(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         poisonAir(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkForGasMask(obj_id self) throws InterruptedException
     {
         obj_id[] objContents = utils.getContents(self, true);
         if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 String strItemTemplate = getTemplateName(objContent);
-                if (strItemTemplate.equals("object/tangible/wearables/goggles/rebreather.iff")) {
+                if (strItemTemplate.equals("object/tangible/wearables/goggles/rebreather.iff"))
+                {
                     obj_id mask = objContent;
-                    if (hasObjVar(mask, "death_watch_ready")) {
+                    if (hasObjVar(mask, "death_watch_ready"))
+                    {
                         obj_id holder = getContainedBy(mask);
-                        if (holder == self) {
+                        if (holder == self)
+                        {
                             return true;
                         }
                     }
                 }
-                if (strItemTemplate.equals("object/tangible/wearables/armor/mandalorian/armor_mandalorian_helmet.iff")) {
+                if (strItemTemplate.equals("object/tangible/wearables/armor/mandalorian/armor_mandalorian_helmet.iff"))
+                {
                     obj_id mandHelm = objContent;
                     obj_id holder = getContainedBy(mandHelm);
-                    if (holder == self) {
+                    if (holder == self)
+                    {
                         return true;
                     }
                 }
@@ -58,16 +74,17 @@ public class death_watch_poison_player extends script.base_script
         }
         return false;
     }
+
     public void poisonAirLogIn(obj_id self) throws InterruptedException
     {
         messageTo(self, "handlePoisonAir", null, 30.0f, false);
-        return;
     }
+
     public void poisonAir(obj_id self) throws InterruptedException
     {
         messageTo(self, "handlePoisonAir", null, 10.0f, false);
-        return;
     }
+
     public boolean validateRoom(obj_id self) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);
@@ -81,12 +98,9 @@ public class death_watch_poison_player extends script.base_script
         obj_id cell57 = getCellId(structure, "smallroom57");
         location myLoc = getLocation(self);
         obj_id myCell = myLoc.cell;
-        if (myCell == cell54 || myCell == cell56 || myCell == cell60 || myCell == cell57)
-        {
-            return false;
-        }
-        return true;
+        return myCell != cell54 && myCell != cell56 && myCell != cell60 && myCell != cell57;
     }
+
     public int handlePoisonAir(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);
@@ -101,7 +115,7 @@ public class death_watch_poison_player extends script.base_script
             detachScript(self, SCRIPT_POISON);
             return SCRIPT_CONTINUE;
         }
-        if (validateRoom(self) == false)
+        if (!validateRoom(self))
         {
             poisonAir(self);
             return SCRIPT_CONTINUE;
@@ -111,7 +125,7 @@ public class death_watch_poison_player extends script.base_script
             poisonAir(self);
             return SCRIPT_CONTINUE;
         }
-        if (checkForGasMask(self) == true)
+        if (checkForGasMask(self))
         {
             poisonAir(self);
             return SCRIPT_CONTINUE;

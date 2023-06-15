@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,20 +14,24 @@ import script.*;
 
 public class tatooine_knives_thrust_kavas extends script.base_script
 {
+    public static String c_stringFile = "conversation/tatooine_knives_thrust_kavas";
+
     public tatooine_knives_thrust_kavas()
     {
     }
-    public static String c_stringFile = "conversation/tatooine_knives_thrust_kavas";
+
     public boolean tatooine_knives_thrust_kavas_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean tatooine_knives_thrust_kavas_condition_onQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tatooine_knives_thrust");
         boolean OnTask = (questIsQuestActive(questId1, player));
         return OnTask;
     }
+
     public boolean tatooine_knives_thrust_kavas_condition_haveBankaccount(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tatooine_knives_thrust");
@@ -29,12 +39,14 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         boolean onTask = questIsTaskActive(questId1, finishBank, player);
         return onTask;
     }
+
     public boolean tatooine_knives_thrust_kavas_condition_questComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tatooine_knives_thrust");
         boolean OnTask = (questIsQuestComplete(questId1, player));
         return OnTask;
     }
+
     public boolean tatooine_knives_thrust_kavas_condition_onTorP(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tatoonie_knives_thrust");
@@ -42,6 +54,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         boolean OnTask = (questIsQuestActive(questId1, player)) || (questIsQuestActive(questId2, player));
         return OnTask;
     }
+
     public boolean tatooine_knives_thrust_kavas_condition_haveCash(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tatooine_knives_thrust");
@@ -49,6 +62,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         boolean onTask = questIsTaskActive(questId1, cashInHand, player);
         return onTask;
     }
+
     public boolean tatooine_knives_thrust_kavas_condition_haveTools(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tatooine_knives_thrust");
@@ -56,35 +70,43 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         boolean onTask = questIsTaskActive(questId1, finishBank, player);
         return onTask;
     }
+
     public boolean tatooine_knives_thrust_kavas_condition_questBlocked(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestDisabled("tatooine_knives_thrust");
     }
+
     public boolean tatooine_knives_thrust_kavas_condition_isThisDisabled(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestDisabled("tatooine_knives_thrust") || groundquests.isQuestDisabled("tatooine_knives_parry") || groundquests.isQuestDisabled("tatooine_knives_fencing");
     }
+
     public void tatooine_knives_thrust_kavas_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void tatooine_knives_thrust_kavas_action_giveQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/tatooine_knives_thrust");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void tatooine_knives_thrust_kavas_action_signalBank(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tatooine_knives_thrust_launch_e9");
     }
+
     public void tatooine_knives_thrust_kavas_action_signalSlicer(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tatooine_knives_thrust_launch_e13");
     }
+
     public void tatooine_knives_thrust_kavas_action_signalReward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tatooine_knives_thrust_launch_e15");
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_87"))
@@ -100,6 +122,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_91"))
@@ -115,6 +138,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_99"))
@@ -134,7 +158,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -143,7 +167,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId");
                     chat.chat(npc, player, message);
@@ -154,6 +178,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_101"))
@@ -175,7 +200,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -184,7 +209,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId");
                     chat.chat(npc, player, message);
@@ -195,6 +220,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_103"))
@@ -212,6 +238,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50"))
@@ -238,7 +265,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_53");
@@ -251,7 +278,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId");
                     chat.chat(npc, player, message);
@@ -262,6 +289,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53"))
@@ -281,7 +309,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_86");
@@ -290,7 +318,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId");
                     chat.chat(npc, player, message);
@@ -317,7 +345,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_111");
@@ -326,7 +354,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId");
                     chat.chat(npc, player, message);
@@ -337,6 +365,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_86"))
@@ -363,7 +392,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90");
@@ -376,7 +405,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId");
                     chat.chat(npc, player, message);
@@ -387,6 +416,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_90"))
@@ -416,6 +446,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_111"))
@@ -431,6 +462,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38"))
@@ -457,7 +489,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -470,7 +502,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId");
                     chat.chat(npc, player, message);
@@ -497,7 +529,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_33");
@@ -506,7 +538,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId");
                     chat.chat(npc, player, message);
@@ -517,6 +549,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33"))
@@ -543,7 +576,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -556,7 +589,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId");
                     chat.chat(npc, player, message);
@@ -567,6 +600,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -587,7 +621,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -596,7 +630,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId");
                     chat.chat(npc, player, message);
@@ -623,7 +657,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -632,7 +666,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId");
                     chat.chat(npc, player, message);
@@ -643,6 +677,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_109"))
@@ -659,6 +694,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -679,7 +715,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -688,7 +724,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId");
                     chat.chat(npc, player, message);
@@ -699,6 +735,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_58"))
@@ -726,7 +763,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -739,7 +776,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId");
                     chat.chat(npc, player, message);
@@ -761,6 +798,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -781,7 +819,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -790,7 +828,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId");
                     chat.chat(npc, player, message);
@@ -812,6 +850,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -838,7 +877,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_72");
@@ -851,7 +890,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId");
                     chat.chat(npc, player, message);
@@ -862,6 +901,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_72"))
@@ -882,7 +922,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -891,7 +931,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId");
                     chat.chat(npc, player, message);
@@ -917,7 +957,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -926,7 +966,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId");
                     chat.chat(npc, player, message);
@@ -937,6 +977,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_107"))
@@ -952,6 +993,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_knives_thrust_kavas_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_95"))
@@ -967,6 +1009,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -980,6 +1023,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -989,6 +1033,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -997,18 +1042,21 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.tatooine_knives_thrust_kavas");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1038,7 +1086,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_87");
@@ -1046,7 +1094,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId", 2);
                 npcStartConversation(player, npc, "tatooine_knives_thrust_kavas", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1068,7 +1116,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -1076,7 +1124,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId", 4);
                 npcStartConversation(player, npc, "tatooine_knives_thrust_kavas", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1099,7 +1147,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -1107,7 +1155,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId", 6);
                 npcStartConversation(player, npc, "tatooine_knives_thrust_kavas", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1128,7 +1176,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -1136,7 +1184,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId", 10);
                 npcStartConversation(player, npc, "tatooine_knives_thrust_kavas", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1165,7 +1213,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_38");
@@ -1177,7 +1225,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId", 18);
                 npcStartConversation(player, npc, "tatooine_knives_thrust_kavas", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1214,7 +1262,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -1226,7 +1274,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_knives_thrust_kavas.branchId", 25);
                 npcStartConversation(player, npc, "tatooine_knives_thrust_kavas", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1235,6 +1283,7 @@ public class tatooine_knives_thrust_kavas extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("tatooine_knives_thrust_kavas"))

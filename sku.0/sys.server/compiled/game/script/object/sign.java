@@ -1,5 +1,11 @@
 package script.object;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.utils;
 
@@ -8,6 +14,7 @@ public class sign extends script.base_script
     public sign()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -39,6 +46,7 @@ public class sign extends script.base_script
         messageTo(self, "setCityName", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -59,6 +67,7 @@ public class sign extends script.base_script
         messageTo(self, "setCityName", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int setCityName(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "cityName"))

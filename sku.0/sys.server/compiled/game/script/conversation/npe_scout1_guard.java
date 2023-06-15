@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,30 +14,37 @@ import script.*;
 
 public class npe_scout1_guard extends script.base_script
 {
+    public static String c_stringFile = "conversation/npe_scout1_guard";
+
     public npe_scout1_guard()
     {
     }
-    public static String c_stringFile = "conversation/npe_scout1_guard";
+
     public boolean npe_scout1_guard_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean npe_scout1_guard_condition_playerOnQuestStep(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_scout_1", "talktoguard");
     }
+
     public boolean npe_scout1_guard_condition_playerCompletedQuestStep(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedTask(player, "npe_scout_1", "talktoguard");
     }
+
     public boolean npe_scout1_guard_condition_playerCompletedQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "npe_scout_1");
     }
+
     public void npe_scout1_guard_action_signalScout1Ambush(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_scout1_signalattack");
     }
+
     public int npe_scout1_guard_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9"))
@@ -51,7 +64,7 @@ public class npe_scout1_guard extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14");
@@ -60,7 +73,7 @@ public class npe_scout1_guard extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_scout1_guard.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -70,6 +83,7 @@ public class npe_scout1_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_scout1_guard_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_14"))
@@ -89,7 +103,7 @@ public class npe_scout1_guard extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_18");
@@ -98,7 +112,7 @@ public class npe_scout1_guard extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_scout1_guard.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -108,6 +122,7 @@ public class npe_scout1_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_scout1_guard_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_18"))
@@ -128,7 +143,7 @@ public class npe_scout1_guard extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_23");
@@ -137,7 +152,7 @@ public class npe_scout1_guard extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_scout1_guard.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -147,6 +162,7 @@ public class npe_scout1_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_scout1_guard_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_23"))
@@ -161,6 +177,7 @@ public class npe_scout1_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -175,6 +192,7 @@ public class npe_scout1_guard extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -185,6 +203,7 @@ public class npe_scout1_guard extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -193,18 +212,21 @@ public class npe_scout1_guard extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.npe_scout1_guard");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -239,7 +261,7 @@ public class npe_scout1_guard extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_9");
@@ -247,7 +269,7 @@ public class npe_scout1_guard extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_scout1_guard.branchId", 3);
                 npcStartConversation(player, npc, "npe_scout1_guard", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -262,6 +284,7 @@ public class npe_scout1_guard extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("npe_scout1_guard"))

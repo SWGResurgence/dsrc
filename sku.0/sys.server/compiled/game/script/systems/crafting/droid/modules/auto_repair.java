@@ -1,5 +1,11 @@
 package script.systems.crafting.droid.modules;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -10,6 +16,7 @@ public class auto_repair extends script.base_script
     public static final String SCRIPT_VAR_LAST_REPAIR = "module_data.last_repair";
     public static final String VAR_REPAIR_POWER = "module_data.auto_repair_power";
     public static final String VAR_REPAIR_PULSE = "module_data.auto_repair_pulse";
+
     public auto_repair()
     {
     }

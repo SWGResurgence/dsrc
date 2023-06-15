@@ -1,5 +1,11 @@
 package script.theme_park.meatlump.hideout;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -10,11 +16,13 @@ public class mtp_instance_rescue_endpoint extends script.base_script
     public mtp_instance_rescue_endpoint()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("mtp_trappedMeatlump", 5.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (!isIdValid(breacher) || isPlayer(breacher))
@@ -32,6 +40,7 @@ public class mtp_instance_rescue_endpoint extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMeatlumpRescued(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id meatlump = params.getObjId("meatlump");
@@ -58,6 +67,7 @@ public class mtp_instance_rescue_endpoint extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTrappedMeatlumpCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id meatlump = params.getObjId("meatlump");

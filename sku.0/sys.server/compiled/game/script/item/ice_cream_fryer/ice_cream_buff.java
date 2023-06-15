@@ -1,5 +1,11 @@
 package script.item.ice_cream_fryer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.collection;
 import script.library.utils;
@@ -11,6 +17,7 @@ public class ice_cream_buff extends script.base_script
     public static final String ALREADY_SETUP = "itemFoodScriptRemoved";
     public static final String ITEM_FOOD_SCRIPT = "item.food";
     public static final String OWNER_OID = "owner";
+
     public ice_cream_buff()
     {
     }

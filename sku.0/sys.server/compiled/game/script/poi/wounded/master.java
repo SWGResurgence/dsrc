@@ -1,5 +1,11 @@
 package script.poi.wounded;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -9,9 +15,6 @@ import java.util.Vector;
 
 public class master extends script.theme_park.poi.base
 {
-    public master()
-    {
-    }
     public static final String SCENARIO_NAME = "wounded";
     public static final String BASE_PATH = "poi." + SCENARIO_NAME;
     public static final String SCRIPT_MASTER = BASE_PATH + ".master";
@@ -25,6 +28,10 @@ public class master extends script.theme_park.poi.base
     public static final int STATE_RUN_ENTER = 4;
     public static final int STATE_RUN_COMPLETE = 5;
     public static final int STATE_SCENARIO_COMPLETE = 6;
+    public master()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("poiWounded", "************ POI(" + SCENARIO_NAME + ") LAUNCH: " + getGameTime() + " ************");
@@ -59,16 +66,19 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTheaterComplete(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("poiWounded", "handleTheaterComplete: entered...");
@@ -83,13 +93,14 @@ public class master extends script.theme_park.poi.base
         if ((buildings == null) || (buildings.length == 0))
         {
         }
-        else 
+        else
         {
         }
         messageTo(self, scenario.HANDLER_INIT_SCENARIO, d, 1, false);
         LOG("poiWounded", "handleTheaterComplete: exiting...");
         return SCRIPT_CONTINUE;
     }
+
     public int initScenario(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("poiWounded", "initScenario: entered...");
@@ -104,7 +115,7 @@ public class master extends script.theme_park.poi.base
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             int cnt = rand(3, 7);
             for (int i = 0; i < cnt; i++)
@@ -118,7 +129,7 @@ public class master extends script.theme_park.poi.base
                 if ((actor == null) || (actor == obj_id.NULL_ID))
                 {
                 }
-                else 
+                else
                 {
                     attachScript(actor, SCRIPT_MEDIATOR);
                     if (i == 0)
@@ -127,7 +138,7 @@ public class master extends script.theme_park.poi.base
                         if ((inv == null) || (inv == obj_id.NULL_ID))
                         {
                         }
-                        else 
+                        else
                         {
                             attachScript(inv, SCRIPT_LEADER_INV);
                         }
@@ -140,22 +151,26 @@ public class master extends script.theme_park.poi.base
         LOG("poiWounded", "initScenario: exiting...");
         return SCRIPT_CONTINUE;
     }
+
     public int runScenario(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("poiWounded", "runScenario: entered...");
         LOG("poiWounded", "runScenario: exiting...");
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupScenario(obj_id self, dictionary params) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleActorDeath(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -169,6 +184,7 @@ public class master extends script.theme_park.poi.base
         setObjVar(self, scenario.VAR_SCENARIO_DEAD, dead);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTimer(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

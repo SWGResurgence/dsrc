@@ -1,15 +1,23 @@
 package script.theme_park.dungeon.mustafar_trials.decrepit_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
 
 public class static_guard extends script.base_script
 {
+    public static final boolean LOGGING = false;
+
     public static_guard()
     {
     }
-    public static final boolean LOGGING = false;
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "cleanup"))
@@ -34,23 +42,19 @@ public class static_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, "destroySelf", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean isWithinHeightDifference(location selfLoc, location targetLoc) throws InterruptedException
     {
         float heightDifference = Math.abs(targetLoc.y - selfLoc.y);
-        if (heightDifference < 6)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return heightDifference < 6;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)
@@ -58,6 +62,7 @@ public class static_guard extends script.base_script
             LOG("logging/patrol_guard/" + section, message);
         }
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

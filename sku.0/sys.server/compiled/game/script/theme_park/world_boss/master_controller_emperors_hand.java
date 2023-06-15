@@ -1,5 +1,11 @@
 package script.theme_park.world_boss;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 
 import script.location;
@@ -16,6 +22,7 @@ public class master_controller_emperors_hand extends script.base_script
             "The Sith will rule the Galaxy!",
             "Long live the Empire!",
     };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
@@ -27,6 +34,7 @@ public class master_controller_emperors_hand extends script.base_script
         resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_EMPERORS_HAND);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         obj_id[] allPlayersNearby = getAllPlayers(getLocation(self), 128.0f);
@@ -39,6 +47,7 @@ public class master_controller_emperors_hand extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (isGod(killer))
@@ -67,6 +76,7 @@ public class master_controller_emperors_hand extends script.base_script
         sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: Aralina Silk, The Hand of his Royal Majesty, The Emperor has been slain, a bounty is now being offered for the capture or murder of " + getName(killer));
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         obj_id[] players = getPlayerCreaturesInRange(self, 64.0f);
@@ -147,7 +157,7 @@ public class master_controller_emperors_hand extends script.base_script
                 {
                     broadcast(who, "The Emperors Hand has summoned reinforcements from the Imperial Inquisitors!");
                 }
-                resurgence.createCircleSpawn(self, self,"emperors_hand_inquisitors", 2, 5);
+                resurgence.createCircleSpawn(self, self, "emperors_hand_inquisitors", 2, 5);
                 utils.setScriptVar(self, "inquisitorsHasSpawned", 1);
                 return SCRIPT_CONTINUE;
             }
@@ -194,6 +204,7 @@ public class master_controller_emperors_hand extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void bombard(obj_id self, obj_id[] targets) throws InterruptedException
     {
         if (targets == null)
@@ -207,10 +218,12 @@ public class master_controller_emperors_hand extends script.base_script
             reduceAction(iTarget, rand(2500, 5000));
         }
     }
+
     public boolean reduceHealth(obj_id player, int amt)
     {
         return setHealth(player, (getHealth(player) - amt));
     }
+
     public boolean reduceAction(obj_id player, int amt)
     {
         return setAction(player, (getAction(player) - amt));

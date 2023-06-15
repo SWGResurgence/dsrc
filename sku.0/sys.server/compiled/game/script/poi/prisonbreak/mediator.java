@@ -1,5 +1,11 @@
 package script.poi.prisonbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -10,9 +16,6 @@ import java.util.Vector;
 
 public class mediator extends script.poi.base.scenario_actor
 {
-    public mediator()
-    {
-    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiPrisonBreak Mediator";
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
@@ -26,31 +29,38 @@ public class mediator extends script.poi.base.scenario_actor
     public static final int CONV_GUARDHOLDINGIT = 7;
     public static final int CONV_MAYBEHELP = 8;
     public static final int CONV_SABOTAGEPLAN = 9;
-    public static final String joyEmotes[] = 
+    public static final String[] joyEmotes =
+            {
+                    "thank",
+                    "cheer",
+                    "applaud",
+                    "laugh",
+                    "softclap",
+                    "yes",
+                    "glow"
+            };
+    public mediator()
     {
-        "thank",
-        "cheer",
-        "applaud",
-        "laugh",
-        "softclap",
-        "yes",
-        "glow"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, SCRIPT_CONVERSE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         attachScript(self, SCRIPT_CONVERSE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, scenario.HANDLER_MY_DEATH, null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -92,7 +102,7 @@ public class mediator extends script.poi.base.scenario_actor
             {
                 guardChatter(self, convo, speaker, poiMaster, antagonistsDead, speakerCredit, leaderDead);
             }
-            else 
+            else
             {
                 minionChatter(self, convo, speaker, poiMaster, antagonistsDead, speakerCredit, leaderDead);
             }
@@ -115,7 +125,7 @@ public class mediator extends script.poi.base.scenario_actor
                 params.put("speaker", speaker);
                 messageTo(self, "finishScenario", params, 0, false);
             }
-            else 
+            else
             {
                 poi.quickSay(self, chat.CHAT_STATE, chat.MOOD_EXUBERANT, "m_minorvictory");
                 dictionary params = new dictionary();
@@ -132,7 +142,7 @@ public class mediator extends script.poi.base.scenario_actor
             {
                 scenario.say(self, convo, "m_distractguard", false);
             }
-            else 
+            else
             {
                 scenario.say(self, convo, "m_soontheypay", false);
             }
@@ -145,46 +155,47 @@ public class mediator extends script.poi.base.scenario_actor
             case CONV_INSULT:
             case CONV_NOHELP:
             case CONV_MAYBEHELP:
-            msg = new string_id(convo, "m_greet");
-            responses = utils.addElement(responses, new string_id(convo, "r_m_greet_whatprisoners"));
-            npcStartConversation(speaker, self, convo, msg, responses);
-            break;
+                msg = new string_id(convo, "m_greet");
+                responses = utils.addElement(responses, new string_id(convo, "r_m_greet_whatprisoners"));
+                npcStartConversation(speaker, self, convo, msg, responses);
+                break;
             case CONV_TALKMEDIATOR:
-            msg = new string_id(convo, "m_busy");
-            responses = utils.addElement(responses, new string_id(convo, "r_anywork"));
-            npcStartConversation(speaker, self, convo, msg, responses);
-            break;
+                msg = new string_id(convo, "m_busy");
+                responses = utils.addElement(responses, new string_id(convo, "r_anywork"));
+                npcStartConversation(speaker, self, convo, msg, responses);
+                break;
             case CONV_CHECKGUARD:
-            msg = new string_id(convo, "m_didyoucheck");
-            responses = utils.addElement(responses, new string_id(convo, "r_noillcheck"));
-            npcStartConversation(speaker, self, convo, msg, responses);
-            break;
+                msg = new string_id(convo, "m_didyoucheck");
+                responses = utils.addElement(responses, new string_id(convo, "r_noillcheck"));
+                npcStartConversation(speaker, self, convo, msg, responses);
+                break;
             case CONV_GUARDPEEING:
             case CONV_GUARDHOLDINGIT:
-            msg = new string_id(convo, "m_didyoucheck");
-            responses = utils.addElement(responses, new string_id(convo, "r_hesdoingfine"));
-            if (progress == CONV_GUARDPEEING)
-            {
-                responses = utils.addElement(responses, new string_id(convo, "r_hesonbreak"));
-            }
-            else if (progress == CONV_GUARDHOLDINGIT)
-            {
-                responses = utils.addElement(responses, new string_id(convo, "r_heneedsabreak"));
-            }
-            npcStartConversation(speaker, self, convo, msg, responses);
-            break;
+                msg = new string_id(convo, "m_didyoucheck");
+                responses = utils.addElement(responses, new string_id(convo, "r_hesdoingfine"));
+                if (progress == CONV_GUARDPEEING)
+                {
+                    responses = utils.addElement(responses, new string_id(convo, "r_hesonbreak"));
+                }
+                else if (progress == CONV_GUARDHOLDINGIT)
+                {
+                    responses = utils.addElement(responses, new string_id(convo, "r_heneedsabreak"));
+                }
+                npcStartConversation(speaker, self, convo, msg, responses);
+                break;
             case CONV_YESHELP:
-            msg = new string_id(convo, "m_busy");
-            responses = utils.addElement(responses, new string_id(convo, "r_prisonersplanning"));
-            npcStartConversation(speaker, self, convo, msg, responses);
-            break;
+                msg = new string_id(convo, "m_busy");
+                responses = utils.addElement(responses, new string_id(convo, "r_prisonersplanning"));
+                npcStartConversation(speaker, self, convo, msg, responses);
+                break;
             default:
-            scenario.say(self, convo, "m_busy", false);
-            npcEndConversation(speaker);
-            return SCRIPT_CONTINUE;
+                scenario.say(self, convo, "m_busy", false);
+                npcEndConversation(speaker);
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void guardChatter(obj_id self, String convo, obj_id speaker, obj_id poiMaster, boolean antagonistsDead, boolean speakerCredit, boolean leaderDead) throws InterruptedException
     {
         int progress = scenario.getPlayerProgress(speaker);
@@ -206,25 +217,26 @@ public class mediator extends script.poi.base.scenario_actor
         switch (progress)
         {
             case CONV_CHECKGUARD:
-            idx = rand(1, 4);
-            msg = new string_id(convo, "m_minion_guard_" + idx);
-            responses = utils.addElement(responses, new string_id(convo, "r_toldtocheckyou"));
-            npcStartConversation(speaker, self, convo, msg, responses);
-            break;
+                idx = rand(1, 4);
+                msg = new string_id(convo, "m_minion_guard_" + idx);
+                responses = utils.addElement(responses, new string_id(convo, "r_toldtocheckyou"));
+                npcStartConversation(speaker, self, convo, msg, responses);
+                break;
             case CONV_YESHELP:
             case CONV_SABOTAGEPLAN:
-            idx = rand(1, 4);
-            msg = new string_id(convo, "m_minion_guard_" + idx);
-            responses = utils.addElement(responses, new string_id(convo, "r_whatshappening"));
-            npcStartConversation(speaker, self, convo, msg, responses);
-            break;
+                idx = rand(1, 4);
+                msg = new string_id(convo, "m_minion_guard_" + idx);
+                responses = utils.addElement(responses, new string_id(convo, "r_whatshappening"));
+                npcStartConversation(speaker, self, convo, msg, responses);
+                break;
             default:
-            idx = rand(1, 4);
-            poi.quickSay(self, "m_minion_guard_" + idx);
-            npcEndConversation(speaker);
-            break;
+                idx = rand(1, 4);
+                poi.quickSay(self, "m_minion_guard_" + idx);
+                npcEndConversation(speaker);
+                break;
         }
     }
+
     public void minionChatter(obj_id self, String convo, obj_id speaker, obj_id poiMaster, boolean antagonistsDead, boolean speakerCredit, boolean leaderDead) throws InterruptedException
     {
         if (leaderDead)
@@ -239,7 +251,7 @@ public class mediator extends script.poi.base.scenario_actor
                 poi.quickSay(self, chat.CHAT_COMPLAIN, chat.MOOD_SAD, "m_minion_minorfailure_" + idx);
                 messageTo(self, "finishScenario", null, 0, false);
             }
-            else 
+            else
             {
                 int idx = rand(1, 2);
                 poi.quickSay(self, chat.CHAT_SHOUT, chat.MOOD_DISMAYED, "m_minion_majorfailure_" + idx);
@@ -257,19 +269,20 @@ public class mediator extends script.poi.base.scenario_actor
                 int idx = rand(1, 2);
                 poi.quickSay(self, chat.CHAT_STATE, chat.MOOD_EXUBERANT, "m_minion_majorvictory_" + idx);
             }
-            else 
+            else
             {
                 int idx = rand(1, 2);
                 poi.quickSay(self, chat.CHAT_STATE, chat.MOOD_EXUBERANT, "m_minion_minorvictory_" + idx);
             }
         }
-        else 
+        else
         {
             int idx = rand(1, 4);
             poi.quickSay(self, "m_minion_" + idx);
         }
         npcEndConversation(speaker);
     }
+
     public int OnNpcConversationResponse(obj_id self, String convoName, obj_id speaker, string_id response) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -307,7 +320,8 @@ public class mediator extends script.poi.base.scenario_actor
         npcSetConversationResponses(speaker, responses);
         if (isGuard)
         {
-            switch (aId) {
+            switch (aId)
+            {
                 case "r_toldtocheckyou":
                     npcSpeak(speaker, new string_id(convo, "m_guard_allsquiet"));
                     responses = utils.addElement(responses, new string_id(convo, "r_gotellmaster"));
@@ -321,7 +335,8 @@ public class mediator extends script.poi.base.scenario_actor
                     break;
                 case "r_pee_goodidea":
                     npcSpeak(speaker, new string_id(convo, "m_guard_pee_goodidea"));
-                    if (progress == CONV_CHECKGUARD) {
+                    if (progress == CONV_CHECKGUARD)
+                    {
                         scenario.setPlayerProgress(speaker, CONV_GUARDPEEING);
                     }
                     messageTo(self, "goPee", null, 2, false);
@@ -329,7 +344,8 @@ public class mediator extends script.poi.base.scenario_actor
                     break;
                 case "r_pee_badidea":
                     npcSpeak(speaker, new string_id(convo, "m_guard_pee_badidea"));
-                    if (progress == CONV_CHECKGUARD) {
+                    if (progress == CONV_CHECKGUARD)
+                    {
                         scenario.setPlayerProgress(speaker, CONV_GUARDHOLDINGIT);
                     }
                     messageTo(self, "goPee", null, 20, false);
@@ -345,7 +361,8 @@ public class mediator extends script.poi.base.scenario_actor
         }
         else if (isLeader)
         {
-            switch (aId) {
+            switch (aId)
+            {
                 case "r_m_greet_whatprisoners":
                     scenario.setPlayerProgress(speaker, CONV_TALKMEDIATOR);
                     npcSpeak(speaker, new string_id(convo, "m_tellprisoners"));
@@ -402,6 +419,7 @@ public class mediator extends script.poi.base.scenario_actor
         }
         return SCRIPT_CONTINUE;
     }
+
     public int finishScenario(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -415,24 +433,28 @@ public class mediator extends script.poi.base.scenario_actor
                 if ((members == null) || (members.length == 0))
                 {
                 }
-                else 
+                else
                 {
-                    for (obj_id member : members) {
-                        if (!badge.hasBadge(member, "poi_prisonbreak")) {
+                    for (obj_id member : members)
+                    {
+                        if (!badge.hasBadge(member, "poi_prisonbreak"))
+                        {
                             badge.grantBadge(member, "poi_prisonbreak");
-                        } else {
+                        }
+                        else
+                        {
                             badge.notifyHasBadge(member, "poi_prisonbreak");
                         }
                     }
                 }
             }
-            else 
+            else
             {
                 if (!badge.hasBadge(speaker, "poi_prisonbreak"))
                 {
                     badge.grantBadge(speaker, "poi_prisonbreak");
                 }
-                else 
+                else
                 {
                     badge.notifyHasBadge(speaker, "poi_prisonbreak");
                 }
@@ -442,8 +464,10 @@ public class mediator extends script.poi.base.scenario_actor
             {
                 return SCRIPT_CONTINUE;
             }
-            for (obj_id a : mediators) {
-                if ((a == null) || (a == obj_id.NULL_ID)) {
+            for (obj_id a : mediators)
+            {
+                if ((a == null) || (a == obj_id.NULL_ID))
+                {
                     continue;
                 }
                 messageTo(a, "celebrateVictory", null, 0, false);
@@ -451,10 +475,12 @@ public class mediator extends script.poi.base.scenario_actor
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSawAttack(obj_id self, obj_id defender, obj_id[] attackers) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int celebrateVictory(obj_id self, dictionary params) throws InterruptedException
     {
         stop(self);
@@ -463,6 +489,7 @@ public class mediator extends script.poi.base.scenario_actor
         messageTo(self, "resumeDefaultCalmBehavior", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int goPee(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -479,6 +506,7 @@ public class mediator extends script.poi.base.scenario_actor
         messageTo(poiMaster, "guardGone", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMyDeath(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -496,6 +524,7 @@ public class mediator extends script.poi.base.scenario_actor
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (hasObjVar(breacher, "gm"))
@@ -545,7 +574,7 @@ public class mediator extends script.poi.base.scenario_actor
             {
                 queueCommand(self, (1780871594), breacher, "hail", COMMAND_PRIORITY_DEFAULT);
             }
-            else 
+            else
             {
                 poi.quickSay(self, "m_approachchatter_" + i);
             }
@@ -553,6 +582,7 @@ public class mediator extends script.poi.base.scenario_actor
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int resetSpeakTimer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);

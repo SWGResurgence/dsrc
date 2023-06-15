@@ -1,5 +1,11 @@
 package script.theme_park.poi.general;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class imperial_outpost_small_01 extends script.theme_park.poi.base
@@ -7,10 +13,12 @@ public class imperial_outpost_small_01 extends script.theme_park.poi.base
     public imperial_outpost_small_01()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String objective = poiGetObjective(self);

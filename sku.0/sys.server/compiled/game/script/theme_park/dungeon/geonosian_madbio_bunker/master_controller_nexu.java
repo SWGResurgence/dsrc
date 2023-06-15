@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.geonosian_madbio_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.pet_lib;
 import script.library.resurgence;
@@ -9,8 +15,9 @@ import script.obj_id;
 public class master_controller_nexu extends script.base_script
 {
     public static final String VOLUME_NAME = "aggressive_area";
-    public static final float  SIGHTING_RADIUS = 12.0f;
-    public static final String  SIGHTING_NAME = "nexu_spotted";
+    public static final float SIGHTING_RADIUS = 12.0f;
+    public static final String SIGHTING_NAME = "nexu_spotted";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         resurgence.setupLootAmount(self, rand(1, 3));
@@ -25,6 +32,7 @@ public class master_controller_nexu extends script.base_script
         setObjVar(tatooine, "dungeon_finder.dungeon.geo_madbio.nexu", "Active");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
@@ -51,6 +59,7 @@ public class master_controller_nexu extends script.base_script
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id who) throws InterruptedException
     {
         if (isPlayer(who))

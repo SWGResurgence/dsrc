@@ -1,5 +1,11 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.colors;
 import script.library.pet_lib;
 import script.library.utils;
@@ -7,16 +13,18 @@ import script.*;
 
 public class elevator_one extends script.base_script
 {
+    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
+    public static final String ACTIVATE = "elev_one_secure";
     public elevator_one()
     {
     }
-    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
-    public static final String ACTIVATE = "elev_one_secure";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu2 = mi.addRootMenu(menu_info_types.ELEVATOR_DOWN, new string_id("elevator_text", "down"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         location here = getLocation(player);
@@ -39,6 +47,7 @@ public class elevator_one extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isSecurityActive(obj_id elevator) throws InterruptedException
     {
         obj_id bldg = getTopMostContainer(elevator);
@@ -51,19 +60,25 @@ public class elevator_one extends script.base_script
         }
         return false;
     }
+
     public void movePartyDown(obj_id self, obj_id player) throws InterruptedException
     {
         location elevLoc = getLocation(self);
         obj_id cell = elevLoc.cell;
         obj_id[] contents = getContents(cell);
-        for (obj_id content : contents) {
-            if (isPlayer(content)) {
+        for (obj_id content : contents)
+        {
+            if (isPlayer(content))
+            {
                 playClientEffectObj(content, "clienteffect/elevator_descend.cef", content, null);
-                if (elevatorMove(content, -1) == 0) {
+                if (elevatorMove(content, -1) == 0)
+                {
                     sendSystemMessage(content, new string_id(SYSTEM_MESSAGES, "elev_toolow"));
                     return;
                 }
-            } else if (pet_lib.isPet(content)) {
+            }
+            else if (pet_lib.isPet(content))
+            {
                 elevatorMove(content, -1);
             }
         }

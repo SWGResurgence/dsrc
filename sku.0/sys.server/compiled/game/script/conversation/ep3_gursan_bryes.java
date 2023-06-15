@@ -1,54 +1,72 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class ep3_gursan_bryes extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_gursan_bryes";
+
     public ep3_gursan_bryes()
     {
     }
-    public static String c_stringFile = "conversation/ep3_gursan_bryes";
+
     public boolean ep3_gursan_bryes_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_gursan_bryes_condition_hasWonHsskasSpaceQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "space_battle", "ep3_slaver_hsskas_space_battle");
     }
+
     public boolean ep3_gursan_bryes_condition_isReadyForHsskasReward(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_gursan_slay_hsskas", "taskReturnHsskasVictorious");
     }
+
     public boolean ep3_gursan_bryes_condition_hasCompletedHsskasQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_gursan_slay_hsskas");
     }
+
     public boolean ep3_gursan_bryes_condition_isSignalQuestActive(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "ep3_kymayrr_send_cyssc_signal");
     }
+
     public boolean ep3_gursan_bryes_condition_readyForSlaveCamp(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_talk_to_gursan"));
     }
+
     public boolean ep3_gursan_bryes_condition_hasRescuedRroot(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_kymayrr_rescue_rroot");
     }
+
     public boolean ep3_gursan_bryes_condition_canCompleteSignalQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_kymayrr_send_cyssc_signal", "taskReturnToGursan") || groundquests.hasCompletedQuest(player, "ep3_kymayrr_send_cyssc_signal"));
     }
+
     public boolean ep3_gursan_bryes_condition_hasCysscSpaceSeries(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player, "space_battle", "ep3_slaver_khrask_space_battle") || space_quest.hasQuest(player, "assassinate", "ep3_slaver_lord_cyssc_final"));
     }
+
     public boolean ep3_gursan_bryes_condition_hasDefeatedCysscSpace(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "assassinate", "ep3_slaver_lord_cyssc_final");
     }
+
     public boolean ep3_gursan_bryes_condition_canRepeatCyssc(obj_id player, obj_id npc) throws InterruptedException
     {
         int currentTime = getCalendarTime();
@@ -57,54 +75,51 @@ public class ep3_gursan_bryes extends script.base_script
         {
             return false;
         }
-        if (badge.hasBadge(player, "bdg_kash_wookiee_rage") && !space_quest.hasQuest(player, "space_battle", "ep3_slaver_khrask_space_battle_alt") && !space_quest.hasQuest(player, "assassinate", "ep3_slaver_lord_cyssc_alt"))
-        {
-            return true;
-        }
-        return false;
+        return badge.hasBadge(player, "bdg_kash_wookiee_rage") && !space_quest.hasQuest(player, "space_battle", "ep3_slaver_khrask_space_battle_alt") && !space_quest.hasQuest(player, "assassinate", "ep3_slaver_lord_cyssc_alt");
     }
+
     public boolean ep3_gursan_bryes_condition_haveRepatCysscQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasQuest(player, "space_battle", "ep3_slaver_khrask_space_battle_alt") && !space_quest.hasQuest(player, "assassinate", "ep3_slaver_lord_cyssc_alt"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasQuest(player, "space_battle", "ep3_slaver_khrask_space_battle_alt") && !space_quest.hasQuest(player, "assassinate", "ep3_slaver_lord_cyssc_alt");
     }
+
     public boolean ep3_gursan_bryes_condition_haveWonRepeatCyssc(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "assassinate", "ep3_slaver_lord_cyssc_alt");
     }
+
     public boolean ep3_gursan_bryes_condition_cysscTimerActive(obj_id player, obj_id npc) throws InterruptedException
     {
         int currentTime = getCalendarTime();
         int cysscTimer = getIntObjVar(player, "ep3.cysscTimer");
-        if (cysscTimer > currentTime)
-        {
-            return true;
-        }
-        return false;
+        return cysscTimer > currentTime;
     }
+
     public void ep3_gursan_bryes_action_grantSequencerQuestAndTicket(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_gursan_capture_sequencer_codes");
     }
+
     public void ep3_gursan_bryes_action_grantTrandoFighterQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "assassinate", "ep3_slaver_trando_reinforcement_intercept");
     }
+
     public void ep3_gursan_bryes_action_grantSlayHsskasQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_gursan_slay_hsskas");
     }
+
     public void ep3_gursan_bryes_action_grantSlayHsskasReward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "signalReturnHsskasVictorious");
     }
+
     public void ep3_gursan_bryes_action_grantKymayrrBrief(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_gursan_kyamyrr_brief");
     }
+
     public void ep3_gursan_bryes_action_grantEntryQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!groundquests.hasCompletedQuest(player, "ep3_slaver_gursan_entry_quest"))
@@ -112,14 +127,17 @@ public class ep3_gursan_bryes extends script.base_script
             groundquests.grantQuest(player, "ep3_slaver_gursan_entry_quest");
         }
     }
+
     public void ep3_gursan_bryes_action_finishSignalQeust(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "signalReturnToGursan");
     }
+
     public void ep3_gursan_bryes_action_grantCysscSpaceSeries(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "space_battle", "ep3_slaver_khrask_space_battle");
     }
+
     public void ep3_gursan_bryes_action_grantRepeatCyssc(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "space_battle", "ep3_slaver_khrask_space_battle_alt");
@@ -128,6 +146,7 @@ public class ep3_gursan_bryes extends script.base_script
         int nextReset = timeUntilReset + currentTime;
         setObjVar(player, "ep3.cysscTimer", nextReset);
     }
+
     public void ep3_gursan_bryes_action_giveRepeatCysscReward(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasWonQuest(player, "space_battle", "ep3_slaver_khrask_space_battle_alt"))
@@ -165,6 +184,7 @@ public class ep3_gursan_bryes extends script.base_script
             sendSystemMessage(player, "You have received a Heavy Ionic Pulse Weapon", null);
         }
     }
+
     public String ep3_gursan_bryes_tokenTO_timeLeft(obj_id player, obj_id npc) throws InterruptedException
     {
         int cysscTimer = getIntObjVar(player, "ep3.cysscTimer");
@@ -172,6 +192,7 @@ public class ep3_gursan_bryes extends script.base_script
         String ep3_gursan_bryes_tokenTO_timeLeft = "return in " + utils.formatTimeVerbose(cysscTimer - currentTime);
         return ep3_gursan_bryes_tokenTO_timeLeft;
     }
+
     public int ep3_gursan_bryes_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44"))
@@ -187,6 +208,7 @@ public class ep3_gursan_bryes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_gursan_bryes_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_39"))
@@ -212,6 +234,7 @@ public class ep3_gursan_bryes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_gursan_bryes_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_804"))
@@ -226,6 +249,7 @@ public class ep3_gursan_bryes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_gursan_bryes_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_812"))
@@ -245,6 +269,7 @@ public class ep3_gursan_bryes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_gursan_bryes_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_818"))
@@ -264,7 +289,7 @@ public class ep3_gursan_bryes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_822");
@@ -273,7 +298,7 @@ public class ep3_gursan_bryes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_gursan_bryes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -283,6 +308,7 @@ public class ep3_gursan_bryes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_gursan_bryes_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_822"))
@@ -302,7 +328,7 @@ public class ep3_gursan_bryes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826");
@@ -311,7 +337,7 @@ public class ep3_gursan_bryes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_gursan_bryes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -321,6 +347,7 @@ public class ep3_gursan_bryes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_gursan_bryes_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_826"))
@@ -340,6 +367,7 @@ public class ep3_gursan_bryes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_gursan_bryes_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_832"))
@@ -359,7 +387,7 @@ public class ep3_gursan_bryes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_836");
@@ -368,7 +396,7 @@ public class ep3_gursan_bryes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_gursan_bryes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -378,6 +406,7 @@ public class ep3_gursan_bryes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_gursan_bryes_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_836"))
@@ -397,7 +426,7 @@ public class ep3_gursan_bryes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_840");
@@ -406,7 +435,7 @@ public class ep3_gursan_bryes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_gursan_bryes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -416,6 +445,7 @@ public class ep3_gursan_bryes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_gursan_bryes_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_840"))
@@ -434,6 +464,7 @@ public class ep3_gursan_bryes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_gursan_bryes_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_846"))
@@ -453,7 +484,7 @@ public class ep3_gursan_bryes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_850");
@@ -462,7 +493,7 @@ public class ep3_gursan_bryes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_gursan_bryes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -472,6 +503,7 @@ public class ep3_gursan_bryes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_gursan_bryes_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_850"))
@@ -491,7 +523,7 @@ public class ep3_gursan_bryes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -500,7 +532,7 @@ public class ep3_gursan_bryes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_gursan_bryes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -541,7 +573,7 @@ public class ep3_gursan_bryes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_39");
@@ -558,7 +590,7 @@ public class ep3_gursan_bryes extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_gursan_bryes.branchId");
                     prose_package pp = new prose_package();
@@ -584,7 +616,7 @@ public class ep3_gursan_bryes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_804");
@@ -593,7 +625,7 @@ public class ep3_gursan_bryes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_gursan_bryes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -627,7 +659,7 @@ public class ep3_gursan_bryes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_812");
@@ -636,7 +668,7 @@ public class ep3_gursan_bryes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_gursan_bryes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -658,7 +690,7 @@ public class ep3_gursan_bryes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_818");
@@ -667,7 +699,7 @@ public class ep3_gursan_bryes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_gursan_bryes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -689,7 +721,7 @@ public class ep3_gursan_bryes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_832");
@@ -698,7 +730,7 @@ public class ep3_gursan_bryes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_gursan_bryes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -721,7 +753,7 @@ public class ep3_gursan_bryes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_846");
@@ -730,7 +762,7 @@ public class ep3_gursan_bryes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_gursan_bryes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -752,7 +784,7 @@ public class ep3_gursan_bryes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_854");
@@ -761,7 +793,7 @@ public class ep3_gursan_bryes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_gursan_bryes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -783,7 +815,7 @@ public class ep3_gursan_bryes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_860");
@@ -796,7 +828,7 @@ public class ep3_gursan_bryes extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_gursan_bryes.branchId");
                     prose_package pp = new prose_package();
@@ -817,6 +849,7 @@ public class ep3_gursan_bryes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_gursan_bryes_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_854"))
@@ -832,6 +865,7 @@ public class ep3_gursan_bryes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_gursan_bryes_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_860"))
@@ -851,7 +885,7 @@ public class ep3_gursan_bryes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_864");
@@ -860,7 +894,7 @@ public class ep3_gursan_bryes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_gursan_bryes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -870,6 +904,7 @@ public class ep3_gursan_bryes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_gursan_bryes_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_864"))
@@ -890,7 +925,7 @@ public class ep3_gursan_bryes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_868");
@@ -899,7 +934,7 @@ public class ep3_gursan_bryes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_gursan_bryes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -909,6 +944,7 @@ public class ep3_gursan_bryes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_gursan_bryes_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_868"))
@@ -927,6 +963,7 @@ public class ep3_gursan_bryes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -936,11 +973,13 @@ public class ep3_gursan_bryes extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -950,18 +989,21 @@ public class ep3_gursan_bryes extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_gursan_bryes");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -984,7 +1026,7 @@ public class ep3_gursan_bryes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -992,7 +1034,7 @@ public class ep3_gursan_bryes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_gursan_bryes.branchId", 1);
                 npcStartConversation(player, npc, "ep3_gursan_bryes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1031,7 +1073,7 @@ public class ep3_gursan_bryes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_39");
@@ -1047,7 +1089,7 @@ public class ep3_gursan_bryes extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_gursan_bryes", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1072,7 +1114,7 @@ public class ep3_gursan_bryes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_804");
@@ -1080,7 +1122,7 @@ public class ep3_gursan_bryes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_gursan_bryes.branchId", 7);
                 npcStartConversation(player, npc, "ep3_gursan_bryes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1112,7 +1154,7 @@ public class ep3_gursan_bryes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_812");
@@ -1120,7 +1162,7 @@ public class ep3_gursan_bryes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_gursan_bryes.branchId", 10);
                 npcStartConversation(player, npc, "ep3_gursan_bryes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1141,7 +1183,7 @@ public class ep3_gursan_bryes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_818");
@@ -1149,7 +1191,7 @@ public class ep3_gursan_bryes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_gursan_bryes.branchId", 12);
                 npcStartConversation(player, npc, "ep3_gursan_bryes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1170,7 +1212,7 @@ public class ep3_gursan_bryes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_832");
@@ -1178,7 +1220,7 @@ public class ep3_gursan_bryes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_gursan_bryes.branchId", 16);
                 npcStartConversation(player, npc, "ep3_gursan_bryes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1200,7 +1242,7 @@ public class ep3_gursan_bryes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_846");
@@ -1208,7 +1250,7 @@ public class ep3_gursan_bryes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_gursan_bryes.branchId", 20);
                 npcStartConversation(player, npc, "ep3_gursan_bryes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1229,7 +1271,7 @@ public class ep3_gursan_bryes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_854");
@@ -1237,7 +1279,7 @@ public class ep3_gursan_bryes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_gursan_bryes.branchId", 22);
                 npcStartConversation(player, npc, "ep3_gursan_bryes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1258,7 +1300,7 @@ public class ep3_gursan_bryes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_860");
@@ -1270,7 +1312,7 @@ public class ep3_gursan_bryes extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_gursan_bryes", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1289,6 +1331,7 @@ public class ep3_gursan_bryes extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_gursan_bryes"))

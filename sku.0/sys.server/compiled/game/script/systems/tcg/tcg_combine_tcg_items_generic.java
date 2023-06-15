@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.static_item;
 import script.library.utils;
@@ -15,6 +21,7 @@ public class tcg_combine_tcg_items_generic extends script.base_script
     public static final String COMBINE = "combine";
     public static final String OBJVAR_COMBINE_ITEM = "tcg.combineItemTemplatePattern";
     public static final int NUM_COMBINE_ITEMS = 4;
+
     public tcg_combine_tcg_items_generic()
     {
     }

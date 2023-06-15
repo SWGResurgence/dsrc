@@ -1,5 +1,11 @@
 package script.poi.rabidbeast;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -9,33 +15,36 @@ import java.util.Vector;
 
 public class mediator extends script.poi.base.scenario_actor
 {
-    public mediator()
-    {
-    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiRabidBeast Mediator";
     public static final int CONV_GREET = 0;
     public static final int CONV_SAVED = 1;
     public static final int CONV_HELP = 2;
     public static final int CONV_NOHELP = 3;
-    public static final String agitateEmotes[] = 
+    public static final String[] agitateEmotes =
+            {
+                    "scratch",
+                    "yawn",
+                    "fidget",
+                    "cough"
+            };
+    public mediator()
     {
-        "scratch",
-        "yawn",
-        "fidget",
-        "cough"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, SCRIPT_CONVERSE);
         messageTo(self, "doAgitation", null, rand(40, 60), true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         attachScript(self, SCRIPT_CONVERSE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -85,26 +94,31 @@ public class mediator extends script.poi.base.scenario_actor
                     if ((members == null) || (members.length == 0))
                     {
                     }
-                    else 
+                    else
                     {
-                        for (obj_id member : members) {
-                            if (scenario.hasKillCredit(poiMaster, "antagonist", member)) {
-                                if (!badge.hasBadge(member, "poi_rabidbeast")) {
+                        for (obj_id member : members)
+                        {
+                            if (scenario.hasKillCredit(poiMaster, "antagonist", member))
+                            {
+                                if (!badge.hasBadge(member, "poi_rabidbeast"))
+                                {
                                     badge.grantBadge(member, "poi_rabidbeast");
-                                } else {
+                                }
+                                else
+                                {
                                     badge.notifyHasBadge(member, "poi_rabidbeast");
                                 }
                             }
                         }
                     }
                 }
-                else 
+                else
                 {
                     if (!badge.hasBadge(speaker, "poi_rabidbeast"))
                     {
                         badge.grantBadge(speaker, "poi_rabidbeast");
                     }
-                    else 
+                    else
                     {
                         badge.notifyHasBadge(speaker, "poi_rabidbeast");
                     }
@@ -129,6 +143,7 @@ public class mediator extends script.poi.base.scenario_actor
         npcStartConversation(speaker, self, convo, msg, responses);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convoName, obj_id speaker, string_id response) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -155,7 +170,8 @@ public class mediator extends script.poi.base.scenario_actor
         Vector responses = new Vector();
         responses.setSize(0);
         npcSetConversationResponses(speaker, responses);
-        switch (aId) {
+        switch (aId)
+        {
             case "r_m_greet":
                 npcSpeak(speaker, new string_id(convo, "m_studying"));
                 responses = utils.addElement(responses, new string_id(convo, "r_m_studying"));
@@ -167,7 +183,8 @@ public class mediator extends script.poi.base.scenario_actor
                 responses = utils.addElement(responses, new string_id(convo, "r_m_thebeast_nohelp"));
                 npcSetConversationResponses(speaker, responses);
                 break;
-            case "r_m_thebeast_help": {
+            case "r_m_thebeast_help":
+            {
                 npcEndConversation(speaker);
                 poi.quickSay(self, "m_hereitcomes_help");
                 setObjVar(self, "attacked", true);
@@ -176,7 +193,8 @@ public class mediator extends script.poi.base.scenario_actor
                 messageTo(poiMaster, "startAttack", params, 2, true);
                 break;
             }
-            case "r_m_thebeast_nohelp": {
+            case "r_m_thebeast_nohelp":
+            {
                 npcEndConversation(speaker);
                 poi.quickSay(self, "m_hereitcomes_nohelp");
                 setObjVar(self, "attacked", true);
@@ -188,6 +206,7 @@ public class mediator extends script.poi.base.scenario_actor
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doAgitation(obj_id self, dictionary params) throws InterruptedException
     {
         if (rand(1, 5) == 3)
@@ -198,6 +217,7 @@ public class mediator extends script.poi.base.scenario_actor
         messageTo(self, "doAgitation", null, rand(40, 60), true);
         return SCRIPT_CONTINUE;
     }
+
     public int allDead(obj_id self, dictionary params) throws InterruptedException
     {
         stop(self);

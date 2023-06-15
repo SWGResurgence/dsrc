@@ -1,5 +1,11 @@
 package script.systems.storyteller;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.storyteller;
 import script.library.trial;
@@ -74,7 +80,6 @@ public class prop_controller extends script.base_script
             int cleanup_time = getStandardCleanupTime(self);
             messageTo(self, "prepCleanupProp", null, cleanup_time, false);
         }
-        return;
     }
 
     public int getStandardCleanupTime(obj_id prop_controller) throws InterruptedException

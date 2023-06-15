@@ -1,5 +1,11 @@
 package script.theme_park.tatooine.criminal_town;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class villager extends script.base_script
     public villager()
     {
     }
+
     public location getNewLocation(obj_id object, int x, int y, int z) throws InterruptedException
     {
         location newLoc = new location(getLocation(object));
@@ -17,6 +24,7 @@ public class villager extends script.base_script
         newLoc.z = z;
         return newLoc;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location location1 = getNewLocation(self, -6426, 0, -7113);

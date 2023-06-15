@@ -1,5 +1,11 @@
 package script.theme_park.heroic.ig88;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class ig88_bomb_droid extends script.base_script
     public ig88_bomb_droid()
     {
     }
+
     public int setBombDroidMaxHealth(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -23,6 +30,7 @@ public class ig88_bomb_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int findTarget(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self) || ai_lib.isDead(self))
@@ -59,7 +67,7 @@ public class ig88_bomb_droid extends script.base_script
             {
                 target = rand(0, 1) == 1 ? closest : secondClosest;
             }
-            else 
+            else
             {
                 target = closest;
             }
@@ -75,7 +83,7 @@ public class ig88_bomb_droid extends script.base_script
             {
                 queueCommand(self, (2040083514), target, "", COMMAND_PRIORITY_DEFAULT);
             }
-            else 
+            else
             {
                 dictionary messageParams = new dictionary();
                 messageParams.put("npc", self);
@@ -90,6 +98,7 @@ public class ig88_bomb_droid extends script.base_script
         messageTo(self, "findTarget", sessionDict, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -105,6 +114,7 @@ public class ig88_bomb_droid extends script.base_script
         messageTo(self, "colorize", sessionDict, 0.25f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int colorize(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -116,6 +126,7 @@ public class ig88_bomb_droid extends script.base_script
         hue.setTexture(self, 1, 7);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))

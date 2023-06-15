@@ -1,5 +1,11 @@
 package script.npc.skillteacher;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.utils;
@@ -11,6 +17,7 @@ public class commerce_trainer_spawner extends script.base_script
     public commerce_trainer_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -18,6 +25,7 @@ public class commerce_trainer_spawner extends script.base_script
         messageTo(self, "spawnThings", params, 20, true);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         spawnSurveyMission(self);
@@ -28,6 +36,7 @@ public class commerce_trainer_spawner extends script.base_script
             spawnCraftingContractor(self);
         }
     }
+
     public void spawnArtisan(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "meetingd");
@@ -37,8 +46,8 @@ public class commerce_trainer_spawner extends script.base_script
         setCreatureStatic(artisan, true);
         setInvulnerable(artisan, true);
         setYaw(artisan, 5);
-        return;
     }
+
     public void spawnSurveyMission(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "meetingd");
@@ -54,8 +63,8 @@ public class commerce_trainer_spawner extends script.base_script
         setInvulnerable(surveyor, true);
         setYaw(surveyor, -111);
         attachScript(surveyor, "npc.converse.npc_convo");
-        return;
     }
+
     public void spawnFoodStation(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "meetinge");
@@ -63,8 +72,8 @@ public class commerce_trainer_spawner extends script.base_script
         obj_id foodStation = create.object("object/tangible/crafting/station/public_food_station.iff", foodStationLoc);
         create.addDestroyMessage(foodStation, "foodStationDied", 10.0f, self);
         setYaw(foodStation, 0);
-        return;
     }
+
     public void spawnClothingStation(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "meetingc");
@@ -72,8 +81,8 @@ public class commerce_trainer_spawner extends script.base_script
         obj_id clothingStation = create.object("object/tangible/crafting/station/public_clothing_station.iff", clothingStationLoc);
         create.addDestroyMessage(clothingStation, "clothingStationDied", 10.0f, self);
         setYaw(clothingStation, 90);
-        return;
     }
+
     public void spawnCraftingContractor(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "mainroom");
@@ -83,8 +92,8 @@ public class commerce_trainer_spawner extends script.base_script
         setCreatureStatic(contractor, true);
         setInvulnerable(contractor, true);
         setYaw(contractor, 11);
-        return;
     }
+
     public int spawnThings(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id stuffs = params.getObjId("stuff");
@@ -95,26 +104,31 @@ public class commerce_trainer_spawner extends script.base_script
         spawnEveryone(stuffs);
         return SCRIPT_CONTINUE;
     }
+
     public int artisanDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnArtisan(self);
         return SCRIPT_CONTINUE;
     }
+
     public int surveyorDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnSurveyMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int foodStationDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnFoodStation(self);
         return SCRIPT_CONTINUE;
     }
+
     public int clothingStationDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnClothingStation(self);
         return SCRIPT_CONTINUE;
     }
+
     public int contractorDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnCraftingContractor(self);

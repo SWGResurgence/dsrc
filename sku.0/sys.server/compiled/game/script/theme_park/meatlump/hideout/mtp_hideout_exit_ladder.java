@@ -1,18 +1,27 @@
 package script.theme_park.meatlump.hideout;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class mtp_hideout_exit_ladder extends script.base_script
 {
+    public static final String STF_FILE = "elevator_text";
+
     public mtp_hideout_exit_ladder()
     {
     }
-    public static final String STF_FILE = "elevator_text";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id(STF_FILE, "mtp_ladder_climb_up"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         location here = getLocation(player);
@@ -36,12 +45,12 @@ public class mtp_hideout_exit_ladder extends script.base_script
                     playClientEffectObj(player, "clienteffect/elevator_rise.cef", player, null);
                     warpPlayer(player, "corellia", -515.0f, 7.3f, -4422.3f, targetCell, 1.6f, -20.8f, 26.6f, "nullCallback", false);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id(STF_FILE, "mtp_no_target_cell"));
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id(STF_FILE, "mtp_no_entrance"));
             }

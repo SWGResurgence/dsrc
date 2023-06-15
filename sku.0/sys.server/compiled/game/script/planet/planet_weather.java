@@ -1,49 +1,56 @@
 package script.planet;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
 public class planet_weather extends script.base_script
 {
-    public planet_weather()
-    {
-    }
     public static final String PARAM_WEATHER_DESIRED = "desired";
     public static final String PARAM_WEATHER_CURRENT = "current";
     public static final int WEATHER_GOOD = 0;
     public static final int WEATHER_MILD = 1;
     public static final int WEATHER_SEVERE = 2;
     public static final int WEATHER_EXTREME = 3;
-    public static final int[] WEATHER_CHANCE = 
+    public static final int[] WEATHER_CHANCE =
+            {
+                    70,
+                    15,
+                    10,
+                    5
+            };
+    public static final int[][] WEATHER_DURATION_LIMITS =
+            {
+
+                    {
+                            1200,
+                            2400
+                    },
+
+                    {
+                            240,
+                            480
+                    },
+
+                    {
+                            120,
+                            300
+                    },
+
+                    {
+                            120,
+                            300
+                    }
+            };
+    public planet_weather()
     {
-        70,
-        15,
-        10,
-        5
-    };
-    public static final int[][] WEATHER_DURATION_LIMITS = 
-    {
-        
-        {
-            1200,
-            2400
-        },
-        
-        {
-            240,
-            480
-        },
-        
-        {
-            120,
-            300
-        },
-        
-        {
-            120,
-            300
-        }
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isInWorld(self))
@@ -53,17 +60,20 @@ public class planet_weather extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(null, "starting weather from OnInitialize()");
         startWeather(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         setWeatherData(WEATHER_GOOD, 0.0f, 0.0f);
         return SCRIPT_CONTINUE;
     }
+
     public void startWeather(obj_id self) throws InterruptedException
     {
         int desiredWeather = WEATHER_GOOD;
@@ -78,6 +88,7 @@ public class planet_weather extends script.base_script
         params.put(PARAM_WEATHER_CURRENT, currentWeather);
         messageTo(self, "updateWeather", params, weatherDuration, false);
     }
+
     public int updateWeather(obj_id self, dictionary params) throws InterruptedException
     {
         int desiredWeather = params.getInt(PARAM_WEATHER_DESIRED);
@@ -89,7 +100,7 @@ public class planet_weather extends script.base_script
             {
                 --currentWeather;
             }
-            else 
+            else
             {
                 ++currentWeather;
             }
@@ -99,7 +110,7 @@ public class planet_weather extends script.base_script
             desiredWeather = 0;
             --currentWeather;
         }
-        else 
+        else
         {
             int r = rand(1, 100);
             for (int i = 0; i <= WEATHER_EXTREME; ++i)

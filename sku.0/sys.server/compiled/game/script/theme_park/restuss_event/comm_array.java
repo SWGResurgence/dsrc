@@ -1,5 +1,11 @@
 package script.theme_park.restuss_event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.create;
@@ -8,9 +14,6 @@ import script.library.utils;
 
 public class comm_array extends script.base_script
 {
-    public comm_array()
-    {
-    }
     public static final string_id SID_MNU_HACK = new string_id("restuss_event/object", "hack_comm");
     public static final string_id SID_NO_HACK = new string_id("restuss_event/object", "cant_hack");
     public static final string_id SID_BEING_HACKED = new string_id("restuss_event/object", "being_hacked");
@@ -21,6 +24,10 @@ public class comm_array extends script.base_script
     public static final String OBJ_FACTION = "faction";
     public static final String FAC_REBEL = "Rebel";
     public static final String FAC_IMPERIAL = "Imperial";
+    public comm_array()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         utils.removeObjVar(self, "spawned0");
@@ -43,6 +50,7 @@ public class comm_array extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         utils.removeObjVar(self, "spawned0");
@@ -64,6 +72,7 @@ public class comm_array extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "cantHack"))
@@ -90,7 +99,7 @@ public class comm_array extends script.base_script
                     mi.addRootMenu(menu_info_types.ITEM_USE, SID_MNU_HACK);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, SID_OWN_ALREADY);
                     return SCRIPT_CONTINUE;
@@ -108,7 +117,7 @@ public class comm_array extends script.base_script
                     mi.addRootMenu(menu_info_types.ITEM_USE, SID_MNU_HACK);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, SID_OWN_ALREADY);
                     return SCRIPT_CONTINUE;
@@ -117,6 +126,7 @@ public class comm_array extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -165,6 +175,7 @@ public class comm_array extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (breacher == utils.getObjIdScriptVar(self, "beingHacked"))
@@ -175,6 +186,7 @@ public class comm_array extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void spawnCreatures(int x, String datatable, obj_id self) throws InterruptedException
     {
         String spawn = dataTableGetString(datatable, x, "spawns");
@@ -203,7 +215,8 @@ public class comm_array extends script.base_script
         if (scriptList != null && !scriptList.equals(""))
         {
             String[] scriptArray = split(scriptList, ',');
-            for (String s : scriptArray) {
+            for (String s : scriptArray)
+            {
                 attachScript(spawnedCreature, s);
             }
         }
@@ -244,13 +257,13 @@ public class comm_array extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             String objVarList = dataTableGetString(datatable, x, "spawn_objvar");
             setCreatureObjVars(spawnedCreature, objVarList);
         }
-        return;
     }
+
     public void setCreatureObjVars(obj_id creature, String objVarList) throws InterruptedException
     {
         if (objVarList == null || objVarList.equals(""))
@@ -258,13 +271,15 @@ public class comm_array extends script.base_script
             return;
         }
         String[] pairs = split(objVarList, ',');
-        for (String pair : pairs) {
+        for (String pair : pairs)
+        {
             String[] objVarToSet = split(pair, '=');
             String objVarValue = objVarToSet[1];
             String[] objVarNameAndType = split(objVarToSet[0], ':');
             String objVarType = objVarNameAndType[0];
             String objVarName = objVarNameAndType[1];
-            switch (objVarType) {
+            switch (objVarType)
+            {
                 case "string":
                     setObjVar(creature, objVarName, objVarValue);
                     break;
@@ -284,6 +299,7 @@ public class comm_array extends script.base_script
             }
         }
     }
+
     public int checkForIncap(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] hackerInRange = getPlayerCreaturesInRange(self, 5.0f);
@@ -292,13 +308,18 @@ public class comm_array extends script.base_script
             utils.removeScriptVar(self, "beingHacked");
             return SCRIPT_CONTINUE;
         }
-        for (obj_id obj_id : hackerInRange) {
-            if (obj_id == utils.getObjIdScriptVar(self, "beingHacked")) {
-                if (isIncapacitated(obj_id)) {
+        for (obj_id obj_id : hackerInRange)
+        {
+            if (obj_id == utils.getObjIdScriptVar(self, "beingHacked"))
+            {
+                if (isIncapacitated(obj_id))
+                {
                     sendSystemMessage(obj_id, SID_HACK_INTERRUPTED);
                     utils.removeScriptVar(self, "beingHacked");
                     return SCRIPT_CONTINUE;
-                } else {
+                }
+                else
+                {
                     messageTo(self, "checkForIncap", null, 2.0f, false);
                     return SCRIPT_CONTINUE;
                 }
@@ -307,6 +328,7 @@ public class comm_array extends script.base_script
         utils.removeScriptVar(self, "beingHacked");
         return SCRIPT_CONTINUE;
     }
+
     public int hackComplete(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] playersInRange = getPlayerCreaturesInRange(self, 64.0f);
@@ -331,11 +353,13 @@ public class comm_array extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hackAvailable(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "cantHack");
         return SCRIPT_CONTINUE;
     }
+
     public int changeFactionImperial(obj_id self, dictionary params) throws InterruptedException
     {
         location loc = getLocation(self);
@@ -359,6 +383,7 @@ public class comm_array extends script.base_script
         messageTo(self, "beginSpawnImperial", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int changeFactionRebel(obj_id self, dictionary params) throws InterruptedException
     {
         location loc = getLocation(self);
@@ -382,6 +407,7 @@ public class comm_array extends script.base_script
         messageTo(self, "beginSpawnRebel", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int beginSpawnImperial(obj_id self, dictionary params) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "spawn_table_imperial");
@@ -401,7 +427,7 @@ public class comm_array extends script.base_script
                     spawnCreatures(x, datatable, self);
                 }
             }
-            else 
+            else
             {
                 spawnCreatures(x, datatable, self);
             }
@@ -409,6 +435,7 @@ public class comm_array extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int beginSpawnRebel(obj_id self, dictionary params) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "spawn_table_rebel");
@@ -428,7 +455,7 @@ public class comm_array extends script.base_script
                     spawnCreatures(x, datatable, self);
                 }
             }
-            else 
+            else
             {
                 spawnCreatures(x, datatable, self);
             }
@@ -436,6 +463,7 @@ public class comm_array extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tellingMomIDied(obj_id self, dictionary params) throws InterruptedException
     {
         int spawn_num = params.getInt("spawnNumber");
@@ -447,7 +475,7 @@ public class comm_array extends script.base_script
                 String datatable = getStringObjVar(self, "spawn_table_rebel");
                 spawnCreatures(spawn_num, datatable, self);
             }
-            else 
+            else
             {
                 String datatable = getStringObjVar(self, "spawn_table_imperial");
                 spawnCreatures(spawn_num, datatable, self);
@@ -455,6 +483,7 @@ public class comm_array extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkFactionInitial(obj_id self, dictionary params) throws InterruptedException
     {
         if ((getStringObjVar(self, OBJ_FACTION)).equals(FAC_IMPERIAL))

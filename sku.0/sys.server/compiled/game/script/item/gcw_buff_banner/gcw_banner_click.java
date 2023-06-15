@@ -1,5 +1,11 @@
 package script.item.gcw_buff_banner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -11,6 +17,7 @@ public class gcw_banner_click extends script.base_script
     public static final String REBEL_BANNER = "object/tangible/event_perk/banner_rebel_style_01.iff";
     public static final String IMPERIAL_BANNER = "object/tangible/event_perk/banner_imperial_style_01.iff";
     public static final string_id SID_ALREADY_HAVE = new string_id("gcw", "banner_already_inplay");
+
     public gcw_banner_click()
     {
     }

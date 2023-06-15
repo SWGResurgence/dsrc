@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,42 +14,52 @@ import script.*;
 
 public class ep3_myyydril_greeter_villager_3 extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_myyydril_greeter_villager_3";
+
     public ep3_myyydril_greeter_villager_3()
     {
     }
-    public static String c_stringFile = "conversation/ep3_myyydril_greeter_villager_3";
+
     public boolean ep3_myyydril_greeter_villager_3_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_myyydril_greeter_villager_3_condition_Kallaarac(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_myyydril_kivvaaa_talkto_1", 0);
     }
+
     public boolean ep3_myyydril_greeter_villager_3_condition_Helping(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_myyydril_kivvaaa_talkto_1");
     }
+
     public boolean ep3_myyydril_greeter_villager_3_condition_Caverns(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_myyydril_nawika_talkto_5");
     }
+
     public boolean ep3_myyydril_greeter_villager_3_condition_Hero(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_myyydril_kallaarac_destroy_3");
     }
+
     public boolean ep3_myyydril_greeter_villager_3_condition_Doctor(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_myyydril_yraka_talkto_6", 0);
     }
+
     public boolean ep3_myyydril_greeter_villager_3_condition_Lorn(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_myyydril_kinesworthy_epic_3", 0);
     }
+
     public boolean ep3_myyydril_greeter_villager_3_condition_End(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_myyydril_kinesworthy_epic_3");
     }
+
     public int ep3_myyydril_greeter_villager_3_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_113"))
@@ -63,7 +79,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -72,7 +88,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_greeter_villager_3.branchId");
                     chat.chat(npc, player, message);
@@ -83,6 +99,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_greeter_villager_3_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_115"))
@@ -98,6 +115,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_greeter_villager_3_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1049"))
@@ -117,7 +135,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1051");
@@ -126,7 +144,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_greeter_villager_3.branchId");
                     chat.chat(npc, player, message);
@@ -137,6 +155,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_greeter_villager_3_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1051"))
@@ -152,6 +171,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_greeter_villager_3_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_995"))
@@ -171,7 +191,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_999");
@@ -180,7 +200,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_greeter_villager_3.branchId");
                     chat.chat(npc, player, message);
@@ -191,6 +211,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_greeter_villager_3_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_999"))
@@ -206,6 +227,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_greeter_villager_3_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1005"))
@@ -225,7 +247,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1009");
@@ -234,7 +256,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_greeter_villager_3.branchId");
                     chat.chat(npc, player, message);
@@ -245,6 +267,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_greeter_villager_3_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1009"))
@@ -264,7 +287,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1013");
@@ -273,7 +296,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_greeter_villager_3.branchId");
                     chat.chat(npc, player, message);
@@ -284,6 +307,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_greeter_villager_3_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1013"))
@@ -299,6 +323,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_greeter_villager_3_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1019"))
@@ -318,7 +343,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1023");
@@ -327,7 +352,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_greeter_villager_3.branchId");
                     chat.chat(npc, player, message);
@@ -338,6 +363,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_greeter_villager_3_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1023"))
@@ -353,6 +379,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_greeter_villager_3_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1029"))
@@ -372,7 +399,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1033");
@@ -381,7 +408,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_greeter_villager_3.branchId");
                     chat.chat(npc, player, message);
@@ -392,6 +419,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_greeter_villager_3_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1033"))
@@ -407,6 +435,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_greeter_villager_3_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1039"))
@@ -422,6 +451,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_greeter_villager_3_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1045"))
@@ -437,6 +467,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -446,11 +477,13 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -460,18 +493,21 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_myyydril_greeter_villager_3");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -494,7 +530,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_113");
@@ -502,7 +538,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_greeter_villager_3.branchId", 1);
                 npcStartConversation(player, npc, "ep3_myyydril_greeter_villager_3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -523,7 +559,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1049");
@@ -531,7 +567,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_greeter_villager_3.branchId", 4);
                 npcStartConversation(player, npc, "ep3_myyydril_greeter_villager_3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -552,7 +588,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_995");
@@ -560,7 +596,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_greeter_villager_3.branchId", 7);
                 npcStartConversation(player, npc, "ep3_myyydril_greeter_villager_3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -581,7 +617,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1005");
@@ -589,7 +625,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_greeter_villager_3.branchId", 10);
                 npcStartConversation(player, npc, "ep3_myyydril_greeter_villager_3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -610,7 +646,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1019");
@@ -618,7 +654,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_greeter_villager_3.branchId", 14);
                 npcStartConversation(player, npc, "ep3_myyydril_greeter_villager_3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -639,7 +675,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1029");
@@ -647,7 +683,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_greeter_villager_3.branchId", 17);
                 npcStartConversation(player, npc, "ep3_myyydril_greeter_villager_3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -668,7 +704,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1039");
@@ -676,7 +712,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_greeter_villager_3.branchId", 20);
                 npcStartConversation(player, npc, "ep3_myyydril_greeter_villager_3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -697,7 +733,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1045");
@@ -705,7 +741,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_greeter_villager_3.branchId", 22);
                 npcStartConversation(player, npc, "ep3_myyydril_greeter_villager_3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -714,6 +750,7 @@ public class ep3_myyydril_greeter_villager_3 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_myyydril_greeter_villager_3"))

@@ -1,5 +1,11 @@
 package script.event.aprilfools;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -10,32 +16,37 @@ import script.string_id;
 
 public class cantina_actor extends script.base_script
 {
-    public cantina_actor()
-    {
-    }
     public static final String RAND_LOCATION = "datatables/event/aprilfools/random_location.iff";
     public static final String POSITIONS = "datatables/event/aprilfools/cantina_positions.iff";
     public static final String DATATABLE = "datatables/event/invasion/ewok_bonus_loot.iff";
+    public cantina_actor()
+    {
+    }
+
     public int faceNorth(obj_id self, dictionary params) throws InterruptedException
     {
         setYaw(self, 90);
         return SCRIPT_CONTINUE;
     }
+
     public int faceSouth(obj_id self, dictionary params) throws InterruptedException
     {
         setYaw(self, -89);
         return SCRIPT_CONTINUE;
     }
+
     public int faceEast(obj_id self, dictionary params) throws InterruptedException
     {
         setYaw(self, 179);
         return SCRIPT_CONTINUE;
     }
+
     public int faceWest(obj_id self, dictionary params) throws InterruptedException
     {
         setYaw(self, 0);
         return SCRIPT_CONTINUE;
     }
+
     public int sayYourLine(obj_id self, dictionary params) throws InterruptedException
     {
         String myMood = params.getString("myMood");
@@ -46,16 +57,19 @@ public class cantina_actor extends script.base_script
         chat.chat(self, chat.CHAT_SAY, myMood, new string_id("aprilfools", params.getString("myLine")));
         return SCRIPT_CONTINUE;
     }
+
     public int becomeVulnerable(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, false);
         return SCRIPT_CONTINUE;
     }
+
     public int becomeInvulnerable(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int moveToRandomLocation(obj_id self, dictionary params) throws InterruptedException
     {
         int randomEntry = rand(0, dataTableGetNumRows(RAND_LOCATION) - 1);
@@ -73,6 +87,7 @@ public class cantina_actor extends script.base_script
         setMovementRun(self);
         return SCRIPT_CONTINUE;
     }
+
     public int moveToMainActorPosition(obj_id self, dictionary params) throws InterruptedException
     {
         String actorRole = getStringObjVar(self, "aprilfools.actor_role");
@@ -89,7 +104,8 @@ public class cantina_actor extends script.base_script
         }
         String myColumnForX = "";
         String myColumnForZ = "";
-        switch (actorRole) {
+        switch (actorRole)
+        {
             case "ewok1":
                 myColumnForX = "EWOK_1X";
                 myColumnForZ = "EWOK_1Z";
@@ -129,11 +145,13 @@ public class cantina_actor extends script.base_script
         setMovementRun(self);
         return SCRIPT_CONTINUE;
     }
+
     public int goDie(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int runAwayAndPoof(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, false);
@@ -151,6 +169,7 @@ public class cantina_actor extends script.base_script
         setMovementRun(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (!hasObjVar(self, "aprilfools.run_away"))
@@ -163,6 +182,7 @@ public class cantina_actor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id cantina = getObjIdObjVar(self, "aprilfools.cantina");
@@ -170,6 +190,7 @@ public class cantina_actor extends script.base_script
         removeObjVar(cantina, "aprilfools.ewok1");
         return SCRIPT_CONTINUE;
     }
+
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
         int chance = rand(1, 200);

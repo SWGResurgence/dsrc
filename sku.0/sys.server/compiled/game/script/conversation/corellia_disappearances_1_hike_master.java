@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,30 +14,37 @@ import script.*;
 
 public class corellia_disappearances_1_hike_master extends script.base_script
 {
+    public static String c_stringFile = "conversation/corellia_disappearances_1_hike_master";
+
     public corellia_disappearances_1_hike_master()
     {
     }
-    public static String c_stringFile = "conversation/corellia_disappearances_1_hike_master";
+
     public boolean corellia_disappearances_1_hike_master_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean corellia_disappearances_1_hike_master_condition_playerFinishedWithRanger(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedTask(player, "corellia_disappearances_1_discovery", "disappear_1_hike_master");
     }
+
     public boolean corellia_disappearances_1_hike_master_condition_playerOnAngelaStep(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_disappearances_1_discovery", "disappear_1_hike_master");
     }
+
     public boolean corellia_disappearances_1_hike_master_condition_finishedAll(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "corellia_disappearances_6_boss");
     }
+
     public void corellia_disappearances_1_hike_master_action_signalFirstQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "corellia_disappearances_1_hike_master");
     }
+
     public int corellia_disappearances_1_hike_master_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25"))
@@ -51,7 +64,7 @@ public class corellia_disappearances_1_hike_master extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -60,7 +73,7 @@ public class corellia_disappearances_1_hike_master extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_disappearances_1_hike_master.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -70,6 +83,7 @@ public class corellia_disappearances_1_hike_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_disappearances_1_hike_master_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -89,7 +103,7 @@ public class corellia_disappearances_1_hike_master extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -98,7 +112,7 @@ public class corellia_disappearances_1_hike_master extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_disappearances_1_hike_master.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -108,6 +122,7 @@ public class corellia_disappearances_1_hike_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_disappearances_1_hike_master_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -123,6 +138,7 @@ public class corellia_disappearances_1_hike_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -134,6 +150,7 @@ public class corellia_disappearances_1_hike_master extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -141,6 +158,7 @@ public class corellia_disappearances_1_hike_master extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -149,18 +167,21 @@ public class corellia_disappearances_1_hike_master extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.corellia_disappearances_1_hike_master");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -196,7 +217,7 @@ public class corellia_disappearances_1_hike_master extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_25");
@@ -204,7 +225,7 @@ public class corellia_disappearances_1_hike_master extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_disappearances_1_hike_master.branchId", 3);
                 npcStartConversation(player, npc, "corellia_disappearances_1_hike_master", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -213,6 +234,7 @@ public class corellia_disappearances_1_hike_master extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("corellia_disappearances_1_hike_master"))

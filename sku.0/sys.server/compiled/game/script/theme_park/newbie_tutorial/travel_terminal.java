@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.utils;
@@ -7,10 +13,12 @@ import script.library.weapons;
 
 public class travel_terminal extends script.theme_park.newbie_tutorial.tutorial_base
 {
+    public static final string_id SID_USE_MENU = new string_id("sui", "use");
+
     public travel_terminal()
     {
     }
-    public static final string_id SID_USE_MENU = new string_id("sui", "use");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menuOption = mi.addRootMenu(menu_info_types.ITEM_USE, SID_USE_MENU);
@@ -32,8 +40,10 @@ public class travel_terminal extends script.theme_park.newbie_tutorial.tutorial_
         }
         obj_id playerInv = utils.getInventoryContainer(player);
         obj_id[] contents = getContents(playerInv);
-        for (obj_id content : contents) {
-            if (isWeapon(content)) {
+        for (obj_id content : contents)
+        {
+            if (isWeapon(content))
+            {
                 String templateName = getTemplateName(content);
                 obj_id weapon = weapons.createWeapon(templateName, playerInv, 0.75f);
                 equip(weapon, player);
@@ -43,6 +53,7 @@ public class travel_terminal extends script.theme_park.newbie_tutorial.tutorial_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -55,7 +66,7 @@ public class travel_terminal extends script.theme_park.newbie_tutorial.tutorial_
                     sendSystemMessage(player, TALK_TO_JEDI);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "newbie.talkedtojedi");
                 }
@@ -64,6 +75,7 @@ public class travel_terminal extends script.theme_park.newbie_tutorial.tutorial_
         }
         return SCRIPT_CONTINUE;
     }
+
     public void leaveTutorial(obj_id self, obj_id player) throws InterruptedException
     {
         removeObjVar(player, "banking_bankid");
@@ -84,8 +96,10 @@ public class travel_terminal extends script.theme_park.newbie_tutorial.tutorial_
         }
         obj_id playerInv = utils.getInventoryContainer(player);
         obj_id[] contents = getContents(playerInv);
-        for (obj_id content : contents) {
-            if (isWeapon(content)) {
+        for (obj_id content : contents)
+        {
+            if (isWeapon(content))
+            {
                 String templateName = getTemplateName(content);
                 obj_id weapon = weapons.createWeapon(templateName, playerInv, 0.75f);
                 equip(weapon, player);
@@ -95,6 +109,7 @@ public class travel_terminal extends script.theme_park.newbie_tutorial.tutorial_
         }
         sendToMosEisley(player);
     }
+
     public void sendToMosEisley(obj_id player) throws InterruptedException
     {
         String planet = "tatooine";
@@ -111,8 +126,8 @@ public class travel_terminal extends script.theme_park.newbie_tutorial.tutorial_
         newbieTutorialRequest(player, "clientReady");
         attachScript(player, "theme_park.newbie_tutorial.new_player_ribbon");
         warpPlayer(player, planet, locX, locY, locZ, null, 0.0f, 0.0f, 0.0f);
-        return;
     }
+
     public int warp_player_now(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

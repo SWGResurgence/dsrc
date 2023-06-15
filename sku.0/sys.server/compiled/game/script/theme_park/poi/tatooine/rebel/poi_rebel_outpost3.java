@@ -1,5 +1,11 @@
 package script.theme_park.poi.tatooine.rebel;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.factions;
@@ -10,6 +16,7 @@ public class poi_rebel_outpost3 extends script.theme_park.poi.base
     public poi_rebel_outpost3()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String objective = poiGetObjective(self);
@@ -45,6 +52,7 @@ public class poi_rebel_outpost3 extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int outpostKilled(obj_id self, dictionary params) throws InterruptedException
     {
         poiComplete(POI_SUCCESS);

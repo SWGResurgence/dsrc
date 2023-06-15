@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.advanced_turret;
 import script.library.factions;
 import script.library.gcw;
@@ -34,6 +40,7 @@ public class gcw_city_kit_turret extends script.systems.gcw.gcw_city_kit
             {
                     "gcw_city_rebel_turret_3"
             };
+
     public gcw_city_kit_turret()
     {
     }

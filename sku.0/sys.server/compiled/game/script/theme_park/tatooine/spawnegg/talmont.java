@@ -1,23 +1,30 @@
 package script.theme_park.tatooine.spawnegg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
 public class talmont extends script.base_script
 {
+    public static final String SCRIPTPATH = "theme_park.tatooine.";
+    public static final String TEMPLATE = "object/creature/npc/theme_park/prefect_talmont.iff";
+    public static final String[] SCRIPTS =
+            {
+                    "talmont_combat_1.tvcm1_talmont_convo",
+                    "talmont_combat_2.tvcm2_talmont_convo",
+                    "talmont_crafting_1.tvc1_talmont_convo",
+                    "talmont_crafting_2.tvc2_talmont_convo",
+                    "talmont_quest_1.tiq_talmont_convo"
+            };
     public talmont()
     {
     }
-    public static final String SCRIPTPATH = "theme_park.tatooine.";
-    public static final String TEMPLATE = "object/creature/npc/theme_park/prefect_talmont.iff";
-    public static final String[] SCRIPTS = 
-    {
-        "talmont_combat_1.tvcm1_talmont_convo",
-        "talmont_combat_2.tvcm2_talmont_convo",
-        "talmont_crafting_1.tvc1_talmont_convo",
-        "talmont_crafting_2.tvc2_talmont_convo",
-        "talmont_quest_1.tiq_talmont_convo"
-    };
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "theme_park.spawn_egg_npc"))
@@ -26,11 +33,13 @@ public class talmont extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int NPCDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "makeNPC", null, 1, true);
         return SCRIPT_CONTINUE;
     }
+
     public int makeNPC(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id myNPC = createObjectAt(TEMPLATE, self);

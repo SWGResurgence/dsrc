@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.qa;
@@ -13,9 +19,6 @@ import java.util.stream.Stream;
 
 public class qa_quest_skipper extends script.base_script
 {
-    public qa_quest_skipper()
-    {
-    }
     public static final String QUEST_TOOL_TITLE = "QA Quest Tool";
     public static final String QUEST_TOOL_PROMPT = "Select a Quest or menu item.\n\n(A) Active Quest\n(C) Completed Quest";
     public static final String QUEST_TOOL_SUBPROMPT = "Be sure to select the correct option. The quest will be modified per your selection without any additional verification. You can also select an individual quest task to manage it. \n\nThe visible tasks of the quest are displayed below prepended with their ID followed by (A) for an active task, (C) for a completed task, or (I) for an inactive task. You can select a task to activate/complete/fail/reset it.";
@@ -27,56 +30,60 @@ public class qa_quest_skipper extends script.base_script
     public static final String SEND_SIGNAL_TITLE = "Send Quest Signal";
     public static final String TASK_MENU_PROMPT = "Be sure to select the correct option. The quest will be modified per your selection without any additional verification. Select the action you would like to perform for this Quest Task.";
     public static final String TASK_MENU_TITLE = "Quest Task Actions";
-    public static final String[] QUEST_TOOL_MENU = 
+    public static final String[] QUEST_TOOL_MENU =
+            {
+                    "Add a ground quest manually",
+                    "Add a space quest manually",
+                    "Attain test quests",
+                    "Bulk Grant/Complete Tool",
+                    "Bulk Grant Tool",
+                    "Send Quest Signal to Self"
+            };
+    public static final String[] QUEST_MAIN_MENU =
+            {
+                    "Complete this quest",
+                    "Remove this quest"
+            };
+    public static final String[] QUEST_ALT_MENU =
+            {
+                    "Remove this quest",
+                    "Remove and re-grant this quest"
+            };
+    public static final String[] QUEST_DEMO_QUESTS =
+            {
+                    "quest/event_cantina_bossk_1",
+                    "quest/borvos_guard_dagorel",
+                    "quest/borvo_acklay_find_armorer ",
+                    "quest/build_speeder_quest",
+                    "quest/tatooine_eisley_gototrehla",
+                    "quest/ep3_stren_dorn_bounty_belga",
+                    "quest/c_newbie_start",
+                    "quest/build_speeder",
+                    "spacequest/destroy_surpriseattack/corellia_imperial_1"
+            };
+    public static final String[] SPACE_QUEST_TYPES =
+            {
+                    "assassinate",
+                    "delivery",
+                    "delivery_no_pickup",
+                    "destroy",
+                    "destroy_duty",
+                    "destroy_surpriseattack",
+                    "escort",
+                    "escort_duty",
+                    "inspect",
+                    "patrol",
+                    "recovery",
+                    "recovery_duty",
+                    "rescue",
+                    "rescue_duty",
+                    "space_battle",
+                    "survival"
+            };
+    public qa_quest_skipper()
     {
-        "Add a ground quest manually",
-        "Add a space quest manually",
-        "Attain test quests",
-        "Bulk Grant/Complete Tool",
-        "Bulk Grant Tool",
-        "Send Quest Signal to Self"
-    };
-    public static final String[] QUEST_MAIN_MENU = 
-    {
-        "Complete this quest",
-        "Remove this quest"
-    };
-    public static final String[] QUEST_ALT_MENU = 
-    {
-        "Remove this quest",
-        "Remove and re-grant this quest"
-    };
-    public static final String[] QUEST_DEMO_QUESTS = 
-    {
-        "quest/event_cantina_bossk_1",
-        "quest/borvos_guard_dagorel",
-        "quest/borvo_acklay_find_armorer ",
-        "quest/build_speeder_quest",
-        "quest/tatooine_eisley_gototrehla",
-        "quest/ep3_stren_dorn_bounty_belga",
-        "quest/c_newbie_start",
-        "quest/build_speeder",
-        "spacequest/destroy_surpriseattack/corellia_imperial_1"
-    };
-    public static final String[] SPACE_QUEST_TYPES = 
-    {
-        "assassinate",
-        "delivery",
-        "delivery_no_pickup",
-        "destroy",
-        "destroy_duty",
-        "destroy_surpriseattack",
-        "escort",
-        "escort_duty",
-        "inspect",
-        "patrol",
-        "recovery",
-        "recovery_duty",
-        "rescue",
-        "rescue_duty",
-        "space_battle",
-        "survival"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -93,6 +100,7 @@ public class qa_quest_skipper extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -105,6 +113,7 @@ public class qa_quest_skipper extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMainMenuOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -126,47 +135,69 @@ public class qa_quest_skipper extends script.base_script
                     utils.removeScriptVarTree(self, "qaquest");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "qaquest.qaquestMenu");
                     String previousSelection = previousMainMenuArray[idx];
-                    if (QUEST_TOOL_MENU[0].equals(previousSelection)) {
+                    if (QUEST_TOOL_MENU[0].equals(previousSelection))
+                    {
                         qa.createInputBox(self, MANUAL_ADD_GROUND_PROMPT, MANUAL_ADD_GROUND_TITLE, "handleAddGroundQuestManually", "qaquest.pid");
-                    } else if (QUEST_TOOL_MENU[1].equals(previousSelection)) {
+                    }
+                    else if (QUEST_TOOL_MENU[1].equals(previousSelection))
+                    {
                         qa.createInputBox(self, MANUAL_ADD_SPACE_PROMPT, MANUAL_ADD_SPACE_TITLE, "handleAddSpaceQuestManually", "qaquest.pid");
-                    } else if (QUEST_TOOL_MENU[2].equals(previousSelection)) {
+                    }
+                    else if (QUEST_TOOL_MENU[2].equals(previousSelection))
+                    {
                         boolean receivedTestQuests = getTestQuests(self);
-                        if (receivedTestQuests) {
+                        if (receivedTestQuests)
+                        {
                             broadcast(self, "Test quests received.");
-                        } else {
+                        }
+                        else
+                        {
                             broadcast(self, "There was a problem giving the test character test quests.");
                         }
                         showToolMainMenu(self);
-                    } else if (QUEST_TOOL_MENU[3].equals(previousSelection)) {
+                    }
+                    else if (QUEST_TOOL_MENU[3].equals(previousSelection))
+                    {
                         broadcast(self, "Type or paste quests into the window separated with a semicolon (;).");
-                        if (!utils.hasScriptVar(self, "qaquest.textData")) {
+                        if (!utils.hasScriptVar(self, "qaquest.textData"))
+                        {
                             bulkGrantAndCompleteQuestUi(self, "");
-                        } else {
+                        }
+                        else
+                        {
                             String textData = utils.getStringScriptVar(self, "qaquest.textData");
                             bulkGrantAndCompleteQuestUi(self, textData);
                         }
-                    } else if (QUEST_TOOL_MENU[4].equals(previousSelection)) {
+                    }
+                    else if (QUEST_TOOL_MENU[4].equals(previousSelection))
+                    {
                         broadcast(self, "Type or paste quests into the window separated with a semicolon (;).");
-                        if (!utils.hasScriptVar(self, "qaquest.textData")) {
+                        if (!utils.hasScriptVar(self, "qaquest.textData"))
+                        {
                             bulkGrantQuestUi(self, "");
-                        } else {
+                        }
+                        else
+                        {
                             String textData = utils.getStringScriptVar(self, "qaquest.textData");
                             bulkGrantQuestUi(self, textData);
                         }
-                    } else if (QUEST_TOOL_MENU[5].equals(previousSelection)) {
+                    }
+                    else if (QUEST_TOOL_MENU[5].equals(previousSelection))
+                    {
                         qa.createInputBox(self, SEND_SIGNAL_PROMPT, SEND_SIGNAL_TITLE, "handleSendQuestSignal", "qaquest.pid");
-                    } else {
+                    }
+                    else
+                    {
                         utils.setScriptVar(self, "qaquest.questString", previousSelection);
                         String[] subMenu = getCorrectMenu(self, previousSelection);
                         utils.setScriptVar(self, "qaquest.menu", subMenu);
 
                         // get tasks for selected quest if quest is active  (swg source addition)
-                        if(!previousSelection.contains("(C)"))
+                        if (!previousSelection.contains("(C)"))
                         {
                             int questId = groundquests.getQuestIdFromString(getQuestString(self));
                             String questName = questGetQuestName(questId);
@@ -174,12 +205,12 @@ public class qa_quest_skipper extends script.base_script
                             int numVisibleRows = Arrays.stream(dataTableGetIntColumn(table, "IS_VISIBLE")).filter(i -> i > 0).sum();
                             int rowCount = dataTableGetNumRows(table);
                             String[] menuItemsToAdd = new String[numVisibleRows];
-                            if(rowCount > 0)
+                            if (rowCount > 0)
                             {
                                 int elementPos = 0;
-                                for(int i = 0; i < rowCount; i++)
+                                for (int i = 0; i < rowCount; i++)
                                 {
-                                    if(groundquests.isTaskVisible(questId, i))
+                                    if (groundquests.isTaskVisible(questId, i))
                                     {
                                         String flag = groundquests.isTaskActive(self, getQuestString(self), i) ? "A" :
                                                 groundquests.hasCompletedTask(self, getQuestString(self), i) ? "C" : "I";
@@ -194,7 +225,7 @@ public class qa_quest_skipper extends script.base_script
                                     }
                                 }
                             }
-                            if(menuItemsToAdd.length > 0) // add tasks to existing menu
+                            if (menuItemsToAdd.length > 0) // add tasks to existing menu
                             {
                                 utils.setScriptVar(self, "qaquest.allQuestTasks", menuItemsToAdd);
                                 subMenu = Stream.concat(Arrays.stream(subMenu), Arrays.stream(menuItemsToAdd)).toArray(String[]::new);
@@ -207,6 +238,7 @@ public class qa_quest_skipper extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -227,7 +259,7 @@ public class qa_quest_skipper extends script.base_script
                     showToolMainMenu(self);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "qaquest.qaquestSubMenu");
                     String previousSelection = previousMainMenuArray[idx];
@@ -263,7 +295,7 @@ public class qa_quest_skipper extends script.base_script
                         if (!questString.equals("") && !questString.equals("Error"))
                         {
                             qa.clearQuest(self, questString);
-                            if(questString.contains("spacequest"))
+                            if (questString.contains("spacequest"))
                             {
                                 qa.grantSpaceQuest(self, qa.getSpaceQuestType(self, questString), questString);
                             }
@@ -274,10 +306,10 @@ public class qa_quest_skipper extends script.base_script
                             showToolMainMenu(self);
                         }
                     }
-                    else 
+                    else
                     {
                         String[] menuOptions = new String[2];
-                        if(previousSelection.contains("(A)"))
+                        if (previousSelection.contains("(A)"))
                         {
                             menuOptions[0] = "Complete this Task";
                             menuOptions[1] = "Fail this Task";
@@ -305,6 +337,7 @@ public class qa_quest_skipper extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestTaskOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -330,46 +363,46 @@ public class qa_quest_skipper extends script.base_script
                     String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "qaquest.qaquestSubMenu");
                     String previousSelection = previousMainMenuArray[idx];
                     int taskId = Integer.parseInt(utils.getStringScriptVar(self, "qaquest.taskToHandle").split(":")[0]);
-                    switch(previousSelection)
+                    switch (previousSelection)
                     {
                         case "Complete this Task":
                             groundquests.completeTask(self, getQuestString(self), taskId);
-                            broadcast(self, "Completing task "+taskId+" for quest "+getQuestString(self));
+                            broadcast(self, "Completing task " + taskId + " for quest " + getQuestString(self));
                             break;
                         case "Fail this Task":
                             groundquests.failTask(self, getQuestString(self), taskId);
-                            broadcast(self, "Failing task "+taskId+" for quest "+getQuestString(self));
+                            broadcast(self, "Failing task " + taskId + " for quest " + getQuestString(self));
                             break;
                         case "Activate this Task":
                             groundquests.activateTask(self, getQuestString(self), taskId);
-                            broadcast(self, "Activating task "+taskId+" for quest "+getQuestString(self));
+                            broadcast(self, "Activating task " + taskId + " for quest " + getQuestString(self));
                             break;
                         case "Activate this Task & Complete All Other Active Tasks":
                             String[] tasks = utils.getStringArrayScriptVar(self, "qaquest.allQuestTasks");
-                            if(tasks != null && tasks.length > 0)
+                            if (tasks != null)
                             {
-                                for(String task : tasks)
+                                for (String task : tasks)
                                 {
-                                    if(task.contains("(A)"))
+                                    if (task.contains("(A)"))
                                     {
                                         int tempId = Integer.parseInt(task.split(":")[0]);
                                         groundquests.completeTask(self, getQuestString(self), tempId);
-                                        broadcast(self, "Completing task "+tempId+" for quest "+getQuestString(self));
+                                        broadcast(self, "Completing task " + tempId + " for quest " + getQuestString(self));
                                     }
                                 }
                             }
                             groundquests.activateTask(self, getQuestString(self), taskId);
-                            broadcast(self, "Activating task "+taskId+" for quest "+getQuestString(self));
+                            broadcast(self, "Activating task " + taskId + " for quest " + getQuestString(self));
                             break;
                         case "Clear this Task's Completion History":
                             groundquests.clearTask(self, getQuestString(self), taskId);
-                            broadcast(self, "Clearing task "+taskId+" for quest "+getQuestString(self));
+                            broadcast(self, "Clearing task " + taskId + " for quest " + getQuestString(self));
                             break;
                         case "Clear this Task and Activate It":
                             groundquests.clearTask(self, getQuestString(self), taskId);
-                            broadcast(self, "Clearing task "+taskId+" for quest "+getQuestString(self));
+                            broadcast(self, "Clearing task " + taskId + " for quest " + getQuestString(self));
                             groundquests.activateTask(self, getQuestString(self), taskId);
-                            broadcast(self, "Activating task "+taskId+" for quest "+getQuestString(self));
+                            broadcast(self, "Activating task " + taskId + " for quest " + getQuestString(self));
                             break;
                     }
                     cleanAllScriptVars(self);
@@ -379,6 +412,7 @@ public class qa_quest_skipper extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAddGroundQuestManually(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -399,7 +433,7 @@ public class qa_quest_skipper extends script.base_script
                     qa.createInputBox(self, MANUAL_ADD_GROUND_PROMPT, MANUAL_ADD_GROUND_TITLE, "handleAddQuestManually", "qaquest.pid");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     qa.grantGroundQuest(self, stringEntry);
                     broadcast(self, "If the Quest wasn't added, check the spelling of the quest string");
@@ -409,6 +443,7 @@ public class qa_quest_skipper extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAddSpaceQuestManually(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -429,7 +464,7 @@ public class qa_quest_skipper extends script.base_script
                     qa.createInputBox(self, MANUAL_ADD_SPACE_PROMPT, MANUAL_ADD_SPACE_TITLE, "handleAddQuestManually", "qaquest.pid");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String questType = qa.getSpaceQuestType(self, stringEntry);
                     if (!questType.equals("Error"))
@@ -442,12 +477,12 @@ public class qa_quest_skipper extends script.base_script
                             qa.grantSpaceQuest(self, questType, questName);
                             broadcast(self, "If the Quest wasn't added, check the spelling of the quest string");
                         }
-                        else 
+                        else
                         {
                             broadcast(self, "The space quest string usually starts with spacequest/<questType>/");
                         }
                     }
-                    else 
+                    else
                     {
                         broadcast(self, "The space quest string usually starts with spacequest/");
                     }
@@ -457,6 +492,7 @@ public class qa_quest_skipper extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSendQuestSignal(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -480,17 +516,18 @@ public class qa_quest_skipper extends script.base_script
                 else
                 {
                     groundquests.sendSignal(self, stringEntry);
-                    broadcast(self, "Sending quest signal "+stringEntry+" to your player...");
+                    broadcast(self, "Sending quest signal " + stringEntry + " to your player...");
                     showToolMainMenu(self);
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int revokeQuestHandler(obj_id self, dictionary params) throws InterruptedException
     {
         String textData = params.getString("Prompt.lblPrompt.LocalText");
-        broadcast(self, "" + params);
+        broadcast(self, String.valueOf(params));
         forceCloseSUIPage(params.getInt("pageId"));
         if (!textData.equals(""))
         {
@@ -506,7 +543,7 @@ public class qa_quest_skipper extends script.base_script
                 iterateClearQuestStrings(self, allData);
                 showToolMainMenu(self);
             }
-            else 
+            else
             {
                 broadcast(self, "No arguments received. Cancelling macro.");
                 showToolMainMenu(self);
@@ -514,6 +551,7 @@ public class qa_quest_skipper extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int grantQuestHandler(obj_id self, dictionary params) throws InterruptedException
     {
         String widgetName = params.getString("eventWidgetName");
@@ -536,7 +574,7 @@ public class qa_quest_skipper extends script.base_script
                 iterateGrantQuestStrings(self, allData, false);
                 showToolMainMenu(self);
             }
-            else 
+            else
             {
                 broadcast(self, "No arguments received. Cancelling macro.");
                 showToolMainMenu(self);
@@ -544,6 +582,7 @@ public class qa_quest_skipper extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int grantAndCompleteQuestHandler(obj_id self, dictionary params) throws InterruptedException
     {
         String widgetName = params.getString("eventWidgetName");
@@ -566,7 +605,7 @@ public class qa_quest_skipper extends script.base_script
                 iterateGrantQuestStrings(self, allData, true);
                 showToolMainMenu(self);
             }
-            else 
+            else
             {
                 broadcast(self, "No arguments received. Cancelling macro.");
                 showToolMainMenu(self);
@@ -574,10 +613,12 @@ public class qa_quest_skipper extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int delay(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void showToolMainMenu(obj_id self) throws InterruptedException
     {
         try
@@ -587,27 +628,33 @@ public class qa_quest_skipper extends script.base_script
             System.arraycopy(allQuests, 0, combinedMenu, 0, allQuests.length);
             System.arraycopy(QUEST_TOOL_MENU, 0, combinedMenu, allQuests.length, QUEST_TOOL_MENU.length);
             qa.refreshMenu(self, QUEST_TOOL_PROMPT, QUEST_TOOL_TITLE, combinedMenu, "handleMainMenuOptions", true, "qaquest.pid", "qaquest.qaquestMenu");
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             qa.refreshMenu(self, QUEST_TOOL_PROMPT + "\n\nNo quests found on character", QUEST_TOOL_TITLE, QUEST_TOOL_MENU, "handleMainMenuOptions", true, "qaquest.pid", "qaquest.qaquestMenu");
         }
     }
+
     public void cleanAllScriptVars(obj_id self) throws InterruptedException
     {
         utils.removeScriptVarTree(self, "qaquest");
     }
+
     public boolean getTestQuests(obj_id self) throws InterruptedException
     {
-        for (String questDemoQuest : QUEST_DEMO_QUESTS) {
-            if (questDemoQuest.indexOf("spacequest/") == 0) {
+        for (String questDemoQuest : QUEST_DEMO_QUESTS)
+        {
+            if (questDemoQuest.indexOf("spacequest/") == 0)
+            {
                 boolean successGrant = qa.evalSpaceQuestThenGrant(self, questDemoQuest);
-            } else {
+            }
+            else
+            {
                 qa.grantGroundQuest(self, questDemoQuest);
             }
         }
         return true;
     }
+
     public String getQuestString(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "qaquest.questString"))
@@ -622,6 +669,7 @@ public class qa_quest_skipper extends script.base_script
         }
         return "Error";
     }
+
     public String[] getCorrectMenu(obj_id self, String questStringAndName) throws InterruptedException
     {
         if (!questStringAndName.equals(""))
@@ -630,13 +678,14 @@ public class qa_quest_skipper extends script.base_script
             {
                 return QUEST_ALT_MENU;
             }
-            else 
+            else
             {
                 return QUEST_MAIN_MENU;
             }
         }
         return QUEST_MAIN_MENU;
     }
+
     public void bulkGrantAndCompleteQuestUi(obj_id self, String textData) throws InterruptedException
     {
         String uiTitle = "Quest Macro";
@@ -645,7 +694,7 @@ public class qa_quest_skipper extends script.base_script
         {
             setSUIProperty(page, "Prompt.lblPrompt", "LocalText", textData);
         }
-        else 
+        else
         {
             setSUIProperty(page, "Prompt.lblPrompt", "LocalText", "");
         }
@@ -665,6 +714,7 @@ public class qa_quest_skipper extends script.base_script
         showSUIPage(page);
         flushSUIPage(page);
     }
+
     public void bulkGrantQuestUi(obj_id self, String textData) throws InterruptedException
     {
         String uiTitle = "Quest Macro";
@@ -673,7 +723,7 @@ public class qa_quest_skipper extends script.base_script
         {
             setSUIProperty(page, "Prompt.lblPrompt", "LocalText", textData);
         }
-        else 
+        else
         {
             setSUIProperty(page, "Prompt.lblPrompt", "LocalText", "");
         }
@@ -693,71 +743,94 @@ public class qa_quest_skipper extends script.base_script
         showSUIPage(page);
         flushSUIPage(page);
     }
+
     public void iterateGrantQuestStrings(obj_id self, String[] allData, boolean completeFlag) throws InterruptedException
     {
-        if (allData.length > 0)
+        for (String allDatum : allData)
         {
-            for (String allDatum : allData) {
-                if (!allDatum.equals("")) {
-                    if (allDatum.indexOf("spacequest/") == 0) {
-                        boolean questAttained = qa.evalSpaceQuestThenGrant(self, allDatum);
-                        if (!questAttained) {
+            if (!allDatum.equals(""))
+            {
+                if (allDatum.indexOf("spacequest/") == 0)
+                {
+                    boolean questAttained = qa.evalSpaceQuestThenGrant(self, allDatum);
+                    if (!questAttained)
+                    {
+                        broadcast(self, "Quest " + allDatum + " could not be granted.");
+                    }
+                    if (completeFlag)
+                    {
+                        messageTo(self, "delay", null, 1, false);
+                        boolean completed = qa.completeActiveQuest(self, allDatum);
+                        if (!completed)
+                        {
+                            broadcast(self, "Quest " + allDatum + " could not be completed.");
+                        }
+                    }
+                }
+                else if (allDatum.indexOf("quest/") == 0)
+                {
+                    qa.grantGroundQuest(self, allDatum);
+                    if (completeFlag)
+                    {
+                        messageTo(self, "delay", null, 1, false);
+                        boolean completed = qa.completeActiveQuest(self, allDatum);
+                        if (!completed)
+                        {
                             broadcast(self, "Quest " + allDatum + " could not be granted.");
                         }
-                        if (completeFlag) {
-                            messageTo(self, "delay", null, 1, false);
-                            boolean completed = qa.completeActiveQuest(self, allDatum);
-                            if (!completed) {
-                                broadcast(self, "Quest " + allDatum + " could not be completed.");
-                            }
-                        }
-                    } else if (allDatum.indexOf("quest/") == 0) {
-                        qa.grantGroundQuest(self, allDatum);
-                        if (completeFlag) {
-                            messageTo(self, "delay", null, 1, false);
-                            boolean completed = qa.completeActiveQuest(self, allDatum);
-                            if (!completed) {
-                                broadcast(self, "Quest " + allDatum + " could not be granted.");
-                            }
-                        }
-                    } else {
-                        broadcast(self, "Unknown quest string: " + allDatum);
                     }
+                }
+                else
+                {
+                    broadcast(self, "Unknown quest string: " + allDatum);
                 }
             }
         }
     }
+
     public void iterateClearQuestStrings(obj_id self, String[] allData) throws InterruptedException
     {
-        if (allData.length > 0)
+        for (String allDatum : allData)
         {
-            for (String allDatum : allData) {
-                if (!allDatum.equals("")) {
-                    if (allDatum.indexOf("spacequest/") == 0) {
-                        String questName = qa.getSpaceQuestName(self, allDatum);
-                        if (!questName.equals("")) {
-                            String questType = qa.getSpaceQuestType(self, allDatum);
-                            if (!questType.equals("")) {
-                                boolean completed = qa.clearQuest(self, allDatum);
-                                messageTo(self, "delay", null, 1, false);
-                                if (!completed) {
-                                    broadcast(self, "Quest " + allDatum + " could not be cleared.");
-                                }
-                            } else {
-                                broadcast(self, "Unknown quest string: " + allDatum);
+            if (!allDatum.equals(""))
+            {
+                if (allDatum.indexOf("spacequest/") == 0)
+                {
+                    String questName = qa.getSpaceQuestName(self, allDatum);
+                    if (!questName.equals(""))
+                    {
+                        String questType = qa.getSpaceQuestType(self, allDatum);
+                        if (!questType.equals(""))
+                        {
+                            boolean completed = qa.clearQuest(self, allDatum);
+                            messageTo(self, "delay", null, 1, false);
+                            if (!completed)
+                            {
+                                broadcast(self, "Quest " + allDatum + " could not be cleared.");
                             }
-                        } else {
+                        }
+                        else
+                        {
                             broadcast(self, "Unknown quest string: " + allDatum);
                         }
-                    } else if (allDatum.indexOf("quest/") == 0) {
-                        boolean completed = qa.clearQuest(self, allDatum);
-                        messageTo(self, "delay", null, 1, false);
-                        if (!completed) {
-                            broadcast(self, "Quest " + allDatum + " could not be cleared.");
-                        }
-                    } else {
+                    }
+                    else
+                    {
                         broadcast(self, "Unknown quest string: " + allDatum);
                     }
+                }
+                else if (allDatum.indexOf("quest/") == 0)
+                {
+                    boolean completed = qa.clearQuest(self, allDatum);
+                    messageTo(self, "delay", null, 1, false);
+                    if (!completed)
+                    {
+                        broadcast(self, "Quest " + allDatum + " could not be cleared.");
+                    }
+                }
+                else
+                {
+                    broadcast(self, "Unknown quest string: " + allDatum);
                 }
             }
         }

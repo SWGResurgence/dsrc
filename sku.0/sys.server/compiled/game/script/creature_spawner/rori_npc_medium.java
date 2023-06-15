@@ -1,5 +1,11 @@
 package script.creature_spawner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -11,9 +17,10 @@ public class rori_npc_medium extends base_newbie_npc_spawner
     public rori_npc_medium()
     {
     }
+
     public String pickCreature() throws InterruptedException
     {
-        switch (rand(1,4))
+        switch (rand(1, 4))
         {
             case 1:
                 return "gundark_rogue";
@@ -26,6 +33,7 @@ public class rori_npc_medium extends base_newbie_npc_spawner
         }
         return "gundark_rogue";
     }
+
     public int creatureDied(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())

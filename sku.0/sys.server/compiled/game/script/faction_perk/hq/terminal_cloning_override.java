@@ -1,5 +1,11 @@
 package script.faction_perk.hq;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.cloninglib;
 import script.library.money;
@@ -10,6 +16,7 @@ public class terminal_cloning_override extends script.base_script
     public terminal_cloning_override()
     {
     }
+
     public int handleRequestedClone(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,20 +14,24 @@ import script.*;
 
 public class legacy_head_malakili extends script.base_script
 {
+    public static String c_stringFile = "conversation/legacy_head_malakili";
+
     public legacy_head_malakili()
     {
     }
-    public static String c_stringFile = "conversation/legacy_head_malakili";
+
     public boolean legacy_head_malakili_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean legacy_head_malakili_condition_onRod(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/legacy_head_rod");
         boolean OnTask = (questIsQuestActive(questId1, player));
         return OnTask;
     }
+
     public boolean legacy_head_malakili_condition_onThreeTasks(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/legacy_head_rod");
@@ -29,6 +39,7 @@ public class legacy_head_malakili extends script.base_script
         boolean onTask = (questIsTaskActive(questId1, ground, player));
         return onTask;
     }
+
     public boolean legacy_head_malakili_condition_abandoned(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/legacy_head_start");
@@ -36,30 +47,36 @@ public class legacy_head_malakili extends script.base_script
         boolean OnTask = (questIsQuestComplete(questId1, player)) && (!(questIsQuestActive(questId2, player))) && (!(questIsQuestComplete(questId2, player)));
         return OnTask;
     }
+
     public boolean legacy_head_malakili_condition_rodCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/legacy_head_rod");
         boolean OnTask = (questIsQuestComplete(questId1, player));
         return OnTask;
     }
+
     public void legacy_head_malakili_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void legacy_head_malakili_action_grantRod(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "legacy_head_rod");
     }
+
     public void legacy_head_malakili_action_signalQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "legacy_head_rod_launch_e2");
     }
+
     public void event_malakili_action_vendor(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary d = new dictionary();
         d.put("player", player);
         messageTo(npc, "showInventorySUI", d, 0, false);
     }
+
     public int legacy_head_malakili_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -75,6 +92,7 @@ public class legacy_head_malakili extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_head_malakili_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_11"))
@@ -101,7 +119,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_15");
@@ -114,7 +132,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -134,6 +152,7 @@ public class legacy_head_malakili extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_head_malakili_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_15"))
@@ -153,7 +172,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_19");
@@ -162,7 +181,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -194,7 +213,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -207,7 +226,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -217,6 +236,7 @@ public class legacy_head_malakili extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_head_malakili_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_19"))
@@ -250,7 +270,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_23");
@@ -267,7 +287,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -277,6 +297,7 @@ public class legacy_head_malakili extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_head_malakili_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_23"))
@@ -335,7 +356,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -360,7 +381,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -380,6 +401,7 @@ public class legacy_head_malakili extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_head_malakili_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -413,7 +435,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_23");
@@ -430,7 +452,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -455,7 +477,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -464,7 +486,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -474,6 +496,7 @@ public class legacy_head_malakili extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_head_malakili_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -507,7 +530,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -524,7 +547,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -534,6 +557,7 @@ public class legacy_head_malakili extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_head_malakili_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -567,7 +591,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_23");
@@ -584,7 +608,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -637,7 +661,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -662,7 +686,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -682,6 +706,7 @@ public class legacy_head_malakili extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_head_malakili_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_121"))
@@ -715,7 +740,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_23");
@@ -732,7 +757,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -771,7 +796,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_96");
@@ -788,7 +813,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -827,7 +852,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -844,7 +869,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -883,7 +908,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116");
@@ -900,7 +925,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -920,6 +945,7 @@ public class legacy_head_malakili extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_head_malakili_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_96"))
@@ -953,7 +979,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_23");
@@ -970,7 +996,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1023,7 +1049,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -1048,7 +1074,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1068,6 +1094,7 @@ public class legacy_head_malakili extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_head_malakili_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_106"))
@@ -1101,7 +1128,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_23");
@@ -1118,7 +1145,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1171,7 +1198,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -1196,7 +1223,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1216,6 +1243,7 @@ public class legacy_head_malakili extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int legacy_head_malakili_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116"))
@@ -1249,7 +1277,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_23");
@@ -1266,7 +1294,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1319,7 +1347,7 @@ public class legacy_head_malakili extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -1344,7 +1372,7 @@ public class legacy_head_malakili extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.legacy_head_malakili.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1364,6 +1392,7 @@ public class legacy_head_malakili extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1377,6 +1406,7 @@ public class legacy_head_malakili extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1386,6 +1416,7 @@ public class legacy_head_malakili extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1394,18 +1425,21 @@ public class legacy_head_malakili extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.legacy_head_malakili");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1430,7 +1464,7 @@ public class legacy_head_malakili extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -1438,7 +1472,7 @@ public class legacy_head_malakili extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_head_malakili.branchId", 1);
                 npcStartConversation(player, npc, "legacy_head_malakili", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1481,7 +1515,7 @@ public class legacy_head_malakili extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_11");
@@ -1493,7 +1527,7 @@ public class legacy_head_malakili extends script.base_script
                 utils.setScriptVar(player, "conversation.legacy_head_malakili.branchId", 5);
                 npcStartConversation(player, npc, "legacy_head_malakili", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1509,6 +1543,7 @@ public class legacy_head_malakili extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("legacy_head_malakili"))

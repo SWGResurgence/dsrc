@@ -1,5 +1,11 @@
 package script.quest.ep3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.attrib;
 import script.library.create;
@@ -8,22 +14,25 @@ import script.library.utils;
 
 public class kachirho_takook_recorder extends script.base_script
 {
-    public kachirho_takook_recorder()
-    {
-    }
     public static final String STF = "ep3/sidequests";
     public static final string_id LISTEN = new string_id(STF, "takook_recorder_listen");
     public static final string_id CLICK = new string_id(STF, "takook_recorder_click");
+    public kachirho_takook_recorder()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setRecorderAttributes(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setRecorderAttributes(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, LISTEN);
@@ -35,6 +44,7 @@ public class kachirho_takook_recorder extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -45,7 +55,7 @@ public class kachirho_takook_recorder extends script.base_script
                 groundquests.sendSignal(player, "takookTale");
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, CLICK);
                 return SCRIPT_CONTINUE;
@@ -53,12 +63,13 @@ public class kachirho_takook_recorder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setRecorderAttributes(obj_id self) throws InterruptedException
     {
         createTriggerVolume("blink_range", 5, true);
         setAttributeInterested(self, attrib.ALL);
-        return;
     }
+
     public int handleReset(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id lightParticle = params.getObjId("lightParticle");
@@ -66,6 +77,7 @@ public class kachirho_takook_recorder extends script.base_script
         utils.removeScriptVar(self, "blinking");
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id who) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "blinking"))

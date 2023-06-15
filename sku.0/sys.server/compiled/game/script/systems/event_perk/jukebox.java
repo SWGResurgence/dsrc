@@ -1,5 +1,11 @@
 package script.systems.event_perk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 import script.library.utils;
@@ -13,6 +19,7 @@ public class jukebox extends script.base_script
     public static final String JUKBOX_RANGE_OBJVAR = "storyteller.jukebox_range";
     public static final String JUKEBOX_ROOM_SCRIPT = "systems.event_perk.jukebox_room";
     public static final String JUKEBOX_ROOM_OBJVAR = "storyteller.room.myJukebox";
+
     public jukebox()
     {
     }
@@ -195,7 +202,6 @@ public class jukebox extends script.base_script
             songs[i] = "@event_perk_jukebox_songs:" + alphabetizedSongList[i];
         }
         sui.listbox(self, player, "@event_perk_jukebox_songs:songs_d", sui.OK_CANCEL, "@event_perk_jukebox_songs:songs_t", songs, "selectMusic", true);
-        return;
     }
 
     public String[] getAlphabetizedSongList(String[] songList) throws InterruptedException
@@ -226,7 +232,6 @@ public class jukebox extends script.base_script
                 playMusic(player, song);
             }
         }
-        return;
     }
 
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
@@ -294,7 +299,6 @@ public class jukebox extends script.base_script
             }
             messageTo(thisRoom, "stopSong", null, 1, false);
         }
-        return;
     }
 
     public int prepareToPlaySelectedSong(obj_id self, dictionary params) throws InterruptedException
@@ -386,6 +390,5 @@ public class jukebox extends script.base_script
                 messageTo(thisRoom, "stopAndCleanUp", null, 1, false);
             }
         }
-        return;
     }
 }

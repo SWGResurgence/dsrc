@@ -1,78 +1,85 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class pvp_station_rebel extends script.base_script
 {
+    public static String c_stringFile = "conversation/pvp_station_rebel";
+
     public pvp_station_rebel()
     {
     }
-    public static String c_stringFile = "conversation/pvp_station_rebel";
+
     public boolean pvp_station_rebel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean pvp_station_rebel_condition_isPlayerRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_battlefield.isInRebelShip(player);
     }
+
     public boolean pvp_station_rebel_condition_isPlayerImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_battlefield.isInImperialShip(player) || pvpGetAlignedFaction(player) == (-615855020));
     }
+
     public boolean pvp_station_rebel_condition_isRebelFactionWithMission(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_battlefield.isInNeutralShip(player))
         {
             return ((pvpGetAlignedFaction(player) == (370444368)) && space_quest.hasQuest(player));
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public boolean pvp_station_rebel_condition_isInYacht(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(player);
         if (isIdValid(ship))
         {
             String template = getTemplateName(ship);
-            if (template != null && template.endsWith("_yacht.iff"))
-            {
-                return true;
-            }
+            return template != null && template.endsWith("_yacht.iff");
         }
         return false;
     }
+
     public boolean pvp_station_rebel_condition_isPlayerNeutral(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_battlefield.isInNeutralShip(player))
         {
-            if (pvpGetAlignedFaction(player) == (370444368))
-            {
-                return false;
-            }
-            else 
-            {
-                return true;
-            }
+            return pvpGetAlignedFaction(player) != (370444368);
         }
         return false;
     }
+
     public boolean pvp_station_rebel_condition_isTooFar(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id containingShip = space_transition.getContainingShip(player);
         return (getDistance(npc, containingShip) > space_transition.STATION_COMM_MAX_DISTANCE);
     }
+
     public void pvp_station_rebel_action_setPlayerToOvertStatus(obj_id player, obj_id npc) throws InterruptedException
     {
         space_transition.setPlayerOvert(player, (370444368));
     }
+
     public int pvp_station_rebel_tokenDI_prestigeCost(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_battlefield.getPrestigeCostForTransition(player, npc);
     }
+
     public int pvp_station_rebel_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32da2cf3"))
@@ -88,6 +95,7 @@ public class pvp_station_rebel extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int pvp_station_rebel_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_370822d1"))
@@ -134,7 +142,7 @@ public class pvp_station_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_626fe576");
@@ -143,7 +151,7 @@ public class pvp_station_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.pvp_station_rebel.branchId");
                     chat.chat(npc, player, message);
@@ -154,6 +162,7 @@ public class pvp_station_rebel extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int pvp_station_rebel_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_626fe576"))
@@ -173,7 +182,7 @@ public class pvp_station_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_dc5b544f");
@@ -182,7 +191,7 @@ public class pvp_station_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.pvp_station_rebel.branchId");
                     chat.chat(npc, player, message);
@@ -193,6 +202,7 @@ public class pvp_station_rebel extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int pvp_station_rebel_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_dc5b544f"))
@@ -226,7 +236,7 @@ public class pvp_station_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_370822d1");
@@ -247,7 +257,7 @@ public class pvp_station_rebel extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.pvp_station_rebel.branchId");
                     prose_package pp = new prose_package();
@@ -262,6 +272,7 @@ public class pvp_station_rebel extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int pvp_station_rebel_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_370822d1"))
@@ -308,7 +319,7 @@ public class pvp_station_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_626fe576");
@@ -317,7 +328,7 @@ public class pvp_station_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.pvp_station_rebel.branchId");
                     chat.chat(npc, player, message);
@@ -328,12 +339,14 @@ public class pvp_station_rebel extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_rebel_transport_01.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -341,6 +354,7 @@ public class pvp_station_rebel extends script.base_script
         detachScript(self, "space.content_tools.spacestation");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -349,18 +363,21 @@ public class pvp_station_rebel extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.pvp_station_rebel");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -395,7 +412,7 @@ public class pvp_station_rebel extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_32da2cf3");
@@ -407,7 +424,7 @@ public class pvp_station_rebel extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "pvp_station_rebel", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -458,7 +475,7 @@ public class pvp_station_rebel extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_370822d1");
@@ -478,7 +495,7 @@ public class pvp_station_rebel extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "pvp_station_rebel", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -491,6 +508,7 @@ public class pvp_station_rebel extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("pvp_station_rebel"))

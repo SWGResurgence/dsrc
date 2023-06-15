@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.decrepit_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.dot;
 import script.library.trial;
@@ -7,17 +13,19 @@ import script.obj_id;
 
 public class heat_trap_dot extends script.base_script
 {
-    public heat_trap_dot()
-    {
-    }
     public static final int DAMAGE = 2000;
     public static final int DURATION = 5;
     public static final boolean LOGGING = false;
+    public heat_trap_dot()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "validateBurn", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -32,6 +40,7 @@ public class heat_trap_dot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int validateBurn(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -42,7 +51,7 @@ public class heat_trap_dot extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             or_5 = withScript[0];
         }
@@ -61,6 +70,7 @@ public class heat_trap_dot extends script.base_script
         messageTo(self, "validateBurn", null, DURATION - 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

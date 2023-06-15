@@ -1,5 +1,11 @@
 package script.theme_park.heroic.ig88;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.hue;
@@ -13,6 +19,7 @@ public class ig88_super_battle_droid extends script.base_script
     public ig88_super_battle_droid()
     {
     }
+
     public obj_id getRocketTarget(obj_id self) throws InterruptedException
     {
         obj_id dungeon = getTopMostContainer(self);
@@ -35,6 +42,7 @@ public class ig88_super_battle_droid extends script.base_script
         }
         return target;
     }
+
     public void findNextTarget(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self) || ai_lib.isDead(self) || utils.hasScriptVar(self, "flameThrowerUnequipped"))
@@ -57,7 +65,7 @@ public class ig88_super_battle_droid extends script.base_script
                 pathToPoint = new location(5, 0, 10, getLocation(self).area, getLocation(self).cell);
                 firstSuperDroid = true;
             }
-            else 
+            else
             {
                 pathToPoint = new location(-5, 0, 10, getLocation(self).area, getLocation(self).cell);
             }
@@ -87,13 +95,16 @@ public class ig88_super_battle_droid extends script.base_script
         {
             return;
         }
-        for (obj_id target1 : targets) {
+        for (obj_id target1 : targets)
+        {
             String checkSpawn = getStringObjVar(target1, "spawn_id");
-            if (firstSuperDroid && checkSpawn.equals("mouse_droid1")) {
+            if (firstSuperDroid && checkSpawn.equals("mouse_droid1"))
+            {
                 target = target1;
                 break;
             }
-            if (!firstSuperDroid && checkSpawn.equals("mouse_droid2")) {
+            if (!firstSuperDroid && checkSpawn.equals("mouse_droid2"))
+            {
                 target = target1;
                 break;
             }
@@ -102,27 +113,31 @@ public class ig88_super_battle_droid extends script.base_script
         {
             return;
         }
-        if ((float)getAttrib(self, ACTION) / getMaxAttrib(self, ACTION) < 0.1f)
+        if ((float) getAttrib(self, ACTION) / getMaxAttrib(self, ACTION) < 0.1f)
         {
             destroyMouseDroids(dungeon);
             return;
         }
         setHate(self, target, 1000000);
     }
+
     public void destroyMouseDroids(obj_id dungeon) throws InterruptedException
     {
         obj_id[] targets = trial.getObjectsInDungeonWithObjVar(dungeon, "spawn_id");
-        if (targets == null || targets.length <= 0)
+        if (targets == null)
         {
             return;
         }
-        for (obj_id target : targets) {
+        for (obj_id target : targets)
+        {
             String checkSpawn = getStringObjVar(target, "spawn_id");
-            if (checkSpawn.equals("mouse_droid1") || checkSpawn.equals("mouse_droid2")) {
+            if (checkSpawn.equals("mouse_droid1") || checkSpawn.equals("mouse_droid2"))
+            {
                 destroyObject(target);
             }
         }
     }
+
     public int findTarget(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -134,6 +149,7 @@ public class ig88_super_battle_droid extends script.base_script
         findNextTarget(self);
         return SCRIPT_CONTINUE;
     }
+
     public int findRocketTarget(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -149,12 +165,14 @@ public class ig88_super_battle_droid extends script.base_script
         messageTo(self, "findRocketTarget", sessionDict, 1 + rand(1, 2), false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         dictionary sessionDict = new dictionary();
         messageTo(self, "colorize", sessionDict, 0.25f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int colorize(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))

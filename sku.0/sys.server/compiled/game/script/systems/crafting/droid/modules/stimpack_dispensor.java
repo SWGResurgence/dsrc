@@ -1,5 +1,11 @@
 package script.systems.crafting.droid.modules;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -11,6 +17,7 @@ public class stimpack_dispensor extends script.base_script
     public static final String SCRIPT_VAR_STIMPACK_LIST = "droid_module.stimpack_list";
     public static final String SCRIPT_VAR_STIMPACK_DROID = "droid_module.stimpack_droid";
     public static final String SCRIPT_VAR_STIMPACK_SUI = "droid_module.stimpack_sui";
+
     public stimpack_dispensor()
     {
     }

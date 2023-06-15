@@ -1,5 +1,11 @@
 package script.theme_park.tatooine.sarlacc;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class sarlacc_spawner extends script.base_script
     public sarlacc_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "sarlacc"))
@@ -22,6 +29,7 @@ public class sarlacc_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "sarlacc"))
@@ -35,6 +43,7 @@ public class sarlacc_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int sarlaccDied(obj_id self, dictionary params) throws InterruptedException
     {
         location sarlaccPit = new location(-6173, 6, -3361, "tatooine", null);

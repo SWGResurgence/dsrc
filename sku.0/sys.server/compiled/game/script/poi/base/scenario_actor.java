@@ -1,5 +1,11 @@
 package script.poi.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.group;
 import script.library.scenario;
@@ -8,10 +14,12 @@ import script.obj_id;
 
 public class scenario_actor extends script.theme_park.poi.base
 {
+    public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
+
     public scenario_actor()
     {
     }
-    public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "npc.converse.npc_convo");
@@ -21,6 +29,7 @@ public class scenario_actor extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int xpDelegated(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] killers = null;
@@ -28,13 +37,13 @@ public class scenario_actor extends script.theme_park.poi.base
         if ((winner == null) || (winner == obj_id.NULL_ID))
         {
         }
-        else 
+        else
         {
             if (group.isGroupObject(winner))
             {
                 killers = getGroupMemberIds(winner);
             }
-            else 
+            else
             {
                 killers = new obj_id[1];
                 killers[0] = winner;

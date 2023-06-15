@@ -1,5 +1,11 @@
 package script.poi.badge;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.badge;
 import script.obj_id;
@@ -9,18 +15,20 @@ public class badge_exploration extends script.base_script
     public badge_exploration()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume("badge1", 10.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volName, obj_id breecher) throws InterruptedException
     {
         if (!isPlayer(breecher))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (!hasObjVar(self, "badge") && !hasObjVar(self, "icon"))
             {
@@ -38,7 +46,7 @@ public class badge_exploration extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 int iconNum = getIntObjVar(self, "icon");
                 String slotName = getCollectionSlotName(iconNum);

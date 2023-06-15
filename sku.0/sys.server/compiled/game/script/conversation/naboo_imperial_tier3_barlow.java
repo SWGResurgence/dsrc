@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.factions;
@@ -8,45 +14,38 @@ import script.*;
 
 public class naboo_imperial_tier3_barlow extends script.base_script
 {
+    public static String c_stringFile = "conversation/naboo_imperial_tier3_barlow";
+
     public naboo_imperial_tier3_barlow()
     {
     }
-    public static String c_stringFile = "conversation/naboo_imperial_tier3_barlow";
+
     public boolean naboo_imperial_tier3_barlow_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean naboo_imperial_tier3_barlow_condition_setByInquisition(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.hasSpaceFlag(player, "questionBarlow"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_flags.hasSpaceFlag(player, "questionBarlow");
     }
+
     public boolean naboo_imperial_tier3_barlow_condition_isCorrectFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_imperial_navy_novice"));
     }
+
     public boolean naboo_imperial_tier3_barlow_condition_alreadyTalkedTo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.hasSpaceFlag(player, "spokeToBarlow"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_flags.hasSpaceFlag(player, "spokeToBarlow");
     }
+
     public void naboo_imperial_tier3_barlow_action_removeTalktoBarlow(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.removeSpaceFlag(player, "questionBarlow");
         space_flags.setSpaceFlag(player, "spokeToBarlow", 1);
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40f102e4"))
@@ -74,7 +73,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aeb1b3ee");
@@ -87,7 +86,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -115,7 +114,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9e3a71b");
@@ -124,7 +123,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -135,6 +134,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_aeb1b3ee"))
@@ -162,7 +162,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c97a22d4");
@@ -175,7 +175,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -209,7 +209,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a623d5ba");
@@ -222,7 +222,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -233,6 +233,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c97a22d4"))
@@ -253,7 +254,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9e3a71b");
@@ -262,7 +263,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -297,7 +298,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24614dc6");
@@ -310,7 +311,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -321,6 +322,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f9e3a71b"))
@@ -348,7 +350,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3700f6");
@@ -361,7 +363,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -372,6 +374,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3700f6"))
@@ -407,7 +410,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7ef5613c");
@@ -424,7 +427,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -452,7 +455,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_80254eb2");
@@ -461,7 +464,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -472,6 +475,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7ef5613c"))
@@ -493,7 +497,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d5ad0fe2");
@@ -502,7 +506,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -530,7 +534,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d5ad0fe2");
@@ -539,7 +543,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -567,7 +571,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d5ad0fe2");
@@ -576,7 +580,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -587,6 +591,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d5ad0fe2"))
@@ -615,7 +620,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81caddeb");
@@ -628,7 +633,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -639,6 +644,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_81caddeb"))
@@ -666,7 +672,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9b59f040");
@@ -679,7 +685,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -714,7 +720,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_eb02c97f");
@@ -727,7 +733,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -738,6 +744,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9b59f040"))
@@ -759,7 +766,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d324b656");
@@ -768,7 +775,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -803,7 +810,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3668d398");
@@ -816,7 +823,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -827,6 +834,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d324b656"))
@@ -855,7 +863,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ea5a649e");
@@ -868,7 +876,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -879,6 +887,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ea5a649e"))
@@ -900,7 +909,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5c896992");
@@ -909,7 +918,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -943,7 +952,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3668d398");
@@ -956,7 +965,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -967,6 +976,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5c896992"))
@@ -988,7 +998,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_72ceec2c");
@@ -997,7 +1007,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1008,6 +1018,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_72ceec2c"))
@@ -1036,7 +1047,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3668d398");
@@ -1049,7 +1060,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1060,6 +1071,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3668d398"))
@@ -1081,7 +1093,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7b1ee2bd");
@@ -1090,7 +1102,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1117,7 +1129,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c37cc43f");
@@ -1126,7 +1138,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1137,6 +1149,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7b1ee2bd"))
@@ -1158,7 +1171,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ffead1ac");
@@ -1167,7 +1180,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1178,6 +1191,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ffead1ac"))
@@ -1205,7 +1219,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_55a16d2b");
@@ -1218,7 +1232,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1229,6 +1243,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_55a16d2b"))
@@ -1249,7 +1264,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b83437a1");
@@ -1258,7 +1273,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1292,7 +1307,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59904aa4");
@@ -1305,7 +1320,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1316,6 +1331,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b83437a1"))
@@ -1337,7 +1353,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c2631c46");
@@ -1346,7 +1362,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1357,6 +1373,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c2631c46"))
@@ -1383,7 +1400,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d1511c14");
@@ -1396,7 +1413,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1407,6 +1424,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d1511c14"))
@@ -1428,7 +1446,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_51df4407");
@@ -1437,7 +1455,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1463,7 +1481,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9cb92ec3");
@@ -1472,7 +1490,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1483,6 +1501,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_51df4407"))
@@ -1503,7 +1522,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_540a88a5");
@@ -1512,7 +1531,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1523,6 +1542,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_540a88a5"))
@@ -1543,7 +1563,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9cb92ec3");
@@ -1552,7 +1572,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1563,6 +1583,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9cb92ec3"))
@@ -1589,7 +1610,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7324835");
@@ -1602,7 +1623,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1613,6 +1634,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7324835"))
@@ -1632,7 +1654,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b969a839");
@@ -1641,7 +1663,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1674,7 +1696,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9bdca9f6");
@@ -1687,7 +1709,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1698,6 +1720,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b969a839"))
@@ -1717,7 +1740,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e6f64e19");
@@ -1726,7 +1749,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1737,6 +1760,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e6f64e19"))
@@ -1763,7 +1787,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9bdca9f6");
@@ -1776,7 +1800,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1787,6 +1811,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9bdca9f6"))
@@ -1806,7 +1831,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d1dc8a70");
@@ -1815,7 +1840,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1842,7 +1867,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107a83ec");
@@ -1851,7 +1876,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1862,6 +1887,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d1dc8a70"))
@@ -1881,7 +1907,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_57cfb6a7");
@@ -1890,7 +1916,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1901,6 +1927,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57cfb6a7"))
@@ -1922,7 +1949,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_becaf709");
@@ -1931,7 +1958,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1942,6 +1969,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_becaf709"))
@@ -1962,7 +1990,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7ed6dd6");
@@ -1971,7 +1999,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -1982,6 +2010,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7ed6dd6"))
@@ -2002,7 +2031,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107a83ec");
@@ -2011,7 +2040,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2022,6 +2051,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_107a83ec"))
@@ -2041,7 +2071,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5ffde8db");
@@ -2050,7 +2080,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2061,6 +2091,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5ffde8db"))
@@ -2080,7 +2111,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30a96327");
@@ -2089,7 +2120,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2100,6 +2131,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30a96327"))
@@ -2134,7 +2166,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2e851dd5");
@@ -2151,7 +2183,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2162,6 +2194,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2e851dd5"))
@@ -2207,6 +2240,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9cb92ec3"))
@@ -2233,7 +2267,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7324835");
@@ -2246,7 +2280,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2257,6 +2291,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_59904aa4"))
@@ -2277,7 +2312,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c2631c46");
@@ -2286,7 +2321,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2314,7 +2349,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cfd0827b");
@@ -2323,7 +2358,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2334,6 +2369,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c2631c46"))
@@ -2360,7 +2396,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d1511c14");
@@ -2373,7 +2409,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2384,6 +2420,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cfd0827b"))
@@ -2405,7 +2442,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c2631c46");
@@ -2414,7 +2451,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2425,6 +2462,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c2631c46"))
@@ -2451,7 +2489,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d1511c14");
@@ -2464,7 +2502,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2475,6 +2513,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c37cc43f"))
@@ -2501,7 +2540,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47e55614");
@@ -2514,7 +2553,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2525,6 +2564,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47e55614"))
@@ -2546,7 +2586,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90c2580f");
@@ -2555,7 +2595,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2582,7 +2622,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_749aece");
@@ -2591,7 +2631,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2602,6 +2642,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_90c2580f"))
@@ -2622,7 +2663,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_749aece");
@@ -2631,7 +2672,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2642,6 +2683,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_749aece"))
@@ -2676,7 +2718,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2e851dd5");
@@ -2693,7 +2735,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2704,6 +2746,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_749aece"))
@@ -2738,7 +2781,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2e851dd5");
@@ -2755,7 +2798,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2766,6 +2809,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_eb02c97f"))
@@ -2786,7 +2830,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4c90f2a4");
@@ -2795,7 +2839,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2822,7 +2866,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_883e63f3");
@@ -2831,7 +2875,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2842,6 +2886,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4c90f2a4"))
@@ -2863,7 +2908,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_883e63f3");
@@ -2872,7 +2917,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2883,6 +2928,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_883e63f3"))
@@ -2910,7 +2956,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3668d398");
@@ -2923,7 +2969,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2934,6 +2980,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_883e63f3"))
@@ -2961,7 +3008,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3668d398");
@@ -2974,7 +3021,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -2985,6 +3032,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d5ad0fe2"))
@@ -3006,7 +3054,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cd5b3d17");
@@ -3015,7 +3063,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3026,6 +3074,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cd5b3d17"))
@@ -3045,7 +3094,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81caddeb");
@@ -3054,7 +3103,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3065,6 +3114,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_81caddeb"))
@@ -3092,7 +3142,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9b59f040");
@@ -3105,7 +3155,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3116,6 +3166,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d5ad0fe2"))
@@ -3137,7 +3188,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8fa4c7bd");
@@ -3146,7 +3197,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3157,6 +3208,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8fa4c7bd"))
@@ -3184,7 +3236,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3668d398");
@@ -3197,7 +3249,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3208,6 +3260,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_80254eb2"))
@@ -3235,7 +3288,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a623d5ba");
@@ -3248,7 +3301,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3259,6 +3312,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a623d5ba"))
@@ -3286,7 +3340,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61c6827c");
@@ -3299,7 +3353,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3325,7 +3379,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6f94037e");
@@ -3334,7 +3388,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3345,6 +3399,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_61c6827c"))
@@ -3365,7 +3420,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8d77e799");
@@ -3374,7 +3429,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3400,7 +3455,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_dc89a970");
@@ -3409,7 +3464,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3420,6 +3475,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8d77e799"))
@@ -3440,7 +3496,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_dc89a970");
@@ -3449,7 +3505,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3460,6 +3516,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_dc89a970"))
@@ -3479,7 +3536,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_35f73adf");
@@ -3488,7 +3545,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3499,6 +3556,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_35f73adf"))
@@ -3525,7 +3583,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14c38c33");
@@ -3538,7 +3596,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3549,6 +3607,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_14c38c33"))
@@ -3576,7 +3635,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_797cf757");
@@ -3589,7 +3648,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3615,7 +3674,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_45ebf891");
@@ -3624,7 +3683,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3635,6 +3694,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_797cf757"))
@@ -3661,7 +3721,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_62adf222");
@@ -3674,7 +3734,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3700,7 +3760,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_45ebf891");
@@ -3709,7 +3769,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3720,6 +3780,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch67(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_62adf222"))
@@ -3747,7 +3808,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1b131a47");
@@ -3760,7 +3821,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3786,7 +3847,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_45ebf891");
@@ -3795,7 +3856,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3806,6 +3867,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1b131a47"))
@@ -3835,6 +3897,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45ebf891"))
@@ -3854,7 +3917,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ea32ea5a");
@@ -3863,7 +3926,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3874,6 +3937,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ea32ea5a"))
@@ -3891,6 +3955,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45ebf891"))
@@ -3910,7 +3975,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ea32ea5a");
@@ -3919,7 +3984,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3930,6 +3995,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6f94037e"))
@@ -3949,7 +4015,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_35f73adf");
@@ -3958,7 +4024,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -3969,6 +4035,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_24614dc6"))
@@ -3990,7 +4057,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9e3a71b");
@@ -3999,7 +4066,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -4025,7 +4092,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2b0fcb12");
@@ -4034,7 +4101,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -4045,6 +4112,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f9e3a71b"))
@@ -4072,7 +4140,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3700f6");
@@ -4085,7 +4153,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -4096,6 +4164,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2b0fcb12"))
@@ -4115,7 +4184,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f211ed92");
@@ -4124,7 +4193,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -4135,6 +4204,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch79(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f211ed92"))
@@ -4162,7 +4232,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99701b9c");
@@ -4175,7 +4245,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -4186,6 +4256,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_99701b9c"))
@@ -4206,7 +4277,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bc4c2f1");
@@ -4215,7 +4286,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -4242,7 +4313,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46897102");
@@ -4251,7 +4322,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -4262,6 +4333,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch81(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5bc4c2f1"))
@@ -4281,7 +4353,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b72bfe9c");
@@ -4290,7 +4362,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -4301,6 +4373,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b72bfe9c"))
@@ -4328,7 +4401,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3668d398");
@@ -4341,7 +4414,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -4352,6 +4425,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch83(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46897102"))
@@ -4371,7 +4445,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61c6827c");
@@ -4380,7 +4454,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -4391,6 +4465,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch84(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_61c6827c"))
@@ -4411,7 +4486,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8d77e799");
@@ -4420,7 +4495,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -4431,6 +4506,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch85(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a623d5ba"))
@@ -4458,7 +4534,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61c6827c");
@@ -4471,7 +4547,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -4497,7 +4573,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6f94037e");
@@ -4506,7 +4582,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -4517,6 +4593,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_imperial_tier3_barlow_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f9e3a71b"))
@@ -4544,7 +4621,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3700f6");
@@ -4557,7 +4634,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId");
                     npcSpeak(player, message);
@@ -4568,6 +4645,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -4580,6 +4658,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         factions.setFaction(self, factions.FACTION_IMPERIAL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -4588,6 +4667,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         factions.setFaction(self, factions.FACTION_IMPERIAL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -4596,18 +4676,21 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.naboo_imperial_tier3_barlow");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -4644,7 +4727,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_40f102e4");
@@ -4656,7 +4739,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
                 setObjVar(player, "conversation.naboo_imperial_tier3_barlow.branchId", 2);
                 npcStartConversation(player, npc, "naboo_imperial_tier3_barlow", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4679,6 +4762,7 @@ public class naboo_imperial_tier3_barlow extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("naboo_imperial_tier3_barlow"))

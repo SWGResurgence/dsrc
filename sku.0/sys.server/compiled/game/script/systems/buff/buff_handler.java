@@ -1,5 +1,11 @@
 package script.systems.buff;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.combat_engine.buff_data;
 import script.combat_engine.combat_data;
@@ -3921,10 +3927,7 @@ public class buff_handler extends script.base_script
             return SCRIPT_CONTINUE;
         }
         utils.removeScriptVar(self, buff.ON_ATTACK_REMOVE);
-        if (removeBuffs.contains(buffName))
-        {
-            removeBuffs.remove(buffName);
-        }
+        removeBuffs.remove(buffName);
         if (removeBuffs != null || removeBuffs.size() > 0)
         {
             utils.setScriptVar(self, buff.ON_ATTACK_REMOVE, removeBuffs);

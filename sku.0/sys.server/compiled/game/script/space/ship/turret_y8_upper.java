@@ -1,5 +1,11 @@
 package script.space.ship;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.space_transition;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,16 +14,18 @@ import script.string_id;
 
 public class turret_y8_upper extends script.base_script
 {
+    public static final string_id SID_PILOT = new string_id("space/space_interaction", "pilot_ship");
+    public static final string_id SID_TURRET_UPPER = new string_id("space/space_interaction", "turret_upper");
     public turret_y8_upper()
     {
     }
-    public static final string_id SID_PILOT = new string_id("space/space_interaction", "pilot_ship");
-    public static final string_id SID_TURRET_UPPER = new string_id("space/space_interaction", "turret_upper");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_TURRET_UPPER);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -33,6 +41,7 @@ public class turret_y8_upper extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasTurretWeapon(obj_id objShip, int intSlot, obj_id objPlayer) throws InterruptedException
     {
         if (!isShipSlotInstalled(objShip, intSlot))

@@ -1,5 +1,11 @@
 package script.event.ewok_festival;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,11 +14,13 @@ public class shaman extends script.base_script
     public shaman()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleChiefInitialize", null, 9, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleChiefInitialize(obj_id self, dictionary params) throws InterruptedException
     {
         if (!getLocation(self).area.equals("naboo"))

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Vector;
@@ -69,6 +75,7 @@ public class space_crafting extends script.base_script
     public static final String STARSHIP_DROID_TABLE = "datatables/space_combat/ship_droid_assignments.iff";
     public static final String SHIP_COMPONENT_TABLE = "datatables/space/ship_components.iff";
     public static final String SHIP_WEAPON_TABLE = "datatables/ship/components/weapon.iff";
+
     public space_crafting()
     {
     }

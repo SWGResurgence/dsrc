@@ -1,9 +1,17 @@
 package script.item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.buff;
 import script.library.prose;
 import script.library.utils;
 import script.*;
+
+import java.util.Objects;
 
 public class spice extends script.base_script
 {
@@ -151,13 +159,13 @@ public class spice extends script.base_script
             default:
                 snd += "human_";
         }
-        switch (getGender(player))
+        if (Objects.requireNonNull(getGender(player)) == Gender.FEMALE)
         {
-            case FEMALE:
-                snd += "female_eat.cef";
-                break;
-            default:
-                snd += "male_eat.cef";
+            snd += "female_eat.cef";
+        }
+        else
+        {
+            snd += "male_eat.cef";
         }
         playClientEffectLoc(player, snd, getLocation(player), getScale(player));
         prose_package pp = prose.getPackage(PROSE_CONSUME_ITEM, player, self);

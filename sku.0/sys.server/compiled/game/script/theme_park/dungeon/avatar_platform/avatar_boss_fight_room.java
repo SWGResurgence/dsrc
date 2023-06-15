@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class avatar_boss_fight_room extends script.base_script
     public avatar_boss_fight_room()
     {
     }
+
     public int OnReceivedItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -17,6 +24,7 @@ public class avatar_boss_fight_room extends script.base_script
         messageTo(self, "handleDoorLock", null, 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDoorLock(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);

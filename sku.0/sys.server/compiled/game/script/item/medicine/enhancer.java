@@ -1,5 +1,11 @@
 package script.item.medicine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.healing;
 import script.library.utils;
 import script.*;
@@ -40,7 +46,7 @@ public class enhancer extends script.base_script
         if (item == menu_info_types.ITEM_USE)
         {
             int commandCrc = getStringCrc(toLower(command));
-            queueCommand(player, commandCrc, getLookAtTarget(player), "" + self, COMMAND_PRIORITY_NORMAL);
+            queueCommand(player, commandCrc, getLookAtTarget(player), String.valueOf(self), COMMAND_PRIORITY_NORMAL);
         }
         return SCRIPT_CONTINUE;
     }

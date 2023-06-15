@@ -1,5 +1,11 @@
 package script.systems.vehicle_system;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -8,6 +14,7 @@ public class battlefield_vehicle extends script.base_script
     public static final String MENU_FILE = "pet/pet_menu";
     public static final String TABLE = "datatables/vehicle/battlefield_vehicle.iff";
     public static final boolean debug = false;
+
     public battlefield_vehicle()
     {
     }
@@ -39,7 +46,6 @@ public class battlefield_vehicle extends script.base_script
         }
         applySkillStatisticModifier(target, "expertise_innate_protection_all", amount);
         armor.recalculateArmorForMob(target);
-        return;
     }
 
     public void establishFaction(obj_id self) throws InterruptedException
@@ -198,13 +204,12 @@ public class battlefield_vehicle extends script.base_script
             }
         }
         checkForPassengers(self);
-        return;
     }
 
     public void areaDebugMessaging(obj_id self, String message) throws InterruptedException
     {
         obj_id[] players = getAllPlayers(getLocation(self), 5.0f);
-        if (players != null && players.length > 0)
+        if (players != null)
         {
             for (obj_id player : players)
             {
@@ -234,7 +239,7 @@ public class battlefield_vehicle extends script.base_script
     public void debugMessaging(obj_id self, String message) throws InterruptedException
     {
         obj_id[] players = getAllPlayers(getLocation(self), 10.0f);
-        if (players != null && players.length > 0)
+        if (players != null)
         {
             for (obj_id player : players)
             {
@@ -272,6 +277,7 @@ public class battlefield_vehicle extends script.base_script
                     if (allowedZone.equals(zone))
                     {
                         allowedHere = true;
+                        break;
                     }
                 }
             }
@@ -288,7 +294,6 @@ public class battlefield_vehicle extends script.base_script
         {
             removePlayersFromVehicleAndDestroySelf(self, 1.0f);
         }
-        return;
     }
 
     public int destroyNow(obj_id self, dictionary params) throws InterruptedException
@@ -348,7 +353,7 @@ public class battlefield_vehicle extends script.base_script
     {
         int numPlayers = 0;
         obj_id[] stuff = getContents(self);
-        if (stuff != null && stuff.length > 0)
+        if (stuff != null)
         {
             for (obj_id obj_id : stuff)
             {
@@ -362,7 +367,6 @@ public class battlefield_vehicle extends script.base_script
         {
             buff.removeBuff(self, "vehicle_passenger");
         }
-        return;
     }
 
     public String getOverrideAttack(dictionary dict, boolean isDriver) throws InterruptedException

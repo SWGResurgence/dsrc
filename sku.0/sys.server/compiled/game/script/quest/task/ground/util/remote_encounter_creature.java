@@ -1,5 +1,11 @@
 package script.quest.task.ground.util;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.base.remote_object;
 import script.dictionary;
 import script.library.groundquests;
@@ -9,11 +15,12 @@ import script.quest.task.ground.remote_encounter;
 
 public class remote_encounter_creature extends script.base_script
 {
+    public static final boolean LOGS_ENABLED = false;
+    public static final String REC = "RemoteEncounterCreature";
     public remote_encounter_creature()
     {
     }
-    public static final boolean LOGS_ENABLED = false;
-    public static final String REC = "RemoteEncounterCreature";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         log("OnAttach");
@@ -28,13 +35,14 @@ public class remote_encounter_creature extends script.base_script
             log("Chief Rock: Ship's current recharge rate is " + getShipShieldRechargeRate(self) + " Setting it to one hojillion");
             setShipShieldRechargeRate(self, 1000000000.0f);
         }
-        else 
+        else
         {
             LOG(REC, "Error: Missing required script vars.");
             destroyObject(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int objectDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         log("objectDestroyed");
@@ -46,12 +54,14 @@ public class remote_encounter_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int remoteEncounterCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         log("remoteEncounterCleanup");
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int remoteEncounterEscape(obj_id self, dictionary params) throws InterruptedException
     {
         log("remoteEncounterEscape");
@@ -64,6 +74,7 @@ public class remote_encounter_creature extends script.base_script
         destroyObjectHyperspace(self);
         return SCRIPT_CONTINUE;
     }
+
     public int remoteEncounterSignaled(obj_id self, dictionary params) throws InterruptedException
     {
         log("remoteEncounterSignaled");
@@ -71,6 +82,7 @@ public class remote_encounter_creature extends script.base_script
         setShipShieldRechargeRate(self, 1.0f);
         return SCRIPT_CONTINUE;
     }
+
     public void log(String text) throws InterruptedException
     {
         if (LOGS_ENABLED)
@@ -78,6 +90,7 @@ public class remote_encounter_creature extends script.base_script
             LOG(REC, text);
         }
     }
+
     public void dumpScriptVars(obj_id self) throws InterruptedException
     {
         obj_id requester = utils.getObjIdScriptVar(self, remote_object.REQUESTER);

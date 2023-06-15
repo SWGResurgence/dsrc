@@ -1,5 +1,11 @@
 package script.poi.mysteriousdisk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.poi;
 import script.library.scenario;
@@ -7,26 +13,30 @@ import script.obj_id;
 
 public class antagonist extends script.poi.base.scenario_actor
 {
+    public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
+    public static final String LOG_NAME = "poiMysteriousDisk Antagonist";
     public antagonist()
     {
     }
-    public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
-    public static final String LOG_NAME = "poiMysteriousDisk Antagonist";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "armWeapon", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int armWeapon(obj_id self, dictionary params) throws InterruptedException
     {
         aiEquipPrimaryWeapon(self);
         return SCRIPT_CONTINUE;
     }
+
     public int commentOnKill(obj_id self, dictionary params) throws InterruptedException
     {
         poi.quickSay(self, "a_lookingfordisk");
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "lookingForDisk"))
@@ -37,6 +47,7 @@ public class antagonist extends script.poi.base.scenario_actor
         }
         return SCRIPT_CONTINUE;
     }
+
     public int searchDone(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id med = poi.findObject(scenario.MEDIATOR + "_0");
@@ -48,7 +59,7 @@ public class antagonist extends script.poi.base.scenario_actor
         {
             poi.quickSay(self, "a_nodisk");
         }
-        else 
+        else
         {
             poi.quickSay(self, "a_hasdisk");
         }

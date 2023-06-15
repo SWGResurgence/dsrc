@@ -1,5 +1,11 @@
 package script.systems.beast;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.hue;
 import script.library.utils;
 import script.obj_id;
@@ -40,6 +46,7 @@ public class enzyme_crafting_base extends script.base_script
     public static final String PROCESS_TRAITS = "system.enzyme_traits";
     public static final string_id ERROR_ON_START = new string_id("beast", "error_on_start");
     public static final string_id NOT_BEASTMASTER = new string_id("beast", "beast_master_use_only");
+
     public enzyme_crafting_base()
     {
     }
@@ -529,7 +536,7 @@ public class enzyme_crafting_base extends script.base_script
     public void clearToolContents() throws InterruptedException
     {
         obj_id[] contents = getContents(getSelf());
-        if (contents == null || contents.length == 0)
+        if (contents == null)
         {
             return;
         }
@@ -542,7 +549,7 @@ public class enzyme_crafting_base extends script.base_script
     public obj_id getObjIdByTemplate(String template) throws InterruptedException
     {
         obj_id[] contents = getContents(getSelf());
-        if (contents == null || contents.length == 0)
+        if (contents == null)
         {
             return null;
         }

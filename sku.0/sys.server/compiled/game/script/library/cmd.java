@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class cmd extends script.base_script
@@ -345,6 +351,7 @@ public class cmd extends script.base_script
     public static final int BOW4 = (2024204859);
     public static final int BOW2 = (1646307209);
     public static final int BOW3 = (1726069310);
+
     public cmd()
     {
     }

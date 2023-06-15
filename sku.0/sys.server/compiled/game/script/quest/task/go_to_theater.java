@@ -1,5 +1,11 @@
 package script.quest.task;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.quests;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class go_to_theater extends script.base_script
     public go_to_theater()
     {
     }
+
     public void completeTask(obj_id self, String questName, boolean succeeded) throws InterruptedException
     {
         if (hasObjVar(self, "quest." + questName))
@@ -25,6 +32,7 @@ public class go_to_theater extends script.base_script
         }
         quests.complete(questName, self, succeeded);
     }
+
     public void setupTheater(obj_id self, int questRow) throws InterruptedException
     {
         if (quests.isMyQuest(questRow, "quest.task.go_to_theater"))
@@ -39,7 +47,7 @@ public class go_to_theater extends script.base_script
             {
                 target = getStringObjVar(self, "quest." + questName + ".target");
             }
-            else 
+            else
             {
                 target = quests.getDataEntry(questRow, "TARGET");
             }
@@ -54,7 +62,7 @@ public class go_to_theater extends script.base_script
             {
                 havePlanet = true;
             }
-            else 
+            else
             {
                 datatable = tokens[0];
             }
@@ -64,7 +72,7 @@ public class go_to_theater extends script.base_script
                 {
                     datatable = tokens[0];
                 }
-                else 
+                else
                 {
                     datatable = tokens[1];
                 }
@@ -95,11 +103,15 @@ public class go_to_theater extends script.base_script
             if (parameterString != null && !parameterString.equals(""))
             {
                 String[] params = split(parameterString, ':');
-                for (String param : params) {
-                    if ("flat" == param) {
+                for (String param : params)
+                {
+                    if ("flat" == param)
+                    {
                         theaterLocationType = TLT_flatten;
                         break;
-                    } else if ("atloc" == param) {
+                    }
+                    else if ("atloc" == param)
+                    {
                         theaterLocationType = TLT_none;
                         break;
                     }
@@ -109,7 +121,7 @@ public class go_to_theater extends script.base_script
             {
                 created = assignTheaterToPlayer(self, datatable, theaterLocationType);
             }
-            else 
+            else
             {
                 theaterLoc = quests.getTheaterLocationTarget(self, questRow);
                 if (theaterLoc != null)
@@ -122,7 +134,7 @@ public class go_to_theater extends script.base_script
                     {
                         created = assignTheaterToPlayer(self, datatable, theaterLoc, "systems.fs_quest.camp_battle_theater", theaterLocationType);
                     }
-                    else 
+                    else
                     {
                         created = assignTheaterToPlayer(self, datatable, theaterLoc, "quest.task.theater_controller", theaterLocationType);
                     }
@@ -132,13 +144,14 @@ public class go_to_theater extends script.base_script
             {
                 setupWaypoint(self, questRow, theaterLoc);
             }
-            else 
+            else
             {
                 LOG("quest", "!!!!!!!!!!!!!!( " + self + " )Can't create theater...");
                 quests.complete(questName, self, false);
             }
         }
     }
+
     public void setupWaypoint(obj_id self, int questRow, location loc) throws InterruptedException
     {
         if (loc != null)
@@ -152,7 +165,7 @@ public class go_to_theater extends script.base_script
                 {
                     setWaypointName(wp, summary);
                 }
-                else 
+                else
                 {
                     setWaypointName(wp, "missing task summary for " + questName);
                 }
@@ -162,6 +175,7 @@ public class go_to_theater extends script.base_script
             }
         }
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         int rows = dataTableGetNumRows("datatables/player/quests.iff");
@@ -183,6 +197,7 @@ public class go_to_theater extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         if (quests.isMyQuest(questRow, "quest.task.go_to_theater"))
@@ -191,6 +206,7 @@ public class go_to_theater extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String locationName) throws InterruptedException
     {
         if (quests.isActive(locationName, self))

@@ -1,109 +1,96 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class station_yavin4 extends script.base_script
 {
+    public static String c_stringFile = "conversation/station_yavin4";
+
     public station_yavin4()
     {
     }
-    public static String c_stringFile = "conversation/station_yavin4";
+
     public boolean station_yavin4_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean station_yavin4_condition_canAfford50(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 0.50f);
     }
+
     public boolean station_yavin4_condition_canAfford25(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_crafting.canAffordShipRepairs(player, npc, 0.25f) && space_crafting.isDamaged(player));
     }
+
     public boolean station_yavin4_condition_canAfford75(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 0.75f);
     }
+
     public boolean station_yavin4_condition_canAfford100(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 1.0f);
     }
+
     public boolean station_yavin4_condition_needRepairs(obj_id player, obj_id npc) throws InterruptedException
     {
         float fltDamage = space_crafting.getDamageTotal(player, getPilotedShip(player));
-        if (fltDamage > 0)
-        {
-            return true;
-        }
-        return false;
+        return fltDamage > 0;
     }
+
     public boolean station_yavin4_condition_isTooFar(obj_id player, obj_id npc) throws InterruptedException
     {
         space_combat.playCombatTauntSound(player);
         obj_id containingShip = space_transition.getContainingShip(player);
         return (getDistance(npc, containingShip) > space_transition.STATION_COMM_MAX_DISTANCE);
     }
+
     public boolean station_yavin4_condition_notOnOpening(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "inspect", "stn_yavin4_company_all_opening_tier2_1"))
         {
             return false;
         }
-        if (space_flags.hasCompletedTierOne(player))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_flags.hasCompletedTierOne(player);
     }
+
     public boolean station_yavin4_condition_failedOpening(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "space_quest.yavin_station.canTakeStationMissions"))
         {
             return false;
         }
-        if (space_quest.hasFailedQuest(player, "inspect", "stn_yavin4_company_all_opening_tier2_1") || space_quest.hasAbortedQuest(player, "inspect", "stn_yavin4_company_all_opening_tier2_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "inspect", "stn_yavin4_company_all_opening_tier2_1") || space_quest.hasAbortedQuest(player, "inspect", "stn_yavin4_company_all_opening_tier2_1");
     }
+
     public boolean station_yavin4_condition_wonOpening(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "space_quest.yavin_station.wonOpening"))
         {
             return false;
         }
-        if (space_quest.hasWonQuest(player, "inspect", "stn_yavin4_company_all_opening_tier2_1") && !space_quest.hasReceivedReward(player, "inspect", "stn_yavin4_company_all_opening_tier2_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "inspect", "stn_yavin4_company_all_opening_tier2_1") && !space_quest.hasReceivedReward(player, "inspect", "stn_yavin4_company_all_opening_tier2_1");
     }
+
     public boolean station_yavin4_condition_hasCompletedOpening(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "recovery", "stn_yavin4_company_all_opening_tier2_2") || space_quest.hasReceivedReward(player, "escort", "stn_yavin4_company_all_opening_tier2_3"))
         {
             return false;
         }
-        if (space_quest.hasReceivedReward(player, "inspect", "stn_yavin4_company_all_opening_tier2_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasReceivedReward(player, "inspect", "stn_yavin4_company_all_opening_tier2_1");
     }
+
     public boolean station_yavin4_condition_failedOpeningTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "space_quest.yavin_station.canTakeStationMissions"))
@@ -114,75 +101,45 @@ public class station_yavin4 extends script.base_script
         {
             return true;
         }
-        if (space_quest.hasFailedQuest(player, "escort", "stn_yavin4_company_all_opening_tier2_3") || space_quest.hasAbortedQuest(player, "escort", "stn_yavin4_company_all_opening_tier2_3"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "escort", "stn_yavin4_company_all_opening_tier2_3") || space_quest.hasAbortedQuest(player, "escort", "stn_yavin4_company_all_opening_tier2_3");
     }
+
     public boolean station_yavin4_condition_getDebrisAssassinate(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "space_quest.yavin_station.debrisAssassin"))
         {
             return false;
         }
-        if (hasObjVar(player, "space_quest.yavin_station.canTakeStationMissions"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(player, "space_quest.yavin_station.canTakeStationMissions");
     }
+
     public boolean station_yavin4_condition_wonOpeningTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "recovery", "stn_yavin4_company_all_opening_tier2_2"))
         {
             return false;
         }
-        if (space_quest.hasWonQuest(player, "recovery", "stn_yavin4_company_all_opening_tier2_2"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "recovery", "stn_yavin4_company_all_opening_tier2_2");
     }
+
     public boolean station_yavin4_condition_wonOpeningThree(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "escort", "stn_yavin4_company_all_opening_tier2_3"))
         {
             return false;
         }
-        if (space_quest.hasWonQuest(player, "escort", "stn_yavin4_company_all_opening_tier2_3"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "escort", "stn_yavin4_company_all_opening_tier2_3");
     }
+
     public boolean station_yavin4_condition_failedDebrisAssassinate(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "space_quest.yavin_station.debrisAssassin"))
         {
             return false;
         }
-        if (space_quest.hasFailedQuest(player, "assassinate", "stn_yavin4_company_all_debrisassassinate_tier2_1") || space_quest.hasAbortedQuest(player, "assassinate", "stn_yavin4_company_all_debrisassassinate_tier2_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "assassinate", "stn_yavin4_company_all_debrisassassinate_tier2_1") || space_quest.hasAbortedQuest(player, "assassinate", "stn_yavin4_company_all_debrisassassinate_tier2_1");
     }
+
     public boolean station_yavin4_condition_wonDebrisAssassinate(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "space_quest.yavin_station.debrisAssassin"))
@@ -193,30 +150,18 @@ public class station_yavin4 extends script.base_script
         {
             return false;
         }
-        if (space_quest.hasWonQuest(player, "assassinate", "stn_yavin4_company_all_debrisassassinate_tier2_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "assassinate", "stn_yavin4_company_all_debrisassassinate_tier2_1");
     }
+
     public boolean station_yavin4_condition_notOnMassassi(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "space_battle", "stn_yavin4_company_all_massassi_tier2_1"))
         {
             return false;
         }
-        if (hasObjVar(player, "space_quest.yavin_station.canTakeStationMissions"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(player, "space_quest.yavin_station.canTakeStationMissions");
     }
+
     public boolean station_yavin4_condition_failedMassassiOne(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "space_battle", "stn_yavin4_company_all_massassi_tier2_1"))
@@ -239,45 +184,27 @@ public class station_yavin4 extends script.base_script
         {
             return true;
         }
-        if (space_quest.hasFailedQuest(player, "inspect", "stn_yavin4_company_all_massassi_tier2_5") || space_quest.hasAbortedQuest(player, "inspect", "stn_yavin4_company_all_massassi_tier2_5"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "inspect", "stn_yavin4_company_all_massassi_tier2_5") || space_quest.hasAbortedQuest(player, "inspect", "stn_yavin4_company_all_massassi_tier2_5");
     }
+
     public boolean station_yavin4_condition_wonMassassiOne(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "space_battle", "stn_yavin4_company_all_massassi_tier2_1"))
         {
             return false;
         }
-        if (space_quest.hasWonQuest(player, "inspect", "stn_yavin4_company_all_massassi_tier2_2") || space_quest.hasWonQuest(player, "inspect", "stn_yavin4_company_all_massassi_tier2_5"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "inspect", "stn_yavin4_company_all_massassi_tier2_2") || space_quest.hasWonQuest(player, "inspect", "stn_yavin4_company_all_massassi_tier2_5");
     }
+
     public boolean station_yavin4_condition_notOnMassassiTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "patrol", "stn_yavin4_company_all_massassi_tier2_6"))
         {
             return false;
         }
-        if (space_quest.hasReceivedReward(player, "space_battle", "stn_yavin4_company_all_massassi_tier2_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasReceivedReward(player, "space_battle", "stn_yavin4_company_all_massassi_tier2_1");
     }
+
     public boolean station_yavin4_condition_failedMassassiTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "patrol", "stn_yavin4_company_all_massassi_tier2_6"))
@@ -292,101 +219,59 @@ public class station_yavin4 extends script.base_script
         {
             return true;
         }
-        if (space_quest.hasFailedQuestRecursive(player, "patrol", "stn_yavin4_company_all_massassi_tier2_11") || space_quest.hasAbortedQuestRecursive(player, "patrol", "stn_yavin4_company_all_massassi_tier2_11"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuestRecursive(player, "patrol", "stn_yavin4_company_all_massassi_tier2_11") || space_quest.hasAbortedQuestRecursive(player, "patrol", "stn_yavin4_company_all_massassi_tier2_11");
     }
+
     public boolean station_yavin4_condition_hasMission(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!space_quest.hasQuest(player))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return !space_quest.hasQuest(player);
     }
+
     public boolean station_yavin4_condition_wonMassassiTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "patrol", "stn_yavin4_company_all_massassi_tier2_6"))
         {
             return false;
         }
-        if (space_quest.hasCompletedQuestRecursive(player, "patrol", "stn_yavin4_company_all_massassi_tier2_6") || space_quest.hasCompletedQuestRecursive(player, "patrol", "stn_yavin4_company_all_massassi_tier2_8"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasCompletedQuestRecursive(player, "patrol", "stn_yavin4_company_all_massassi_tier2_6") || space_quest.hasCompletedQuestRecursive(player, "patrol", "stn_yavin4_company_all_massassi_tier2_8");
     }
+
     public boolean station_yavin4_condition_wonMassassiPatrolThree(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "space_quest.yavin_station.massassiPatrolThree"))
         {
             return false;
         }
-        if (space_quest.hasCompletedQuest(player, "patrol", "stn_yavin4_company_all_massassi_tier2_11"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasCompletedQuest(player, "patrol", "stn_yavin4_company_all_massassi_tier2_11");
     }
+
     public boolean station_yavin4_condition_notOnMassassiClosing(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "assassinate", "stn_yavin4_company_all_massassi_tier2_11"))
         {
             return false;
         }
-        if (space_quest.hasReceivedReward(player, "patrol", "stn_yavin4_company_all_massassi_tier2_6"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasReceivedReward(player, "patrol", "stn_yavin4_company_all_massassi_tier2_6");
     }
+
     public boolean station_yavin4_condition_failedMassassiClosing(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "assassinate", "stn_yavin4_company_all_massassi_tier2_11"))
         {
             return false;
         }
-        if (space_quest.hasFailedQuest(player, "assassinate", "stn_yavin4_company_all_massassi_tier2_11") || space_quest.hasAbortedQuest(player, "assassinate", "stn_yavin4_company_all_massassi_tier2_11"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "assassinate", "stn_yavin4_company_all_massassi_tier2_11") || space_quest.hasAbortedQuest(player, "assassinate", "stn_yavin4_company_all_massassi_tier2_11");
     }
+
     public boolean station_yavin4_condition_wonMassassiClosing(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "assassinate", "stn_yavin4_company_all_massassi_tier2_11"))
         {
             return false;
         }
-        if (space_quest.hasWonQuest(player, "assassinate", "stn_yavin4_company_all_massassi_tier2_11"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "assassinate", "stn_yavin4_company_all_massassi_tier2_11");
     }
+
     public boolean station_yavin4_condition_notOnImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "recovery", "stn_yavin4_imp_imperial_tier2_1"))
@@ -397,82 +282,46 @@ public class station_yavin4 extends script.base_script
         {
             return false;
         }
-        if (hasObjVar(player, "space_quest.yavin_station.canTakeStationMissions"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(player, "space_quest.yavin_station.canTakeStationMissions");
     }
+
     public boolean station_yavin4_condition_failedImperialOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "recovery", "stn_yavin4_imp_imperial_tier2_1") || space_quest.hasAbortedQuest(player, "recovery", "stn_yavin4_imp_imperial_tier2_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "recovery", "stn_yavin4_imp_imperial_tier2_1") || space_quest.hasAbortedQuest(player, "recovery", "stn_yavin4_imp_imperial_tier2_1");
     }
+
     public boolean station_yavin4_condition_wonImperialOne(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "recovery", "stn_yavin4_imp_imperial_tier2_1"))
         {
             return false;
         }
-        if (space_quest.hasWonQuest(player, "recovery", "stn_yavin4_imp_imperial_tier2_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "recovery", "stn_yavin4_imp_imperial_tier2_1");
     }
+
     public boolean station_yavin4_condition_notOnImperialTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "rescue", "stn_yavin4_imp_imperial_tier2_2"))
         {
             return false;
         }
-        if (space_quest.hasReceivedReward(player, "recovery", "stn_yavin4_imp_imperial_tier2_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasReceivedReward(player, "recovery", "stn_yavin4_imp_imperial_tier2_1");
     }
+
     public boolean station_yavin4_condition_failedImperialTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuestRecursive(player, "rescue", "stn_yavin4_imp_imperial_tier2_2") || space_quest.hasAbortedQuestRecursive(player, "rescue", "stn_yavin4_imp_imperial_tier2_2"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuestRecursive(player, "rescue", "stn_yavin4_imp_imperial_tier2_2") || space_quest.hasAbortedQuestRecursive(player, "rescue", "stn_yavin4_imp_imperial_tier2_2");
     }
+
     public boolean station_yavin4_condition_wonImperailTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "rescue", "stn_yavin4_imp_imperial_tier2_2"))
         {
             return false;
         }
-        if (space_quest.hasCompletedQuestRecursive(player, "rescue", "stn_yavin4_imp_imperial_tier2_2"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasCompletedQuestRecursive(player, "rescue", "stn_yavin4_imp_imperial_tier2_2");
     }
+
     public boolean station_yavin4_condition_notOnSmuggler(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "delivery_no_pickup", "stn_yavin4_company_smuggler_tier2_1"))
@@ -483,173 +332,142 @@ public class station_yavin4 extends script.base_script
         {
             return false;
         }
-        if (hasObjVar(player, "space_quest.yavin_station.canTakeStationMissions"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(player, "space_quest.yavin_station.canTakeStationMissions");
     }
+
     public boolean station_yavin4_condition_failedSmugglerOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuestRecursive(player, "delivery_no_pickup", "stn_yavin4_company_smuggler_tier2_1") || space_quest.hasAbortedQuestRecursive(player, "delivery_no_pickup", "stn_yavin4_company_smuggler_tier2_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuestRecursive(player, "delivery_no_pickup", "stn_yavin4_company_smuggler_tier2_1") || space_quest.hasAbortedQuestRecursive(player, "delivery_no_pickup", "stn_yavin4_company_smuggler_tier2_1");
     }
+
     public boolean station_yavin4_condition_wonSmugglerOne(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "delivery_no_pickup", "stn_yavin4_company_smuggler_tier2_1"))
         {
             return false;
         }
-        if (space_quest.hasCompletedQuestRecursive(player, "delivery_no_pickup", "stn_yavin4_company_smuggler_tier2_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasCompletedQuestRecursive(player, "delivery_no_pickup", "stn_yavin4_company_smuggler_tier2_1");
     }
+
     public boolean station_yavin4_condition_canTakeDuty(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(player, "space_quest.yavin_station.canTakeStationMissions"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(player, "space_quest.yavin_station.canTakeStationMissions");
     }
+
     public boolean station_yavin4_condition_patrolThreeDone(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(player, "space_quest.yavin_station.massassiPatrolThree"))
-        {
-            return false;
-        }
-        else 
-        {
-            return true;
-        }
+        return !hasObjVar(player, "space_quest.yavin_station.massassiPatrolThree");
     }
+
     public boolean station_yavin4_condition_canTakeQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasQuest(player))
-        {
-            return false;
-        }
-        return true;
+        return !space_quest.hasQuest(player);
     }
+
     public boolean station_yavin4_condition_canAttackImperial(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player);
     }
+
     public boolean station_yavin4_condition_canAttackRebel(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player);
     }
+
     public boolean station_yavin4_condition_finishedTier2(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.hasCompletedTierTwo(player);
     }
+
     public boolean station_yavin4_condition_canTakeTier5RebelDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_skill.isMasterPilot(player))
         {
             return false;
         }
-        if (space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player);
     }
+
     public boolean station_yavin4_condition_canTakeTier5ImperialDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_skill.isMasterPilot(player))
         {
             return false;
         }
-        if (space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player);
     }
+
     public void station_yavin4_action_landStation3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Imperial Base Starport");
     }
+
     public void station_yavin4_action_fix25(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.25f);
     }
+
     public void station_yavin4_action_fix50(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.50f);
     }
+
     public void station_yavin4_action_fix75(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.75f);
     }
+
     public void station_yavin4_action_fix100(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 1.0f);
     }
+
     public void station_yavin4_action_landStation1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Yavin IV Mining Outpost");
     }
+
     public void station_yavin4_action_landStation2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Yavin IV Labor Outpost");
     }
+
     public void station_yavin4_action_grantOpeningMission(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "inspect", "stn_yavin4_company_all_opening_tier2_1");
     }
+
     public void station_yavin4_action_giveRewardOpening(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "inspect", "stn_yavin4_company_all_opening_tier2_1", 10000);
         grantExperiencePoints(player, "space_combat_general", 1000);
     }
+
     public void station_yavin4_action_grantOpeningMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "recovery", "stn_yavin4_company_all_opening_tier2_2");
     }
+
     public void station_yavin4_action_grantStationAccess(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "recovery", "stn_yavin4_company_all_opening_tier2_2", 0);
         setObjVar(player, "space_quest.yavin_station.canTakeStationMissions", 1);
     }
+
     public void station_yavin4_action_giveRewardOpeningTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "recovery", "stn_yavin4_company_all_opening_tier2_2", 25000);
         grantExperiencePoints(player, "space_combat_general", 2000);
         setObjVar(player, "space_quest.yavin_station.canTakeStationMissions", 1);
     }
+
     public void station_yavin4_action_giveRewardOpeningThree(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "escort", "stn_yavin4_company_all_opening_tier2_3", 10000);
         grantExperiencePoints(player, "space_combat_general", 1000);
         setObjVar(player, "space_quest.yavin_station.canTakeStationMissions", 1);
     }
+
     public void station_yavin4_action_grantDebrisAssassinate(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "space_quest.yavin_station.debrisAssassin"))
@@ -658,28 +476,34 @@ public class station_yavin4 extends script.base_script
         }
         space_quest.grantQuest(player, "assassinate", "stn_yavin4_company_all_debrisassassinate_tier2_1");
     }
+
     public void station_yavin4_action_clearDebrisAssassinate(obj_id player, obj_id npc) throws InterruptedException
     {
         removeObjVar(player, "space_quest.yavin_station.debrisAssassin");
         space_quest.clearQuestFlags(player, "assassinate", "stn_yavin4_company_all_debrisassassinate_tier2_1");
     }
+
     public void station_yavin4_action_giveRewardDebrisAssassinate(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "assassinate", "stn_yavin4_company_all_debrisassassinate_tier2_1", 15000);
         grantExperiencePoints(player, "space_combat_general", 1000);
     }
+
     public void station_yavin4_action_grantDestroyDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "stn_yavin4_company_all_debrisdestroy_tier2_1");
     }
+
     public void station_yavin4_action_grantEscortDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort_duty", "stn_yavin4_company_all_freighterescort_tier2_1");
     }
+
     public void station_yavin4_action_grantMassassiOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "space_battle", "stn_yavin4_company_all_massassi_tier2_1");
     }
+
     public void station_yavin4_action_clearMassassiOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "space_battle", "stn_yavin4_company_massassi_all_tier2_1");
@@ -688,23 +512,28 @@ public class station_yavin4 extends script.base_script
         space_quest.clearQuestFlags(player, "destroy_surpriseattack", "stn_yavin4_company_massassi_all_tier2_4");
         space_quest.clearQuestFlags(player, "inspect", "stn_yavin4_company_massassi_all_tier2_5");
     }
+
     public void station_yavin4_action_giveRewardMassassiOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "space_battle", "stn_yavin4_company_all_massassi_tier2_1", 10000);
         grantExperiencePoints(player, "space_combat_general", 1000);
     }
+
     public void station_yavin4_action_grantMassassiPatrolOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "patrol", "stn_yavin4_company_all_massassi_tier2_6");
     }
+
     public void station_yavin4_action_grantMassassiPatrolTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "patrol", "stn_yavin4_company_all_massassi_tier2_8");
     }
+
     public void station_yavin4_action_grantMassassiPatrolThree(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "patrol", "stn_yavin4_company_all_massassi_tier2_11");
     }
+
     public void station_yavin4_action_clearMassassiTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "patrol", "stn_yavin4_company_massassi_all_tier2_6");
@@ -714,56 +543,68 @@ public class station_yavin4 extends script.base_script
         space_quest.clearQuestFlags(player, "destroy_surpriseattack", "stn_yavin4_company_massassi_all_tier2_10");
         space_quest.clearQuestFlags(player, "patrol", "stn_yavin4_company_massassi_all_tier2_11");
     }
+
     public void station_yavin4_action_giveRewardMassassiTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "patrol", "stn_yavin4_company_all_massassi_tier2_6", 15000);
         grantExperiencePoints(player, "space_combat_general", 2000);
     }
+
     public void station_yavin4_action_grantMassassiClosing(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "assassinate", "stn_yavin4_company_all_massassi_tier2_11");
     }
+
     public void station_yavin4_action_giveRewardMassassiClosing(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "assassinate", "stn_yavin4_company_all_massassi_tier2_11", 35000);
         grantExperiencePoints(player, "space_combat_general", 5000);
     }
+
     public void station_yavin4_action_grantImperialOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "recovery", "stn_yavin4_imp_imperial_tier2_1");
     }
+
     public void station_yavin4_action_giveRewardImperialOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "recovery", "stn_yavin4_imp_imperial_tier2_1", 10000);
         grantExperiencePoints(player, "space_combat_general", 1000);
     }
+
     public void station_yavin4_action_grantImperialTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "rescue", "stn_yavin4_imp_imperial_tier2_2");
     }
+
     public void station_yavin4_action_giveRewardImperialTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "rescue", "stn_yavin4_imp_imperial_tier2_2", 20000);
         grantExperiencePoints(player, "space_combat_general", 2000);
     }
+
     public void station_yavin4_action_grantSmugglerOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "delivery_no_pickup", "stn_yavin4_company_smuggler_tier2_1");
     }
+
     public void station_yavin4_action_giveRewardSmugglerOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "delivery_no_pickup", "stn_yavin4_company_smuggler_tier2_1", 20000);
         grantExperiencePoints(player, "space_combat_general", 2000);
     }
+
     public void station_yavin4_action_clearImperialOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "recovery", "stn_yavin4_imp_imperial_tier2_1");
     }
+
     public void station_yavin4_action_clearImperialTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "rescue", "stn_yavin4_imp_imperial_tier2_2");
         space_quest.clearQuestFlags(player, "recovery", "stn_yavin4_imp_imperial_tier2_3");
     }
+
     public void station_yavin4_action_clearSmugglerOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "delivery_no_pickup", "stn_yavin4_company_smuggler_tier2_1");
@@ -772,58 +613,72 @@ public class station_yavin4 extends script.base_script
         space_quest.clearQuestFlags(player, "patrol", "stn_yavin4_company_smuggler_tier2_4");
         space_quest.clearQuestFlags(player, "delivery_no_pickup", "stn_yavin4_company_smuggler_tier2_5");
     }
+
     public void station_yavin4_action_clearMassassiClosing(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "assassinate", "stn_yavin4_company_massassi_all_tier2_11");
     }
+
     public void station_yavin4_action_setMassassiPatrolThree(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "space_quest.yavin_station.massassiPatrolThree", 1);
     }
+
     public void station_yavin4_action_grantImperialDuty3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "yavin_imperial_tier3");
     }
+
     public void station_yavin4_action_grantRebelDuty3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "yavin_rebel_tier3");
     }
+
     public void station_yavin4_action_grantBlackSunDuty3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "yavin_blacksun_tier3");
     }
+
     public void station_yavin4_action_grantVoidDuty3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "yavin_void_wing_tier3");
     }
+
     public void station_yavin4_action_grantImperialDuty5(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "yavin_imperial_tier5");
     }
+
     public void station_yavin4_action_grantRebelDuty5(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "yavin_rebel_tier5");
     }
+
     public String station_yavin4_tokenTO_tokenTO0001(obj_id player, obj_id npc) throws InterruptedException
     {
-        return new String();
+        return "";
     }
+
     public int station_yavin4_tokenDI_getStationRepairCost25(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.25f);
     }
+
     public int station_yavin4_tokenDI_getStationRepairCost50(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.50f);
     }
+
     public int station_yavin4_tokenDI_getStationRepairCost75(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.75f);
     }
+
     public int station_yavin4_tokenDI_getStationRepairCost100(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 1.0f);
     }
+
     public int station_yavin4_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8684604b"))
@@ -868,7 +723,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -885,7 +740,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -938,7 +793,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -963,7 +818,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -973,6 +828,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_10"))
@@ -1006,7 +862,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -1023,7 +879,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1076,7 +932,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -1101,7 +957,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1111,6 +967,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fa50b9ba"))
@@ -1155,7 +1012,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -1172,7 +1029,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1225,7 +1082,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -1250,7 +1107,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1360,7 +1217,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -1417,7 +1274,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1427,6 +1284,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -1460,7 +1318,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -1477,7 +1335,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1530,7 +1388,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -1555,7 +1413,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1587,7 +1445,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -1600,7 +1458,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1639,7 +1497,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -1652,7 +1510,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1709,7 +1567,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -1722,7 +1580,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1754,7 +1612,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -1763,7 +1621,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1795,7 +1653,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -1804,7 +1662,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1843,7 +1701,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -1856,7 +1714,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1888,7 +1746,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -1897,7 +1755,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1936,7 +1794,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -1949,7 +1807,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2041,7 +1899,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -2074,7 +1932,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2091,6 +1949,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f771fd8a"))
@@ -2111,7 +1970,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5b3f10e8");
@@ -2120,7 +1979,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2159,7 +2018,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -2176,7 +2035,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2229,7 +2088,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -2254,7 +2113,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2364,7 +2223,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -2421,7 +2280,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2431,6 +2290,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5b3f10e8"))
@@ -2446,6 +2306,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -2479,7 +2340,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -2496,7 +2357,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2549,7 +2410,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -2574,7 +2435,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2606,7 +2467,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -2619,7 +2480,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2658,7 +2519,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -2671,7 +2532,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2728,7 +2589,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -2741,7 +2602,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2773,7 +2634,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -2782,7 +2643,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2814,7 +2675,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -2823,7 +2684,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2862,7 +2723,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -2875,7 +2736,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2907,7 +2768,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -2916,7 +2777,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2955,7 +2816,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -2968,7 +2829,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3060,7 +2921,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -3093,7 +2954,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3110,6 +2971,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_504c55d7"))
@@ -3144,7 +3006,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d7bd9744");
@@ -3161,7 +3023,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3200,7 +3062,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -3217,7 +3079,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3270,7 +3132,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -3295,7 +3157,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3405,7 +3267,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -3462,7 +3324,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3472,6 +3334,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d7bd9744"))
@@ -3509,6 +3372,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -3542,7 +3406,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -3559,7 +3423,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3612,7 +3476,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -3637,7 +3501,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3669,7 +3533,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -3682,7 +3546,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3721,7 +3585,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -3734,7 +3598,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3791,7 +3655,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -3804,7 +3668,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3836,7 +3700,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -3845,7 +3709,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3877,7 +3741,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -3886,7 +3750,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3925,7 +3789,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -3938,7 +3802,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3970,7 +3834,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -3979,7 +3843,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4018,7 +3882,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -4031,7 +3895,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4123,7 +3987,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -4156,7 +4020,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4173,6 +4037,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ce7c38dc"))
@@ -4218,7 +4083,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -4235,7 +4100,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4288,7 +4153,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -4313,7 +4178,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4423,7 +4288,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -4480,7 +4345,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4490,6 +4355,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -4523,7 +4389,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -4540,7 +4406,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4593,7 +4459,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -4618,7 +4484,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4650,7 +4516,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -4663,7 +4529,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4702,7 +4568,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -4715,7 +4581,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4772,7 +4638,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -4785,7 +4651,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4817,7 +4683,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -4826,7 +4692,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4858,7 +4724,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -4867,7 +4733,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4906,7 +4772,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -4919,7 +4785,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4951,7 +4817,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -4960,7 +4826,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4999,7 +4865,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -5012,7 +4878,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5104,7 +4970,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -5137,7 +5003,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5154,6 +5020,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1e46e4ca"))
@@ -5198,7 +5065,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -5215,7 +5082,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5268,7 +5135,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -5293,7 +5160,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5403,7 +5270,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -5460,7 +5327,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5470,6 +5337,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -5503,7 +5371,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -5520,7 +5388,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5573,7 +5441,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -5598,7 +5466,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5630,7 +5498,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -5643,7 +5511,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5682,7 +5550,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -5695,7 +5563,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5752,7 +5620,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -5765,7 +5633,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5797,7 +5665,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -5806,7 +5674,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5838,7 +5706,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -5847,7 +5715,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5886,7 +5754,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -5899,7 +5767,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5931,7 +5799,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -5940,7 +5808,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5979,7 +5847,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -5992,7 +5860,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6084,7 +5952,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -6117,7 +5985,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6134,6 +6002,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a0d09783"))
@@ -6178,7 +6047,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -6195,7 +6064,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6248,7 +6117,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -6273,7 +6142,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6383,7 +6252,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -6440,7 +6309,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6450,6 +6319,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -6483,7 +6353,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -6500,7 +6370,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6553,7 +6423,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -6578,7 +6448,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6610,7 +6480,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -6623,7 +6493,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6662,7 +6532,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -6675,7 +6545,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6732,7 +6602,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -6745,7 +6615,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6777,7 +6647,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -6786,7 +6656,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6818,7 +6688,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -6827,7 +6697,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6866,7 +6736,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -6879,7 +6749,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6911,7 +6781,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -6920,7 +6790,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6959,7 +6829,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -6972,7 +6842,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7064,7 +6934,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -7097,7 +6967,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7114,6 +6984,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c9c08b99"))
@@ -7158,7 +7029,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -7175,7 +7046,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7228,7 +7099,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -7253,7 +7124,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7363,7 +7234,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -7420,7 +7291,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7430,6 +7301,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -7463,7 +7335,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -7480,7 +7352,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7533,7 +7405,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -7558,7 +7430,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7590,7 +7462,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -7603,7 +7475,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7642,7 +7514,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -7655,7 +7527,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7712,7 +7584,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -7725,7 +7597,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7757,7 +7629,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -7766,7 +7638,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7798,7 +7670,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -7807,7 +7679,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7846,7 +7718,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -7859,7 +7731,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7891,7 +7763,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -7900,7 +7772,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7939,7 +7811,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -7952,7 +7824,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8044,7 +7916,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -8077,7 +7949,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8094,6 +7966,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_86922104"))
@@ -8198,7 +8071,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -8255,7 +8128,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8265,6 +8138,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -8298,7 +8172,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -8315,7 +8189,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8368,7 +8242,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -8393,7 +8267,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8425,7 +8299,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -8438,7 +8312,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8477,7 +8351,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -8490,7 +8364,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8547,7 +8421,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -8560,7 +8434,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8592,7 +8466,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -8601,7 +8475,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8633,7 +8507,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -8642,7 +8516,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8681,7 +8555,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -8694,7 +8568,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8726,7 +8600,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -8735,7 +8609,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8774,7 +8648,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -8787,7 +8661,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8879,7 +8753,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -8912,7 +8786,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8929,6 +8803,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7fab133d"))
@@ -9032,7 +8907,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -9089,7 +8964,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9099,6 +8974,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -9132,7 +9008,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -9149,7 +9025,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9202,7 +9078,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -9227,7 +9103,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9259,7 +9135,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -9272,7 +9148,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9311,7 +9187,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -9324,7 +9200,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9381,7 +9257,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -9394,7 +9270,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9426,7 +9302,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -9435,7 +9311,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9467,7 +9343,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -9476,7 +9352,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9515,7 +9391,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -9528,7 +9404,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9560,7 +9436,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -9569,7 +9445,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9608,7 +9484,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -9621,7 +9497,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9713,7 +9589,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -9746,7 +9622,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9763,6 +9639,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_89"))
@@ -9866,7 +9743,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -9923,7 +9800,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9933,6 +9810,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -9966,7 +9844,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -9983,7 +9861,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10036,7 +9914,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -10061,7 +9939,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10093,7 +9971,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -10106,7 +9984,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10145,7 +10023,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -10158,7 +10036,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10215,7 +10093,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -10228,7 +10106,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10260,7 +10138,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -10269,7 +10147,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10301,7 +10179,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -10310,7 +10188,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10349,7 +10227,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -10362,7 +10240,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10394,7 +10272,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -10403,7 +10281,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10442,7 +10320,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -10455,7 +10333,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10547,7 +10425,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -10580,7 +10458,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10597,6 +10475,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a5105d38"))
@@ -10701,7 +10580,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -10758,7 +10637,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10768,6 +10647,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -10801,7 +10681,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -10818,7 +10698,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10871,7 +10751,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -10896,7 +10776,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10928,7 +10808,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -10941,7 +10821,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10980,7 +10860,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -10993,7 +10873,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11050,7 +10930,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -11063,7 +10943,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11095,7 +10975,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -11104,7 +10984,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11136,7 +11016,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -11145,7 +11025,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11184,7 +11064,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -11197,7 +11077,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11229,7 +11109,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -11238,7 +11118,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11277,7 +11157,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -11290,7 +11170,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11382,7 +11262,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -11415,7 +11295,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11432,6 +11312,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8ac5cbaf"))
@@ -11451,7 +11332,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_38f85840");
@@ -11460,7 +11341,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11470,6 +11351,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38f85840"))
@@ -11574,7 +11456,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -11631,7 +11513,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11641,6 +11523,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -11674,7 +11557,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -11691,7 +11574,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11744,7 +11627,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -11769,7 +11652,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11801,7 +11684,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -11814,7 +11697,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11853,7 +11736,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -11866,7 +11749,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11923,7 +11806,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -11936,7 +11819,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11968,7 +11851,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -11977,7 +11860,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12009,7 +11892,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -12018,7 +11901,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12057,7 +11940,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -12070,7 +11953,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12102,7 +11985,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -12111,7 +11994,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12150,7 +12033,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -12163,7 +12046,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12255,7 +12138,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -12288,7 +12171,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12305,6 +12188,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4ed46b5d"))
@@ -12409,7 +12293,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -12466,7 +12350,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12476,6 +12360,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -12509,7 +12394,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -12526,7 +12411,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12579,7 +12464,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -12604,7 +12489,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12636,7 +12521,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -12649,7 +12534,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12688,7 +12573,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -12701,7 +12586,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12758,7 +12643,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -12771,7 +12656,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12803,7 +12688,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -12812,7 +12697,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12844,7 +12729,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -12853,7 +12738,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12892,7 +12777,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -12905,7 +12790,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12937,7 +12822,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -12946,7 +12831,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12985,7 +12870,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -12998,7 +12883,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13090,7 +12975,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -13123,7 +13008,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13140,6 +13025,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2dbe402f"))
@@ -13166,7 +13052,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c88bcdf1");
@@ -13179,7 +13065,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13218,7 +13104,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -13235,7 +13121,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13288,7 +13174,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -13313,7 +13199,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13423,7 +13309,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -13480,7 +13366,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13490,6 +13376,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c88bcdf1"))
@@ -13516,6 +13403,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -13549,7 +13437,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -13566,7 +13454,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13619,7 +13507,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -13644,7 +13532,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13676,7 +13564,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -13689,7 +13577,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13728,7 +13616,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -13741,7 +13629,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13798,7 +13686,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -13811,7 +13699,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13843,7 +13731,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -13852,7 +13740,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13884,7 +13772,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -13893,7 +13781,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13932,7 +13820,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -13945,7 +13833,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13977,7 +13865,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -13986,7 +13874,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14025,7 +13913,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -14038,7 +13926,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14130,7 +14018,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -14163,7 +14051,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14180,6 +14068,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e6b2affe"))
@@ -14284,7 +14173,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -14341,7 +14230,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14351,6 +14240,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -14384,7 +14274,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -14401,7 +14291,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14454,7 +14344,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -14479,7 +14369,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14511,7 +14401,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -14524,7 +14414,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14563,7 +14453,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -14576,7 +14466,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14633,7 +14523,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -14646,7 +14536,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14678,7 +14568,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -14687,7 +14577,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14719,7 +14609,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -14728,7 +14618,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14767,7 +14657,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -14780,7 +14670,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14812,7 +14702,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -14821,7 +14711,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14860,7 +14750,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -14873,7 +14763,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14965,7 +14855,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -14998,7 +14888,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -15015,6 +14905,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2c9ad69a"))
@@ -15119,7 +15010,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -15176,7 +15067,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -15186,6 +15077,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -15219,7 +15111,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -15236,7 +15128,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -15289,7 +15181,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -15314,7 +15206,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -15346,7 +15238,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -15359,7 +15251,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -15398,7 +15290,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -15411,7 +15303,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -15468,7 +15360,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -15481,7 +15373,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -15513,7 +15405,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -15522,7 +15414,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -15554,7 +15446,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -15563,7 +15455,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -15602,7 +15494,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -15615,7 +15507,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -15647,7 +15539,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -15656,7 +15548,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -15695,7 +15587,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -15708,7 +15600,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -15800,7 +15692,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -15833,7 +15725,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -15850,6 +15742,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_362a48e0"))
@@ -15954,7 +15847,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -16011,7 +15904,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -16021,6 +15914,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -16054,7 +15948,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -16071,7 +15965,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -16124,7 +16018,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -16149,7 +16043,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -16181,7 +16075,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -16194,7 +16088,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -16233,7 +16127,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -16246,7 +16140,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -16303,7 +16197,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -16316,7 +16210,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -16348,7 +16242,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -16357,7 +16251,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -16389,7 +16283,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -16398,7 +16292,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -16437,7 +16331,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -16450,7 +16344,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -16482,7 +16376,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -16491,7 +16385,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -16530,7 +16424,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -16543,7 +16437,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -16635,7 +16529,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -16668,7 +16562,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -16685,6 +16579,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6e605bd6"))
@@ -16789,7 +16684,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -16846,7 +16741,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -16856,6 +16751,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -16889,7 +16785,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -16906,7 +16802,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -16959,7 +16855,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -16984,7 +16880,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17016,7 +16912,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -17029,7 +16925,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17068,7 +16964,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -17081,7 +16977,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17138,7 +17034,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -17151,7 +17047,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17183,7 +17079,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -17192,7 +17088,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17224,7 +17120,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -17233,7 +17129,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17272,7 +17168,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -17285,7 +17181,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17317,7 +17213,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -17326,7 +17222,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17365,7 +17261,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -17378,7 +17274,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17470,7 +17366,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -17503,7 +17399,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17520,6 +17416,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -17553,7 +17450,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -17570,7 +17467,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17623,7 +17520,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -17648,7 +17545,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17680,7 +17577,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -17693,7 +17590,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17732,7 +17629,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -17745,7 +17642,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17802,7 +17699,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -17815,7 +17712,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17847,7 +17744,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -17856,7 +17753,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17888,7 +17785,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -17897,7 +17794,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17936,7 +17833,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -17949,7 +17846,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17981,7 +17878,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -17990,7 +17887,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -18029,7 +17926,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -18042,7 +17939,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -18134,7 +18031,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -18167,7 +18064,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -18184,6 +18081,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_826b822"))
@@ -18210,7 +18108,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2dc4697a");
@@ -18223,7 +18121,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -18255,7 +18153,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_139");
@@ -18268,7 +18166,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -18300,7 +18198,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_147");
@@ -18313,7 +18211,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -18323,6 +18221,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2dc4697a"))
@@ -18348,6 +18247,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_139"))
@@ -18373,6 +18273,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_147"))
@@ -18398,6 +18299,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7de495e9"))
@@ -18424,7 +18326,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fdfb1283");
@@ -18442,7 +18344,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     prose_package pp = new prose_package();
@@ -18479,7 +18381,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -18497,7 +18399,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     prose_package pp = new prose_package();
@@ -18534,7 +18436,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_176");
@@ -18552,7 +18454,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     prose_package pp = new prose_package();
@@ -18589,7 +18491,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_186");
@@ -18607,7 +18509,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     prose_package pp = new prose_package();
@@ -18632,6 +18534,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fdfb1283"))
@@ -18657,6 +18560,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_166"))
@@ -18682,6 +18586,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_176"))
@@ -18707,6 +18612,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_186"))
@@ -18732,6 +18638,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5bbcc6ae"))
@@ -18846,7 +18753,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -18903,7 +18810,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -18913,6 +18820,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -18946,7 +18854,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -18963,7 +18871,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -19016,7 +18924,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -19041,7 +18949,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -19073,7 +18981,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -19086,7 +18994,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -19125,7 +19033,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -19138,7 +19046,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -19195,7 +19103,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -19208,7 +19116,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -19240,7 +19148,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -19249,7 +19157,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -19281,7 +19189,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -19290,7 +19198,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -19329,7 +19237,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -19342,7 +19250,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -19374,7 +19282,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -19383,7 +19291,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -19422,7 +19330,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -19435,7 +19343,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -19527,7 +19435,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -19560,7 +19468,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -19577,6 +19485,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5bd69df6"))
@@ -19691,7 +19600,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -19748,7 +19657,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -19758,6 +19667,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -19791,7 +19701,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -19808,7 +19718,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -19861,7 +19771,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -19886,7 +19796,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -19918,7 +19828,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -19931,7 +19841,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -19970,7 +19880,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -19983,7 +19893,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -20040,7 +19950,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -20053,7 +19963,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -20085,7 +19995,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -20094,7 +20004,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -20126,7 +20036,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -20135,7 +20045,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -20174,7 +20084,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -20187,7 +20097,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -20219,7 +20129,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -20228,7 +20138,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -20267,7 +20177,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -20280,7 +20190,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -20372,7 +20282,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -20405,7 +20315,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -20422,6 +20332,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_aa668ed0"))
@@ -20448,6 +20359,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch90(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f7a9938a"))
@@ -20474,7 +20386,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1000a375");
@@ -20487,7 +20399,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -20497,6 +20409,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch91(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1000a375"))
@@ -20611,7 +20524,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -20668,7 +20581,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -20678,6 +20591,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch93(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -20711,7 +20625,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -20728,7 +20642,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -20781,7 +20695,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -20806,7 +20720,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -20838,7 +20752,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -20851,7 +20765,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -20890,7 +20804,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -20903,7 +20817,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -20960,7 +20874,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -20973,7 +20887,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21005,7 +20919,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -21014,7 +20928,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21046,7 +20960,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -21055,7 +20969,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21094,7 +21008,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -21107,7 +21021,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21139,7 +21053,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -21148,7 +21062,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21187,7 +21101,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -21200,7 +21114,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21292,7 +21206,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -21325,7 +21239,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21342,6 +21256,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch95(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_24645c62"))
@@ -21357,6 +21272,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch98(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48d5ef59"))
@@ -21471,7 +21387,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -21528,7 +21444,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21538,6 +21454,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch100(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -21571,7 +21488,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -21588,7 +21505,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21641,7 +21558,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -21666,7 +21583,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21698,7 +21615,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -21711,7 +21628,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21750,7 +21667,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -21763,7 +21680,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21820,7 +21737,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -21833,7 +21750,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21865,7 +21782,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -21874,7 +21791,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21906,7 +21823,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -21915,7 +21832,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21954,7 +21871,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -21967,7 +21884,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21999,7 +21916,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -22008,7 +21925,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -22047,7 +21964,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -22060,7 +21977,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -22152,7 +22069,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -22185,7 +22102,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -22202,6 +22119,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch102(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b0064b47"))
@@ -22235,7 +22153,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84ee6fa0");
@@ -22252,7 +22170,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -22262,6 +22180,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch103(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_84ee6fa0"))
@@ -22299,6 +22218,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch108(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_84388bb"))
@@ -22413,7 +22333,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -22470,7 +22390,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -22480,6 +22400,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch110(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -22513,7 +22434,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_826b822");
@@ -22530,7 +22451,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -22583,7 +22504,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7de495e9");
@@ -22608,7 +22529,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -22640,7 +22561,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bbcc6ae");
@@ -22653,7 +22574,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -22692,7 +22613,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -22705,7 +22626,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -22762,7 +22683,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aa668ed0");
@@ -22775,7 +22696,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -22807,7 +22728,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7a9938a");
@@ -22816,7 +22737,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -22848,7 +22769,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24645c62");
@@ -22857,7 +22778,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -22896,7 +22817,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48d5ef59");
@@ -22909,7 +22830,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -22941,7 +22862,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0064b47");
@@ -22950,7 +22871,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -22989,7 +22910,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84388bb");
@@ -23002,7 +22923,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -23094,7 +23015,7 @@ public class station_yavin4 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -23127,7 +23048,7 @@ public class station_yavin4 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_yavin4.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -23144,6 +23065,7 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_yavin4_handleBranch114(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_270"))
@@ -23224,18 +23146,21 @@ public class station_yavin4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_station_yavin4.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_station_yavin4.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -23244,18 +23169,21 @@ public class station_yavin4 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.station_yavin4");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -23298,7 +23226,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_8684604b");
@@ -23314,7 +23242,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 2);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -23343,7 +23271,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_10");
@@ -23355,7 +23283,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 4);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -23397,7 +23325,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_fa50b9ba");
@@ -23417,7 +23345,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 5);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -23459,7 +23387,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_f771fd8a");
@@ -23479,7 +23407,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 8);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -23521,7 +23449,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_504c55d7");
@@ -23541,7 +23469,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 12);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -23583,7 +23511,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ce7c38dc");
@@ -23603,7 +23531,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 15);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -23645,7 +23573,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1e46e4ca");
@@ -23665,7 +23593,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 18);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -23707,7 +23635,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_a0d09783");
@@ -23727,7 +23655,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 21);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -23769,7 +23697,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_c9c08b99");
@@ -23789,7 +23717,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 24);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -23810,7 +23738,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_86922104");
@@ -23818,7 +23746,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 27);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -23840,7 +23768,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_7fab133d");
@@ -23848,7 +23776,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 29);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -23870,7 +23798,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_89");
@@ -23878,7 +23806,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 31);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -23899,7 +23827,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_a5105d38");
@@ -23907,7 +23835,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 33);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -23928,7 +23856,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_8ac5cbaf");
@@ -23936,7 +23864,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 35);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -23957,7 +23885,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4ed46b5d");
@@ -23965,7 +23893,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 38);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -24008,7 +23936,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_2dbe402f");
@@ -24028,7 +23956,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 40);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -24049,7 +23977,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_e6b2affe");
@@ -24057,7 +23985,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 43);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -24078,7 +24006,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_2c9ad69a");
@@ -24086,7 +24014,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 45);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -24107,7 +24035,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_362a48e0");
@@ -24115,7 +24043,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 47);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -24136,7 +24064,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6e605bd6");
@@ -24144,7 +24072,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 49);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -24249,7 +24177,7 @@ public class station_yavin4 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -24305,7 +24233,7 @@ public class station_yavin4 extends script.base_script
                 utils.setScriptVar(player, "conversation.station_yavin4.branchId", 51);
                 npcStartConversation(player, npc, "station_yavin4", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -24314,6 +24242,7 @@ public class station_yavin4 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("station_yavin4"))

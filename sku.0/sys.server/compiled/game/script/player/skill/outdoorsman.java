@@ -1,5 +1,11 @@
 package script.player.skill;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.corpse;
 import script.library.prose;
@@ -9,12 +15,13 @@ import script.string_id;
 
 public class outdoorsman extends script.base_script
 {
-    public outdoorsman()
-    {
-    }
     public static final string_id PROSE_HARVEST_FAILED = new string_id("error_message", "prose_harvest_corpse_failed");
     public static final string_id SID_HARVEST_FAILED = new string_id("error_message", "harvest_corpse_failed");
     public static final string_id SID_NO_RESOURCE = new string_id("error_message", "no_resource");
+    public outdoorsman()
+    {
+    }
+
     public int cmdHarvestCorpse(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target) || params == null)
@@ -32,19 +39,23 @@ public class outdoorsman extends script.base_script
         }
         boolean found = false;
         int[] hasResource = getIntArrayObjVar(target, corpse.VAR_HAS_RESOURCE);
-        switch (params) {
+        switch (params)
+        {
             case "meat":
-                if (hasResource[corpse.CCR_MEAT] > 0) {
+                if (hasResource[corpse.CCR_MEAT] > 0)
+                {
                     found = true;
                 }
                 break;
             case "hide":
-                if (hasResource[corpse.CCR_HIDE] > 0) {
+                if (hasResource[corpse.CCR_HIDE] > 0)
+                {
                     found = true;
                 }
                 break;
             case "bone":
-                if (hasResource[corpse.CCR_BONE] > 0) {
+                if (hasResource[corpse.CCR_BONE] > 0)
+                {
                     found = true;
                 }
                 break;
@@ -63,13 +74,14 @@ public class outdoorsman extends script.base_script
         messageTo(target, "harvestCorpse", outparams, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdHarvestCorpseFail(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (target == null)
         {
             sendSystemMessage(self, SID_HARVEST_FAILED);
         }
-        else 
+        else
         {
             prose_package pp = prose.getPackage(PROSE_HARVEST_FAILED, target);
             sendSystemMessageProse(self, pp);

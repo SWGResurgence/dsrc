@@ -1,5 +1,11 @@
 package script.developer.soe.hnguyen;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.script_entry;
@@ -12,6 +18,7 @@ public class cts_test2 extends script.base_script
     public cts_test2()
     {
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (objSpeaker != self)
@@ -60,15 +67,15 @@ public class cts_test2 extends script.base_script
                             {
                                 fos = new FileOutputStream(file);
                                 dos = new DataOutputStream(fos);
-                                for (byte b : dictPacked) {
+                                for (byte b : dictPacked)
+                                {
                                     dos.writeByte(b);
                                 }
                                 fos.close();
                                 fos = null;
                                 long fileSize = (new File(file)).length();
                                 broadcast(self, "dictionary written to " + file + " file size=" + fileSize);
-                            }
-                            catch(IOException ioe)
+                            } catch (IOException ioe)
                             {
                                 broadcast(self, "IO error: " + ioe);
                             }
@@ -78,8 +85,7 @@ public class cts_test2 extends script.base_script
                                 {
                                     fos.close();
                                 }
-                            }
-                            catch(IOException ioe2)
+                            } catch (IOException ioe2)
                             {
                                 broadcast(self, "IO error on closing file: " + ioe2);
                             }
@@ -89,12 +95,11 @@ public class cts_test2 extends script.base_script
                             saveBytesOnClient(self, file, dictPacked);
                         }
                     }
-                    else 
+                    else
                     {
                         broadcast(self, "trigger OnUploadCharacter() *DIDN'T* return SCRIPT_CONTINUE");
                     }
-                }
-                catch(Throwable t)
+                } catch (Throwable t)
                 {
                     broadcast(self, "trigger OnUploadCharacter() resulted in exception: " + t);
                 }
@@ -117,14 +122,13 @@ public class cts_test2 extends script.base_script
                     broadcast(self, "reading dictionary " + file + " file size=" + fileSize);
                     fis = new FileInputStream(file);
                     dis = new DataInputStream(fis);
-                    dictRead = new byte[(int)(fileSize)];
+                    dictRead = new byte[(int) (fileSize)];
                     int index = 0;
                     while (true)
                     {
                         dictRead[index++] = dis.readByte();
                     }
-                }
-                catch(EOFException eof)
+                } catch (EOFException eof)
                 {
                     if (dictRead != null)
                     {
@@ -136,17 +140,16 @@ public class cts_test2 extends script.base_script
                         {
                             broadcast(self, "trigger OnDownloadCharacter() return SCRIPT_CONTINUE");
                         }
-                        else 
+                        else
                         {
                             broadcast(self, "trigger OnDownloadCharacter() *DIDN'T* return SCRIPT_CONTINUE");
                         }
                     }
-                    else 
+                    else
                     {
                         broadcast(self, "couldn't read dictionary");
                     }
-                }
-                catch(IOException ioe)
+                } catch (IOException ioe)
                 {
                     broadcast(self, "IO error: " + ioe);
                 }
@@ -156,8 +159,7 @@ public class cts_test2 extends script.base_script
                     {
                         fis.close();
                     }
-                }
-                catch(IOException ioe2)
+                } catch (IOException ioe2)
                 {
                     broadcast(self, "IO error on closing file: " + ioe2);
                 }

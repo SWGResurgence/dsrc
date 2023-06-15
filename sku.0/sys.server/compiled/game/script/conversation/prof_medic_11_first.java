@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,32 +14,39 @@ import script.*;
 
 public class prof_medic_11_first extends script.base_script
 {
+    public static String c_stringFile = "conversation/prof_medic_11_first";
+
     public prof_medic_11_first()
     {
     }
-    public static String c_stringFile = "conversation/prof_medic_11_first";
+
     public boolean prof_medic_11_first_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean prof_medic_11_first_condition_playerOnCorrectStep(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "profession_medic_11", "talktofirst");
     }
+
     public boolean prof_medic_11_first_condition_playercompletedTask(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedTask(player, "profession_medic_11", "talktofirst");
     }
+
     public void prof_medic_11_first_action_givePassSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "profession_medic_11_first_victim");
     }
+
     public void prof_medic_11_first_action_healnpc(obj_id player, obj_id npc) throws InterruptedException
     {
         playClientEffectObj(player, "clienteffect/prof_medic_21_heal2.cef", npc, "");
     }
+
     public int prof_medic_11_first_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_20"))
@@ -53,7 +66,7 @@ public class prof_medic_11_first extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_10");
@@ -62,7 +75,7 @@ public class prof_medic_11_first extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.prof_medic_11_first.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -72,6 +85,7 @@ public class prof_medic_11_first extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int prof_medic_11_first_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_10"))
@@ -92,7 +106,7 @@ public class prof_medic_11_first extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14");
@@ -101,7 +115,7 @@ public class prof_medic_11_first extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.prof_medic_11_first.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -111,6 +125,7 @@ public class prof_medic_11_first extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int prof_medic_11_first_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_14"))
@@ -128,6 +143,7 @@ public class prof_medic_11_first extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -140,6 +156,7 @@ public class prof_medic_11_first extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -148,6 +165,7 @@ public class prof_medic_11_first extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -156,18 +174,21 @@ public class prof_medic_11_first extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.prof_medic_11_first");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -196,7 +217,7 @@ public class prof_medic_11_first extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_20");
@@ -204,7 +225,7 @@ public class prof_medic_11_first extends script.base_script
                 utils.setScriptVar(player, "conversation.prof_medic_11_first.branchId", 2);
                 npcStartConversation(player, npc, "prof_medic_11_first", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -219,6 +240,7 @@ public class prof_medic_11_first extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("prof_medic_11_first"))

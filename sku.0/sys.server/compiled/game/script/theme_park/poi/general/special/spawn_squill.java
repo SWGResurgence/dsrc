@@ -1,5 +1,11 @@
 package script.theme_park.poi.general.special;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.quests;
 import script.location;
@@ -8,11 +14,12 @@ import script.theme_park.tatooine.gating;
 
 public class spawn_squill extends script.base_script
 {
+    public static final String QUEST_ID = gating.BIB_QUEST;
+    public static final String QUEST_SCRIPT_PATH = "theme_park.tatooine.bib_quest.";
     public spawn_squill()
     {
     }
-    public static final String QUEST_ID = gating.BIB_QUEST;
-    public static final String QUEST_SCRIPT_PATH = "theme_park.tatooine.bib_quest.";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location hero = getLocation(self);
@@ -22,12 +29,14 @@ public class spawn_squill extends script.base_script
         quests.addQuestLocationTarget(self, "squill", "squill", squill, 30);
         return SCRIPT_CONTINUE;
     }
+
     public int IDied(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "squillKilled", 1);
         detachScript(self, "theme_park.poi.general.special.spawn_squill");
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         if (name.equals("squill"))

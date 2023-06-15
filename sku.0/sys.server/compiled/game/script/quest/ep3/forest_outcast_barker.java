@@ -1,5 +1,11 @@
 package script.quest.ep3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.attrib;
 import script.library.chat;
@@ -10,11 +16,12 @@ import script.string_id;
 
 public class forest_outcast_barker extends script.base_script
 {
+    public static final String STF = "ep3/sidequests";
+    public static final string_id CONTACT = new string_id(STF, "outcast");
     public forest_outcast_barker()
     {
     }
-    public static final String STF = "ep3/sidequests";
-    public static final string_id CONTACT = new string_id(STF, "outcast");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setBarkAttributes(self);
@@ -22,6 +29,7 @@ public class forest_outcast_barker extends script.base_script
         attachScript(self, "conversation.ep3_forest_outcast_informant");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setBarkAttributes(self);
@@ -29,22 +37,24 @@ public class forest_outcast_barker extends script.base_script
         attachScript(self, "conversation.ep3_forest_outcast_informant");
         return SCRIPT_CONTINUE;
     }
+
     public void setBarkAttributes(obj_id self) throws InterruptedException
     {
         createTriggerVolume("chat_range", 10, true);
         setAttributeInterested(self, attrib.ALL);
-        return;
     }
+
     public void beginChatting(obj_id self, obj_id player) throws InterruptedException
     {
         chat.chat(self, CONTACT);
-        return;
     }
+
     public int handleReset(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "already_chatting");
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id who) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "already_chatting"))

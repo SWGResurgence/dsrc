@@ -1,5 +1,11 @@
 package script.city.imperial_crackdown;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -8,10 +14,12 @@ import script.string_id;
 
 public class imperial_trouble extends script.base_script
 {
+    public static String CONVO = "npc_reaction/imperial_crackdown_cantina";
+
     public imperial_trouble()
     {
     }
-    public static String CONVO = "npc_reaction/imperial_crackdown_cantina";
+
     public int startMoving(obj_id self, dictionary params) throws InterruptedException
     {
         location fight = new location(22.37f, -0.89f, 0.98f, getLocation(self).area, getCellId(getTopMostContainer(self), "cantina"));
@@ -19,10 +27,12 @@ public class imperial_trouble extends script.base_script
         addLocationTarget("harass", fight, 1);
         return SCRIPT_CONTINUE;
     }
+
     public String getFactionName(obj_id self) throws InterruptedException
     {
         return getStringObjVar(self, "string_faction");
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         if (name.equals("harass"))
@@ -43,6 +53,7 @@ public class imperial_trouble extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSawAttack(obj_id self, obj_id defender, obj_id[] attackers) throws InterruptedException
     {
         if (defender == self)
@@ -60,6 +71,7 @@ public class imperial_trouble extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startTrouble(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
@@ -77,17 +89,23 @@ public class imperial_trouble extends script.base_script
             setObjVar(self, "harassing", players[0]);
             messageTo(self, "harassPlayer", null, 12, false);
         }
-        else 
+        else
         {
             String harassFaction;
-            for (obj_id thisPlayer : players) {
-                if (factions.isCovert(thisPlayer)) {
-                    if (getFactionName(self).equals("imperial")) {
+            for (obj_id thisPlayer : players)
+            {
+                if (factions.isCovert(thisPlayer))
+                {
+                    if (getFactionName(self).equals("imperial"))
+                    {
                         harassFaction = "Rebel";
-                    } else {
+                    }
+                    else
+                    {
                         harassFaction = "Imperial";
                     }
-                    if (factions.getFaction(thisPlayer).equals(harassFaction)) {
+                    if (factions.getFaction(thisPlayer).equals(harassFaction))
+                    {
                         chat.chat(self, new string_id(CONVO, "harass_guy_" + getFactionName(self)));
                         setObjVar(self, "harassing", thisPlayer);
                         messageTo(self, "harassPlayer", null, 10, false);
@@ -103,6 +121,7 @@ public class imperial_trouble extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int harassPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "trouble"))
@@ -116,6 +135,7 @@ public class imperial_trouble extends script.base_script
         messageTo(self, "moveOver", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int moveOver(obj_id self, dictionary params) throws InterruptedException
     {
         chat.chat(self, new string_id(CONVO, "checking_out_" + getFactionName(self)));
@@ -125,6 +145,7 @@ public class imperial_trouble extends script.base_script
         addLocationTarget("trouble", trouble, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int continueTrouble(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -143,12 +164,14 @@ public class imperial_trouble extends script.base_script
         utils.setScriptVar(self, "talked", talked + 1);
         return SCRIPT_CONTINUE;
     }
+
     public string_id getSomethingToSay(obj_id self) throws InterruptedException
     {
         int which = rand(1, 15);
         utils.setScriptVar(self, "lastSaid", which);
         return new string_id(CONVO, "harass_" + which + "_" + getFactionName(self));
     }
+
     public int finishTrouble(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "Final"))
@@ -172,6 +195,7 @@ public class imperial_trouble extends script.base_script
         messageTo(self, "handleBadLeaving", null, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int leaveCantina(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -183,6 +207,7 @@ public class imperial_trouble extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBadLeaving(obj_id self, dictionary params) throws InterruptedException
     {
         string_id back = new string_id(CONVO, "back_home");
@@ -190,11 +215,13 @@ public class imperial_trouble extends script.base_script
         messageTo(self, "leaveCantina", null, 7, false);
         return SCRIPT_CONTINUE;
     }
+
     public int postCombatPathHome(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "leaveCantina", null, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkForFinalFight(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -209,21 +236,33 @@ public class imperial_trouble extends script.base_script
             return false;
         }
         String harassFaction;
-        for (obj_id player : players) {
-            if (isIdValid(player)) {
-                if (factions.isCovert(player)) {
-                    if (getFactionName(self).equals("imperial")) {
+        for (obj_id player : players)
+        {
+            if (isIdValid(player))
+            {
+                if (factions.isCovert(player))
+                {
+                    if (getFactionName(self).equals("imperial"))
+                    {
                         harassFaction = "Rebel";
-                    } else {
+                    }
+                    else
+                    {
                         harassFaction = "Imperial";
                     }
-                    if (factions.getFaction(player).equals(harassFaction)) {
-                        if (!checkForPercentage(player)) {
-                            if (getLevel(player) > 10) {
+                    if (factions.getFaction(player).equals(harassFaction))
+                    {
+                        if (!checkForPercentage(player))
+                        {
+                            if (getLevel(player) > 10)
+                            {
                                 chat.chat(self, new string_id(CONVO, "attacking_" + getFactionName(self)));
-                                if (!isJedi(player) && factions.isOnLeave(player)) {
+                                if (!isJedi(player) && factions.isOnLeave(player))
+                                {
                                     pvpMakeCovert(player);
-                                } else if (isJedi(player)) {
+                                }
+                                else if (isJedi(player))
+                                {
                                     jedi.doJediTEF(player);
                                 }
                                 startCombat(self, player);
@@ -243,6 +282,7 @@ public class imperial_trouble extends script.base_script
         }
         return false;
     }
+
     public boolean checkForPercentage(obj_id player) throws InterruptedException
     {
         boolean yesNo = true;
@@ -256,13 +296,16 @@ public class imperial_trouble extends script.base_script
         {
             return false;
         }
-        for (obj_id thisMember : members) {
-            if (!ai_lib.checkForSmuggler(thisMember)) {
+        for (obj_id thisMember : members)
+        {
+            if (!ai_lib.checkForSmuggler(thisMember))
+            {
                 yesNo = false;
             }
         }
         return yesNo;
     }
+
     public int getSmugglerPercentage(obj_id thisMember) throws InterruptedException
     {
         int chance = 90;

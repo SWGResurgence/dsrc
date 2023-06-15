@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -8,10 +14,12 @@ import script.string_id;
 
 public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
 {
+    public static final String questNewbieHall01 = "c_newbie_hall_01";
+
     public newbie()
     {
     }
-    public static final String questNewbieHall01 = "c_newbie_hall_01";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (features.isSpaceEdition(self))
@@ -27,6 +35,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         grantNewbieStartingMoney(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (features.isSpaceEdition(self))
@@ -57,6 +66,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public void beginTutorial(obj_id self) throws InterruptedException
     {
         obj_id bldg = getTopMostContainer(self);
@@ -66,6 +76,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         messageTo(self, "handleWelcome", null, 5, false);
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "newbie.hasReleaseDocuments"))
@@ -86,22 +97,28 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         transferBankToInventory(self);
         obj_id playerInv = utils.getInventoryContainer(self);
         obj_id[] contents = getContents(playerInv);
-        for (obj_id content1 : contents) {
-            if (hasObjVar(content1, "newbie.item")) {
-                if (hasScript(content1, BOX_ITEM_SCRIPT)) {
+        for (obj_id content1 : contents)
+        {
+            if (hasObjVar(content1, "newbie.item"))
+            {
+                if (hasScript(content1, BOX_ITEM_SCRIPT))
+                {
                     detachScript(content1, BOX_ITEM_SCRIPT);
                 }
                 destroyObject(content1);
             }
         }
         contents = getContents(self);
-        for (obj_id content : contents) {
-            if (hasObjVar(content, "newbie.item")) {
+        for (obj_id content : contents)
+        {
+            if (hasObjVar(content, "newbie.item"))
+            {
                 destroyObject(content);
             }
         }
         removeObjVar(self, "banking_bankid");
-        for (String boxContent : BOX_CONTENTS) {
+        for (String boxContent : BOX_CONTENTS)
+        {
             createObject(boxContent, playerInv, "");
         }
         removeObjVar(self, loot.VAR_DENY_LOOT);
@@ -127,6 +144,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         grantAllNoviceSkills(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -216,20 +234,26 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNewbieTutorialResponse(obj_id self, String action) throws InterruptedException
     {
-        switch (action) {
+        switch (action)
+        {
             case "clientReady":
                 location loc = getLocation(self);
                 String area = loc.area;
-                if (area.equals("tutorial")) {
+                if (area.equals("tutorial"))
+                {
                     beginTutorial(self);
-                } else {
+                }
+                else
+                {
                     utils.setScriptVar(self, "newbie.hasExitedTutorial", true);
                 }
                 break;
             case "zoomCamera":
-                if (utils.hasScriptVar(self, "newbie.waitingForCameraZoom")) {
+                if (utils.hasScriptVar(self, "newbie.waitingForCameraZoom"))
+                {
                     utils.removeScriptVar(self, "newbie.waitingForCameraZoom");
                     messageTo(self, "handleChatWindow", null, 10.0f, false);
                 }
@@ -242,8 +266,10 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
                 utils.removeScriptVar(self, "newbie.waitingForcharacterSheetClose");
                 break;
             case "openInventory":
-                if (utils.hasScriptVar(self, "newbie.waitingForInventoryOpen")) {
-                    if (isInRoom(self, "r2")) {
+                if (utils.hasScriptVar(self, "newbie.waitingForInventoryOpen"))
+                {
+                    if (isInRoom(self, "r2"))
+                    {
                         utils.removeScriptVar(self, "newbie.waitingForInventoryOpen");
                         messageTo(self, "handleToolbarPrompt", null, 6, false);
                         newbieTutorialRequest(self, "closeInventory");
@@ -253,7 +279,8 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
                 break;
             case "closeInventory":
                 utils.setScriptVar(self, "newbie.skipCloseInventory", true);
-                if (utils.hasScriptVar(self, "newbie.waitingForInventoryClose")) {
+                if (utils.hasScriptVar(self, "newbie.waitingForInventoryClose"))
+                {
                     messageTo(self, "handlePromptToCommerceRoom", null, 5, false);
                 }
                 utils.removeScriptVar(self, "newbie.waitingForInventoryClose");
@@ -268,6 +295,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleWelcome(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id bldg = getTopMostContainer(self);
@@ -275,6 +303,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleMoveKeys", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMoveKeys(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r1"))
@@ -284,6 +313,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleMoveMouse", null, 7, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMoveMouse(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r1"))
@@ -293,6 +323,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "moveOnToNextRoom", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMouseWheel(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r1"))
@@ -303,6 +334,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleNoMouseWheelOrKeypad", null, MEDIUM_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleNoMouseWheelOrKeypad(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r1"))
@@ -316,6 +348,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePromptForCameraZoom(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r1"))
@@ -328,6 +361,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleChatWindow(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r1"))
@@ -338,13 +372,14 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "newbie.alreadyChatted", true);
         }
         utils.setScriptVar(self, "newbie.promptedToChat", true);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRepeatChatPrompt(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r1"))
@@ -358,6 +393,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         utils.setScriptVar(self, "newbie.promptedToChat", true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "newbie.promptedToChat"))
@@ -367,6 +403,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleOpencharacterSheetWindow(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r1"))
@@ -378,6 +415,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleRepeatOpencharacterSheet", null, VERY_LONG_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRepeatOpencharacterSheet(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r1"))
@@ -389,6 +427,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRepeatClosecharacterSheet(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r1"))
@@ -400,6 +439,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleStatusScreenInfo(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r1"))
@@ -411,6 +451,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleRepeatClosecharacterSheet", null, VERY_LONG_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMoveToItemRoomPrompt(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r1"))
@@ -425,6 +466,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRepeatItemRoomPrompt(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r1"))
@@ -433,6 +475,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleExplainFreemouse(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r2"))
@@ -443,12 +486,13 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "newbie.handleExplainFreemouse", true);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleExplainInventory(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r2"))
@@ -459,13 +503,14 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "newbie.handleExplainInventory", true);
         }
         messageTo(self, "handleOpenInventory", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleOpenInventory(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "newbie.waitingForInventoryOpen"))
@@ -478,6 +523,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleToolbarPrompt(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r2"))
@@ -488,13 +534,14 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "newbie.handleToolbarPromp", true);
         }
         messageTo(self, "handleReadyItemPrompt", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleReadyItemPrompt(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r2"))
@@ -505,13 +552,14 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "newbie.handleReadyItemPrompt", true);
         }
         messageTo(self, "handleUseToolbarPrompt", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleUseToolbarPrompt(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r2"))
@@ -522,7 +570,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "newbie.handleUseToolbarPrompt", true);
         }
@@ -531,12 +579,13 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
             utils.setScriptVar(self, "newbie.waitingForInventoryClose", true);
             messageTo(self, "handlePromptToCloseInventory", null, LONG_DELAY, false);
         }
-        else 
+        else
         {
             messageTo(self, "handlePromptToCommerceRoom", null, 1, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePromptToCloseInventory(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r2"))
@@ -551,12 +600,13 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         {
             messageTo(self, "handleInventoryAlreadyClosed", null, VERY_LONG_DELAY, false);
         }
-        else 
+        else
         {
             messageTo(self, "handleInventoryAlreadyClosed", null, 1, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleInventoryAlreadyClosed(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "newbie.waitingForInventoryClose"))
@@ -566,6 +616,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handlePromptToCommerceRoom", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePromptToCommerceRoom(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r2"))
@@ -576,13 +627,14 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "newbie.promptedToRoom", true);
         }
         messageTo(self, "handleRepeatPromptToCommerceRoom", null, VERY_LONG_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRepeatPromptToCommerceRoom(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r2"))
@@ -591,6 +643,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public void initiateCommerceRoom(obj_id player) throws InterruptedException
     {
         obj_id bldg = getBuilding(player);
@@ -606,6 +659,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(banker, "handleInitiateConvo", null, 2, false);
         makeStaticWaypoint(banker);
     }
+
     public int handleBankAndBazaarFlyText(obj_id self, dictionary params) throws InterruptedException
     {
         if (isInRoom(self, "r3"))
@@ -620,6 +674,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBankInfoSpam(obj_id self, dictionary params) throws InterruptedException
     {
         utils.setScriptVar(self, "newbie.usedBank", true);
@@ -646,6 +701,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBazaarInfoSpam(obj_id self, dictionary params) throws InterruptedException
     {
         utils.setScriptVar(self, "newbie.usedBazaar", true);
@@ -667,27 +723,29 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         switch (bazaarSpamNum)
         {
             case 1:
-            break;
+                break;
             case 2:
-            break;
+                break;
             case 3:
-            utils.setScriptVar(self, "newbie.bazaarSpamDone", true);
-            utils.removeScriptVar(self, "newbie.bazaarSpam");
-            if (utils.hasScriptVar(self, "newbie.bankSpamPending"))
-            {
-                messageTo(self, "handleBankInfoSpam", null, MEDIUM_DELAY, false);
-            }
-            return SCRIPT_CONTINUE;
+                utils.setScriptVar(self, "newbie.bazaarSpamDone", true);
+                utils.removeScriptVar(self, "newbie.bazaarSpam");
+                if (utils.hasScriptVar(self, "newbie.bankSpamPending"))
+                {
+                    messageTo(self, "handleBankInfoSpam", null, MEDIUM_DELAY, false);
+                }
+                return SCRIPT_CONTINUE;
         }
         utils.setScriptVar(self, "newbie.bazaarSpam", bazaarSpamNum);
         messageTo(self, "handleBazaarInfoSpam", null, SHORT_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public void initiateCloneRoom(obj_id player) throws InterruptedException
     {
         obj_id cloneNpc = getObjIdObjVar(getBuilding(player), CLONE_NPC);
         messageTo(cloneNpc, "handleInitiateConvo", null, SHORT_DELAY, false);
     }
+
     public void initiatePromptToClone(obj_id player) throws InterruptedException
     {
         messageTo(player, "handleCloneAndInsureFlyText", null, 1, false);
@@ -696,6 +754,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         obj_id terminal = getObjIdObjVar(getTopMostContainer(player), CLONE_TERMINAL);
         makeStaticWaypoint(terminal);
     }
+
     public int handleCloneAndInsureFlyText(obj_id self, dictionary params) throws InterruptedException
     {
         if (isInRoom(self, "r5"))
@@ -715,6 +774,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePromptToInsure(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "newbie.insuredStuff"))
@@ -723,6 +783,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCloneInfoSpam(obj_id self, dictionary params) throws InterruptedException
     {
         removeStaticWaypoint(self);
@@ -731,6 +792,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handlePromptToInsure", null, SHORT_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleInsuranceInfoSpam(obj_id self, dictionary params) throws InterruptedException
     {
         removeStaticWaypoint(self);
@@ -738,13 +800,14 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "moveOnToNextRoom", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public void doRoomSixPrompt(obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "newbie.panicInitiated"))
         {
             return;
         }
-        else 
+        else
         {
             utils.setScriptVar(player, "newbie.panicInitiated", true);
         }
@@ -758,10 +821,12 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(panicGuy, "initiatePanic", null, 2, false);
         messageTo(player, "handleRadar", null, 5, false);
     }
+
     public int handleSeeWhatIsGoingOn(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void initiatePromptForCombat(obj_id player) throws InterruptedException
     {
         if (!isInRoom(player, "r7"))
@@ -773,10 +838,12 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         makeStaticWaypoint(combatExplainer);
         messageTo(combatExplainer, "handlePlayerArrival", null, 3, false);
     }
+
     public int handleExplainCombatToolbar(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void handlePromptToNextRoom(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "newbie.killedPirate"))
@@ -786,6 +853,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
             messageTo(self, "handleExplainCombatToolbar", null, SHORT_DELAY, false);
         }
     }
+
     public int handleRadar(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r8"))
@@ -794,6 +862,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRadarMore(obj_id self, dictionary params) throws InterruptedException
     {
         if (isInRoom(self, "r8"))
@@ -803,6 +872,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleZoomMap", null, MEDIUM_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleZoomMap(obj_id self, dictionary params) throws InterruptedException
     {
         if (isInRoom(self, "r8"))
@@ -811,6 +881,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public void initiatePirateAttack(obj_id player, obj_id bldg) throws InterruptedException
     {
         obj_id pirate = getObjIdObjVar(bldg, PIRATE);
@@ -827,14 +898,17 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(pirate, "handlePlayerInRoom", parms, 2, false);
         messageTo(player, "handleAttackingDescription", null, LONG_DELAY, false);
     }
+
     public int handleAttackingDescription(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handleCongrats(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void initiateTrainerExplanation(obj_id player) throws InterruptedException
     {
         obj_id bldg = getTopMostContainer(player);
@@ -855,20 +929,24 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
             }
         }
     }
+
     public int handleShowCharSheet(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "handlePromptToMissionRoom", null, VERY_LONG_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePromptToMissionRoom(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handleTrainerDoneTalking(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "newbie.trainerIsTalking");
         return SCRIPT_CONTINUE;
     }
+
     public void initiateMissionExplanation(obj_id player) throws InterruptedException
     {
         if (!isInRoom(player, "r10"))
@@ -877,6 +955,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         messageTo(player, "handleMissionExplaination", null, 1, false);
     }
+
     public int handleMissionExplaination(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r10"))
@@ -887,12 +966,13 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         {
             messageTo(self, "handleExplainNpcMissions", null, 9, false);
         }
-        else 
+        else
         {
             messageTo(self, "handleMissionExplaination", null, 5, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleExplainNpcMissions(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r10"))
@@ -907,6 +987,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleGetTravelWaypoint(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "newbie.hasReleaseDocuments"))
@@ -928,10 +1009,12 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleExplainWaypoint(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void initiateTravelExplanation(obj_id player) throws InterruptedException
     {
         obj_id travelNpc = getObjIdObjVar(getTopMostContainer(player), TRAVEL_NPC);
@@ -940,12 +1023,14 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
             messageTo(travelNpc, "handleInitiateDialog", null, 0, false);
         }
     }
+
     public int handleStartOath(obj_id self, dictionary params) throws InterruptedException
     {
         utils.setScriptVar(self, "newbie.takingOath", true);
         messageTo(self, "handlePromptForPromise", null, SHORT_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePromptForPromise(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "newbie.oathCompleted"))
@@ -960,6 +1045,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRePromptForPromise(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(self, "r11"))
@@ -973,11 +1059,13 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleRePromptForPromise", null, LONG_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int xferFailed(obj_id self, dictionary params) throws InterruptedException
     {
         grantNewbieStartingMoney(self);
         return SCRIPT_CONTINUE;
     }
+
     public int timeToWithdraw(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -989,32 +1077,37 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         withdrawCashFromBank(self, amt, "cashReceived", "xferFailed", params);
         return SCRIPT_CONTINUE;
     }
+
     public int cashReceived(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handleEndTutorial(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "newbie.hasExitedTutorial"))
         {
             detachScript(self, "theme_park.newbie_tutorial.newbie");
         }
-        else 
+        else
         {
             messageTo(self, "handleEndTutorial", null, 10, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbieRequestStartingLocations(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         newbieTutorialSendStartingLocationsToPlayer(self, null);
         return SCRIPT_CONTINUE;
     }
+
     public int newbieSelectStartingLocation(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         sendToStartLocation(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         location loc = getLocation(self);
@@ -1025,6 +1118,7 @@ public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moveOnToNextRoom(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

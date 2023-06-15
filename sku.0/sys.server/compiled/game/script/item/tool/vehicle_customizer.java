@@ -1,5 +1,11 @@
 package script.item.tool;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -28,6 +34,7 @@ public class vehicle_customizer extends script.base_script
     public static final string_id PROSE_FAIL = new string_id(STF, "prose_fail");
     public static final string_id PROSE_FAIL_OWNER = new string_id(STF, "prose_fail_owner");
     public static final String TBL = "datatables/item/vehicle_customizer/indices.iff";
+
     public vehicle_customizer()
     {
     }

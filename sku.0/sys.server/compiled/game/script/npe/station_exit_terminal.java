@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.npe;
 import script.library.sui;
@@ -7,19 +13,23 @@ import script.library.utils;
 
 public class station_exit_terminal extends script.base_script
 {
+    public static final string_id EXIT_STATION = new string_id("npe", "exit_station");
+
     public station_exit_terminal()
     {
     }
-    public static final string_id EXIT_STATION = new string_id("npe", "exit_station");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, EXIT_STATION);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -36,6 +46,7 @@ public class station_exit_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkGod(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -45,6 +56,7 @@ public class station_exit_terminal extends script.base_script
         }
         return false;
     }
+
     public int handTransfer(obj_id self, dictionary params) throws InterruptedException
     {
         int btn = sui.getIntButtonPressed(params);

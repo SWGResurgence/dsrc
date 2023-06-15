@@ -1,5 +1,11 @@
 package script.item.container.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.permissions;
 import script.library.utils;
 import script.menu_info;
@@ -17,13 +23,10 @@ public class base_container extends script.base_script
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        switch (getContainerType(self))
+        if (getContainerType(self) == 0)
         {
-            case 0:
-                detachScript(self, SCRIPT_BASE_CONTAINER);
-                return SCRIPT_OVERRIDE;
-            default:
-                break;
+            detachScript(self, SCRIPT_BASE_CONTAINER);
+            return SCRIPT_OVERRIDE;
         }
         return SCRIPT_CONTINUE;
     }

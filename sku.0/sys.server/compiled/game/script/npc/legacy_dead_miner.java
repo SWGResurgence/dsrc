@@ -1,13 +1,21 @@
 package script.npc;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class legacy_dead_miner extends script.base_script
 {
+    public static int INITIAL_DELAY = 1;
+
     public legacy_dead_miner()
     {
     }
-    public static int INITIAL_DELAY = 1;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasScript(self, "ai.ai"))

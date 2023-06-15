@@ -1,5 +1,11 @@
 package script.space.content_tools;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -30,17 +36,21 @@ public class spawner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
             Vector<transform> trPatrolPoints = new Vector<>(0);
-            
+
             obj_id[] objTestObjects = getAllObjectsWithTemplate(getLocation(self), 320000, "object/tangible/space/content_infrastructure/basic_patrol_point.iff");
             if (objTestObjects == null)
             {
                 return SCRIPT_CONTINUE;
             }
-            for (String strPatrolPoint : strPatrolPoints) {
-                for (int intJ = 0; intJ < objTestObjects.length; intJ++) {
-                    if (isIdValid(objTestObjects[intJ]) && hasObjVar(objTestObjects[intJ], "strName")) {
+            for (String strPatrolPoint : strPatrolPoints)
+            {
+                for (int intJ = 0; intJ < objTestObjects.length; intJ++)
+                {
+                    if (isIdValid(objTestObjects[intJ]) && hasObjVar(objTestObjects[intJ], "strName"))
+                    {
                         String strName = getStringObjVar(objTestObjects[intJ], "strName");
-                        if (strName.equals(strPatrolPoint)) {
+                        if (strName.equals(strPatrolPoint))
+                        {
                             trPatrolPoints.add(getTransform_o2w(objTestObjects[intJ]));
                             intJ = objTestObjects.length + 10;
                         }
@@ -56,15 +66,18 @@ public class spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         requestPreloadCompleteTrigger(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnPreloadComplete(obj_id self) throws InterruptedException
     {
         obj_id questManager = getNamedObject(space_quest.QUEST_MANAGER);
@@ -99,6 +112,7 @@ public class spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isSpawnerActivated(obj_id self) throws InterruptedException
     {
         obj_id objManager = space_battlefield.getManagerObject();
@@ -110,6 +124,7 @@ public class spawner extends script.base_script
         }
         return true;
     }
+
     public int startSpawning(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "strSpawnerType"))
@@ -124,10 +139,13 @@ public class spawner extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String strSpawnerType = getStringObjVar(self, "strSpawnerType");
-        switch (strSpawnerType) {
-            case "generic": {
+        switch (strSpawnerType)
+        {
+            case "generic":
+            {
                 String[] strSpawns = objvar_mangle.getMangledStringArrayObjVar(self, "strSpawns");
-                if (strSpawns == null) {
+                if (strSpawns == null)
+                {
                     return SCRIPT_CONTINUE;
                 }
                 int intSpawnCount = getIntObjVar(self, "intSpawnCount");
@@ -135,8 +153,9 @@ public class spawner extends script.base_script
                 float fltMaxSpawnTime = getFloatObjVar(self, "fltMaxSpawnTime");
                 float fltDelay;
                 String[] strLoopSpawns = new String[1];
-                
-                for (int intI = 0; intI < intSpawnCount; intI++) {
+
+                for (int intI = 0; intI < intSpawnCount; intI++)
+                {
                     fltDelay = rand(fltMinSpawnTime, fltMaxSpawnTime);
                     strLoopSpawns[0] = strSpawns[rand(0, strSpawns.length - 1)];
                     dictionary dctParams = new dictionary();
@@ -145,9 +164,11 @@ public class spawner extends script.base_script
                 }
                 break;
             }
-            case "asteroid": {
+            case "asteroid":
+            {
                 String strAsteroidType = getStringObjVar(self, "strAsteroidType");
-                if (strAsteroidType.equals("")) {
+                if (strAsteroidType.equals(""))
+                {
                     return SCRIPT_CONTINUE;
                 }
                 int intMinResourcePool = getIntObjVar(self, "intMinResourcePool");
@@ -164,40 +185,49 @@ public class spawner extends script.base_script
                 messageTo(self, "createAsteroidSpawn", dctParams, 1.0f, false);
                 break;
             }
-            case "wave": {
+            case "wave":
+            {
                 utils.setScriptVar(self, "intWave", 0);
 
                 String[] strWaves = objvar_mangle.getMangledStringArrayObjVar(self, "strWaves");
-                if(strWaves == null || strWaves.length == 0) {
+                if (strWaves == null || strWaves.length == 0)
+                {
                     return SCRIPT_CONTINUE;
                 }
 
                 String[] strSpawns = dataTableGetStringColumnNoDefaults("datatables/space_content/spawners/waves.iff", strWaves[0]);
-                if (strSpawns == null) {
+                if (strSpawns == null)
+                {
                     return SCRIPT_CONTINUE;
                 }
                 String strSpawn = strSpawns[0];
-                
+
                 float fltMinSpawnDistance = getFloatObjVar(self, "fltMinSpawnDistance");
                 float fltMaxSpawnDistance = getFloatObjVar(self, "fltMaxSpawnDistance");
 
                 float fltMinSpawnTime = getFloatObjVar(self, "fltMinSpawnTime");
                 float fltMaxSpawnTime = getFloatObjVar(self, "fltMaxSpawnTime");
-                
-                if (!isSquad(strSpawn)) {
+
+                if (!isSquad(strSpawn))
+                {
                     obj_id objShip = createGenericSpawn(self, strSpawn, fltMinSpawnDistance, fltMaxSpawnDistance, false);
-                    if (isIdValid(objShip)) {
+                    if (isIdValid(objShip))
+                    {
                         setupSpawnerSpawn(objShip, self);
                     }
-                } else {
+                }
+                else
+                {
                     Vector<obj_id> objMembers = space_create.createSquadHyperspace(self, strSpawn, getTransform_o2p(self), 100, null);
-                    if (objMembers != null) {
+                    if (objMembers != null)
+                    {
                         setupSpawnerSpawn(objMembers, self);
                     }
                 }
                 String[] strLoopSpawns = new String[1];
-                
-                for (int intI = 1; intI < strSpawns.length; intI++) {
+
+                for (int intI = 1; intI < strSpawns.length; intI++)
+                {
                     float fltDelay = rand(fltMinSpawnTime, fltMaxSpawnTime);
                     strLoopSpawns[0] = strSpawns[intI];
                     dictionary dctParams = new dictionary();
@@ -212,6 +242,7 @@ public class spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnNextWave(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isSpawnerActivated(self))
@@ -219,8 +250,9 @@ public class spawner extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String[] strWaves = objvar_mangle.getMangledStringArrayObjVar(self, "strWaves");
-        
-        if(strWaves == null || strWaves.length == 0) {
+
+        if (strWaves == null || strWaves.length == 0)
+        {
             return SCRIPT_CONTINUE;
         }
 
@@ -231,10 +263,10 @@ public class spawner extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        
+
         float fltMinSpawnDistance = getFloatObjVar(self, "fltMinSpawnDistance");
         float fltMaxSpawnDistance = getFloatObjVar(self, "fltMaxSpawnDistance");
-        
+
         String strSpawn = strSpawns[0];
         if (!isSquad(strSpawn))
         {
@@ -244,7 +276,7 @@ public class spawner extends script.base_script
                 setupSpawnerSpawn(objShip, self);
             }
         }
-        else 
+        else
         {
             Vector<obj_id> objMembers = space_create.createSquadHyperspace(self, strSpawn, getTransform_o2p(self), 100, null);
             if (objMembers != null)
@@ -253,7 +285,7 @@ public class spawner extends script.base_script
             }
         }
         String[] strLoopSpawns = new String[1];
-        
+
         for (int intI = 1; intI < strSpawns.length; intI++)
         {
             strLoopSpawns[0] = strSpawns[intI];
@@ -264,6 +296,7 @@ public class spawner extends script.base_script
         utils.setScriptVar(self, "intWavePopulation", strSpawns.length);
         return SCRIPT_CONTINUE;
     }
+
     public int createSpawns(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isSpawnerActivated(self))
@@ -273,21 +306,28 @@ public class spawner extends script.base_script
         float fltMinSpawnDistance = getFloatObjVar(self, "fltMinSpawnDistance");
         float fltMaxSpawnDistance = getFloatObjVar(self, "fltMaxSpawnDistance");
         String[] strSpawns = params.getStringArray("strSpawns");
-        for (String strSpawn : strSpawns) {
-            if (!isSquad(strSpawn)) {
+        for (String strSpawn : strSpawns)
+        {
+            if (!isSquad(strSpawn))
+            {
                 obj_id objShip = createGenericSpawn(self, strSpawn, fltMinSpawnDistance, fltMaxSpawnDistance, false);
-                if (isIdValid(objShip)) {
+                if (isIdValid(objShip))
+                {
                     setupSpawnerSpawn(objShip, self);
                 }
-            } else {
+            }
+            else
+            {
                 Vector<obj_id> objMembers = space_create.createSquadHyperspace(self, strSpawn, getTransform_o2p(self), 100, null);
-                if (objMembers != null) {
+                if (objMembers != null)
+                {
                     setupSpawnerSpawn(objMembers, self);
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int createAsteroidSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isSpawnerActivated(self))
@@ -302,6 +342,7 @@ public class spawner extends script.base_script
         createAsteroidSpawn(self, strAsteroidType, intMinResourcePool, intMaxResourcePool, intDangerLevel, intDangerPct);
         return SCRIPT_CONTINUE;
     }
+
     public void setupSpawnerSpawn(obj_id objShip, obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "intSpawnsAllowed"))
@@ -314,7 +355,8 @@ public class spawner extends script.base_script
         }
         String strDefaultBehavior = getStringObjVar(self, "strDefaultBehavior");
         setObjVar(objShip, "objParent", self);
-        switch (strDefaultBehavior) {
+        switch (strDefaultBehavior)
+        {
             case "loiter":
                 ship_ai.spaceLoiter(
                         objShip,
@@ -323,32 +365,37 @@ public class spawner extends script.base_script
                         getFloatObjVar(self, "fltMaxLoiterDistance")
                 );
                 break;
-            case "patrol": {
+            case "patrol":
+            {
                 ship_ai.spacePatrol(
                         objShip,
                         utils.getTransformArrayScriptVar(self, "trPatrolPoints")
                 );
                 break;
             }
-            case "patrolNoRecycle": {
+            case "patrolNoRecycle":
+            {
                 transform[] trPatrolPoints = utils.getTransformArrayScriptVar(self, "trPatrolPoints");
                 transform trTest = trPatrolPoints[trPatrolPoints.length - 1];
                 location locTest = utils.getLocationFromTransform(trTest);
                 addLocationTarget3d(objShip, "spawnerArrival", locTest, 64);
-                if (utils.hasLocalVar(self, "objDockingStation")) {
+                if (utils.hasLocalVar(self, "objDockingStation"))
+                {
                     setObjVar(objShip, "objDockingStation", utils.getObjIdLocalVar(self, "objDockingStation"));
                 }
                 ship_ai.spaceMoveTo(objShip, trPatrolPoints);
                 break;
             }
-            case "patrolFixedCircle": {
+            case "patrolFixedCircle":
+            {
                 float fltCircleDistance = rand(getFloatObjVar(self, "fltMinCircleDistance"), getFloatObjVar(self, "fltMaxCircleDistance"));
                 transform trTest = getTransform_o2p(self);
                 transform[] trPatrolPoints = ship_ai.createPatrolPathCircle(trTest.getPosition_p(), fltCircleDistance);
                 ship_ai.spacePatrol(objShip, trPatrolPoints);
                 break;
             }
-            case "patrolRandomPath": {
+            case "patrolRandomPath":
+            {
                 transform[] trPatrolPoints = ship_ai.createPatrolPathLoiter(getTransform_o2p(self), getFloatObjVar(self, "fltMinCircleDistance"), getFloatObjVar(self, "fltMaxCircleDistance"));
                 ship_ai.spacePatrol(objShip, trPatrolPoints);
                 break;
@@ -363,9 +410,11 @@ public class spawner extends script.base_script
             space_utils.notifyObject(self, "singleAttackerSpawned", dctParams);
         }
     }
+
     public void setupSpawnerSpawn(Vector<obj_id> objMembers, obj_id self) throws InterruptedException
     {
-        for (obj_id objMember : objMembers) {
+        for (obj_id objMember : objMembers)
+        {
             setObjVar(objMember, "objParent", self);
         }
         if (hasObjVar(self, "intSpawnsAllowed"))
@@ -378,8 +427,9 @@ public class spawner extends script.base_script
         }
         String strDefaultBehavior = getStringObjVar(self, "strDefaultBehavior");
         transform trMyLocation = getTransform_o2w(self);
-        int intSquadId = ship_ai.unitGetSquadId(((obj_id)objMembers.get(0)));
-        switch (strDefaultBehavior) {
+        int intSquadId = ship_ai.unitGetSquadId(objMembers.get(0));
+        switch (strDefaultBehavior)
+        {
             case "loiter":
                 ship_ai.squadLoiter(
                         intSquadId,
@@ -388,11 +438,13 @@ public class spawner extends script.base_script
                         getFloatObjVar(self, "fltMaxLoiterDistance")
                 );
                 break;
-            case "patrol": {
+            case "patrol":
+            {
                 ship_ai.squadAddPatrolPath(intSquadId, utils.getTransformArrayScriptVar(self, "trPatrolPoints"));
                 break;
             }
-            case "patrolNoRecycle": {
+            case "patrolNoRecycle":
+            {
                 transform[] trPatrolPoints = utils.getTransformArrayScriptVar(self, "trPatrolPoints");
                 transform trTest = trPatrolPoints[trPatrolPoints.length - 1];
                 location locTest = utils.getLocationFromTransform(trTest);
@@ -400,13 +452,15 @@ public class spawner extends script.base_script
                 ship_ai.squadMoveTo(intSquadId, trPatrolPoints);
                 break;
             }
-            case "patrolFixedCircle": {
+            case "patrolFixedCircle":
+            {
                 float fltCircleDistance = rand(getFloatObjVar(self, "fltMinCircleDistance"), getFloatObjVar(self, "fltMaxCircleDistance"));
                 transform[] trPatrolPoints = ship_ai.createPatrolPathCircle(getTransform_o2p(self).getPosition_p(), fltCircleDistance);
                 ship_ai.squadAddPatrolPath(intSquadId, trPatrolPoints);
                 break;
             }
-            case "patrolRandomPath": {
+            case "patrolRandomPath":
+            {
                 transform[] trPatrolPoints = ship_ai.createPatrolPathLoiter(getTransform_o2p(self), getFloatObjVar(self, "fltMinCircleDistance"), getFloatObjVar(self, "fltMaxCircleDistance"));
                 ship_ai.squadAddPatrolPath(intSquadId, trPatrolPoints);
                 break;
@@ -421,6 +475,7 @@ public class spawner extends script.base_script
             space_utils.notifyObject(self, "squadAttackerSpawned", dctParams);
         }
     }
+
     public int childDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isSpawnerActivated(self))
@@ -428,7 +483,8 @@ public class spawner extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String strSpawnerType = getStringObjVar(self, "strSpawnerType");
-        switch (strSpawnerType) {
+        switch (strSpawnerType)
+        {
             case "generic":
                 float fltRespawnTime = rand(getFloatObjVar(self, "fltMinSpawnTime"), getFloatObjVar(self, "fltMaxSpawnTime"));
                 messageTo(self, "respawnShip", null, fltRespawnTime, false);
@@ -438,26 +494,33 @@ public class spawner extends script.base_script
                 break;
             case "wave":
                 int intWavePopulation = utils.getIntScriptVar(self, "intWavePopulation") - 1;
-                if (intWavePopulation <= 0) {
+                if (intWavePopulation <= 0)
+                {
                     int intWave = utils.getIntScriptVar(self, "intWave");
                     String[] strWaves = objvar_mangle.getMangledStringArrayObjVar(self, "strWaves");
                     intWave++;
-                    if (intWave >= strWaves.length) {
+                    if (intWave >= strWaves.length)
+                    {
                         utils.setScriptVar(self, "intWave", 0);
                         float fltTime = rand(getFloatObjVar(self, "fltMinResetTime"), getFloatObjVar(self, "fltMaxResetTime"));
                         messageTo(self, "spawnNextWave", null, fltTime, false);
-                    } else {
+                    }
+                    else
+                    {
                         utils.setScriptVar(self, "intWave", intWave);
                         float fltTime = rand(getFloatObjVar(self, "fltMinWaveSpawnTime"), getFloatObjVar(self, "fltMaxWaveSpawnTime"));
                         messageTo(self, "spawnNextWave", null, fltTime, false);
                     }
-                } else {
+                }
+                else
+                {
                     utils.setScriptVar(self, "intWavePopulation", intWavePopulation);
                 }
                 break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int respawnAsteroid(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isSpawnerActivated(self))
@@ -472,6 +535,7 @@ public class spawner extends script.base_script
         createAsteroidSpawn(self, strAsteroidType, intMinResourcePool, intMaxResourcePool, intDangerLevel, intDangerPct);
         return SCRIPT_CONTINUE;
     }
+
     public int respawnShip(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isSpawnerActivated(self))
@@ -479,7 +543,8 @@ public class spawner extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String[] strSpawns = objvar_mangle.getMangledStringArrayObjVar(self, "strSpawns");
-        if (strSpawns == null || strSpawns.length == 0) {
+        if (strSpawns == null || strSpawns.length == 0)
+        {
             return SCRIPT_CONTINUE;
         }
 
@@ -494,7 +559,7 @@ public class spawner extends script.base_script
                 setupSpawnerSpawn(objShip, self);
             }
         }
-        else 
+        else
         {
             Vector<obj_id> objMembers = space_create.createSquadHyperspace(self, strSpawn, getTransform_o2p(self), 100, null);
             if (objMembers != null)
@@ -504,6 +569,7 @@ public class spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id createGenericSpawn(obj_id objSpawner, String strShipType, float fltMinDistance, float fltMaxDistance, boolean boolRandomizeOrientation) throws InterruptedException
     {
         obj_id objShip = null;
@@ -513,7 +579,7 @@ public class spawner extends script.base_script
             transform trTest = ship_ai.unitGetDockTransform(objSpawner, objShip);
             setTransform_o2p(objShip, trTest);
         }
-        else 
+        else
         {
             transform trSpawnLocation = space_utils.getRandomPositionInSphere(getTransform_o2w(objSpawner), fltMinDistance, fltMaxDistance, boolRandomizeOrientation);
             objShip = space_create.createShipHyperspace(strShipType, trSpawnLocation, null);
@@ -525,12 +591,14 @@ public class spawner extends script.base_script
         }
         return null;
     }
+
     public obj_id createAsteroidSpawn(obj_id objSpawner, String strAsteroidType, int intMinResourcePool, int intMaxResourcePool, int intDangerLevel, int intDangerPct) throws InterruptedException
     {
         String strAsteroidTable = "datatables/space_mining/mining_asteroids.iff";
         transform trSpawnLocation = space_utils.getRandomPositionInSphere(getTransform_o2w(objSpawner), 0, 1, true);
         obj_id objAsteroid;
-        switch (strAsteroidType) {
+        switch (strAsteroidType)
+        {
             case "iron":
             case "silicaceous":
             case "carbonaceous":
@@ -543,7 +611,8 @@ public class spawner extends script.base_script
             case "cyanomethanic":
             case "sulfuric":
             case "methane":
-            case "organometallic": {
+            case "organometallic":
+            {
                 int choice = rand(1, 2);
                 String template = dataTableGetString(strAsteroidTable, strAsteroidType, choice);
                 objAsteroid = createObject(template, trSpawnLocation, null);
@@ -565,10 +634,12 @@ public class spawner extends script.base_script
         setHitpoints(objAsteroid, resourcePool);
         return objAsteroid;
     }
+
     public int destroyableCreated(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void addDestroyable(obj_id objParent, obj_id objDestroyable) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
@@ -576,6 +647,7 @@ public class spawner extends script.base_script
         dctParams.put("objDestroyable", objDestroyable);
         messageTo(getObjIdObjVar(objParent, "objParent"), "destroyableCreated", dctParams, 1, false);
     }
+
     public void RemoveDestroyable(obj_id objParent, obj_id objDestroyable) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
@@ -583,6 +655,7 @@ public class spawner extends script.base_script
         dctParams.put("objDestroyable", objDestroyable);
         messageTo(getObjIdObjVar(objParent, "objParent"), "destroyableDestroyed", dctParams, 1, false);
     }
+
     public void writeSpawner(obj_id self) throws InterruptedException
     {
         broadcast(self, "Writing spawner");
@@ -630,6 +703,7 @@ public class spawner extends script.base_script
             utils.setScriptVar(objSpawner, "objPatrolPoints", objPatrolPoints);
         }
     }
+
     public boolean isSquad(String strSpawn) throws InterruptedException
     {
         return strSpawn.contains("squad_");

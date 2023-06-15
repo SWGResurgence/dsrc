@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.geonosian_madbio_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,13 +14,14 @@ public class geo_died extends script.base_script
     public geo_died()
     {
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (hasObjVar(self, "respawn_called"))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             setObjVar(self, "respawn_called", 1);
         }
@@ -37,13 +44,14 @@ public class geo_died extends script.base_script
         messageTo(mom, "tellingMomIDied", info, respawnTime, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         if (hasObjVar(self, "respawn_called"))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             setObjVar(self, "respawn_called", 1);
         }

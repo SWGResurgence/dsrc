@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 
@@ -8,24 +14,29 @@ public class getgoodlocation_test extends script.base_script
     public getgoodlocation_test()
     {
     }
+
     public void end(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Testing of GetGoodLocation has begun");
     }
+
     public void start(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Testing of GetGoodLocation has begun");
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         start(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         end(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         String[] words = split(text, ' ');
@@ -43,6 +54,7 @@ public class getgoodlocation_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void getGoodLoc(obj_id self) throws InterruptedException
     {
         location sll = new location(getLocation(self));
@@ -56,11 +68,12 @@ public class getgoodlocation_test extends script.base_script
         {
             debugSpeakMsg(self, goodLocation.x + ", " + goodLocation.y + ", " + goodLocation.z + " is a good location.");
         }
-        else 
+        else
         {
             debugSpeakMsg(self, "Failed");
         }
     }
+
     public void dropTestObjects(obj_id self, int numObjects) throws InterruptedException
     {
         int areaSizeX = 8;
@@ -78,15 +91,16 @@ public class getgoodlocation_test extends script.base_script
             {
                 createObject("object/tangible/furniture/frn_all_table_s01.iff", goodLocation);
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "Failed to find good location.");
             }
         }
     }
+
     public void getHeight(obj_id self) throws InterruptedException
     {
         float result = getHeightAtLocation(0, 0);
-        debugSpeakMsg(self, "" + result);
+        debugSpeakMsg(self, String.valueOf(result));
     }
 }

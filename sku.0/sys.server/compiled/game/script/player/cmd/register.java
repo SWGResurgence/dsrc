@@ -1,5 +1,11 @@
 package script.player.cmd;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.locations;
 import script.library.planetary_map;
 import script.library.utils;
@@ -11,9 +17,6 @@ import java.util.Vector;
 
 public class register extends script.base_script
 {
-    public register()
-    {
-    }
     public static final string_id SID_CANNOT_REGISTER_BAD_LOC = new string_id("register", "cannot_register_bad_loc");
     public static final string_id SID_CANNOT_REGISTER_NO_SUPPORT = new string_id("register", "cannot_register_no_support");
     public static final string_id SID_CANNOT_REGISTER_NOT_NEUTRAL = new string_id("register", "cannot_register_not_neutral");
@@ -21,6 +24,10 @@ public class register extends script.base_script
     public static final string_id SID_CANNOT_REGISTER_ALREADY_REG = new string_id("register", "cannot_register_already_reg");
     public static final string_id SID_SUCCESS_REGISTER = new string_id("register", "success_register");
     public static final string_id SID_CANNOT_REGISTER_LACK_SKILL = new string_id("register", "cannot_register_lack_skill");
+    public register()
+    {
+    }
+
     public int cmdRegisterWithLocation(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id updateTarget = null;
@@ -36,7 +43,7 @@ public class register extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             map_location maploc = getPlanetaryMapLocation(topMost);
             if (maploc == null)
@@ -88,7 +95,7 @@ public class register extends script.base_script
                 //notifyServerEvents(getName(self) + " has started enchancement services within " + locations.getCityName(getLocation(self)) + "\n`/wp " + getLocation(self).x + " " + getLocation(self).y + " " + getLocation(self).z + " " + getLocation(self).area + "`");
             }
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_CANNOT_REGISTER_LACK_SKILL);
         }

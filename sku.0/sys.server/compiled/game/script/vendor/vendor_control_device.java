@@ -1,5 +1,11 @@
 package script.vendor;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
@@ -9,16 +15,19 @@ public class vendor_control_device extends script.base_script
     public static final string_id SID_ONLY_IN_HOUSES = new string_id("sui", "only_in_houses");
     public static final string_id SID_VENDOR_PUBLIC_ONLY = new string_id("player_structure", "vendor_public_only");
     public static final string_id SID_VENDOR_NOT_IN_SHIP = new string_id("player_structure", "vendor_not_in_ship");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "noTrade", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "noTrade", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id[] contents = getContents(self);
@@ -32,18 +41,20 @@ public class vendor_control_device extends script.base_script
         {
             sui.msgbox(vendor, player, "@player_structure:destroy_vendor_cs_unavailable_d", sui.OK_ONLY, "@player_structure:destroy_vendor_cs_unavailable_t", "noHandler");
         }
-        else 
+        else
         {
             CustomerServiceLog("vendor", "Vendor destroyed by owner via vendor control device. Vendor: " + vendor + " Location: " + getLocation(vendor));
             destroyObject(vendor);
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id objPlayer, String[] strNames, String[] strAttribs) throws InterruptedException
     {
         int intIndex = utils.getValidAttributeIndex(strNames);
@@ -53,6 +64,7 @@ public class vendor_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -81,7 +93,7 @@ public class vendor_control_device extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_ONLY_IN_HOUSES);
                 return SCRIPT_CONTINUE;
@@ -95,6 +107,7 @@ public class vendor_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -137,7 +150,7 @@ public class vendor_control_device extends script.base_script
                         return SCRIPT_CONTINUE;
                     }
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, SID_ONLY_IN_HOUSES);
                     return SCRIPT_CONTINUE;
@@ -173,7 +186,7 @@ public class vendor_control_device extends script.base_script
                         setObjVar(vendor_lib.getAuctionContainer(vendor), "vendor.needs_old_reinitialize", 1);
                         reinitializeVendor(vendor, player);
                     }
-                    else 
+                    else
                     {
                         updateVendorStatus(vendor, VENDOR_STATUS_FLAG_NONE);
                     }
@@ -181,18 +194,19 @@ public class vendor_control_device extends script.base_script
                     sendDirtyObjectMenuNotification(vendor);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id("player_structure", "drop_npc_vendor_perm"));
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("player_structure", "drop_npc_vendor_building"));
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;

@@ -1,5 +1,11 @@
 package script.systems.veteran_reward;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.veteran_deprecated;
 import script.obj_id;
 
@@ -7,6 +13,7 @@ public class emote_group extends script.base_script
 {
     public static final String OBJVAR_GROUP_GAINED = "group";
     public static final String OBJVAR_GROUP_REWARDED = "rewarded";
+
     public emote_group()
     {
     }
@@ -28,10 +35,7 @@ public class emote_group extends script.base_script
                 if (emoteGroups != null)
                 {
                     newGroups = new int[emoteGroups.length + 1];
-                    for (int i = 0; i < emoteGroups.length; ++i)
-                    {
-                        newGroups[i] = emoteGroups[i];
-                    }
+                    System.arraycopy(emoteGroups, 0, newGroups, 0, emoteGroups.length);
                 }
                 else
                 {

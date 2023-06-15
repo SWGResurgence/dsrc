@@ -1,5 +1,11 @@
 package script.systems.npc_lair;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.ai.ai_combat_movement;
 import script.dictionary;
 import script.library.*;
@@ -16,6 +22,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
     public static final int JOB_HEAL = 5;
     public static final int JOB_CONVERSE = 6;
     public static final int JOB_DANCE = 7;
+
     public npc_lair_ai()
     {
     }
@@ -448,7 +455,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
             else
             {
                 obj_id[] creatures = getCreaturesInRange(getLocation(self), 6.0f);
-                if (creatures != null && creatures.length > 0)
+                if (creatures != null)
                 {
                     for (obj_id creature : creatures)
                     {
@@ -476,7 +483,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
                 else
                 {
                     obj_id[] creatures = getCreaturesInRange(getLocation(self), 6.0f);
-                    if (creatures != null && creatures.length > 0)
+                    if (creatures != null)
                     {
                         for (obj_id creature : creatures)
                         {
@@ -754,7 +761,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
         utils.setScriptVar(self, "npc_lair.pathingToConverse", true);
         location destLoc = new location(getLocation(partner));
         location myLoc = getLocation(self);
-        if (myLoc == null || !isValidLocation(myLoc))
+        if (!isValidLocation(myLoc))
         {
             return SCRIPT_CONTINUE;
         }

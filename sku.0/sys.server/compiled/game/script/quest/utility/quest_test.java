@@ -1,5 +1,11 @@
 package script.quest.utility;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.library.utils;
 import script.location;
@@ -7,23 +13,26 @@ import script.obj_id;
 
 public class quest_test extends script.base_script
 {
+    public static String[] OPTIONS =
+            {
+                    "=========================",
+                    "HELP",
+                    "ACTIVATEQUEST QUESTNAME",
+                    "COMPLETEQUEST QUESTNAME",
+                    "CLEARQUESTFLAG QUESTNAME",
+                    "========================="
+            };
+
     public quest_test()
     {
     }
-    public static String[] OPTIONS = 
-    {
-        "=========================",
-        "HELP",
-        "ACTIVATEQUEST QUESTNAME",
-        "COMPLETEQUEST QUESTNAME",
-        "CLEARQUESTFLAG QUESTNAME",
-        "========================="
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         broadcast(self, "Ground quest test script attached");
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         String[] parse = split(text, ' ');
@@ -51,11 +60,11 @@ public class quest_test extends script.base_script
             }
             boolean result = groundquests.isValidQuestName(parse[1]);
             LOG("debug_test", "boolean result returned " + result);
-            if (result == false)
+            if (!result)
             {
                 broadcast(self, "FAILED TO ACTIVATE QUEST ");
             }
-            else 
+            else
             {
                 groundquests.clearQuest(self, parse[1]);
                 groundquests.requestGrantQuest(self, parse[1]);
@@ -83,7 +92,7 @@ public class quest_test extends script.base_script
             {
                 broadcast(self, "Unable to verify quest" + text);
             }
-            else 
+            else
             {
                 groundquests.clearQuest(self, parse[1]);
                 broadcast(self, "Quest data for " + parse[1] + " cleared");
@@ -103,7 +112,7 @@ public class quest_test extends script.base_script
             {
                 broadcast(self, "BAD QUEST NAME");
             }
-            else 
+            else
             {
                 String taskName = parse[2];
                 int taskId = groundquests.getTaskId(questCrc, taskName);
@@ -111,7 +120,7 @@ public class quest_test extends script.base_script
                 {
                     broadcast(self, "BAD TASK NAME");
                 }
-                else 
+                else
                 {
                     questActivateTask(questCrc, taskId, self);
                 }
@@ -130,7 +139,7 @@ public class quest_test extends script.base_script
             {
                 broadcast(self, "BAD QUEST NAME");
             }
-            else 
+            else
             {
                 String taskName = parse[2];
                 int taskId = groundquests.getTaskId(questCrc, taskName);
@@ -138,7 +147,7 @@ public class quest_test extends script.base_script
                 {
                     broadcast(self, "BAD TASK NAME");
                 }
-                else 
+                else
                 {
                     questCompleteTask(questCrc, taskId, self);
                 }
@@ -157,7 +166,7 @@ public class quest_test extends script.base_script
             {
                 broadcast(self, "BAD QUEST NAME");
             }
-            else 
+            else
             {
                 String taskName = parse[2];
                 int taskId = groundquests.getTaskId(questCrc, taskName);
@@ -165,7 +174,7 @@ public class quest_test extends script.base_script
                 {
                     broadcast(self, "BAD TASK NAME");
                 }
-                else 
+                else
                 {
                     questFailTask(questCrc, taskId, self);
                 }
@@ -184,7 +193,7 @@ public class quest_test extends script.base_script
             {
                 broadcast(self, "BAD QUEST NAME");
             }
-            else 
+            else
             {
                 int taskId = utils.stringToInt(parse[2]);
                 questActivateTask(questCrc, taskId, self);
@@ -203,7 +212,7 @@ public class quest_test extends script.base_script
             {
                 broadcast(self, "BAD QUEST NAME");
             }
-            else 
+            else
             {
                 int taskId = utils.stringToInt(parse[2]);
                 questCompleteTask(questCrc, taskId, self);
@@ -222,7 +231,7 @@ public class quest_test extends script.base_script
             {
                 broadcast(self, "BAD QUEST NAME");
             }
-            else 
+            else
             {
                 int taskId = utils.stringToInt(parse[2]);
                 questFailTask(questCrc, taskId, self);
@@ -238,11 +247,12 @@ public class quest_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showHelp() throws InterruptedException
     {
-        for (String option : OPTIONS) {
+        for (String option : OPTIONS)
+        {
             broadcast(getSelf(), option);
         }
-        return;
     }
 }

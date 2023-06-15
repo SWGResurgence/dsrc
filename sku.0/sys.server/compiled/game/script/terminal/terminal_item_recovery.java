@@ -4,6 +4,12 @@
 
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.string_id;
 import script.library.badge;
@@ -13,16 +19,18 @@ import script.menu_info_types;
 
 public class terminal_item_recovery extends script.base_script
 {
+    public static final String STF = "terminal_ui";
+    public static final string_id SID_RECOVER = new string_id("Pickup Parcel");
     public terminal_item_recovery()
     {
     }
-    public static final String STF = "terminal_ui";
-    public static final string_id SID_RECOVER = new string_id("Pickup Parcel");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_RECOVER);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)

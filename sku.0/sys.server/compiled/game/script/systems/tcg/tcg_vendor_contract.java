@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.static_item;
 import script.library.sui;
@@ -86,7 +92,7 @@ public class tcg_vendor_contract extends script.base_script
             CustomerServiceLog("vendor", " TCG Vendor Contract: " + self + " is being used by a NON-TRADER player: " + player + ". The contract is asking for confirmation before usage.");
             sui.msgbox(self, player, utils.packStringId(SID_NON_TRADER_CONFIRMATION_MSG), sui.YES_NO, "msgConfirmNonTraderVendorUse");
         }
-        else if (hasObjVar(self, NON_TRADER_AGREEMENT) && getBooleanObjVar(self, NON_TRADER_AGREEMENT) == true)
+        else if (hasObjVar(self, NON_TRADER_AGREEMENT) && getBooleanObjVar(self, NON_TRADER_AGREEMENT))
         {
             blog("tcg_vendor_contract.OnObjectMenuSelect: NON-TRADE USING A VENDOR CONTRACT (confirmation objvar found)");
             CustomerServiceLog("vendor", " TCG Vendor Contract: " + self + " is being used by a NON-TRADER player: " + player + " who has converted the contract to create a limited functionality vendor.");

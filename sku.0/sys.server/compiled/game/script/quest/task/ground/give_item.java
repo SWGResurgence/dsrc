@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -8,9 +14,6 @@ import script.string_id;
 
 public class give_item extends script.quest.task.ground.base_task
 {
-    public give_item()
-    {
-    }
     public static final String dataTableNumToGive = "NUM_TO_GIVE";
     public static final String dataTableItemToGive = "ITEM_TO_GIVE";
     public static final String dataTableCreateItem = "CREATE_ITEM";
@@ -24,6 +27,10 @@ public class give_item extends script.quest.task.ground.base_task
     public static final String taskType = "give_item";
     public static final int textGive = 0;
     public static final int textDeliver = 1;
+    public give_item()
+    {
+    }
+
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         String baseObjVar = groundquests.setBaseObjVar(self, taskType, questGetQuestName(questCrc), taskId);
@@ -45,7 +52,7 @@ public class give_item extends script.quest.task.ground.base_task
                     {
                         newItem = static_item.createNewItemFunction(itemName, self);
                     }
-                    else 
+                    else
                     {
                         newItem = createObjectInInventoryAllowOverload(itemName, self);
                     }
@@ -66,6 +73,7 @@ public class give_item extends script.quest.task.ground.base_task
         }
         return super.OnTaskActivated(self, questCrc, taskId);
     }
+
     public int itemGivenToNpc(obj_id self, dictionary params) throws InterruptedException
     {
         String questName = params.getString("questName");
@@ -81,14 +89,18 @@ public class give_item extends script.quest.task.ground.base_task
             {
                 String[] itemsNeeded = split(item, ',');
                 int textType = Math.max(0, groundquests.getTaskIntDataEntry(questCrc, taskId, dataTableTextType));
-                for (String s : itemsNeeded) {
-                    if (s != null && s.equals(itemName)) {
+                for (String s : itemsNeeded)
+                {
+                    if (s != null && s.equals(itemName))
+                    {
                         String baseObjVar = groundquests.getBaseObjVar(self, taskType, questGetQuestName(questCrc), taskId);
                         String objvarNameCount = baseObjVar + "." + objVarCount;
-                        if (hasObjVar(self, objvarNameCount)) {
+                        if (hasObjVar(self, objvarNameCount))
+                        {
                             int giveCount = getIntObjVar(self, objvarNameCount);
                             --giveCount;
-                            if (giveCount < 0) {
+                            if (giveCount < 0)
+                            {
                                 giveCount = 0;
                             }
                             int countMax = groundquests.getTaskIntDataEntry(questCrc, taskId, dataTableNumToGive);
@@ -96,9 +108,12 @@ public class give_item extends script.quest.task.ground.base_task
                             prose_package pp = prose.getPackage(message, self, self);
                             prose.setDI(pp, giveCount);
                             sendSystemMessageProse(self, pp);
-                            if (giveCount <= 0) {
+                            if (giveCount <= 0)
+                            {
                                 questCompleteTask(questCrc, taskId, self);
-                            } else {
+                            }
+                            else
+                            {
                                 setObjVar(self, objvarNameCount, giveCount);
                                 questSetQuestTaskCounter(self, questGetQuestName(questCrc), taskId, getCounterText(textType), countMax - giveCount, countMax);
                                 play2dNonLoopingSound(self, groundquests.MUSIC_QUEST_INCREMENT_COUNTER);
@@ -111,34 +126,40 @@ public class give_item extends script.quest.task.ground.base_task
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTaskCompleted(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCompleted", taskType + "task completed.");
         return super.OnTaskCompleted(self, questCrc, taskId);
     }
+
     public int OnTaskFailed(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskFailed", taskType + "task failed.");
         return super.OnTaskFailed(self, questCrc, taskId);
     }
+
     public int OnTaskCleared(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCleared", taskType + " task cleared.");
         return super.OnTaskCleared(self, questCrc, taskId);
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         failIfFailOnLogout(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         failIfFailOnLogout(self);
         return SCRIPT_CONTINUE;
     }
+
     public void cleanup(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         String baseObjVar = groundquests.setBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
@@ -163,11 +184,13 @@ public class give_item extends script.quest.task.ground.base_task
         }
         groundquests.clearBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         removeObjVar(self, groundquests.getTaskTypeObjVar(self, taskType));
         return SCRIPT_CONTINUE;
     }
+
     public void failIfFailOnLogout(obj_id player) throws InterruptedException
     {
         dictionary tasks = groundquests.getActiveTasksForTaskType(player, taskType);
@@ -176,12 +199,14 @@ public class give_item extends script.quest.task.ground.base_task
             java.util.Enumeration keys = tasks.keys();
             while (keys.hasMoreElements())
             {
-                String questCrcString = (String)keys.nextElement();
+                String questCrcString = (String) keys.nextElement();
                 int questCrc = utils.stringToInt(questCrcString);
                 int[] tasksForCurrentQuest = tasks.getIntArray(questCrcString);
-                for (int taskId : tasksForCurrentQuest) {
+                for (int taskId : tasksForCurrentQuest)
+                {
                     boolean shouldFailOnLogout = groundquests.getTaskBoolDataEntry(questCrc, taskId, dataTableFailOnLogout, false);
-                    if (shouldFailOnLogout) {
+                    if (shouldFailOnLogout)
+                    {
                         LOG("QUEST_LOG", "Quest task failed due to log out.");
                         questFailTask(questCrc, taskId, player);
                     }
@@ -189,26 +214,28 @@ public class give_item extends script.quest.task.ground.base_task
             }
         }
     }
+
     public String getCounterText(int textType) throws InterruptedException
     {
         switch (textType)
         {
             case textDeliver:
-            return "quest/groundquests:deliver_counter";
+                return "quest/groundquests:deliver_counter";
             case textGive:
             default:
-            return "quest/groundquests:give_counter";
+                return "quest/groundquests:give_counter";
         }
     }
+
     public String getMultipleSuccessTextKey(int textType) throws InterruptedException
     {
         switch (textType)
         {
             case textDeliver:
-            return "deliver_to_npc_multiple_success";
+                return "deliver_to_npc_multiple_success";
             case textGive:
             default:
-            return "give_item_to_npc_multiple_success";
+                return "give_item_to_npc_multiple_success";
         }
     }
 }

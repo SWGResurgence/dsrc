@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,50 +14,62 @@ import script.*;
 
 public class mtp_hideout_safe_tech extends script.base_script
 {
+    public static String c_stringFile = "conversation/mtp_hideout_safe_tech";
+
     public mtp_hideout_safe_tech()
     {
     }
-    public static String c_stringFile = "conversation/mtp_hideout_safe_tech";
+
     public boolean mtp_hideout_safe_tech_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean mtp_hideout_safe_tech_condition_isEligible(obj_id player, obj_id npc) throws InterruptedException
     {
         return ((!groundquests.isQuestActiveOrComplete(player, "quest/mtp_find_infiltrator_1")) && (!groundquests.isQuestActiveOrComplete(player, "quest/mtp_find_infiltrator_2")) && (!groundquests.isQuestActiveOrComplete(player, "quest/mtp_find_infiltrator_3")) && (!groundquests.isQuestActiveOrComplete(player, "quest/mtp_find_infiltrator_4")) && (!groundquests.isQuestActiveOrComplete(player, "quest/mtp_find_infiltrator_5")));
     }
+
     public boolean mtp_hideout_safe_tech_condition_hasCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "quest/mtp_find_infiltrator_1") || groundquests.hasCompletedQuest(player, "quest/mtp_find_infiltrator_2") || groundquests.hasCompletedQuest(player, "quest/mtp_find_infiltrator_3") || groundquests.hasCompletedQuest(player, "quest/mtp_find_infiltrator_4") || groundquests.hasCompletedQuest(player, "quest/mtp_find_infiltrator_5"));
     }
+
     public boolean mtp_hideout_safe_tech_condition_isActive(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "quest/mtp_find_infiltrator_1") || groundquests.isQuestActive(player, "quest/mtp_find_infiltrator_2") || groundquests.isQuestActive(player, "quest/mtp_find_infiltrator_3") || groundquests.isQuestActive(player, "quest/mtp_find_infiltrator_4") || groundquests.isQuestActive(player, "quest/mtp_find_infiltrator_5"));
     }
+
     public boolean mtp_hideout_safe_tech_condition_isReturningSuccess(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "quest/mtp_find_infiltrator_1", "returnToLocksmith")) || (groundquests.isTaskActive(player, "quest/mtp_find_infiltrator_2", "returnToLocksmith")) || (groundquests.isTaskActive(player, "quest/mtp_find_infiltrator_3", "returnToLocksmith")) || (groundquests.isTaskActive(player, "quest/mtp_find_infiltrator_4", "returnToLocksmith")) || (groundquests.isTaskActive(player, "quest/mtp_find_infiltrator_5", "returnToLocksmith"));
     }
+
     public boolean mtp_hideout_safe_tech_condition_abortedRoriTalus(obj_id player, obj_id npc) throws InterruptedException
     {
         return (mtp_hideout_safe_tech_condition_hasCompleted(player, npc) && !mtp_hideout_safe_tech_condition_roriTalusActiveComplete(player, npc));
     }
+
     public boolean mtp_hideout_safe_tech_condition_roriTalusActiveComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "quest/mtp_camp_quest_rori_talus");
     }
+
     public void mtp_hideout_safe_tech_action_giveQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/mtp_find_infiltrator_" + rand(1, 5));
     }
+
     public void mtp_hideout_safe_tech_action_completeTask(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "returnedToMeatlumpLocksmith");
     }
+
     public void mtp_hideout_safe_tech_action_giveLocations(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/mtp_camp_quest_rori_talus");
     }
+
     public int mtp_hideout_safe_tech_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50"))
@@ -67,6 +85,7 @@ public class mtp_hideout_safe_tech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_safe_tech_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6"))
@@ -86,7 +105,7 @@ public class mtp_hideout_safe_tech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_10");
@@ -95,7 +114,7 @@ public class mtp_hideout_safe_tech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_safe_tech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -105,6 +124,7 @@ public class mtp_hideout_safe_tech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_safe_tech_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_10"))
@@ -124,7 +144,7 @@ public class mtp_hideout_safe_tech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14");
@@ -133,7 +153,7 @@ public class mtp_hideout_safe_tech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_safe_tech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -143,6 +163,7 @@ public class mtp_hideout_safe_tech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_safe_tech_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_14"))
@@ -162,7 +183,7 @@ public class mtp_hideout_safe_tech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_18");
@@ -171,7 +192,7 @@ public class mtp_hideout_safe_tech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_safe_tech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -181,6 +202,7 @@ public class mtp_hideout_safe_tech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_safe_tech_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_18"))
@@ -200,7 +222,7 @@ public class mtp_hideout_safe_tech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_22");
@@ -209,7 +231,7 @@ public class mtp_hideout_safe_tech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_safe_tech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -219,6 +241,7 @@ public class mtp_hideout_safe_tech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_safe_tech_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_22"))
@@ -238,7 +261,7 @@ public class mtp_hideout_safe_tech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_26");
@@ -247,7 +270,7 @@ public class mtp_hideout_safe_tech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_safe_tech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -257,6 +280,7 @@ public class mtp_hideout_safe_tech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_safe_tech_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_26"))
@@ -272,6 +296,7 @@ public class mtp_hideout_safe_tech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_safe_tech_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -292,7 +317,7 @@ public class mtp_hideout_safe_tech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_38");
@@ -301,7 +326,7 @@ public class mtp_hideout_safe_tech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_safe_tech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -311,6 +336,7 @@ public class mtp_hideout_safe_tech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_safe_tech_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38"))
@@ -330,7 +356,7 @@ public class mtp_hideout_safe_tech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -339,7 +365,7 @@ public class mtp_hideout_safe_tech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_hideout_safe_tech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -349,6 +375,7 @@ public class mtp_hideout_safe_tech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_hideout_safe_tech_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -364,6 +391,7 @@ public class mtp_hideout_safe_tech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -373,12 +401,14 @@ public class mtp_hideout_safe_tech extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_SPACE_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -387,18 +417,21 @@ public class mtp_hideout_safe_tech extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.mtp_hideout_safe_tech");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -421,7 +454,7 @@ public class mtp_hideout_safe_tech extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -429,7 +462,7 @@ public class mtp_hideout_safe_tech extends script.base_script
                 utils.setScriptVar(player, "conversation.mtp_hideout_safe_tech.branchId", 1);
                 npcStartConversation(player, npc, "mtp_hideout_safe_tech", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -450,7 +483,7 @@ public class mtp_hideout_safe_tech extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6");
@@ -458,7 +491,7 @@ public class mtp_hideout_safe_tech extends script.base_script
                 utils.setScriptVar(player, "conversation.mtp_hideout_safe_tech.branchId", 3);
                 npcStartConversation(player, npc, "mtp_hideout_safe_tech", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -479,7 +512,7 @@ public class mtp_hideout_safe_tech extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -487,7 +520,7 @@ public class mtp_hideout_safe_tech extends script.base_script
                 utils.setScriptVar(player, "conversation.mtp_hideout_safe_tech.branchId", 10);
                 npcStartConversation(player, npc, "mtp_hideout_safe_tech", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -514,6 +547,7 @@ public class mtp_hideout_safe_tech extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("mtp_hideout_safe_tech"))

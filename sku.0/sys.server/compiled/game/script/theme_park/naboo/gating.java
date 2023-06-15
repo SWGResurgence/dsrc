@@ -1,14 +1,17 @@
 package script.theme_park.naboo;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.factions;
 import script.library.quests;
 import script.obj_id;
 
 public class gating extends script.base_script
 {
-    public gating()
-    {
-    }
     public static final String KAJA_QUEST_1 = "kajaQuest1";
     public static final String KAJA_QUEST_2 = "kajaQuest2";
     public static final String LOAM_QUEST_1 = "loamQuest1";
@@ -33,6 +36,10 @@ public class gating extends script.base_script
     public static final String EBELT_VET_CRAFTING_1 = "ebeltVetCrafting1";
     public static final String EBELT_VET_COMBAT_1 = "ebeltVetCombat1";
     public static final String EBELT_VET_GROUP_1 = "ebeltVetGroup1";
+    public gating()
+    {
+    }
+
     public static boolean canTakeQuest(obj_id player, String questId) throws InterruptedException
     {
         if (quests.hasCompletedQuest(player, questId))
@@ -82,6 +89,7 @@ public class gating extends script.base_script
         debugServerConsoleMsg(player, "Error:  Don't know WTF " + questId + " quest is!");
         return false;
     }
+
     public static boolean canTakeInfiltrationMission(obj_id player, String questId) throws InterruptedException
     {
         return true;

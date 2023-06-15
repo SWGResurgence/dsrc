@@ -1,5 +1,11 @@
 package script.item.ice_cream_fryer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.collection;
 import script.library.static_item;
@@ -28,6 +34,7 @@ public class fryer extends script.base_script
     public static final String FORAGE_BUFF = "item_ice_cream_buff_forage_buff_01_01";
     public static final String PID_NAME = "fryer_repair";
     public static final int DOMESTICS_ONLY_BUFF = 7;
+
     public fryer()
     {
     }

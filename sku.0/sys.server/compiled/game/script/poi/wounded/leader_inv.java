@@ -1,5 +1,11 @@
 package script.poi.wounded;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.attrib_mod;
 import script.attribute;
 import script.dictionary;
@@ -11,18 +17,22 @@ import script.obj_id;
 
 public class leader_inv extends script.item.container.add_only
 {
+    public static final int PROVIDED_MEDICINE = 4;
+
     public leader_inv()
     {
     }
-    public static final int PROVIDED_MEDICINE = 4;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id actor = getContainedBy(self);
@@ -52,6 +62,7 @@ public class leader_inv extends script.item.container.add_only
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id actor = getContainedBy(self);
@@ -80,7 +91,7 @@ public class leader_inv extends script.item.container.add_only
                 if ((actors == null) || (actors.length == 0))
                 {
                 }
-                else 
+                else
                 {
                     boolean assisted = false;
                     for (int i = 0; i < cnt; i++)
@@ -100,9 +111,10 @@ public class leader_inv extends script.item.container.add_only
                         if ((mods == null) || (mods.length == 0))
                         {
                         }
-                        else 
+                        else
                         {
-                            for (attrib_mod mod : mods) {
+                            for (attrib_mod mod : mods)
+                            {
                                 amt += mod.getValue();
                             }
                         }
@@ -126,6 +138,7 @@ public class leader_inv extends script.item.container.add_only
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean healActorWounds(obj_id actor, int[] wounds) throws InterruptedException
     {
         if ((actor == null) || (wounds == null) || (wounds.length == 0))
@@ -143,6 +156,7 @@ public class leader_inv extends script.item.container.add_only
         }
         return true;
     }
+
     public obj_id getFirstWoundedActor(obj_id[] actors) throws InterruptedException
     {
         return null;

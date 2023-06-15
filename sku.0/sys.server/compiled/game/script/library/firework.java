@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Vector;
@@ -32,6 +38,7 @@ public class firework extends script.base_script
     public static final string_id SID_NO_SHOWS_TO_DISPLAY = new string_id(STF, "no_shows_to_display");
     public static final string_id SID_NO_NEED_TO_REORDER = new string_id(STF, "no_need_to_reorder");
     public static final string_id SID_DUD_FIREWORK = new string_id(STF, "dud_firework");
+
     public firework()
     {
     }

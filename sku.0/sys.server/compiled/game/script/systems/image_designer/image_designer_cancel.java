@@ -1,5 +1,11 @@
 package script.systems.image_designer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class image_designer_cancel extends script.base_script
     public static final String VAR_IMAGE_DESIGN_CONFIRM = "image_designer.confirm";
     public static final String SCRIPT_IMAGE_DESIGNER_CANCEL = "systems.image_designer.image_designer_cancel";
     public static final String VAR_IMAGE_DESIGN_LD = "image_designer.linkdeath";
+
     public image_designer_cancel()
     {
     }

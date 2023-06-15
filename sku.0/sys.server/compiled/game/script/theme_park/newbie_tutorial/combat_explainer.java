@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.chat;
 import script.library.utils;
@@ -10,6 +16,7 @@ public class combat_explainer extends script.theme_park.newbie_tutorial.tutorial
     public combat_explainer()
     {
     }
+
     public int handlePlayerArrival(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getPlayer(self);
@@ -17,6 +24,7 @@ public class combat_explainer extends script.theme_park.newbie_tutorial.tutorial
         messageTo(self, "handleGreetPlayer", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         removeStaticWaypoint(self);
@@ -26,6 +34,7 @@ public class combat_explainer extends script.theme_park.newbie_tutorial.tutorial
         faceToBehavior(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGreetPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getPlayer(self);
@@ -45,6 +54,7 @@ public class combat_explainer extends script.theme_park.newbie_tutorial.tutorial
         chat.chat(self, greeting);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         doAnimationAction(self, "slow_down");
@@ -56,7 +66,7 @@ public class combat_explainer extends script.theme_park.newbie_tutorial.tutorial
                 string_id greeting = new string_id(NEWBIE_CONVO, "good_job");
                 chat.chat(self, greeting);
             }
-            else 
+            else
             {
                 string_id greeting = new string_id(NEWBIE_CONVO, "convo_4_repeat");
                 chat.chat(self, greeting);
@@ -64,12 +74,13 @@ public class combat_explainer extends script.theme_park.newbie_tutorial.tutorial
             return SCRIPT_CONTINUE;
         }
         string_id greeting = new string_id(NEWBIE_CONVO, "convo_4_start");
-        string_id response[] = new string_id[2];
+        string_id[] response = new string_id[2];
         response[0] = new string_id(NEWBIE_CONVO, "convo_4_reply_1");
         response[1] = new string_id(NEWBIE_CONVO, "convo_4_reply_2");
         npcStartConversation(speaker, self, CONVO, greeting, response);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         npcRemoveConversationResponse(player, response);
@@ -122,6 +133,7 @@ public class combat_explainer extends script.theme_park.newbie_tutorial.tutorial
         }
         return SCRIPT_CONTINUE;
     }
+
     public void giveWeapon(obj_id npc, obj_id player) throws InterruptedException
     {
         obj_id weapon = weapons.createWeapon(NEWBIE_WEAPON, npc, 0.75f);
@@ -134,6 +146,7 @@ public class combat_explainer extends script.theme_park.newbie_tutorial.tutorial
         }
         messageTo(npc, "handleGiveWeapon", parms, 2, false);
     }
+
     public int handleGiveWeapon(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

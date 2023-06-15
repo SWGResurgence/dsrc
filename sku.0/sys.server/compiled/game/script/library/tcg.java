@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Arrays;
@@ -80,6 +86,7 @@ public class tcg extends script.base_script
                     "Hanse",
                     "Teesquared"
             };
+
     public tcg()
     {
     }

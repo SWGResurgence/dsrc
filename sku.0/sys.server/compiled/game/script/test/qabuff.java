@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.qa;
 import script.library.sui;
@@ -10,13 +16,14 @@ import java.util.Arrays;
 
 public class qabuff extends script.base_script
 {
-    public qabuff()
-    {
-    }
     public static final String MY_SCRIPTVAR = "qabuff";
     public static final String BUFF_TABLE = "datatables/buff/buff.iff";
     public static final String BUFF_TOOL_PROMPT = "Select Spacial Attack or Buff to be performed on your test character.\n\nTo remove all buffs use the command:\n\n/qatool buff clear";
     public static final String BUFF_TOOL_TITLE = "Special Attack & Buff Tool";
+    public qabuff()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -33,6 +40,7 @@ public class qabuff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int buffOptionHandler(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -42,7 +50,7 @@ public class qabuff extends script.base_script
                 qa.checkParams(params, "bufftool");
                 int idx = sui.getListboxSelectedRow(params);
                 int btn = sui.getIntButtonPressed(params);
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, MY_SCRIPTVAR + ".buffMenu");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, MY_SCRIPTVAR + ".buffMenu");
                 if (btn == sui.BP_CANCEL)
                 {
                     utils.removeScriptVarTree(self, MY_SCRIPTVAR);
@@ -55,7 +63,7 @@ public class qabuff extends script.base_script
                     qa.refreshMenu(self, "Choose the tool you want to use", "QA Tools", tool_options, "toolMainMenu", true, "qatool.pid");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String buffArg = previousMainMenuArray[idx];
                     String buffName = qa.getClientBuffName(self, buffArg);
@@ -69,6 +77,7 @@ public class qabuff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void createMainMenu(obj_id self) throws InterruptedException
     {
         String[] allBuffs = dataTableGetStringColumn(BUFF_TABLE, "NAME");

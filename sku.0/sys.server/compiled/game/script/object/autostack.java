@@ -1,20 +1,28 @@
 package script.object;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class autostack extends script.base_script
 {
+    public static final boolean BLOGGING_ON = false;
+    public static final String BLOGGING_CATEGORY = "auto_stack";
     public autostack()
     {
     }
-    public static final boolean BLOGGING_ON = false;
-    public static final String BLOGGING_CATEGORY = "auto_stack";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "msgStackItem", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (isIdValid(sourceContainer) && isIdValid(destContainer))
@@ -33,6 +41,7 @@ public class autostack extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!canRestack(self))
@@ -47,7 +56,7 @@ public class autostack extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 mid.setServerNotify(true);
             }
@@ -58,12 +67,13 @@ public class autostack extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             mid.setServerNotify(true);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!canRestack(self))
@@ -84,6 +94,7 @@ public class autostack extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int free = getFirstFreeIndex(names);
@@ -93,9 +104,10 @@ public class autostack extends script.base_script
         }
         int numInStack = getCount(self);
         names[free] = "num_in_stack";
-        attribs[free] = "" + numInStack;
+        attribs[free] = String.valueOf(numInStack);
         return SCRIPT_CONTINUE;
     }
+
     public boolean canRestack(obj_id self) throws InterruptedException
     {
         blog("canRestack init");
@@ -117,6 +129,7 @@ public class autostack extends script.base_script
         blog("containerObject is valid");
         return true;
     }
+
     public void restackIt(obj_id self) throws InterruptedException
     {
         blog("restackIt init");
@@ -163,6 +176,7 @@ public class autostack extends script.base_script
             }
         }
     }
+
     public void unstackIt(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isInSecureTrade(self))
@@ -173,23 +187,26 @@ public class autostack extends script.base_script
                 utils.setScriptVar(self, "unstacking", 1);
                 messageTo(self, "clearUnstackingScriptVar", null, 3, false);
             }
-            else 
+            else
             {
                 sui.inputbox(self, player, "@autostack:stacksize", "msgUnstackItem");
             }
         }
     }
+
     public int msgStackItem(obj_id self, dictionary params) throws InterruptedException
     {
         blog("msgStackItem init");
         restackIt(self);
         return SCRIPT_CONTINUE;
     }
+
     public int clearUnstackingScriptVar(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "unstacking");
         return SCRIPT_CONTINUE;
     }
+
     public int msgUnstackItem(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -228,6 +245,7 @@ public class autostack extends script.base_script
         messageTo(self, "clearUnstackingScriptVar", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public void createNewStack(obj_id player, obj_id item, int newStackSize, int oldStackSize) throws InterruptedException
     {
         obj_id container = getContainedBy(item);
@@ -247,7 +265,7 @@ public class autostack extends script.base_script
         {
             newItem = static_item.createNewItemFunction(getStaticItemName(item), container);
         }
-        else 
+        else
         {
             newItem = createObject(item, container, "");
         }
@@ -261,9 +279,9 @@ public class autostack extends script.base_script
         //@Note: This is checks the old timestamp for stims, and uses it, rather than making a long long long timestamp.
         if (getTemplateName(item).equals("object/tangible/loot/generic_usable/stim_syringe_generic.iff"))
         {
-            String TIMESTAMP_OBJVAR ="item.temporary.time_stamp";
+            String TIMESTAMP_OBJVAR = "item.temporary.time_stamp";
             int oldTime = getIntObjVar(item, TIMESTAMP_OBJVAR);
-            if(hasObjVar(newItem, TIMESTAMP_OBJVAR))
+            if (hasObjVar(newItem, TIMESTAMP_OBJVAR))
             {
                 removeObjVar(newItem, TIMESTAMP_OBJVAR);
             }
@@ -272,6 +290,7 @@ public class autostack extends script.base_script
         setCount(newItem, newStackSize);
         utils.removeScriptVar(player, "autostack.ignoreitems");
     }
+
     public boolean isContainerValidForStacking(obj_id self) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -286,14 +305,11 @@ public class autostack extends script.base_script
         }
         else if (isGameObjectTypeOf(getContainedBy(self), GOT_misc_container))
         {
-            if (containerTemplate.startsWith("object/tangible/furniture/") || containerTemplate.startsWith("object/tangible/poi/object/"))
-            {
-                return true;
-            }
-            return false;
+            return containerTemplate.startsWith("object/tangible/furniture/") || containerTemplate.startsWith("object/tangible/poi/object/");
         }
         return false;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (!BLOGGING_ON)

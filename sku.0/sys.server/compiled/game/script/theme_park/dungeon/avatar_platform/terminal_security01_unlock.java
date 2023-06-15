@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,18 +14,20 @@ import script.string_id;
 
 public class terminal_security01_unlock extends script.base_script
 {
-    public terminal_security01_unlock()
-    {
-    }
     public static final String STF = "terminal_ui";
     public static final string_id USE_PASSCARD = new string_id(STF, "swipe_passcard");
     public static final string_id DISABLED = new string_id(STF, "door_locks_disabled");
     public static final string_id NOCARD = new string_id(STF, "no_passcard");
+    public terminal_security01_unlock()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, USE_PASSCARD);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -36,7 +44,7 @@ public class terminal_security01_unlock extends script.base_script
                 groundquests.sendSignal(player, "techhalls_unlocked");
                 sendSystemMessage(player, DISABLED);
             }
-            else 
+            else
             {
                 if (!groundquests.isQuestActive(player, "ep3_avatar_security_01"))
                 {

@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.factions;
 import script.library.fs_quests;
@@ -15,6 +21,7 @@ public class fs_defend_01_cleanup extends script.base_script
     public fs_defend_01_cleanup()
     {
     }
+
     public int msgQuestAbortPhaseChange(obj_id self, dictionary params) throws InterruptedException
     {
         if (!quests.isComplete("fs_defend_01", self) || !quests.isComplete("fs_defend_02", self))
@@ -76,14 +83,15 @@ public class fs_defend_01_cleanup extends script.base_script
                     newArray.toArray(updateNames);
                     setObjVar(self, "quest.destroy_multi." + objvar.getName(), updateNames);
                 }
-                else 
+                else
                 {
                     objvarsToRemove.add("quest.destroy_multi." + objvar.getName());
                 }
             }
             if (objvarsToRemove.size() > 0)
             {
-                for (Object o : objvarsToRemove) {
+                for (Object o : objvarsToRemove)
+                {
                     String name = (String) o;
                     removeObjVar(self, name);
                 }
@@ -92,6 +100,7 @@ public class fs_defend_01_cleanup extends script.base_script
         detachScript(self, "quest.force_sensitive.fs_defend_01_cleanup");
         return SCRIPT_CONTINUE;
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         String questName = quests.getDataEntry(questRow, "NAME");

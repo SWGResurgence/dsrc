@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_quest;
 import script.library.utils;
@@ -11,11 +17,13 @@ public class quest_manager extends script.base_script
     public quest_manager()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         registerNamedObject(space_quest.QUEST_MANAGER, self);
         return SCRIPT_CONTINUE;
     }
+
     public int registerQuestLocation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -32,7 +40,7 @@ public class quest_manager extends script.base_script
             points[0] = new_point;
             utils.setScriptVar(self, type + "_list", points);
         }
-        else 
+        else
         {
             obj_id[] updated_points = new obj_id[points.length + 1];
             for (int i = 0; i < points.length; i++)
@@ -55,6 +63,7 @@ public class quest_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int createWaypointToSpawner(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -73,9 +82,11 @@ public class quest_manager extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id nav : navs) {
+        for (obj_id nav : navs)
+        {
             String curSpawnName = getStringObjVar(nav, "strSpawnerName");
-            if ((curSpawnName != null) && curSpawnName.equals(spawner)) {
+            if ((curSpawnName != null) && curSpawnName.equals(spawner))
+            {
                 location loc = getLocation(nav);
                 obj_id waypoint = createWaypointInDatapad(player, loc);
                 setWaypointVisible(waypoint, true);
@@ -94,7 +105,7 @@ public class quest_manager extends script.base_script
         {
             broadcast(player, "Error: Failed to find spawner '" + spawner + "'.  " + navs.length + " spawners were searched.  The nav point object may not exist or your server may need to specify 'createZoneObjects=1'");
         }
-        else 
+        else
         {
             broadcast(player, "Error: Failed to find spawner '" + spawner + "'.  No spawners were registered!  The nav point object may not exist or your server may need to specify 'createZoneObjects=1'");
         }

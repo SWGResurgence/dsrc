@@ -1,5 +1,11 @@
 package script.item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.static_item;
 import script.library.utils;
 import script.menu_info;
@@ -16,7 +22,7 @@ public class trader_care_package_tools extends script.base_script
 
     public static void grantTraderCarePackageTools(obj_id player) throws InterruptedException
     {
-        String TOOLS[] = {
+        String[] TOOLS = {
                 "object/draft_schematic/item/item_clothing_tool.iff",
                 "object/draft_schematic/item/item_food_tool.iff",
                 "object/draft_schematic/item/item_structure_tool.iff",

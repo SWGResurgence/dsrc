@@ -1,5 +1,11 @@
 package script.city.bestine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -8,10 +14,11 @@ import java.util.Vector;
 
 public class museum_event_master extends script.base_script
 {
+    public static final String DATATABLE_NAME = "datatables/city/bestine/bestine_museum_event.iff";
+
     public museum_event_master()
     {
     }
-    public static final String DATATABLE_NAME = "datatables/city/bestine/bestine_museum_event.iff";
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
@@ -29,6 +36,7 @@ public class museum_event_master extends script.base_script
         }
         return museumEventDuration;
     }
+
     public int beginBestineMuseumEvent(obj_id self, dictionary params) throws InterruptedException
     {
         int museumEventNum = 1;
@@ -66,6 +74,7 @@ public class museum_event_master extends script.base_script
 
         return SCRIPT_CONTINUE;
     }
+
     public int endBestineMuseumEvent(obj_id self, dictionary params) throws InterruptedException
     {
         int museumEventNum = 1;
@@ -103,11 +112,13 @@ public class museum_event_master extends script.base_script
 
         return SCRIPT_CONTINUE;
     }
+
     public void pickArtistsForEvent(obj_id self) throws InterruptedException
     {
         String[] strArtists = dataTableGetStringColumnNoDefaults(DATATABLE_NAME, "artistNpc");
         Vector vectArtists = new Vector();
-        for (String temp : strArtists) {
+        for (String temp : strArtists)
+        {
             vectArtists = utils.addElement(vectArtists, temp);
         }
 
@@ -141,7 +152,7 @@ public class museum_event_master extends script.base_script
                 {
                     foundArtworkEntry = true;
                 }
-                else 
+                else
                 {
                     artworkNum = artworkNum + 1;
                 }

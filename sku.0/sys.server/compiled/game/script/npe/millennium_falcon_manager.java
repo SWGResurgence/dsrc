@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,28 +13,34 @@ import java.util.Vector;
 
 public class millennium_falcon_manager extends script.base_script
 {
+    public static final String STF = "npe/millennium_falcon";
+
     public millennium_falcon_manager()
     {
     }
-    public static final String STF = "npe/millennium_falcon";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "intInvincible", 1);
         return SCRIPT_CONTINUE;
     }
+
     public obj_id containsPlayer(obj_id bldg) throws InterruptedException
     {
         obj_id[] contents = getBuildingContents(bldg);
         if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (isPlayer(content)) {
+            for (obj_id content : contents)
+            {
+                if (isPlayer(content))
+                {
                     return content;
                 }
             }
         }
         return null;
     }
+
     public int playerTimeoutAdvanceToStation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("objPlayer");
@@ -54,33 +66,34 @@ public class millennium_falcon_manager extends script.base_script
                 attachScript(player, "npe.npe_station_player");
                 npe.movePlayerFromFalconToSharedStation(player);
             }
-            else 
+            else
             {
                 return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int setupArea(obj_id self, dictionary params) throws InterruptedException
     {
         location locSelf = getLocation(self);
         utils.setScriptVar(self, "shipsRemaining", 3);
-        location point1 = (location)locSelf.clone();
+        location point1 = (location) locSelf.clone();
         point1.x += 200;
         point1.y += 40;
         obj_id objPoint1 = create.object("object/tangible/npe/npe_node.iff", point1);
         utils.setScriptVar(self, "objPoint1", objPoint1);
-        location point2 = (location)locSelf.clone();
+        location point2 = (location) locSelf.clone();
         point2.z += 200;
         point2.y += 40;
         obj_id objPoint2 = create.object("object/tangible/npe/npe_node.iff", point2);
         utils.setScriptVar(self, "objPoint2", objPoint2);
-        location point3 = (location)locSelf.clone();
+        location point3 = (location) locSelf.clone();
         point3.x -= 200;
         point3.y += 40;
         obj_id objPoint3 = create.object("object/tangible/npe/npe_node.iff", point3);
         utils.setScriptVar(self, "objPoint3", objPoint3);
-        location point4 = (location)locSelf.clone();
+        location point4 = (location) locSelf.clone();
         point4.z -= 200;
         point4.y += 40;
         obj_id objPoint4 = create.object("object/tangible/npe/npe_node.iff", point4);
@@ -125,6 +138,7 @@ public class millennium_falcon_manager extends script.base_script
         utils.setScriptVar(self, "objVader", jabbaInvis);
         return SCRIPT_CONTINUE;
     }
+
     public int phaseTwo(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id hanSolo = sequencer.getSequenceObject("hanSolo");
@@ -137,34 +151,40 @@ public class millennium_falcon_manager extends script.base_script
         sequencer.registerSequenceObject(hanSolo2, "hanSolo");
         return SCRIPT_CONTINUE;
     }
+
     public int makehanconverse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id hanSolo = utils.getObjIdScriptVar(self, "objHanSolo");
         attachScript(hanSolo, "conversation.npe_han_solo_falcon");
         return SCRIPT_CONTINUE;
     }
+
     public int makehanconverse2(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id hanSolo = utils.getObjIdScriptVar(self, "objHanSolo");
         attachScript(hanSolo, "conversation.npe_han_solo_falcon2");
         return SCRIPT_CONTINUE;
     }
+
     public int makejolkaconverse(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int setupturretpath(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
         obj_id han = sequencer.getSequenceObject("hanTurret3");
         return SCRIPT_CONTINUE;
     }
+
     public int setupcockpitpath(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
         obj_id loc = sequencer.getSequenceObject("hanEnd");
         return SCRIPT_CONTINUE;
     }
+
     public int playerTalkedToHan(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id hanSolo = utils.getObjIdScriptVar(self, "objHanSolo");
@@ -174,6 +194,7 @@ public class millennium_falcon_manager extends script.base_script
         messageTo(self, "continueMainTable", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int playerTalkedToHan2(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id hanSolo = utils.getObjIdScriptVar(self, "objHanSolo");
@@ -183,6 +204,7 @@ public class millennium_falcon_manager extends script.base_script
         messageTo(self, "continueMainTable", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int endEncounter(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
@@ -207,21 +229,26 @@ public class millennium_falcon_manager extends script.base_script
         utils.removeScriptVar(self, "intSecondIndex");
         if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (!isPlayer(content) && isMob(content)) {
+            for (obj_id content : contents)
+            {
+                if (!isPlayer(content) && isMob(content))
+                {
                     destroyObject(content);
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanOutDungeon(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] contents = getBuildingContents(self);
         if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (!isPlayer(content) && isMob(content)) {
+            for (obj_id content : contents)
+            {
+                if (!isPlayer(content) && isMob(content))
+                {
                     destroyObject(content);
                 }
             }
@@ -242,6 +269,7 @@ public class millennium_falcon_manager extends script.base_script
         utils.setScriptVar(self, "shipsRemaining", 3);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnShips(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id point1 = utils.getObjIdScriptVar(self, "objPoint1");
@@ -294,6 +322,7 @@ public class millennium_falcon_manager extends script.base_script
         ship_ai.squadPatrol(squad, patrol);
         return SCRIPT_CONTINUE;
     }
+
     public int shipDied(obj_id self, dictionary params) throws InterruptedException
     {
         int remaining = utils.getIntScriptVar(self, "shipsRemaining");
@@ -324,12 +353,14 @@ public class millennium_falcon_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int finishedturret(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
         utils.setScriptVar(player, "npe.finishedTurret", true);
         return SCRIPT_CONTINUE;
     }
+
     public int transitionSequence(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
@@ -341,6 +372,7 @@ public class millennium_falcon_manager extends script.base_script
         messageTo(self, "hyperspaceFalcon", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int hyperspaceFalcon(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
@@ -361,6 +393,7 @@ public class millennium_falcon_manager extends script.base_script
         setPosture(player, POSTURE_UPRIGHT);
         return SCRIPT_CONTINUE;
     }
+
     public int movePlayerToStation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
@@ -369,6 +402,7 @@ public class millennium_falcon_manager extends script.base_script
         npe.movePlayerFromFalconToSharedStation(player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(transferer) && !isPlayer(item))
@@ -377,6 +411,7 @@ public class millennium_falcon_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         LOG("npe", "Received " + item);
@@ -408,6 +443,7 @@ public class millennium_falcon_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(item))
@@ -424,15 +460,19 @@ public class millennium_falcon_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id[] getBuildingContents(obj_id objObject) throws InterruptedException
     {
         Vector objContents = new Vector();
         objContents.setSize(0);
         obj_id[] objCells = getContents(objObject);
-        for (obj_id objCell : objCells) {
+        for (obj_id objCell : objCells)
+        {
             obj_id[] objTestContents = getContents(objCell);
-            if ((objTestContents != null) && (objTestContents.length > 0)) {
-                for (obj_id objTestContent : objTestContents) {
+            if (objTestContents != null)
+            {
+                for (obj_id objTestContent : objTestContents)
+                {
                     objContents = utils.addElement(objContents, objTestContent);
                 }
             }
@@ -445,6 +485,7 @@ public class millennium_falcon_manager extends script.base_script
         }
         return _objContents;
     }
+
     public boolean checkGod(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -454,11 +495,13 @@ public class millennium_falcon_manager extends script.base_script
         }
         return false;
     }
+
     public int clearhate(obj_id self, dictionary params) throws InterruptedException
     {
         ship_ai.unitRemoveFromAllAttackTargetLists(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         LOG("npe_falcon", "Falcon was destroyed.  Here come the logs!");

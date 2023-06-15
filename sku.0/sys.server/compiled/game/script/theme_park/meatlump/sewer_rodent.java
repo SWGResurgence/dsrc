@@ -1,5 +1,11 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.location;
 import script.obj_id;
@@ -7,19 +13,21 @@ import script.string_id;
 
 public class sewer_rodent extends script.base_script
 {
-    public sewer_rodent()
-    {
-    }
     public static final String STARTER_SLOT = "meatlump_wine_starter_slot";
     public static final String COLLECTION_NAME = "col_meatlump_wine_01";
     public static final String SLOT_NAME = "meatlump_wine_juicer_slot";
     public static final float UPDATE_RADIUS = 0.5f;
     public static final string_id SID_COLLECT_JUICE = new string_id("collection", "meatlump_collect_juice");
+    public sewer_rodent()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("meatlump_rodent_trigger_volume", UPDATE_RADIUS, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volName, obj_id breecher) throws InterruptedException
     {
         if (!isIdValid(breecher) || !exists(breecher))
@@ -56,7 +64,7 @@ public class sewer_rodent extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             setInvulnerable(self, false);
             setHealth(self, -1000);

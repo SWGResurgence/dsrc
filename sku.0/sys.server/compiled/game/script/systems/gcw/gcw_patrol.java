@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -40,6 +46,7 @@ public class gcw_patrol extends script.base_script
                     "gcw_city_rebel_specforce_assault",
                     "gcw_city_rebel_specforce_defense"
             };
+
     public gcw_patrol()
     {
     }
@@ -87,7 +94,7 @@ public class gcw_patrol extends script.base_script
         int repairCount = getIntObjVar(self, gcw.GCW_OBJECT_REPAIR_COUNT);
         if (repairCount > 0)
         {
-            attribs[idx] = "" + repairCount + " out of " + gcw.REPAIR_COUNT_MAX;
+            attribs[idx] = repairCount + " out of " + gcw.REPAIR_COUNT_MAX;
         }
         else
         {
@@ -535,6 +542,5 @@ public class gcw_patrol extends script.base_script
         setInvulnerable(self, true);
         messageTo(self, "destroyGCWPatrol", null, 1.0f, false);
         gcw.gcwInvasionCreditForDestroy(killer);
-        return;
     }
 }

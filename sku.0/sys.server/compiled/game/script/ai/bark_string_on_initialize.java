@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.obj_id;
@@ -10,11 +16,13 @@ public class bark_string_on_initialize extends script.base_script
     public bark_string_on_initialize()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "barkString", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int barkString(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "bark_string_file") || !hasObjVar(self, "bark_string_id"))
@@ -23,7 +31,7 @@ public class bark_string_on_initialize extends script.base_script
             {
                 setObjVar(self, "alreadyTriedBarking", 1);
             }
-            else 
+            else
             {
                 if (getIntObjVar(self, "alreadyTriedBarking") > 2)
                 {

@@ -1,5 +1,11 @@
 package script.systems.crafting.space.reactor;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -44,6 +50,7 @@ public class crafting_reactor_overcharger extends script.systems.crafting.space.
                                     new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 3)
                             })
             };
+
     public crafting_reactor_overcharger()
     {
     }

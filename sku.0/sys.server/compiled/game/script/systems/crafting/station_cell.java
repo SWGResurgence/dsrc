@@ -1,5 +1,11 @@
 package script.systems.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.buff;
 import script.library.craftinglib;
 import script.library.utils;
@@ -69,7 +75,7 @@ public class station_cell extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id[] stations = utils.getObjIdArrayScriptVar(self, craftinglib.SCRIPTVAR_CELL_STATIONS);
-        if (stations == null || stations.length <= 0)
+        if (stations == null)
         {
             return SCRIPT_CONTINUE;
         }
@@ -132,7 +138,7 @@ public class station_cell extends script.base_script
                 stations = utils.removeElement(stations, item);
                 utils.setScriptVar(self, craftinglib.SCRIPTVAR_CELL_STATIONS, stations);
                 obj_id[] cellContents = getContents(self);
-                if (cellContents != null && cellContents.length > 0)
+                if (cellContents != null)
                 {
                     for (obj_id cellContent : cellContents)
                     {
@@ -160,7 +166,7 @@ public class station_cell extends script.base_script
             return SCRIPT_CONTINUE;
         }
         int[] stationBuffs = buff.getAllBuffsByEffect(item, "station_buff");
-        if (stationBuffs == null || stationBuffs.length <= 0)
+        if (stationBuffs == null)
         {
             return SCRIPT_CONTINUE;
         }

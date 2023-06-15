@@ -1,5 +1,11 @@
 package script.systems.crafting.chemistry.enzyme;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -54,6 +60,7 @@ public class crafting_ws_enzyme_units extends script.systems.crafting.chemistry.
                                     new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
                             })
             };
+
     public crafting_ws_enzyme_units()
     {
     }

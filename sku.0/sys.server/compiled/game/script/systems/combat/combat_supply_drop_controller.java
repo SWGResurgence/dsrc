@@ -1,5 +1,11 @@
 package script.systems.combat;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -16,6 +22,7 @@ public class combat_supply_drop_controller extends script.base_script
     public static final String FOOD_HIGH = "high";
     */public static final int FOOD_ITEMS = 2;
     public static final int GROUP_SIZE = 16;
+
     public combat_supply_drop_controller()
     {
     }
@@ -304,6 +311,5 @@ public class combat_supply_drop_controller extends script.base_script
             params.put("controlDevice", petControlDevice);
             messageTo(hireling, "handleAddMaster", params, 0, false);
         }
-        return;
     }
 }

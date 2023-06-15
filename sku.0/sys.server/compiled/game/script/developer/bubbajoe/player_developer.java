@@ -6,6 +6,12 @@
  */
 package script.developer.bubbajoe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -86,7 +92,7 @@ public class player_developer extends base_script
             String clipboard = tok.nextToken();
             if (clipboard == null)
             {
-                broadcast(self,"Not enough arguments. Usage: /developer clipboard [location] [scripts] [objvars]");
+                broadcast(self, "Not enough arguments. Usage: /developer clipboard [location] [scripts] [objvars]");
             }
             if (clipboard.equals("location"))
             {
@@ -198,7 +204,7 @@ public class player_developer extends base_script
             attachScript(datapad, "item.special.nomove");
             static_item.setStaticItemName(datapad, "Resource Analyzer");
             static_item.setDescriptionStringId(datapad, new string_id("This item is used to generate resources that have erroneously been removed from the game.\n\n" + "It is a developer tool and should not be used by players."));
-            broadcast(self,"Resource Analyzer has been added to your inventory. All actions regarding this tool are logged. [Player: " +  myTarget + "]");
+            broadcast(self, "Resource Analyzer has been added to your inventory. All actions regarding this tool are logged. [Player: " + myTarget + "]");
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("uberize"))
@@ -380,7 +386,7 @@ public class player_developer extends base_script
                 }
                 else
                 {
-                    sendConsoleMessage(self,"Skipping " + item);
+                    sendConsoleMessage(self, "Skipping " + item);
                 }
             }
             broadcast(self, "Seeding " + bagLimit + " items with 100% quality.");
@@ -1431,7 +1437,7 @@ public class player_developer extends base_script
                 String corpseTemplate = "object/tangible/container/drum/warren_drum_skeleton.iff";
                 location treasureLoc = getLocation(self);
                 obj_id treasureChest = createObject(corpseTemplate, treasureLoc);
-                attachScript (treasureChest, "item.container.loot_crate_opened");
+                attachScript(treasureChest, "item.container.loot_crate_opened");
                 setName(treasureChest, "a corpse of " + NAMEs[rand(0, NAMEs.length - 1)]);
                 loot.makeLootInContainer(treasureChest, table, amt, 300);
                 broadcast(self, "A loot chest was made with " + amt + " items from the loot table: " + table);
@@ -1467,7 +1473,7 @@ public class player_developer extends base_script
                 String corpseTemplate = "object/tangible/container/loot/large_container.iff";
                 location treasureLoc = getLocation(self);
                 obj_id treasureChest = createObject(corpseTemplate, treasureLoc);
-                attachScript (treasureChest, "item.container.loot_crate_opened");
+                attachScript(treasureChest, "item.container.loot_crate_opened");
                 setName(treasureChest, "\\#FFC0CBa cargo container\\#.");
                 loot.makeLootInContainer(treasureChest, table, amt, 300);
                 broadcast(self, "A cargo container was made with " + amt + " items from the loot table: " + table);
@@ -1502,7 +1508,7 @@ public class player_developer extends base_script
                 String corpseTemplate = "object/tangible/container/loot/large_container.iff";
                 location treasureLoc = getLocation(self);
                 obj_id treasureChest = createObject(corpseTemplate, treasureLoc);
-                attachScript (treasureChest, "item.container.loot_crate_opened");
+                attachScript(treasureChest, "item.container.loot_crate_opened");
                 setName(treasureChest, "a cache of junk");
                 String JUNK_TABLE = "datatables/crafting/reverse_engineering_junk.iff";
                 int COUNT = Integer.parseInt(tok.nextToken());
@@ -1549,7 +1555,7 @@ public class player_developer extends base_script
             };
             int randomIndex = rand(0, RACES.length - 1);
             String randomString = RACES[randomIndex];
-            int genderChance = rand(1,100);
+            int genderChance = rand(1, 100);
             obj_id bot;
             if (genderChance < 49)
             {
@@ -1698,7 +1704,7 @@ public class player_developer extends base_script
                 location loc = getLocation(iTarget);
                 float height = loc.y;
                 setObjVar(self, "developer_clipboard.height", height);
-                broadcast(self, "Height of " + height +  " copied.");
+                broadcast(self, "Height of " + height + " copied.");
                 return SCRIPT_CONTINUE;
             }
             else if (subcommand.equals("paste"))
@@ -1712,7 +1718,7 @@ public class player_developer extends base_script
                 location loc = getLocation(iTarget);
                 loc.y = height;
                 setLocation(iTarget, loc);
-                broadcast(self, "Height of " + height +  " pasted to " + target);
+                broadcast(self, "Height of " + height + " pasted to " + target);
                 return SCRIPT_CONTINUE;
             }
         }
@@ -1940,9 +1946,9 @@ public class player_developer extends base_script
             int rows = dataTableGetNumRows(table);
             for (int i = 0; i < rows; i++)
             {
-                String itemCode =dataTableGetString(table, i, columns[0]);
-                String itemName =dataTableGetString(table, i, columns[1]);
-                String itemDesc =dataTableGetString(table, i, columns[2]);
+                String itemCode = dataTableGetString(table, i, columns[0]);
+                String itemName = dataTableGetString(table, i, columns[1]);
+                String itemDesc = dataTableGetString(table, i, columns[2]);
                 String finalizedFormatName = itemCode + "\t" + itemName + "\n";
                 String finalizedFormatDesc = itemCode + "\t" + itemDesc + "\n";
                 BufferedWriter nameWriter = new BufferedWriter(new FileWriter(clobberedText, true));
@@ -2062,28 +2068,31 @@ public class player_developer extends base_script
         location there = getLocation(target);
         createClientPathAdvanced(target, there, here, "default");
     }
+
     public void pathToWho(obj_id self, obj_id target)
     {
         location here = getLocation(self);
         location there = getLocation(target);
         createClientPathAdvanced(self, here, there, "default");
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
-        if(hasObjVar(self, "live_qa")) // not valid for non-optimized clients.
+        if (hasObjVar(self, "live_qa")) // not valid for non-optimized clients.
         {
-            sendConsoleCommand( "/object setCoverVisibility " + self + " " + 1, self);
-            sendConsoleCommand( "/object hide " + self + " " + 0, self);
-            sendConsoleCommand( "/drawNetworkIds 0", self);
-            sendConsoleCommand( "/ui debugExamine 0", self);
-            sendConsoleCommand( "/ui debugClipboardExamine 0", self);
-            sendConsoleCommand( "/ui allowTargetAnything 0", self);
-            sendConsoleCommand( "/object hide " + self + " " + 0, self);
-            sendConsoleCommand( "/echo You are visible and interactable due to having the 'live_qa' objvar.", self);
-            sendConsoleCommand( "/setGodMode 0", self);
+            sendConsoleCommand("/object setCoverVisibility " + self + " " + 1, self);
+            sendConsoleCommand("/object hide " + self + " " + 0, self);
+            sendConsoleCommand("/drawNetworkIds 0", self);
+            sendConsoleCommand("/ui debugExamine 0", self);
+            sendConsoleCommand("/ui debugClipboardExamine 0", self);
+            sendConsoleCommand("/ui allowTargetAnything 0", self);
+            sendConsoleCommand("/object hide " + self + " " + 0, self);
+            sendConsoleCommand("/echo You are visible and interactable due to having the 'live_qa' objvar.", self);
+            sendConsoleCommand("/setGodMode 0", self);
         }
         return SCRIPT_CONTINUE;
     }
+
     private void spawnRingInterior(obj_id self, int num, float radius, location where, String creatureToSpawn) throws InterruptedException
     {
         float x = where.x;
@@ -2093,9 +2102,9 @@ public class player_developer extends base_script
         float angleInc = 360.0f / num;
         for (int i = 0; i < num; i++)
         {
-             angle = angle + angleInc;
-            float newX = x + (float)Math.cos(angle) * radius;
-            float newY = y + (float)Math.sin(angle) * radius;
+            angle = angle + angleInc;
+            float newX = x + (float) Math.cos(angle) * radius;
+            float newY = y + (float) Math.sin(angle) * radius;
             location newLoc = new location(newX, newY, z, where.area, where.cell);
             obj_id creature = create.object(creatureToSpawn, newLoc);
             if (isIdValid(creature))
@@ -2104,6 +2113,7 @@ public class player_developer extends base_script
             }
         }
     }
+
     private location getO2P(obj_id self, obj_id target)
     {
         location here = getLocation(self);
@@ -2113,6 +2123,7 @@ public class player_developer extends base_script
         float z = here.z - there.z;
         return new location(x, y, z);
     }
+
     public int handleDescribe(obj_id self, dictionary paramsDict) throws InterruptedException
     {
         obj_id myTarget = getIntendedTarget(self);

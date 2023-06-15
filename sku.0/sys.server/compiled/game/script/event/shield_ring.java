@@ -1,22 +1,30 @@
 package script.event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class shield_ring extends script.base_script
 {
+    private static final String[] HELP_TEXT =
+            {
+                    "=========================================",
+                    "USAGE: ShieldRing [Armor Effectiveness 1-100] (default effectiveness is 20)",
+                    "ShieldRing [Armor Effectiveness 1-100] [Armor Rating 0-3] (default armor rating is 1)",
+                    "ShieldRing [Armor Effectiveness 1-100] [Armor Rating 0-3] [Armor Vulnerability 0-511] (default vulnerability is 0, none)",
+                    "Note: Armor Vulnerabilities use 9 bits. If you don't know what this means and need to be vulnerable to something see Mark.",
+                    "Saying \"detach\" will automatically detach this script.",
+                    "========================================="
+            };
+
     public shield_ring()
     {
     }
-    private static final String[] HELP_TEXT =
-    {
-        "=========================================",
-        "USAGE: ShieldRing [Armor Effectiveness 1-100] (default effectiveness is 20)",
-        "ShieldRing [Armor Effectiveness 1-100] [Armor Rating 0-3] (default armor rating is 1)",
-        "ShieldRing [Armor Effectiveness 1-100] [Armor Rating 0-3] [Armor Vulnerability 0-511] (default vulnerability is 0, none)",
-        "Note: Armor Vulnerabilities use 9 bits. If you don't know what this means and need to be vulnerable to something see Mark.",
-        "Saying \"detach\" will automatically detach this script.",
-        "========================================="
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isPlayer(self))
@@ -41,6 +49,7 @@ public class shield_ring extends script.base_script
         sendSystemMessage(self, "Say \"Help\" for usage and options.", null);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (!isGod(self))
@@ -59,6 +68,7 @@ public class shield_ring extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (objSpeaker != self)
@@ -91,7 +101,8 @@ public class shield_ring extends script.base_script
         }
         else if ((toLower(strText)).equals("help"))
         {
-            for (String helpText : HELP_TEXT) {
+            for (String helpText : HELP_TEXT)
+            {
                 sendSystemMessage(self, helpText, null);
             }
             return SCRIPT_CONTINUE;

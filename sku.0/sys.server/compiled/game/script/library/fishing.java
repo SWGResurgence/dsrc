@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -32,6 +38,7 @@ public class fishing extends script.base_script
     public static final String OBJVAR_ELUSIVE_FISH_COUNT_TOTAL = "elusive_fish.count_rewarded_total";
     public static final String OBJVAR_PLANET_OBJECT_REFERENCE = "master_fishing_object";
     public static final String OBJVAR_LARGEST_FISH_CAUGHT_THIS_PERIOD = "fishing.record_fish_current_max";
+
     public fishing()
     {
     }

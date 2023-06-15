@@ -1,5 +1,11 @@
 package script.developer.soe.working;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.combat_engine.hit_result;
 import script.library.*;
@@ -14,6 +20,7 @@ public class dantest extends script.base_script
     public static final int SPAWN_CHECK_DISTANCE = 64;
     public static final int SPAWN_CHECK_LIMIT = 15;
     public static final int SPAWN_CHECK_THEATER_LIMIT = 1;
+
     public dantest()
     {
     }
@@ -95,7 +102,6 @@ public class dantest extends script.base_script
         locTest.z = mapLocations[intRoll].getY();
         locTest.area = locHome.area;
         setObjVar(self, "jedi.locTrainerLocation", locTest);
-        return;
     }
 
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
@@ -474,7 +480,7 @@ public class dantest extends script.base_script
         if (strCommands[0].equals("validateSequencer"))
         {
             obj_id master = sequencer.getSequenceObject(strCommands[1]);
-            broadcast(self, "" + master);
+            broadcast(self, String.valueOf(master));
             return SCRIPT_CONTINUE;
         }
         if (strCommands[0].equals("forceMaintenanceLong"))
@@ -1213,7 +1219,7 @@ public class dantest extends script.base_script
             obj_id[] objPcds = space_transition.findShipControlDevicesForPlayer(self);
             obj_id objShip = space_transition.getShipFromShipControlDevice(objPcds[0]);
             dictionary dctParams = new dictionary();
-            dctParams.put("strSlot", "" + space_crafting.CHASSIS);
+            dctParams.put("strSlot", String.valueOf(space_crafting.CHASSIS));
             dctParams.put("objShip", objShip);
             space_utils.notifyObject(self, "fixit", dctParams);
         }
@@ -1582,7 +1588,7 @@ public class dantest extends script.base_script
             for (obj_id objCell : objCells)
             {
                 obj_id[] objTestContents = getContents(objCell);
-                if ((objTestContents != null) && (objTestContents.length > 0))
+                if (objTestContents != null)
                 {
                     for (obj_id objTestContent : objTestContents)
                     {
@@ -2561,7 +2567,7 @@ public class dantest extends script.base_script
         {
             boolean boolSpawnerIsOn;
             boolSpawnerIsOn = getBooleanObjVar(objMasterSpawner, "boolSpawnerIsOn");
-            if (boolSpawnerIsOn == false)
+            if (!boolSpawnerIsOn)
             {
                 strSpam = objPlayer + " canSpawn failed: spawning is disabled";
                 sendSpawnSpam(objPlayer, boolLogFailures, boolVerboseMode, strSpam);
@@ -2628,7 +2634,6 @@ public class dantest extends script.base_script
     public void sendSpawnSpam(obj_id self, boolean boolLogFailures, boolean boolVerboseMode, String strSpam) throws InterruptedException
     {
         broadcast(self, strSpam);
-        return;
     }
 
     public boolean isSpawningAllowed(location locTest) throws InterruptedException
@@ -2705,7 +2710,7 @@ public class dantest extends script.base_script
         if (intRoll > 6)
         {
             obj_id[] objContents = getShipContents(self);
-            if ((objContents != null) && (objContents.length > 0))
+            if (objContents != null)
             {
                 for (obj_id objContent : objContents)
                 {
@@ -2728,7 +2733,7 @@ public class dantest extends script.base_script
         for (obj_id objCell : objCells)
         {
             obj_id[] objTestContents = getContents(objCell);
-            if ((objTestContents != null) && (objTestContents.length > 0))
+            if (objTestContents != null)
             {
                 for (obj_id objTestContent : objTestContents)
                 {

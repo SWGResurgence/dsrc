@@ -4,6 +4,12 @@ package script.developer.bubbajoe;/*
 @Purpose: Expells players from a trigger volume named "no_enter"
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class expel extends script.base_script
@@ -37,6 +43,7 @@ public class expel extends script.base_script
         removeTriggerVolume("no_enter");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self)
     {
         removeTriggerVolume("no_enter");

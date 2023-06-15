@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.fs_quests;
 import script.library.quests;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class fs_task_unlock_branch extends script.base_script
     public fs_task_unlock_branch()
     {
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         boolean success = false;
@@ -23,7 +30,7 @@ public class fs_task_unlock_branch extends script.base_script
                 {
                     unlockBranch = getStringObjVar(self, objvarName);
                 }
-                else 
+                else
                 {
                     unlockBranch = quests.getDataEntry(questRow, "TARGET");
                 }
@@ -35,13 +42,13 @@ public class fs_task_unlock_branch extends script.base_script
                         CustomerServiceLog("fs_quests", "failed to unlock force sensitive branch " + unlockBranch + " to complete quest task " + questName + " for %TU", self, null);
                     }
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("fs_quests", "failed to retrieve force sensitive branch name to complete quest task " + questName + " for %TU", self, null);
                 }
                 quests.complete(questName, self, success);
             }
-            else 
+            else
             {
                 CustomerServiceLog("fs_quests", "failed to retrieve quest name for quest id" + questRow + " for %TU ", self, null);
             }

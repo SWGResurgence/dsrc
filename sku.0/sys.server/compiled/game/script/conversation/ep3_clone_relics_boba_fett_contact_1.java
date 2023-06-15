@@ -1,42 +1,57 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_clone_relics_boba_fett_contact_1";
+
     public ep3_clone_relics_boba_fett_contact_1()
     {
     }
-    public static String c_stringFile = "conversation/ep3_clone_relics_boba_fett_contact_1";
+
     public boolean ep3_clone_relics_boba_fett_contact_1_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_clone_relics_boba_fett_contact_1_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_boba_fett_1"));
     }
+
     public boolean ep3_clone_relics_boba_fett_contact_1_condition_onSpaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player, "recovery", "ep3_clone_relics_boba_fett_2"));
     }
+
     public boolean ep3_clone_relics_boba_fett_contact_1_condition_hasCompletedQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "destroy_surpriseattack", "ep3_clone_relics_boba_fett_3"));
     }
+
     public boolean ep3_clone_relics_boba_fett_contact_1_condition_onQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_clone_relics_boba_fett_1"));
     }
+
     public void ep3_clone_relics_boba_fett_contact_1_action_giveDeliverySignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "deliveredPackage");
     }
+
     public void ep3_clone_relics_boba_fett_contact_1_action_grantSpaceMissionRecovery(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "recovery", "ep3_clone_relics_boba_fett_2");
     }
+
     public int ep3_clone_relics_boba_fett_contact_1_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_766"))
@@ -67,6 +82,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_boba_fett_contact_1_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_776"))
@@ -84,6 +100,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_boba_fett_contact_1_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_782"))
@@ -105,7 +122,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_786");
@@ -114,7 +131,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_boba_fett_contact_1.branchId");
                     chat.chat(npc, player, message);
@@ -138,6 +155,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_boba_fett_contact_1_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_786"))
@@ -160,7 +178,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_790");
@@ -169,7 +187,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_boba_fett_contact_1.branchId");
                     chat.chat(npc, player, message);
@@ -180,6 +198,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_boba_fett_contact_1_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_790"))
@@ -197,6 +216,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_boba_fett_contact_1_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_800"))
@@ -225,7 +245,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_804");
@@ -238,7 +258,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_boba_fett_contact_1.branchId");
                     chat.chat(npc, player, message);
@@ -249,6 +269,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_boba_fett_contact_1_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_804"))
@@ -282,7 +303,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_812");
@@ -291,7 +312,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_boba_fett_contact_1.branchId");
                     chat.chat(npc, player, message);
@@ -302,6 +323,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_boba_fett_contact_1_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_812"))
@@ -323,7 +345,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_816");
@@ -332,7 +354,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_boba_fett_contact_1.branchId");
                     chat.chat(npc, player, message);
@@ -343,6 +365,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_boba_fett_contact_1_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_816"))
@@ -364,7 +387,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_820");
@@ -373,7 +396,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_boba_fett_contact_1.branchId");
                     chat.chat(npc, player, message);
@@ -384,6 +407,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_boba_fett_contact_1_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_820"))
@@ -403,6 +427,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_boba_fett_contact_1_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_826"))
@@ -421,6 +446,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -432,6 +458,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
         setName(self, new string_id("ep3/npc_names", "clone_relics_kkrax"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -439,6 +466,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
         setName(self, new string_id("ep3/npc_names", "clone_relics_kkrax"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -448,18 +476,21 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_clone_relics_boba_fett_contact_1");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -490,7 +521,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_766");
@@ -502,7 +533,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_boba_fett_contact_1.branchId", 1);
                 npcStartConversation(player, npc, "ep3_clone_relics_boba_fett_contact_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -524,7 +555,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_776");
@@ -532,7 +563,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_boba_fett_contact_1.branchId", 4);
                 npcStartConversation(player, npc, "ep3_clone_relics_boba_fett_contact_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -561,7 +592,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_782");
@@ -573,7 +604,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_boba_fett_contact_1.branchId", 6);
                 npcStartConversation(player, npc, "ep3_clone_relics_boba_fett_contact_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -595,7 +626,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_800");
@@ -603,7 +634,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_boba_fett_contact_1.branchId", 11);
                 npcStartConversation(player, npc, "ep3_clone_relics_boba_fett_contact_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -625,7 +656,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_826");
@@ -633,7 +664,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_boba_fett_contact_1.branchId", 18);
                 npcStartConversation(player, npc, "ep3_clone_relics_boba_fett_contact_1", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -642,6 +673,7 @@ public class ep3_clone_relics_boba_fett_contact_1 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_clone_relics_boba_fett_contact_1"))

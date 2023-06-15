@@ -1,5 +1,11 @@
 package script.creature;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.bio_engineer;
 import script.menu_info;
 import script.menu_info_types;
@@ -10,6 +16,7 @@ public class dna_harvest extends script.base_script
     public dna_harvest()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (getSkillStatMod(player, "dna_harvesting") > 0)
@@ -18,6 +25,7 @@ public class dna_harvest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_HARVEST_CORPSE)

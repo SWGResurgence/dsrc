@@ -1,5 +1,11 @@
 package script.systems.skills.stealth;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.stealth;
 import script.library.utils;
 import script.menu_info;
@@ -29,10 +35,10 @@ public class chaffflare extends script.base_script
             return SCRIPT_CONTINUE;
         }
         names[free] = "effectiveness";
-        attribs[free++] = "" + floatFormat.format((float) getIntObjVar(self, stealth.DETECT_EFFECTIVENESS) / 10) + "%";
+        attribs[free++] = floatFormat.format((float) getIntObjVar(self, stealth.DETECT_EFFECTIVENESS) / 10) + "%";
         float flareDistance = stealth.CHAFF_FLARE_DISTANCE;
         names[free] = "trap_radius";
-        attribs[free++] = "" + flareDistance;
+        attribs[free++] = String.valueOf(flareDistance);
         utils.addClassRequirementAttributes(player, self, names, attribs, free, "");
         return SCRIPT_CONTINUE;
     }

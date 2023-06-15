@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,64 +13,77 @@ import script.*;
 
 public class emp_day_jedi_prisoner extends script.base_script
 {
+    public static String c_stringFile = "conversation/emp_day_jedi_prisoner";
+
     public emp_day_jedi_prisoner()
     {
     }
-    public static String c_stringFile = "conversation/emp_day_jedi_prisoner";
+
     public boolean emp_day_jedi_prisoner_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean emp_day_jedi_prisoner_condition_minus1(obj_id player, obj_id npc) throws InterruptedException
     {
         int score = utils.getIntScriptVar(player, "emp_day.score");
         return (score == -1);
     }
+
     public boolean emp_day_jedi_prisoner_condition_minus2(obj_id player, obj_id npc) throws InterruptedException
     {
         int score = utils.getIntScriptVar(player, "emp_day.score");
         return (score == -2);
     }
+
     public boolean emp_day_jedi_prisoner_condition_minus3(obj_id player, obj_id npc) throws InterruptedException
     {
         int score = utils.getIntScriptVar(player, "emp_day.score");
         return (score == -3);
     }
+
     public boolean emp_day_jedi_prisoner_condition_minus4(obj_id player, obj_id npc) throws InterruptedException
     {
         int score = utils.getIntScriptVar(player, "emp_day.score");
         return (score == -4);
     }
+
     public boolean emp_day_jedi_prisoner_condition_zero(obj_id player, obj_id npc) throws InterruptedException
     {
         int score = utils.getIntScriptVar(player, "emp_day.score");
         return (score == 0);
     }
+
     public boolean emp_day_jedi_prisoner_condition_plus1(obj_id player, obj_id npc) throws InterruptedException
     {
         int score = utils.getIntScriptVar(player, "emp_day.score");
         return (score == 1);
     }
+
     public boolean emp_day_jedi_prisoner_condition_plus2(obj_id player, obj_id npc) throws InterruptedException
     {
         int score = utils.getIntScriptVar(player, "emp_day.score");
         return (score == 2);
     }
+
     public boolean emp_day_jedi_prisoner_condition_plus3(obj_id player, obj_id npc) throws InterruptedException
     {
         int score = utils.getIntScriptVar(player, "emp_day.score");
         return (score == 3);
     }
+
     public boolean emp_day_jedi_prisoner_condition_plus4(obj_id player, obj_id npc) throws InterruptedException
     {
         int score = utils.getIntScriptVar(player, "emp_day.score");
         return (score == 4);
     }
+
     public boolean emp_day_jedi_prisoner_condition_plusMinus5(obj_id player, obj_id npc) throws InterruptedException
     {
         int score = utils.getIntScriptVar(player, "emp_day.score");
         return ((score == -5) || (score == 5));
     }
+
     public boolean emp_day_jedi_prisoner_condition_hasInterrogated(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "event.emp_day.prisoner"))
@@ -74,51 +93,60 @@ public class emp_day_jedi_prisoner extends script.base_script
         int status = getIntObjVar(player, "event.emp_day.prisoner");
         return (status > 0);
     }
+
     public void emp_day_jedi_prisoner_action_add1(obj_id player, obj_id npc) throws InterruptedException
     {
         int score = utils.getIntScriptVar(player, "emp_day.score");
         score += 1;
         utils.setScriptVar(player, "emp_day.score", score);
     }
+
     public void emp_day_jedi_prisoner_action_add2(obj_id player, obj_id npc) throws InterruptedException
     {
         int score = utils.getIntScriptVar(player, "emp_day.score");
         score += 2;
         utils.setScriptVar(player, "emp_day.score", score);
     }
+
     public void emp_day_jedi_prisoner_action_sub1(obj_id player, obj_id npc) throws InterruptedException
     {
         int score = utils.getIntScriptVar(player, "emp_day.score");
         score -= 1;
         utils.setScriptVar(player, "emp_day.score", score);
     }
+
     public void emp_day_jedi_prisoner_action_sub2(obj_id player, obj_id npc) throws InterruptedException
     {
         int score = utils.getIntScriptVar(player, "emp_day.score");
         score -= 2;
         utils.setScriptVar(player, "emp_day.score", score);
     }
+
     public void emp_day_jedi_prisoner_action_initCounter(obj_id player, obj_id npc) throws InterruptedException
     {
         int score = 0;
         utils.setScriptVar(player, "emp_day.score", score);
     }
+
     public void emp_day_jedi_prisoner_action_add3(obj_id player, obj_id npc) throws InterruptedException
     {
         int score = utils.getIntScriptVar(player, "emp_day.score");
         score += 3;
         utils.setScriptVar(player, "emp_day.score", score);
     }
+
     public void emp_day_jedi_prisoner_action_endFail(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "event.emp_day.prisoner", 2);
         sendSystemMessage(player, new string_id("event/empire_day", "prisoner_fail"));
     }
+
     public void emp_day_jedi_prisoner_action_endWin(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "event.emp_day.prisoner", 1);
         sendSystemMessage(player, new string_id("event/empire_day", "prisoner_win"));
     }
+
     public int emp_day_jedi_prisoner_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -145,7 +173,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -158,7 +186,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -191,7 +219,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -204,7 +232,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -344,7 +372,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -417,7 +445,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -556,7 +584,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -629,7 +657,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -768,7 +796,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -841,7 +869,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -980,7 +1008,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -1053,7 +1081,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -1192,7 +1220,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -1265,7 +1293,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -1291,7 +1319,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -1300,7 +1328,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -1326,7 +1354,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -1335,7 +1363,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -1486,7 +1514,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -1559,7 +1587,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -1698,7 +1726,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -1771,7 +1799,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -1797,7 +1825,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -1806,7 +1834,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -1945,7 +1973,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -2018,7 +2046,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -2157,7 +2185,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -2230,7 +2258,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -2369,7 +2397,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -2442,7 +2470,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -2475,7 +2503,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -2488,7 +2516,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -2499,6 +2527,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1046"))
@@ -2525,7 +2554,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1050");
@@ -2538,7 +2567,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -2571,7 +2600,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1062");
@@ -2584,7 +2613,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -2595,6 +2624,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1050"))
@@ -2727,7 +2757,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -2800,7 +2830,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -2939,7 +2969,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -3012,7 +3042,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -3023,6 +3053,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -3049,7 +3080,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -3062,7 +3093,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -3095,7 +3126,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -3108,7 +3139,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -3248,7 +3279,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -3321,7 +3352,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -3460,7 +3491,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -3533,7 +3564,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -3672,7 +3703,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -3745,7 +3776,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -3884,7 +3915,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -3957,7 +3988,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -4096,7 +4127,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -4169,7 +4200,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -4195,7 +4226,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -4204,7 +4235,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -4230,7 +4261,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -4239,7 +4270,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -4390,7 +4421,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -4463,7 +4494,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -4602,7 +4633,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -4675,7 +4706,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -4701,7 +4732,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -4710,7 +4741,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -4849,7 +4880,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -4922,7 +4953,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -5061,7 +5092,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -5134,7 +5165,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -5273,7 +5304,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -5346,7 +5377,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -5379,7 +5410,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -5392,7 +5423,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -5403,6 +5434,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -5429,7 +5461,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -5442,7 +5474,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -5475,7 +5507,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -5488,7 +5520,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -5628,7 +5660,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -5701,7 +5733,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -5840,7 +5872,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -5913,7 +5945,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -6052,7 +6084,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -6125,7 +6157,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -6264,7 +6296,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -6337,7 +6369,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -6476,7 +6508,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -6549,7 +6581,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -6575,7 +6607,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -6584,7 +6616,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -6610,7 +6642,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -6619,7 +6651,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -6770,7 +6802,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -6843,7 +6875,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -6982,7 +7014,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -7055,7 +7087,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -7081,7 +7113,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -7090,7 +7122,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -7229,7 +7261,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -7302,7 +7334,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -7441,7 +7473,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -7514,7 +7546,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -7653,7 +7685,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -7726,7 +7758,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -7759,7 +7791,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -7772,7 +7804,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -7783,6 +7815,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1062"))
@@ -7915,7 +7948,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -7988,7 +8021,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -8127,7 +8160,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -8200,7 +8233,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -8211,6 +8244,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -8237,7 +8271,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -8250,7 +8284,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -8283,7 +8317,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -8296,7 +8330,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -8436,7 +8470,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -8509,7 +8543,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -8648,7 +8682,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -8721,7 +8755,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -8860,7 +8894,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -8933,7 +8967,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -9072,7 +9106,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -9145,7 +9179,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -9284,7 +9318,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -9357,7 +9391,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -9383,7 +9417,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -9392,7 +9426,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -9418,7 +9452,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -9427,7 +9461,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -9578,7 +9612,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -9651,7 +9685,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -9790,7 +9824,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -9863,7 +9897,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -9889,7 +9923,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -9898,7 +9932,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -10037,7 +10071,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -10110,7 +10144,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -10249,7 +10283,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -10322,7 +10356,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -10461,7 +10495,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -10534,7 +10568,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -10567,7 +10601,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -10580,7 +10614,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -10591,6 +10625,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -10617,7 +10652,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -10630,7 +10665,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -10663,7 +10698,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -10676,7 +10711,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -10816,7 +10851,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -10889,7 +10924,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -11028,7 +11063,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -11101,7 +11136,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -11240,7 +11275,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -11313,7 +11348,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -11452,7 +11487,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -11525,7 +11560,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -11664,7 +11699,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -11737,7 +11772,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -11763,7 +11798,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -11772,7 +11807,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -11798,7 +11833,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -11807,7 +11842,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -11958,7 +11993,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -12031,7 +12066,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -12170,7 +12205,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -12243,7 +12278,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -12269,7 +12304,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -12278,7 +12313,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -12417,7 +12452,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -12490,7 +12525,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -12629,7 +12664,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -12702,7 +12737,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -12841,7 +12876,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -12914,7 +12949,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -12947,7 +12982,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -12960,7 +12995,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -12971,6 +13006,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1074"))
@@ -13103,7 +13139,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -13176,7 +13212,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -13315,7 +13351,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -13388,7 +13424,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -13399,6 +13435,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -13425,7 +13462,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -13438,7 +13475,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -13471,7 +13508,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -13484,7 +13521,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -13624,7 +13661,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -13697,7 +13734,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -13836,7 +13873,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -13909,7 +13946,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -14048,7 +14085,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -14121,7 +14158,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -14260,7 +14297,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -14333,7 +14370,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -14472,7 +14509,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -14545,7 +14582,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -14571,7 +14608,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -14580,7 +14617,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -14606,7 +14643,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -14615,7 +14652,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -14766,7 +14803,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -14839,7 +14876,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -14978,7 +15015,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -15051,7 +15088,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -15077,7 +15114,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -15086,7 +15123,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -15225,7 +15262,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -15298,7 +15335,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -15437,7 +15474,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -15510,7 +15547,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -15649,7 +15686,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -15722,7 +15759,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -15755,7 +15792,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -15768,7 +15805,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -15779,6 +15816,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -15805,7 +15843,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -15818,7 +15856,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -15851,7 +15889,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -15864,7 +15902,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -16004,7 +16042,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -16077,7 +16115,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -16216,7 +16254,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -16289,7 +16327,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -16428,7 +16466,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -16501,7 +16539,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -16640,7 +16678,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -16713,7 +16751,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -16852,7 +16890,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -16925,7 +16963,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -16951,7 +16989,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -16960,7 +16998,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -16986,7 +17024,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -16995,7 +17033,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -17146,7 +17184,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -17219,7 +17257,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -17358,7 +17396,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -17431,7 +17469,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -17457,7 +17495,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -17466,7 +17504,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -17605,7 +17643,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -17678,7 +17716,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -17817,7 +17855,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -17890,7 +17928,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -18029,7 +18067,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -18102,7 +18140,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -18135,7 +18173,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -18148,7 +18186,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -18159,6 +18197,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -18185,7 +18224,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -18198,7 +18237,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -18231,7 +18270,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -18244,7 +18283,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -18384,7 +18423,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -18457,7 +18496,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -18596,7 +18635,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -18669,7 +18708,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -18808,7 +18847,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -18881,7 +18920,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -19020,7 +19059,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -19093,7 +19132,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -19232,7 +19271,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -19305,7 +19344,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -19331,7 +19370,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -19340,7 +19379,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -19366,7 +19405,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -19375,7 +19414,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -19526,7 +19565,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -19599,7 +19638,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -19738,7 +19777,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -19811,7 +19850,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -19837,7 +19876,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -19846,7 +19885,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -19985,7 +20024,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -20058,7 +20097,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -20197,7 +20236,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -20270,7 +20309,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -20409,7 +20448,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -20482,7 +20521,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -20515,7 +20554,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -20528,7 +20567,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -20539,6 +20578,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -20565,7 +20605,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -20578,7 +20618,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -20611,7 +20651,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -20624,7 +20664,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -20764,7 +20804,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -20837,7 +20877,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -20976,7 +21016,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -21049,7 +21089,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -21188,7 +21228,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -21261,7 +21301,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -21400,7 +21440,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -21473,7 +21513,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -21612,7 +21652,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -21685,7 +21725,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -21711,7 +21751,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -21720,7 +21760,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -21746,7 +21786,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -21755,7 +21795,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -21906,7 +21946,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -21979,7 +22019,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -22118,7 +22158,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -22191,7 +22231,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -22217,7 +22257,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -22226,7 +22266,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -22365,7 +22405,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -22438,7 +22478,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -22577,7 +22617,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -22650,7 +22690,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -22789,7 +22829,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -22862,7 +22902,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -22895,7 +22935,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -22908,7 +22948,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -22919,6 +22959,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -22945,7 +22986,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -22958,7 +22999,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -22991,7 +23032,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -23004,7 +23045,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -23144,7 +23185,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -23217,7 +23258,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -23356,7 +23397,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -23429,7 +23470,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -23568,7 +23609,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -23641,7 +23682,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -23780,7 +23821,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -23853,7 +23894,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -23992,7 +24033,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -24065,7 +24106,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -24091,7 +24132,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -24100,7 +24141,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -24126,7 +24167,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -24135,7 +24176,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -24286,7 +24327,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -24359,7 +24400,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -24498,7 +24539,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -24571,7 +24612,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -24597,7 +24638,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -24606,7 +24647,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -24745,7 +24786,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -24818,7 +24859,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -24957,7 +24998,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -25030,7 +25071,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -25169,7 +25210,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -25242,7 +25283,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -25275,7 +25316,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -25288,7 +25329,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -25299,6 +25340,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -25325,7 +25367,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -25338,7 +25380,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -25371,7 +25413,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -25384,7 +25426,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -25524,7 +25566,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -25597,7 +25639,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -25736,7 +25778,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -25809,7 +25851,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -25948,7 +25990,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -26021,7 +26063,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -26160,7 +26202,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -26233,7 +26275,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -26372,7 +26414,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -26445,7 +26487,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -26471,7 +26513,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -26480,7 +26522,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -26506,7 +26548,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -26515,7 +26557,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -26666,7 +26708,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -26739,7 +26781,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -26878,7 +26920,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -26951,7 +26993,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -26977,7 +27019,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -26986,7 +27028,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -27125,7 +27167,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -27198,7 +27240,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -27337,7 +27379,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -27410,7 +27452,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -27549,7 +27591,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -27622,7 +27664,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -27655,7 +27697,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -27668,7 +27710,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -27679,6 +27721,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -27705,7 +27748,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -27718,7 +27761,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -27751,7 +27794,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -27764,7 +27807,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -27904,7 +27947,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -27977,7 +28020,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -28116,7 +28159,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -28189,7 +28232,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -28328,7 +28371,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -28401,7 +28444,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -28540,7 +28583,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -28613,7 +28656,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -28752,7 +28795,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -28825,7 +28868,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -28851,7 +28894,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -28860,7 +28903,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -28886,7 +28929,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -28895,7 +28938,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -29046,7 +29089,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -29119,7 +29162,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -29258,7 +29301,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -29331,7 +29374,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -29357,7 +29400,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -29366,7 +29409,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -29505,7 +29548,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -29578,7 +29621,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -29717,7 +29760,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -29790,7 +29833,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -29929,7 +29972,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -30002,7 +30045,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -30035,7 +30078,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -30048,7 +30091,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -30059,6 +30102,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1106"))
@@ -30085,7 +30129,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1110");
@@ -30098,7 +30142,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -30109,6 +30153,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1110"))
@@ -30241,7 +30286,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -30314,7 +30359,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -30453,7 +30498,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -30526,7 +30571,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -30537,6 +30582,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -30563,7 +30609,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -30576,7 +30622,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -30609,7 +30655,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -30622,7 +30668,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -30762,7 +30808,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -30835,7 +30881,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -30974,7 +31020,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -31047,7 +31093,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -31186,7 +31232,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -31259,7 +31305,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -31398,7 +31444,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -31471,7 +31517,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -31610,7 +31656,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -31683,7 +31729,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -31709,7 +31755,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -31718,7 +31764,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -31744,7 +31790,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -31753,7 +31799,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -31904,7 +31950,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -31977,7 +32023,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -32116,7 +32162,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -32189,7 +32235,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -32215,7 +32261,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -32224,7 +32270,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -32363,7 +32409,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -32436,7 +32482,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -32575,7 +32621,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -32648,7 +32694,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -32787,7 +32833,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -32860,7 +32906,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -32893,7 +32939,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -32906,7 +32952,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -32917,6 +32963,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -32943,7 +32990,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -32956,7 +33003,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -32989,7 +33036,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -33002,7 +33049,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -33142,7 +33189,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -33215,7 +33262,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -33354,7 +33401,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -33427,7 +33474,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -33566,7 +33613,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -33639,7 +33686,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -33778,7 +33825,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -33851,7 +33898,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -33990,7 +34037,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -34063,7 +34110,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -34089,7 +34136,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -34098,7 +34145,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -34124,7 +34171,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -34133,7 +34180,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -34284,7 +34331,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -34357,7 +34404,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -34496,7 +34543,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -34569,7 +34616,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -34595,7 +34642,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -34604,7 +34651,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -34743,7 +34790,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -34816,7 +34863,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -34955,7 +35002,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -35028,7 +35075,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -35167,7 +35214,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -35240,7 +35287,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -35273,7 +35320,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -35286,7 +35333,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -35297,6 +35344,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1122"))
@@ -35316,7 +35364,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1126");
@@ -35325,7 +35373,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -35336,6 +35384,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1126"))
@@ -35362,7 +35411,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1130");
@@ -35375,7 +35424,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -35386,6 +35435,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1130"))
@@ -35518,7 +35568,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -35591,7 +35641,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -35614,6 +35664,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -35640,7 +35691,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -35653,7 +35704,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -35686,7 +35737,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -35699,7 +35750,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -35839,7 +35890,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -35912,7 +35963,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -36051,7 +36102,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -36124,7 +36175,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -36263,7 +36314,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -36336,7 +36387,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -36475,7 +36526,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -36548,7 +36599,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -36687,7 +36738,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -36760,7 +36811,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -36786,7 +36837,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -36795,7 +36846,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -36821,7 +36872,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -36830,7 +36881,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -36981,7 +37032,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -37054,7 +37105,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -37193,7 +37244,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -37266,7 +37317,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -37292,7 +37343,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -37301,7 +37352,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -37440,7 +37491,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -37513,7 +37564,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -37652,7 +37703,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -37725,7 +37776,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -37864,7 +37915,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -37937,7 +37988,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -37970,7 +38021,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -37983,7 +38034,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -37994,6 +38045,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -38020,7 +38072,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -38033,7 +38085,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -38066,7 +38118,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -38079,7 +38131,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -38219,7 +38271,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -38292,7 +38344,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -38431,7 +38483,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -38504,7 +38556,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -38643,7 +38695,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -38716,7 +38768,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -38855,7 +38907,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -38928,7 +38980,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -39067,7 +39119,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -39140,7 +39192,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -39166,7 +39218,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -39175,7 +39227,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -39201,7 +39253,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -39210,7 +39262,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -39361,7 +39413,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -39434,7 +39486,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -39573,7 +39625,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -39646,7 +39698,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -39672,7 +39724,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -39681,7 +39733,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -39820,7 +39872,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -39893,7 +39945,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -40032,7 +40084,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -40105,7 +40157,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -40244,7 +40296,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -40317,7 +40369,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -40350,7 +40402,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -40363,7 +40415,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -40374,6 +40426,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -40400,7 +40453,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -40413,7 +40466,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -40446,7 +40499,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -40459,7 +40512,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -40599,7 +40652,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -40672,7 +40725,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -40811,7 +40864,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -40884,7 +40937,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -41023,7 +41076,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -41096,7 +41149,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -41235,7 +41288,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -41308,7 +41361,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -41447,7 +41500,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -41520,7 +41573,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -41546,7 +41599,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -41555,7 +41608,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -41581,7 +41634,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -41590,7 +41643,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -41741,7 +41794,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -41814,7 +41867,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -41953,7 +42006,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -42026,7 +42079,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -42052,7 +42105,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -42061,7 +42114,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -42200,7 +42253,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -42273,7 +42326,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -42412,7 +42465,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -42485,7 +42538,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -42624,7 +42677,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -42697,7 +42750,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -42730,7 +42783,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -42743,7 +42796,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -42754,6 +42807,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1154"))
@@ -42886,7 +42940,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -42959,7 +43013,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -42970,6 +43024,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -42996,7 +43051,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -43009,7 +43064,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -43042,7 +43097,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -43055,7 +43110,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -43195,7 +43250,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -43268,7 +43323,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -43407,7 +43462,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -43480,7 +43535,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -43619,7 +43674,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -43692,7 +43747,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -43831,7 +43886,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -43904,7 +43959,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -44043,7 +44098,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -44116,7 +44171,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -44142,7 +44197,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -44151,7 +44206,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -44177,7 +44232,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -44186,7 +44241,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -44337,7 +44392,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -44410,7 +44465,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -44549,7 +44604,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -44622,7 +44677,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -44648,7 +44703,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -44657,7 +44712,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -44796,7 +44851,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -44869,7 +44924,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -45008,7 +45063,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -45081,7 +45136,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -45220,7 +45275,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -45293,7 +45348,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -45326,7 +45381,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -45339,7 +45394,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -45350,6 +45405,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -45376,7 +45432,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -45389,7 +45445,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -45422,7 +45478,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -45435,7 +45491,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -45575,7 +45631,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -45648,7 +45704,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -45787,7 +45843,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -45860,7 +45916,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -45999,7 +46055,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -46072,7 +46128,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -46211,7 +46267,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -46284,7 +46340,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -46423,7 +46479,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -46496,7 +46552,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -46522,7 +46578,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -46531,7 +46587,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -46557,7 +46613,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -46566,7 +46622,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -46717,7 +46773,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -46790,7 +46846,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -46929,7 +46985,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -47002,7 +47058,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -47028,7 +47084,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -47037,7 +47093,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -47176,7 +47232,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -47249,7 +47305,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -47388,7 +47444,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -47461,7 +47517,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -47600,7 +47656,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -47673,7 +47729,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -47706,7 +47762,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -47719,7 +47775,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -47730,6 +47786,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -47756,7 +47813,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -47769,7 +47826,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -47802,7 +47859,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -47815,7 +47872,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -47955,7 +48012,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -48028,7 +48085,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -48167,7 +48224,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -48240,7 +48297,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -48379,7 +48436,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -48452,7 +48509,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -48591,7 +48648,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -48664,7 +48721,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -48803,7 +48860,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -48876,7 +48933,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -48902,7 +48959,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -48911,7 +48968,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -48937,7 +48994,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -48946,7 +49003,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -49097,7 +49154,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -49170,7 +49227,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -49309,7 +49366,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -49382,7 +49439,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -49408,7 +49465,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -49417,7 +49474,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -49556,7 +49613,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -49629,7 +49686,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -49768,7 +49825,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -49841,7 +49898,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -49980,7 +50037,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -50053,7 +50110,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -50086,7 +50143,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -50099,7 +50156,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -50110,6 +50167,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1042"))
@@ -50136,7 +50194,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1046");
@@ -50149,7 +50207,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -50182,7 +50240,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1074");
@@ -50195,7 +50253,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -50335,7 +50393,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -50408,7 +50466,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -50547,7 +50605,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -50620,7 +50678,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -50759,7 +50817,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -50832,7 +50890,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -50971,7 +51029,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -51044,7 +51102,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -51183,7 +51241,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -51256,7 +51314,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -51282,7 +51340,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1106");
@@ -51291,7 +51349,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -51317,7 +51375,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1122");
@@ -51326,7 +51384,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -51477,7 +51535,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -51550,7 +51608,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -51689,7 +51747,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -51762,7 +51820,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -51788,7 +51846,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1154");
@@ -51797,7 +51855,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -51936,7 +51994,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -52009,7 +52067,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -52148,7 +52206,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -52221,7 +52279,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -52360,7 +52418,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -52433,7 +52491,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -52466,7 +52524,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1174");
@@ -52479,7 +52537,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -52490,6 +52548,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1174"))
@@ -52516,7 +52575,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1178");
@@ -52529,7 +52588,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -52562,7 +52621,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1190");
@@ -52575,7 +52634,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId");
                     chat.chat(npc, player, message);
@@ -52586,6 +52645,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1178"))
@@ -52614,6 +52674,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_jedi_prisoner_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1190"))
@@ -52642,6 +52703,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -52651,11 +52713,13 @@ public class emp_day_jedi_prisoner extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -52664,18 +52728,21 @@ public class emp_day_jedi_prisoner extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.emp_day_jedi_prisoner");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -52811,7 +52878,7 @@ public class emp_day_jedi_prisoner extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1042");
@@ -52883,7 +52950,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 utils.setScriptVar(player, "conversation.emp_day_jedi_prisoner.branchId", 1);
                 npcStartConversation(player, npc, "emp_day_jedi_prisoner", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -52898,6 +52965,7 @@ public class emp_day_jedi_prisoner extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("emp_day_jedi_prisoner"))

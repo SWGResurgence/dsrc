@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.myyydril;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -8,10 +14,12 @@ import script.string_id;
 
 public class wirartu_attack extends script.base_script
 {
+    public static final String STF_FILE = "quest/pirates";
+
     public wirartu_attack()
     {
     }
-    public static final String STF_FILE = "quest/pirates";
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         final float DAMAGE_THRESHOLD = 0.50f;
@@ -30,6 +38,7 @@ public class wirartu_attack extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanMeUp(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

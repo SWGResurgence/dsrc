@@ -4,6 +4,12 @@ package script.player;/*
 @Purpose: This script is used for Resurgence specific functions.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.obj_id;
 import script.location;
@@ -22,6 +28,7 @@ public class player_resurgence extends script.base_script
 {
     public boolean requireEntBuffRecycle = false;
     public boolean restoredContent = false;
+
     public int OnAttach(obj_id self)
     {
         return SCRIPT_CONTINUE;
@@ -44,6 +51,7 @@ public class player_resurgence extends script.base_script
         incrementPlayerCount(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogout(obj_id self)
     {
         removeFromAdminList(self);
@@ -91,7 +99,6 @@ public class player_resurgence extends script.base_script
         String planetName = getCurrentSceneName();
         if (planetName.equals("tutorial"))
         {
-            return;
         }
         else if (planetName.equals("corellia"))
         {
@@ -221,6 +228,7 @@ public class player_resurgence extends script.base_script
             setObjVar(tatooine, "avatarCount", playerCount);
         }
     }
+
     public void decrementPlayerCount(obj_id self)
     {
         int count = 1;
@@ -236,6 +244,7 @@ public class player_resurgence extends script.base_script
             setObjVar(tatooine, "avatarCount", playerCount);
         }
     }
+
     public int cmdContentFinder(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         listAllContentStatuses(self);
@@ -337,6 +346,7 @@ public class player_resurgence extends script.base_script
         }
         return dungeonStatus;
     }
+
     public int cmdTapeMeasure(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id objectOne = getIntendedTarget(self);
@@ -352,6 +362,7 @@ public class player_resurgence extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdAiManipulate(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
@@ -387,7 +398,7 @@ public class player_resurgence extends script.base_script
             }
             if (command.equals("flee"))
             {
-                float  minDistance = utils.stringToFloat(st.nextToken());
+                float minDistance = utils.stringToFloat(st.nextToken());
                 float maxDistance = utils.stringToFloat(st.nextToken());
                 if (st.countTokens() != 2)
                 {
@@ -420,7 +431,8 @@ public class player_resurgence extends script.base_script
                     ai_lib.setDefaultCalmBehavior(target, ai_lib.BEHAVIOR_STOP);
                     broadcast(self, "Setting " + target + " to stop");
                 }
-                else {
+                else
+                {
                     broadcast(self, "Invalid movement type specified. Valid types are: wander, sentinel, loiter, stop");
                 }
             }
@@ -451,7 +463,7 @@ public class player_resurgence extends script.base_script
                     broadcast(self, "Invalid flag specified. Valid flags are: -name, -self, -stop");
                 }
             }
-            if(command.equals("level"))
+            if (command.equals("level"))
             {
                 int level = utils.stringToInt(st.nextToken());
                 if (level < 1 || level > 90)
@@ -461,7 +473,7 @@ public class player_resurgence extends script.base_script
                 }
                 setLevel(target, level);
             }
-            if(command.equals("health"))
+            if (command.equals("health"))
             {
                 int health = utils.stringToInt(st.nextToken());
                 if (health < 1)
@@ -472,7 +484,7 @@ public class player_resurgence extends script.base_script
                 setMaxAttrib(target, HEALTH, health);
                 setAttrib(target, HEALTH, health);
             }
-            if(command.equals("action"))
+            if (command.equals("action"))
             {
                 int action = utils.stringToInt(st.nextToken());
                 if (action < 1)

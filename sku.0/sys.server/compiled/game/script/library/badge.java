@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.prose_package;
 import script.string_id;
@@ -13,6 +19,7 @@ public class badge extends script.base_script
     public static final string_id SID_PROSE_REVOKE = new string_id(STF_COLLECTION_N, "prose_revoke");
     public static final string_id SID_PROSE_HASBADGE = new string_id(STF_COLLECTION_N, "prose_hasbadge");
     public static final string_id SID_REWARD_BADGE = new string_id("collection", "reward_badge");
+
     public badge()
     {
     }

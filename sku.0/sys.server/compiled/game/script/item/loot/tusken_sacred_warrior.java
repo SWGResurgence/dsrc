@@ -1,5 +1,11 @@
 package script.item.loot;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.static_item;
@@ -44,6 +50,5 @@ public class tusken_sacred_warrior extends script.base_script
                 static_item.createNewItemFunction("item_color_crystal_02_35", corpseInventory);
             }
         }
-        return;
     }
 }

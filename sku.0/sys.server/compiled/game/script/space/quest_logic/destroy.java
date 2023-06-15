@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_quest;
 import script.library.space_transition;
@@ -12,12 +18,13 @@ import java.util.StringTokenizer;
 
 public class destroy extends script.base_script
 {
-    public destroy()
-    {
-    }
     public static final string_id SID_REMAINDER_UPDATE = new string_id("space/quest", "destroy_remainder_update");
     public static final string_id SID_TARGET_WAYPOINTS = new string_id("space/quest", "destroy_target_waypoints");
     public static final string_id SID_ABANDONED_DESTROY = new string_id("space/quest", "destroy_abandoned");
+    public destroy()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -72,6 +79,7 @@ public class destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int initializedQuestPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -153,12 +161,14 @@ public class destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int notifyTargetWaypoints(obj_id self, dictionary params) throws InterruptedException
     {
         int added = params.getInt("added");
         space_quest.showQuestUpdate(self, SID_TARGET_WAYPOINTS, added);
         return SCRIPT_CONTINUE;
     }
+
     public int createdWaypointToSpawner(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -173,18 +183,16 @@ public class destroy extends script.base_script
             waypoints[0] = newpoint;
             setObjVar(self, "target_waypoints", waypoints);
         }
-        else 
+        else
         {
             obj_id[] newlist = new obj_id[waypoints.length + 1];
-            for (int i = 0; i < waypoints.length; i++)
-            {
-                newlist[i] = waypoints[i];
-            }
+            System.arraycopy(waypoints, 0, newlist, 0, waypoints.length);
             newlist[waypoints.length] = newpoint;
             setObjVar(self, "target_waypoints", newlist);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -196,49 +204,63 @@ public class destroy extends script.base_script
         String spawnerName = params.getString("strSpawnerName");
         obj_id destroyed = params.getObjId("ship");
         obj_id player = utils.getContainingPlayer(self);
-        for (String shipType : shipTypes) {
-            if (shipType.equals(killType)) {
-                if (hasObjVar(self, "killTrack")) {
+        for (String shipType : shipTypes)
+        {
+            if (shipType.equals(killType))
+            {
+                if (hasObjVar(self, "killTrack"))
+                {
                     obj_id[] track = getObjIdArrayObjVar(self, "killTrack");
-                    if (track != null) {
-                        for (obj_id obj_id : track) {
-                            if (obj_id == destroyed) {
+                    if (track != null)
+                    {
+                        for (obj_id obj_id : track)
+                        {
+                            if (obj_id == destroyed)
+                            {
                                 return SCRIPT_CONTINUE;
                             }
                         }
                     }
                 }
                 int spawnsForWaypointsOnly = getIntObjVar(self, "spawnsForWaypointsOnly");
-                if ((spawnsForWaypointsOnly == 0) && hasObjVar(self, "validSpawns")) {
+                if ((spawnsForWaypointsOnly == 0) && hasObjVar(self, "validSpawns"))
+                {
                     String[] spawns = getStringArrayObjVar(self, "validSpawns");
-                    if (spawns != null) {
+                    if (spawns != null)
+                    {
                         boolean match = false;
-                        for (String spawn : spawns) {
+                        for (String spawn : spawns)
+                        {
                             StringTokenizer st = new StringTokenizer(spawn, ":");
                             String scene = st.nextToken();
                             String point = st.nextToken();
-                            if ((spawnerName != null) && spawnerName.equals(point)) {
+                            if ((spawnerName != null) && spawnerName.equals(point))
+                            {
                                 match = true;
                                 break;
                             }
                         }
-                        if (!match) {
+                        if (!match)
+                        {
                             return SCRIPT_CONTINUE;
                         }
-                    } else {
+                    }
+                    else
+                    {
                         return SCRIPT_CONTINUE;
                     }
                 }
                 obj_id[] killTrack = null;
-                if (hasObjVar(self, "killTrack")) {
+                if (hasObjVar(self, "killTrack"))
+                {
                     killTrack = getObjIdArrayObjVar(self, "killTrack");
                     obj_id[] newKillTrack = new obj_id[killTrack.length + 1];
-                    for (int i = 0; i < killTrack.length; i++) {
-                        newKillTrack[i] = killTrack[i];
-                    }
+                    System.arraycopy(killTrack, 0, newKillTrack, 0, killTrack.length);
                     newKillTrack[killTrack.length] = destroyed;
                     setObjVar(self, "killTrack", newKillTrack);
-                } else {
+                }
+                else
+                {
                     killTrack = new obj_id[1];
                     killTrack[0] = destroyed;
                     setObjVar(self, "killTrack", killTrack);
@@ -251,12 +273,16 @@ public class destroy extends script.base_script
                 String questName = getStringObjVar(self, space_quest.QUEST_NAME);
                 String questType = getStringObjVar(self, space_quest.QUEST_TYPE);
                 questSetQuestTaskCounter(player, "spacequest/" + questType + "/" + questName, 1, "quest/groundquests:destroy_counter", maxCount - killCount, maxCount);
-                if (checkSpecialEvent(self, player, killCount)) {
+                if (checkSpecialEvent(self, player, killCount))
+                {
                     return SCRIPT_CONTINUE;
                 }
-                if (killCount <= 0) {
+                if (killCount <= 0)
+                {
                     questCompleted(self);
-                } else {
+                }
+                else
+                {
                     space_quest.showQuestUpdate(self, SID_REMAINDER_UPDATE, killCount);
                 }
                 return SCRIPT_CONTINUE;
@@ -264,6 +290,7 @@ public class destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void questCompleted(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -280,6 +307,7 @@ public class destroy extends script.base_script
         clearTargetWaypoints(self);
         space_quest.setQuestWon(player, self);
     }
+
     public int playerShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -294,6 +322,7 @@ public class destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "noAbort"))
@@ -305,19 +334,23 @@ public class destroy extends script.base_script
         space_quest.setQuestAborted(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public void clearTargetWaypoints(obj_id self) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(self);
         obj_id[] waypoints = getObjIdArrayObjVar(self, "target_waypoints");
         if (waypoints != null)
         {
-            for (obj_id waypoint : waypoints) {
-                if (isIdValid(waypoint)) {
+            for (obj_id waypoint : waypoints)
+            {
+                if (isIdValid(waypoint))
+                {
                     destroyWaypointInDatapad(waypoint, player);
                 }
             }
         }
     }
+
     public int removeQuest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(self);
@@ -332,6 +365,7 @@ public class destroy extends script.base_script
         space_quest._removeQuest(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkSpecialEvent(obj_id self, obj_id player, int killCount) throws InterruptedException
     {
         if (!hasObjVar(self, space_quest.QUEST_TRIGGER_EVENT))

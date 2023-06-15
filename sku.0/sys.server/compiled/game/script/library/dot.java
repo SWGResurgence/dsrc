@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.combat_engine.hit_result;
 import script.combat_engine.weapon_data;
 import script.*;
@@ -119,6 +125,7 @@ public class dot extends script.base_script
     public static final string_id SID_ELECTRICITY_DMG_ATKR = new string_id("dot_message", "electricity_dmg_atkr");
     public static final string_id SID_KINETIC_DMG = new string_id("dot_message", "kinetic_dmg");
     public static final string_id SID_KINETIC_DMG_ATKR = new string_id("dot_message", "kinetic_dmg_atkr");
+
     public dot()
     {
     }

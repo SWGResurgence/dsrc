@@ -1,5 +1,11 @@
 package script.space.trainer_spawner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.factions;
@@ -13,6 +19,7 @@ public class trainer_spawner extends script.base_script
     public trainer_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "msgTimeStamp"))
@@ -22,6 +29,7 @@ public class trainer_spawner extends script.base_script
         messageTo(self, "handleStartSpawning", null, 30, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStartSpawning(obj_id self, dictionary params) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "tableName");
@@ -38,6 +46,7 @@ public class trainer_spawner extends script.base_script
         messageTo(self, "handleSpawnNext", parms, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnNext(obj_id self, dictionary params) throws InterruptedException
     {
         int timeStamp = utils.getIntScriptVar(self, "msgTimeStamp");

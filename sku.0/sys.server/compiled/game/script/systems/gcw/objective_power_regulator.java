@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -12,6 +18,7 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
     public static final String VAR_SWITCH_BASE = "hq.objective.switch";
     public static final String VAR_SWITCH_START = VAR_SWITCH_BASE + ".start";
     public static final String VAR_SWITCH_RULES = VAR_SWITCH_BASE + ".rules";
+
     public objective_power_regulator()
     {
     }

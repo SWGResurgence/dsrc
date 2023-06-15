@@ -1,14 +1,22 @@
 package script.space.special_loot;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.string_id;
 
 public class imperial_only extends script.base_script
 {
+    public static final string_id SID_ERROR = new string_id("space/space_loot", "imperial_only");
+
     public imperial_only()
     {
     }
-    public static final string_id SID_ERROR = new string_id("space/space_loot", "imperial_only");
+
     public int OnAboutToBeTransferred(obj_id self, obj_id player, obj_id transferer) throws InterruptedException
     {
         if (!isPlayer(player))

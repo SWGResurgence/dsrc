@@ -1,15 +1,22 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class repair extends script.terminal.base.base_terminal
 {
+    public static final string_id SID_MNU_REPAIR = new string_id("sui", "mnu_repair");
+    public static final string_id SID_MNU_REPAIR_ALL = new string_id("sui", "mnu_repair_all");
     public repair()
     {
     }
-    public static final string_id SID_MNU_REPAIR = new string_id("sui", "mnu_repair");
-    public static final string_id SID_MNU_REPAIR_ALL = new string_id("sui", "mnu_repair_all");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isMob(self))
@@ -25,6 +32,7 @@ public class repair extends script.terminal.base.base_terminal
         int repair_all = mi.addSubMenu(mnu, menu_info_types.SERVER_MENU1, SID_MNU_REPAIR_ALL);
         return super.OnObjectMenuRequest(self, player, mi);
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -37,6 +45,7 @@ public class repair extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleConfirmRepairAll(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -59,6 +68,7 @@ public class repair extends script.terminal.base.base_terminal
         cloninglib.payRepairFee(player, self, totalCost);
         return SCRIPT_CONTINUE;
     }
+
     public void confirmRepairAll(obj_id player) throws InterruptedException
     {
         closeOldRepairSui(player);
@@ -76,6 +86,7 @@ public class repair extends script.terminal.base.base_terminal
         utils.setScriptVar(player, "repair.totalCost", totalCost);
         utils.setScriptVar(player, "repair.repairList", repairList);
     }
+
     public void openRepairSui(obj_id player) throws InterruptedException
     {
         closeOldRepairSui(player);
@@ -87,7 +98,8 @@ public class repair extends script.terminal.base.base_terminal
         }
         int[] costList = cloninglib.getItemRepairCostList(player, repairList);
         int totalCost = 0;
-        for (int i1 : costList) {
+        for (int i1 : costList)
+        {
             totalCost += i1;
         }
         utils.setScriptVar(player, "repair.itemList", repairList);
@@ -103,7 +115,7 @@ public class repair extends script.terminal.base.base_terminal
         clearSUIDataSource(pid, sui.LISTBOX_DATASOURCE);
         for (int i = 0; i < repairList.length; i++)
         {
-            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + i);
+            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(i));
             setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, buildRepairEntry(repairList[i], costList[i]));
         }
         subscribeToSUIEvent(pid, sui_event_type.SET_onGenericSelection, sui.LISTBOX_LIST, "handleRepairSuiUpdate");
@@ -114,6 +126,7 @@ public class repair extends script.terminal.base.base_terminal
         flushSUIPage(pid);
         utils.setScriptVar(player, "repair.sui", pid);
     }
+
     public int handleRepairSuiUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -128,6 +141,7 @@ public class repair extends script.terminal.base.base_terminal
         flushSUIPage(pid);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRepairSuiSelect(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -160,12 +174,14 @@ public class repair extends script.terminal.base.base_terminal
         cloninglib.payRepairFee(player, self, costList[idx]);
         return SCRIPT_CONTINUE;
     }
+
     public String buildRepairEntry(obj_id item, int cost) throws InterruptedException
     {
         String entry = getEncodedName(item);
         entry += " \\%070( @terminal_ui:repair_prompt_cost " + cost + ")";
         return entry;
     }
+
     public String buildRepairPrompt(obj_id player, int index) throws InterruptedException
     {
         int totalCost = utils.getIntScriptVar(player, "repair.totalCost");
@@ -183,6 +199,7 @@ public class repair extends script.terminal.base.base_terminal
         }
         return prompt;
     }
+
     public void closeOldRepairSui(obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "repair.sui"))
@@ -192,6 +209,7 @@ public class repair extends script.terminal.base.base_terminal
         }
         utils.removeScriptVarTree(player, "repair");
     }
+
     public int handlePayRepairSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId(money.DICT_PLAYER_ID);

@@ -1,5 +1,11 @@
 package script.theme_park.new_player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.veteran_deprecated;
 import script.obj_id;
 import script.obj_var;
@@ -7,12 +13,13 @@ import script.obj_var_list;
 
 public class helper_droid_pcd extends script.base_script
 {
-    public helper_droid_pcd()
-    {
-    }
     public static final int ALLOW_DELETE_AGE = 3 * 60 * 60;
     public static final String NEW_PLAYER_SCRIPT = "theme_park.new_player.new_player";
     public static final int ACCOUNT_AGE_CAP = 30;
+    public helper_droid_pcd()
+    {
+    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         String newPlayerQuestsEnabled = getConfigSetting("New_Player", "NewPlayerQuestsEnabled");
@@ -43,14 +50,14 @@ public class helper_droid_pcd extends script.base_script
         {
             detachScript(player, NEW_PLAYER_SCRIPT);
         }
-        else 
+        else
         {
             obj_var_list varList = getObjVarList(player, "new_player.quest");
             if (varList == null)
             {
                 detachScript(player, NEW_PLAYER_SCRIPT);
             }
-            else 
+            else
             {
                 int numItem = varList.getNumItems();
                 for (int i = 0; i < numItem; i++)

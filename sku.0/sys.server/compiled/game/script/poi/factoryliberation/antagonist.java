@@ -1,5 +1,11 @@
 package script.poi.factoryliberation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -9,9 +15,6 @@ import java.util.Vector;
 
 public class antagonist extends script.poi.base.scenario_actor
 {
-    public antagonist()
-    {
-    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiFactoryLiberation Antagonist";
     public static final int CONV_GREET = 0;
@@ -20,16 +23,22 @@ public class antagonist extends script.poi.base.scenario_actor
     public static final int CONV_CONSULTMEDIATOR = 3;
     public static final int CONV_NOHELP = 4;
     public static final int CONV_YESHELP = 5;
+    public antagonist()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, SCRIPT_CONVERSE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         attachScript(self, SCRIPT_CONVERSE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -61,41 +70,43 @@ public class antagonist extends script.poi.base.scenario_actor
         switch (progress)
         {
             case CONV_GREET:
-            msg = new string_id(convo, "a_greet");
-            responses = utils.addElement(responses, new string_id(convo, "r_greet_maybehelp"));
-            responses = utils.addElement(responses, new string_id(convo, "r_greet_insult"));
-            npcStartConversation(speaker, self, convo, msg, responses);
-            scenario.setPlayerProgress(speaker, 1);
-            break;
+                msg = new string_id(convo, "a_greet");
+                responses = utils.addElement(responses, new string_id(convo, "r_greet_maybehelp"));
+                responses = utils.addElement(responses, new string_id(convo, "r_greet_insult"));
+                npcStartConversation(speaker, self, convo, msg, responses);
+                scenario.setPlayerProgress(speaker, 1);
+                break;
             case CONV_INSULT:
-            scenario.say(self, convo, "a_attackafterinsult", false);
-            npcEndConversation(speaker);
-            startCombat(self, speaker);
-            return SCRIPT_CONTINUE;
+                scenario.say(self, convo, "a_attackafterinsult", false);
+                npcEndConversation(speaker);
+                startCombat(self, speaker);
+                return SCRIPT_CONTINUE;
             case CONV_MAYBEHELP:
-            scenario.say(self, convo, "a_angryaftermaybehelp", false);
-            npcEndConversation(speaker);
-            scenario.setPlayerProgress(speaker, CONV_INSULT);
-            break;
+                scenario.say(self, convo, "a_angryaftermaybehelp", false);
+                npcEndConversation(speaker);
+                scenario.setPlayerProgress(speaker, CONV_INSULT);
+                break;
             case CONV_NOHELP:
-            scenario.say(self, convo, "a_nohelp", false);
-            npcEndConversation(speaker);
-            scenario.setPlayerProgress(speaker, CONV_INSULT);
-            break;
+                scenario.say(self, convo, "a_nohelp", false);
+                npcEndConversation(speaker);
+                scenario.setPlayerProgress(speaker, CONV_INSULT);
+                break;
             case CONV_YESHELP:
-            scenario.say(self, convo, "a_yeshelp", false);
-            npcEndConversation(speaker);
-            scenario.setPlayerProgress(speaker, CONV_INSULT);
-            break;
+                scenario.say(self, convo, "a_yeshelp", false);
+                npcEndConversation(speaker);
+                scenario.setPlayerProgress(speaker, CONV_INSULT);
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void minionChatter(obj_id self, String convo, obj_id speaker, obj_id poiMaster) throws InterruptedException
     {
         int idx = rand(1, 4);
         poi.quickSay(self, "a_minion_" + idx);
         npcEndConversation(speaker);
     }
+
     public int OnNpcConversationResponse(obj_id self, String convoName, obj_id speaker, string_id response) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -133,6 +144,7 @@ public class antagonist extends script.poi.base.scenario_actor
         }
         return SCRIPT_CONTINUE;
     }
+
     public int defendWall(obj_id self, dictionary params) throws InterruptedException
     {
         poi.quickSay(self, chat.CHAT_SHOUT, chat.MOOD_ANGRY, "a_defendwall");

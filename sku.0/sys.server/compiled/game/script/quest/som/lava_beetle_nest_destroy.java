@@ -1,5 +1,11 @@
 package script.quest.som;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.group;
@@ -10,14 +16,15 @@ import java.util.Vector;
 
 public class lava_beetle_nest_destroy extends script.base_script
 {
-    public lava_beetle_nest_destroy()
-    {
-    }
     public static final String STF = "som/som_quest";
     public static final string_id DESTROY = new string_id(STF, "lava_beetle_nest_destroy");
     public static final string_id NO_EXPLOSIVES = new string_id(STF, "lava_beetle_nest_no_explosives");
     public static final string_id ALREADY_DESTROYED = new string_id(STF, "lava_beetle_nest_destroyed");
     public static final string_id EXIT_AREA = new string_id(STF, "lava_beetle_nest_run_away");
+    public lava_beetle_nest_destroy()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if ((groundquests.isTaskActive(player, "som_lava_beetle_nest_destroy", "lava_beetle_nest_tasks") || groundquests.isTaskActive(player, "som_lava_beetle_nest_destroy_2", "lava_beetle_nest_tasks")))
@@ -32,6 +39,7 @@ public class lava_beetle_nest_destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -62,7 +70,8 @@ public class lava_beetle_nest_destroy extends script.base_script
                             {
                                 return SCRIPT_CONTINUE;
                             }
-                            for (Object member : members) {
+                            for (Object member : members)
+                            {
                                 obj_id thisMember = ((obj_id) member);
                                 utils.setScriptVar(player, "beetle_nestdestroyed_01", 1);
                                 dictionary dict2 = new dictionary();
@@ -71,14 +80,14 @@ public class lava_beetle_nest_destroy extends script.base_script
                             }
                         }
                     }
-                    else 
+                    else
                     {
                         utils.setScriptVar(player, "beetle_nest.destroyed_01", 1);
                         messageTo(self, "handleDestroyNest", dict, 10, false);
                         return SCRIPT_CONTINUE;
                     }
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, ALREADY_DESTROYED);
                     return SCRIPT_CONTINUE;
@@ -110,7 +119,8 @@ public class lava_beetle_nest_destroy extends script.base_script
                             {
                                 return SCRIPT_CONTINUE;
                             }
-                            for (Object member : members) {
+                            for (Object member : members)
+                            {
                                 obj_id thisMember = ((obj_id) member);
                                 utils.setScriptVar(player, "beetle_nestdestroyed_02", 1);
                                 dictionary dict2 = new dictionary();
@@ -119,14 +129,14 @@ public class lava_beetle_nest_destroy extends script.base_script
                             }
                         }
                     }
-                    else 
+                    else
                     {
                         utils.setScriptVar(player, "beetle_nest.destroyed_02", 1);
                         messageTo(self, "handleDestroyNest", dict, 10, false);
                         return SCRIPT_CONTINUE;
                     }
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, ALREADY_DESTROYED);
                     return SCRIPT_CONTINUE;
@@ -158,7 +168,8 @@ public class lava_beetle_nest_destroy extends script.base_script
                             {
                                 return SCRIPT_CONTINUE;
                             }
-                            for (Object member : members) {
+                            for (Object member : members)
+                            {
                                 obj_id thisMember = ((obj_id) member);
                                 utils.setScriptVar(player, "beetle_nestdestroyed_03", 1);
                                 dictionary dict2 = new dictionary();
@@ -167,14 +178,14 @@ public class lava_beetle_nest_destroy extends script.base_script
                             }
                         }
                     }
-                    else 
+                    else
                     {
                         utils.setScriptVar(player, "beetle_nest.destroyed_03", 1);
                         messageTo(self, "handleDestroyNest", dict, 10, false);
                         return SCRIPT_CONTINUE;
                     }
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, ALREADY_DESTROYED);
                     return SCRIPT_CONTINUE;
@@ -206,7 +217,8 @@ public class lava_beetle_nest_destroy extends script.base_script
                             {
                                 return SCRIPT_CONTINUE;
                             }
-                            for (Object member : members) {
+                            for (Object member : members)
+                            {
                                 obj_id thisMember = ((obj_id) member);
                                 utils.setScriptVar(player, "beetle_nestdestroyed_04", 1);
                                 dictionary dict2 = new dictionary();
@@ -215,20 +227,20 @@ public class lava_beetle_nest_destroy extends script.base_script
                             }
                         }
                     }
-                    else 
+                    else
                     {
                         utils.setScriptVar(player, "beetle_nest.destroyed_04", 1);
                         messageTo(self, "handleDestroyNest", dict, 10, false);
                         return SCRIPT_CONTINUE;
                     }
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, ALREADY_DESTROYED);
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, ALREADY_DESTROYED);
                 return SCRIPT_CONTINUE;
@@ -236,6 +248,7 @@ public class lava_beetle_nest_destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleFlyTextTimer(obj_id self, dictionary params) throws InterruptedException
     {
         int timer = params.getInt("timer");
@@ -246,6 +259,7 @@ public class lava_beetle_nest_destroy extends script.base_script
         trial.doCountdownTimerFlyText(self, timer);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroyNest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("target");
@@ -271,29 +285,34 @@ public class lava_beetle_nest_destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDamageTarget(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("target");
         playClientEffectLoc(player, "clienteffect/avatar_hallway_explosion.cef", getLocation(self), 0.0f);
         obj_id[] targets = getValidPlayersInRadius(self, 15);
-        if (targets == null || targets.length == 0)
+        if (targets == null)
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id target : targets) {
+        for (obj_id target : targets)
+        {
             damage(target, DAMAGE_ELEMENTAL_HEAT, HIT_LOCATION_BODY, 750);
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id[] getValidPlayersInRadius(obj_id self, float range) throws InterruptedException
     {
         obj_id[] players = getPlayerCreaturesInRange(self, range);
         Vector targets = new Vector();
         targets.setSize(0);
-        if (players != null && players.length != 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
-                if (isPlayer(player) && isIdValid(player) && exists(player) && !isIncapacitated(player)) {
+            for (obj_id player : players)
+            {
+                if (isPlayer(player) && isIdValid(player) && exists(player) && !isIncapacitated(player))
+                {
                     utils.addElement(targets, player);
                 }
             }

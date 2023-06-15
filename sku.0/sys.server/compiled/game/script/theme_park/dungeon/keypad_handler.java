@@ -1,5 +1,11 @@
 package script.theme_park.dungeon;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.slicing;
 import script.library.sui;
@@ -7,10 +13,12 @@ import script.library.utils;
 
 public class keypad_handler extends script.base_script
 {
+    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public keypad_handler()
     {
     }
-    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -21,6 +29,7 @@ public class keypad_handler extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -29,6 +38,7 @@ public class keypad_handler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void keypad(obj_id player) throws InterruptedException
     {
         boolean playersKeyCard = hasKeyCard(player);
@@ -38,17 +48,17 @@ public class keypad_handler extends script.base_script
         sui.setAssociateRange(player, pid, self, 8.0f);
         subscribeToSUIProperty(pid, "result.numberBox", "localtext");
         subscribeToSUIProperty(pid, "buttonEnter", "ButtonPressed");
-        if (playersKeyCard == false)
+        if (!playersKeyCard)
         {
             setSUIProperty(pid, "buttonKeyCard", "enabled", "false");
         }
-        if (playerHasSlicingSkill == false)
+        if (!playerHasSlicingSkill)
         {
             setSUIProperty(pid, "buttonSlice", "enabled", "false");
         }
         showSUIPage(pid);
-        return;
     }
+
     public int KeypadCallback(obj_id self, dictionary params) throws InterruptedException
     {
         String result = params.getString("result.numberBox" + "." + "localtext");
@@ -89,7 +99,7 @@ public class keypad_handler extends script.base_script
                 sendSystemMessage(player, goodCode);
                 setObjVar(player, objvarToSet, 1);
             }
-            else 
+            else
             {
                 string_id badcode = new string_id(MSGS, "bad_code");
                 sendSystemMessage(player, badcode);
@@ -101,7 +111,7 @@ public class keypad_handler extends script.base_script
             if (keyCard == null)
             {
             }
-            else 
+            else
             {
                 String room = getStringObjVar(self, "room");
                 obj_id mom = getTopMostContainer(self);
@@ -121,6 +131,7 @@ public class keypad_handler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasKeyCard(obj_id player) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(player);
@@ -129,15 +140,13 @@ public class keypad_handler extends script.base_script
         hadIt = utils.playerHasItemByTemplate(player, passcard);
         return hadIt;
     }
+
     public boolean hasSlicingSkill(obj_id player) throws InterruptedException
     {
-        boolean hadIt = false;
-        if (hasSkill(player, "class_smuggler_phase1_novice"))
-        {
-            hadIt = true;
-        }
+        boolean hadIt = hasSkill(player, "class_smuggler_phase1_novice");
         return hadIt;
     }
+
     public obj_id keyCardObjId(obj_id objPlayer, String strTemplate) throws InterruptedException
     {
         obj_id objInventory = utils.getInventoryContainer(objPlayer);
@@ -146,9 +155,11 @@ public class keypad_handler extends script.base_script
             obj_id[] objContents = getContents(objInventory);
             if (objContents != null)
             {
-                for (obj_id objContent : objContents) {
+                for (obj_id objContent : objContents)
+                {
                     String strItemTemplate = getTemplateName(objContent);
-                    if (strItemTemplate.equals(strTemplate)) {
+                    if (strItemTemplate.equals(strTemplate))
+                    {
                         obj_id keycard = objContent;
                         return keycard;
                     }
@@ -157,6 +168,7 @@ public class keypad_handler extends script.base_script
         }
         return null;
     }
+
     public int finishedSlicingKeypad(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -177,7 +189,7 @@ public class keypad_handler extends script.base_script
             websters.put("room", openRoom);
             messageTo(openRoom, "addToList", websters, 1, false);
         }
-        else 
+        else
         {
             string_id fail = new string_id(MSGS, "hack_fail");
             sendSystemMessage(player, fail);

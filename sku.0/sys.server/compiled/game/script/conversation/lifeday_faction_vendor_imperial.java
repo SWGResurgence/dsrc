@@ -1,39 +1,43 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class lifeday_faction_vendor_imperial extends script.base_script
 {
+    public static String c_stringFile = "conversation/lifeday_faction_vendor_imperial";
+
     public lifeday_faction_vendor_imperial()
     {
     }
-    public static String c_stringFile = "conversation/lifeday_faction_vendor_imperial";
+
     public boolean lifeday_faction_vendor_imperial_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean lifeday_faction_vendor_imperial_condition_alreadyWorking(obj_id player, obj_id npc) throws InterruptedException
     {
         int lifeDayBuff = buff.getBuffOnTargetFromGroup(player, "lifeday_tracker");
-        if (lifeDayBuff == 0)
-        {
-            return true;
-        }
-        return false;
+        return lifeDayBuff == 0;
     }
+
     public boolean lifeday_faction_vendor_imperial_condition_lockedOut(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(player, "lifeday.locked_out"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "lifeday.locked_out");
     }
+
     public boolean lifeday_faction_vendor_imperial_condition_godMode(obj_id player, obj_id npc) throws InterruptedException
     {
         return (isGod(player));
     }
+
     public boolean lifeday_faction_vendor_imperial_condition_scoreBoardNotEmpty(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
@@ -50,21 +54,15 @@ public class lifeday_faction_vendor_imperial extends script.base_script
         {
             return false;
         }
-        if (emptyScoreBoard.equals("true"))
-        {
-            return false;
-        }
-        return true;
+        return !emptyScoreBoard.equals("true");
     }
+
     public boolean lifeday_faction_vendor_imperial_condition_alreadyWorking_2(obj_id player, obj_id npc) throws InterruptedException
     {
         int lifeDayBuff = buff.getBuffOnTargetFromGroup(player, "lifeday");
-        if (lifeDayBuff == 0)
-        {
-            return false;
-        }
-        return true;
+        return lifeDayBuff != 0;
     }
+
     public boolean lifeday_faction_vendor_imperial_condition_rebelPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (factions.isRebel(player))
@@ -91,30 +89,25 @@ public class lifeday_faction_vendor_imperial extends script.base_script
         }
         return false;
     }
+
     public boolean lifeday_faction_vendor_imperial_condition_neutral(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!factions.isImperial(player))
-        {
-            return true;
-        }
-        return false;
+        return !factions.isImperial(player);
     }
+
     public boolean lifeday_faction_vendor_imperial_condition_wookiee(obj_id player, obj_id npc) throws InterruptedException
     {
         int species = getSpecies(player);
-        if (species == SPECIES_WOOKIEE)
-        {
-            return true;
-        }
-        return false;
+        return species == SPECIES_WOOKIEE;
     }
+
     public void lifeday_faction_vendor_imperial_action_showTokenVendorUI(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary d = new dictionary();
         d.put("player", player);
         messageTo(npc, "showInventorySUI", d, 0, false);
-        return;
     }
+
     public void lifeday_faction_vendor_imperial_action_addCasualBuff(obj_id player, obj_id npc) throws InterruptedException
     {
         int lifeDayBuff = buff.getBuffOnTargetFromGroup(player, "lifeday_tracker");
@@ -129,8 +122,8 @@ public class lifeday_faction_vendor_imperial extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public void lifeday_faction_vendor_imperial_action_addCompetitiveBuff(obj_id player, obj_id npc) throws InterruptedException
     {
         int lifeDayBuff = buff.getBuffOnTargetFromGroup(player, "lifeday_tracker");
@@ -145,8 +138,8 @@ public class lifeday_faction_vendor_imperial extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public void lifeday_faction_vendor_imperial_action_barkLeaders(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!buff.hasBuff(npc, "event_lifeday_no_bark"))
@@ -192,6 +185,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
             }
         }
     }
+
     public void lifeday_faction_vendor_imperial_action_barkLeadersSilent(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
@@ -234,6 +228,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
             }
         }
     }
+
     public int lifeday_faction_vendor_imperial_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -261,6 +256,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday_faction_vendor_imperial_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_102"))
@@ -304,6 +300,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday_faction_vendor_imperial_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -332,7 +329,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_38");
@@ -349,7 +346,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                     prose_package pp = new prose_package();
@@ -379,6 +376,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday_faction_vendor_imperial_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38"))
@@ -419,7 +417,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -440,7 +438,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -461,6 +459,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday_faction_vendor_imperial_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -526,6 +525,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday_faction_vendor_imperial_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
@@ -568,7 +568,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -593,7 +593,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                     prose_package pp = new prose_package();
@@ -642,6 +642,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday_faction_vendor_imperial_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -707,6 +708,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday_faction_vendor_imperial_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
@@ -748,7 +750,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -769,7 +771,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -801,6 +803,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday_faction_vendor_imperial_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -866,6 +869,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -875,11 +879,13 @@ public class lifeday_faction_vendor_imperial extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -888,23 +894,27 @@ public class lifeday_faction_vendor_imperial extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.lifeday_faction_vendor_imperial");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -944,7 +954,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -960,7 +970,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "lifeday_faction_vendor_imperial", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1002,7 +1012,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_102");
@@ -1022,7 +1032,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "lifeday_faction_vendor_imperial", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1056,7 +1066,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -1068,7 +1078,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
                 utils.setScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId", 7);
                 npcStartConversation(player, npc, "lifeday_faction_vendor_imperial", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1113,7 +1123,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_85");
@@ -1137,7 +1147,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "lifeday_faction_vendor_imperial", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1179,7 +1189,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_60");
@@ -1199,7 +1209,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "lifeday_faction_vendor_imperial", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1212,6 +1222,7 @@ public class lifeday_faction_vendor_imperial extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("lifeday_faction_vendor_imperial"))

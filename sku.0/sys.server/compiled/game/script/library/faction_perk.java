@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.StringTokenizer;
@@ -83,6 +89,7 @@ public class faction_perk extends script.base_script
     public static final string_id SID_ALREADY_HAVE = new string_id("gcw", "comm_already_used");
     public static final string_id SID_TOO_LOW_LEVEL = new string_id("gcw", "player_too_low");
     public static final string_id SID_INDOORS = new string_id("gcw", "player_is_indoors");
+
     public faction_perk()
     {
     }

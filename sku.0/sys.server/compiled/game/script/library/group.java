@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Vector;
@@ -34,6 +40,7 @@ public class group extends script.base_script
     public static final int MASTER_LOOTER = 1;
     public static final int LOTTERY = 2;
     public static final int RANDOM = 3;
+
     public group()
     {
     }

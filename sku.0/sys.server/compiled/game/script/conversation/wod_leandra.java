@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,14 +14,17 @@ import script.*;
 
 public class wod_leandra extends script.base_script
 {
+    public static String c_stringFile = "conversation/wod_leandra";
+
     public wod_leandra()
     {
     }
-    public static String c_stringFile = "conversation/wod_leandra";
+
     public boolean wod_leandra_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean wod_leandra_condition_IsSM(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "wod_prologue_quests"))
@@ -23,12 +32,9 @@ public class wod_leandra extends script.base_script
             return false;
         }
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if (status < 1)
-        {
-            return true;
-        }
-        return false;
+        return status < 1;
     }
+
     public boolean wod_leandra_condition_IsIndifferent(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "wod_prologue_quests"))
@@ -36,89 +42,100 @@ public class wod_leandra extends script.base_script
             return false;
         }
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if ((status > 0) && (status < 8))
-        {
-            return true;
-        }
-        return false;
+        return (status > 0) && (status < 8);
     }
+
     public boolean wod_leandra_condition_hasPreqComplete(obj_id player, obj_id npc) throws InterruptedException
     {
-        if ((hasObjVar(player, "wod_prologue_quests")) && (groundquests.hasCompletedQuest(player, "wod_rubina_goto_ns")) && (!groundquests.hasCompletedQuest(player, "wod_themepark_ns_lost_e01")))
-        {
-            return true;
-        }
-        return false;
+        return (hasObjVar(player, "wod_prologue_quests")) && (groundquests.hasCompletedQuest(player, "wod_rubina_goto_ns")) && (!groundquests.hasCompletedQuest(player, "wod_themepark_ns_lost_e01"));
     }
+
     public boolean wod_leandra_condition_onReturnLostINS(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_themepark_ns_lost_e01", "returnLean");
     }
+
     public boolean wod_leandra_condition_onReturnLostIINS(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_themepark_ns_lost_e02", "returnLean2");
     }
+
     public boolean wod_leandra_condition_hasQuestActiveIV(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "wod_queen_mother_boss_fight_ns");
     }
+
     public boolean wod_leandra_condition_hasQuestActiveI(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "wod_themepark_ns_lost_e01");
     }
+
     public boolean wod_leandra_condition_hasQuestActiveII(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "wod_themepark_ns_lost_e02");
     }
+
     public boolean wod_leandra_condition_hasQuestActiveIII(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "wod_themepark_ns_ehs_1");
     }
+
     public boolean wod_leandra_condition_completedQuestLostINS(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "wod_themepark_ns_lost_e01");
     }
+
     public boolean wod_leandra_condition_completedQuestLostIINS(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "wod_themepark_ns_lost_e02");
     }
+
     public boolean wod_leandra_condition_onReturnHateSistersNS(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_themepark_ns_ehs_1", "goBackLean");
     }
+
     public boolean wod_leandra_condition_completedQuestHateSistersNS(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "wod_themepark_ns_ehs_1");
     }
+
     public void wod_leandra_action_sendReturnedSignalLostINS(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasReturnedLean");
     }
+
     public void wod_leandra_action_sendReturnedSignalLostIINS(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasReturnedLean2");
     }
+
     public void wod_leandra_action_grantTPLostINS(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_themepark_ns_lost_e01");
     }
+
     public void wod_leandra_action_grantTPLostIINS(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_themepark_ns_lost_e02");
     }
+
     public void wod_leandra_action_grantTPHateSistersNS(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_themepark_ns_ehs_1");
     }
+
     public void wod_leandra_action_grantTPQueenBossFightNS(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "quest/wod_queen_mother_boss_fight_ns");
         groundquests.grantQuest(player, "quest/wod_queen_mother_boss_fight_ns");
     }
+
     public void wod_leandra_action_sendReturnedSignalHateSistersNS(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasComeBack");
     }
+
     public int wod_leandra_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -139,7 +156,7 @@ public class wod_leandra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -148,7 +165,7 @@ public class wod_leandra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_leandra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -158,6 +175,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_leandra_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -177,7 +195,7 @@ public class wod_leandra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_55");
@@ -186,7 +204,7 @@ public class wod_leandra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_leandra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -196,6 +214,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_leandra_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -216,7 +235,7 @@ public class wod_leandra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84");
@@ -225,7 +244,7 @@ public class wod_leandra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_leandra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -235,6 +254,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_leandra_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_84"))
@@ -254,7 +274,7 @@ public class wod_leandra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_89");
@@ -263,7 +283,7 @@ public class wod_leandra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_leandra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -273,6 +293,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_leandra_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
@@ -293,7 +314,7 @@ public class wod_leandra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -302,7 +323,7 @@ public class wod_leandra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_leandra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -312,6 +333,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_leandra_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_104"))
@@ -331,7 +353,7 @@ public class wod_leandra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_108");
@@ -340,7 +362,7 @@ public class wod_leandra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_leandra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -350,6 +372,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_leandra_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_104"))
@@ -369,7 +392,7 @@ public class wod_leandra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_108");
@@ -378,7 +401,7 @@ public class wod_leandra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_leandra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -388,6 +411,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_leandra_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_108"))
@@ -414,7 +438,7 @@ public class wod_leandra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_112");
@@ -427,7 +451,7 @@ public class wod_leandra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_leandra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -437,6 +461,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_leandra_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_112"))
@@ -462,6 +487,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_leandra_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_84"))
@@ -481,7 +507,7 @@ public class wod_leandra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_89");
@@ -490,7 +516,7 @@ public class wod_leandra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_leandra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -500,6 +526,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_leandra_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_89"))
@@ -519,7 +546,7 @@ public class wod_leandra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -528,7 +555,7 @@ public class wod_leandra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_leandra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -538,6 +565,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_leandra_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_93"))
@@ -557,7 +585,7 @@ public class wod_leandra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -566,7 +594,7 @@ public class wod_leandra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_leandra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -576,6 +604,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_leandra_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -591,6 +620,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_leandra_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -610,7 +640,7 @@ public class wod_leandra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_55");
@@ -619,7 +649,7 @@ public class wod_leandra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_leandra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -629,6 +659,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_leandra_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_55"))
@@ -644,6 +675,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_leandra_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -663,7 +695,7 @@ public class wod_leandra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -672,7 +704,7 @@ public class wod_leandra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_leandra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -682,6 +714,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_leandra_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -701,7 +734,7 @@ public class wod_leandra extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_72");
@@ -710,7 +743,7 @@ public class wod_leandra extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_leandra.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -720,6 +753,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_leandra_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_72"))
@@ -735,6 +769,7 @@ public class wod_leandra extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -744,11 +779,13 @@ public class wod_leandra extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -757,18 +794,21 @@ public class wod_leandra extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.wod_leandra");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -803,7 +843,7 @@ public class wod_leandra extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -811,7 +851,7 @@ public class wod_leandra extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_leandra.branchId", 3);
                 npcStartConversation(player, npc, "wod_leandra", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -832,7 +872,7 @@ public class wod_leandra extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -840,7 +880,7 @@ public class wod_leandra extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_leandra.branchId", 5);
                 npcStartConversation(player, npc, "wod_leandra", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -861,7 +901,7 @@ public class wod_leandra extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_85");
@@ -869,7 +909,7 @@ public class wod_leandra extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_leandra.branchId", 7);
                 npcStartConversation(player, npc, "wod_leandra", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -914,7 +954,7 @@ public class wod_leandra extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -922,7 +962,7 @@ public class wod_leandra extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_leandra.branchId", 13);
                 npcStartConversation(player, npc, "wod_leandra", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -943,7 +983,7 @@ public class wod_leandra extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_84");
@@ -951,7 +991,7 @@ public class wod_leandra extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_leandra.branchId", 18);
                 npcStartConversation(player, npc, "wod_leandra", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -972,7 +1012,7 @@ public class wod_leandra extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -980,7 +1020,7 @@ public class wod_leandra extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_leandra.branchId", 23);
                 npcStartConversation(player, npc, "wod_leandra", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1001,7 +1041,7 @@ public class wod_leandra extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -1009,7 +1049,7 @@ public class wod_leandra extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_leandra.branchId", 26);
                 npcStartConversation(player, npc, "wod_leandra", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1024,6 +1064,7 @@ public class wod_leandra extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("wod_leandra"))

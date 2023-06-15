@@ -5,6 +5,12 @@ package script.systems.hub;/*
 @   This script is used in conjunction with hub_manager.java
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class hub_building extends script.base_script

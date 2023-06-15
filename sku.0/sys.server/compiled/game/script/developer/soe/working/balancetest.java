@@ -1,5 +1,11 @@
 package script.developer.soe.working;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.deltadictionary;
 import script.dictionary;
 import script.library.*;
@@ -14,6 +20,7 @@ public class balancetest extends script.base_script
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String STAT_BALANCE_TABLE = "datatables/mob/stat_balance.iff";
     public static final boolean CONST_FLAG_DO_LOGGING = true;
+
     public balancetest()
     {
     }
@@ -269,6 +276,5 @@ public class balancetest extends script.base_script
         String creatureName = utils.getStringScriptVar(self, "clev_creature");
         dictionary creatureDict = utils.dataTableGetRow(CREATURE_TABLE, creatureName);
         create.initializeCreature(mob, creatureName, creatureDict, level);
-        return;
     }
 }

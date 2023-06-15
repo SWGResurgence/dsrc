@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act2;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.sui;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,24 +14,27 @@ import script.string_id;
 
 public class imperial_slicer_disk extends script.base_script
 {
-    public imperial_slicer_disk()
-    {
-    }
     public static final String IMPERIAL_STF = "theme_park/alderaan/act2/imperial_missions";
     public static final String IMPERIAL_SHARED_STF = "theme_park/alderaan/act2/shared_imperial_missions";
     public static final string_id DISK_NAME_SLICER = new string_id(IMPERIAL_SHARED_STF, "disk_name_slicer");
     public static final string_id SID_USE = new string_id(IMPERIAL_SHARED_STF, "use");
     public static final String SID_CLOSE = "@" + IMPERIAL_SHARED_STF + ":close";
+    public imperial_slicer_disk()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setName(self, DISK_NAME_SLICER);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_USE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -34,6 +43,7 @@ public class imperial_slicer_disk extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public void displayDialog(obj_id self, obj_id player) throws InterruptedException
     {
         String title = null;
@@ -44,6 +54,7 @@ public class imperial_slicer_disk extends script.base_script
         text = localize(textID);
         createDialog(self, player, text, title);
     }
+
     public int createDialog(obj_id self, obj_id player, String text, String title) throws InterruptedException
     {
         if (player == null)

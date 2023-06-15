@@ -8,6 +8,12 @@
 
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -22,7 +28,7 @@ public class resurgence extends script.base_script
     public static final string_id SID_TITLE = new string_id("resurgence", "ui_list_objects_title");
     //note: add to this list, do not reindex these values!
     public static int WORLD_BOSS_PEKO = 0;
-    public static int WORLD_BOSS_KRAYT= 1;
+    public static int WORLD_BOSS_KRAYT = 1;
     public static int WORLD_BOSS_PAX = 2;
     public static int WORLD_BOSS_GIZMO = 3;
     public static int WORLD_BOSS_DONKDONK = 4;
@@ -40,6 +46,7 @@ public class resurgence extends script.base_script
         attachScript(spawned, script);
         return SCRIPT_CONTINUE;
     }
+
     public static int setupLootAmount(obj_id what, int amount)
     {
         setObjVar(what, "loot.numItems", amount);
@@ -158,7 +165,7 @@ public class resurgence extends script.base_script
         {
             Random obj = new Random();
             int rand_num = obj.nextInt(0xffffff + 1);
-            rainbowName += "\\#" + rand_num  + name.charAt(i);
+            rainbowName += "\\#" + rand_num + name.charAt(i);
         }
         return rainbowName;
     }
@@ -190,6 +197,7 @@ public class resurgence extends script.base_script
         setPosture(target, POSTURE_CROUCHED);
         debugServerConsoleMsg(target, "suspicious() - player is now suspicious.");
     }
+
     public static void sneak(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target))
@@ -394,6 +402,70 @@ public class resurgence extends script.base_script
         }
     }
 
+    public static String[] getAttackerList(obj_id target) throws InterruptedException
+    {
+        String[] attackerList = new String[0];
+        if (isIdValid(target))
+        {
+            obj_id[] attackers = getHateList(target);
+            if (attackers != null)
+            {
+                attackerList = new String[attackers.length];
+                for (int i = 0; i < attackers.length; i++)
+                {
+                    if (isPlayer(attackers[i]))
+                    {
+                        attackerList[i] = getName(attackers[i]);
+                    }
+                }
+            }
+        }
+        return attackerList;
+    }
+
+    public static void doWorldBossAnnounce(obj_id target, int worldboss) throws InterruptedException
+    {
+        location here = getLocation(target);
+        switch (worldboss)
+        {
+            case 0:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The Mutated Peko-Peko Empress has been reported to have last been on Naboo. The Czerka Corporation is paying a high price for it's remains.");
+                break;
+            case 1:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The Elder Ancient Krayt Dragon has been reported to have last been seen on Tatooine. The Czerka Corporation is paying a high price for it's remains.");
+                break;
+            case 2:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\nThe Renegade Pax Vizla has been reported to have been last seen on Dxun near the Abandoned Mandalorian Outpost.The Czerka Corporation is paying a high price for it's remains.");
+                break;
+            case 3:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The wretched and accursed, Darth Gizmo, has been reported to have been seen last on Endor at one of the Lake Villages. The Czerka Corporation is paying a high price for it's remains.");
+                break;
+            case 4:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The wanted criminal, Donk-Donk Binks, has been reported to have been seen near the Rorgungan Lake Village on Rori. The Czerka Corporation is paying a high price for it's remains.");
+                break;
+            case 5:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The assassin, Aurra Sing, has been reported to have been seen on an island on Naboo. The Czerka Corporation is paying a high price for it's remains.");
+                break;
+            case 6:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The Hand of his Royal Majesty, The Emperor himself, has been located near the Emperor's Retreat on Naboo. The Czerka Corporation is paying a high price for her dissected remains, and any Jedi that she has captured.");
+        }
+    }
+
+    public static void doWorldBossDeathMsg(obj_id target) throws InterruptedException
+    {
+        String[] attackerList = getAttackerList(target);
+        if (attackerList.length > 0)
+        {
+            String msg = "The world boss " + getEncodedName(target) + " has been defeated by the following adventurers: " + toUpper(attackerList[0], 0);
+            for (int i = 1; i < attackerList.length; i++)
+            {
+                msg += ", " + toUpper(attackerList[i], 0);
+            }
+            msg += ". Congratulations to all!";
+            notifyGalacticFeed(msg);
+        }
+    }
+
     public int broadcastGroup(obj_id player, String message)
     {
         obj_id group = getGroupObject(player);
@@ -551,68 +623,6 @@ public class resurgence extends script.base_script
             {
                 LOG("bubbajoe", "stripPlayer() - possession is invalid. ID: " + possession);
             }
-        }
-    }
-    public static String[] getAttackerList(obj_id target) throws InterruptedException
-    {
-        String[] attackerList = new String[0];
-        if (isIdValid(target))
-        {
-            obj_id[] attackers = getHateList(target);
-            if (attackers != null)
-            {
-                attackerList = new String[attackers.length];
-                for (int i = 0; i < attackers.length; i++)
-                {
-                    if (isPlayer(attackers[i]))
-                    {
-                        attackerList[i] = getName(attackers[i]);
-                    }
-                }
-            }
-        }
-        return attackerList;
-    }
-
-    public static void doWorldBossAnnounce(obj_id target, int worldboss) throws InterruptedException
-    {
-        location here = getLocation(target);
-        switch (worldboss)
-        {
-            case 0:
-                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The Mutated Peko-Peko Empress has been reported to have last been on Naboo. The Czerka Corporation is paying a high price for it's remains.");
-                break;
-            case 1:
-                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The Elder Ancient Krayt Dragon has been reported to have last been seen on Tatooine. The Czerka Corporation is paying a high price for it's remains.");
-                break;
-            case 2:
-                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\nThe Renegade Pax Vizla has been reported to have been last seen on Dxun near the Abandoned Mandalorian Outpost.The Czerka Corporation is paying a high price for it's remains.");
-                break;
-            case 3:
-                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The wretched and accursed, Darth Gizmo, has been reported to have been seen last on Endor at one of the Lake Villages. The Czerka Corporation is paying a high price for it's remains.");
-                break;
-            case 4:
-                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The wanted criminal, Donk-Donk Binks, has been reported to have been seen near the Rorgungan Lake Village on Rori. The Czerka Corporation is paying a high price for it's remains.");
-                break;
-            case 5:
-                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The assassin, Aurra Sing, has been reported to have been seen on an island on Naboo. The Czerka Corporation is paying a high price for it's remains.");
-                break;
-            case 6:
-                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The Hand of his Royal Majesty, The Emperor himself, has been located near the Emperor's Retreat on Naboo. The Czerka Corporation is paying a high price for her dissected remains, and any Jedi that she has captured.");
-        }
-    }
-    public static void doWorldBossDeathMsg(obj_id target) throws InterruptedException
-    {
-        String[] attackerList = getAttackerList(target);
-        if (attackerList.length > 0)
-        {
-            String msg = "The world boss " + getEncodedName(target) + " has been defeated by the following adventurers: " + toUpper(attackerList[0], 0);
-            for (int i = 1; i < attackerList.length; i++)
-            {
-                msg += ", " + toUpper(attackerList[i], 0);
-            }
-            msg += ". Congratulations to all!";
-            notifyGalacticFeed(msg);
         }
     }
 

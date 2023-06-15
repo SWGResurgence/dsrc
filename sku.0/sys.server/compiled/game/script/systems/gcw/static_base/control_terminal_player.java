@@ -1,5 +1,11 @@
 package script.systems.gcw.static_base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -8,6 +14,7 @@ public class control_terminal_player extends script.base_script
 {
     public static final String SCRIPT_VAR_ATTEMPT_ID = "gcw.static_base.control_terminal.attempt_id";
     public static final String SCRIPT_VAR_TERMINAL = "gcw.static_base.control_terminal.terminal";
+
     public control_terminal_player()
     {
     }

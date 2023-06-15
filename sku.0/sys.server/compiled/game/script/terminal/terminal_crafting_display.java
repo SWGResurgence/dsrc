@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,12 +14,13 @@ import script.string_id;
 
 public class terminal_crafting_display extends script.base_script
 {
-    public terminal_crafting_display()
-    {
-    }
     public static final string_id SID_GRANT_BUFF = new string_id("spam", "assembly_terminal_grant_buff");
     public static final string_id SID_NOT_IN_HOUSE = new string_id("spam", "assembly_terminal_not_in_huse");
     public static final string_id SID_WRONG_CLASS = new string_id("spam", "assembly_terminal_wrong_class");
+    public terminal_crafting_display()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -26,6 +33,7 @@ public class terminal_crafting_display extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE && isIdValid(player))
@@ -34,13 +42,14 @@ public class terminal_crafting_display extends script.base_script
             {
                 grantBuff(player);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_NOT_IN_HOUSE);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkLocation(obj_id item) throws InterruptedException
     {
         if (!isIdValid(item))
@@ -60,13 +69,11 @@ public class terminal_crafting_display extends script.base_script
             {
                 templateName = getTemplateName(ship);
             }
-            if (isIdValid(house) && (player_structure.isBuilding(house) || space_utils.isPobType(templateName)))
-            {
-                return true;
-            }
+            return isIdValid(house) && (player_structure.isBuilding(house) || space_utils.isPobType(templateName));
         }
         return false;
     }
+
     public void grantBuff(obj_id player) throws InterruptedException
     {
         if (hasSkill(player, "class_domestics_phase1_novice"))
@@ -90,7 +97,7 @@ public class terminal_crafting_display extends script.base_script
         {
             buff.applyBuff(player, "crafting_display_jedi_buff");
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_WRONG_CLASS);
         }

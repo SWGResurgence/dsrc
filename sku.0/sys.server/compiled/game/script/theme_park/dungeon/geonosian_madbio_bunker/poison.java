@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.geonosian_madbio_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.dot;
 import script.library.utils;
@@ -9,10 +15,12 @@ import script.string_id;
 
 public class poison extends script.base_script
 {
+    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public poison()
     {
     }
-    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("geonosian_poison_gas", 4.0f, true);
@@ -24,13 +32,14 @@ public class poison extends script.base_script
                 makeShutOffSwitches(self);
             }
         }
-        else 
+        else
         {
             makeShutOffSwitches(self);
         }
         messageTo(self, "showGas", null, 1, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume("geonosian_poison_gas", 4.0f, true);
@@ -42,34 +51,35 @@ public class poison extends script.base_script
                 makeShutOffSwitches(self);
             }
         }
-        else 
+        else
         {
             makeShutOffSwitches(self);
         }
         messageTo(self, "showGas", null, 1, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         if (!isPlayer(whoTriggeredMe))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (hasObjVar(self, "trap_off"))
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
-                if (checkForGasMask(whoTriggeredMe) != true)
+                if (!checkForGasMask(whoTriggeredMe))
                 {
                     string_id toxic = new string_id(MSGS, "toxic_fumes");
                     sendSystemMessage(whoTriggeredMe, toxic);
                     dot.applyDotEffect(whoTriggeredMe, self, dot.DOT_POISON, "geonosian_poison_cloud", HEALTH, 100, 150, 300);
                 }
-                else 
+                else
                 {
                     string_id gasmask = new string_id(MSGS, "gasmask");
                     sendSystemMessage(whoTriggeredMe, gasmask);
@@ -78,6 +88,7 @@ public class poison extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trapShutOff(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id trap = getObjIdObjVar(self, "trap");
@@ -88,7 +99,8 @@ public class poison extends script.base_script
             destroyObject(invisible);
         }
         obj_id[] players = getAllPlayers(getLocation(self), 40.0f);
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             playClientEffectObj(player, "clienteffect/item_gas_leak_trap_off.cef", self, "");
         }
         invisible = createObject("object/tangible/theme_park/invisible_object.iff", getLocation(self));
@@ -97,6 +109,7 @@ public class poison extends script.base_script
         messageTo(self, "turnGasOn", null, 7, true);
         return SCRIPT_CONTINUE;
     }
+
     public int turnGasOn(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "trap_off"))
@@ -104,12 +117,14 @@ public class poison extends script.base_script
             removeObjVar(self, "trap_off");
         }
         obj_id[] players = getAllPlayers(getLocation(self), 40.0f);
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             playClientEffectObj(player, "clienteffect/item_gas_leak_trap_on.cef", self, "");
         }
         messageTo(self, "showGas", null, 2, true);
         return SCRIPT_CONTINUE;
     }
+
     public void makeShutOffSwitches(obj_id self) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -130,8 +145,8 @@ public class poison extends script.base_script
         setObjVar(self, "valve2", valve2);
         setYaw(shutoff, 180);
         setYaw(shutoff2, 270);
-        return;
     }
+
     public int showGas(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "trap_off"))
@@ -141,7 +156,8 @@ public class poison extends script.base_script
             if (isIdValid(invisible))
             {
                 obj_id[] players = getAllPlayers(getLocation(self), 40.0f);
-                for (obj_id player : players) {
+                for (obj_id player : players)
+                {
                     playClientEffectObj(player, "clienteffect/item_gas_leak_trap_lp.cef", invisible, "");
                 }
             }
@@ -149,17 +165,21 @@ public class poison extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkForGasMask(obj_id player) throws InterruptedException
     {
         obj_id[] objContents = utils.getContents(player, true);
         if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 String strItemTemplate = getTemplateName(objContent);
-                if (strItemTemplate.equals("object/tangible/wearables/goggles/rebreather.iff")) {
+                if (strItemTemplate.equals("object/tangible/wearables/goggles/rebreather.iff"))
+                {
                     obj_id mask = objContent;
                     obj_id holder = getContainedBy(mask);
-                    if (holder == player) {
+                    if (holder == player)
+                    {
                         return true;
                     }
                 }

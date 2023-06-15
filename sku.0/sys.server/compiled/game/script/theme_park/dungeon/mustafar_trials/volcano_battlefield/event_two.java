@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.volcano_battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -10,23 +16,26 @@ import script.obj_id;
 
 public class event_two extends script.base_script
 {
-    public event_two()
-    {
-    }
     public static final String boss = "som_volcano_two_ak_prime";
     public static final String guard = "som_volcano_two_hk77";
     public static final boolean LOGGING = false;
+    public event_two()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         spawnBoss(self);
         messageTo(self, "spawnGuards", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int activateEvent(obj_id self, dictionary params) throws InterruptedException
     {
         setTriggerVolume(self);
         return SCRIPT_CONTINUE;
     }
+
     public void setTriggerVolume(obj_id self) throws InterruptedException
     {
         if (!hasTriggerVolume(self, "activateVolume"))
@@ -34,6 +43,7 @@ public class event_two extends script.base_script
             createTriggerVolume("activateVolume", 45, true);
         }
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (isPlayer(breacher) && !isIncapacitated(breacher))
@@ -45,6 +55,7 @@ public class event_two extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void activateEncounter(obj_id self) throws InterruptedException
     {
         obj_id eventBoss = utils.getObjIdScriptVar(self, "eventBoss");
@@ -52,6 +63,7 @@ public class event_two extends script.base_script
         obj_id[] guardList = utils.getObjIdArrayScriptVar(self, "guardList");
         utils.messageTo(guardList, "activate", null, 0, false);
     }
+
     public void spawnBoss(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -67,16 +79,17 @@ public class event_two extends script.base_script
         trial.setParent(self, eventBoss, false);
         utils.setScriptVar(self, "eventBoss", eventBoss);
     }
+
     public int spawnGuards(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
-        String[] offSet = 
-        {
-            "-6:-6",
-            "6:6",
-            "-6:6",
-            "6:-6"
-        };
+        String[] offSet =
+                {
+                        "-6:-6",
+                        "6:6",
+                        "-6:6",
+                        "6:-6"
+                };
         obj_id[] guards = new obj_id[4];
         obj_id eventBoss = utils.getObjIdScriptVar(self, "eventBoss");
         for (int i = 0; i < offSet.length; i++)
@@ -100,6 +113,7 @@ public class event_two extends script.base_script
         ai_lib.establishAgroLink(eventBoss, guards);
         return SCRIPT_CONTINUE;
     }
+
     public int eventMobDied(obj_id self, dictionary params) throws InterruptedException
     {
         String type = params.getString("type");
@@ -109,6 +123,7 @@ public class event_two extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void winEvent(obj_id self) throws InterruptedException
     {
         obj_id top = trial.getParent(self);
@@ -119,6 +134,7 @@ public class event_two extends script.base_script
         }
         messageTo(top, "eventDefeated", null, 0, false);
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VOLCANO_LOGGING)

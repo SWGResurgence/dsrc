@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -8,10 +14,12 @@ import java.util.Vector;
 
 public class debugger extends script.base_script
 {
+    public static final String DEBUG_EMOTE_TARGET = "debug.emote_target";
+
     public debugger()
     {
     }
-    public static final String DEBUG_EMOTE_TARGET = "debug.emote_target";
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         boolean foundTrigger = false;
@@ -128,7 +136,7 @@ public class debugger extends script.base_script
                 {
                     broadcast(self, "[DEBUGGER] syntax: setFactionStanding <faction> <value>");
                 }
-                else 
+                else
                 {
                     factions.setFactionStanding(target, factionName, value);
                     broadcast(self, "[DEBUGGER] attempting to setfaction: faction = " + factionName + " val = " + value);
@@ -194,7 +202,7 @@ public class debugger extends script.base_script
                         {
                             delays[i] = 10.0f;
                         }
-                        else 
+                        else
                         {
                             delays[i] = 0.1f;
                         }
@@ -207,7 +215,7 @@ public class debugger extends script.base_script
                         broadcast(self, "Fireworks show created in your inventory!");
                     }
                 }
-                else 
+                else
                 {
                     debugSpeakMsg(self, "fireworkShow: unable to create valid object in your inventory!");
                 }
@@ -224,7 +232,7 @@ public class debugger extends script.base_script
                 java.util.Enumeration keys = d.keys();
                 while (keys.hasMoreElements())
                 {
-                    String var = (String)keys.nextElement();
+                    String var = (String) keys.nextElement();
                     int idx = d.getInt(var);
                     entries = utils.addElement(entries, var + " -> " + idx);
                 }
@@ -233,7 +241,7 @@ public class debugger extends script.base_script
             {
                 broadcast(self, "No palcolor data for target: " + target);
             }
-            else 
+            else
             {
                 sui.listbox(self, self, "Palvar data for " + target, sui.OK_ONLY, target.toString(), entries, "noHandler");
             }
@@ -251,7 +259,7 @@ public class debugger extends script.base_script
             {
                 broadcast(self, " Set Owner succeeded");
             }
-            else 
+            else
             {
                 broadcast(self, " Set Owner failed");
             }
@@ -295,7 +303,7 @@ public class debugger extends script.base_script
                 d.put("cnt", 0);
                 messageTo(self, "handleSignedStructureCreation", d, 3, false);
             }
-            else 
+            else
             {
                 broadcast(self, "unable to locate structure templates");
             }
@@ -361,20 +369,20 @@ public class debugger extends script.base_script
             {
                 broadcast(self, "Invalid obj_id reference in slot HELD_R");
             }
-            else 
+            else
             {
                 if (!minigame.isFishingPole(held))
                 {
                     broadcast(self, "HELD_R object is not a fishing pole");
                 }
-                else 
+                else
                 {
                     obj_id bait = createObject("object/tangible/fishing/bait/bait_grub.iff", held, "");
                     if (isIdValid(bait))
                     {
                         broadcast(self, "Bait(" + bait + ") created in HELD_R(" + held + ")");
                     }
-                    else 
+                    else
                     {
                         broadcast(self, "Unable to create bait(" + bait + ") in HELD_R(" + held + ")");
                     }
@@ -407,7 +415,7 @@ public class debugger extends script.base_script
             {
                 broadcast(self, "creating fish: obj_id = " + fish);
             }
-            else 
+            else
             {
                 broadcast(self, "unable to make fish!");
             }
@@ -421,7 +429,7 @@ public class debugger extends script.base_script
             {
                 broadcast(self, "creating firework: obj_id = " + fw);
             }
-            else 
+            else
             {
                 broadcast(self, "unable to make firework!");
             }
@@ -440,7 +448,7 @@ public class debugger extends script.base_script
                 location testLoc = utils.rotatePointXZ(there, range, heading);
                 createObject("object/static/particle/particle_sm_explosion.iff", testLoc);
             }
-            else 
+            else
             {
                 broadcast(self, "Self is an invalid target for this test trigger");
             }
@@ -505,7 +513,7 @@ public class debugger extends script.base_script
                 setObjVar(deed, "player_structure.deed.buildtime", 15);
                 broadcast(self, "deed set in inventory...");
             }
-            else 
+            else
             {
                 broadcast(self, "unable to create deed...");
             }
@@ -524,7 +532,7 @@ public class debugger extends script.base_script
                     {
                         broadcast(self, "sign(" + sign + ") created...");
                     }
-                    else 
+                    else
                     {
                         broadcast(self, "unable to create structure sign...");
                     }
@@ -611,14 +619,14 @@ public class debugger extends script.base_script
         }
         else if (arg.equals("testRandomLoot"))
         {
-            int[] opt = 
-            {
-                1,
-                3,
-                4,
-                5,
-                6
-            };
+            int[] opt =
+                    {
+                            1,
+                            3,
+                            4,
+                            5,
+                            6
+                    };
             int idx = rand(0, opt.length - 1);
             String template = "object/tangible/wearables/backpack/backpack_s0" + opt[idx] + ".iff";
             target = createObject(template, utils.getInventoryContainer(self), "");
@@ -626,7 +634,7 @@ public class debugger extends script.base_script
             {
                 broadcast(self, "unable to create template: " + template);
             }
-            else 
+            else
             {
                 setName(target, "lootTest:" + getGameTime());
                 String[] lootTypes = dataTableGetStringColumnNoDefaults("datatables/mob/creatures.iff", "miscType");
@@ -671,7 +679,7 @@ public class debugger extends script.base_script
                 {
                     broadcast(self, "createObject: object created! id = " + item);
                 }
-                else 
+                else
                 {
                     broadcast(self, "createObject: unable to create object!!");
                 }
@@ -689,14 +697,14 @@ public class debugger extends script.base_script
             {
                 broadcast(self, "convertToMagicItem: invalid target!");
             }
-            else 
+            else
             {
                 int lvl = rand(5, 250);
                 if (magic_item.convertToMagicItem(target, lvl))
                 {
                     broadcast(self, "Target(" + target + "): converted to magic item where lvl = " + lvl);
                 }
-                else 
+                else
                 {
                     broadcast(self, "Target(" + target + "): convert failed @ lvl = " + lvl);
                 }
@@ -706,14 +714,14 @@ public class debugger extends script.base_script
         else if (arg.equals("magicBackpack"))
         {
             int lvl = rand(5, 250);
-            int[] opt = 
-            {
-                1,
-                3,
-                4,
-                5,
-                6
-            };
+            int[] opt =
+                    {
+                            1,
+                            3,
+                            4,
+                            5,
+                            6
+                    };
             int idx = rand(0, opt.length - 1);
             String template = "object/tangible/wearables/backpack/backpack_s0" + opt[idx] + ".iff";
             target = createObject(template, utils.getInventoryContainer(self), "");
@@ -721,13 +729,13 @@ public class debugger extends script.base_script
             {
                 broadcast(self, "unable to create template: " + template);
             }
-            else 
+            else
             {
                 if (magic_item.convertToMagicItem(target, lvl))
                 {
                     broadcast(self, "Target(" + target + "): converted to magic item where lvl = " + lvl);
                 }
-                else 
+                else
                 {
                     broadcast(self, "Target(" + target + "): convert failed @ lvl = " + lvl);
                 }
@@ -741,7 +749,7 @@ public class debugger extends script.base_script
             {
                 broadcast(self, "Target = " + target + " Inventory = " + inv);
             }
-            else 
+            else
             {
                 broadcast(self, "Unable to locate an inventory for target = " + target);
             }
@@ -780,7 +788,7 @@ public class debugger extends script.base_script
                     {
                         broadcast(self, "Granted " + val + "pts of " + faction + " faction to target: " + target);
                     }
-                    else 
+                    else
                     {
                         broadcast(self, "Unable to grant faction pts to target. target = " + target);
                         broadcast(self, "faction = " + faction + " val = " + val);
@@ -835,11 +843,9 @@ public class debugger extends script.base_script
             {
                 int numTokens = st.countTokens();
                 String name = null;
-                switch (numTokens)
+                if (numTokens == 2)
                 {
-                    case 2:
                     target = utils.stringToObjId(st.nextToken());
-                    break;
                 }
                 name = st.nextToken();
                 if (isIdValid(target) && (name != null) && (!name.equals("")))
@@ -860,7 +866,7 @@ public class debugger extends script.base_script
                 {
                     broadcast(self, "(" + target + ") no object in slot(" + slot + ")");
                 }
-                else 
+                else
                 {
                     broadcast(self, "(" + target + ") object in slot(" + slot + ") is (" + item + ")" + getName(item));
                 }
@@ -884,7 +890,7 @@ public class debugger extends script.base_script
                     int gotType = getGameObjectType(item);
                     broadcast(self, "(" + item + ")" + getName(item) + " is of object type " + gotType);
                 }
-                else 
+                else
                 {
                     broadcast(self, "unable to parse valid obj_id");
                 }
@@ -900,13 +906,13 @@ public class debugger extends script.base_script
                 switch (st.countTokens())
                 {
                     case 1:
-                    slotName = st.nextToken();
-                    break;
+                        slotName = st.nextToken();
+                        break;
                     case 2:
-                    sTarget = st.nextToken();
-                    slotName = st.nextToken();
-                    target = utils.stringToObjId(sTarget);
-                    break;
+                        sTarget = st.nextToken();
+                        slotName = st.nextToken();
+                        target = utils.stringToObjId(sTarget);
+                        break;
                 }
                 if (isIdValid(target))
                 {
@@ -915,12 +921,12 @@ public class debugger extends script.base_script
                     {
                         broadcast(self, "(" + target + ") object in slot " + slotName + " = (" + itemInSlot + ") " + getName(itemInSlot));
                     }
-                    else 
+                    else
                     {
                         broadcast(self, "no valid item in slot " + slotName);
                     }
                 }
-                else 
+                else
                 {
                     broadcast(self, "unable to parse valid obj_id");
                 }
@@ -942,7 +948,7 @@ public class debugger extends script.base_script
                     {
                         broadcast(self, "unable to parse valid obj_ids");
                     }
-                    else 
+                    else
                     {
                     }
                 }
@@ -976,7 +982,7 @@ public class debugger extends script.base_script
                 {
                     broadcast(self, "hasScriptVar = TRUE");
                 }
-                else 
+                else
                 {
                     broadcast(self, "hasScriptVar = FALSE");
                 }
@@ -1005,7 +1011,7 @@ public class debugger extends script.base_script
                 {
                     broadcast(self, "target does not have scriptvar " + path);
                 }
-                else 
+                else
                 {
                     broadcast(self, "scriptvar(" + path + ") = " + val);
                 }
@@ -1024,7 +1030,7 @@ public class debugger extends script.base_script
                 {
                     target = tmp;
                 }
-                else 
+                else
                 {
                     debugSpeakMsg(self, "UNABLE to parse oid from " + soid);
                 }
@@ -1035,9 +1041,9 @@ public class debugger extends script.base_script
             {
                 debugConsoleMsg(self, "NONE!");
             }
-            else 
+            else
             {
-                debugConsoleMsg(self, "dd = " + delta.toString());
+                debugConsoleMsg(self, "dd = " + delta);
             }
             broadcast(self, "Check console for showScriptVars output");
             foundTrigger = true;
@@ -1066,7 +1072,7 @@ public class debugger extends script.base_script
                 {
                     container = utils.getPlayerDatapad(self);
                 }
-                else 
+                else
                 {
                     return SCRIPT_CONTINUE;
                 }
@@ -1074,9 +1080,10 @@ public class debugger extends script.base_script
                 if ((items == null) || (items.length == 0))
                 {
                 }
-                else 
+                else
                 {
-                    for (obj_id item : items) {
+                    for (obj_id item : items)
+                    {
                         destroyObject(item);
                     }
                 }
@@ -1103,13 +1110,13 @@ public class debugger extends script.base_script
                     {
                         money.pay(self, param, amt, "foo", d, true);
                     }
-                    else 
+                    else
                     {
                         money.pay(self, payTarget, amt, "foo", d, true);
                     }
                 }
             }
-            else 
+            else
             {
                 broadcast(self, "[debugger] SYNTAX: pay <acct name>|<obj_id> <amt>");
                 return SCRIPT_CONTINUE;
@@ -1136,7 +1143,7 @@ public class debugger extends script.base_script
                 create.object(type, getLocation(self));
                 foundTrigger = true;
             }
-            else 
+            else
             {
                 broadcast(self, "[debugger] SYNTAX: spawn <mob type>");
                 return SCRIPT_OVERRIDE;
@@ -1157,7 +1164,7 @@ public class debugger extends script.base_script
                 {
                     tpf = "data_imperial.iff";
                 }
-                else 
+                else
                 {
                 }
             }
@@ -1171,7 +1178,7 @@ public class debugger extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 pet_lib.makePet(target, self);
             }
@@ -1199,7 +1206,7 @@ public class debugger extends script.base_script
                 {
                     broadcast(self, "syntax: setYaw <target id> <yaw>");
                 }
-                else 
+                else
                 {
                     String sYaw = st.nextToken();
                     float yaw = utils.stringToFloat(sYaw);
@@ -1223,7 +1230,7 @@ public class debugger extends script.base_script
             {
                 broadcast(self, "syntax: getYaw (<target id>)");
             }
-            else 
+            else
             {
                 broadcast(self, "(" + target + ")" + getName(target) + " yaw = " + getYaw(target));
             }
@@ -1244,7 +1251,7 @@ public class debugger extends script.base_script
                 broadcast(self, "pathing (" + target + ")" + getName(target) + " to " + myLoc.toString());
                 pathTo(target, myLoc);
             }
-            else 
+            else
             {
                 broadcast(self, "pathTo trigger may only be used on AI-driven mobs");
             }
@@ -1258,7 +1265,7 @@ public class debugger extends script.base_script
                 broadcast(self, "pathing (" + target + ")" + getName(target) + " away from self: " + myLoc.toString());
                 ai_lib.pathAwayFrom(target, self);
             }
-            else 
+            else
             {
                 broadcast(self, "pathFrom trigger may only be used on AI-driven mobs");
             }
@@ -1286,12 +1293,12 @@ public class debugger extends script.base_script
                 {
                     debugSpeakMsg(self, "int param must be >= 0");
                 }
-                else 
+                else
                 {
                     setPosture(target, posture);
                 }
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "syntax: setPosture <posture(int)>");
             }
@@ -1331,7 +1338,7 @@ public class debugger extends script.base_script
             {
                 debug.forceSuicide(target);
             }
-            else 
+            else
             {
                 broadcast(self, "forceSuicide requires a non-self target!");
             }
@@ -1374,9 +1381,10 @@ public class debugger extends script.base_script
             if ((skill_names == null) || (skill_names.length == 0))
             {
             }
-            else 
+            else
             {
-                for (String skill_name : skill_names) {
+                for (String skill_name : skill_names)
+                {
                     revokeSkill(target, skill_name);
                 }
             }
@@ -1391,11 +1399,12 @@ public class debugger extends script.base_script
                 broadcast(self, "error getting required skills for : " + skill_name);
                 foundTrigger = true;
             }
-            else 
+            else
             {
                 debugConsoleMsg(self, "SKILLS REQUIRED FOR: " + skill_name);
                 debugConsoleMsg(self, "****************************************");
-                for (String s : skills) {
+                for (String s : skills)
+                {
                     debugConsoleMsg(self, " * " + s);
                 }
             }
@@ -1409,7 +1418,7 @@ public class debugger extends script.base_script
             {
                 broadcast(self, "grantSkill::skill granted: " + skill_name);
             }
-            else 
+            else
             {
                 broadcast(self, "grantSkill::unable to grant skill: " + skill_name);
                 return SCRIPT_OVERRIDE;
@@ -1430,7 +1439,7 @@ public class debugger extends script.base_script
             {
                 broadcast(self, "grantSkillToPlayer::skill granted: " + skill_name);
             }
-            else 
+            else
             {
                 broadcast(self, "grantSkillToPlayer::unable to grant skill: " + skill_name);
                 return SCRIPT_OVERRIDE;
@@ -1444,7 +1453,7 @@ public class debugger extends script.base_script
             java.util.Enumeration e = xpReqs.keys();
             while (e.hasMoreElements())
             {
-                String xpType = (String)(e.nextElement());
+                String xpType = (String) (e.nextElement());
                 int xpCost = xpReqs.getInt(xpType);
                 grantExperiencePoints(self, xpType, xpCost);
             }
@@ -1490,7 +1499,7 @@ public class debugger extends script.base_script
             {
                 broadcast(self, "Unable to retrieve contents of object #" + target);
             }
-            else 
+            else
             {
                 String[] names = utils.makeNameList(contents);
                 String[] src = new String[contents.length];
@@ -1509,7 +1518,7 @@ public class debugger extends script.base_script
             {
                 foundTrigger = true;
             }
-            else 
+            else
             {
                 obj_id[] contents = utils.getContents(inv, true);
                 String[] names = utils.makeNameList(contents);
@@ -1528,7 +1537,7 @@ public class debugger extends script.base_script
             {
                 ai_lib.aiFollow(target, self);
             }
-            else 
+            else
             {
                 broadcast(self, "Follow commands are only usable on non-pc mobs!");
             }
@@ -1540,7 +1549,7 @@ public class debugger extends script.base_script
             {
                 ai_lib.aiStopFollowing(target);
             }
-            else 
+            else
             {
                 broadcast(self, "Follow commands are only usable on non-pc mobs!");
             }
@@ -1552,7 +1561,8 @@ public class debugger extends script.base_script
             {
                 int behavior = -1;
                 String sBehavior = st.nextToken();
-                switch (sBehavior) {
+                switch (sBehavior)
+                {
                     case "sentinel":
                         behavior = ai_lib.BEHAVIOR_SENTINEL;
                         break;
@@ -1573,7 +1583,7 @@ public class debugger extends script.base_script
                         ai_lib.setDefaultCalmBehavior(target, behavior);
                         broadcast(self, getName(target) + "'s behavior set to " + behavior);
                     }
-                    else 
+                    else
                     {
                         broadcast(self, "set behavior commands are only usable on non-pc mobs!");
                     }
@@ -1595,24 +1605,24 @@ public class debugger extends script.base_script
                         ai_lib.setMood(target, mood);
                         broadcast(self, "Attempting to set " + getName(target) + "'s mood to " + mood);
                     }
-                    else 
+                    else
                     {
                         if (queueCommand(target, (1000440469), null, mood, COMMAND_PRIORITY_DEFAULT))
                         {
                             broadcast(self, getName(target) + "'s mood set to " + mood);
                         }
-                        else 
+                        else
                         {
                             broadcast(self, "Unable to set " + getName(target) + "'s mood to " + mood);
                         }
                     }
                 }
-                else 
+                else
                 {
                     broadcast(self, "moods commands are only valid for creature objects!");
                 }
             }
-            else 
+            else
             {
                 broadcast(self, "SYNTAX: mood <mood name>");
             }
@@ -1639,7 +1649,7 @@ public class debugger extends script.base_script
                 {
                     mood = tok.substring(1);
                 }
-                else 
+                else
                 {
                     msg += tok + " ";
                 }
@@ -1683,7 +1693,8 @@ public class debugger extends script.base_script
                 }
                 if (isMob(target))
                 {
-                    switch (param) {
+                    switch (param)
+                    {
                         case "self":
                             queueCommand(target, (1780871594), target, social, COMMAND_PRIORITY_DEFAULT);
                             break;
@@ -1692,9 +1703,12 @@ public class debugger extends script.base_script
                             break;
                         case "other":
                             obj_id tId = getObjIdObjVar(self, DEBUG_EMOTE_TARGET);
-                            if ((tId != null) && (tId != obj_id.NULL_ID) && (exists(tId)) && (isInWorld(tId)) && (tId.isLoaded())) {
+                            if ((tId != null) && (tId != obj_id.NULL_ID) && (exists(tId)) && (isInWorld(tId)) && (tId.isLoaded()))
+                            {
                                 queueCommand(target, (1780871594), tId, social, COMMAND_PRIORITY_DEFAULT);
-                            } else {
+                            }
+                            else
+                            {
                                 broadcast(self, "invalid DEBUG_EMOTE_TARGET! set it using 'emote target <oid>'");
                             }
                             break;
@@ -1703,12 +1717,12 @@ public class debugger extends script.base_script
                             break;
                     }
                 }
-                else 
+                else
                 {
                     broadcast(self, "emote commands are only valid for creature objects!");
                 }
             }
-            else 
+            else
             {
                 broadcast(self, "SYNTAX: emote <mood name>");
             }
@@ -1742,7 +1756,7 @@ public class debugger extends script.base_script
                             amt = -amt;
                         }
                     }
-                    else 
+                    else
                     {
                         amt = utils.stringToInt(sAmt);
                         if (amt == -1)
@@ -1757,13 +1771,13 @@ public class debugger extends script.base_script
                         xp.grant(target, xp_type, amt);
                     }
                 }
-                else 
+                else
                 {
                     String msg = "(" + target + ") " + getName(target) + " has " + xp_amt + "pts of " + xp_type + " experience";
                     broadcast(self, msg);
                 }
             }
-            else 
+            else
             {
                 broadcast(self, "SYNTAX: xp <type> (+|-)<amt>");
             }
@@ -1781,7 +1795,7 @@ public class debugger extends script.base_script
             if ((inv == null) || (inv == obj_id.NULL_ID))
             {
             }
-            else 
+            else
             {
                 while (getVolumeFree(inv) > 0)
                 {
@@ -1799,7 +1813,7 @@ public class debugger extends script.base_script
                 {
                     broadcast(self, "(" + target + ") " + getName(target) + " has a trigger volume named " + vol_name);
                 }
-                else 
+                else
                 {
                     broadcast(self, "(" + target + ") " + getName(target) + " does NOT have a trigger volume named " + vol_name);
                 }
@@ -1816,31 +1830,31 @@ public class debugger extends script.base_script
                 if ((other == null) || (other == obj_id.NULL_ID))
                 {
                 }
-                else 
+                else
                 {
                     location there = getLocation(other);
                     float dist = 0.0f;
                     switch (cnt)
                     {
                         case 1:
-                        dist = utils.getDistance2D(here, there);
-                        broadcast(self, "distance between " + target + " and " + other + " = " + dist);
-                        break;
-                        case 2:
-                        target = utils.stringToObjId(st.nextToken());
-                        if ((target == null) || (target == obj_id.NULL_ID))
-                        {
-                        }
-                        else 
-                        {
-                            here = getLocation(target);
                             dist = utils.getDistance2D(here, there);
                             broadcast(self, "distance between " + target + " and " + other + " = " + dist);
-                        }
+                            break;
+                        case 2:
+                            target = utils.stringToObjId(st.nextToken());
+                            if ((target == null) || (target == obj_id.NULL_ID))
+                            {
+                            }
+                            else
+                            {
+                                here = getLocation(target);
+                                dist = utils.getDistance2D(here, there);
+                                broadcast(self, "distance between " + target + " and " + other + " = " + dist);
+                            }
                     }
                 }
             }
-            else 
+            else
             {
                 float range = utils.getDistance2D(getLocation(self), getLocation(target));
                 broadcast(self, "distance between " + target + " and self = " + range);
@@ -1871,13 +1885,13 @@ public class debugger extends script.base_script
                 {
                     hueClothes(target, col);
                 }
-                else 
+                else
                 {
                     broadcast(self, "[beta.debugger] hue passed invalid color -> randomizing");
                     hue.hueObject(target);
                 }
             }
-            else 
+            else
             {
                 ss = true;
             }
@@ -1887,7 +1901,7 @@ public class debugger extends script.base_script
             }
             foundTrigger = true;
         }
-        
+
         {
         }
         if (foundTrigger)
@@ -1895,29 +1909,33 @@ public class debugger extends script.base_script
             broadcast(self, "[beta.debugger] " + text);
             return SCRIPT_OVERRIDE;
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
     }
+
     public void hueClothes(obj_id newClothes, int col) throws InterruptedException
     {
         custom_var[] allVars = getAllCustomVars(newClothes);
-        for (custom_var cv : allVars) {
+        for (custom_var cv : allVars)
+        {
             ranged_int_custom_var ri = (ranged_int_custom_var) cv;
-            if (cv != null) {
-                if (cv.isPalColor()) {
+            if (cv != null)
+            {
+                if (cv.isPalColor())
+                {
                     ri.setValue(col);
                 }
             }
         }
-        return;
     }
+
     public int handleSignedStructureCreation(obj_id self, dictionary params) throws InterruptedException
     {
         String[] tmp = params.getStringArray("template");
         Vector tpf = new Vector(Arrays.asList(tmp));
-        String template = (String)(tpf.elementAt(0));
+        String template = (String) (tpf.elementAt(0));
         location there = params.getLocation("loc");
         int cnt = params.getInt("cnt");
         obj_id it = createObject(template, there);
@@ -1925,7 +1943,7 @@ public class debugger extends script.base_script
         {
             broadcast(self, "unable create structure from template: " + template);
         }
-        else 
+        else
         {
             obj_id sign = player_structure.createStructureSign(it);
             if (!isIdValid(sign))
@@ -1942,7 +1960,7 @@ public class debugger extends script.base_script
                 there.x = there.x + 300.0f;
                 there.z = there.z + 60.0f;
             }
-            else 
+            else
             {
                 there.x = there.x - 60.0f;
                 params.put("loc", there);
@@ -1953,6 +1971,7 @@ public class debugger extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleGrantAllSkills(obj_id self, dictionary params) throws InterruptedException
     {
         broadcast(self, "handleGrantAllSkills entered...");
@@ -1969,7 +1988,7 @@ public class debugger extends script.base_script
                 broadcast(self, "attempting to grant: " + skillList[i]);
                 grantSkill(self, skillList[i]);
             }
-            else 
+            else
             {
                 return SCRIPT_CONTINUE;
             }

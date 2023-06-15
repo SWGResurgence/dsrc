@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.menu_info;
 import script.menu_info_data;
@@ -11,6 +17,7 @@ public class clone_terminal extends script.theme_park.newbie_tutorial.tutorial_b
     public clone_terminal()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         utils.setScriptVar(player, "newbie.usedCloneTerm", true);
@@ -21,6 +28,7 @@ public class clone_terminal extends script.theme_park.newbie_tutorial.tutorial_b
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

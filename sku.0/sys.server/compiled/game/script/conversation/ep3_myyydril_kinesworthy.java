@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,98 +14,96 @@ import script.*;
 
 public class ep3_myyydril_kinesworthy extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_myyydril_kinesworthy";
+
     public ep3_myyydril_kinesworthy()
     {
     }
-    public static String c_stringFile = "conversation/ep3_myyydril_kinesworthy";
+
     public boolean ep3_myyydril_kinesworthy_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_myyydril_kinesworthy_condition_hasCompletedOther(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_myyydril_yraka_talkto_6", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_yraka_talkto_6", 0));
     }
+
     public boolean ep3_myyydril_kinesworthy_condition_hasCompletedTaskOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_myyydril_kinesworthy_epic_1", 1) && !groundquests.hasCompletedQuest(player, "ep3_myyydril_kinesworthy_epic_1"));
     }
+
     public boolean ep3_myyydril_kinesworthy_condition_isActiveTaskOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_myyydril_kinesworthy_epic_1", 0) || groundquests.isTaskActive(player, "ep3_myyydril_kinesworthy_epic_1", 1) || groundquests.isTaskActive(player, "ep3_myyydril_kinesworthy_epic_1", 2) || groundquests.isTaskActive(player, "ep3_myyydril_kinesworthy_epic_1", 3) || groundquests.isTaskActive(player, "ep3_myyydril_kinesworthy_epic_1", 4) || groundquests.hasCompletedTask(player, "ep3_myyydril_kinesworthy_epic_1", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_kinesworthy_epic_1", 1) || groundquests.hasCompletedTask(player, "ep3_myyydril_kinesworthy_epic_1", 2) || groundquests.hasCompletedTask(player, "ep3_myyydril_kinesworthy_epic_1", 3) || groundquests.hasCompletedTask(player, "ep3_myyydril_kinesworthy_epic_1", 4))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_myyydril_kinesworthy_epic_1", 0) || groundquests.isTaskActive(player, "ep3_myyydril_kinesworthy_epic_1", 1) || groundquests.isTaskActive(player, "ep3_myyydril_kinesworthy_epic_1", 2) || groundquests.isTaskActive(player, "ep3_myyydril_kinesworthy_epic_1", 3) || groundquests.isTaskActive(player, "ep3_myyydril_kinesworthy_epic_1", 4) || groundquests.hasCompletedTask(player, "ep3_myyydril_kinesworthy_epic_1", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_kinesworthy_epic_1", 1) || groundquests.hasCompletedTask(player, "ep3_myyydril_kinesworthy_epic_1", 2) || groundquests.hasCompletedTask(player, "ep3_myyydril_kinesworthy_epic_1", 3) || groundquests.hasCompletedTask(player, "ep3_myyydril_kinesworthy_epic_1", 4);
     }
+
     public boolean ep3_myyydril_kinesworthy_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_myyydril_kinesworthy_epic_1");
     }
+
     public boolean ep3_myyydril_kinesworthy_condition_isActiveTaskTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_myyydril_kinesworthy_epic_2", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_kinesworthy_epic_2", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_myyydril_kinesworthy_epic_2", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_kinesworthy_epic_2", 0);
     }
+
     public boolean ep3_myyydril_kinesworthy_condition_hasCompletedTaskTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_myyydril_kinesworthy_epic_2", 0) && !groundquests.hasCompletedQuest(player, "ep3_myyydril_kinesworthy_epic_2"));
     }
+
     public boolean ep3_myyydril_kinesworthy_condition_hasCompletedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_myyydril_kinesworthy_epic_2");
     }
+
     public boolean ep3_myyydril_kinesworthy_condition_isActiveTaskThree(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_myyydril_kinesworthy_epic_3", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_kinesworthy_epic_3", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_myyydril_kinesworthy_epic_3", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_kinesworthy_epic_3", 0);
     }
+
     public boolean ep3_myyydril_kinesworthy_condition_hasCompletedTaskThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_myyydril_kinesworthy_epic_3", 0) && !groundquests.hasCompletedQuest(player, "ep3_myyydril_kinesworthy_epic_3"));
     }
+
     public boolean ep3_myyydril_kinesworthy_condition_hasCompletedQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_myyydril_kinesworthy_epic_3");
     }
+
     public void ep3_myyydril_kinesworthy_action_giveQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_myyydril_kinesworthy_epic_1");
     }
+
     public void ep3_myyydril_kinesworthy_action_giveQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_myyydril_kinesworthy_epic_2");
     }
+
     public void ep3_myyydril_kinesworthy_action_giveQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_myyydril_kinesworthy_epic_3");
     }
+
     public void ep3_myyydril_kinesworthy_action_giveSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "phatLewts");
     }
+
     public void ep3_myyydril_kinesworthy_action_giveSingal2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "talktokines");
     }
+
     public void ep3_myyydril_kinesworthy_action_takeItem(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4020"))
@@ -119,7 +123,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4024");
@@ -128,7 +132,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -138,6 +142,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4024"))
@@ -158,7 +163,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4028");
@@ -167,7 +172,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -177,6 +182,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4028"))
@@ -191,6 +197,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4034"))
@@ -205,6 +212,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4040"))
@@ -224,7 +232,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4044");
@@ -233,7 +241,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -243,6 +251,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4044"))
@@ -258,6 +267,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4050"))
@@ -278,7 +288,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4054");
@@ -287,7 +297,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -297,6 +307,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4054"))
@@ -317,7 +328,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4058");
@@ -326,7 +337,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -336,6 +347,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4058"))
@@ -350,6 +362,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4064"))
@@ -364,6 +377,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4070"))
@@ -383,7 +397,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4074");
@@ -392,7 +406,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -402,6 +416,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4074"))
@@ -421,7 +436,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4078");
@@ -430,7 +445,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -440,6 +455,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4078"))
@@ -459,7 +475,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4082");
@@ -468,7 +484,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -478,6 +494,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4082"))
@@ -497,7 +514,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4086");
@@ -506,7 +523,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -516,6 +533,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4086"))
@@ -535,7 +553,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4090");
@@ -544,7 +562,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -554,6 +572,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4090"))
@@ -580,7 +599,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4094");
@@ -593,7 +612,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -603,6 +622,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4094"))
@@ -628,6 +648,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4104"))
@@ -648,7 +669,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4108");
@@ -657,7 +678,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -667,6 +688,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4108"))
@@ -681,6 +703,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4114"))
@@ -695,6 +718,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4120"))
@@ -715,7 +739,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4124");
@@ -724,7 +748,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -734,6 +758,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4124"))
@@ -753,7 +778,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4128");
@@ -762,7 +787,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -772,6 +797,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4128"))
@@ -791,7 +817,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4132");
@@ -800,7 +826,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -810,6 +836,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4132"))
@@ -829,7 +856,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4136");
@@ -838,7 +865,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -848,6 +875,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4136"))
@@ -867,7 +895,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4140");
@@ -876,7 +904,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -886,6 +914,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4140"))
@@ -905,7 +934,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4144");
@@ -914,7 +943,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -924,6 +953,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4144"))
@@ -943,7 +973,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4148");
@@ -952,7 +982,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -962,6 +992,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4148"))
@@ -981,7 +1012,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4152");
@@ -990,7 +1021,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1000,6 +1031,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4152"))
@@ -1019,7 +1051,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4156");
@@ -1028,7 +1060,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1038,6 +1070,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4156"))
@@ -1057,7 +1090,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4160");
@@ -1066,7 +1099,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1076,6 +1109,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4160"))
@@ -1095,7 +1129,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4164");
@@ -1104,7 +1138,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1114,6 +1148,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4164"))
@@ -1134,7 +1169,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4168");
@@ -1143,7 +1178,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1153,6 +1188,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_kinesworthy_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4168"))
@@ -1167,6 +1203,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1178,6 +1215,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1185,6 +1223,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1194,18 +1233,21 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_myyydril_kinesworthy");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1234,7 +1276,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4020");
@@ -1242,7 +1284,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId", 2);
                 npcStartConversation(player, npc, "ep3_myyydril_kinesworthy", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1263,7 +1305,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4034");
@@ -1271,7 +1313,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId", 6);
                 npcStartConversation(player, npc, "ep3_myyydril_kinesworthy", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1292,7 +1334,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4040");
@@ -1300,7 +1342,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId", 8);
                 npcStartConversation(player, npc, "ep3_myyydril_kinesworthy", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1321,7 +1363,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4050");
@@ -1329,7 +1371,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId", 11);
                 npcStartConversation(player, npc, "ep3_myyydril_kinesworthy", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1350,7 +1392,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4064");
@@ -1358,7 +1400,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId", 15);
                 npcStartConversation(player, npc, "ep3_myyydril_kinesworthy", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1379,7 +1421,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4070");
@@ -1387,7 +1429,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId", 17);
                 npcStartConversation(player, npc, "ep3_myyydril_kinesworthy", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1409,7 +1451,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4104");
@@ -1417,7 +1459,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId", 26);
                 npcStartConversation(player, npc, "ep3_myyydril_kinesworthy", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1438,7 +1480,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4114");
@@ -1446,7 +1488,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId", 29);
                 npcStartConversation(player, npc, "ep3_myyydril_kinesworthy", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1467,7 +1509,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4120");
@@ -1475,7 +1517,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_kinesworthy.branchId", 31);
                 npcStartConversation(player, npc, "ep3_myyydril_kinesworthy", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1490,6 +1532,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_myyydril_kinesworthy"))

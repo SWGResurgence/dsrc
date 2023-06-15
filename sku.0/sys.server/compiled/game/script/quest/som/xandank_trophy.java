@@ -1,18 +1,25 @@
 package script.quest.som;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 
 public class xandank_trophy extends script.base_script
 {
-    public xandank_trophy()
-    {
-    }
     public static final String STF = "som/som_quest";
     public static final string_id TRACK = new string_id(STF, "xandank_trophy_track");
     public static final string_id TRACK_FOUND_ONE = new string_id(STF, "xandank_trophy_track_one");
     public static final string_id TRACK_FOUND_TWO = new string_id(STF, "xandank_trophy_track_two");
     public static final string_id TRACK_COMPLETE = new string_id(STF, "xandank_trophy_track_complete");
+    public xandank_trophy()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, "som_xandank_trophey"))
@@ -27,6 +34,7 @@ public class xandank_trophy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -41,7 +49,7 @@ public class xandank_trophy extends script.base_script
                     messageTo(self, "handleFindTrackOne", dict, 5.0f, false);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, TRACK_COMPLETE);
                     return SCRIPT_CONTINUE;
@@ -57,7 +65,7 @@ public class xandank_trophy extends script.base_script
                     messageTo(self, "handleFindTrackTwo", dict, 5.0f, false);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, TRACK_COMPLETE);
                     return SCRIPT_CONTINUE;
@@ -66,6 +74,7 @@ public class xandank_trophy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleFindTrackOne(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("target");
@@ -73,6 +82,7 @@ public class xandank_trophy extends script.base_script
         groundquests.sendSignal(player, "xandank_trophy_signal_one");
         return SCRIPT_CONTINUE;
     }
+
     public int handleFindTrackTwo(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("target");

@@ -1,13 +1,16 @@
 package script.quest.task.ground.util;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.*;
 
 public class quest_use_object_on_object extends script.base_script
 {
-    public quest_use_object_on_object()
-    {
-    }
     public static final string_id SID_USE_CAMERA = new string_id("collection", "use_camera");
     public static final string_id SID_PICTURE_TAKEN = new string_id("collection", "picture_taken");
     public static final string_id SID_INVALID_TARGET = new string_id("collection", "invalid_target");
@@ -18,6 +21,10 @@ public class quest_use_object_on_object extends script.base_script
     public static final string_id MUST_DISMOUNT = new string_id("collection", "must_dismount");
     public static final string_id CREATURE_IS_DEAD = new string_id("collection", "creature_is_dead");
     public static final String OBJECT_KEY = "quest.object_key";
+    public quest_use_object_on_object()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!canManipulate(player, self, true, true, 15, true))
@@ -33,12 +40,13 @@ public class quest_use_object_on_object extends script.base_script
         {
             mid.setServerNotify(true);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("spam", "costume_learn"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -70,12 +78,13 @@ public class quest_use_object_on_object extends script.base_script
         {
             sendSystemMessage(player, SID_INVALID_TARGET);
         }
-        else 
+        else
         {
             checkValidTarget(player, intended, self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkValidTarget(obj_id player, obj_id target, obj_id self) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))

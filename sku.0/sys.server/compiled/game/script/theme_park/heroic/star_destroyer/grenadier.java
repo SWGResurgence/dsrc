@@ -1,5 +1,11 @@
 package script.theme_park.heroic.star_destroyer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.trial;
 import script.library.utils;
@@ -11,23 +17,27 @@ public class grenadier extends script.base_script
     public grenadier()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "ai.combat.oneShotAction", "non_attack");
         setThrowSpeed(self, 4.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         setMovementPercent(self, 0.0f);
         messageTo(self, "doThrow", trial.getSessionDict(self, "throw"), getThrowSpeed(self), false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         trial.bumpSession(self, "throw");
         return SCRIPT_CONTINUE;
     }
+
     public int doThrow(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "throw"))
@@ -44,21 +54,23 @@ public class grenadier extends script.base_script
         messageTo(self, "doThrow", trial.getSessionDict(self, "throw"), getThrowSpeed(self), false);
         return SCRIPT_CONTINUE;
     }
+
     public int grenadier_throw_random(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        String[] abilityList = 
-        {
-            "grenadier_cold",
-            "grenadier_heat",
-            "grenadier_acid",
-            "grenadier_kinetic"
-        };
+        String[] abilityList =
+                {
+                        "grenadier_cold",
+                        "grenadier_heat",
+                        "grenadier_acid",
+                        "grenadier_kinetic"
+                };
         String random_ability = abilityList[rand(0, abilityList.length - 1)];
         location loc = getLocation(target);
-        String targetLoc = "" + loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
+        String targetLoc = loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
         queueCommand(self, getStringCrc(random_ability.toLowerCase()), target, targetLoc, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int resetHate(obj_id self, dictionary params) throws InterruptedException
     {
         if (isDead(self))
@@ -75,23 +87,30 @@ public class grenadier extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id focus = hateList[rand(0, hateList.length - 1)];
-        for (obj_id obj_id : hateList) {
-            if (obj_id == focus) {
+        for (obj_id obj_id : hateList)
+        {
+            if (obj_id == focus)
+            {
                 setHate(self, focus, 10000.0f);
-            } else {
+            }
+            else
+            {
                 setHate(self, obj_id, 1.0f);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public float getThrowSpeed(obj_id self) throws InterruptedException
     {
         return getFloatObjVar(self, "throw_speed");
     }
+
     public void setThrowSpeed(obj_id self, float speed) throws InterruptedException
     {
         setObjVar(self, "throw_speed", speed);
     }
+
     public float hastenThrowSpeed(obj_id self, float delta) throws InterruptedException
     {
         float speed = getThrowSpeed(self);
@@ -99,6 +118,7 @@ public class grenadier extends script.base_script
         setThrowSpeed(self, speed);
         return speed;
     }
+
     public int hastenThrow(obj_id self, dictionary params) throws InterruptedException
     {
         float newSpeed = hastenThrowSpeed(self, 0.2f);

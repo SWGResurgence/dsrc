@@ -1,164 +1,202 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class imperial_empire_day_major_tantor extends script.base_script
 {
     public static final String c_stringFile = "conversation/imperial_empire_day_major_tantor";
+
     public boolean imperial_empire_day_major_tantor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean imperial_empire_day_major_tantor_condition_alreadyDoingRecruitment(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return buff.hasBuff(player, holiday.BUFF_IMP_EMPIREDAY_RECRUITMENT_COMBATANT) || buff.hasBuff(player, holiday.BUFF_IMP_EMPIREDAY_RECRUITMENT_SF);
     }
+
     public boolean imperial_empire_day_major_tantor_condition_hasCompletedBothCollections(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (imperial_empire_day_major_tantor_condition_hasCompletedPropagandaCollection(player, npc) && imperial_empire_day_major_tantor_condition_hasCompletedRecruitmentCollection(player, npc));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isSpecialForcesImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (factions.isDeclared(player) && factions.isImperial(player));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_hasRecruitmentCollectionPrerequisite(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasCompletedCollectionSlotPrereq(player, holiday.IMPERIAL_RECRUITING_COUNTER_SLOT);
     }
+
     public boolean imperial_empire_day_major_tantor_condition_alreadyDoingPropaganda(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return buff.hasBuff(player, holiday.BUFF_IMP_EMPIREDAY_ANTIPROP_COMBATANT) || buff.hasBuff(player, holiday.BUFF_IMP_EMPIREDAY_ANTIPROP_SF);
     }
+
     public boolean imperial_empire_day_major_tantor_condition_alreadyKnowsTantor(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (imperial_empire_day_major_tantor_condition_hasRecruitmentCollectionPrerequisite(player, npc) || imperial_empire_day_major_tantor_condition_hasPropagandaCollectionPrerequisite(player, npc));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_hasPropagandaCollectionPrerequisite(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasCompletedCollectionSlotPrereq(player, holiday.IMPERIAL_ANTIPROP_COUNTER_SLOT);
     }
+
     public boolean imperial_empire_day_major_tantor_condition_hasEmpireDayBadge(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasCompletedCollectionSlot(player, holiday.EMPIRE_DAY_CHAMPION_BADGE);
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isQualifiedRecruitmentSpecialForces(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (imperial_empire_day_major_tantor_condition_isSpecialForcesImperial(player, npc) && !imperial_empire_day_major_tantor_condition_alreadyDoingRecruitment(player, npc));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isQualifiedPropagandaSpecialForces(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (imperial_empire_day_major_tantor_condition_isSpecialForcesImperial(player, npc) && !imperial_empire_day_major_tantor_condition_alreadyDoingPropaganda(player, npc));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isRebelPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (factions.isRebel(player));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isNeutralPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (!factions.isImperial(player) && !factions.isRebel(player));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isQualifiedRecruitmentCombatant(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (!imperial_empire_day_major_tantor_condition_isSpecialForcesImperial(player, npc) && !imperial_empire_day_major_tantor_condition_alreadyDoingRecruitment(player, npc));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isQualifiedPropagandaCombatant(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (!imperial_empire_day_major_tantor_condition_isSpecialForcesImperial(player, npc) && !imperial_empire_day_major_tantor_condition_alreadyDoingPropaganda(player, npc));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_hasCompletedRecruitmentCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasCompletedCollection(player, holiday.IMPERIAL_RECRUITING_COLLECTION);
     }
+
     public boolean imperial_empire_day_major_tantor_condition_hasCompletedPropagandaCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasCompletedCollection(player, holiday.IMPERIAL_ANTIPROP_COLLECTION);
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isLockedOutOfEvents(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (imperial_empire_day_major_tantor_condition_isLockedOutOfRecruitment(player, npc) && imperial_empire_day_major_tantor_condition_isLockedOutOfPropaganda(player, npc));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_hasNotCompletedBothCollections(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (!imperial_empire_day_major_tantor_condition_hasCompletedPropagandaCollection(player, npc) && !imperial_empire_day_major_tantor_condition_hasCompletedRecruitmentCollection(player, npc));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_alreadyDoingBothPropagandaRecruitment(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (imperial_empire_day_major_tantor_condition_alreadyDoingPropaganda(player, npc) && imperial_empire_day_major_tantor_condition_alreadyDoingRecruitment(player, npc));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isChampionDoesntKnowTantor(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (imperial_empire_day_major_tantor_condition_hasEmpireDayBadge(player, npc) && !imperial_empire_day_major_tantor_condition_alreadyKnowsTantor(player, npc));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isChampionKnowsTantor(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (imperial_empire_day_major_tantor_condition_hasEmpireDayBadge(player, npc) && imperial_empire_day_major_tantor_condition_alreadyKnowsTantor(player, npc));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_hasCollectionsButNotCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (imperial_empire_day_major_tantor_condition_hasNotCompletedBothCollections(player, npc) && imperial_empire_day_major_tantor_condition_hasPropagandaCollectionPrerequisite(player, npc) && imperial_empire_day_major_tantor_condition_hasRecruitmentCollectionPrerequisite(player, npc));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isLockedOutOfPropaganda(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasObjVar(player, holiday.EMPIRE_DAY_PROPAGANDA_LOCKED_OUT);
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isLockedOutOfRecruitment(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasObjVar(player, holiday.EMPIRE_DAY_RECRUITMENT_LOCKED_OUT);
     }
+
     public boolean imperial_empire_day_major_tantor_condition_canDoPropagandaEvent(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (!imperial_empire_day_major_tantor_condition_alreadyDoingPropaganda(player, npc) && !imperial_empire_day_major_tantor_condition_isLockedOutOfPropaganda(player, npc) && !imperial_empire_day_major_tantor_condition_hasCompletedPropagandaCollection(player, npc));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_canDoRecruitmentEvent(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (!imperial_empire_day_major_tantor_condition_alreadyDoingRecruitment(player, npc) && !imperial_empire_day_major_tantor_condition_isLockedOutOfRecruitment(player, npc) && !imperial_empire_day_major_tantor_condition_hasCompletedRecruitmentCollection(player, npc));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_canDoAtLeastOneEvent(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (imperial_empire_day_major_tantor_condition_canDoRecruitmentEvent(player, npc) || imperial_empire_day_major_tantor_condition_canDoPropagandaEvent(player, npc));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isTrader(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return utils.isProfession(player, utils.TRADER);
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isEntertainer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return utils.isProfession(player, utils.ENTERTAINER);
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isTraderOrEntertainer(obj_id player, obj_id npc) throws InterruptedException
     {
         return imperial_empire_day_major_tantor_condition_isTrader(player, npc) || imperial_empire_day_major_tantor_condition_isEntertainer(player, npc);
     }
+
     public boolean imperial_empire_day_major_tantor_condition_canCheckLeaderBoard(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
@@ -188,45 +226,50 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return true;
     }
+
     public boolean imperial_empire_day_major_tantor_condition_hasScore(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, holiday.PLAYER_EMPIRE_DAY_SCORE);
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isNeutralRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return ((getCollectionSlotValue(player, holiday.REBEL_RESISTANCE_COUNTER_SLOT) > 0) && !hasCompletedCollection(player, holiday.REBEL_RESISTANCE_COLLECTION) || (getCollectionSlotValue(player, holiday.REBEL_VANDAL_COUNTER_SLOT) > 0) && !hasCompletedCollection(player, holiday.REBEL_VANDAL_COLLECTION));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isNewNeutralPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return ((getCollectionSlotValue(player, holiday.IMPERIAL_ANTIPROP_START_SLOT) <= 0) && (getCollectionSlotValue(player, holiday.IMPERIAL_RECRUITING_START_SLOT) <= 0));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isNeutralRebelButImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasObjVar(player, holiday.PLAYER_EMPIRE_DAY_NEUTRAL + holiday.PLANET_VAR_PLAYER_FACTION_REB) && factions.isImperial(player);
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isNeutralAlignedIncompletedCollections(obj_id player, obj_id npc) throws InterruptedException
     {
         return ((getCollectionSlotValue(player, holiday.IMPERIAL_ANTIPROP_START_SLOT) > 0) && !hasCompletedCollection(player, holiday.IMPERIAL_ANTIPROP_COLLECTION) || (getCollectionSlotValue(player, holiday.IMPERIAL_RECRUITING_START_SLOT) > 0) && !hasCompletedCollection(player, holiday.IMPERIAL_RECRUITING_COLLECTION));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_isNeutralAligned(obj_id player, obj_id npc) throws InterruptedException
     {
         return ((getCollectionSlotValue(player, holiday.IMPERIAL_ANTIPROP_START_SLOT) > 0) || (getCollectionSlotValue(player, holiday.IMPERIAL_RECRUITING_START_SLOT) > 0));
     }
+
     public boolean imperial_empire_day_major_tantor_condition_hasBothRebAndImpKioskCollections(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         if ((getCollectionSlotValue(player, holiday.IMPERIAL_RECRUITING_COUNTER_SLOT) > 0) && !hasCompletedCollection(player, holiday.IMPERIAL_RECRUITING_COLLECTION) || (getCollectionSlotValue(player, holiday.IMPERIAL_ANTIPROP_COUNTER_SLOT) > 0) && !hasCompletedCollection(player, holiday.IMPERIAL_ANTIPROP_COLLECTION))
         {
-            if ((getCollectionSlotValue(player, holiday.REBEL_RESISTANCE_COUNTER_SLOT) > 0) && !hasCompletedCollection(player, holiday.REBEL_RESISTANCE_COLLECTION) || (getCollectionSlotValue(player, holiday.REBEL_VANDAL_COUNTER_SLOT) > 0) && !hasCompletedCollection(player, holiday.REBEL_VANDAL_COLLECTION))
-            {
-                return true;
-            }
+            return (getCollectionSlotValue(player, holiday.REBEL_RESISTANCE_COUNTER_SLOT) > 0) && !hasCompletedCollection(player, holiday.REBEL_RESISTANCE_COLLECTION) || (getCollectionSlotValue(player, holiday.REBEL_VANDAL_COUNTER_SLOT) > 0) && !hasCompletedCollection(player, holiday.REBEL_VANDAL_COLLECTION);
         }
         return false;
     }
+
     public void imperial_empire_day_major_tantor_action_setSFRecruitmentEventOnPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (getCollectionSlotValue(player, holiday.IMPERIAL_RECRUITING_START_SLOT) <= 0)
@@ -235,17 +278,20 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         buff.applyBuff(player, holiday.BUFF_IMP_EMPIREDAY_RECRUITMENT_SF);
     }
+
     public void imperial_empire_day_major_tantor_action_resetPropagandaAndRecruitmentCollections(obj_id player, obj_id npc) throws InterruptedException
     {
         if (imperial_empire_day_major_tantor_condition_hasCompletedPropagandaCollection(player, npc) && imperial_empire_day_major_tantor_condition_hasCompletedRecruitmentCollection(player, npc))
         {
             String[] recruitingSlotsInCollection = getAllCollectionSlotsInCollection(holiday.IMPERIAL_RECRUITING_COLLECTION);
-            for (String s1 : recruitingSlotsInCollection) {
+            for (String s1 : recruitingSlotsInCollection)
+            {
                 long collectionSlotValue = getCollectionSlotValue(player, s1) * -1;
                 modifyCollectionSlotValue(player, s1, collectionSlotValue);
             }
             String[] slotsInCollection = getAllCollectionSlotsInCollection(holiday.IMPERIAL_ANTIPROP_COLLECTION);
-            for (String s : slotsInCollection) {
+            for (String s : slotsInCollection)
+            {
                 long collectionSlotValue = getCollectionSlotValue(player, s) * -1;
                 modifyCollectionSlotValue(player, s, collectionSlotValue);
             }
@@ -253,10 +299,12 @@ public class imperial_empire_day_major_tantor extends script.base_script
             imperial_empire_day_major_tantor_action_setRecruitmentCollectionStarterSlot(player, npc);
         }
     }
+
     public void imperial_empire_day_major_tantor_action_setRecruitmentTimeStampOnPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         holiday.setEventLockOutTimeStamp(player, holiday.EMPIRE_DAY_RECRUITMENT_TIMESTAMP);
     }
+
     public void imperial_empire_day_major_tantor_action_setSFPropagandaEventOnPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (getCollectionSlotValue(player, holiday.IMPERIAL_ANTIPROP_START_SLOT) <= 0)
@@ -265,6 +313,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         buff.applyBuff(player, holiday.BUFF_IMP_EMPIREDAY_ANTIPROP_SF);
     }
+
     public void imperial_empire_day_major_tantor_action_giveMaraKaythreeWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         location loc = new location(-5533, 6, 4372, "naboo");
@@ -272,6 +321,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         setWaypointName(maraWpt, "Unknown Imperial Parties");
         setWaypointActive(maraWpt, true);
     }
+
     public void imperial_empire_day_major_tantor_action_spawnTroopers(obj_id player, obj_id npc) throws InterruptedException
     {
         for (int i = 0; i < 3; i++)
@@ -283,6 +333,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
             startCombat(guard, player);
         }
     }
+
     public void imperial_empire_day_major_tantor_action_getLeaderBoardSui(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
@@ -304,14 +355,17 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         CustomerServiceLog("holidayEvent", "tantor_conversation.getLeaderBoardSui: High Score Data received by player: " + player + ".");
     }
+
     public void imperial_empire_day_major_tantor_action_setRecruitmentCollectionStarterSlot(obj_id player, obj_id npc) throws InterruptedException
     {
         modifyCollectionSlotValue(player, holiday.IMPERIAL_RECRUITING_START_SLOT, 1);
     }
+
     public void imperial_empire_day_major_tantor_action_setPropagandaCollectionStarterSlot(obj_id player, obj_id npc) throws InterruptedException
     {
         modifyCollectionSlotValue(player, holiday.IMPERIAL_ANTIPROP_START_SLOT, 1);
     }
+
     public void imperial_empire_day_major_tantor_action_setCombatantRecruitmentEventOnPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (getCollectionSlotValue(player, holiday.IMPERIAL_RECRUITING_START_SLOT) <= 0)
@@ -320,6 +374,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         buff.applyBuff(player, holiday.BUFF_IMP_EMPIREDAY_RECRUITMENT_COMBATANT);
     }
+
     public void imperial_empire_day_major_tantor_action_setCombatantPropagandaEventOnPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (getCollectionSlotValue(player, holiday.IMPERIAL_ANTIPROP_START_SLOT) <= 0)
@@ -328,15 +383,18 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         buff.applyBuff(player, holiday.BUFF_IMP_EMPIREDAY_ANTIPROP_COMBATANT);
     }
+
     public void imperial_empire_day_major_tantor_action_setPropagandaTimeStampOnPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         holiday.setEventLockOutTimeStamp(player, holiday.EMPIRE_DAY_PROPAGANDA_TIMESTAMP);
     }
+
     public void imperial_empire_day_major_tantor_action_checkHolidayTimeStampOnPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         holiday.checkEventLockOutRemoval(player, holiday.EMPIRE_DAY_RECRUITMENT_TIMESTAMP, holiday.EMPIRE_DAY_RECRUITMENT_LOCKED_OUT);
         holiday.checkEventLockOutRemoval(player, holiday.EMPIRE_DAY_PROPAGANDA_TIMESTAMP, holiday.EMPIRE_DAY_PROPAGANDA_LOCKED_OUT);
     }
+
     public void imperial_empire_day_major_tantor_action_setLeaderBoardScore(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, holiday.PLAYER_EMPIRE_DAY_SCORE))
@@ -362,18 +420,20 @@ public class imperial_empire_day_major_tantor extends script.base_script
         if (!holiday.setEmpireDayLeaderScores(tatooine, player, holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY + holiday.PLANET_VAR_SCORE, playerScore, playerName, holiday.IMPERIAL_PLAYER))
         {
             CustomerServiceLog("holidayEvent", "tantor_conversation.getLeaderBoardSui: Player: (" + player + ") " + playerName + " was unable to attain leader board data. Their score was: " + playerScore);
-            return;
         }
     }
+
     public void imperial_empire_day_major_tantor_action_makeNeutralImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, space_quest.MUSIC_QUEST_EVENT);
         setObjVar(player, holiday.PLAYER_EMPIRE_DAY_NEUTRAL + holiday.PLANET_VAR_PLAYER_FACTION_IMP, true);
     }
+
     public void imperial_empire_day_major_tantor_action_removeNeutralRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         removeObjVar(player, holiday.PLAYER_EMPIRE_DAY_NEUTRAL + holiday.PLANET_VAR_PLAYER_FACTION_REB);
     }
+
     public void imperial_empire_day_major_tantor_action_removeFactionalObjVars(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, holiday.PLAYER_EMPIRE_DAY_NEUTRAL + holiday.PLANET_VAR_PLAYER_FACTION_IMP))
@@ -385,14 +445,15 @@ public class imperial_empire_day_major_tantor extends script.base_script
             removeObjVar(player, holiday.PLAYER_EMPIRE_DAY_NEUTRAL + holiday.PLANET_VAR_PLAYER_FACTION_REB);
         }
     }
+
     public void imperial_empire_day_major_tantor_action_removeRebCollections(obj_id player, obj_id npc) throws InterruptedException
     {
         String playerName = getPlayerFullName(player);
         if (!collection.removeCollectionForRealsies(player, holiday.REBEL_RESISTANCE_COLLECTION))
         {
-           // CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: ERROR. Player: (" + player + ") " + playerName + " was UNABLE to remove their Imperial collection " + holiday.REBEL_RESISTANCE_COLLECTION + " and fix themselves to continue doing Kiosk events.");
+            // CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: ERROR. Player: (" + player + ") " + playerName + " was UNABLE to remove their Imperial collection " + holiday.REBEL_RESISTANCE_COLLECTION + " and fix themselves to continue doing Kiosk events.");
         }
-        else 
+        else
         {
             //CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: Player: (" + player + ") " + playerName + " was able to remove their Imperial collection " + holiday.REBEL_RESISTANCE_COLLECTION + " and fix themselves to continue doing Kiosk events.");
         }
@@ -400,11 +461,12 @@ public class imperial_empire_day_major_tantor extends script.base_script
         {
             //CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: ERROR. Player: (" + player + ") " + playerName + " was UNABLE to remove their Imperial collection " + holiday.REBEL_VANDAL_COLLECTION + " and fix themselves to continue doing Kiosk events.");
         }
-        else 
+        else
         {
             //CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: Player: (" + player + ") " + playerName + " was able to remove their Imperial collection " + holiday.REBEL_VANDAL_COLLECTION + " and fix themselves to continue doing Kiosk events.");
         }
     }
+
     public String imperial_empire_day_major_tantor_tokenTO_timeLeftRecruitment(obj_id player, obj_id npc) throws InterruptedException
     {
         String returnString = holiday.getTimeRemainingBeforeLockoutRemoved(player, holiday.EMPIRE_DAY_RECRUITMENT_TIMESTAMP);
@@ -414,6 +476,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return returnString;
     }
+
     public String imperial_empire_day_major_tantor_tokenTO_timeLeftPropaganda(obj_id player, obj_id npc) throws InterruptedException
     {
         String returnString = holiday.getTimeRemainingBeforeLockoutRemoved(player, holiday.EMPIRE_DAY_PROPAGANDA_TIMESTAMP);
@@ -423,6 +486,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return returnString;
     }
+
     public String imperial_empire_day_major_tantor_tokenTO_currentScore(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, holiday.PLAYER_EMPIRE_DAY_SCORE))
@@ -436,10 +500,12 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return playerScore + " points so far.";
     }
+
     public int imperial_empire_day_major_tantor_tokenDI_notUsed(obj_id player, obj_id npc) throws InterruptedException
     {
         return 0;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_169"))
@@ -459,7 +525,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_171");
@@ -468,7 +534,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -478,6 +544,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_171"))
@@ -493,6 +560,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_173"))
@@ -512,7 +580,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_214");
@@ -525,7 +593,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     prose_package pp = new prose_package();
@@ -558,7 +626,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -575,7 +643,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     prose_package pp = new prose_package();
@@ -643,7 +711,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_250");
@@ -672,7 +740,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -704,7 +772,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_125");
@@ -713,7 +781,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -738,7 +806,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_126");
@@ -747,7 +815,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -783,6 +851,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_173"))
@@ -802,7 +871,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_214");
@@ -815,7 +884,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     prose_package pp = new prose_package();
@@ -848,7 +917,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -865,7 +934,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     prose_package pp = new prose_package();
@@ -933,7 +1002,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_250");
@@ -962,7 +1031,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -994,7 +1063,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_125");
@@ -1003,7 +1072,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1028,7 +1097,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_126");
@@ -1037,7 +1106,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1073,6 +1142,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_214"))
@@ -1092,7 +1162,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_218");
@@ -1101,7 +1171,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1111,6 +1181,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_218"))
@@ -1130,7 +1201,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_222");
@@ -1139,7 +1210,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1149,6 +1220,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_222"))
@@ -1204,7 +1276,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_250");
@@ -1233,7 +1305,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1243,6 +1315,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_250"))
@@ -1262,7 +1335,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_254");
@@ -1271,7 +1344,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1296,7 +1369,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_280");
@@ -1305,7 +1378,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1330,7 +1403,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -1339,7 +1412,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1364,7 +1437,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -1373,7 +1446,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1404,6 +1477,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -1430,7 +1504,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -1443,7 +1517,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1468,7 +1542,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60");
@@ -1477,7 +1551,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1487,6 +1561,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_91"))
@@ -1521,6 +1596,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
@@ -1536,6 +1612,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_250"))
@@ -1555,7 +1632,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_254");
@@ -1564,7 +1641,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1589,7 +1666,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_280");
@@ -1598,7 +1675,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1623,7 +1700,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -1632,7 +1709,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1657,7 +1734,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -1666,7 +1743,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1697,6 +1774,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_125"))
@@ -1712,6 +1790,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_126"))
@@ -1727,6 +1806,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_74"))
@@ -1746,7 +1826,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -1755,7 +1835,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1765,6 +1845,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_142"))
@@ -1784,7 +1865,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_145");
@@ -1793,7 +1874,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1818,7 +1899,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_105");
@@ -1827,7 +1908,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1887,7 +1968,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_250");
@@ -1920,7 +2001,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     prose_package pp = new prose_package();
@@ -1945,6 +2026,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_145"))
@@ -1959,6 +2041,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_105"))
@@ -1978,7 +2061,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -1987,7 +2070,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1997,6 +2080,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_107"))
@@ -2018,7 +2102,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -2027,7 +2111,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2037,6 +2121,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_250"))
@@ -2056,7 +2141,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_254");
@@ -2065,7 +2150,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2090,7 +2175,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_280");
@@ -2099,7 +2184,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2124,7 +2209,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -2133,7 +2218,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2158,7 +2243,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -2167,7 +2252,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2198,6 +2283,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_72"))
@@ -2217,7 +2303,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -2226,7 +2312,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2236,6 +2322,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -2291,7 +2378,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_250");
@@ -2324,7 +2411,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     prose_package pp = new prose_package();
@@ -2338,6 +2425,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_250"))
@@ -2357,7 +2445,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_254");
@@ -2366,7 +2454,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2391,7 +2479,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_280");
@@ -2400,7 +2488,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2425,7 +2513,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -2434,7 +2522,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2459,7 +2547,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -2468,7 +2556,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2499,6 +2587,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_254"))
@@ -2518,7 +2607,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_131");
@@ -2527,7 +2616,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2549,7 +2638,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_258");
@@ -2558,7 +2647,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2568,6 +2657,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_131"))
@@ -2623,7 +2713,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_250");
@@ -2652,7 +2742,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2670,6 +2760,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_250"))
@@ -2689,7 +2780,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_254");
@@ -2698,7 +2789,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2723,7 +2814,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_280");
@@ -2732,7 +2823,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2757,7 +2848,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -2766,7 +2857,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2791,7 +2882,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -2800,7 +2891,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2831,6 +2922,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_258"))
@@ -2850,7 +2942,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_262");
@@ -2859,7 +2951,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2881,7 +2973,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -2890,7 +2982,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2900,6 +2992,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_262"))
@@ -2955,7 +3048,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_250");
@@ -2984,7 +3077,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3002,6 +3095,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_250"))
@@ -3021,7 +3115,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_254");
@@ -3030,7 +3124,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3055,7 +3149,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_280");
@@ -3064,7 +3158,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3089,7 +3183,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -3098,7 +3192,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3123,7 +3217,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -3132,7 +3226,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3163,6 +3257,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_270"))
@@ -3218,7 +3313,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_250");
@@ -3247,7 +3342,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3265,6 +3360,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_250"))
@@ -3284,7 +3380,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_254");
@@ -3293,7 +3389,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3318,7 +3414,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_280");
@@ -3327,7 +3423,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3352,7 +3448,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -3361,7 +3457,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3386,7 +3482,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -3395,7 +3491,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3426,6 +3522,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_280"))
@@ -3445,7 +3542,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -3454,7 +3551,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3476,7 +3573,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_284");
@@ -3485,7 +3582,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3495,6 +3592,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_136"))
@@ -3550,7 +3648,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_250");
@@ -3579,7 +3677,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3597,6 +3695,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_250"))
@@ -3616,7 +3715,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_254");
@@ -3625,7 +3724,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3650,7 +3749,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_280");
@@ -3659,7 +3758,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3684,7 +3783,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -3693,7 +3792,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3718,7 +3817,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -3727,7 +3826,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3758,6 +3857,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_284"))
@@ -3777,7 +3877,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_288");
@@ -3786,7 +3886,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3808,7 +3908,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_296");
@@ -3817,7 +3917,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3827,6 +3927,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_288"))
@@ -3882,7 +3983,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_250");
@@ -3911,7 +4012,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3929,6 +4030,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_250"))
@@ -3948,7 +4050,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_254");
@@ -3957,7 +4059,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3982,7 +4084,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_280");
@@ -3991,7 +4093,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4016,7 +4118,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -4025,7 +4127,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4050,7 +4152,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -4059,7 +4161,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4090,6 +4192,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_296"))
@@ -4145,7 +4248,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_250");
@@ -4174,7 +4277,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4192,6 +4295,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_250"))
@@ -4211,7 +4315,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_254");
@@ -4220,7 +4324,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4245,7 +4349,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_280");
@@ -4254,7 +4358,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4279,7 +4383,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -4288,7 +4392,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4313,7 +4417,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -4322,7 +4426,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4353,6 +4457,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_162"))
@@ -4368,6 +4473,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_empire_day_major_tantor_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_166"))
@@ -4383,6 +4489,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -4393,12 +4500,14 @@ public class imperial_empire_day_major_tantor extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -4407,23 +4516,27 @@ public class imperial_empire_day_major_tantor extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.imperial_empire_day_major_tantor");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -4453,7 +4566,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_169");
@@ -4461,7 +4574,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 utils.setScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId", 2);
                 npcStartConversation(player, npc, "imperial_empire_day_major_tantor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4517,7 +4630,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_173");
@@ -4545,7 +4658,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "imperial_empire_day_major_tantor", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -4599,7 +4712,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_173");
@@ -4627,7 +4740,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "imperial_empire_day_major_tantor", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -4654,7 +4767,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -4666,7 +4779,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "imperial_empire_day_major_tantor", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -4713,7 +4826,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_142");
@@ -4733,7 +4846,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 utils.setScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId", 28);
                 npcStartConversation(player, npc, "imperial_empire_day_major_tantor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4756,7 +4869,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_72");
@@ -4768,7 +4881,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "imperial_empire_day_major_tantor", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -4781,6 +4894,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("imperial_empire_day_major_tantor"))

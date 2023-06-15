@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -152,7 +158,7 @@ public class barn_beast extends script.base_script
                 experiencePercentage = (int) (((float) experienceProgress / experienceNeeded) * 100);
             }
             names[idx] = "level_progress";
-            attribs[idx] = "" + experiencePercentage + "%";
+            attribs[idx] = experiencePercentage + "%";
             idx++;
         }
         if (beast_lib.getBeastCanLevel(self))
@@ -176,7 +182,7 @@ public class barn_beast extends script.base_script
         String currentHappinessString = utils.packStringId(beast_lib.convertHappinessString(currentHappiness));
         if (currentHappinessString != null)
         {
-            attribs[idx] = "" + currentHappinessString;
+            attribs[idx] = currentHappinessString;
             idx++;
             if (idx >= names.length)
             {
@@ -192,7 +198,7 @@ public class barn_beast extends script.base_script
         String currentLoyaltyString = utils.packStringId(beast_lib.convertLoyaltyString(currentLoyalty));
         if (currentLoyaltyString != null)
         {
-            attribs[idx] = "" + currentLoyaltyString;
+            attribs[idx] = currentLoyaltyString;
             idx++;
             if (idx >= names.length)
             {
@@ -200,7 +206,7 @@ public class barn_beast extends script.base_script
             }
         }
         names[idx] = "armorhpmax";
-        attribs[idx] = "" + (utils.getIntScriptVar(self, "beast.display.armor") + getEnhancedSkillStatisticModifier(self, "private_armor_bonus"));
+        attribs[idx] = String.valueOf(utils.getIntScriptVar(self, "beast.display.armor") + getEnhancedSkillStatisticModifier(self, "private_armor_bonus"));
         idx++;
         obj_id beastWeapon = getCurrentWeapon(self);
         if (isIdValid(beastWeapon))
@@ -212,14 +218,14 @@ public class barn_beast extends script.base_script
             maxDamage = (int) (maxDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
             float weaponSpeed = getWeaponAttackSpeed(beastWeapon);
             names[idx] = "damage";
-            attribs[idx] = "" + minDamage + " - " + maxDamage;
+            attribs[idx] = minDamage + " - " + maxDamage;
             idx++;
             names[idx] = "attackspeed";
-            attribs[idx] = "" + weaponSpeed;
+            attribs[idx] = String.valueOf(weaponSpeed);
             idx++;
             float beastDPS = utils.roundFloatByDecimal((minDamage + maxDamage) / weaponSpeed / 2);
             names[idx] = "basedps";
-            attribs[idx] = "" + beastDPS;
+            attribs[idx] = String.valueOf(beastDPS);
             idx++;
         }
         else
@@ -234,14 +240,14 @@ public class barn_beast extends script.base_script
                 minDamage = (int) (minDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
                 maxDamage = (int) (maxDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
                 names[idx] = "damage";
-                attribs[idx] = "" + minDamage + " - " + maxDamage;
+                attribs[idx] = minDamage + " - " + maxDamage;
                 idx++;
                 names[idx] = "attackspeed";
-                attribs[idx] = "" + weaponSpeed;
+                attribs[idx] = String.valueOf(weaponSpeed);
                 idx++;
                 float beastDPS = utils.roundFloatByDecimal((minDamage + maxDamage) / weaponSpeed / 2);
                 names[idx] = "basedps";
-                attribs[idx] = "" + beastDPS;
+                attribs[idx] = String.valueOf(beastDPS);
                 idx++;
             }
         }
@@ -255,13 +261,13 @@ public class barn_beast extends script.base_script
                     if (!name.equals("block_value_bonus"))
                     {
                         names[idx] = beast_lib.DISPLAY_NAMES[i];
-                        attribs[idx] = "" + utils.roundFloatByDecimal((utils.getFloatScriptVar(self, beast_lib.ARRAY_BEAST_INCUBATION_STATS[i]) * beast_lib.DISPLAY_CONVERSION_RATES[i])) + "%";
+                        attribs[idx] = utils.roundFloatByDecimal((utils.getFloatScriptVar(self, beast_lib.ARRAY_BEAST_INCUBATION_STATS[i]) * beast_lib.DISPLAY_CONVERSION_RATES[i])) + "%";
                         idx++;
                     }
                     else
                     {
                         names[idx] = beast_lib.DISPLAY_NAMES[i];
-                        attribs[idx] = "" + utils.roundFloatByDecimal(utils.getFloatScriptVar(self, beast_lib.ARRAY_BEAST_INCUBATION_STATS[i]));
+                        attribs[idx] = String.valueOf(utils.roundFloatByDecimal(utils.getFloatScriptVar(self, beast_lib.ARRAY_BEAST_INCUBATION_STATS[i])));
                         idx++;
                     }
                     continue;
@@ -269,7 +275,7 @@ public class barn_beast extends script.base_script
                 else
                 {
                     names[idx] = beast_lib.DISPLAY_NAMES[i];
-                    attribs[idx] = "" + utils.roundFloatByDecimal(utils.getFloatScriptVar(self, beast_lib.ARRAY_BEAST_INCUBATION_STATS[i]));
+                    attribs[idx] = String.valueOf(utils.roundFloatByDecimal(utils.getFloatScriptVar(self, beast_lib.ARRAY_BEAST_INCUBATION_STATS[i])));
                     idx++;
                     continue;
                 }
@@ -279,7 +285,7 @@ public class barn_beast extends script.base_script
         if (glanceReduct > 0)
         {
             names[idx] = "bm_glance_reduct";
-            attribs[idx] = "" + glanceReduct + "%";
+            attribs[idx] = glanceReduct + "%";
             idx++;
             if (idx >= names.length)
             {
@@ -290,7 +296,7 @@ public class barn_beast extends script.base_script
         if (damageReduct > 0)
         {
             names[idx] = "bm_damage_reduct";
-            attribs[idx] = "" + damageReduct + "%";
+            attribs[idx] = damageReduct + "%";
             idx++;
             if (idx >= names.length)
             {
@@ -301,7 +307,7 @@ public class barn_beast extends script.base_script
         if (punishReduct > 0)
         {
             names[idx] = "bm_punish_reduct";
-            attribs[idx] = "" + punishReduct + "%";
+            attribs[idx] = punishReduct + "%";
             idx++;
             if (idx >= names.length)
             {

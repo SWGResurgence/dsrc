@@ -1,5 +1,11 @@
 package script.creature;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.library.groundquests;
@@ -11,6 +17,7 @@ public class dynamic_enemy extends script.base_script
     public dynamic_enemy()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "clientEffect", null, 400, true);
@@ -18,6 +25,7 @@ public class dynamic_enemy extends script.base_script
         messageTo(self, "barkAttack", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitateTarget(obj_id self, obj_id victim) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "player");
@@ -32,29 +40,33 @@ public class dynamic_enemy extends script.base_script
         messageTo(self, "expression", null, 3, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLoiterMoving(obj_id self) throws InterruptedException
     {
         messageTo(self, "clientEffect", null, 3, true);
         return SCRIPT_CONTINUE;
     }
+
     public int clientEffect(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "clientEffect"))
         {
             messageTo(self, "cleanUp", null, 0, true);
         }
-        else 
+        else
         {
             playClientEffectObj(self, getStringObjVar(self, "clientEffect"), self, "");
             messageTo(self, "cleanUp", null, 1, true);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int expression(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "player");
@@ -68,12 +80,14 @@ public class dynamic_enemy extends script.base_script
         messageTo(self, "runAwayThenCleanUp", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int runAwayThenCleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         pathTo(self, groundquests.getRandom2DLocationAroundPlayer(self, 20, 50));
         messageTo(self, "clientEffect", null, 6, true);
         return SCRIPT_CONTINUE;
     }
+
     public int attackPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "player");
@@ -84,6 +98,7 @@ public class dynamic_enemy extends script.base_script
         startCombat(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int barkAttack(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -102,6 +117,7 @@ public class dynamic_enemy extends script.base_script
         chat.chat(self, chat.CHAT_SHOUT, chat.MOOD_ANGRY, new string_id(getStringObjVar(self, "phrase_string_file"), attackString));
         return SCRIPT_CONTINUE;
     }
+
     public int barkDefeat(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)

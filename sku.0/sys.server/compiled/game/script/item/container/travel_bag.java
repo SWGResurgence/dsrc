@@ -1,5 +1,11 @@
 package script.item.container;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class travel_bag extends script.base_script
@@ -15,6 +21,7 @@ public class travel_bag extends script.base_script
     public static final string_id SID_TRAVEL_RORI = new string_id("travel", "travel_rori");
     public static final string_id SID_NO_LOCATION_FOUND = new string_id("travel", "no_location_found");
     public static final string_id SID_ALREADY_THERE = new string_id("travel", "already_there");
+
     public travel_bag()
     {
     }

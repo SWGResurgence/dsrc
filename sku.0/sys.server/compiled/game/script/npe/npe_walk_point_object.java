@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.xp;
 import script.obj_id;
@@ -9,15 +15,18 @@ public class npe_walk_point_object extends script.base_script
     public npe_walk_point_object()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int setupWalkTrigger(obj_id self, dictionary params) throws InterruptedException
     {
         createTriggerVolume("npeWalkPoint", 2.5f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id player) throws InterruptedException
     {
         if (volumeName.equals("npeWalkPoint"))
@@ -33,6 +42,7 @@ public class npe_walk_point_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkGod(obj_id self) throws InterruptedException
     {
         if (isGod(self))

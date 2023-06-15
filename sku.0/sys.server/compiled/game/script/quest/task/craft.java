@@ -1,5 +1,11 @@
 package script.quest.task;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.draft_schematic;
 import script.library.quests;
 import script.library.utils;
@@ -10,6 +16,7 @@ public class craft extends script.base_script
     public craft()
     {
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         LOG("newquests", "OnQUestActivated(" + quests.getDataEntry(questRow, "NAME"));
@@ -20,7 +27,7 @@ public class craft extends script.base_script
         {
             craftedObjectTemplateName = getStringObjVar(self, objvarname);
         }
-        else 
+        else
         {
             craftedObjectTemplateName = quests.getDataEntry(questRow, "TARGET");
         }
@@ -30,7 +37,7 @@ public class craft extends script.base_script
         {
             craftedObjectCount = getIntObjVar(self, objvarname);
         }
-        else 
+        else
         {
             String countString = quests.getDataEntry(questRow, "PARAMETER");
             craftedObjectCount = utils.stringToInt(countString);
@@ -50,12 +57,13 @@ public class craft extends script.base_script
             objvarname = "quest." + questName + ".objectTemplateCrc";
             setObjVar(self, objvarname, objectTemplateCrc);
         }
-        else 
+        else
         {
             LOG("newquests", "craft - OnQuestActivated() - could not determine object to craft");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCraftedPrototype(obj_id self, obj_id prototypeObject, draft_schematic manufacturingSchematic) throws InterruptedException
     {
         LOG("newquests", "OnCraftedPrototype(" + prototypeObject + ", " + manufacturingSchematic + ")");
@@ -96,23 +104,23 @@ public class craft extends script.base_script
                             quests.complete(activeTasks[iter], self, true);
                             break;
                         }
-                        else 
+                        else
                         {
                             LOG("newquests", "cract - OnCraftedPrototype - the quest requires " + count + " objects to be crafted. The player has crafted " + currentCount + " objects");
                         }
                     }
-                    else 
+                    else
                     {
                         LOG("newquests", "craft - OnCraftedPrototype - the crafted object template crc (" + prototypeObjectTemplateCrc + " does not match the required crafted object template crc " + objectTemplateCrc);
                     }
                 }
-                else 
+                else
                 {
                     LOG("newquests", "craft - OnCraftedPrototype - could not determine what object needs to be crafted, " + objvarname + " was not found");
                 }
             }
         }
-        else 
+        else
         {
             LOG("newquests", "craft - OnCraftedPrototype - no active tasks for quest.task.craft");
         }

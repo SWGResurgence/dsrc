@@ -1,5 +1,11 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -9,9 +15,6 @@ import script.obj_id;
 
 public class quest_shuttle_event extends script.base_script
 {
-    public quest_shuttle_event()
-    {
-    }
     public static final boolean LOGGING_ON = false;
     public static final String SMUGGLER_MOB = "mtp_hideout_quest_smuggler";
     public static final String MEATLUMP_LOG = "meatlump_weapons_delivery";
@@ -20,6 +23,10 @@ public class quest_shuttle_event extends script.base_script
     public static final String SHUTTLE_OBJVAR = "meatlump.shuttle";
     public static final String QUEST_TASK = "speakSmuggler";
     public static final String QUEST_NAME = "quest/mtp_hideout_retrieve_delivery";
+    public quest_shuttle_event()
+    {
+    }
+
     public int startLandingSequence(obj_id self, dictionary params) throws InterruptedException
     {
         blog("startLandingSequence init ");
@@ -33,6 +40,7 @@ public class quest_shuttle_event extends script.base_script
         messageTo(self, "landed", null, 6.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int landed(obj_id self, dictionary params) throws InterruptedException
     {
         blog("landed init");
@@ -45,6 +53,7 @@ public class quest_shuttle_event extends script.base_script
         messageTo(self, "startTakeOffSequence", null, 160.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startTakeOffSequence(obj_id self, dictionary params) throws InterruptedException
     {
         blog("startTakeOffSequence init");
@@ -70,12 +79,14 @@ public class quest_shuttle_event extends script.base_script
         messageTo(self, "cleanUp", null, 20.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         blog("cleanUp init");
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnSmuggler(obj_id self, dictionary params) throws InterruptedException
     {
         blog("spawnSmuggler init");
@@ -104,6 +115,7 @@ public class quest_shuttle_event extends script.base_script
         blog("spawnSmuggler smuggler spawned");
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

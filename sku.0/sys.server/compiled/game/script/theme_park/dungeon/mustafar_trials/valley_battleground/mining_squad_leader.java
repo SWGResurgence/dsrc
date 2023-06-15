@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.valley_battleground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -7,11 +13,12 @@ import script.obj_id;
 
 public class mining_squad_leader extends script.base_script
 {
+    public static final String MINE_SOLDIER = "som_battlefield_miner";
+    public static final boolean LOGGING = false;
     public mining_squad_leader()
     {
     }
-    public static final String MINE_SOLDIER = "som_battlefield_miner";
-    public static final boolean LOGGING = false;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -20,6 +27,7 @@ public class mining_squad_leader extends script.base_script
         setHibernationDelay(self, 7200);
         return SCRIPT_CONTINUE;
     }
+
     public int autoDeploy(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "autoDeploy"))
@@ -28,6 +36,7 @@ public class mining_squad_leader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         utils.setScriptVar(self, "engaged", true);
@@ -38,19 +47,22 @@ public class mining_squad_leader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         if (isPlayer(attacker) || pet_lib.isPet(attacker))
         {
             setHate(self, attacker, -5000.0f);
             int total = 0;
-            for (int i : damage) {
+            for (int i : damage)
+            {
                 total += i;
             }
             addToHealth(self, total);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttackerCombatAction(obj_id self, obj_id weapon, obj_id defender) throws InterruptedException
     {
         if (isPlayer(defender))
@@ -59,6 +71,7 @@ public class mining_squad_leader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHateTargetAdded(obj_id self, obj_id target) throws InterruptedException
     {
         if (isPlayer(target) || pet_lib.isPet(target))
@@ -67,11 +80,13 @@ public class mining_squad_leader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int troopEngaged(obj_id self, dictionary params) throws InterruptedException
     {
         utils.setScriptVar(self, "engaged", true);
         return SCRIPT_CONTINUE;
     }
+
     public int deployForces(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, false);
@@ -97,6 +112,7 @@ public class mining_squad_leader extends script.base_script
         utils.setScriptVar(self, "deployed", true);
         return SCRIPT_CONTINUE;
     }
+
     public int unDeployForces(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "engaged"))
@@ -120,16 +136,21 @@ public class mining_squad_leader extends script.base_script
             return SCRIPT_CONTINUE;
         }
         setInvulnerable(self, true);
-        for (obj_id force : forces) {
-            if (isIdValid(force)) {
+        for (obj_id force : forces)
+        {
+            if (isIdValid(force))
+            {
                 kill(force);
                 destroyObject(force);
-            } else {
+            }
+            else
+            {
                 doLogging("unDeployForces", "Id for troop(" + force + ") was invalid, ignoring");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VALLEY_LOGGING)

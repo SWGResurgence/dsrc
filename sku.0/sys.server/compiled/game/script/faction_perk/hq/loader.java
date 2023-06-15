@@ -1,5 +1,11 @@
 package script.faction_perk.hq;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -12,6 +18,7 @@ public class loader extends script.base_script
     public loader()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, factions.FACTION))
@@ -32,6 +39,7 @@ public class loader extends script.base_script
         setCWData(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         permissionsMakePublic(self);
@@ -41,6 +49,7 @@ public class loader extends script.base_script
         setCWData(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isIdValid(srcContainer))
@@ -61,6 +70,7 @@ public class loader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (utils.isNestedWithinAPlayer(item))
@@ -69,6 +79,7 @@ public class loader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isIdValid(destContainer))
@@ -77,11 +88,13 @@ public class loader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDelayedRefundChecker(obj_id self, dictionary params) throws InterruptedException
     {
         hq.refundFactionBaseLots(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleHqDetonation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = obj_id.NULL_ID;
@@ -98,7 +111,7 @@ public class loader extends script.base_script
             {
                 CustomerServiceLog("faction_hq", "Faction HQ (" + self + "), destroyed by normal terminal overload. Player initiating the destruction is %TU", player, null);
             }
-            else 
+            else
             {
                 CustomerServiceLog("faction_hq", "Faction HQ (" + self + "), destroyed by normal terminal overload.");
             }
@@ -119,7 +132,7 @@ public class loader extends script.base_script
             {
                 CustomerServiceLog("faction_hq", "Faction HQ (" + self + "), destroyed by normal terminal overload. Player initiating the destruction is %TU", player, null);
             }
-            else 
+            else
             {
                 CustomerServiceLog("faction_hq", "Faction HQ (" + self + "), destroyed by normal terminal overload.");
             }
@@ -130,7 +143,7 @@ public class loader extends script.base_script
         {
             params.remove("locs");
         }
-        else 
+        else
         {
             params.put("locs", locs);
         }
@@ -138,12 +151,13 @@ public class loader extends script.base_script
         messageTo(self, "handleHqDetonation", params, rand(0.1f, 1.0f), true);
         return SCRIPT_CONTINUE;
     }
+
     public int handleHqExplosions(obj_id self, dictionary params) throws InterruptedException
     {
         location[] locs = params.getLocationArray("locs");
         if (locs != null && locs.length > 0)
         {
-            obj_id players[] = getPlayerCreaturesInRange(getLocation(self), 100.0f);
+            obj_id[] players = getPlayerCreaturesInRange(getLocation(self), 100.0f);
             if (players != null && players.length > 0)
             {
                 playClientEffectLoc(players[0], "clienteffect/combat_explosion_lair_large.cef", locs[0], 0.0f);
@@ -151,6 +165,7 @@ public class loader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     private int getHqLevel(obj_id self) throws InterruptedException
     {
         String template = getTemplateName(self);
@@ -162,6 +177,7 @@ public class loader extends script.base_script
         }
         return -1;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         hq.cleanUpHackAlarms(self);
@@ -172,10 +188,12 @@ public class loader extends script.base_script
         hq.refundBaseUnit(self);
         return SCRIPT_CONTINUE;
     }
+
     private void setCWData(obj_id self) throws InterruptedException
     {
         getClusterWideData("gcw_player_base", "base_cwdata_manager", true, self);
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String dungeon_name, int request_id, String[] element_name_list, dictionary[] dungeon_data, int lock_key) throws InterruptedException
     {
         location loc = getLocation(self);

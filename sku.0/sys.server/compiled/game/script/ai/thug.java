@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.attrib;
 import script.library.factions;
@@ -7,23 +13,26 @@ import script.obj_id;
 
 public class thug extends script.base_script
 {
+    public static final String ACTION_ALERT = "alert";
+    public static final String ACTION_THREATEN = "threaten";
     public thug()
     {
     }
-    public static final String ACTION_ALERT = "alert";
-    public static final String ACTION_THREATEN = "threaten";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setAttributeAttained(self, attrib.THUG);
         setAttributeInterested(self, attrib.VICTIM);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setAttributeAttained(self, attrib.THUG);
         setAttributeInterested(self, attrib.VICTIM);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (hasObjVar(breacher, "gm"))
@@ -68,7 +77,7 @@ public class thug extends script.base_script
             switch (reaction)
             {
                 case factions.REACTION_NEGATIVE:
-                
+
                 {
                     ai_lib.barkString(self, "hi_mean");
                     ai_aggro.requestAggroCheck(breacher);
@@ -76,13 +85,13 @@ public class thug extends script.base_script
                 }
                 case factions.REACTION_POSITIVE:
                 case factions.REACTION_LIKE:
-                
+
                 {
                     ai_lib.barkString(self, "hi_nice");
                 }
                 break;
                 default:
-                
+
                 {
                 }
                 break;
@@ -90,6 +99,7 @@ public class thug extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -116,7 +126,7 @@ public class thug extends script.base_script
                 switch (reaction)
                 {
                     case factions.REACTION_NEGATIVE:
-                    
+
                     {
                         ai_lib.barkString(self, "bye_mean");
                         if (rand(1, 2) == 1)
@@ -127,13 +137,13 @@ public class thug extends script.base_script
                     }
                     case factions.REACTION_POSITIVE:
                     case factions.REACTION_LIKE:
-                    
+
                     {
                         ai_lib.barkString(self, "bye_nice");
                     }
                     break;
                     default:
-                    
+
                     {
                         ai_lib.barkString(self, "bye_mean");
                     }
@@ -143,6 +153,7 @@ public class thug extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnBehaviorChange(obj_id self, int newBehavior, int oldBehavior, int[] changeFlags) throws InterruptedException
     {
         if (isIncapacitated(self))
@@ -169,11 +180,11 @@ public class thug extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doAgitateBehavior(obj_id npc, int behavior) throws InterruptedException
     {
         if (isInvulnerable(npc))
         {
-            return;
         }
     }
 }

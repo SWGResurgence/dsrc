@@ -1,5 +1,11 @@
 package script.item.droid;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.hue;
 import script.library.sui;
@@ -9,6 +15,7 @@ public class serving_droid extends script.base_script
 {
     public static final string_id PCOLOR = new string_id("sui", "set_primary_color");
     public static final string_id SCOLOR = new string_id("sui", "set_secondary_color");
+
     public serving_droid()
     {
     }

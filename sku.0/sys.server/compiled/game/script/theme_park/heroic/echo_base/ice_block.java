@@ -1,5 +1,11 @@
 package script.theme_park.heroic.echo_base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.buff;
 import script.library.trial;
@@ -11,12 +17,14 @@ public class ice_block extends script.base_script
     public ice_block()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "cleanupSelf", null, 90.0f, false);
         trial.markAsTempObject(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupSelf(obj_id self, dictionary params) throws InterruptedException
     {
         String buffName = "";

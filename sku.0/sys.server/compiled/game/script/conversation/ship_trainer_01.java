@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,22 +13,25 @@ import script.*;
 
 public class ship_trainer_01 extends script.base_script
 {
+    public static String c_stringFile = "conversation/ship_trainer_01";
+
     public ship_trainer_01()
     {
     }
-    public static String c_stringFile = "conversation/ship_trainer_01";
+
     public boolean ship_trainer_01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public void ship_trainer_01_action_clearTutorial(obj_id player, obj_id npc) throws InterruptedException
     {
         clearCondition(npc, CONDITION_INFLIGHT_TUTORIAL);
         removeObjVar(npc, "convo.appearance");
         clearCondition(npc, CONDITION_CONVERSABLE);
         detachScript(npc, "conversation.ship_trainer_01");
-        return;
     }
+
     public int ship_trainer_01_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a44e0bb8"))
@@ -42,7 +51,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9288900f");
@@ -51,7 +60,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -98,7 +107,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -119,7 +128,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -152,7 +161,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b440102e");
@@ -165,7 +174,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -209,7 +218,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -222,7 +231,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -233,6 +242,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9288900f"))
@@ -252,7 +262,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5ef040d8");
@@ -261,7 +271,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -272,6 +282,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5ef040d8"))
@@ -305,7 +316,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4cc9a6bb");
@@ -322,7 +333,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -333,6 +344,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4cc9a6bb"))
@@ -366,7 +378,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4cc9a6bb");
@@ -383,7 +395,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -423,7 +435,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4cc9a6bb");
@@ -440,7 +452,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -494,7 +506,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a44e0bb8");
@@ -519,7 +531,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -530,6 +542,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4cc9a6bb"))
@@ -563,7 +576,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4cc9a6bb");
@@ -580,7 +593,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -620,7 +633,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4cc9a6bb");
@@ -637,7 +650,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -691,7 +704,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a44e0bb8");
@@ -716,7 +729,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -727,6 +740,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4cc9a6bb"))
@@ -760,7 +774,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4cc9a6bb");
@@ -777,7 +791,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -817,7 +831,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4cc9a6bb");
@@ -834,7 +848,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -888,7 +902,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a44e0bb8");
@@ -913,7 +927,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -924,6 +938,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a44e0bb8"))
@@ -943,7 +958,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9288900f");
@@ -952,7 +967,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -999,7 +1014,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -1020,7 +1035,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -1053,7 +1068,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b440102e");
@@ -1066,7 +1081,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -1110,7 +1125,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -1123,7 +1138,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -1134,6 +1149,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_717ffa5d"))
@@ -1174,7 +1190,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d589bcc5");
@@ -1195,7 +1211,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -1242,7 +1258,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_306c1aa");
@@ -1263,7 +1279,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -1310,7 +1326,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_915b9a74");
@@ -1331,7 +1347,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -1385,7 +1401,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a44e0bb8");
@@ -1410,7 +1426,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -1421,6 +1437,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d589bcc5"))
@@ -1461,7 +1478,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d589bcc5");
@@ -1482,7 +1499,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -1529,7 +1546,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d589bcc5");
@@ -1550,7 +1567,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -1597,7 +1614,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d589bcc5");
@@ -1618,7 +1635,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -1665,7 +1682,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -1686,7 +1703,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -1697,6 +1714,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d589bcc5"))
@@ -1737,7 +1755,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d589bcc5");
@@ -1758,7 +1776,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -1805,7 +1823,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d589bcc5");
@@ -1826,7 +1844,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -1873,7 +1891,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d589bcc5");
@@ -1894,7 +1912,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -1941,7 +1959,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -1962,7 +1980,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -1973,6 +1991,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d589bcc5"))
@@ -2013,7 +2032,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d589bcc5");
@@ -2034,7 +2053,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -2081,7 +2100,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d589bcc5");
@@ -2102,7 +2121,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -2149,7 +2168,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d589bcc5");
@@ -2170,7 +2189,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -2217,7 +2236,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -2238,7 +2257,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -2249,6 +2268,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d589bcc5"))
@@ -2289,7 +2309,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d589bcc5");
@@ -2310,7 +2330,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -2357,7 +2377,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d589bcc5");
@@ -2378,7 +2398,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -2425,7 +2445,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d589bcc5");
@@ -2446,7 +2466,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -2493,7 +2513,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -2514,7 +2534,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -2525,6 +2545,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_717ffa5d"))
@@ -2565,7 +2586,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d589bcc5");
@@ -2586,7 +2607,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -2633,7 +2654,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_306c1aa");
@@ -2654,7 +2675,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -2701,7 +2722,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_915b9a74");
@@ -2722,7 +2743,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -2776,7 +2797,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a44e0bb8");
@@ -2801,7 +2822,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -2812,6 +2833,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_306c1aa"))
@@ -2852,7 +2874,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_306c1aa");
@@ -2873,7 +2895,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -2920,7 +2942,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_306c1aa");
@@ -2941,7 +2963,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -2988,7 +3010,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_306c1aa");
@@ -3009,7 +3031,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -3056,7 +3078,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -3077,7 +3099,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -3088,6 +3110,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_306c1aa"))
@@ -3128,7 +3151,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_306c1aa");
@@ -3149,7 +3172,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -3196,7 +3219,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_306c1aa");
@@ -3217,7 +3240,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -3264,7 +3287,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_306c1aa");
@@ -3285,7 +3308,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -3332,7 +3355,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -3353,7 +3376,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -3364,6 +3387,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_306c1aa"))
@@ -3404,7 +3428,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_306c1aa");
@@ -3425,7 +3449,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -3472,7 +3496,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_306c1aa");
@@ -3493,7 +3517,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -3540,7 +3564,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_306c1aa");
@@ -3561,7 +3585,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -3608,7 +3632,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -3629,7 +3653,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -3640,6 +3664,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_306c1aa"))
@@ -3680,7 +3705,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_306c1aa");
@@ -3701,7 +3726,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -3748,7 +3773,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_306c1aa");
@@ -3769,7 +3794,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -3816,7 +3841,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_306c1aa");
@@ -3837,7 +3862,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -3884,7 +3909,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -3905,7 +3930,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -3916,6 +3941,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_717ffa5d"))
@@ -3956,7 +3982,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d589bcc5");
@@ -3977,7 +4003,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -4024,7 +4050,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_306c1aa");
@@ -4045,7 +4071,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -4092,7 +4118,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_915b9a74");
@@ -4113,7 +4139,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -4167,7 +4193,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a44e0bb8");
@@ -4192,7 +4218,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -4203,6 +4229,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_915b9a74"))
@@ -4243,7 +4270,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_915b9a74");
@@ -4264,7 +4291,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -4311,7 +4338,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_915b9a74");
@@ -4332,7 +4359,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -4379,7 +4406,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_915b9a74");
@@ -4400,7 +4427,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -4447,7 +4474,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -4468,7 +4495,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -4479,6 +4506,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_915b9a74"))
@@ -4519,7 +4547,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_915b9a74");
@@ -4540,7 +4568,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -4587,7 +4615,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_915b9a74");
@@ -4608,7 +4636,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -4655,7 +4683,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_915b9a74");
@@ -4676,7 +4704,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -4723,7 +4751,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -4744,7 +4772,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -4755,6 +4783,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_915b9a74"))
@@ -4795,7 +4824,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_915b9a74");
@@ -4816,7 +4845,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -4863,7 +4892,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_915b9a74");
@@ -4884,7 +4913,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -4931,7 +4960,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_915b9a74");
@@ -4952,7 +4981,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -4999,7 +5028,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -5020,7 +5049,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -5031,6 +5060,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_915b9a74"))
@@ -5071,7 +5101,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_915b9a74");
@@ -5092,7 +5122,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -5139,7 +5169,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_915b9a74");
@@ -5160,7 +5190,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -5207,7 +5237,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_915b9a74");
@@ -5228,7 +5258,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -5275,7 +5305,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -5296,7 +5326,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -5307,6 +5337,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_717ffa5d"))
@@ -5347,7 +5378,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d589bcc5");
@@ -5368,7 +5399,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -5415,7 +5446,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_306c1aa");
@@ -5436,7 +5467,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -5483,7 +5514,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_915b9a74");
@@ -5504,7 +5535,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -5558,7 +5589,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a44e0bb8");
@@ -5583,7 +5614,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -5594,6 +5625,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a44e0bb8"))
@@ -5613,7 +5645,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9288900f");
@@ -5622,7 +5654,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -5669,7 +5701,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -5690,7 +5722,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -5723,7 +5755,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b440102e");
@@ -5736,7 +5768,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -5780,7 +5812,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -5793,7 +5825,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -5804,6 +5836,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b440102e"))
@@ -5823,7 +5856,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_23f4b352");
@@ -5832,7 +5865,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -5886,7 +5919,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a44e0bb8");
@@ -5911,7 +5944,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -5922,6 +5955,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_23f4b352"))
@@ -5941,7 +5975,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e93ecaeb");
@@ -5950,7 +5984,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -5961,6 +5995,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e93ecaeb"))
@@ -5987,7 +6022,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b8768b9a");
@@ -6000,7 +6035,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -6011,6 +6046,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b8768b9a"))
@@ -6051,7 +6087,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6f4feb49");
@@ -6072,7 +6108,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -6126,7 +6162,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a44e0bb8");
@@ -6151,7 +6187,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -6162,6 +6198,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6f4feb49"))
@@ -6202,7 +6239,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6f4feb49");
@@ -6223,7 +6260,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -6270,7 +6307,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6f4feb49");
@@ -6291,7 +6328,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -6338,7 +6375,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6f4feb49");
@@ -6359,7 +6396,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -6413,7 +6450,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a44e0bb8");
@@ -6438,7 +6475,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -6449,6 +6486,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6f4feb49"))
@@ -6489,7 +6527,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6f4feb49");
@@ -6510,7 +6548,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -6557,7 +6595,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6f4feb49");
@@ -6578,7 +6616,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -6625,7 +6663,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6f4feb49");
@@ -6646,7 +6684,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -6700,7 +6738,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a44e0bb8");
@@ -6725,7 +6763,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -6736,6 +6774,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6f4feb49"))
@@ -6776,7 +6815,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6f4feb49");
@@ -6797,7 +6836,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -6844,7 +6883,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6f4feb49");
@@ -6865,7 +6904,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -6912,7 +6951,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6f4feb49");
@@ -6933,7 +6972,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -6987,7 +7026,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a44e0bb8");
@@ -7012,7 +7051,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -7023,6 +7062,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6f4feb49"))
@@ -7063,7 +7103,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6f4feb49");
@@ -7084,7 +7124,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -7131,7 +7171,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6f4feb49");
@@ -7152,7 +7192,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -7199,7 +7239,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6f4feb49");
@@ -7220,7 +7260,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -7274,7 +7314,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a44e0bb8");
@@ -7299,7 +7339,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -7310,6 +7350,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a44e0bb8"))
@@ -7329,7 +7370,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9288900f");
@@ -7338,7 +7379,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -7385,7 +7426,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -7406,7 +7447,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -7439,7 +7480,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b440102e");
@@ -7452,7 +7493,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -7496,7 +7537,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -7509,7 +7550,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -7520,6 +7561,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a44e0bb8"))
@@ -7539,7 +7581,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9288900f");
@@ -7548,7 +7590,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -7595,7 +7637,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -7616,7 +7658,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -7649,7 +7691,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b440102e");
@@ -7662,7 +7704,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -7706,7 +7748,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -7719,7 +7761,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -7730,6 +7772,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a44e0bb8"))
@@ -7749,7 +7792,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9288900f");
@@ -7758,7 +7801,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -7805,7 +7848,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_717ffa5d");
@@ -7826,7 +7869,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -7859,7 +7902,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b440102e");
@@ -7872,7 +7915,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -7916,7 +7959,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -7929,7 +7972,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -7940,6 +7983,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ship_trainer_01_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_99"))
@@ -7999,7 +8043,7 @@ public class ship_trainer_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a44e0bb8");
@@ -8024,7 +8068,7 @@ public class ship_trainer_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ship_trainer_01.branchId");
                     chat.chat(npc, player, message);
@@ -8035,6 +8079,7 @@ public class ship_trainer_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -8042,6 +8087,7 @@ public class ship_trainer_01 extends script.base_script
         setObjVar(self, "convo.appearance", "object/mobile/tt8l_y7.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "convo.appearance", "object/mobile/tt8l_y7.iff");
@@ -8049,6 +8095,7 @@ public class ship_trainer_01 extends script.base_script
         setCondition(self, CONDITION_INFLIGHT_TUTORIAL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -8057,18 +8104,21 @@ public class ship_trainer_01 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ship_trainer_01");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -8119,7 +8169,7 @@ public class ship_trainer_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_a44e0bb8");
@@ -8143,7 +8193,7 @@ public class ship_trainer_01 extends script.base_script
                 utils.setScriptVar(player, "conversation.ship_trainer_01.branchId", 1);
                 npcStartConversation(player, npc, "ship_trainer_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8152,6 +8202,7 @@ public class ship_trainer_01 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ship_trainer_01"))

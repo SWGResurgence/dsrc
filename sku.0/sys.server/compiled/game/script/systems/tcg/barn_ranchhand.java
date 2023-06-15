@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,6 +13,7 @@ public class barn_ranchhand extends script.base_script
 {
     public static final boolean LOGGING_ON = false;
     public static final String LOGGING_CATEGORY = "tcg_barn";
+
     public barn_ranchhand()
     {
     }
@@ -28,7 +35,7 @@ public class barn_ranchhand extends script.base_script
             String buildingOwnerName = getStringObjVar(building, player_structure.VAR_OWNER);
             if (buildingOwnerName != null && buildingOwnerName.length() > 0)
             {
-                ranchhandName = "" + toUpper(buildingOwnerName, 0) + "'s ranch hand";
+                ranchhandName = toUpper(buildingOwnerName, 0) + "'s ranch hand";
             }
         }
         setName(self, ranchhandName);

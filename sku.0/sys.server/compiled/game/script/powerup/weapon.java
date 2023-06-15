@@ -1,5 +1,11 @@
 package script.powerup;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.powerup;
 import script.library.prose;
 import script.library.utils;
@@ -7,15 +13,17 @@ import script.*;
 
 public class weapon extends script.base_script
 {
+    public static final string_id MNU_REMOVE_POWERUP = new string_id("powerup", "mnu_remove_powerup");
+    public static final string_id PROSE_REMOVE_POWERUP = new string_id("powerup", "prose_remove_powerup");
     public weapon()
     {
     }
-    public static final string_id MNU_REMOVE_POWERUP = new string_id("powerup", "mnu_remove_powerup");
-    public static final string_id PROSE_REMOVE_POWERUP = new string_id("powerup", "prose_remove_powerup");
+
     public int OnApplyPowerup(obj_id self, obj_id player, obj_id target) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("powerup", "powerup.weapon.onAttach");
@@ -30,11 +38,13 @@ public class weapon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         powerup.getWeaponAttributes(player, self, names, attribs, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.isNestedWithin(self, player))
@@ -43,6 +53,7 @@ public class weapon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         LOG("powerup", "Selected cleanup item " + item);

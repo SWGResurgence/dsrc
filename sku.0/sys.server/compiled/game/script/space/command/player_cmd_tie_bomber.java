@@ -1,5 +1,11 @@
 package script.space.command;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ship_ai;
 import script.library.space_combat;
@@ -11,12 +17,14 @@ public class player_cmd_tie_bomber extends script.base_script
     public player_cmd_tie_bomber()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         dictionary outparams = new dictionary();
         messageTo(self, "bomberStrikeTimeout", outparams, 1200.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "evacuate"))
@@ -33,6 +41,7 @@ public class player_cmd_tie_bomber extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpaceUnitMoveToComplete(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(null, "ONsPACEuNITmOVEtOcOMPLETE - tie bomber script");
@@ -46,11 +55,13 @@ public class player_cmd_tie_bomber extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id squadUnit : squadUnits) {
+        for (obj_id squadUnit : squadUnits)
+        {
             space_combat.destroyObjectHyperspace(squadUnit);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int bomberStrikeTimeout(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))

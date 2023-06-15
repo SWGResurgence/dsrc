@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.groundquests;
@@ -9,9 +15,6 @@ import script.obj_id;
 
 public class encounter_on_creature extends script.base_script
 {
-    public encounter_on_creature()
-    {
-    }
     public static final String objvarOnCreatureOwner = "quest.owner";
     public static final String objvarOnCreatureQuestCrc = "quest.questCrc";
     public static final String objvarOnCreatureTaskId = "quest.taskId";
@@ -21,6 +24,10 @@ public class encounter_on_creature extends script.base_script
     public static final String objvarOnCreatureStartDistanceToPlayer = "quest.startDistanceToPlayer";
     public static final String taskType = "encounter";
     public static float combatDistance = 64;
+    public encounter_on_creature()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, objvarOnCreatureOwner);
@@ -33,6 +40,7 @@ public class encounter_on_creature extends script.base_script
         messageTo(self, "messageEncounterTaskCheckCreatureDistance", params, 15, false);
         return SCRIPT_CONTINUE;
     }
+
     public int messageEncounterTaskCheckCreatureDistance(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, objvarOnCreatureOwner);
@@ -43,7 +51,8 @@ public class encounter_on_creature extends script.base_script
         }
         location currentLocation = getLocation(self);
         location playerLocation = getLocation(player);
-        if(currentLocation == null && playerLocation == null){
+        if (currentLocation == null && playerLocation == null)
+        {
             utils.setScriptVar(self, scriptVarNumAttempts, ++numTries);
             if (numTries < 4)
             {
@@ -94,6 +103,7 @@ public class encounter_on_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         if (hasObjVar(self, objvarOnCreatureOwner) && hasObjVar(self, objvarOnCreatureQuestCrc) && hasObjVar(self, objvarOnCreatureTaskId))
@@ -109,6 +119,7 @@ public class encounter_on_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int messageEncounterCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

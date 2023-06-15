@@ -1,37 +1,51 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class prisoner_pirate_cave extends script.base_script
 {
+    public static final string_id SID_TOO_FAR = new string_id("spam", "too_far_from_prisoner");
+    public static String c_stringFile = "conversation/prisoner_pirate_cave";
+
     public prisoner_pirate_cave()
     {
     }
-    public static String c_stringFile = "conversation/prisoner_pirate_cave";
+
     public boolean prisoner_pirate_cave_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean prisoner_pirate_cave_condition_hasRescueTask(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !hasObjVar(npc, "traveling") && (groundquests.isTaskActive(player, "u16_nym_themepark_pirate_prisoner_rescue_collection", "findPrisoner") || groundquests.isTaskActive(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_01", "findPrisoner") || groundquests.isTaskActive(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_02", "findPrisoner"));
     }
+
     public boolean prisoner_pirate_cave_condition_isTravelingWithOwner(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasObjVar(npc, "traveling") && (getObjIdObjVar(npc, "playerOwner") == player) && getIntObjVar(npc, "traveling") == 1 && groundquests.isTaskActive(player, "u16_nym_themepark_pirate_prisoner_rescue_collection", "isEscortingPrisoner") || groundquests.isTaskActive(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_01", "isEscortingPrisoner") || groundquests.isTaskActive(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_02", "isEscortingPrisoner");
     }
+
     public boolean prisoner_pirate_cave_condition_hasArrived(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_pirate_prisoner_rescue_collection", "waitingForShuttle") || groundquests.isTaskActive(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_01", "waitingForShuttle") || groundquests.isTaskActive(player, "u16_nym_themepark_pirate_prisoner_rescue_retry_02", "waitingForShuttle");
     }
+
     public boolean prisoner_pirate_cave_condition_isTraveling(obj_id player, obj_id npc) throws InterruptedException
     {
         return getIntObjVar(npc, "traveling") == 1;
     }
+
     public void prisoner_pirate_cave_action_startEscort(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasFoundPrisoner");
@@ -45,12 +59,14 @@ public class prisoner_pirate_cave extends script.base_script
         messageTo(npc, "checkArrivalLoopHandler", null, 5, false);
         LOG("prisoner_error_log", "prisoner being rescued. Sending message to checkArrivalLoopHandler in 60 seconds.");
     }
+
     public void prisoner_pirate_cave_action_walkFaster(obj_id player, obj_id npc) throws InterruptedException
     {
         setMovementRun(npc);
         setBaseRunSpeed(npc, (getBaseRunSpeed(npc) - 8));
         ai_lib.aiFollow(npc, player, 1.0f, 3.0f);
     }
+
     public int prisoner_pirate_cave_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8"))
@@ -70,7 +86,7 @@ public class prisoner_pirate_cave extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_12");
@@ -79,7 +95,7 @@ public class prisoner_pirate_cave extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.prisoner_pirate_cave.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -89,6 +105,7 @@ public class prisoner_pirate_cave extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int prisoner_pirate_cave_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_12"))
@@ -104,7 +121,7 @@ public class prisoner_pirate_cave extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public static final string_id SID_TOO_FAR = new string_id("spam", "too_far_from_prisoner");
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -114,11 +131,13 @@ public class prisoner_pirate_cave extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -127,6 +146,7 @@ public class prisoner_pirate_cave extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
@@ -135,6 +155,7 @@ public class prisoner_pirate_cave extends script.base_script
         setObjVar(self, "toldMom", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "toldMom"))
@@ -145,6 +166,7 @@ public class prisoner_pirate_cave extends script.base_script
         setObjVar(self, "toldMom", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int handleUpdatePrisonerRescueQuest(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self))
@@ -173,12 +195,14 @@ public class prisoner_pirate_cave extends script.base_script
         groundquests.sendSignal(player, signal);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         tellMomIDied(self);
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int checkArrivalLoopHandler(obj_id self, dictionary params) throws InterruptedException
     {
         setMovementRun(self);
@@ -231,7 +255,7 @@ public class prisoner_pirate_cave extends script.base_script
                 pp = prose.setDI(pp, count);
                 sendQuestSystemMessage(player, pp);
             }
-            else 
+            else
             {
                 int count = 10;
                 prose_package pp = new prose_package();
@@ -241,7 +265,7 @@ public class prisoner_pirate_cave extends script.base_script
                 utils.setScriptVar(player, "timer", getGameTime());
             }
         }
-        else 
+        else
         {
             utils.removeScriptVar(player, "timer");
         }
@@ -249,6 +273,7 @@ public class prisoner_pirate_cave extends script.base_script
         messageTo(self, "checkArrivalLoopHandler", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean callShuttle(obj_id self, obj_id player) throws InterruptedException
     {
         LOG("prisoner_error_log", "callShuttle - Shuttle Called");
@@ -295,6 +320,7 @@ public class prisoner_pirate_cave extends script.base_script
         messageTo(self, "handleDestroySelf", null, 32, false);
         return true;
     }
+
     public boolean tellMomIDied(obj_id self) throws InterruptedException
     {
         if (!isValidId(self))
@@ -319,6 +345,7 @@ public class prisoner_pirate_cave extends script.base_script
         messageTo(mom, "tellingMomIDied", info, 5, false);
         return true;
     }
+
     public boolean failRescueQuest(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "playerOwner");
@@ -337,12 +364,14 @@ public class prisoner_pirate_cave extends script.base_script
         messageTo(self, "handleDestroySelf", null, 1, false);
         return true;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -379,7 +408,7 @@ public class prisoner_pirate_cave extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_8");
@@ -387,7 +416,7 @@ public class prisoner_pirate_cave extends script.base_script
                 utils.setScriptVar(player, "conversation.prisoner_pirate_cave.branchId", 3);
                 npcStartConversation(player, npc, "prisoner_pirate_cave", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -408,6 +437,7 @@ public class prisoner_pirate_cave extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("prisoner_pirate_cave"))

@@ -1,5 +1,11 @@
 package script.theme_park.singing_mountain;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.location;
@@ -10,18 +16,21 @@ public class sentry2_path extends script.base_script
     public sentry2_path()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int timeOut = rand(20, 40);
         messageTo(self, "startPatrol", null, timeOut, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         int timeOut = rand(20, 40);
         messageTo(self, "startPatrol", null, timeOut, true);
         return SCRIPT_CONTINUE;
     }
+
     public int startPatrol(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id stronghold = getTopMostContainer(self);
@@ -31,6 +40,7 @@ public class sentry2_path extends script.base_script
         addLocationTarget("spot1", guard1, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         doAnimationAction(self, pickOverlyElaborateAnimationActionFromList());
@@ -61,6 +71,7 @@ public class sentry2_path extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spot2(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id stronghold = getTopMostContainer(self);
@@ -70,6 +81,7 @@ public class sentry2_path extends script.base_script
         addLocationTarget("spot2", guard1, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int spot3(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id stronghold = getTopMostContainer(self);
@@ -79,6 +91,7 @@ public class sentry2_path extends script.base_script
         addLocationTarget("spot3", guard1, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int spot4(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id stronghold = getTopMostContainer(self);
@@ -88,6 +101,7 @@ public class sentry2_path extends script.base_script
         addLocationTarget("spot4", guard1, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int spot5(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id stronghold = getTopMostContainer(self);
@@ -97,6 +111,7 @@ public class sentry2_path extends script.base_script
         addLocationTarget("spot5", guard1, 1);
         return SCRIPT_CONTINUE;
     }
+
     public String pickOverlyElaborateAnimationActionFromList() throws InterruptedException
     {
         String action = "listen";
@@ -105,7 +120,7 @@ public class sentry2_path extends script.base_script
         {
             return action;
         }
-        else 
+        else
         {
             return "search";
         }

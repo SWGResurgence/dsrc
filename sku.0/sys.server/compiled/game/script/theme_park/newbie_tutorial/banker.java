@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -10,6 +16,7 @@ public class banker extends script.theme_park.newbie_tutorial.tutorial_base
     public banker()
     {
     }
+
     public int handleInitiateConvo(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getPlayer(self);
@@ -20,6 +27,7 @@ public class banker extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "explainConvoAgain", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int explainConvoAgain(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "newbie.talking"))
@@ -33,6 +41,7 @@ public class banker extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -49,6 +58,7 @@ public class banker extends script.theme_park.newbie_tutorial.tutorial_base
         setObjVar(self, "newbie.talking", true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         setObjVar(self, "newbie.talking", true);
@@ -60,73 +70,84 @@ public class banker extends script.theme_park.newbie_tutorial.tutorial_base
             makeStaticWaypoint(bank);
         }
         string_id greeting = new string_id(NEWBIE_CONVO, "banker_1_start");
-        string_id response[] = new string_id[2];
+        string_id[] response = new string_id[2];
         response[0] = new string_id(NEWBIE_CONVO, "banker_1_reply_1");
         response[1] = new string_id(NEWBIE_CONVO, "banker_1_reply_2");
         doAnimationAction(self, "embarrassed");
         npcStartConversation(speaker, self, CONVO, greeting, response);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         npcRemoveConversationResponse(player, response);
-        switch ((response.getAsciiId())) {
-            case "banker_1_reply_1": {
+        switch ((response.getAsciiId()))
+        {
+            case "banker_1_reply_1":
+            {
                 string_id message = new string_id(NEWBIE_CONVO, "banker_2_start");
                 npcSpeak(player, message);
                 doAnimationAction(self, "explain");
                 npcAddConversationResponse(player, new string_id(NEWBIE_CONVO, "banker_2_reply_1"));
                 break;
             }
-            case "banker_2_reply_1": {
+            case "banker_2_reply_1":
+            {
                 string_id message = new string_id(NEWBIE_CONVO, "banker_2_more");
                 npcSpeak(player, message);
                 doAnimationAction(self, "shake_head_no");
                 npcAddConversationResponse(player, new string_id(NEWBIE_CONVO, "banker_2_reply_2"));
                 break;
             }
-            case "banker_2_reply_2": {
+            case "banker_2_reply_2":
+            {
                 string_id message = new string_id(NEWBIE_CONVO, "banker_2_explain");
                 npcSpeak(player, message);
                 doAnimationAction(self, "point_left");
                 npcAddConversationResponse(player, new string_id(NEWBIE_CONVO, "banker_2_reply_3"));
                 break;
             }
-            case "banker_2_reply_3": {
+            case "banker_2_reply_3":
+            {
                 string_id message = new string_id(NEWBIE_CONVO, "banker_2_explain_2");
                 doAnimationAction(self, "face_wink");
                 npcSpeak(player, message);
                 break;
             }
-            case "banker_1_reply_2": {
+            case "banker_1_reply_2":
+            {
                 string_id message = new string_id(NEWBIE_CONVO, "banker_2_explain_terminals");
                 npcSpeak(player, message);
                 doAnimationAction(self, "look_left");
                 npcAddConversationResponse(player, new string_id(NEWBIE_CONVO, "banker_1_reply_3"));
                 break;
             }
-            case "banker_1_reply_3": {
+            case "banker_1_reply_3":
+            {
                 string_id message = new string_id(NEWBIE_CONVO, "banker_2_explain_bank");
                 npcSpeak(player, message);
                 doAnimationAction(self, "face_innocent");
                 npcAddConversationResponse(player, new string_id(NEWBIE_CONVO, "banker_bank_reply_1"));
                 break;
             }
-            case "banker_bank_reply_1": {
+            case "banker_bank_reply_1":
+            {
                 string_id message = new string_id(NEWBIE_CONVO, "banker_2_more_bank");
                 npcSpeak(player, message);
                 doAnimationAction(self, "whisper");
                 npcAddConversationResponse(player, new string_id(NEWBIE_CONVO, "banker_2_bank_question"));
                 break;
             }
-            case "banker_2_bank_question": {
+            case "banker_2_bank_question":
+            {
                 string_id message = new string_id(NEWBIE_CONVO, "banker_2_bank_answer");
                 npcSpeak(player, message);
                 doAnimationAction(self, "face_eye_roll");
                 npcAddConversationResponse(player, new string_id(NEWBIE_CONVO, "banker_bank_question_2"));
                 break;
             }
-            case "banker_bank_question_2": {
+            case "banker_bank_question_2":
+            {
                 string_id message = new string_id(NEWBIE_CONVO, "banker_bank_answer_2");
                 npcSpeak(player, message);
                 doAnimationAction(self, "wave_finger_warning");
@@ -135,6 +156,7 @@ public class banker extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleInitiateClonePrompt(obj_id self, dictionary params) throws InterruptedException
     {
         location destLoc = new location(getLocation(self));
@@ -146,6 +168,7 @@ public class banker extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleExplainTerminalOne", null, 8, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         if (!isInRoom(getPlayer(self), "r5"))
@@ -156,6 +179,7 @@ public class banker extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleCorrectFacing", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCorrectFacing(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(getPlayer(self), "r5"))
@@ -165,6 +189,7 @@ public class banker extends script.theme_park.newbie_tutorial.tutorial_base
         faceToBehavior(self, getPlayer(self));
         return SCRIPT_CONTINUE;
     }
+
     public int handleExplainTerminalOne(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(getPlayer(self), "r5"))
@@ -175,6 +200,7 @@ public class banker extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleExplainTerminalTwo", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleExplainTerminalTwo(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInRoom(getPlayer(self), "r5"))

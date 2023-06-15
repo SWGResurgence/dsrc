@@ -1,16 +1,23 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class imperial_captain extends script.base_script
 {
-    public imperial_captain()
-    {
-    }
     public static final String CONVO_FILE = "theme_park/warren/warren";
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public static final String PASSKEYCODE = "object/tangible/mission/quest_item/warren_passkey_s01.iff";
+    public imperial_captain()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -18,6 +25,7 @@ public class imperial_captain extends script.base_script
         setName(self, new string_id("theme_park/warren/warren_system_messages", "name_heff"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -25,6 +33,7 @@ public class imperial_captain extends script.base_script
         mdata.setServerNotify(false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(speaker) || ai_lib.aiIsDead(self))
@@ -44,11 +53,12 @@ public class imperial_captain extends script.base_script
         }
         faceToBehavior(self, speaker);
         string_id greeting = new string_id(CONVO_FILE, "heff_start");
-        string_id response[] = new string_id[1];
+        string_id[] response = new string_id[1];
         response[0] = new string_id(CONVO_FILE, "heff_reply_1");
         npcStartConversation(speaker, self, CONVO_FILE, greeting, response);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if (!convo.equals(CONVO_FILE))
@@ -72,6 +82,7 @@ public class imperial_captain extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasEvidence(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getPlayerDatapad(player);
@@ -81,8 +92,10 @@ public class imperial_captain extends script.base_script
             return false;
         }
         int[] evCount = new int[5];
-        for (obj_id content : contents) {
-            if (hasObjVar(content, "warren.evidence")) {
+        for (obj_id content : contents)
+        {
+            if (hasObjVar(content, "warren.evidence"))
+            {
                 evCount[getIntObjVar(content, "warren.evidence")] = 1;
             }
         }
@@ -95,6 +108,7 @@ public class imperial_captain extends script.base_script
         }
         return true;
     }
+
     public boolean takeAllEvidence(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getPlayerDatapad(player);
@@ -104,8 +118,10 @@ public class imperial_captain extends script.base_script
             return false;
         }
         int[] evCount = new int[5];
-        for (obj_id content : contents) {
-            if (hasObjVar(content, "warren.evidence")) {
+        for (obj_id content : contents)
+        {
+            if (hasObjVar(content, "warren.evidence"))
+            {
                 evCount[getIntObjVar(content, "warren.evidence")] = 1;
                 destroyObject(content);
             }

@@ -1,286 +1,294 @@
 package script.developer.soe.e3demo;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class e3_demoer extends script.base_script
 {
+    public static final String[] MANDALORIAN_ARMOR =
+            {
+                    "object/tangible/wearables/armor/mandalorian/armor_mandalorian_bracer_l.iff",
+                    "object/tangible/wearables/armor/mandalorian/armor_mandalorian_bracer_r.iff",
+                    "object/tangible/wearables/armor/mandalorian/armor_mandalorian_chest_plate.iff",
+                    "object/tangible/wearables/armor/mandalorian/armor_mandalorian_belt.iff",
+                    "object/tangible/wearables/armor/mandalorian/armor_mandalorian_bicep_l.iff",
+                    "object/tangible/wearables/armor/mandalorian/armor_mandalorian_bicep_r.iff",
+                    "object/tangible/wearables/armor/mandalorian/armor_mandalorian_gloves.iff",
+                    "object/tangible/wearables/armor/mandalorian/armor_mandalorian_helmet.iff",
+                    "object/tangible/wearables/armor/mandalorian/armor_mandalorian_leggings.iff",
+                    "object/tangible/wearables/armor/mandalorian/armor_mandalorian_shoes.iff"
+            };
+    public static final String[] WOOKIEE_ARMOR =
+            {
+                    "object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_bracer_l.iff",
+                    "object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_bracer_r.iff",
+                    "object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_chest_plate.iff",
+                    "object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_leggings.iff"
+            };
+    public static final String[] SHIP_COMPONENTS =
+            {
+                    "object/tangible/ship/components/engine/eng_incom_fusialthrust.iff",
+                    "object/tangible/ship/components/engine/eng_qualdex_kyromaster.iff",
+                    "object/tangible/ship/components/weapon/wpn_subpro_tripleblaster_mark2.iff",
+                    "object/tangible/ship/components/weapon/wpn_incom_shredder.iff",
+                    "object/tangible/ship/components/weapon/wpn_armek_sw4.iff",
+                    "object/tangible/ship/components/booster/xwing_booster_test.iff"
+            };
+    public static final String[] JEDI_CLOTHES =
+            {
+                    "object/tangible/wearables/robe/robe_s05_h1.iff",
+                    "object/tangible/wearables/robe/robe_s05.iff"
+            };
+    public static final String[] LIGHTSABERS =
+            {
+                    "object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen5.iff",
+                    "object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen5.iff",
+                    "object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen5.iff"
+            };
+    public static final String[] CREATUREHANDLER =
+            {
+                    "outdoors_ranger",
+                    "outdoors_ranger_novice",
+                    "outdoors_ranger_master",
+                    "outdoors_ranger_movement_01",
+                    "outdoors_ranger_movement_02",
+                    "outdoors_ranger_movement_03",
+                    "outdoors_ranger_movement_04",
+                    "outdoors_ranger_tracking_01",
+                    "outdoors_ranger_tracking_02",
+                    "outdoors_ranger_tracking_03",
+                    "outdoors_ranger_tracking_04",
+                    "outdoors_ranger_harvest_01",
+                    "outdoors_ranger_harvest_02",
+                    "outdoors_ranger_harvest_03",
+                    "outdoors_ranger_harvest_04",
+                    "outdoors_ranger_support_01",
+                    "outdoors_ranger_support_02",
+                    "outdoors_ranger_support_03",
+                    "outdoors_ranger_support_04",
+                    "outdoors_creaturehandler",
+                    "outdoors_creaturehandler_novice",
+                    "outdoors_creaturehandler_master",
+                    "outdoors_creaturehandler_taming_01",
+                    "outdoors_creaturehandler_taming_02",
+                    "outdoors_creaturehandler_taming_03",
+                    "outdoors_creaturehandler_taming_04",
+                    "outdoors_creaturehandler_training_01",
+                    "outdoors_creaturehandler_training_02",
+                    "outdoors_creaturehandler_training_03",
+                    "outdoors_creaturehandler_training_04",
+                    "outdoors_creaturehandler_healing_01",
+                    "outdoors_creaturehandler_healing_02",
+                    "outdoors_creaturehandler_healing_03",
+                    "outdoors_creaturehandler_healing_04",
+                    "outdoors_creaturehandler_support_01",
+                    "outdoors_creaturehandler_support_02",
+                    "outdoors_creaturehandler_support_03",
+                    "outdoors_creaturehandler_support_04"
+            };
+    public static final String[] POLITICIAN =
+            {
+                    "social_politician",
+                    "social_politician_novice",
+                    "social_politician_master",
+                    "social_politician_fiscal_01",
+                    "social_politician_fiscal_02",
+                    "social_politician_fiscal_03",
+                    "social_politician_fiscal_04",
+                    "social_politician_martial_01",
+                    "social_politician_martial_02",
+                    "social_politician_martial_03",
+                    "social_politician_martial_04",
+                    "social_politician_civic_01",
+                    "social_politician_civic_02",
+                    "social_politician_civic_03",
+                    "social_politician_civic_04",
+                    "social_politician_urban_01",
+                    "social_politician_urban_02",
+                    "social_politician_urban_03",
+                    "social_politician_urban_04"
+            };
+    public static final String[] JEDI =
+            {
+                    "jedi_padawan",
+                    "jedi_padawan_novice",
+                    "jedi_padawan_master",
+                    "jedi_padawan_saber_01",
+                    "jedi_padawan_saber_02",
+                    "jedi_padawan_saber_03",
+                    "jedi_padawan_saber_04",
+                    "jedi_padawan_healing_01",
+                    "jedi_padawan_healing_02",
+                    "jedi_padawan_healing_03",
+                    "jedi_padawan_healing_04",
+                    "jedi_padawan_force_power_01",
+                    "jedi_padawan_force_power_02",
+                    "jedi_padawan_force_power_03",
+                    "jedi_padawan_force_power_04",
+                    "jedi_padawan_force_manipulation_01",
+                    "jedi_padawan_force_manipulation_02",
+                    "jedi_padawan_force_manipulation_03",
+                    "jedi_padawan_force_manipulation_04",
+                    "jedi_light_side_journeyman",
+                    "jedi_light_side_journeyman_novice",
+                    "jedi_light_side_journeyman_master",
+                    "jedi_light_side_journeyman_saber_01",
+                    "jedi_light_side_journeyman_saber_02",
+                    "jedi_light_side_journeyman_saber_03",
+                    "jedi_light_side_journeyman_saber_04",
+                    "jedi_light_side_journeyman_healing_01",
+                    "jedi_light_side_journeyman_healing_02",
+                    "jedi_light_side_journeyman_healing_03",
+                    "jedi_light_side_journeyman_healing_04",
+                    "jedi_light_side_journeyman_force_power_01",
+                    "jedi_light_side_journeyman_force_power_02",
+                    "jedi_light_side_journeyman_force_power_03",
+                    "jedi_light_side_journeyman_force_power_04",
+                    "jedi_light_side_journeyman_force_manipulation_01",
+                    "jedi_light_side_journeyman_force_manipulation_02",
+                    "jedi_light_side_journeyman_force_manipulation_03",
+                    "jedi_light_side_journeyman_force_manipulation_04",
+                    "jedi_light_side_master",
+                    "jedi_light_side_master_novice",
+                    "jedi_light_side_master_master",
+                    "jedi_light_side_master_saber_01",
+                    "jedi_light_side_master_saber_02",
+                    "jedi_light_side_master_saber_03",
+                    "jedi_light_side_master_saber_04",
+                    "jedi_light_side_master_healing_01",
+                    "jedi_light_side_master_healing_02",
+                    "jedi_light_side_master_healing_03",
+                    "jedi_light_side_master_healing_04",
+                    "jedi_light_side_master_force_power_01",
+                    "jedi_light_side_master_force_power_02",
+                    "jedi_light_side_master_force_power_03",
+                    "jedi_light_side_master_force_power_04",
+                    "jedi_light_side_master_force_manipulation_01",
+                    "jedi_light_side_master_force_manipulation_02",
+                    "jedi_light_side_master_force_manipulation_03",
+                    "jedi_light_side_master_force_manipulation_04",
+                    "jedi_dark_side_journeyman",
+                    "jedi_dark_side_journeyman_novice",
+                    "jedi_dark_side_journeyman_master",
+                    "jedi_dark_side_journeyman_saber_01",
+                    "jedi_dark_side_journeyman_saber_02",
+                    "jedi_dark_side_journeyman_saber_03",
+                    "jedi_dark_side_journeyman_saber_04",
+                    "jedi_dark_side_journeyman_healing_01",
+                    "jedi_dark_side_journeyman_healing_02",
+                    "jedi_dark_side_journeyman_healing_03",
+                    "jedi_dark_side_journeyman_healing_04",
+                    "jedi_dark_side_journeyman_force_power_01",
+                    "jedi_dark_side_journeyman_force_power_02",
+                    "jedi_dark_side_journeyman_force_power_03",
+                    "jedi_dark_side_journeyman_force_power_04",
+                    "jedi_dark_side_journeyman_force_manipulation_01",
+                    "jedi_dark_side_journeyman_force_manipulation_02",
+                    "jedi_dark_side_journeyman_force_manipulation_03",
+                    "jedi_dark_side_journeyman_force_manipulation_04",
+                    "jedi_dark_side_master",
+                    "jedi_dark_side_master_novice",
+                    "jedi_dark_side_master_master",
+                    "jedi_dark_side_master_saber_01",
+                    "jedi_dark_side_master_saber_02",
+                    "jedi_dark_side_master_saber_03",
+                    "jedi_dark_side_master_saber_04",
+                    "jedi_dark_side_master_healing_01",
+                    "jedi_dark_side_master_healing_02",
+                    "jedi_dark_side_master_healing_03",
+                    "jedi_dark_side_master_healing_04",
+                    "jedi_dark_side_master_force_power_01",
+                    "jedi_dark_side_master_force_power_02",
+                    "jedi_dark_side_master_force_power_03",
+                    "jedi_dark_side_master_force_power_04",
+                    "jedi_dark_side_master_force_manipulation_01",
+                    "jedi_dark_side_master_force_manipulation_02",
+                    "jedi_dark_side_master_force_manipulation_03",
+                    "jedi_dark_side_master_force_manipulation_04"
+            };
+    public static final String[] REBEL_PILOT =
+            {
+                    "pilot_rebel_navy",
+                    "pilot_rebel_navy_novice",
+                    "pilot_rebel_navy_master",
+                    "pilot_rebel_navy_starships_01",
+                    "pilot_rebel_navy_starships_02",
+                    "pilot_rebel_navy_starships_03",
+                    "pilot_rebel_navy_starships_04",
+                    "pilot_rebel_navy_weapons_01",
+                    "pilot_rebel_navy_weapons_02",
+                    "pilot_rebel_navy_weapons_03",
+                    "pilot_rebel_navy_weapons_04",
+                    "pilot_rebel_navy_procedures_01",
+                    "pilot_rebel_navy_procedures_02",
+                    "pilot_rebel_navy_procedures_03",
+                    "pilot_rebel_navy_procedures_04",
+                    "pilot_rebel_navy_droid_01",
+                    "pilot_rebel_navy_droid_02",
+                    "pilot_rebel_navy_droid_03",
+                    "pilot_rebel_navy_droid_04"
+            };
+    public static final String[] IMPERIAL_PILOT =
+            {
+                    "pilot_imperial_navy",
+                    "pilot_imperial_navy_novice",
+                    "pilot_imperial_navy_master",
+                    "pilot_imperial_navy_starships_01",
+                    "pilot_imperial_navy_starships_02",
+                    "pilot_imperial_navy_starships_03",
+                    "pilot_imperial_navy_starships_04",
+                    "pilot_imperial_navy_weapons_01",
+                    "pilot_imperial_navy_weapons_02",
+                    "pilot_imperial_navy_weapons_03",
+                    "pilot_imperial_navy_weapons_04",
+                    "pilot_imperial_navy_procedures_01",
+                    "pilot_imperial_navy_procedures_02",
+                    "pilot_imperial_navy_procedures_03",
+                    "pilot_imperial_navy_procedures_04",
+                    "pilot_imperial_navy_droid_01",
+                    "pilot_imperial_navy_droid_02",
+                    "pilot_imperial_navy_droid_03",
+                    "pilot_imperial_navy_droid_04"
+            };
+    public static final String[] NEUTRAL_PILOT =
+            {
+                    "pilot_neutral",
+                    "pilot_neutral_novice",
+                    "pilot_neutral_master",
+                    "pilot_neutral_starships_01",
+                    "pilot_neutral_starships_02",
+                    "pilot_neutral_starships_03",
+                    "pilot_neutral_starships_04",
+                    "pilot_neutral_weapons_01",
+                    "pilot_neutral_weapons_02",
+                    "pilot_neutral_weapons_03",
+                    "pilot_neutral_weapons_04",
+                    "pilot_neutral_procedures_01",
+                    "pilot_neutral_procedures_02",
+                    "pilot_neutral_procedures_03",
+                    "pilot_neutral_procedures_04",
+                    "pilot_neutral_droid_01",
+                    "pilot_neutral_droid_02",
+                    "pilot_neutral_droid_03",
+                    "pilot_neutral_droid_04"
+            };
     public e3_demoer()
     {
     }
-    public static final String[] MANDALORIAN_ARMOR = 
-    {
-        "object/tangible/wearables/armor/mandalorian/armor_mandalorian_bracer_l.iff",
-        "object/tangible/wearables/armor/mandalorian/armor_mandalorian_bracer_r.iff",
-        "object/tangible/wearables/armor/mandalorian/armor_mandalorian_chest_plate.iff",
-        "object/tangible/wearables/armor/mandalorian/armor_mandalorian_belt.iff",
-        "object/tangible/wearables/armor/mandalorian/armor_mandalorian_bicep_l.iff",
-        "object/tangible/wearables/armor/mandalorian/armor_mandalorian_bicep_r.iff",
-        "object/tangible/wearables/armor/mandalorian/armor_mandalorian_gloves.iff",
-        "object/tangible/wearables/armor/mandalorian/armor_mandalorian_helmet.iff",
-        "object/tangible/wearables/armor/mandalorian/armor_mandalorian_leggings.iff",
-        "object/tangible/wearables/armor/mandalorian/armor_mandalorian_shoes.iff"
-    };
-    public static final String[] WOOKIEE_ARMOR = 
-    {
-        "object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_bracer_l.iff",
-        "object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_bracer_r.iff",
-        "object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_chest_plate.iff",
-        "object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_leggings.iff"
-    };
-    public static final String[] SHIP_COMPONENTS = 
-    {
-        "object/tangible/ship/components/engine/eng_incom_fusialthrust.iff",
-        "object/tangible/ship/components/engine/eng_qualdex_kyromaster.iff",
-        "object/tangible/ship/components/weapon/wpn_subpro_tripleblaster_mark2.iff",
-        "object/tangible/ship/components/weapon/wpn_incom_shredder.iff",
-        "object/tangible/ship/components/weapon/wpn_armek_sw4.iff",
-        "object/tangible/ship/components/booster/xwing_booster_test.iff"
-    };
-    public static final String[] JEDI_CLOTHES = 
-    {
-        "object/tangible/wearables/robe/robe_s05_h1.iff",
-        "object/tangible/wearables/robe/robe_s05.iff"
-    };
-    public static final String[] LIGHTSABERS = 
-    {
-        "object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen5.iff",
-        "object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen5.iff",
-        "object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen5.iff"
-    };
-    public static final String[] CREATUREHANDLER = 
-    {
-        "outdoors_ranger",
-        "outdoors_ranger_novice",
-        "outdoors_ranger_master",
-        "outdoors_ranger_movement_01",
-        "outdoors_ranger_movement_02",
-        "outdoors_ranger_movement_03",
-        "outdoors_ranger_movement_04",
-        "outdoors_ranger_tracking_01",
-        "outdoors_ranger_tracking_02",
-        "outdoors_ranger_tracking_03",
-        "outdoors_ranger_tracking_04",
-        "outdoors_ranger_harvest_01",
-        "outdoors_ranger_harvest_02",
-        "outdoors_ranger_harvest_03",
-        "outdoors_ranger_harvest_04",
-        "outdoors_ranger_support_01",
-        "outdoors_ranger_support_02",
-        "outdoors_ranger_support_03",
-        "outdoors_ranger_support_04",
-        "outdoors_creaturehandler",
-        "outdoors_creaturehandler_novice",
-        "outdoors_creaturehandler_master",
-        "outdoors_creaturehandler_taming_01",
-        "outdoors_creaturehandler_taming_02",
-        "outdoors_creaturehandler_taming_03",
-        "outdoors_creaturehandler_taming_04",
-        "outdoors_creaturehandler_training_01",
-        "outdoors_creaturehandler_training_02",
-        "outdoors_creaturehandler_training_03",
-        "outdoors_creaturehandler_training_04",
-        "outdoors_creaturehandler_healing_01",
-        "outdoors_creaturehandler_healing_02",
-        "outdoors_creaturehandler_healing_03",
-        "outdoors_creaturehandler_healing_04",
-        "outdoors_creaturehandler_support_01",
-        "outdoors_creaturehandler_support_02",
-        "outdoors_creaturehandler_support_03",
-        "outdoors_creaturehandler_support_04"
-    };
-    public static final String[] POLITICIAN = 
-    {
-        "social_politician",
-        "social_politician_novice",
-        "social_politician_master",
-        "social_politician_fiscal_01",
-        "social_politician_fiscal_02",
-        "social_politician_fiscal_03",
-        "social_politician_fiscal_04",
-        "social_politician_martial_01",
-        "social_politician_martial_02",
-        "social_politician_martial_03",
-        "social_politician_martial_04",
-        "social_politician_civic_01",
-        "social_politician_civic_02",
-        "social_politician_civic_03",
-        "social_politician_civic_04",
-        "social_politician_urban_01",
-        "social_politician_urban_02",
-        "social_politician_urban_03",
-        "social_politician_urban_04"
-    };
-    public static final String[] JEDI = 
-    {
-        "jedi_padawan",
-        "jedi_padawan_novice",
-        "jedi_padawan_master",
-        "jedi_padawan_saber_01",
-        "jedi_padawan_saber_02",
-        "jedi_padawan_saber_03",
-        "jedi_padawan_saber_04",
-        "jedi_padawan_healing_01",
-        "jedi_padawan_healing_02",
-        "jedi_padawan_healing_03",
-        "jedi_padawan_healing_04",
-        "jedi_padawan_force_power_01",
-        "jedi_padawan_force_power_02",
-        "jedi_padawan_force_power_03",
-        "jedi_padawan_force_power_04",
-        "jedi_padawan_force_manipulation_01",
-        "jedi_padawan_force_manipulation_02",
-        "jedi_padawan_force_manipulation_03",
-        "jedi_padawan_force_manipulation_04",
-        "jedi_light_side_journeyman",
-        "jedi_light_side_journeyman_novice",
-        "jedi_light_side_journeyman_master",
-        "jedi_light_side_journeyman_saber_01",
-        "jedi_light_side_journeyman_saber_02",
-        "jedi_light_side_journeyman_saber_03",
-        "jedi_light_side_journeyman_saber_04",
-        "jedi_light_side_journeyman_healing_01",
-        "jedi_light_side_journeyman_healing_02",
-        "jedi_light_side_journeyman_healing_03",
-        "jedi_light_side_journeyman_healing_04",
-        "jedi_light_side_journeyman_force_power_01",
-        "jedi_light_side_journeyman_force_power_02",
-        "jedi_light_side_journeyman_force_power_03",
-        "jedi_light_side_journeyman_force_power_04",
-        "jedi_light_side_journeyman_force_manipulation_01",
-        "jedi_light_side_journeyman_force_manipulation_02",
-        "jedi_light_side_journeyman_force_manipulation_03",
-        "jedi_light_side_journeyman_force_manipulation_04",
-        "jedi_light_side_master",
-        "jedi_light_side_master_novice",
-        "jedi_light_side_master_master",
-        "jedi_light_side_master_saber_01",
-        "jedi_light_side_master_saber_02",
-        "jedi_light_side_master_saber_03",
-        "jedi_light_side_master_saber_04",
-        "jedi_light_side_master_healing_01",
-        "jedi_light_side_master_healing_02",
-        "jedi_light_side_master_healing_03",
-        "jedi_light_side_master_healing_04",
-        "jedi_light_side_master_force_power_01",
-        "jedi_light_side_master_force_power_02",
-        "jedi_light_side_master_force_power_03",
-        "jedi_light_side_master_force_power_04",
-        "jedi_light_side_master_force_manipulation_01",
-        "jedi_light_side_master_force_manipulation_02",
-        "jedi_light_side_master_force_manipulation_03",
-        "jedi_light_side_master_force_manipulation_04",
-        "jedi_dark_side_journeyman",
-        "jedi_dark_side_journeyman_novice",
-        "jedi_dark_side_journeyman_master",
-        "jedi_dark_side_journeyman_saber_01",
-        "jedi_dark_side_journeyman_saber_02",
-        "jedi_dark_side_journeyman_saber_03",
-        "jedi_dark_side_journeyman_saber_04",
-        "jedi_dark_side_journeyman_healing_01",
-        "jedi_dark_side_journeyman_healing_02",
-        "jedi_dark_side_journeyman_healing_03",
-        "jedi_dark_side_journeyman_healing_04",
-        "jedi_dark_side_journeyman_force_power_01",
-        "jedi_dark_side_journeyman_force_power_02",
-        "jedi_dark_side_journeyman_force_power_03",
-        "jedi_dark_side_journeyman_force_power_04",
-        "jedi_dark_side_journeyman_force_manipulation_01",
-        "jedi_dark_side_journeyman_force_manipulation_02",
-        "jedi_dark_side_journeyman_force_manipulation_03",
-        "jedi_dark_side_journeyman_force_manipulation_04",
-        "jedi_dark_side_master",
-        "jedi_dark_side_master_novice",
-        "jedi_dark_side_master_master",
-        "jedi_dark_side_master_saber_01",
-        "jedi_dark_side_master_saber_02",
-        "jedi_dark_side_master_saber_03",
-        "jedi_dark_side_master_saber_04",
-        "jedi_dark_side_master_healing_01",
-        "jedi_dark_side_master_healing_02",
-        "jedi_dark_side_master_healing_03",
-        "jedi_dark_side_master_healing_04",
-        "jedi_dark_side_master_force_power_01",
-        "jedi_dark_side_master_force_power_02",
-        "jedi_dark_side_master_force_power_03",
-        "jedi_dark_side_master_force_power_04",
-        "jedi_dark_side_master_force_manipulation_01",
-        "jedi_dark_side_master_force_manipulation_02",
-        "jedi_dark_side_master_force_manipulation_03",
-        "jedi_dark_side_master_force_manipulation_04"
-    };
-    public static final String[] REBEL_PILOT = 
-    {
-        "pilot_rebel_navy",
-        "pilot_rebel_navy_novice",
-        "pilot_rebel_navy_master",
-        "pilot_rebel_navy_starships_01",
-        "pilot_rebel_navy_starships_02",
-        "pilot_rebel_navy_starships_03",
-        "pilot_rebel_navy_starships_04",
-        "pilot_rebel_navy_weapons_01",
-        "pilot_rebel_navy_weapons_02",
-        "pilot_rebel_navy_weapons_03",
-        "pilot_rebel_navy_weapons_04",
-        "pilot_rebel_navy_procedures_01",
-        "pilot_rebel_navy_procedures_02",
-        "pilot_rebel_navy_procedures_03",
-        "pilot_rebel_navy_procedures_04",
-        "pilot_rebel_navy_droid_01",
-        "pilot_rebel_navy_droid_02",
-        "pilot_rebel_navy_droid_03",
-        "pilot_rebel_navy_droid_04"
-    };
-    public static final String[] IMPERIAL_PILOT = 
-    {
-        "pilot_imperial_navy",
-        "pilot_imperial_navy_novice",
-        "pilot_imperial_navy_master",
-        "pilot_imperial_navy_starships_01",
-        "pilot_imperial_navy_starships_02",
-        "pilot_imperial_navy_starships_03",
-        "pilot_imperial_navy_starships_04",
-        "pilot_imperial_navy_weapons_01",
-        "pilot_imperial_navy_weapons_02",
-        "pilot_imperial_navy_weapons_03",
-        "pilot_imperial_navy_weapons_04",
-        "pilot_imperial_navy_procedures_01",
-        "pilot_imperial_navy_procedures_02",
-        "pilot_imperial_navy_procedures_03",
-        "pilot_imperial_navy_procedures_04",
-        "pilot_imperial_navy_droid_01",
-        "pilot_imperial_navy_droid_02",
-        "pilot_imperial_navy_droid_03",
-        "pilot_imperial_navy_droid_04"
-    };
-    public static final String[] NEUTRAL_PILOT = 
-    {
-        "pilot_neutral",
-        "pilot_neutral_novice",
-        "pilot_neutral_master",
-        "pilot_neutral_starships_01",
-        "pilot_neutral_starships_02",
-        "pilot_neutral_starships_03",
-        "pilot_neutral_starships_04",
-        "pilot_neutral_weapons_01",
-        "pilot_neutral_weapons_02",
-        "pilot_neutral_weapons_03",
-        "pilot_neutral_weapons_04",
-        "pilot_neutral_procedures_01",
-        "pilot_neutral_procedures_02",
-        "pilot_neutral_procedures_03",
-        "pilot_neutral_procedures_04",
-        "pilot_neutral_droid_01",
-        "pilot_neutral_droid_02",
-        "pilot_neutral_droid_03",
-        "pilot_neutral_droid_04"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "intAutoSaveOff", 1);
         queueCommand(self, (1577314655), self, "declared imperial", COMMAND_PRIORITY_FRONT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         location locTest = new location();
@@ -288,11 +296,13 @@ public class e3_demoer extends script.base_script
         setLocation(self, locTest);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         queueCommand(self, (1577314655), self, "declared imperial", COMMAND_PRIORITY_FRONT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
     {
         String[] strCommands = split(strText, ' ');
@@ -319,7 +329,8 @@ public class e3_demoer extends script.base_script
             obj_id[] objTestObjects = getAllObjectsWithObjVar(getLocation(self), 320000, "intDeleteOnReset");
             if (objTestObjects != null)
             {
-                for (obj_id objTestObject : objTestObjects) {
+                for (obj_id objTestObject : objTestObjects)
+                {
                     destroyObject(objTestObject);
                 }
             }
@@ -354,7 +365,7 @@ public class e3_demoer extends script.base_script
             custom_var myVar = getCustomVarByName(objWeapon, "private/index_color_blade");
             if (myVar.isPalColor())
             {
-                palcolor_custom_var pcVar = (palcolor_custom_var)myVar;
+                palcolor_custom_var pcVar = (palcolor_custom_var) myVar;
                 int intColor = pcVar.getValue();
                 intColor = intColor + 1;
                 if (intColor > 11)
@@ -385,11 +396,15 @@ public class e3_demoer extends script.base_script
         {
             String[] strItems = LIGHTSABERS;
             obj_id objInventory = utils.getInventoryContainer(self);
-            for (String strItem : strItems) {
+            for (String strItem : strItems)
+            {
                 obj_id objTest = createObjectOverloaded(strItem, objInventory);
-                if (!isIdValid(objTest)) {
+                if (!isIdValid(objTest))
+                {
                     broadcast(self, "Item of template " + strItem + " is Incorret!");
-                } else {
+                }
+                else
+                {
                     setObjVar(objTest, "crafting.source_schematic", objTest);
                     setCrafter(objTest, self);
                 }
@@ -399,7 +414,8 @@ public class e3_demoer extends script.base_script
         if (strCommands[0].equalsIgnoreCase("resetNebulon"))
         {
             obj_id[] objTestObjects = getAllObjectsWithObjVar(getLocation(self), 320000, "intNebulon");
-            for (obj_id objTestObject : objTestObjects) {
+            for (obj_id objTestObject : objTestObjects)
+            {
                 setObjVar(objTestObject, "intReset", 1);
                 destroyObject(objTestObject);
             }
@@ -411,7 +427,8 @@ public class e3_demoer extends script.base_script
         if (strCommands[0].equalsIgnoreCase("destroyNebulon"))
         {
             obj_id[] objTestObjects = getAllObjectsWithObjVar(getLocation(self), 320000, "intNebulon");
-            for (obj_id objTestObject : objTestObjects) {
+            for (obj_id objTestObject : objTestObjects)
+            {
                 setObjVar(objTestObject, "intReset", 1);
                 destroyObject(objTestObject);
             }
@@ -525,7 +542,7 @@ public class e3_demoer extends script.base_script
                 int minAttrib = creatureDict.getInt(create.MINATTRIBNAMES[attribNum]);
                 int maxAttrib = creatureDict.getInt(create.MAXATTRIBNAMES[attribNum]);
                 int attribRange = maxAttrib - minAttrib;
-                int newAttribValue = (int)((attribRange * powerLevel) / 1000) + minAttrib;
+                int newAttribValue = ((attribRange * powerLevel) / 1000) + minAttrib;
                 setObjVar(object, "creature_attribs." + create.MAXATTRIBNAMES[attribNum], newAttribValue);
             }
             int toHitChance = creatureDict.getInt("toHitChance");
@@ -543,8 +560,8 @@ public class e3_demoer extends script.base_script
             float maxMinDamage = minDamage + (minDamage * bio_engineer.CREATURE_MAX_DAMAGE_MOD);
             float minMaxDamage = maxDamage + (maxDamage * bio_engineer.CREATURE_MIN_DAMAGE_MOD);
             float maxMaxDamage = maxDamage + (maxDamage * bio_engineer.CREATURE_MAX_DAMAGE_MOD);
-            minDamage = (int)(minMinDamage + (((maxMinDamage - minMinDamage) * powerLevel) / 1000));
-            maxDamage = (int)(minMaxDamage + (((maxMaxDamage - minMaxDamage) * powerLevel) / 1000));
+            minDamage = (int) (minMinDamage + (((maxMinDamage - minMinDamage) * powerLevel) / 1000));
+            maxDamage = (int) (minMaxDamage + (((maxMaxDamage - minMaxDamage) * powerLevel) / 1000));
             setObjVar(object, "creature_attribs.minDamage", minDamage);
             setObjVar(object, "creature_attribs.maxDamage", maxDamage);
             setObjVar(object, "crafting_components.cmbt_module", 600.0f);
@@ -555,12 +572,15 @@ public class e3_demoer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void grantAllSkills(obj_id objPlayer, String[] strSkillList) throws InterruptedException
     {
-        for (String s : strSkillList) {
+        for (String s : strSkillList)
+        {
             grantSkill(objPlayer, s);
         }
     }
+
     public void createBantha(obj_id self) throws InterruptedException
     {
         String controlTemplate = "object/intangible/pet/bantha_hue.iff";
@@ -573,6 +593,7 @@ public class e3_demoer extends script.base_script
         setObjVar(petControlDevice, "ai.pet.type", petType);
         setObjVar(petControlDevice, "ai.pet.trainedMount", 1);
     }
+
     public void createDewback(obj_id self) throws InterruptedException
     {
         String controlTemplate = "object/intangible/pet/dewback_hue.iff";
@@ -585,6 +606,7 @@ public class e3_demoer extends script.base_script
         setObjVar(petControlDevice, "ai.pet.type", petType);
         setObjVar(petControlDevice, "ai.pet.trainedMount", 1);
     }
+
     public void createLandSpeeder(obj_id self) throws InterruptedException
     {
         obj_id datapad = utils.getPlayerDatapad(self);
@@ -596,6 +618,7 @@ public class e3_demoer extends script.base_script
         setObjVar(petControlDevice, "ai.pet.trainedMount", 1);
         setName(petControlDevice, "(x34)");
     }
+
     public void createAv21(obj_id self) throws InterruptedException
     {
         obj_id datapad = utils.getPlayerDatapad(self);
@@ -607,6 +630,7 @@ public class e3_demoer extends script.base_script
         setObjVar(petControlDevice, "ai.pet.trainedMount", 1);
         setName(petControlDevice, "(av21)");
     }
+
     public void createSwoop(obj_id self) throws InterruptedException
     {
         obj_id datapad = utils.getPlayerDatapad(self);
@@ -618,6 +642,7 @@ public class e3_demoer extends script.base_script
         setObjVar(petControlDevice, "ai.pet.trainedMount", 1);
         setName(petControlDevice, "(swoop)");
     }
+
     public void createJetpack(obj_id self) throws InterruptedException
     {
         obj_id datapad = utils.getPlayerDatapad(self);
@@ -629,17 +654,20 @@ public class e3_demoer extends script.base_script
         setObjVar(petControlDevice, "ai.pet.trainedMount", 1);
         setName(petControlDevice, "(jetpack)");
     }
+
     public void createInInventory(obj_id objPlayer, String[] strItems) throws InterruptedException
     {
         obj_id objInventory = utils.getInventoryContainer(objPlayer);
-        for (String strItem : strItems) {
+        for (String strItem : strItems)
+        {
             obj_id objTest = createObjectOverloaded(strItem, objInventory);
-            if (!isIdValid(objTest)) {
+            if (!isIdValid(objTest))
+            {
                 broadcast(objPlayer, "Item of template " + strItem + " is Incorret!");
             }
         }
-        return;
     }
+
     public int beginMusicPlaying(obj_id self, dictionary params) throws InterruptedException
     {
         String bldgName = getTemplateName(getTopMostContainer(self));

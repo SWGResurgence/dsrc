@@ -1,53 +1,56 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class halloween_vendor extends script.base_script
 {
     public static String c_stringFile = "conversation/halloween_vendor";
+
     public boolean halloween_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean halloween_vendor_condition_costumeLockout(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (buff.hasBuff(player, "event_halloween_costume_lockout") || !buff.canApplyBuff(player, "event_halloween_costume_jawa"))
-        {
-            return true;
-        }
-        return false;
+        return buff.hasBuff(player, "event_halloween_costume_lockout") || !buff.canApplyBuff(player, "event_halloween_costume_jawa");
     }
+
     public boolean halloween_vendor_condition_costumeAlready(obj_id player, obj_id npc) throws InterruptedException
     {
         int[] currentBuffs = buff.getAllBuffs(player);
         if (currentBuffs != null || currentBuffs.length > 0)
         {
-            for (int currentBuff : currentBuffs) {
+            for (int currentBuff : currentBuffs)
+            {
                 String buffName = buff.getBuffNameFromCrc(currentBuff);
-                if (buffName.startsWith("event_halloween_costume_")) {
+                if (buffName.startsWith("event_halloween_costume_"))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public boolean halloween_vendor_condition_godMode(obj_id player, obj_id npc) throws InterruptedException
     {
         return (isGod(player));
     }
+
     public boolean halloween_vendor_condition_doesntHaveThree(obj_id player, obj_id npc) throws InterruptedException
     {
         long collectionValue = getCollectionSlotValue(player, "received_halloween_reward");
-        if (collectionValue < 1)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return collectionValue < 1;
     }
+
     public boolean halloween_vendor_condition_canBuyThree(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id trickDeviceTwo = utils.getStaticItemInInventory(player, "item_event_halloween_trick_device_02_01");
@@ -58,25 +61,19 @@ public class halloween_vendor extends script.base_script
             int numberOfCoins = utils.countOfStackedItemsInArray(coins);
             if (numberOfCoins != 0)
             {
-                if (isIdValid(trickDeviceTwo) && exists(trickDeviceTwo) && numberOfCoins >= 700 && collectionValue < 1)
-                {
-                    return true;
-                }
-                else 
-                {
-                    return false;
-                }
+                return isIdValid(trickDeviceTwo) && exists(trickDeviceTwo) && numberOfCoins >= 700 && collectionValue < 1;
             }
-            else 
+            else
             {
                 return false;
             }
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public boolean halloween_vendor_condition_hasDevice(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasCompletedCollectionSlot(player, "received_halloween_reward"))
@@ -85,25 +82,22 @@ public class halloween_vendor extends script.base_script
         }
         obj_id inventory = utils.getInventoryContainer(player);
         obj_id[] inventoryContents = getContents(inventory);
-        for (obj_id inventoryContent : inventoryContents) {
+        for (obj_id inventoryContent : inventoryContents)
+        {
             String itemName = getStaticItemName(inventoryContent);
-            if (itemName != null && !itemName.equals("") && itemName.startsWith("item_event_halloween_trick_device_")) {
+            if (itemName != null && !itemName.equals("") && itemName.startsWith("item_event_halloween_trick_device_"))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public boolean halloween_vendor_condition_noBadge(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!hasCompletedCollectionSlot(player, "halloween_badge_11"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return !hasCompletedCollectionSlot(player, "halloween_badge_11");
     }
+
     public boolean halloween_vendor_condition_canBuyBadge(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] coins = utils.getAllStaticItemsInPlayerInventory(player, "item_event_halloween_coin");
@@ -112,52 +106,40 @@ public class halloween_vendor extends script.base_script
             int numberOfCoins = utils.countOfStackedItemsInArray(coins);
             if (numberOfCoins != 0)
             {
-                if (numberOfCoins >= 1 && !hasCompletedCollectionSlot(player, "halloween_badge_11"))
-                {
-                    return true;
-                }
-                else 
-                {
-                    return false;
-                }
+                return numberOfCoins >= 1 && !hasCompletedCollectionSlot(player, "halloween_badge_11");
             }
-            else 
+            else
             {
                 return false;
             }
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public boolean halloween_vendor_condition_playerStealthed(obj_id player, obj_id npc) throws InterruptedException
     {
         int stealth = buff.getBuffOnTargetFromGroup(player, "invisibility");
-        if (stealth != 0)
-        {
-            return true;
-        }
-        return false;
+        return stealth != 0;
     }
+
     public boolean halloween_vendor_condition_outOfRange(obj_id player, obj_id npc) throws InterruptedException
     {
         location selfLoc = getLocation(npc);
         location targetLoc = getLocation(player);
         float fltDistance = getDistance(selfLoc, targetLoc);
-        if (fltDistance > 10.0f)
-        {
-            return true;
-        }
-        return false;
+        return fltDistance > 10.0f;
     }
+
     public void halloween_vendor_action_showTokenVendorUI(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary d = new dictionary();
         d.put("player", player);
         messageTo(npc, "showInventorySUI", d, 0, false);
-        return;
     }
+
     public void halloween_vendor_action_applyCostume(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(player);
@@ -166,33 +148,41 @@ public class halloween_vendor extends script.base_script
             static_item.createNewItemFunction("item_event_halloween_trick_device_01_01", inventory);
             sendSystemMessage(player, new string_id("event/halloween", "halloween_projector"));
         }
-        String[] costumes = 
-        {
-            "jawa",
-            "toydarian",
-            "hutt_female",
-            "droid",
-            "kowakian"
-        };
+        String[] costumes =
+                {
+                        "jawa",
+                        "toydarian",
+                        "hutt_female",
+                        "droid",
+                        "kowakian"
+                };
         if (halloween_vendor_condition_costumeAlready(player, npc))
         {
             int[] currentBuffs = buff.getAllBuffs(player);
-            for (int currentBuff : currentBuffs) {
+            for (int currentBuff : currentBuffs)
+            {
                 String buffName = buff.getBuffNameFromCrc(currentBuff);
-                if (buffName.startsWith("event_halloween_costume_")) {
+                if (buffName.startsWith("event_halloween_costume_"))
+                {
                     int costumeRandom = rand(0, 4);
                     String newCostume = "event_halloween_costume_" + costumes[costumeRandom];
-                    if (newCostume != null && !newCostume.equals("")) {
+                    if (newCostume != null && !newCostume.equals(""))
+                    {
                         obj_id weapon = getObjectInSlot(player, "hold_r");
                         obj_id playerInv = utils.getInventoryContainer(player);
-                        if (isIdValid(weapon) && isIdValid(playerInv)) {
+                        if (isIdValid(weapon) && isIdValid(playerInv))
+                        {
                             putInOverloaded(weapon, playerInv);
                         }
-                        if (buffName.equals(newCostume)) {
+                        if (buffName.equals(newCostume))
+                        {
                             halloween_vendor_action_applyCostume(player, npc);
-                        } else {
+                        }
+                        else
+                        {
                             int halloweenBuff = buff.getBuffOnTargetFromGroup(player, "shapechange");
-                            if (halloweenBuff != 0) {
+                            if (halloweenBuff != 0)
+                            {
                                 buff.removeBuff(player, halloweenBuff);
                             }
                             buff.applyBuff(player, newCostume);
@@ -202,7 +192,7 @@ public class halloween_vendor extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             obj_id weapon = getObjectInSlot(player, "hold_r");
             obj_id playerInv = utils.getInventoryContainer(player);
@@ -216,14 +206,15 @@ public class halloween_vendor extends script.base_script
             buff.applyBuff(player, "event_halloween_costume_lockout");
         }
     }
+
     public void halloween_vendor_action_removeLockout(obj_id player, obj_id npc) throws InterruptedException
     {
         if (buff.hasBuff(player, "event_halloween_costume_lockout"))
         {
             buff.removeBuff(player, "event_halloween_costume_lockout");
         }
-        return;
     }
+
     public void halloween_vendor_action_grantProjectorThree(obj_id player, obj_id npc) throws InterruptedException
     {
         if (halloween_vendor_condition_canBuyThree(player, npc))
@@ -232,21 +223,29 @@ public class halloween_vendor extends script.base_script
             obj_id inventory = utils.getInventoryContainer(player);
             obj_id[] inventoryContents = getInventoryAndEquipment(player);
             int tokenCostForReals = 700;
-            for (obj_id inventoryContent : inventoryContents) {
+            for (obj_id inventoryContent : inventoryContents)
+            {
                 String itemName = getStaticItemName(inventoryContent);
-                if (itemName != null && !itemName.equals("")) {
+                if (itemName != null && !itemName.equals(""))
+                {
                     String halloweenCoins = "item_event_halloween_coin";
-                    if (itemName.equals(halloweenCoins) && tokenCostForReals > 0) {
-                        if (getCount(inventoryContent) > 1) {
+                    if (itemName.equals(halloweenCoins) && tokenCostForReals > 0)
+                    {
+                        if (getCount(inventoryContent) > 1)
+                        {
                             int numInStack = getCount(inventoryContent);
-                            for (int m = 0; m < numInStack - 1; m++) {
-                                if (tokenCostForReals > 0) {
+                            for (int m = 0; m < numInStack - 1; m++)
+                            {
+                                if (tokenCostForReals > 0)
+                                {
                                     tokenCostForReals--;
                                     setCount(inventoryContent, getCount(inventoryContent) - 1);
-                                    if (tokenCostForReals <= 0) {
+                                    if (tokenCostForReals <= 0)
+                                    {
                                         static_item.createNewItemFunction("item_event_halloween_trick_device_03_01", inventory);
                                         obj_id trickDeviceThree = utils.getStaticItemInInventory(player, "item_event_halloween_trick_device_03_01");
-                                        if (isIdValid(trickDeviceThree) && exists(trickDeviceThree)) {
+                                        if (isIdValid(trickDeviceThree) && exists(trickDeviceThree))
+                                        {
                                             setObjVar(trickDeviceThree, "deviceOwner", player);
                                             destroyObject(trickDeviceTwo);
                                             modifyCollectionSlotValue(player, "received_halloween_reward", 1);
@@ -255,13 +254,16 @@ public class halloween_vendor extends script.base_script
                                 }
                             }
                         }
-                        if (getCount(inventoryContent) <= 1 && tokenCostForReals > 0) {
+                        if (getCount(inventoryContent) <= 1 && tokenCostForReals > 0)
+                        {
                             destroyObject(inventoryContent);
                             tokenCostForReals--;
-                            if (tokenCostForReals <= 0) {
+                            if (tokenCostForReals <= 0)
+                            {
                                 static_item.createNewItemFunction("item_event_halloween_trick_device_03_01", inventory);
                                 obj_id trickDeviceThree = utils.getStaticItemInInventory(player, "item_event_halloween_trick_device_03_01");
-                                if (isIdValid(trickDeviceThree) && exists(trickDeviceThree)) {
+                                if (isIdValid(trickDeviceThree) && exists(trickDeviceThree))
+                                {
                                     destroyObject(trickDeviceTwo);
                                     modifyCollectionSlotValue(player, "received_halloween_reward", 1);
                                 }
@@ -272,6 +274,7 @@ public class halloween_vendor extends script.base_script
             }
         }
     }
+
     public void halloween_vendor_action_grantCoins(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -281,11 +284,12 @@ public class halloween_vendor extends script.base_script
             int currentCoins = getCount(halloweenCoins);
             setCount(halloweenCoins, currentCoins + 5000);
         }
-        else 
+        else
         {
             obj_id coins = static_item.createNewItemFunction("item_event_halloween_coin", pInv, 5000);
         }
     }
+
     public void halloween_vendor_action_removeProjectorLockout(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasCompletedCollectionSlot(player, "received_halloween_reward"))
@@ -293,32 +297,42 @@ public class halloween_vendor extends script.base_script
             modifyCollectionSlotValue(player, "received_halloween_reward", -1);
         }
     }
+
     public void halloween_vendor_action_badgePurchased(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(player);
         obj_id[] inventoryContents = getInventoryAndEquipment(player);
         int tokenCostForReals = 900;
-        for (obj_id inventoryContent : inventoryContents) {
+        for (obj_id inventoryContent : inventoryContents)
+        {
             String itemName = getStaticItemName(inventoryContent);
-            if (itemName != null && !itemName.equals("")) {
+            if (itemName != null && !itemName.equals(""))
+            {
                 String halloweenCoins = "item_event_halloween_coin";
-                if (itemName.equals(halloweenCoins) && tokenCostForReals > 0) {
-                    if (getCount(inventoryContent) > 1) {
+                if (itemName.equals(halloweenCoins) && tokenCostForReals > 0)
+                {
+                    if (getCount(inventoryContent) > 1)
+                    {
                         int numInStack = getCount(inventoryContent);
-                        for (int m = 0; m < numInStack - 1; m++) {
-                            if (tokenCostForReals > 0) {
+                        for (int m = 0; m < numInStack - 1; m++)
+                        {
+                            if (tokenCostForReals > 0)
+                            {
                                 tokenCostForReals--;
                                 setCount(inventoryContent, getCount(inventoryContent) - 1);
-                                if (tokenCostForReals <= 0) {
+                                if (tokenCostForReals <= 0)
+                                {
                                     badge.grantBadge(player, "halloween_badge_11");
                                 }
                             }
                         }
                     }
-                    if (getCount(inventoryContent) <= 1 && tokenCostForReals > 0) {
+                    if (getCount(inventoryContent) <= 1 && tokenCostForReals > 0)
+                    {
                         destroyObject(inventoryContent);
                         tokenCostForReals--;
-                        if (tokenCostForReals <= 0) {
+                        if (tokenCostForReals <= 0)
+                        {
                             badge.grantBadge(player, "halloween_badge_11");
                         }
                     }
@@ -326,6 +340,7 @@ public class halloween_vendor extends script.base_script
             }
         }
     }
+
     public void halloween_vendor_action_removeDailyLimit(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "galacticCoinCounter.numberOfCoins"))
@@ -346,6 +361,7 @@ public class halloween_vendor extends script.base_script
         }
         utils.removeScriptVarTree(player, "galacticMoonNpcList");
     }
+
     public int halloween_vendor_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7"))
@@ -451,7 +467,7 @@ public class halloween_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -464,7 +480,7 @@ public class halloween_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.halloween_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -490,7 +506,7 @@ public class halloween_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -499,7 +515,7 @@ public class halloween_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.halloween_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -569,6 +585,7 @@ public class halloween_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int halloween_vendor_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_54"))
@@ -604,6 +621,7 @@ public class halloween_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int halloween_vendor_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -623,7 +641,7 @@ public class halloween_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82");
@@ -632,7 +650,7 @@ public class halloween_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.halloween_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -642,6 +660,7 @@ public class halloween_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int halloween_vendor_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_82"))
@@ -668,7 +687,7 @@ public class halloween_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_86");
@@ -681,7 +700,7 @@ public class halloween_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.halloween_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -691,6 +710,7 @@ public class halloween_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int halloween_vendor_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_86"))
@@ -733,6 +753,7 @@ public class halloween_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -742,11 +763,13 @@ public class halloween_vendor extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -755,23 +778,27 @@ public class halloween_vendor extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.halloween_vendor");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -858,7 +885,7 @@ public class halloween_vendor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_7");
@@ -902,7 +929,7 @@ public class halloween_vendor extends script.base_script
                 utils.setScriptVar(player, "conversation.halloween_vendor.branchId", 1);
                 npcStartConversation(player, npc, "halloween_vendor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -911,6 +938,7 @@ public class halloween_vendor extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("halloween_vendor"))

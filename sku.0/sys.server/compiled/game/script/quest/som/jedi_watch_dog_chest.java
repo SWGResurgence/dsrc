@@ -1,20 +1,27 @@
 package script.quest.som;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.utils;
 
 public class jedi_watch_dog_chest extends script.base_script
 {
-    public jedi_watch_dog_chest()
-    {
-    }
     public static final String STF = "som/som_quest";
     public static final string_id ENTER_CODE = new string_id(STF, "enter_code");
     public static final string_id UNLOCKED = new string_id(STF, "unlocked");
     public static final string_id UNKNOWN_CODE = new string_id(STF, "unknown_code");
     public static final string_id INCORRECT_CODE = new string_id(STF, "incorrect_code");
     public static final string_id UNLOCK = new string_id(STF, "unlock");
+    public jedi_watch_dog_chest()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "som_jedi_dog", "mustafar_jedi_dog_three"))
@@ -29,6 +36,7 @@ public class jedi_watch_dog_chest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -38,7 +46,7 @@ public class jedi_watch_dog_chest extends script.base_script
                 keypad(player);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, UNKNOWN_CODE);
                 return SCRIPT_CONTINUE;
@@ -46,6 +54,7 @@ public class jedi_watch_dog_chest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void keypad(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -53,8 +62,8 @@ public class jedi_watch_dog_chest extends script.base_script
         subscribeToSUIProperty(pid, "result.numberBox", "localtext");
         subscribeToSUIProperty(pid, "buttonEnter", "ButtonPressed");
         showSUIPage(pid);
-        return;
     }
+
     public int KeypadCallback(obj_id self, dictionary params) throws InterruptedException
     {
         String result = params.getString("result.numberBox" + "." + "localtext");
@@ -85,13 +94,14 @@ public class jedi_watch_dog_chest extends script.base_script
                 grantReward(player);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, INCORRECT_CODE);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void grantReward(obj_id player) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(player);

@@ -1,5 +1,11 @@
 package script.event.gcwraids;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.badge;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class pve_badge extends script.base_script
     public pve_badge()
     {
     }
+
     public int receiveCreditForKill(obj_id self, dictionary params) throws InterruptedException
     {
         int cmReb4 = questGetQuestId("quest/event_gcwcheerleader_cmreb4");
@@ -27,6 +34,7 @@ public class pve_badge extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         int cmReb4 = questGetQuestId("quest/event_gcwcheerleader_cmreb4");

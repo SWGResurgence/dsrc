@@ -1,5 +1,11 @@
 package script.systems.crafting.item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.skill;
 import script.library.utils;
 import script.obj_id;
@@ -33,7 +39,7 @@ public class crafting_gcw_tools extends script.base_script
         if (getCount(self) > 1)
         {
             names[idx] = "charges";
-            attribs[idx] = "" + count;
+            attribs[idx] = String.valueOf(count);
             idx++;
             if (idx >= names.length)
             {
@@ -43,7 +49,7 @@ public class crafting_gcw_tools extends script.base_script
         if (hasObjVar(self, "crafting_components.power"))
         {
             names[idx] = "power";
-            attribs[idx] = "" + power;
+            attribs[idx] = String.valueOf(power);
             idx++;
             if (idx >= names.length)
             {
@@ -51,7 +57,7 @@ public class crafting_gcw_tools extends script.base_script
             }
         }
         names[idx] = "fatigue";
-        attribs[idx] = "" + fatigue;
+        attribs[idx] = String.valueOf(fatigue);
         idx++;
         if (idx >= names.length)
         {

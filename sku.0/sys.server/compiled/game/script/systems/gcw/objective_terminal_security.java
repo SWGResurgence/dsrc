@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.hq;
 import script.library.prose;
@@ -12,6 +18,7 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
     public static final string_id SID_FAIL_SLICE = new string_id("slicing/slicing", "hq_security_fail");
     public static final string_id SID_SUCCESS_SLICE = new string_id("slicing/slicing", "hq_security_success");
     public static final string_id SID_NOT_AGAIN = new string_id("slicing/slicing", "not_again");
+
     public objective_terminal_security()
     {
     }

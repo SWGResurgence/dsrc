@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.player_structure;
 import script.library.structure;
@@ -10,9 +16,6 @@ import script.string_id;
 
 public class water_pressure_master extends script.base_script
 {
-    public water_pressure_master()
-    {
-    }
     public static final String TBL_TERMINAL_PATH = "datatables/dungeon/death_watch/water_pressure.iff";
     public static final String TBL_LIGHTS_PATH = "datatables/dungeon/death_watch/water_pressure_light.iff";
     public static final String VAR_PRESSURE_TERMINALS = "water_pressure.terminals";
@@ -21,12 +24,17 @@ public class water_pressure_master extends script.base_script
     public static final string_id WATER_PRESSURE_FAILED = new string_id("dungeon/death_watch", "water_pressure_failed");
     public static final string_id VALVE_OFF = new string_id("dungeon/death_watch", "valve_off");
     public static final string_id VALVE_ON = new string_id("dungeon/death_watch", "valve_on");
+    public water_pressure_master()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         loadWaterTerminals(self);
         loadWaterLights(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         loadWaterTerminals(self);
@@ -37,6 +45,7 @@ public class water_pressure_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void loadWaterTerminals(obj_id self) throws InterruptedException
     {
         obj_id[] terminals = structure.createStructureTerminals(self, TBL_TERMINAL_PATH);
@@ -44,8 +53,8 @@ public class water_pressure_master extends script.base_script
         {
             utils.setBatchObjVar(self, VAR_PRESSURE_TERMINALS, terminals);
         }
-        return;
     }
+
     public void loadWaterLights(obj_id self) throws InterruptedException
     {
         obj_id[] lights = structure.createStructureTerminals(self, TBL_LIGHTS_PATH);
@@ -53,8 +62,8 @@ public class water_pressure_master extends script.base_script
         {
             utils.setBatchObjVar(self, VAR_PRESSURE_LIGHTS, lights);
         }
-        return;
     }
+
     public void flipSwitchOne(obj_id terminal, obj_id player) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(terminal);
@@ -107,8 +116,8 @@ public class water_pressure_master extends script.base_script
             setObjVar(structure, "particle1", particleTwo);
         }
         checkForSuccess(structure, player);
-        return;
     }
+
     public void flipSwitchTwo(obj_id terminal, obj_id player) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(terminal);
@@ -180,8 +189,8 @@ public class water_pressure_master extends script.base_script
             setObjVar(structure, "particle2", particleThree);
         }
         checkForSuccess(structure, player);
-        return;
     }
+
     public void flipSwitchThree(obj_id terminal, obj_id player) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(terminal);
@@ -253,8 +262,8 @@ public class water_pressure_master extends script.base_script
             setObjVar(structure, "particle3", particleFour);
         }
         checkForSuccess(structure, player);
-        return;
     }
+
     public void flipSwitchFour(obj_id terminal, obj_id player) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(terminal);
@@ -307,8 +316,8 @@ public class water_pressure_master extends script.base_script
             sendSystemMessage(player, VALVE_ON);
         }
         checkForSuccess(structure, player);
-        return;
     }
+
     public void checkForSuccess(obj_id structure, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -323,8 +332,10 @@ public class water_pressure_master extends script.base_script
             {
                 return;
             }
-            for (obj_id thisLight : lights) {
-                if (hasObjVar(thisLight, "valveOff")) {
+            for (obj_id thisLight : lights)
+            {
+                if (hasObjVar(thisLight, "valveOff"))
+                {
                     return;
                 }
             }
@@ -335,8 +346,8 @@ public class water_pressure_master extends script.base_script
             sendSystemMessage(player, RESTORED_PRESSURE);
             CustomerServiceLog("DUNGEON_DeathWatchBunker", "*Death Watch Air Vent: %TU has restored the water pressure.", player);
         }
-        return;
     }
+
     public int handleTerminalSwitch(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -363,6 +374,7 @@ public class water_pressure_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleWaterPumpReset(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id particle1 = getObjIdObjVar(self, "particle0");
@@ -393,7 +405,7 @@ public class water_pressure_master extends script.base_script
                     obj_id particle = createObject("object/static/particle/pt_light_streetlamp_red.iff", light);
                     setObjVar(self, "particle" + i, particle);
                 }
-                else 
+                else
                 {
                     removeObjVar(thisLight, "valveOff");
                     setObjVar(thisLight, "valveOn", 1);
@@ -408,6 +420,7 @@ public class water_pressure_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleWaterPumpTimeOut(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "death_watch.water_pressure_mission"))
@@ -420,7 +433,7 @@ public class water_pressure_master extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sendSystemMessage(oldPlayer, WATER_PRESSURE_FAILED);
             removeObjVar(oldPlayer, "death_watch.water_pressure");

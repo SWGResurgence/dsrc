@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.colors;
 import script.library.create;
@@ -13,11 +19,13 @@ public class pet_test extends script.base_script
     public pet_test()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Pet test ready.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         location playerLocation = getLocation(self);
@@ -31,6 +39,7 @@ public class pet_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void petTest(obj_id self) throws InterruptedException
     {
         grantSkill(self, "outdoors_creaturehandler_master");
@@ -61,6 +70,7 @@ public class pet_test extends script.base_script
         setObjVar(self, "pet_test.pet_id", pet);
         sendSystemMessage(self, "Ready for pet demonstration.", null);
     }
+
     public void endPetTest(obj_id self) throws InterruptedException
     {
         obj_id pet = getObjIdObjVar(self, "pet_test.pet_id");
@@ -71,6 +81,7 @@ public class pet_test extends script.base_script
         pet_lib.removeFromPetList(pet);
         messageTo(self, "destroyPet", null, 2.0f, true);
     }
+
     public int destroyPet(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id pet = getObjIdObjVar(self, "pet_test.pet_id");

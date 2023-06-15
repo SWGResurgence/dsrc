@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.working_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.trial;
 import script.menu_info;
 import script.menu_info_types;
@@ -10,14 +16,17 @@ public class guardian_lock_terminal extends script.base_script
     public guardian_lock_terminal()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         boolean isUnlocked = trial.isCellPublic(self, trial.WORKING_ONE_TWO_STAIR);
@@ -25,13 +34,14 @@ public class guardian_lock_terminal extends script.base_script
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, trial.TWINS_LOCK_ACTIVE);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, trial.SID_NOT_LOCKED);
         }
         sendDirtyObjectMenuNotification(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -41,7 +51,7 @@ public class guardian_lock_terminal extends script.base_script
                 trial.makeCellPublic(self, trial.WORKING_ONE_TWO_STAIR);
                 trial.sendInstanceSystemMessage(trial.getTop(self), trial.SID_ACCESS_GRANTED);
             }
-            else 
+            else
             {
                 trial.sendInstanceSystemMessage(trial.getTop(self), trial.TWINS_KILL_CLUE);
             }

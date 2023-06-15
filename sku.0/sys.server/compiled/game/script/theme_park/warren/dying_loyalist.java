@@ -1,16 +1,23 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.*;
 
 public class dying_loyalist extends script.base_script
 {
+    public static final String CONVO_FILE = "theme_park/warren/warren";
+    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public dying_loyalist()
     {
     }
-    public static final String CONVO_FILE = "theme_park/warren/warren";
-    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_LOITER);
@@ -21,6 +28,7 @@ public class dying_loyalist extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -28,6 +36,7 @@ public class dying_loyalist extends script.base_script
         mdata.setServerNotify(false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(speaker) || ai_lib.aiIsDead(self))
@@ -40,6 +49,7 @@ public class dying_loyalist extends script.base_script
         chat.chat(self, greeting);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id warren = getObjIdObjVar(self, "warren.bldg");

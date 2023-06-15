@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.callable;
 import script.library.create;
 import script.library.locations;
@@ -19,6 +25,7 @@ public class terminal_travel_instant_one_use extends script.base_script
     public static final int SHIP_TYPE_INSTANT_XWING_TIE = 1;
     public static final int SHIP_TYPE_INSTANT_PRIVATEER = 2;
     public static final int SHIP_TYPE_INSTANT_ROYAL_SHIP = 3;
+
     public terminal_travel_instant_one_use()
     {
     }

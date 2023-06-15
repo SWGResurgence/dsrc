@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.money;
 import script.library.prose;
@@ -16,6 +22,7 @@ public class tcg_tauntaun_ride extends script.base_script
     public static final String LOCKOUT = "tauntaun_lockout";
     public static final String MONEY_TOTAL = "money_total";
     public static final int RIDE_COST = 25;
+
     public tcg_tauntaun_ride()
     {
     }

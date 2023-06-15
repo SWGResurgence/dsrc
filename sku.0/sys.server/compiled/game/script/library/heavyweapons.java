@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.combat_engine.attacker_data;
 import script.combat_engine.defender_data;
 import script.combat_engine.effect_data;
@@ -46,6 +52,7 @@ public class heavyweapons extends script.base_script
     public static final float DEMOLITION_2_DAM_MULTIPLIER = 1.8f;
     public static final String ATTACK_NAME_BASE_SINGLE = "co_hw_dot_";
     public static final String ATTACK_NAME_BASE_AREA = "co_ae_hw_dot_";
+
     public heavyweapons()
     {
     }

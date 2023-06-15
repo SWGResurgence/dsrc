@@ -1,5 +1,11 @@
 package script.systems.event_perk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.event_perk;
 import script.library.*;
@@ -10,6 +16,7 @@ public class event_perk_deed extends script.base_script
     public static final String TBL_ALLNPC_TYPES = "datatables/vendor/vendor_allnpc_types.iff";
     public static final String DATATABLE = "datatables/event_perk/perk_data.iff";
     public static final String STF_FILE = "event_perk";
+
     public event_perk_deed()
     {
     }
@@ -327,7 +334,6 @@ public class event_perk_deed extends script.base_script
                 sendSystemMessage(player, new string_id(STF_FILE, "deed_expired"));
             }
         }
-        return;
     }
 
     public void createNpcActor(obj_id self, obj_id player, location here) throws InterruptedException
@@ -346,7 +352,6 @@ public class event_perk_deed extends script.base_script
         utils.setScriptVar(self, "event_perk.races", rawRaceTypes);
         utils.setScriptVar(self, "event_perk.checkGender", 1);
         sui.listbox(self, player, "@event_perk_npc_actor:race_type_d", sui.OK_CANCEL, "@event_perk_npc_actor:race_type_t", raceTypes, "handleNpcActorRaceSelect", true);
-        return;
     }
 
     public int destroyYourself(obj_id self, dictionary params) throws InterruptedException

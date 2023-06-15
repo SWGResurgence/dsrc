@@ -1,5 +1,11 @@
 package script.item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.static_item;
 import script.library.utils;
 import script.menu_info;
@@ -9,10 +15,12 @@ import script.string_id;
 
 import java.util.HashSet;
 
-public class trader_care_package_resources extends script.base_script {
+public class trader_care_package_resources extends script.base_script
+{
     public static final String STF_FILE = "npe";
 
-    public static obj_id[] grantTraderCarePackageResources(obj_id player) throws InterruptedException {
+    public static obj_id[] grantTraderCarePackageResources(obj_id player) throws InterruptedException
+    {
         obj_id pInv = utils.getInventoryContainer(player);
         HashSet theSet = new HashSet<>();
 
@@ -32,11 +40,13 @@ public class trader_care_package_resources extends script.base_script {
         showLootBox(player, items);
         return items;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu2 = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id(STF_FILE, "redeem_care_package"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

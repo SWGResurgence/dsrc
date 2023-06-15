@@ -5,6 +5,12 @@ package script.event.gjpud;/*
 @ increases
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.static_item;
 import script.library.trial;
@@ -24,11 +30,12 @@ public class junk extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public int OnObjectMenuRequest( obj_id self, obj_id player, menu_info mi )
+    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi)
     {
-        mi.addRootMenu( menu_info_types.ITEM_USE, new string_id("Collect"));
+        mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Collect"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException, InvocationTargetException
     {
         if (item == menu_info_types.ITEM_USE)

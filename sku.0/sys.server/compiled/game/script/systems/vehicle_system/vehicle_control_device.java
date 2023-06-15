@@ -1,5 +1,11 @@
 package script.systems.vehicle_system;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -365,7 +371,7 @@ public class vehicle_control_device extends script.base_script
         names[idx] = "rideables_current_of_max";
         int currentRideables = callable.getNumStoredCDByType(player, callable.CALLABLE_TYPE_RIDEABLE);
         int maxRideables = callable.getMaxAllowedStoredRideables(player);
-        attribs[idx] = "" + target_dummy.BLUE + currentRideables + " of " + maxRideables;
+        attribs[idx] = target_dummy.BLUE + currentRideables + " of " + maxRideables;
         idx++;
         if (idx >= names.length)
         {
@@ -575,7 +581,7 @@ public class vehicle_control_device extends script.base_script
         {
             status = false;
         }
-        if (status == false && getIntObjVar(pcd, "difficultyClass") != 1)
+        if (!status && getIntObjVar(pcd, "difficultyClass") != 1)
         {
             sendSystemMessage(player, pet_lib.SID_INVALID_CRAFTED_PET);
         }

@@ -1,15 +1,23 @@
 package script.theme_park.dungeon.mustafar_trials.working_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.combat;
 import script.library.trial;
 
 public class working_player extends script.base_script
 {
+    public static final boolean DO_LOGGING = true;
+
     public working_player()
     {
     }
-    public static final boolean DO_LOGGING = true;
+
     public int dualityDetonation(obj_id self, dictionary params) throws InterruptedException
     {
         final int DUALITY_DAMAGE = 8000;
@@ -25,8 +33,10 @@ public class working_player extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id target : targets) {
-            if (target == self) {
+        for (obj_id target : targets)
+        {
+            if (target == self)
+            {
                 continue;
             }
             pp.stringId = new string_id("cbt_spam", "duality_detonate_other");
@@ -37,6 +47,7 @@ public class working_player extends script.base_script
         playClientEffectObj(self, trial.PRT_WORKING_DUALITY_EXPLOSION, self, "root");
         return SCRIPT_CONTINUE;
     }
+
     public int aurek_diminish(obj_id self, dictionary params) throws InterruptedException
     {
         location loc = getLocation(self);
@@ -47,6 +58,7 @@ public class working_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int besh_diminish(obj_id self, dictionary params) throws InterruptedException
     {
         location loc = getLocation(self);
@@ -57,6 +69,7 @@ public class working_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (DO_LOGGING)

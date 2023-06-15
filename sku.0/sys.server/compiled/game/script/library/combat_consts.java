@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 public class combat_consts extends script.base_script
 {
     public static final int toHitNumber = 75;
@@ -256,6 +262,7 @@ public class combat_consts extends script.base_script
                     rangedLocomotionDefenseMod,
                     rangedLocomotionDefenseMod
             };
+
     public combat_consts()
     {
     }

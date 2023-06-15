@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.quests;
 import script.library.utils;
 import script.obj_id;
@@ -7,11 +13,12 @@ import script.string_id;
 
 public class fs_crafting4_loot_kit extends script.base_script
 {
+    public static final string_id SID_LOOT_KIT_DESTROYED = new string_id("quest/force_sensitive/fs_crafting", "crafting4_kit_destroyed");
+    public static final string_id SID_LOOT_KIT_DESTROYED_OVER = new string_id("quest/force_sensitive/fs_crafting", "crafting4_kit_destroyed_over");
     public fs_crafting4_loot_kit()
     {
     }
-    public static final string_id SID_LOOT_KIT_DESTROYED = new string_id("quest/force_sensitive/fs_crafting", "crafting4_kit_destroyed");
-    public static final string_id SID_LOOT_KIT_DESTROYED_OVER = new string_id("quest/force_sensitive/fs_crafting", "crafting4_kit_destroyed_over");
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "cleaningUp"))
@@ -23,7 +30,7 @@ public class fs_crafting4_loot_kit extends script.base_script
                 {
                     sendSystemMessage(owner, SID_LOOT_KIT_DESTROYED);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(owner, SID_LOOT_KIT_DESTROYED_OVER);
                 }

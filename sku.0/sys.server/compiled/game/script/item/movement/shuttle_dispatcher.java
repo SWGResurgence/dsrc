@@ -4,6 +4,12 @@ package script.item.movement;/*
 @Purpose: This item will allow players to place a droid that will be able to call a shuttle to the location saved from using the item.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 

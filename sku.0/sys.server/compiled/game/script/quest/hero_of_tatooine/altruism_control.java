@@ -1,13 +1,16 @@
 package script.quest.hero_of_tatooine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class altruism_control extends script.base_script
 {
-    public altruism_control()
-    {
-    }
     public static final String MARK_OF_ALTRUISM = "object/tangible/loot/quest/hero_of_tatooine/mark_altruism.iff";
     public static final String ALTRUISM_OBJVAR = "quest.hero_of_tatooine.altruism";
     public static final String ALTRUISM_WAYPOINT = ALTRUISM_OBJVAR + "_waypoint";
@@ -26,6 +29,10 @@ public class altruism_control extends script.base_script
     public static final string_id QUEST_SUCCESS = new string_id("quest/hero_of_tatooine/system_messages", "altruism_quest_success");
     public static final string_id NPC_FAREWELL = new string_id("quest/hero_of_tatooine/system_messages", "altruism_npc_farewell");
     public static final string_id ALTRUISM_INV_FULL = new string_id("quest/hero_of_tatooine/system_messages", "altruism_inv_full");
+    public altruism_control()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, ALTRUISM_ACTIVE))
@@ -34,6 +41,7 @@ public class altruism_control extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isIdValid(srcContainer) || !isIdValid(item))
@@ -61,10 +69,13 @@ public class altruism_control extends script.base_script
                 obj_id[] objects = player_structure.getObjectsInBuilding(self);
                 if (objects != null || objects.length > 0)
                 {
-                    for (obj_id object : objects) {
-                        if (isIdValid(object) && isMob(object)) {
+                    for (obj_id object : objects)
+                    {
+                        if (isIdValid(object) && isMob(object))
+                        {
                             String cName = getCreatureName(object);
-                            if (cName != null && cName.equals("quest_hero_of_tatooine_farmer_wife")) {
+                            if (cName != null && cName.equals("quest_hero_of_tatooine_farmer_wife"))
+                            {
                                 mother = object;
                                 break;
                             }
@@ -77,7 +88,7 @@ public class altruism_control extends script.base_script
                     webster.put("player", item);
                     messageTo(self, "handleAltruismResetCheck", webster, 1, false);
                 }
-                else 
+                else
                 {
                     obj_id currentQuestPlayer = getObjIdObjVar(mother, ALTRUISM_LEADER);
                     if (currentQuestPlayer != item && !badge.hasBadge(item, "poi_factoryliberation"))
@@ -111,6 +122,7 @@ public class altruism_control extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!hasObjVar(self, ALTRUISM_ACTIVE))
@@ -138,7 +150,7 @@ public class altruism_control extends script.base_script
                     cleanupObjects(self);
                 }
             }
-            else 
+            else
             {
                 obj_id mother = getObjIdObjVar(self, ALTRUISM_MOTHER);
                 if (isIdValid(mother))
@@ -152,6 +164,7 @@ public class altruism_control extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAltruismResetCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -170,23 +183,28 @@ public class altruism_control extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleExplosion(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id big_rock = getObjIdObjVar(self, ALTRUISM_BIG_ROCK);
         obj_id little_rock = getObjIdObjVar(self, ALTRUISM_LITTLE_ROCK);
         obj_id[] players_dmg = getPlayerCreaturesInRange(little_rock, 4.0f);
-        if (players_dmg != null && players_dmg.length > 0)
+        if (players_dmg != null)
         {
-            for (obj_id obj_id : players_dmg) {
+            for (obj_id obj_id : players_dmg)
+            {
                 attribute[] attrib = getAttribs(obj_id);
                 int dmg = 200;
-                for (int j = 0; j < attrib.length; j += NUM_ATTRIBUTES_PER_GROUP) {
+                for (int j = 0; j < attrib.length; j += NUM_ATTRIBUTES_PER_GROUP)
+                {
                     attrib[j] = new attribute(attrib[j].getType(), (attrib[j].getValue() - dmg));
-                    if (attrib[j].getValue() < 1) {
+                    if (attrib[j].getValue() < 1)
+                    {
                         attrib[j] = new attribute(attrib[j].getType(), 1);
                     }
                 }
-                if (setAttribs(obj_id, attrib)) {
+                if (setAttribs(obj_id, attrib))
+                {
                     sendSystemMessage(obj_id, EXPLOSION_DMG);
                 }
             }
@@ -201,9 +219,10 @@ public class altruism_control extends script.base_script
         if (isIdValid(little_rock) && exists(little_rock))
         {
             obj_id[] contents = getContents(little_rock);
-            if (contents != null && contents.length > 0)
+            if (contents != null)
             {
-                for (obj_id content : contents) {
+                for (obj_id content : contents)
+                {
                     destroyObject(content);
                 }
             }
@@ -211,6 +230,7 @@ public class altruism_control extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestFail(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -221,6 +241,7 @@ public class altruism_control extends script.base_script
         sendSystemMessage(player, QUEST_FAIL);
         return SCRIPT_CONTINUE;
     }
+
     public int handleValidateContent(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, ALTRUISM_ACTIVE))
@@ -231,37 +252,43 @@ public class altruism_control extends script.base_script
         {
             cleanupObjects(self);
         }
-        else 
+        else
         {
             messageTo(self, "handleValidateContent", null, 3600.0f, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int resetContent(obj_id self, dictionary params) throws InterruptedException
     {
         cleanupObjects(self);
         return SCRIPT_CONTINUE;
     }
+
     public int setupContent(obj_id self, dictionary params) throws InterruptedException
     {
         cleanupObjects(self);
         spawnQuestObjects(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean caveHasQuestPlayers(obj_id self) throws InterruptedException
     {
         obj_id[] players = player_structure.getPlayersInBuilding(self);
-        if (players == null || players.length == 0)
+        if (players == null)
         {
             return false;
         }
-        for (obj_id player : players) {
-            if (hasObjVar(player, ALTRUISM_OBJVAR) && !hasObjVar(player, ALTRUISM_COMPLETE)) {
+        for (obj_id player : players)
+        {
+            if (hasObjVar(player, ALTRUISM_OBJVAR) && !hasObjVar(player, ALTRUISM_COMPLETE))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public void spawnQuestObjects(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, ALTRUISM_LAST_SUCCESS))
@@ -298,6 +325,7 @@ public class altruism_control extends script.base_script
         setObjVar(self, ALTRUISM_DAUGHTER, daughter);
         messageTo(self, "handleValidateContent", null, 360.0f, false);
     }
+
     public void succeedQuest(obj_id control, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(npc, ALTRUISM_LEADER))
@@ -332,6 +360,7 @@ public class altruism_control extends script.base_script
         ai_lib.pathAwayFrom(npc, control);
         messageTo(control, "resetContent", null, 20.0f, false);
     }
+
     public void destroyWaypoint(obj_id player) throws InterruptedException
     {
         obj_id waypoint = getObjIdObjVar(player, ALTRUISM_WAYPOINT);
@@ -343,6 +372,7 @@ public class altruism_control extends script.base_script
         }
         removeObjVar(player, ALTRUISM_WAYPOINT);
     }
+
     public void cleanupObjects(obj_id self) throws InterruptedException
     {
         obj_id explosive = getObjIdObjVar(self, ALTRUISM_EXPLOSIVE);

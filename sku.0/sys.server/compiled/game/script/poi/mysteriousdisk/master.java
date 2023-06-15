@@ -1,5 +1,11 @@
 package script.poi.mysteriousdisk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.poi;
@@ -9,9 +15,6 @@ import script.obj_id;
 
 public class master extends script.theme_park.poi.base
 {
-    public master()
-    {
-    }
     public static final String SCENARIO_NAME = "mysteriousdisk";
     public static final String LOG_NAME = "poiMysteriousDisk Master";
     public static final String BASE_PATH = "poi." + SCENARIO_NAME;
@@ -21,6 +24,10 @@ public class master extends script.theme_park.poi.base
     public static final String MEDIATOR_TYPE = "MEDIATOR_TYPE";
     public static final String ANTAGONIST_TYPE = "ANTAGONIST_TYPE";
     public static final int DEFAULT_ANTAGONIST_COUNT = 1;
+    public master()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!scenario.initScenario(self, TBL))
@@ -29,26 +36,31 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupScenario(obj_id self, dictionary params) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int initScenario(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -59,7 +71,7 @@ public class master extends script.theme_park.poi.base
         setObjVar(self, MEDIATOR_TYPE, params.getString(MEDIATOR_TYPE));
         setObjVar(self, ANTAGONIST_TYPE, params.getString(ANTAGONIST_TYPE));
         scenario.createTeam(self, "mediator", self.toString() + "_mediator");
-        scenario.createTeam(self, "antagonist", self.toString() + "_antagonist");
+        scenario.createTeam(self, "antagonist", self + "_antagonist");
         if (!createMediator(self))
         {
             scenario.cleanup(self);
@@ -68,6 +80,7 @@ public class master extends script.theme_park.poi.base
         createAntagonists(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean createMediator(obj_id self) throws InterruptedException
     {
         String type = getStringObjVar(self, MEDIATOR_TYPE);
@@ -83,6 +96,7 @@ public class master extends script.theme_park.poi.base
         setObjVar(mediator, "ai.rangedOnly", true);
         return true;
     }
+
     public boolean createAntagonists(obj_id self) throws InterruptedException
     {
         location baseloc = getLocation(self);
@@ -100,7 +114,7 @@ public class master extends script.theme_park.poi.base
                 {
                     LOG(LOG_NAME, "Couldn't create antagonist minion.");
                 }
-                else 
+                else
                 {
                     setYaw(antagonist, rand(0, 359));
                     ai_lib.setDefaultCalmBehavior(antagonist, ai_lib.BEHAVIOR_LOITER);
@@ -111,6 +125,7 @@ public class master extends script.theme_park.poi.base
         }
         return true;
     }
+
     public int startFight(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "fighting"))
@@ -121,6 +136,7 @@ public class master extends script.theme_park.poi.base
         messageTo(self, "dieDieMyDarling", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int dieDieMyDarling(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id med = poi.findObject(scenario.MEDIATOR + "_0");
@@ -143,6 +159,7 @@ public class master extends script.theme_park.poi.base
         startCombat(s2, med);
         return SCRIPT_CONTINUE;
     }
+
     public int handleActorDeath(obj_id self, dictionary params) throws InterruptedException
     {
         scenario.complete(self);

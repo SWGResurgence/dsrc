@@ -1,5 +1,11 @@
 package script.theme_park;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -12,9 +18,6 @@ import java.util.Vector;
 
 public class npc_base_builder extends script.base_script
 {
-    public npc_base_builder()
-    {
-    }
     public static final String SPAWN_DATATABLE = "base_builder.spawn_datatable";
     public static final String SPAWN_LIST = "base_builder.spawn_list";
     public static final String SPAWN_POSITION = "base_builder.spawn_position";
@@ -24,6 +27,10 @@ public class npc_base_builder extends script.base_script
     public static final String CURRENT_PHASE = "base_builder.current_phase";
     public static final String OVERRIDE_PHASE = "base_builder.override_phase";
     public static final boolean LOGGING = false;
+    public npc_base_builder()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         dictionary dict = trial.getSessionDict(self);
@@ -34,6 +41,7 @@ public class npc_base_builder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         dictionary dict = trial.getSessionDict(self);
@@ -44,16 +52,19 @@ public class npc_base_builder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         cleanupChildren(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         cleanupChildren(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupEvent(obj_id self, dictionary params) throws InterruptedException
     {
         String dataTable = getStringObjVar(self, SPAWN_DATATABLE);
@@ -69,6 +80,7 @@ public class npc_base_builder extends script.base_script
         doSpawning(self, dataTable, spawnPhase);
         return SCRIPT_CONTINUE;
     }
+
     public int initializePhase(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -98,6 +110,7 @@ public class npc_base_builder extends script.base_script
         doSpawning(self, dataTable, spawnPhase);
         return SCRIPT_CONTINUE;
     }
+
     public void cleanupChildren(obj_id self) throws InterruptedException
     {
         obj_id[] objects = getObjectsInRange(getSelf(), 400.0f);
@@ -107,26 +120,32 @@ public class npc_base_builder extends script.base_script
             return;
         }
         boolean isMaster = ((getStringObjVar(self, "element")).equals("ph1_restuss_master"));
-        for (obj_id object : objects) {
-            if (trial.isChild(self, object)) {
+        for (obj_id object : objects)
+        {
+            if (trial.isChild(self, object))
+            {
                 trial.cleanupObject(object);
                 continue;
             }
-            if (isMaster) {
-                if (hasObjVar(object, trial.PARENT)) {
-                    if (!isIdValid(trial.getParent(object)) || !hasScript(trial.getParent(object), "theme_park.npc_base_builder")) {
+            if (isMaster)
+            {
+                if (hasObjVar(object, trial.PARENT))
+                {
+                    if (!isIdValid(trial.getParent(object)) || !hasScript(trial.getParent(object), "theme_park.npc_base_builder"))
+                    {
                         trial.cleanupObject(object);
                     }
                 }
             }
         }
         removeObjVar(self, SPAWN_LIST);
-        return;
     }
+
     public void doSpawning(obj_id self, String dataTable, int phase) throws InterruptedException
     {
         doSpawning(self, dataTable, phase, -1);
     }
+
     public void doSpawning(obj_id self, String dataTable, int phase, int lineNumber) throws InterruptedException
     {
         final int SPAWN_OFFSET = 0;
@@ -169,7 +188,7 @@ public class npc_base_builder extends script.base_script
                         doLogging("doSpawning", "I am the parent object(" + getName(self) + "/" + self + ") but I have no cells. skipping creation of " + toSpawn);
                         continue;
                     }
-                    else 
+                    else
                     {
                         utils.setScriptVar(self, LAST_POB, self);
                     }
@@ -191,13 +210,13 @@ public class npc_base_builder extends script.base_script
                 {
                     newObject = createObjectInCell(toSpawn, lastPob, cell, spawnLoc);
                 }
-                else 
+                else
                 {
                     newObject = create.object(toSpawn, spawnLoc);
                     ai_lib.setDefaultCalmBehavior(newObject, ai_lib.BEHAVIOR_SENTINEL);
                 }
             }
-            else 
+            else
             {
                 if (locationType == SPAWN_OFFSET)
                 {
@@ -216,7 +235,7 @@ public class npc_base_builder extends script.base_script
                         utils.setScriptVar(self, LAST_POB, newObject);
                     }
                 }
-                else 
+                else
                 {
                     newObject = create.object(toSpawn, spawnLoc);
                     ai_lib.setDefaultCalmBehavior(newObject, ai_lib.BEHAVIOR_SENTINEL);
@@ -235,6 +254,7 @@ public class npc_base_builder extends script.base_script
             setObjVar(self, SPAWN_LIST, "base_builder.childrenInWorld");
         }
     }
+
     public int handleEntityRespawn(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -251,17 +271,21 @@ public class npc_base_builder extends script.base_script
         doSpawning(self, dataTable, -1, lineNumber);
         return SCRIPT_CONTINUE;
     }
+
     public boolean validatePhase(int phase, String spawnPhase) throws InterruptedException
     {
         String[] parse = split(spawnPhase, ',');
-        for (String s : parse) {
+        for (String s : parse)
+        {
             int intParse = utils.stringToInt(s);
-            if (intParse == -1 || intParse == phase) {
+            if (intParse == -1 || intParse == phase)
+            {
                 return true;
             }
         }
         return false;
     }
+
     public void attachSpawnScript(obj_id newObject, String scriptString, String respawn) throws InterruptedException
     {
         if (!respawn.equals("-1"))
@@ -274,14 +298,16 @@ public class npc_base_builder extends script.base_script
             return;
         }
         String[] parse = split(scriptString, ';');
-        if (parse == null || parse.length == 0)
+        if (parse == null)
         {
             return;
         }
-        for (String s : parse) {
+        for (String s : parse)
+        {
             attachScript(newObject, s);
         }
     }
+
     public void setSpawnObjVar(obj_id newObject, String objvarString) throws InterruptedException
     {
         if (objvarString.equals("none"))
@@ -289,39 +315,47 @@ public class npc_base_builder extends script.base_script
             return;
         }
         String[] parse = split(objvarString, ';');
-        if (parse == null || parse.length == 0)
+        if (parse == null)
         {
             return;
         }
-        for (String s : parse) {
+        for (String s : parse)
+        {
             String[] typeDataSplit = split(s, ':');
             String type = typeDataSplit[0];
             String data = typeDataSplit[1];
             String[] nameValueSplit = split(data, '=');
             String name = nameValueSplit[0];
             String value = nameValueSplit[1];
-            if (type.equals("int")) {
+            if (type.equals("int"))
+            {
                 setObjVar(newObject, name, utils.stringToInt(value));
             }
-            if (type.equals("float")) {
+            if (type.equals("float"))
+            {
                 setObjVar(newObject, name, utils.stringToFloat(value));
             }
-            if (type.equals("string")) {
+            if (type.equals("string"))
+            {
                 setObjVar(newObject, name, value);
             }
-            if (type.equals("boolean") && (value.equals("true") || value.equals("1"))) {
+            if (type.equals("boolean") && (value.equals("true") || value.equals("1")))
+            {
                 setObjVar(newObject, name, true);
             }
-            if (type.equals("boolean") && (value.equals("false") || value.equals("0"))) {
+            if (type.equals("boolean") && (value.equals("false") || value.equals("0")))
+            {
                 setObjVar(newObject, name, false);
             }
         }
     }
+
     public int incrimentPhase(obj_id self, dictionary params) throws InterruptedException
     {
         incrimentPhase(self);
         return SCRIPT_CONTINUE;
     }
+
     public void incrimentPhase(obj_id self) throws InterruptedException
     {
         if (!canIncrimentPhase(self))
@@ -333,7 +367,7 @@ public class npc_base_builder extends script.base_script
         {
             setObjVar(self, CURRENT_PHASE, getIntObjVar(self, CURRENT_PHASE) + 1);
         }
-        else 
+        else
         {
             setObjVar(self, CURRENT_PHASE, 1);
         }
@@ -343,6 +377,7 @@ public class npc_base_builder extends script.base_script
         }
         messageTo(self, "initializePhase", trial.getSessionDict(self), 1.0f, false);
     }
+
     public boolean canIncrimentPhase(obj_id self) throws InterruptedException
     {
         int phase = 0;
@@ -363,11 +398,13 @@ public class npc_base_builder extends script.base_script
         }
         return false;
     }
+
     public int decrimentPhase(obj_id self, dictionary params) throws InterruptedException
     {
         decrimentPhase(self);
         return SCRIPT_CONTINUE;
     }
+
     public void decrimentPhase(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, CURRENT_PHASE) || getIntObjVar(self, CURRENT_PHASE) == 0)
@@ -384,22 +421,27 @@ public class npc_base_builder extends script.base_script
         int spawnPhase = getCurrentPhase(self);
         messageTo(self, "initializePhase", trial.getSessionDict(self), 1.0f, false);
     }
+
     public int getCurrentPhase(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, CURRENT_PHASE))
         {
             String restussEvent = getConfigSetting("EventTeam", "restussEvent");
 
-            if(restussEvent == null || (!restussEvent.equals("1") && !restussEvent.equals("true"))) {
+            if (restussEvent == null || (!restussEvent.equals("1") && !restussEvent.equals("true")))
+            {
                 // event is not on so start at beginning phase
                 setObjVar(self, CURRENT_PHASE, 0);
-            } else {
+            }
+            else
+            {
                 // event is on so move to final phase
                 setObjVar(self, CURRENT_PHASE, 2);
             }
         }
         return getIntObjVar(self, CURRENT_PHASE);
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

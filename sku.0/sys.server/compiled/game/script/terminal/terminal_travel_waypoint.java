@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.ai.ai;
 import script.library.callable;
 import script.library.chat;
@@ -97,7 +103,7 @@ public class terminal_travel_waypoint extends script.base_script
     public int destroyAllInContainerByObjVar(obj_id self, obj_id player, String objvarName) throws InterruptedException
     {
         obj_id[] contents = getContents(utils.getInventoryContainer(player));
-        if (contents == null || contents.length == 0)
+        if (contents == null)
         {
             return SCRIPT_CONTINUE;
         }

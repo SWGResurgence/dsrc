@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.StringTokenizer;
 
 public class recovery extends script.base_script
 {
-    public recovery()
-    {
-    }
     public static final string_id SID_ABANDONED_MISSION = new string_id("space/quest", "mission_abandoned");
     public static final string_id SID_ABANDONED_RECOVERY = new string_id("space/quest", "recovery_abandoned");
     public static final string_id SID_TARGETS_REMAINING = new string_id("space/quest", "destroy_duty_targets_remaining");
@@ -18,6 +21,10 @@ public class recovery extends script.base_script
     public static final String SOUND_DESTROYED_ALL = "clienteffect/ui_quest_destroyed_all.cef";
     public static final String SOUND_DESTROYED_WAVE = "clienteffect/ui_quest_destroyed_wave.cef";
     public static final string_id WARPOUT_FAILURE = new string_id("space/quest", "warpout_failure");
+    public recovery()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -77,6 +84,7 @@ public class recovery extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int initializedQuestPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -135,6 +143,7 @@ public class recovery extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void findTargetStart(obj_id self, obj_id player, String destNav) throws InterruptedException
     {
         obj_id navPoint = space_quest.findQuestLocation(self, player, destNav, "nav");
@@ -152,6 +161,7 @@ public class recovery extends script.base_script
         }
         setObjVar(self, "initialized", 1);
     }
+
     public int warpInTarget(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -235,6 +245,7 @@ public class recovery extends script.base_script
         questUpdate(self, status_update);
         return SCRIPT_CONTINUE;
     }
+
     public obj_id createTargetShip(obj_id self) throws InterruptedException
     {
         String shipType = getStringObjVar(self, "targetShipType");
@@ -242,6 +253,7 @@ public class recovery extends script.base_script
         transform spawnLoc = space_quest.getRandomPositionInSphere(trans, 100, 200);
         return space_create.createShipHyperspace(shipType, spawnLoc);
     }
+
     public transform[] getPathTransforms(obj_id self, boolean escort) throws InterruptedException
     {
         obj_id questManager = getNamedObject(space_quest.QUEST_MANAGER);
@@ -255,7 +267,7 @@ public class recovery extends script.base_script
         {
             pathPoints = getStringArrayObjVar(self, "escortPath");
         }
-        else 
+        else
         {
             pathPoints = getStringArrayObjVar(self, "recoveryPath");
         }
@@ -265,17 +277,20 @@ public class recovery extends script.base_script
         for (int j = 0; j < pathPoints.length; j++)
         {
             boolean found = false;
-            for (obj_id point : points) {
+            for (obj_id point : points)
+            {
                 String pointName = getStringObjVar(point, "nav_name");
                 String eName = pathPoints[j];
                 StringTokenizer st = new StringTokenizer(eName, ":");
                 String scene = st.nextToken();
                 eName = st.nextToken();
-                if ((pointName != null) && pointName.equals(eName)) {
+                if ((pointName != null) && pointName.equals(eName))
+                {
                     found = true;
                     b++;
                     translist[j] = getTransform_o2w(point);
-                    if (j + 1 == pathPoints.length) {
+                    if (j + 1 == pathPoints.length)
+                    {
                         setObjVar(self, "last_loc", getLocation(point));
                     }
                     break;
@@ -292,6 +307,7 @@ public class recovery extends script.base_script
         }
         return translist;
     }
+
     public int recoverShipDisabled(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id ship = getObjIdObjVar(self, "target");
@@ -324,6 +340,7 @@ public class recovery extends script.base_script
         messageTo(self, "recoverPhase1", null, getIntObjVar(self, "targetRecoverTime"), false);
         return SCRIPT_CONTINUE;
     }
+
     public int recoverPhase1(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id ship = getObjIdObjVar(self, "target");
@@ -344,10 +361,12 @@ public class recovery extends script.base_script
         messageTo(self, "recoverPhase2", null, getIntObjVar(self, "targetRecoverTime"), false);
         return SCRIPT_CONTINUE;
     }
+
     public String getCapturePhrase1(obj_id self) throws InterruptedException
     {
         return "capture_phase_1";
     }
+
     public int recoverPhase2(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id ship = getObjIdObjVar(self, "target");
@@ -362,7 +381,8 @@ public class recovery extends script.base_script
         obj_id[] targets = ship_ai.unitGetAttackTargetList(ship);
         if (targets != null)
         {
-            for (obj_id target : targets) {
+            for (obj_id target : targets)
+            {
                 ship_ai.spaceStopAttack(ship, target);
             }
         }
@@ -388,10 +408,12 @@ public class recovery extends script.base_script
         messageTo(self, "startCapturedShipPathing", null, 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public String getCapturePhrase2(obj_id self) throws InterruptedException
     {
         return "capture_phase_2";
     }
+
     public int startCapturedShipPathing(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id ship = getObjIdObjVar(self, "target");
@@ -420,6 +442,7 @@ public class recovery extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int recoveryComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -447,10 +470,12 @@ public class recovery extends script.base_script
         messageTo(self, "completeQuestMsg", null, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public String getCompletePhrase(obj_id self) throws InterruptedException
     {
         return "complete";
     }
+
     public int recoveryFailed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -476,9 +501,11 @@ public class recovery extends script.base_script
         questFailed(self);
         return SCRIPT_CONTINUE;
     }
+
     public int updateTargetWaypoint(obj_id self, dictionary params) throws InterruptedException
     {
-        if(self == null || self == obj_id.NULL_ID || !isIdValid(self)){
+        if (self == null || self == obj_id.NULL_ID || !isIdValid(self))
+        {
             return SCRIPT_CONTINUE;
         }
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -505,39 +532,47 @@ public class recovery extends script.base_script
         messageTo(self, "updateTargetWaypoint", null, 30.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void clearMissionWaypoint(obj_id self) throws InterruptedException
     {
-        if(isIdValid(self)) {
+        if (isIdValid(self))
+        {
             obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
             obj_id waypoint = getObjIdObjVar(self, "waypoint");
-            if (isIdValid(waypoint) && isIdValid(player)) {
+            if (isIdValid(waypoint) && isIdValid(player))
+            {
                 destroyWaypointInDatapad(waypoint, player);
             }
         }
     }
+
     public void questCompleted(obj_id self) throws InterruptedException
     {
         clearMissionWaypoint(self);
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         space_quest.setQuestWon(player, self);
     }
+
     public int completeQuestMsg(obj_id self, dictionary params) throws InterruptedException
     {
         questCompleted(self);
         return SCRIPT_CONTINUE;
     }
+
     public void questFailed(obj_id self) throws InterruptedException
     {
         clearMissionWaypoint(self);
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         space_quest.setQuestFailed(player, self);
     }
+
     public void questAborted(obj_id self) throws InterruptedException
     {
         clearMissionWaypoint(self);
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         space_quest.setQuestAborted(player, self);
     }
+
     public int removeQuest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -551,6 +586,7 @@ public class recovery extends script.base_script
         space_quest._removeQuest(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "noAbort"))
@@ -570,15 +606,17 @@ public class recovery extends script.base_script
                 space_quest.groupTaunt(ship, player, pp);
                 messageTo(ship, "missionAbort", null, 2.0f, false);
             }
-            else 
+            else
             {
                 messageTo(ship, "missionAbort", null, 10.0f, false);
             }
             obj_id[] escorts = getObjIdArrayObjVar(self, "escorts");
             if (escorts != null)
             {
-                for (obj_id escort : escorts) {
-                    if (isIdValid(escort) && exists(escort)) {
+                for (obj_id escort : escorts)
+                {
+                    if (isIdValid(escort) && exists(escort))
+                    {
                         messageTo(escort, "missionAbort", null, 10.0f, false);
                     }
                 }
@@ -587,6 +625,7 @@ public class recovery extends script.base_script
         questAborted(self);
         return SCRIPT_CONTINUE;
     }
+
     public int playerShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -600,6 +639,7 @@ public class recovery extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -629,7 +669,7 @@ public class recovery extends script.base_script
                     space_quest.sendQuestMessage(player, update);
                     playClientEffectObj(player, SOUND_DESTROYED_ALL, player, "");
                 }
-                else 
+                else
                 {
                     string_id update = new string_id("spacequest/" + questType + "/" + questName, "escort_remaining");
                     prose_package pp = prose.getPackage(update, remaining);
@@ -645,15 +685,18 @@ public class recovery extends script.base_script
         setObjVar(self, "dead_escorts", dead_escorts);
         return SCRIPT_CONTINUE;
     }
+
     public void cleanupShips(obj_id self) throws InterruptedException
     {
         space_quest.recoveryCleanUpShips(self);
     }
+
     public int cleanupShipsMsg(obj_id self, dictionary params) throws InterruptedException
     {
         cleanupShips(self);
         return SCRIPT_CONTINUE;
     }
+
     public void questUpdate(obj_id self, string_id update_id) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -663,6 +706,7 @@ public class recovery extends script.base_script
         prose_package pp = prose.getPackage(update_prefix, update_id);
         space_quest.sendQuestMessage(player, pp);
     }
+
     public int launchAttack(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "initialized") || !hasObjVar(self, "target"))
@@ -687,7 +731,7 @@ public class recovery extends script.base_script
         {
             wavenum = 2;
         }
-        else 
+        else
         {
             wavenum = 1;
         }
@@ -724,14 +768,11 @@ public class recovery extends script.base_script
         {
             targets = new obj_id[count];
         }
-        else 
+        else
         {
             targets = new obj_id[count + oldtargets.length];
             k = oldtargets.length;
-            for (int i = 0; i < oldtargets.length; i++)
-            {
-                targets[i] = oldtargets[i];
-            }
+            System.arraycopy(oldtargets, 0, targets, 0, oldtargets.length);
         }
         int squad = ship_ai.squadCreateSquadId();
         int j = 0;
@@ -798,6 +839,7 @@ public class recovery extends script.base_script
         messageTo(self, "launchAttack", outparams, attackPeriod, false);
         return SCRIPT_CONTINUE;
     }
+
     public int targetDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -809,7 +851,7 @@ public class recovery extends script.base_script
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
         String questType = getStringObjVar(self, space_quest.QUEST_TYPE);
         obj_id deadship = params.getObjId("ship");
-        obj_id targets[] = getObjIdArrayObjVar(self, "targets");
+        obj_id[] targets = getObjIdArrayObjVar(self, "targets");
         if (targets == null)
         {
             return SCRIPT_CONTINUE;
@@ -833,7 +875,7 @@ public class recovery extends script.base_script
                     removeObjVar(self, "wave" + shipswave);
                     launchWave = true;
                 }
-                else 
+                else
                 {
                     setObjVar(self, "wave" + shipswave, wavecount);
                 }
@@ -874,6 +916,7 @@ public class recovery extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int warpoutFailureRecovery(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "handling_warpout_failure"))

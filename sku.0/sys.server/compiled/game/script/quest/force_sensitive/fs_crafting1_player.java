@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -9,9 +15,6 @@ import java.util.Vector;
 
 public class fs_crafting1_player extends script.base_script
 {
-    public fs_crafting1_player()
-    {
-    }
     public static final string_id MSG_COMP_NOT_INSTALLED = new string_id("quest/force_sensitive/fs_crafting", "phase1_msg_comp_not_installed");
     public static final string_id MSG_INVENTORY_FULL = new string_id("quest/force_sensitive/fs_crafting", "phase1_msg_inventory_full");
     public static final string_id MSG_ALREADY_HAVE_COMPONENT = new string_id("quest/force_sensitive/fs_crafting", "phase1_msg_already_have_component");
@@ -80,62 +83,66 @@ public class fs_crafting1_player extends script.base_script
     public static final String SUI_SSA_SLIDER3 = "@quest/force_sensitive/fs_crafting:sui_ssa_slider3";
     public static final String SUI_SSA_SLIDER4 = "@quest/force_sensitive/fs_crafting:sui_ssa_slider4";
     public static final String SUI_SSA_SLIDER5 = "@quest/force_sensitive/fs_crafting:sui_ssa_slider5";
-    public static final String[] COMPONENTS = 
-    {
-        "@quest_item_n:fs_craft_puzzle_config_processor",
-        "@quest_item_n:fs_craft_puzzle_gyro_receiver",
-        "@quest_item_n:fs_craft_puzzle_signal_amp",
-        "@quest_item_n:fs_craft_puzzle_solid_state_array"
-    };
-    public static final String[] TEMPLATES = 
-    {
-        "object/tangible/item/quest/force_sensitive/fs_craft_puzzle_config_processor.iff",
-        "object/tangible/item/quest/force_sensitive/fs_craft_puzzle_gyro_receiver.iff",
-        "object/tangible/item/quest/force_sensitive/fs_craft_puzzle_signal_amp.iff",
-        "object/tangible/item/quest/force_sensitive/fs_craft_puzzle_solid_state_array.iff"
-    };
-    public static final String[] SCHEMATICS = 
-    {
-        "object/draft_schematic/item/quest_item/fs_craft_puzzle_config_processor.iff",
-        "object/draft_schematic/item/quest_item/fs_craft_puzzle_gyro_receiver.iff",
-        "object/draft_schematic/item/quest_item/fs_craft_puzzle_signal_amp.iff",
-        "object/draft_schematic/item/quest_item/fs_craft_puzzle_solid_state_array.iff"
-    };
-    public static final String[] CONFIG_PLAYER_BUTTONS = 
-    {
-        "top.triangles.player.right.1",
-        "top.triangles.player.right.2",
-        "top.triangles.player.right.3",
-        "top.triangles.player.left.2",
-        "top.triangles.player.left.3",
-        "top.triangles.player.left.1"
-    };
-    public static final String[] CONFIG_SERVER_BUTTONS = 
-    {
-        "top.triangles.server.right.1",
-        "top.triangles.server.right.2",
-        "top.triangles.server.right.3",
-        "top.triangles.server.left.2",
-        "top.triangles.server.left.3",
-        "top.triangles.server.left.1"
-    };
+    public static final String[] COMPONENTS =
+            {
+                    "@quest_item_n:fs_craft_puzzle_config_processor",
+                    "@quest_item_n:fs_craft_puzzle_gyro_receiver",
+                    "@quest_item_n:fs_craft_puzzle_signal_amp",
+                    "@quest_item_n:fs_craft_puzzle_solid_state_array"
+            };
+    public static final String[] TEMPLATES =
+            {
+                    "object/tangible/item/quest/force_sensitive/fs_craft_puzzle_config_processor.iff",
+                    "object/tangible/item/quest/force_sensitive/fs_craft_puzzle_gyro_receiver.iff",
+                    "object/tangible/item/quest/force_sensitive/fs_craft_puzzle_signal_amp.iff",
+                    "object/tangible/item/quest/force_sensitive/fs_craft_puzzle_solid_state_array.iff"
+            };
+    public static final String[] SCHEMATICS =
+            {
+                    "object/draft_schematic/item/quest_item/fs_craft_puzzle_config_processor.iff",
+                    "object/draft_schematic/item/quest_item/fs_craft_puzzle_gyro_receiver.iff",
+                    "object/draft_schematic/item/quest_item/fs_craft_puzzle_signal_amp.iff",
+                    "object/draft_schematic/item/quest_item/fs_craft_puzzle_solid_state_array.iff"
+            };
+    public static final String[] CONFIG_PLAYER_BUTTONS =
+            {
+                    "top.triangles.player.right.1",
+                    "top.triangles.player.right.2",
+                    "top.triangles.player.right.3",
+                    "top.triangles.player.left.2",
+                    "top.triangles.player.left.3",
+                    "top.triangles.player.left.1"
+            };
+    public static final String[] CONFIG_SERVER_BUTTONS =
+            {
+                    "top.triangles.server.right.1",
+                    "top.triangles.server.right.2",
+                    "top.triangles.server.right.3",
+                    "top.triangles.server.left.2",
+                    "top.triangles.server.left.3",
+                    "top.triangles.server.left.1"
+            };
     public static final int SUI_SSA_LINE_MIN = 20;
     public static final int SUI_SSA_LINE_MAX = 248;
     public static final int SUI_SSA_LINE_RANGE = SUI_SSA_LINE_MAX - SUI_SSA_LINE_MIN;
-    public static final int[] DEFAULT_STATUS = 
+    public static final int[] DEFAULT_STATUS =
+            {
+                    -1,
+                    -1,
+                    -1,
+                    -1
+            };
+    public static final int[] DEFAULT_ANALYZED =
+            {
+                    0,
+                    0,
+                    0,
+                    0
+            };
+    public fs_crafting1_player()
     {
-        -1,
-        -1,
-        -1,
-        -1
-    };
-    public static final int[] DEFAULT_ANALYZED = 
-    {
-        0,
-        0,
-        0,
-        0
-    };
+    }
+
     public int msgQuestAbortPhaseChange(obj_id self, dictionary params) throws InterruptedException
     {
         sendSystemMessage(self, MSG_QUEST_FAIL_PHASE_DONE);
@@ -156,6 +163,7 @@ public class fs_crafting1_player extends script.base_script
         detachScript(self, "quest.force_sensitive.fs_crafting1_player");
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SUI_OBJVAR + ".pid"))
@@ -164,13 +172,15 @@ public class fs_crafting1_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (!isGod(self))
         {
             return SCRIPT_CONTINUE;
         }
-        switch (text) {
+        switch (text)
+        {
             case "config":
                 configProcessorPuzzle(self, self);
                 break;
@@ -186,6 +196,7 @@ public class fs_crafting1_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMasterIdResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = params.getObjId(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER);
@@ -195,6 +206,7 @@ public class fs_crafting1_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAccessTerminal(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SUI_OBJVAR + ".pid"))
@@ -211,13 +223,13 @@ public class fs_crafting1_player extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        int[] status = 
-        {
-            -1,
-            -1,
-            -1,
-            -1
-        };
+        int[] status =
+                {
+                        -1,
+                        -1,
+                        -1,
+                        -1
+                };
         if (hasObjVar(self, STATUS_OBJVAR))
         {
             status = getIntArrayObjVar(self, STATUS_OBJVAR);
@@ -228,10 +240,13 @@ public class fs_crafting1_player extends script.base_script
         }
         boolean win = true;
         String arrayStatus = SUI_ONLINE;
-        for (int status1 : status) {
-            if (status1 != 1) {
+        for (int status1 : status)
+        {
+            if (status1 != 1)
+            {
                 arrayStatus = SUI_OFFLINE;
                 win = false;
+                break;
             }
         }
         String prompt = SUI_PROMPT0 + "\n\n";
@@ -244,14 +259,14 @@ public class fs_crafting1_player extends script.base_script
             switch (status[i])
             {
                 case -1:
-                statusData[i] += SUI_DAMAGED;
-                break;
+                    statusData[i] += SUI_DAMAGED;
+                    break;
                 case 0:
-                statusData[i] += SUI_EMPTY;
-                break;
+                    statusData[i] += SUI_EMPTY;
+                    break;
                 case 1:
-                statusData[i] += SUI_OPERATIONAL;
-                break;
+                    statusData[i] += SUI_OPERATIONAL;
+                    break;
             }
         }
         int pid = sui.listbox(self, self, prompt, sui.OK_CANCEL_ALL, SUI_TITLE, statusData, "handleAccessTerminalCallback", false, false);
@@ -273,7 +288,7 @@ public class fs_crafting1_player extends script.base_script
             setSUIProperty(pid, "btnOk", "Visible", "false");
             setSUIProperty(pid, "btnOther", "Visible", "false");
         }
-        else 
+        else
         {
             setSUIProperty(pid, "btnOk", "Text", SUI_BTN_REPLACE);
             setSUIProperty(pid, "btnOther", "Text", SUI_BTN_RETRIEVE);
@@ -283,6 +298,7 @@ public class fs_crafting1_player extends script.base_script
         showSUIPage(pid);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAccessTerminalCallback(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, SUI_OBJVAR + ".pid");
@@ -301,12 +317,13 @@ public class fs_crafting1_player extends script.base_script
         {
             replaceComponent(self, idx);
         }
-        else 
+        else
         {
             retrieveComponent(self, idx);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleUseAnalyzer(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SUI_OBJVAR + ".pid"))
@@ -323,22 +340,22 @@ public class fs_crafting1_player extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        int[] analyzed = 
-        {
-            0,
-            0,
-            0,
-            0
-        };
+        int[] analyzed =
+                {
+                        0,
+                        0,
+                        0,
+                        0
+                };
         if (hasObjVar(self, ANALYZED_OBJVAR))
         {
             analyzed = getIntArrayObjVar(self, ANALYZED_OBJVAR);
         }
-        String[] choices = 
-        {
-            SUI_ANALYZER_ANALYZE_COMPONENT,
-            SUI_ANALYZER_GET_SCHEMATIC
-        };
+        String[] choices =
+                {
+                        SUI_ANALYZER_ANALYZE_COMPONENT,
+                        SUI_ANALYZER_GET_SCHEMATIC
+                };
         int pid = sui.listbox(self, self, SUI_ANALYZER_PROMPT0, sui.OK_CANCEL, SUI_ANALYZER_TITLE, choices, "handleUseAnalyzerCallback", false, false);
         if (pid < 0)
         {
@@ -350,6 +367,7 @@ public class fs_crafting1_player extends script.base_script
         showSUIPage(pid);
         return SCRIPT_CONTINUE;
     }
+
     public int handleUseAnalyzerCallback(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, SUI_OBJVAR + ".pid");
@@ -369,13 +387,14 @@ public class fs_crafting1_player extends script.base_script
             {
                 analyzeComponent(self, false);
             }
-            else 
+            else
             {
                 accessSchematic(self, false);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAnalyzeCompCallback(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, SUI_OBJVAR + ".pid");
@@ -385,13 +404,13 @@ public class fs_crafting1_player extends script.base_script
             return SCRIPT_CONTINUE;
         }
         utils.removeScriptVar(self, DATA_OBJVAR);
-        int[] analyzed = 
-        {
-            0,
-            0,
-            0,
-            0
-        };
+        int[] analyzed =
+                {
+                        0,
+                        0,
+                        0,
+                        0
+                };
         if (hasObjVar(self, ANALYZED_OBJVAR))
         {
             analyzed = getIntArrayObjVar(self, ANALYZED_OBJVAR);
@@ -438,6 +457,7 @@ public class fs_crafting1_player extends script.base_script
         analyzeComponent(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAccessSchematicCallback(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, SUI_OBJVAR + ".pid");
@@ -447,13 +467,13 @@ public class fs_crafting1_player extends script.base_script
             return SCRIPT_CONTINUE;
         }
         utils.removeScriptVar(self, DATA_OBJVAR);
-        int[] analyzed = 
-        {
-            0,
-            0,
-            0,
-            0
-        };
+        int[] analyzed =
+                {
+                        0,
+                        0,
+                        0,
+                        0
+                };
         if (hasObjVar(self, ANALYZED_OBJVAR))
         {
             analyzed = getIntArrayObjVar(self, ANALYZED_OBJVAR);
@@ -498,6 +518,7 @@ public class fs_crafting1_player extends script.base_script
         accessSchematic(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int handleUseCalibrator(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SUI_OBJVAR + ".pid"))
@@ -519,12 +540,15 @@ public class fs_crafting1_player extends script.base_script
         for (int i = 0; i < TEMPLATES.length; i++)
         {
             obj_id[] contents = utils.getAllItemsPlayerHasByTemplate(self, TEMPLATES[i]);
-            if (contents != null && contents.length > 0)
+            if (contents != null)
             {
-                for (obj_id content : contents) {
-                    if (!hasObjVar(content, STATUS_OBJVAR)) {
+                for (obj_id content : contents)
+                {
+                    if (!hasObjVar(content, STATUS_OBJVAR))
+                    {
                         obj_id crafter = getCrafter(content);
-                        if (!isIdValid(crafter) || crafter != self) {
+                        if (!isIdValid(crafter) || crafter != self)
+                        {
                             continue;
                         }
                         tempData = utils.addElement(tempData, COMPONENTS[i]);
@@ -541,7 +565,7 @@ public class fs_crafting1_player extends script.base_script
         String[] data = new String[tempData.size()];
         for (int i = 0; i < tempData.size(); i++)
         {
-            data[i] = (String)tempData.get(i);
+            data[i] = (String) tempData.get(i);
         }
         int pid = sui.listbox(self, self, SUI_CALIBRATOR_PROMPT, sui.OK_CANCEL, SUI_CALIBRATOR_TITLE, data, "handleUseCalibratorCallback", false, false);
         if (pid < 0)
@@ -555,6 +579,7 @@ public class fs_crafting1_player extends script.base_script
         showSUIPage(pid);
         return SCRIPT_CONTINUE;
     }
+
     public int handleUseCalibratorCallback(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, SUI_OBJVAR + ".pid");
@@ -602,8 +627,10 @@ public class fs_crafting1_player extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id content : contents) {
-            if (!hasObjVar(content, STATUS_OBJVAR)) {
+        for (obj_id content : contents)
+        {
+            if (!hasObjVar(content, STATUS_OBJVAR))
+            {
                 component = content;
                 break;
             }
@@ -612,27 +639,28 @@ public class fs_crafting1_player extends script.base_script
         {
             utils.setScriptVar(self, COMPONENT_OBJVAR, component);
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
         switch (index)
         {
             case 0:
-            configProcessorPuzzle(self, calibrator);
-            break;
+                configProcessorPuzzle(self, calibrator);
+                break;
             case 1:
-            gyroReceiverPuzzle(self, calibrator);
-            break;
+                gyroReceiverPuzzle(self, calibrator);
+                break;
             case 2:
-            signalAmpPuzzle(self, calibrator);
-            break;
+                signalAmpPuzzle(self, calibrator);
+                break;
             case 3:
-            solidStateArrayPuzzle(self, calibrator);
-            break;
+                solidStateArrayPuzzle(self, calibrator);
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int configProcessorPuzzleCallback(obj_id self, dictionary params) throws InterruptedException
     {
         String widgetName = params.getString("eventWidgetName");
@@ -680,13 +708,14 @@ public class fs_crafting1_player extends script.base_script
             }
         }
         tries--;
-        int integrity = (int)(((float)tries / max_tries) * 100);
+        int integrity = (int) (((float) tries / max_tries) * 100);
         boolean win = true;
         for (int i = 0; i < current.length; i++)
         {
             if (current[i] != goal[i])
             {
                 win = false;
+                break;
             }
         }
         if (win)
@@ -694,7 +723,8 @@ public class fs_crafting1_player extends script.base_script
             obj_id component = utils.getObjIdScriptVar(self, COMPONENT_OBJVAR);
             setObjVar(component, STATUS_OBJVAR, 1);
             setSUIProperty(pid, "top.description.desc", "Text", SUI_CALIBRATION_SUCCESS);
-            for (String configPlayerButton : CONFIG_PLAYER_BUTTONS) {
+            for (String configPlayerButton : CONFIG_PLAYER_BUTTONS)
+            {
                 subscribeToSUIEvent(pid, sui_event_type.SET_onButton, configPlayerButton, "noCallback");
                 setSUIProperty(pid, configPlayerButton, "GetsInput", "false");
             }
@@ -706,13 +736,14 @@ public class fs_crafting1_player extends script.base_script
             setObjVar(component, STATUS_OBJVAR, -1);
             setSUIProperty(pid, "top.description.attempts", "Text", SUI_ATTEMPTS_REMAINING + " " + integrity + "%");
             setSUIProperty(pid, "top.description.desc", "Text", SUI_CALIBRATION_FAILURE);
-            for (String configPlayerButton : CONFIG_PLAYER_BUTTONS) {
+            for (String configPlayerButton : CONFIG_PLAYER_BUTTONS)
+            {
                 subscribeToSUIEvent(pid, sui_event_type.SET_onButton, configPlayerButton, "noCallback");
                 setSUIProperty(pid, configPlayerButton, "GetsInput", "false");
             }
             utils.removeScriptVar(self, SUI_OBJVAR + ".pid");
         }
-        else 
+        else
         {
             setSUIProperty(pid, "top.description.attempts", "Text", SUI_ATTEMPTS_REMAINING + " " + integrity + "%");
         }
@@ -721,6 +752,7 @@ public class fs_crafting1_player extends script.base_script
         flushSUIPage(pid);
         return SCRIPT_CONTINUE;
     }
+
     public int gyroReceiverPuzzleCallback(obj_id self, dictionary params) throws InterruptedException
     {
         String widgetName = params.getString("eventWidgetName");
@@ -739,12 +771,12 @@ public class fs_crafting1_player extends script.base_script
         }
         else if (widgetName.equalsIgnoreCase("%buttonOK%"))
         {
-            int[] current = 
-            {
-                0,
-                0,
-                0
-            };
+            int[] current =
+                    {
+                            0,
+                            0,
+                            0
+                    };
             int[] goal = utils.getIntArrayScriptVar(self, SUI_OBJVAR + ".goal");
             int tries = utils.getIntScriptVar(self, SUI_OBJVAR + ".tries");
             int max_tries = utils.getIntScriptVar(self, SUI_OBJVAR + ".max_tries");
@@ -758,7 +790,7 @@ public class fs_crafting1_player extends script.base_script
                     win = false;
                 }
                 float pct = current[i] / 100.0f;
-                int dec = (int)(255 * pct);
+                int dec = (int) (255 * pct);
                 String hex = Integer.toHexString(dec);
                 if (hex.length() == 1)
                 {
@@ -768,7 +800,7 @@ public class fs_crafting1_player extends script.base_script
                 setSUIProperty(pid, "top.bars.player." + (i + 1), "Color", hexValue);
             }
             tries--;
-            int integrity = (int)(((float)tries / max_tries) * 100);
+            int integrity = (int) (((float) tries / max_tries) * 100);
             if (win)
             {
                 obj_id component = utils.getObjIdScriptVar(self, COMPONENT_OBJVAR);
@@ -781,7 +813,7 @@ public class fs_crafting1_player extends script.base_script
                 for (int i = 0; i < current.length; i++)
                 {
                     float pct = current[i] / 100.0f;
-                    int dec = (int)(255 * pct);
+                    int dec = (int) (255 * pct);
                     String hex = Integer.toHexString(dec);
                     if (hex.length() == 1)
                     {
@@ -807,7 +839,7 @@ public class fs_crafting1_player extends script.base_script
                 for (int i = 0; i < current.length; i++)
                 {
                     float pct = current[i] / 100.0f;
-                    int dec = (int)(255 * pct);
+                    int dec = (int) (255 * pct);
                     String hex = Integer.toHexString(dec);
                     if (hex.length() == 1)
                     {
@@ -819,7 +851,7 @@ public class fs_crafting1_player extends script.base_script
                 for (int i = 0; i < current.length; i++)
                 {
                     float pct = goal[i] / 100.0f;
-                    int dec = (int)(255 * pct);
+                    int dec = (int) (255 * pct);
                     String hex = Integer.toHexString(dec);
                     if (hex.length() == 1)
                     {
@@ -831,19 +863,20 @@ public class fs_crafting1_player extends script.base_script
                 setSUIProperty(pid, "description.attempts", "Text", SUI_ATTEMPTS_REMAINING + " " + integrity + "%");
                 utils.removeScriptVar(self, SUI_OBJVAR + ".pid");
             }
-            else 
+            else
             {
                 setSUIProperty(pid, "description.attempts", "Text", SUI_ATTEMPTS_REMAINING + " " + integrity + "%");
             }
             utils.setScriptVar(self, SUI_OBJVAR + ".tries", tries);
             flushSUIPage(pid);
         }
-        else 
+        else
         {
             debugSpeakMsg(self, "calibpuzzle3 got invalid widget, widget = '" + widgetName + "'");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int signalAmpPuzzleCallback(obj_id self, dictionary params) throws InterruptedException
     {
         String widgetName = params.getString("eventWidgetName");
@@ -888,20 +921,16 @@ public class fs_crafting1_player extends script.base_script
                 {
                     value = 1.0f;
                 }
-                setSUIProperty(pid, "%barTop" + (i + 1) + "%", "Value", "" + (100 * value));
+                setSUIProperty(pid, "%barTop" + (i + 1) + "%", "Value", String.valueOf(100 * value));
                 setSUIProperty(pid, "%barTop" + (i + 1) + "%", "RunScript", "");
                 float targetValue = (coeff0 + (coeff1 * n) + (coeff2 * n * n)) / 3.0f;
                 e += Math.abs(value - targetValue);
             }
-            boolean win = false;
-            if (e < 0.2f)
-            {
-                win = true;
-            }
+            boolean win = e < 0.2f;
             int tries = utils.getIntScriptVar(self, SUI_OBJVAR + ".tries");
             int max_tries = utils.getIntScriptVar(self, SUI_OBJVAR + ".max_tries");
             tries--;
-            int integrity = (int)(((float)tries / max_tries) * 100);
+            int integrity = (int) (((float) tries / max_tries) * 100);
             if (win)
             {
                 obj_id component = utils.getObjIdScriptVar(self, COMPONENT_OBJVAR);
@@ -927,7 +956,7 @@ public class fs_crafting1_player extends script.base_script
                 setSUIProperty(pid, "%attemptsRemaining%", "Text", SUI_ATTEMPTS_REMAINING + " " + integrity + "%");
                 utils.removeScriptVar(self, SUI_OBJVAR + ".pid");
             }
-            else 
+            else
             {
                 setSUIProperty(pid, "%attemptsRemaining%", "Text", SUI_ATTEMPTS_REMAINING + " " + integrity + "%");
             }
@@ -935,12 +964,13 @@ public class fs_crafting1_player extends script.base_script
             flushSUIPage(pid);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             debugSpeakMsg(self, "calibpuzzle2 got invalid widget, widget = '" + widgetName + "'");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int solidStateArrayPuzzleCallback(obj_id self, dictionary params) throws InterruptedException
     {
         String widgetName = params.getString("eventWidgetName");
@@ -960,14 +990,14 @@ public class fs_crafting1_player extends script.base_script
         }
         else if (widgetName.equalsIgnoreCase("%buttonOK%"))
         {
-            int[] current = 
-            {
-                0,
-                0,
-                0,
-                0,
-                0
-            };
+            int[] current =
+                    {
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                    };
             int[] mod = utils.getIntArrayScriptVar(self, SUI_OBJVAR + ".mod");
             int goal = utils.getIntScriptVar(self, SUI_OBJVAR + ".goal");
             int tries = utils.getIntScriptVar(self, SUI_OBJVAR + ".tries");
@@ -986,13 +1016,13 @@ public class fs_crafting1_player extends script.base_script
                 {
                     win = false;
                 }
-                setSUIProperty(pid, "comp.bars.bar" + (i + 1) + ".left", "Value", "" + (pct - 3));
-                setSUIProperty(pid, "comp.bars.bar" + (i + 1) + ".right", "Value", "" + (100 - (pct + 3)));
+                setSUIProperty(pid, "comp.bars.bar" + (i + 1) + ".left", "Value", String.valueOf(pct - 3));
+                setSUIProperty(pid, "comp.bars.bar" + (i + 1) + ".right", "Value", String.valueOf(100 - (pct + 3)));
                 setSUIProperty(pid, "comp.bars.bar" + (i + 1) + ".left", "RunScript", "");
                 setSUIProperty(pid, "comp.bars.bar" + (i + 1) + ".right", "RunScript", "");
             }
             tries--;
-            int integrity = (int)(((float)tries / max_tries) * 100);
+            int integrity = (int) (((float) tries / max_tries) * 100);
             if (win)
             {
                 obj_id component = utils.getObjIdScriptVar(self, COMPONENT_OBJVAR);
@@ -1022,36 +1052,38 @@ public class fs_crafting1_player extends script.base_script
                 setSUIProperty(pid, "description.attempts", "Text", SUI_ATTEMPTS_REMAINING + " " + integrity + "%");
                 utils.removeScriptVar(self, SUI_OBJVAR + ".pid");
             }
-            else 
+            else
             {
                 setSUIProperty(pid, "description.attempts", "Text", SUI_ATTEMPTS_REMAINING + " " + integrity + "%");
             }
             utils.setScriptVar(self, SUI_OBJVAR + ".tries", tries);
             flushSUIPage(pid);
         }
-        else 
+        else
         {
             debugSpeakMsg(self, "calibpuzzle1 got invalid widget, widget = '" + widgetName + "'");
         }
         return SCRIPT_CONTINUE;
     }
+
     public void refreshTerminalSUI(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleAccessTerminal", null, 0.0f, false);
     }
+
     public void retrieveComponent(obj_id self, int row) throws InterruptedException
     {
         if (row >= COMPONENTS.length)
         {
             return;
         }
-        int[] status = 
-        {
-            -1,
-            -1,
-            -1,
-            -1
-        };
+        int[] status =
+                {
+                        -1,
+                        -1,
+                        -1,
+                        -1
+                };
         if (hasObjVar(self, STATUS_OBJVAR))
         {
             status = getIntArrayObjVar(self, STATUS_OBJVAR);
@@ -1078,7 +1110,7 @@ public class fs_crafting1_player extends script.base_script
                 return;
             }
         }
-        else 
+        else
         {
             refreshTerminalSUI(self);
             return;
@@ -1094,7 +1126,7 @@ public class fs_crafting1_player extends script.base_script
         {
             setObjVar(component, STATUS_OBJVAR, 1);
         }
-        else 
+        else
         {
             setObjVar(component, STATUS_OBJVAR, -1);
         }
@@ -1103,19 +1135,20 @@ public class fs_crafting1_player extends script.base_script
         sendSystemMessage(self, MSG_COMPONENT_RETRIEVED);
         refreshTerminalSUI(self);
     }
+
     public void replaceComponent(obj_id self, int row) throws InterruptedException
     {
         if (row >= COMPONENTS.length)
         {
             return;
         }
-        int[] status = 
-        {
-            -1,
-            -1,
-            -1,
-            -1
-        };
+        int[] status =
+                {
+                        -1,
+                        -1,
+                        -1,
+                        -1
+                };
         if (hasObjVar(self, STATUS_OBJVAR))
         {
             status = getIntArrayObjVar(self, STATUS_OBJVAR);
@@ -1147,18 +1180,23 @@ public class fs_crafting1_player extends script.base_script
                 return;
             }
             int compStatus = -1;
-            for (obj_id content1 : contents) {
-                if (hasObjVar(content1, STATUS_OBJVAR)) {
+            for (obj_id content1 : contents)
+            {
+                if (hasObjVar(content1, STATUS_OBJVAR))
+                {
                     compStatus = getIntObjVar(content1, STATUS_OBJVAR);
                 }
-                if (compStatus == 1) {
+                if (compStatus == 1)
+                {
                     component = content1;
                 }
             }
             if (!isIdValid(component))
             {
-                for (obj_id content : contents) {
-                    if (!hasObjVar(content, STATUS_OBJVAR)) {
+                for (obj_id content : contents)
+                {
+                    if (!hasObjVar(content, STATUS_OBJVAR))
+                    {
                         component = content;
                     }
                 }
@@ -1177,13 +1215,13 @@ public class fs_crafting1_player extends script.base_script
             destroyObject(component);
             sendSystemMessage(self, MSG_COMPONENT_REPLACED);
             refreshTerminalSUI(self);
-            return;
         }
-        else 
+        else
         {
             sendSystemMessage(self, MSG_DONT_HAVE_COMPONENT);
         }
     }
+
     public void analyzeComponent(obj_id self, boolean callback) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SUI_OBJVAR + ".pid"))
@@ -1200,13 +1238,13 @@ public class fs_crafting1_player extends script.base_script
         {
             return;
         }
-        int[] analyzed = 
-        {
-            0,
-            0,
-            0,
-            0
-        };
+        int[] analyzed =
+                {
+                        0,
+                        0,
+                        0,
+                        0
+                };
         if (hasObjVar(self, ANALYZED_OBJVAR))
         {
             analyzed = getIntArrayObjVar(self, ANALYZED_OBJVAR);
@@ -1226,14 +1264,13 @@ public class fs_crafting1_player extends script.base_script
             {
                 sui.msgbox(self, self, SUI_ANALYZER_NO_COMP, sui.OK_ONLY, SUI_ANALYZER_TITLE, 0, "noHandler");
             }
-            return;
         }
-        else 
+        else
         {
             String[] data = new String[tempData.size()];
             for (int i = 0; i < tempData.size(); i++)
             {
-                data[i] = (String)tempData.get(i);
+                data[i] = (String) tempData.get(i);
             }
             int pid = sui.listbox(self, self, SUI_ANALYZER_PROMPT1, sui.OK_CANCEL, SUI_ANALYZER_TITLE, data, "handleAnalyzeCompCallback", false, false);
             if (pid < 0)
@@ -1247,6 +1284,7 @@ public class fs_crafting1_player extends script.base_script
             showSUIPage(pid);
         }
     }
+
     public void accessSchematic(obj_id self, boolean callback) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SUI_OBJVAR + ".pid"))
@@ -1263,13 +1301,13 @@ public class fs_crafting1_player extends script.base_script
         {
             return;
         }
-        int[] analyzed = 
-        {
-            0,
-            0,
-            0,
-            0
-        };
+        int[] analyzed =
+                {
+                        0,
+                        0,
+                        0,
+                        0
+                };
         if (hasObjVar(self, ANALYZED_OBJVAR))
         {
             analyzed = getIntArrayObjVar(self, ANALYZED_OBJVAR);
@@ -1289,14 +1327,13 @@ public class fs_crafting1_player extends script.base_script
             {
                 sui.msgbox(self, self, SUI_ANALYZER_NO_SCHEMATIC, sui.OK_ONLY, SUI_ANALYZER_TITLE, 0, "noHandler");
             }
-            return;
         }
-        else 
+        else
         {
             String[] data = new String[tempData.size()];
             for (int i = 0; i < tempData.size(); i++)
             {
-                data[i] = (String)tempData.get(i);
+                data[i] = (String) tempData.get(i);
             }
             int pid = sui.listbox(self, self, SUI_ANALYZER_PROMPT2, sui.OK_CANCEL, SUI_ANALYZER_TITLE, data, "handleAccessSchematicCallback", false, false);
             if (pid < 0)
@@ -1310,6 +1347,7 @@ public class fs_crafting1_player extends script.base_script
             showSUIPage(pid);
         }
     }
+
     public void configProcessorPuzzle(obj_id self, obj_id calibrator) throws InterruptedException
     {
         int pid = createSUIPage("/Script.calibration.game4", self, self, "configProcessorPuzzleCallback");
@@ -1318,24 +1356,24 @@ public class fs_crafting1_player extends script.base_script
             return;
         }
         utils.setScriptVar(self, SUI_OBJVAR + ".pid", pid);
-        int[] goal = 
-        {
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-        };
-        int[] current = 
-        {
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-        };
+        int[] goal =
+                {
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                };
+        int[] current =
+                {
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                };
         int lastr = -1;
         int r = -1;
         int tries = 10;
@@ -1360,6 +1398,7 @@ public class fs_crafting1_player extends script.base_script
                 if (goal[j] != current[j])
                 {
                     mixed = true;
+                    break;
                 }
             }
         }
@@ -1380,13 +1419,15 @@ public class fs_crafting1_player extends script.base_script
             setSUIProperty(pid, CONFIG_PLAYER_BUTTONS[i], "IsCancelButton", "false");
         }
         setSUIProperty(pid, "bg.mmc.close", "IsCancelButton", "true");
-        for (String configPlayerButton : CONFIG_PLAYER_BUTTONS) {
+        for (String configPlayerButton : CONFIG_PLAYER_BUTTONS)
+        {
             subscribeToSUIEvent(pid, sui_event_type.SET_onButton, configPlayerButton, "configProcessorPuzzleCallback");
         }
         setSUIAssociatedObject(pid, calibrator);
         setSUIMaxRangeToObject(pid, 10.0f);
         showSUIPage(pid);
     }
+
     public int[] toggleButton(int[] config, int button) throws InterruptedException
     {
         int secondary1 = -1;
@@ -1394,29 +1435,29 @@ public class fs_crafting1_player extends script.base_script
         switch (button)
         {
             case 0:
-            secondary1 = 3;
-            secondary2 = 4;
-            break;
+                secondary1 = 3;
+                secondary2 = 4;
+                break;
             case 1:
-            secondary1 = 4;
-            secondary2 = 5;
-            break;
+                secondary1 = 4;
+                secondary2 = 5;
+                break;
             case 2:
-            secondary1 = 3;
-            secondary2 = 5;
-            break;
+                secondary1 = 3;
+                secondary2 = 5;
+                break;
             case 3:
-            secondary1 = 0;
-            secondary2 = 2;
-            break;
+                secondary1 = 0;
+                secondary2 = 2;
+                break;
             case 4:
-            secondary1 = 0;
-            secondary2 = 1;
-            break;
+                secondary1 = 0;
+                secondary2 = 1;
+                break;
             case 5:
-            secondary1 = 1;
-            secondary2 = 2;
-            break;
+                secondary1 = 1;
+                secondary2 = 2;
+                break;
         }
         if (secondary1 == -1 || secondary2 == -1)
         {
@@ -1426,7 +1467,7 @@ public class fs_crafting1_player extends script.base_script
         {
             config[button] = 1;
         }
-        else 
+        else
         {
             config[button] = 0;
         }
@@ -1434,7 +1475,7 @@ public class fs_crafting1_player extends script.base_script
         {
             config[secondary1] = 1;
         }
-        else 
+        else
         {
             config[secondary1] = 0;
         }
@@ -1442,12 +1483,13 @@ public class fs_crafting1_player extends script.base_script
         {
             config[secondary2] = 1;
         }
-        else 
+        else
         {
             config[secondary2] = 0;
         }
         return config;
     }
+
     public void gyroReceiverPuzzle(obj_id self, obj_id calibrator) throws InterruptedException
     {
         int pid = createSUIPage("/Script.calibration.game3", self, self, "gyroReceiverPuzzleCallback");
@@ -1456,18 +1498,18 @@ public class fs_crafting1_player extends script.base_script
             return;
         }
         utils.setScriptVar(self, SUI_OBJVAR + ".pid", pid);
-        int[] goal = 
-        {
-            0,
-            0,
-            0
-        };
-        int[] current = 
-        {
-            0,
-            0,
-            0
-        };
+        int[] goal =
+                {
+                        0,
+                        0,
+                        0
+                };
+        int[] current =
+                {
+                        0,
+                        0,
+                        0
+                };
         int tries = 10;
         for (int i = 0; i < 3; i++)
         {
@@ -1488,7 +1530,7 @@ public class fs_crafting1_player extends script.base_script
         for (int i = 0; i < goal.length; i++)
         {
             float pct = goal[i] / 100.0f;
-            int dec = (int)(255 * pct);
+            int dec = (int) (255 * pct);
             String hex = Integer.toHexString(dec);
             if (hex.length() == 1)
             {
@@ -1506,6 +1548,7 @@ public class fs_crafting1_player extends script.base_script
         showSUIPage(pid);
         flushSUIPage(pid);
     }
+
     public void signalAmpPuzzle(obj_id self, obj_id calibrator) throws InterruptedException
     {
         int pid = createSUIPage("/Script.calibration.game2", self, self, "signalAmpPuzzleCallback");
@@ -1554,9 +1597,9 @@ public class fs_crafting1_player extends script.base_script
         utils.setScriptVar(self, "calibpuzzle2_barPos0", sliderPos0);
         utils.setScriptVar(self, "calibpuzzle2_barPos1", sliderPos1);
         utils.setScriptVar(self, "calibpuzzle2_barPos2", sliderPos2);
-        setSUIProperty(pid, "%slider1%", "Value", "" + (100 * sliderPos0));
-        setSUIProperty(pid, "%slider2%", "Value", "" + (100 * sliderPos1));
-        setSUIProperty(pid, "%slider3%", "Value", "" + (100 * sliderPos2));
+        setSUIProperty(pid, "%slider1%", "Value", String.valueOf(100 * sliderPos0));
+        setSUIProperty(pid, "%slider2%", "Value", String.valueOf(100 * sliderPos1));
+        setSUIProperty(pid, "%slider3%", "Value", String.valueOf(100 * sliderPos2));
         setSUIProperty(pid, "top.sliders.1.title", "Text", SUI_AMP_SLIDER1);
         setSUIProperty(pid, "top.sliders.2.title", "Text", SUI_AMP_SLIDER2);
         setSUIProperty(pid, "top.sliders.3.title", "Text", SUI_AMP_SLIDER3);
@@ -1582,7 +1625,7 @@ public class fs_crafting1_player extends script.base_script
             {
                 value = 1.0f;
             }
-            setSUIProperty(pid, "%barTop" + (i + 1) + "%", "Value", "" + (100 * value));
+            setSUIProperty(pid, "%barTop" + (i + 1) + "%", "Value", String.valueOf(100 * value));
             setSUIProperty(pid, "%barTop" + (i + 1) + "%", "OnRunScript", "sizeY = (parent.sizeY * Value) / 100\nlocationY = parent.sizeY - sizeY");
             setSUIProperty(pid, "%barTop" + (i + 1) + "%", "RunScript", "");
         }
@@ -1599,7 +1642,7 @@ public class fs_crafting1_player extends script.base_script
                 value = 1.0f;
             }
             LOG("ampPuzzle", "server n = " + n + " value = " + value);
-            setSUIProperty(pid, "%barBottom" + (i + 1) + "%", "Value", "" + (100 * value));
+            setSUIProperty(pid, "%barBottom" + (i + 1) + "%", "Value", String.valueOf(100 * value));
             setSUIProperty(pid, "%barBottom" + (i + 1) + "%", "OnRunScript", "sizeY = (parent.sizeY * Value) / 100\nlocationY = parent.sizeY - sizeY");
             setSUIProperty(pid, "%barBottom" + (i + 1) + "%", "RunScript", "");
         }
@@ -1613,6 +1656,7 @@ public class fs_crafting1_player extends script.base_script
         showSUIPage(pid);
         flushSUIPage(pid);
     }
+
     public void solidStateArrayPuzzle(obj_id self, obj_id calibrator) throws InterruptedException
     {
         int pid = createSUIPage("/Script.calibration.game1", self, self, "solidStateArrayPuzzleCallback");
@@ -1622,22 +1666,22 @@ public class fs_crafting1_player extends script.base_script
         }
         utils.setScriptVar(self, SUI_OBJVAR + ".pid", pid);
         int goal = rand(0, 100);
-        int[] current = 
-        {
-            0,
-            0,
-            0,
-            0,
-            0
-        };
-        int[] mod = 
-        {
-            0,
-            0,
-            0,
-            0,
-            0
-        };
+        int[] current =
+                {
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                };
+        int[] mod =
+                {
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                };
         int tries = 10;
         for (int i = 0; i < current.length; i++)
         {
@@ -1660,9 +1704,9 @@ public class fs_crafting1_player extends script.base_script
         float g0 = goal / 100.0f;
         float g1 = SUI_SSA_LINE_RANGE * g0;
         float g2 = SUI_SSA_LINE_MIN + g1;
-        int g = (int)g2;
+        int g = (int) g2;
         setSUIProperty(pid, "line", "OnRunScript", "locationX = Value");
-        setSUIProperty(pid, "line", "Value", "" + g);
+        setSUIProperty(pid, "line", "Value", String.valueOf(g));
         setSUIProperty(pid, "line", "RunScript", "");
         for (int i = 0; i < current.length; i++)
         {
@@ -1675,8 +1719,8 @@ public class fs_crafting1_player extends script.base_script
             }
             setSUIProperty(pid, "comp.bars.bar" + (i + 1) + ".left", "OnRunScript", "sizeX = parent.sizeX * Value / 100.0");
             setSUIProperty(pid, "comp.bars.bar" + (i + 1) + ".right", "OnRunScript", "sizeX = parent.sizeX * Value / 100.0\nlocationX = parent.sizeX - sizeX");
-            setSUIProperty(pid, "comp.bars.bar" + (i + 1) + ".left", "Value", "" + (pct - 3));
-            setSUIProperty(pid, "comp.bars.bar" + (i + 1) + ".right", "Value", "" + (100 - (pct + 3)));
+            setSUIProperty(pid, "comp.bars.bar" + (i + 1) + ".left", "Value", String.valueOf(pct - 3));
+            setSUIProperty(pid, "comp.bars.bar" + (i + 1) + ".right", "Value", String.valueOf(100 - (pct + 3)));
             setSUIProperty(pid, "comp.bars.bar" + (i + 1) + ".left", "RunScript", "");
             setSUIProperty(pid, "comp.bars.bar" + (i + 1) + ".right", "RunScript", "");
         }

@@ -1,5 +1,11 @@
 package script.npc.converse;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.menu_info;
 import script.menu_info_data;
 import script.menu_info_types;
@@ -7,10 +13,12 @@ import script.obj_id;
 
 public class npc_converse_menu extends script.base_script
 {
+    public static final String SCRIPT_NPC_CONVERSE_MENU = "npc.converse.npc_converse_menu";
+
     public npc_converse_menu()
     {
     }
-    public static final String SCRIPT_NPC_CONVERSE_MENU = "npc.converse.npc_converse_menu";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -20,11 +28,13 @@ public class npc_converse_menu extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -34,6 +44,7 @@ public class npc_converse_menu extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);

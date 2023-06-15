@@ -1,5 +1,11 @@
 package script.ai.imperial_presence;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.Vector;
 
 public class harass extends script.base_script
 {
-    public harass()
-    {
-    }
     public static final String SCRIPTVAR_FINE = "harass.fine";
     public static final String SCRIPTVAR_HARASS_BASE = "harass";
     public static final String SCRIPTVAR_TARGET = "harass.target";
@@ -33,6 +36,10 @@ public class harass extends script.base_script
     public static final string_id IMPERIAL_FINE = new string_id(STF, "imperial_fine");
     public static final String COL_INDEX = "INDEX";
     public static final int MT_TOTAL = 2;
+    public harass()
+    {
+    }
+
     public String getFactionName(obj_id self) throws InterruptedException
     {
         String tFac = factions.getFaction(self);
@@ -44,7 +51,7 @@ public class harass extends script.base_script
         {
             return "rebel";
         }
-        else 
+        else
         {
             float imp_r = gcw.getImperialRatio(self);
             float reb_r = gcw.getRebelRatio(self);
@@ -52,12 +59,13 @@ public class harass extends script.base_script
             {
                 return "imperial";
             }
-            else 
+            else
             {
                 return "rebel";
             }
         }
     }
+
     public boolean isInFriendlyFaction(obj_id self, obj_id who) throws InterruptedException
     {
         String tFac = factions.getFaction(who);
@@ -70,26 +78,14 @@ public class harass extends script.base_script
         {
             return true;
         }
-        else if (tFac.equals("Imperial") && sFac.equals("imperial"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        else return tFac.equals("Imperial") && sFac.equals("imperial");
     }
+
     public boolean isOnLeaveFromFriendlyFaction(obj_id self, obj_id who) throws InterruptedException
     {
-        if (factions.isOnLeave(who) && isInFriendlyFaction(self, who))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return factions.isOnLeave(who) && isInFriendlyFaction(self, who);
     }
+
     public boolean isInEnemyFaction(obj_id self, obj_id target) throws InterruptedException
     {
         String tFac = factions.getFaction(target);
@@ -102,15 +98,9 @@ public class harass extends script.base_script
         {
             return true;
         }
-        else if (tFac.equals("Rebel") && sFac.equals("imperial"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        else return tFac.equals("Rebel") && sFac.equals("imperial");
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -123,7 +113,7 @@ public class harass extends script.base_script
             createTriggerVolume(VOL_CITY_CHECKPOINT, VOL_CITY_CHECKPOINT_RANGE, true);
             setAttributeInterested(self, attrib.ALL);
         }
-        else 
+        else
         {
             createTriggerVolume(VOL_CHECKPOINT, VOL_CHECKPOINT_RANGE, true);
             setAttributeInterested(self, attrib.ALL);
@@ -139,6 +129,7 @@ public class harass extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volName, obj_id who) throws InterruptedException
     {
         if (isDead(self) || isDead(who))
@@ -209,6 +200,7 @@ public class harass extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volName, obj_id who) throws InterruptedException
     {
         if (!isIdValid(who))
@@ -225,22 +217,23 @@ public class harass extends script.base_script
             switch (status)
             {
                 case 1:
-                chat.publicChat(self, who, new string_id(STF, "return_request_" + getFactionName(self)));
-                utils.setScriptVar(self, SCRIPTVAR_STATUS, 2);
-                dictionary d = new dictionary();
-                d.put("target", who);
-                messageTo(self, "handleReturnRequest", d, 10.0f, false);
-                break;
+                    chat.publicChat(self, who, new string_id(STF, "return_request_" + getFactionName(self)));
+                    utils.setScriptVar(self, SCRIPTVAR_STATUS, 2);
+                    dictionary d = new dictionary();
+                    d.put("target", who);
+                    messageTo(self, "handleReturnRequest", d, 10.0f, false);
+                    break;
                 case 3:
-                chat.publicChat(self, who, new string_id(STF, "return_false_" + getFactionName(self)));
-                utils.setScriptVar(self, SCRIPTVAR_STATUS, 2);
-                dictionary d3 = new dictionary();
-                d3.put("target", who);
-                messageTo(self, "handleReturnRequest", d3, 10.0f, false);
+                    chat.publicChat(self, who, new string_id(STF, "return_false_" + getFactionName(self)));
+                    utils.setScriptVar(self, SCRIPTVAR_STATUS, 2);
+                    dictionary d3 = new dictionary();
+                    d3.put("target", who);
+                    messageTo(self, "handleReturnRequest", d3, 10.0f, false);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnFollowWaiting(obj_id self, obj_id target) throws InterruptedException
     {
         obj_id harassTarget = utils.getObjIdScriptVar(self, SCRIPTVAR_TARGET);
@@ -261,21 +254,25 @@ public class harass extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnFollowTargetLost(obj_id self, obj_id oldTarget) throws InterruptedException
     {
         enterCheckpointMode(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         cleanupHarassment(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         cleanupHarassment(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleHarassTarget(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = utils.getObjIdScriptVar(self, SCRIPTVAR_TARGET);
@@ -293,12 +290,13 @@ public class harass extends script.base_script
             enterHarassMode(self, params);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             enterCheckpointMode(self);
             return SCRIPT_CONTINUE;
         }
     }
+
     public int handleNewHarassTarget(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("harassTarget");
@@ -312,6 +310,7 @@ public class harass extends script.base_script
         enterHarassMode(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCheckpointMode(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id harassTarget = utils.getObjIdScriptVar(self, SCRIPTVAR_TARGET);
@@ -326,6 +325,7 @@ public class harass extends script.base_script
         enterCheckpointMode(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean enterHarassMode(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("harassTarget");
@@ -337,6 +337,7 @@ public class harass extends script.base_script
         utils.setScriptVar(self, SCRIPTVAR_TARGET, target);
         return enterHarassMode(self, target);
     }
+
     public boolean enterHarassMode(obj_id self, obj_id target) throws InterruptedException
     {
         if (utils.hasScriptVar(target, "being_scanned"))
@@ -365,18 +366,21 @@ public class harass extends script.base_script
         }
         return false;
     }
+
     public int followHarass(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = utils.getObjIdScriptVar(self, SCRIPTVAR_TARGET);
         ai_lib.aiFollow(self, target);
         return SCRIPT_CONTINUE;
     }
+
     public void enterCheckpointMode(obj_id self) throws InterruptedException
     {
         cleanupHarassment(self);
         setMovementWalk(self);
         ai_lib.wander(self);
     }
+
     public void cleanupHarassment(obj_id self) throws InterruptedException
     {
         obj_id target = utils.getObjIdScriptVar(self, SCRIPTVAR_TARGET);
@@ -392,6 +396,7 @@ public class harass extends script.base_script
         utils.removeScriptVarTree(self, SCRIPTVAR_HARASS_BASE);
         utils.removeObjVar(self, "ai.persistantFollowing");
     }
+
     public void volDetainBreach(obj_id self, obj_id who) throws InterruptedException
     {
         if (!isPlayer(who))
@@ -425,7 +430,7 @@ public class harass extends script.base_script
                     String lastName = st.nextToken();
                     officer = prose.getPackage(SORRY_SIR_NAME, factions.getRankNameStringId(rank, faction), lastName);
                 }
-                else 
+                else
                 {
                     officer = prose.getPackage(SORRY_SIR, factions.getRankNameStringId(rank, faction));
                 }
@@ -450,27 +455,28 @@ public class harass extends script.base_script
         switch (status)
         {
             case 0:
-            chat.publicChat(self, who, new string_id(STF, "scan_greeting_" + getFactionName(self)));
-            utils.setScriptVar(self, SCRIPTVAR_STATUS, 1);
-            float rating = gcw.getContrabandRating(who);
-            utils.setScriptVar(self, SCRIPTVAR_RATING, rating);
-            sendSystemMessage(who, new string_id(STF, "contraband_scan_" + getFactionName(self)));
-            dictionary d1 = new dictionary();
-            d1.put("status", 1);
-            d1.put("target", who);
-            messageTo(self, "handleScanComplete", d1, 15.0f, false);
-            break;
+                chat.publicChat(self, who, new string_id(STF, "scan_greeting_" + getFactionName(self)));
+                utils.setScriptVar(self, SCRIPTVAR_STATUS, 1);
+                float rating = gcw.getContrabandRating(who);
+                utils.setScriptVar(self, SCRIPTVAR_RATING, rating);
+                sendSystemMessage(who, new string_id(STF, "contraband_scan_" + getFactionName(self)));
+                dictionary d1 = new dictionary();
+                d1.put("status", 1);
+                d1.put("target", who);
+                messageTo(self, "handleScanComplete", d1, 15.0f, false);
+                break;
             case 2:
-            chat.publicChat(self, who, new string_id(STF, "return_thank_" + getFactionName(self)));
-            utils.setScriptVar(self, SCRIPTVAR_STATUS, 3);
-            sendSystemMessage(who, new string_id(STF, "contraband_scan_" + getFactionName(self)));
-            dictionary d2 = new dictionary();
-            d2.put("status", 3);
-            d2.put("target", who);
-            messageTo(self, "handleScanComplete", d2, 15.0f, false);
-            break;
+                chat.publicChat(self, who, new string_id(STF, "return_thank_" + getFactionName(self)));
+                utils.setScriptVar(self, SCRIPTVAR_STATUS, 3);
+                sendSystemMessage(who, new string_id(STF, "contraband_scan_" + getFactionName(self)));
+                dictionary d2 = new dictionary();
+                d2.put("status", 3);
+                d2.put("target", who);
+                messageTo(self, "handleScanComplete", d2, 15.0f, false);
+                break;
         }
     }
+
     public int handleScanComplete(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
@@ -525,7 +531,7 @@ public class harass extends script.base_script
                 messageTo(self, "handleJediMindTrick", jedi, 5.0f, false);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 chat.publicChat(target, self, new string_id(STF, "jedi_mind_trick_novice"));
                 doAnimationAction(target, anims.PLAYER_FORCE_PERSUASION);
@@ -547,12 +553,16 @@ public class harass extends script.base_script
                 {
                     return SCRIPT_CONTINUE;
                 }
-                for (Object member : members) {
+                for (Object member : members)
+                {
                     obj_id thisMember = ((obj_id) member);
-                    if (hasSkill(thisMember, "class_smuggler_phase1_novice") && thisMember != (target)) {
-                        if (ai_lib.checkForSmuggler(thisMember)) {
+                    if (hasSkill(thisMember, "class_smuggler_phase1_novice") && thisMember != (target))
+                    {
+                        if (ai_lib.checkForSmuggler(thisMember))
+                        {
                             chat.publicChat(self, target, new string_id(STF, "clean_target_" + getFactionName(self)));
-                            if (getGender(self) == Gender.MALE) {
+                            if (getGender(self) == Gender.MALE)
+                            {
                                 playClientEffectLoc(target, "clienteffect/stormtrp_movealng.cef", getLocation(self), 0.0f);
                             }
                             removeTriggerVolume(VOL_DETAIN);
@@ -588,7 +598,7 @@ public class harass extends script.base_script
             chat.publicChat(self, target, new string_id(STF, "discovered_chat_" + getFactionName(self)));
             attackFactionViolator(self, target, false);
         }
-        else 
+        else
         {
             float rating = utils.getFloatScriptVar(self, SCRIPTVAR_RATING);
             if (rating > rand(10.0f, 15.0f))
@@ -596,7 +606,7 @@ public class harass extends script.base_script
                 invokePenaltyAction(self, target);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 chat.publicChat(self, target, new string_id(STF, "clean_target_" + getFactionName(self)));
                 if (getGender(self) == Gender.MALE)
@@ -609,6 +619,7 @@ public class harass extends script.base_script
         enterCheckpointMode(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean isEnemyJedi(obj_id self, obj_id target) throws InterruptedException
     {
         if (!utils.isProfession(target, utils.FORCE_SENSITIVE))
@@ -619,12 +630,9 @@ public class harass extends script.base_script
         {
             return true;
         }
-        else if (utils.isProfession(target, utils.FORCE_SENSITIVE) && isInEnemyFaction(self, target))
-        {
-            return true;
-        }
-        return false;
+        else return utils.isProfession(target, utils.FORCE_SENSITIVE) && isInEnemyFaction(self, target);
     }
+
     public int handleReturnRequest(obj_id self, dictionary params) throws InterruptedException
     {
         int status = utils.getIntScriptVar(self, SCRIPTVAR_STATUS);
@@ -653,7 +661,7 @@ public class harass extends script.base_script
                 enterCheckpointMode(self);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(target, new string_id(STF, "ran_away_" + getFactionName(self)));
                 penaltyAction(self, target, 50.0f);
@@ -665,6 +673,7 @@ public class harass extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void attackFactionViolator(obj_id self, obj_id target, boolean antiJedi) throws InterruptedException
     {
         if (isJedi(target))
@@ -683,18 +692,18 @@ public class harass extends script.base_script
             {
                 backupClass = "crackdown_elite_dark_trooper_hard";
             }
-            else 
+            else
             {
                 backupClass = "crackdown_storm_commando";
             }
         }
-        else 
+        else
         {
             if (antiJedi && isEnemyJedi(self, target))
             {
                 backupClass = "crackdown_rebel_elite_heavy_trooper_hard";
             }
-            else 
+            else
             {
                 backupClass = "crackdown_rebel_commando";
             }
@@ -723,6 +732,7 @@ public class harass extends script.base_script
         }
         startCombat(self, target);
     }
+
     public void invokePenaltyAction(obj_id self, obj_id target) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(target))
@@ -737,6 +747,7 @@ public class harass extends script.base_script
         float rating = utils.getFloatScriptVar(self, SCRIPTVAR_RATING);
         invokePenaltyAction(self, target, rating);
     }
+
     public void invokePenaltyAction(obj_id self, obj_id target, float rating) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(target) || !target.isLoaded() || rating <= 0.0f)
@@ -745,7 +756,7 @@ public class harass extends script.base_script
             return;
         }
         float amt = rating * 20;
-        int FINE = (int)amt;
+        int FINE = (int) amt;
         String tFac = factions.getFaction(target);
         int rank = pvpGetCurrentGcwRank(target);
         if (isInEnemyFaction(self, target) && (rank > 6))
@@ -768,7 +779,7 @@ public class harass extends script.base_script
             messageTo(self, "fineImperial", params, 5.0f, false);
             return;
         }
-        else 
+        else
         {
             if (money.hasFunds(target, MT_TOTAL, FINE))
             {
@@ -783,7 +794,7 @@ public class harass extends script.base_script
                 messageTo(self, "handleCheckpointMode", null, 5.0f, false);
                 return;
             }
-            else 
+            else
             {
                 chat.publicChat(self, target, new string_id(STF, "failure_to_pay_" + getFactionName(self)));
                 penaltyAction(self, target, rating * 2);
@@ -798,6 +809,7 @@ public class harass extends script.base_script
         }
         messageTo(self, "handleCheckpointMode", null, 30.0f, false);
     }
+
     public void penaltyAction(obj_id self, obj_id target, float lostFaction) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(target) || !target.isLoaded() || lostFaction <= 0.0f)
@@ -809,7 +821,7 @@ public class harass extends script.base_script
         {
             testFaction = "Imperial";
         }
-        else 
+        else
         {
             testFaction = "Rebel";
         }
@@ -829,7 +841,7 @@ public class harass extends script.base_script
                 factions.addFactionStanding(target, testFaction, -delta);
             }
         }
-        else 
+        else
         {
             if (newStanding < factions.FACTION_RATING_MIN)
             {
@@ -841,6 +853,7 @@ public class harass extends script.base_script
         }
         factions.addFactionStanding(target, testFaction, -lostFaction);
     }
+
     public int fineImperial(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
@@ -848,6 +861,7 @@ public class harass extends script.base_script
         showFineSui(target, self, rating);
         return SCRIPT_CONTINUE;
     }
+
     public void showFineSui(obj_id self, obj_id target, float rating) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(target))
@@ -855,7 +869,7 @@ public class harass extends script.base_script
             return;
         }
         float amt = rating * 20;
-        int FINE = (int)amt;
+        int FINE = (int) amt;
         if (money.hasFunds(self, MT_TOTAL, FINE))
         {
             int pid = sui.createSUIPage(sui.SUI_MSGBOX, target, self, "handleFineSui");
@@ -865,23 +879,22 @@ public class harass extends script.base_script
             {
                 setSUIProperty(pid, sui.MSGBOX_PROMPT, sui.PROP_TEXT, localize(IMP_FINE_TEXT) + FINE + localize(IMP_FINE_TEXT2));
             }
-            else 
+            else
             {
                 setSUIProperty(pid, sui.MSGBOX_PROMPT, sui.PROP_TEXT, localize(IMP_FINE_TEXT) + FINE + localize(IMP_FINE_TEXT2_REB));
             }
             sui.msgboxButtonSetup(pid, sui.YES_NO);
             sui.showSUIPage(pid);
             utils.setScriptVar(target, SCRIPTVAR_FINE, pid);
-            return;
         }
-        else 
+        else
         {
             chat.publicChat(target, self, new string_id(STF, "failure_to_pay_" + getFactionName(self)));
             penaltyAction(target, self, rating * 2);
             messageTo(target, "handleCheckpointMode", null, 5.0f, false);
-            return;
         }
     }
+
     public int handleFineSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = sui.getPlayerId(params);
@@ -891,7 +904,7 @@ public class harass extends script.base_script
         }
         float rating = utils.getFloatScriptVar(self, SCRIPTVAR_RATING);
         float amt = rating * 20;
-        int FINE = (int)amt;
+        int FINE = (int) amt;
         int bp = sui.getIntButtonPressed(params);
         if (bp == sui.BP_OK)
         {
@@ -924,7 +937,7 @@ public class harass extends script.base_script
             messageTo(self, "handleCheckpointMode", null, 5.0f, false);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             chat.publicChat(self, target, new string_id(STF, "punish_+" + getFactionName(self)));
             penaltyAction(self, target, rating * 2);
@@ -940,6 +953,7 @@ public class harass extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleJediMindTrick(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
@@ -953,6 +967,7 @@ public class harass extends script.base_script
         enterCheckpointMode(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleJediMindTrickDark(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
@@ -966,6 +981,7 @@ public class harass extends script.base_script
         enterCheckpointMode(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleJediMindTrickNovice(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
@@ -978,6 +994,7 @@ public class harass extends script.base_script
         enterCheckpointMode(self);
         return SCRIPT_CONTINUE;
     }
+
     public void cleanupImperialFine(obj_id target) throws InterruptedException
     {
         utils.removeScriptVar(target, SCRIPTVAR_FINE);

@@ -1,5 +1,11 @@
 package script.item.dna;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.static_item;
 import script.library.utils;
@@ -9,6 +15,7 @@ public class vorpal_durni_dna extends script.base_script
 {
     public static final String VORPAL_DURNI_DNA_LOOT_ITEM = "item_vorpal_durni_dna";
     public static final int VORPAL_DURNI_DNA_LOOT_CHANCE = 5;
+
     public vorpal_durni_dna()
     {
     }

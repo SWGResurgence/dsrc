@@ -1,13 +1,25 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
 public class jwatson_sui_test extends script.base_script
 {
+    public static String OBJVAR_SUI_TARGET_INFO_PID = "suiTargetInfoPid";
+    public static String OBJVAR_SUI_TARGET_INFO_TARGET_OBJ_ID = "suiTargetInfoTargetObjId";
+    public static String OBJVAR_SUI_TARGET_VIEWER_PID = "suiTargetViewerPid";
+    public static String OBJVAR_SUI_TARGET_VIEWER_TARGET_OBJ_ID = "suiTargetViewerTargetObjId";
+
     public jwatson_sui_test()
     {
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         java.util.StringTokenizer tok = new java.util.StringTokenizer(text);
@@ -26,8 +38,7 @@ public class jwatson_sui_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public static String OBJVAR_SUI_TARGET_INFO_PID = "suiTargetInfoPid";
-    public static String OBJVAR_SUI_TARGET_INFO_TARGET_OBJ_ID = "suiTargetInfoTargetObjId";
+
     public void spawnSuiTargetInfo(obj_id player) throws InterruptedException
     {
         int pId = createSUIPage("Script.ColorPicker", player, player, "suiTargetInfoCallbackClosedCancel");
@@ -52,6 +63,7 @@ public class jwatson_sui_test extends script.base_script
         setObjVar(player, OBJVAR_SUI_TARGET_INFO_TARGET_OBJ_ID, target);
         messageTo(player, "updateSuiTargetInfo", null, 1.0f, true);
     }
+
     public int updateSuiTargetInfo(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = getLookAtTarget(self);
@@ -72,14 +84,14 @@ public class jwatson_sui_test extends script.base_script
         messageTo(self, "updateSuiTargetInfo", null, 1.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int suiTargetInfoCallbackClosedCancel(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, OBJVAR_SUI_TARGET_INFO_PID);
         removeObjVar(self, OBJVAR_SUI_TARGET_INFO_TARGET_OBJ_ID);
         return SCRIPT_CONTINUE;
     }
-    public static String OBJVAR_SUI_TARGET_VIEWER_PID = "suiTargetViewerPid";
-    public static String OBJVAR_SUI_TARGET_VIEWER_TARGET_OBJ_ID = "suiTargetViewerTargetObjId";
+
     public void spawnSuiTargetViewer(obj_id player) throws InterruptedException
     {
         int pId = createSUIPage("Script.ObjectViewer", player, player, "suiTargetViewerCallbackClosedCancel");
@@ -99,6 +111,7 @@ public class jwatson_sui_test extends script.base_script
         setObjVar(player, OBJVAR_SUI_TARGET_VIEWER_TARGET_OBJ_ID, target);
         messageTo(player, "updateSuiTargetViewer", null, 1.0f, true);
     }
+
     public int updateSuiTargetViewer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = getLookAtTarget(self);
@@ -117,6 +130,7 @@ public class jwatson_sui_test extends script.base_script
         messageTo(self, "updateSuiTargetViewer", null, 1.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int suiTargetViewerCallbackClosedCancel(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, OBJVAR_SUI_TARGET_VIEWER_TARGET_OBJ_ID);

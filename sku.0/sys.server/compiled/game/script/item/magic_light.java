@@ -4,6 +4,12 @@ package script.item;/*
 @Purpose: Wim Magwit's Luminous Lamp
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.cts;
 import script.library.sui;
@@ -65,6 +71,7 @@ public class magic_light extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self)
     {
         setName(self, "Wim Magwit's Luminous Lamp");
@@ -136,6 +143,7 @@ public class magic_light extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void handleMainColor(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -149,6 +157,7 @@ public class magic_light extends script.base_script
         String[] subcolorList = dataTableGetStringColumn(subcolorTable, "description");
         sui.listbox(self, sui.getPlayerId(params), "Select the sub color for this lightsource.", sui.OK_CANCEL, "Wim Magwit's Luminous Lamp", subcolorList, "handleSubColor", true, false);
     }
+
     public void handleSubColor(obj_id self, dictionary params) throws InterruptedException
     {
         if (sui.getIntButtonPressed(params) == sui.BP_CANCEL)
@@ -166,6 +175,7 @@ public class magic_light extends script.base_script
         setObjVar(self, DATATABLE_SUB_COLOR_COL, subColor);
         sui.listbox(self, sui.getPlayerId(params), "Select the range for this light.", sui.OK_CANCEL, "Wim Magwit's Luminous Lamp", RANGES_MAGIC_LIGHT, "handleColorRange", true, false);
     }
+
     public void handleColorRange(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -178,12 +188,13 @@ public class magic_light extends script.base_script
         switchTemplate(self, getStringObjVar(self, DATATABLE_MAIN_COLOR_COL), getStringObjVar(self, DATATABLE_SUB_COLOR_COL), rangeSelection, player);
         setObjVar(self, "range", rangeSelection);
     }
+
     public void switchTemplate(obj_id self, String color, String subcolor, String rangeSelection, obj_id player) throws InterruptedException
     {
         location loc = getLocation(self);
         float yaw = getYaw(self);
         float[] rotation = getQuaternion(self);
-        String template  = "object/tangible/tarkin_custom/decorative/lights/" + color + "/" + subcolor + "_" + rangeSelection + ".iff";
+        String template = "object/tangible/tarkin_custom/decorative/lights/" + color + "/" + subcolor + "_" + rangeSelection + ".iff";
         if (!utils.isNestedWithinAPlayer(self, true))//inside a house
         {
             obj_id newLight = createObject(template, loc);

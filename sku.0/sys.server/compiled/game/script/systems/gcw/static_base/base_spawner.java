@@ -1,5 +1,11 @@
 package script.systems.gcw.static_base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -17,6 +23,7 @@ public class base_spawner extends script.base_script
     public static final int NO_CONTROL = 0;
     public static final int IMPERIAL_CONTROL = 1;
     public static final int REBEL_CONTROL = 2;
+
     public base_spawner()
     {
     }
@@ -72,7 +79,7 @@ public class base_spawner extends script.base_script
                 removeObjVar(self, SPAWNED + i);
             }
         }
-        if (objects == null || objects.length == 0)
+        if (objects == null)
         {
             return SCRIPT_CONTINUE;
         }

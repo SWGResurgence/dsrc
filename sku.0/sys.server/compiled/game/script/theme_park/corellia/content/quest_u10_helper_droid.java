@@ -1,5 +1,11 @@
 package script.theme_park.corellia.content;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.chat;
 import script.library.utils;
 import script.obj_id;
@@ -7,49 +13,51 @@ import script.string_id;
 
 public class quest_u10_helper_droid extends script.base_script
 {
+    public static final String[] HELPER_DROID_QUOTES =
+            {
+                    "artisan_added",
+                    "artisan_quest_03",
+                    "brawler_added",
+                    "brawler_quest_05",
+                    "entertainer_added",
+                    "entertainer_quest_00",
+                    "entertainer_quest_01",
+                    "entertainer_quest_05",
+                    "marksman_added",
+                    "marksman_quest_03",
+                    "marksman_quest_05",
+                    "medic_added",
+                    "medic_quest_01",
+                    "medic_quest_02",
+                    "medic_quest_06",
+                    "scout_added",
+                    "scout_quest_01",
+                    "scout_quest_04",
+                    "scout_quest_05",
+                    "space_info_how_to_make_money",
+                    "quest_u10_helper_droid_01",
+                    "quest_u10_helper_droid_02",
+                    "quest_u10_helper_droid_03",
+                    "quest_u10_helper_droid_04",
+                    "quest_u10_helper_droid_05"
+            };
+    public static final String[] HELPER_DROID_QUEEN_QUOTES =
+            {
+                    "quest_u10_helper_droid_queen_01",
+                    "quest_u10_helper_droid_queen_02",
+                    "quest_u10_helper_droid_queen_03"
+            };
     public quest_u10_helper_droid()
     {
     }
-    public static final String[] HELPER_DROID_QUOTES = 
-    {
-        "artisan_added",
-        "artisan_quest_03",
-        "brawler_added",
-        "brawler_quest_05",
-        "entertainer_added",
-        "entertainer_quest_00",
-        "entertainer_quest_01",
-        "entertainer_quest_05",
-        "marksman_added",
-        "marksman_quest_03",
-        "marksman_quest_05",
-        "medic_added",
-        "medic_quest_01",
-        "medic_quest_02",
-        "medic_quest_06",
-        "scout_added",
-        "scout_quest_01",
-        "scout_quest_04",
-        "scout_quest_05",
-        "space_info_how_to_make_money",
-        "quest_u10_helper_droid_01",
-        "quest_u10_helper_droid_02",
-        "quest_u10_helper_droid_03",
-        "quest_u10_helper_droid_04",
-        "quest_u10_helper_droid_05"
-    };
-    public static final String[] HELPER_DROID_QUEEN_QUOTES = 
-    {
-        "quest_u10_helper_droid_queen_01",
-        "quest_u10_helper_droid_queen_02",
-        "quest_u10_helper_droid_queen_03"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         chat.setChatMood(self, chat.MOOD_NONE);
         chat.setChatType(self, chat.CHAT_SAY);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "lastUtterance"))
@@ -59,7 +67,7 @@ public class quest_u10_helper_droid extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 utils.removeScriptVar(self, "lastUtterance");
             }

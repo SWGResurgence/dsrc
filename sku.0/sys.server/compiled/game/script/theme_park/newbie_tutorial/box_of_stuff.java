@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.colors;
 import script.menu_info;
@@ -10,15 +16,18 @@ public class box_of_stuff extends script.theme_park.newbie_tutorial.tutorial_bas
     public box_of_stuff()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        for (String boxContent : BOX_CONTENTS) {
+        for (String boxContent : BOX_CONTENTS)
+        {
             obj_id item = createObject(boxContent, self, "");
             attachScript(item, BOX_ITEM_SCRIPT);
             setObjVar(item, "newbie.item", true);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (hasObjVar(self, "newbie.boxEmptied"))
@@ -28,6 +37,7 @@ public class box_of_stuff extends script.theme_park.newbie_tutorial.tutorial_bas
         setObjVar(player, "newbie.getBoxOfStuff", true);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePromptToOpen(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "newbie.boxOpened"))
@@ -38,6 +48,7 @@ public class box_of_stuff extends script.theme_park.newbie_tutorial.tutorial_bas
         messageTo(self, "handleRepeatBoxOpenPrompt", null, VERY_LONG_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRepeatBoxOpenPrompt(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getPlayer(self);
@@ -57,6 +68,7 @@ public class box_of_stuff extends script.theme_park.newbie_tutorial.tutorial_bas
         messageTo(self, "handleOpenMeFlyText", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleOpenMeFlyText(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "newbie.stopFlyText"))
@@ -67,6 +79,7 @@ public class box_of_stuff extends script.theme_park.newbie_tutorial.tutorial_bas
         messageTo(self, "handleOpenMeFlyText", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnOpenedContainer(obj_id self, obj_id player) throws InterruptedException
     {
         removeStaticWaypoint(self);
@@ -79,6 +92,7 @@ public class box_of_stuff extends script.theme_park.newbie_tutorial.tutorial_bas
         messageTo(self, "handleExplainTakeItem", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleExplainTakeItem(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getPlayer(self);
@@ -89,6 +103,7 @@ public class box_of_stuff extends script.theme_park.newbie_tutorial.tutorial_bas
         messageTo(player, "moveOnToNextRoom", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnClosedContainer(obj_id self, obj_id player) throws InterruptedException
     {
         if (hasObjVar(self, "newbie.boxEmptied"))
@@ -99,6 +114,7 @@ public class box_of_stuff extends script.theme_park.newbie_tutorial.tutorial_bas
         messageTo(player, "handleExplainFreemouse", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         debugSpeakMsg(self, "There's no possible explanation for this.");

@@ -5,6 +5,12 @@ package script.item;/*
 @Note: Needs non-player controlled volume container..
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class item_nuker extends script.base_script
@@ -19,7 +25,7 @@ public class item_nuker extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public int OnAboutToRecieveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item)
+    public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item)
     {
         if (isPlayer(item))
         {

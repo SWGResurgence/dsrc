@@ -1,28 +1,36 @@
 package script.event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 
 public class boss_buff extends script.base_script
 {
+    private static final String[] HELP_TEXT =
+            {
+                    "=========================================",
+                    "USAGE:",
+                    "\"Buff <VALUE>\": Sets your primary stats to <VALUE> and secondary stats to 1/2 of <VALUE>",
+                    "or \"Buff <VALUE> <SECONDARY STAT OPTIONS>\": See Secondary stats options below for details.",
+                    "or \"Buff <VALUE> <SECONDARY STAT OPTIONS> <DURATION IN SECONDS>: See Duration in Seconds below for details",
+                    "Secondary stats options: These can either be a specific number or the words \"default\" or \"low\".",
+                    "Secondary stats options: If you specify a number your secondary stats will be buffed to that value.",
+                    "Secondary stats options: Specify \"low\" to make your secondary stats automatically lower. This is useful when buffing to very high HAM to prevent crazy regen.",
+                    "Secondary stats options: Specify \"default\" to use the standard derived secondary stats.",
+                    "Duration in Seconds: Specify a number in seconds if you do not want the default 10000 seconds, which is roughly 2 hours and 45 minutes.",
+                    "Saying \"Detach\" will automatically remove this script.",
+                    "========================================="
+            };
+
     public boss_buff()
     {
     }
-    private static final String[] HELP_TEXT =
-    {
-        "=========================================",
-        "USAGE:",
-        "\"Buff <VALUE>\": Sets your primary stats to <VALUE> and secondary stats to 1/2 of <VALUE>",
-        "or \"Buff <VALUE> <SECONDARY STAT OPTIONS>\": See Secondary stats options below for details.",
-        "or \"Buff <VALUE> <SECONDARY STAT OPTIONS> <DURATION IN SECONDS>: See Duration in Seconds below for details",
-        "Secondary stats options: These can either be a specific number or the words \"default\" or \"low\".",
-        "Secondary stats options: If you specify a number your secondary stats will be buffed to that value.",
-        "Secondary stats options: Specify \"low\" to make your secondary stats automatically lower. This is useful when buffing to very high HAM to prevent crazy regen.",
-        "Secondary stats options: Specify \"default\" to use the standard derived secondary stats.",
-        "Duration in Seconds: Specify a number in seconds if you do not want the default 10000 seconds, which is roughly 2 hours and 45 minutes.",
-        "Saying \"Detach\" will automatically remove this script.",
-        "========================================="
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isPlayer(self))
@@ -47,6 +55,7 @@ public class boss_buff extends script.base_script
         sendSystemMessage(self, "Say \"Help\" for usage and options.", null);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (!isGod(self))
@@ -64,6 +73,7 @@ public class boss_buff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (objSpeaker != self)
@@ -102,11 +112,12 @@ public class boss_buff extends script.base_script
             }
             int buffTime = 10000;
             String secondBuffLevelStr;
-            String args[] = strText.split(" ");
+            String[] args = strText.split(" ");
             int buffLevel = utils.stringToInt(args[1]);
             int secondBuffLevel = buffLevel / 2;
             secondBuffLevelStr = args[2];
-            switch(args.length){
+            switch (args.length)
+            {
                 case 4:
                     buffTime = utils.stringToInt(args[3]);
                     // don't break.
@@ -141,7 +152,8 @@ public class boss_buff extends script.base_script
         }
         else if ((toLower(strText)).equals("help"))
         {
-            for (String helpText : HELP_TEXT) {
+            for (String helpText : HELP_TEXT)
+            {
                 sendSystemMessage(self, helpText, null);
             }
         }

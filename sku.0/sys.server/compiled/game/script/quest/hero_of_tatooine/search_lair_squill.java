@@ -1,5 +1,11 @@
 package script.quest.hero_of_tatooine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.stealth;
@@ -8,9 +14,6 @@ import script.library.utils;
 
 public class search_lair_squill extends script.base_script
 {
-    public search_lair_squill()
-    {
-    }
     public static final string_id SEARCH_ITEM = new string_id("quest/hero_of_tatooine/system_messages", "search");
     public static final string_id ALREADY_SEARCHED_MSG = new string_id("quest/hero_of_tatooine/system_messages", "already_search");
     public static final string_id DEFAULT_RECEIVE_MSG = new string_id("quest/hero_of_tatooine/system_messages", "receive");
@@ -18,6 +21,10 @@ public class search_lair_squill extends script.base_script
     public static final string_id COUNTDOWN_TIMER_SEARCH = new string_id("quest/hero_of_tatooine/system_messages", "countdown_timer_search");
     public static final String VAR_ITEM_REQUEST_BASE = "item_request";
     public static final String VAR_ITEM_REQUEST_CATEGORY = VAR_ITEM_REQUEST_BASE + ".category";
+    public search_lair_squill()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canSearch(self, player))
@@ -26,6 +33,7 @@ public class search_lair_squill extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -49,6 +57,7 @@ public class search_lair_squill extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleHeroCountdownTimer(obj_id self, dictionary params) throws InterruptedException
     {
         int pid = params.getInt("id");
@@ -116,12 +125,9 @@ public class search_lair_squill extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean canSearch(obj_id self, obj_id player) throws InterruptedException
     {
-        if (hasObjVar(player, "quest.hero_of_tatooine.task") || groundquests.isTaskActive(player, "quest_hero_of_tatooine_main", "hero_of_tatooine_main_skull"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "quest.hero_of_tatooine.task") || groundquests.isTaskActive(player, "quest_hero_of_tatooine_main", "hero_of_tatooine_main_skull");
     }
 }

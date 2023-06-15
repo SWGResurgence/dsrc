@@ -1,14 +1,10 @@
-// ======================================================================
-//
-// book_procurer.java
-// Copyright 2004-2020, Sony Online Entertainment
-// All Rights Reserved.
-//
-// Created with SwgConversationEditor 1.37 [author(bubbajoex)] - DO NOT EDIT THIS AUTO-GENERATED FILE!
-//
-// ======================================================================
-
 package script.event.books;
+
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
 
 // ======================================================================
 // Library Includes

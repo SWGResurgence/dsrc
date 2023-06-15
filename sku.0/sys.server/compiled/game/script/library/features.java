@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class features extends script.base_script
@@ -20,6 +26,7 @@ public class features extends script.base_script
     public static final int SUBSCRIPTION_BASE = 0x1;
     public static final int SUBSCRIPTION_FREE_TRIAL = 0x2;
     public static final int SUBSCRIPTION_COMBAT_BALANCE_ACCESS = 0x4;
+
     public features()
     {
     }

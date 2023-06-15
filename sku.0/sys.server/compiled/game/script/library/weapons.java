@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.combat_engine.combat_data;
 import script.combat_engine.weapon_data;
@@ -122,6 +128,7 @@ public class weapons extends script.base_script
     public static final String[] DAMAGE_TYPE_NAMES = new String[NUM_DAMAGE_TYPES];
     public static final int CONVERSION_VERSION = 14;
     public static final int CORED_WEAPON_CONVERSION_VERSION = 3;
+
     public weapons()
     {
     }

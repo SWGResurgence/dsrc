@@ -1,5 +1,11 @@
 package script.systems.crafting.item.specific_item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.resource_weight;
 
 public class crafting_firework_show extends script.systems.crafting.item.crafting_base_firework_show
@@ -23,6 +29,7 @@ public class crafting_firework_show extends script.systems.crafting.item.craftin
     public static final resource_weight[] OBJ_MAX_ATTRIBUTE_RESOURCES =
             {
             };
+
     public crafting_firework_show()
     {
     }

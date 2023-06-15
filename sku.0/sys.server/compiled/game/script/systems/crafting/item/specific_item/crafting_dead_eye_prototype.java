@@ -1,5 +1,11 @@
 package script.systems.crafting.item.specific_item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.draft_schematic;
 import script.library.craftinglib;
@@ -68,6 +74,7 @@ public class crafting_dead_eye_prototype extends script.systems.crafting.craftin
                                     new resource_weight.weight(craftinglib.RESOURCE_TOUGHNESS, 2)
                             })
             };
+
     public crafting_dead_eye_prototype()
     {
     }

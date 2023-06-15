@@ -1,5 +1,11 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -102,6 +108,7 @@ public class player_building extends script.base_script
     public static final string_id SID_ROTATE_RESTORE_EMPTY_SLOT = new string_id(STF, "rotate_restore_empty_slot");
     public static final string_id SID_DESTRUCTION_LOCKED = new string_id("city/city", "destruction_locked");
     public static final int MAX_DEPOSIT = 1000000;
+
     public int OnPlaceStructure(obj_id self, obj_id player, obj_id deed, location position, int rotation) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::OnPlaceStructure");
@@ -117,7 +124,8 @@ public class player_building extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id owner = utils.getContainingPlayer(deed);
-        if (player != owner) {
+        if (player != owner)
+        {
             sendSystemMessage(player, new string_id(STF, "no_possession"));
             if (isIdValid(owner))
             {
@@ -204,12 +212,12 @@ public class player_building extends script.base_script
                 {
                     sendSystemMessage(self, SID_PLACED_NEXT_TO_LAST);
                 }
-                else 
+                else
                 {
                     sendSystemMessageProse(self, prose.getPackage(new string_id("faction_perk", "faction_base_unit_used"), (player_structure.MAX_BASE_COUNT - updatedFactionBaseCount)));
                 }
             }
-            else 
+            else
             {
                 setObjVar(player, "factionBaseCount", 1);
                 sendSystemMessageProse(self, prose.getPackage(new string_id("faction_perk", "faction_base_unit_used"), (player_structure.MAX_BASE_COUNT - 1)));
@@ -217,6 +225,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnPermissionListModify(obj_id self, obj_id player, String name, String listName, String action) throws InterruptedException
     {
         LOG("debug", "player_building::OnPermissionListModify");
@@ -253,6 +262,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnContentsLoadedForBuildingToBePacked(obj_id self, obj_id structure) throws InterruptedException
     {
         LOG("sissynoid", "Loading Finished - Triggered OnContentsLoadedForBuildingToBePacked");
@@ -285,6 +295,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMadeAuthoritative(obj_id self) throws InterruptedException
     {
         LOG("sissynoid", "OnMadeAuthoritative: HouseAndPlayer have been made authoritative");
@@ -321,6 +332,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnPlayerVendorCountReply(obj_id self, int count) throws InterruptedException
     {
         if (count < 0)
@@ -377,6 +389,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rotateFurniture(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (hasScript(self, performance.MUSIC_HEARTBEAT_SCRIPT))
@@ -393,7 +406,7 @@ public class player_building extends script.base_script
             {
                 sendSystemMessage(self, new string_id(STF, "formet_rotratefurniture_degrees"));
             }
-            else 
+            else
             {
                 sendSystemMessage(self, new string_id(STF, "formet_enhanced_rotratefurniture_degrees"));
             }
@@ -410,44 +423,70 @@ public class player_building extends script.base_script
         boolean actionRestore = false;
         boolean actionSetQuaternion = false;
         String internalOnly = "(^-,=+_)INTERNAL_USE_ONLY_" + self + "_QUATERNION(,+-=_^)";
-        if ("YAW".equals(direction)) {
+        if ("YAW".equals(direction))
+        {
             actionYaw = true;
-        } else if ("PITCH".equals(direction)) {
-            if (!canRollAndPitch) {
+        }
+        else if ("PITCH".equals(direction))
+        {
+            if (!canRollAndPitch)
+            {
                 sendSystemMessage(self, new string_id(STF, "formet_rotratefurniture_degrees"));
                 return SCRIPT_CONTINUE;
             }
             actionPitch = true;
-        } else if ("ROLL".equals(direction)) {
-            if (!canRollAndPitch) {
+        }
+        else if ("ROLL".equals(direction))
+        {
+            if (!canRollAndPitch)
+            {
                 sendSystemMessage(self, new string_id(STF, "formet_rotratefurniture_degrees"));
                 return SCRIPT_CONTINUE;
             }
             actionRoll = true;
-        } else if ("RANDOM".equals(direction)) {
-            if (!canRollAndPitch) {
+        }
+        else if ("RANDOM".equals(direction))
+        {
+            if (!canRollAndPitch)
+            {
                 sendSystemMessage(self, new string_id(STF, "formet_rotratefurniture_degrees"));
                 return SCRIPT_CONTINUE;
             }
             actionRandom = true;
-        } else if ("RESET".equals(direction)) {
+        }
+        else if ("RESET".equals(direction))
+        {
             actionReset = true;
-        } else if ("COPY".equals(direction)) {
+        }
+        else if ("COPY".equals(direction))
+        {
             actionCopy = true;
-        } else if ("SAVE".equals(direction)) {
+        }
+        else if ("SAVE".equals(direction))
+        {
             actionSave = true;
-        } else if ("RESTORE".equals(direction)) {
+        }
+        else if ("RESTORE".equals(direction))
+        {
             actionRestore = true;
-        } else if (("(^-,=+_)INTERNAL_USE_ONLY_" + self + "_QUATERNION(,+-=_^)").equals(direction)) {
-            if (!canRollAndPitch) {
+        }
+        else if (("(^-,=+_)INTERNAL_USE_ONLY_" + self + "_QUATERNION(,+-=_^)").equals(direction))
+        {
+            if (!canRollAndPitch)
+            {
                 sendSystemMessage(self, new string_id(STF, "formet_rotratefurniture_degrees"));
                 return SCRIPT_CONTINUE;
             }
             actionSetQuaternion = true;
-        } else {
-            if (!canRollAndPitch) {
+        }
+        else
+        {
+            if (!canRollAndPitch)
+            {
                 sendSystemMessage(self, new string_id(STF, "formet_rotratefurniture_degrees"));
-            } else {
+            }
+            else
+            {
                 sendSystemMessage(self, new string_id(STF, "formet_enhanced_rotratefurniture_degrees"));
             }
             return SCRIPT_CONTINUE;
@@ -467,13 +506,12 @@ public class player_building extends script.base_script
                 {
                     actionRandom = true;
                 }
-                else 
+                else
                 {
                     try
                     {
                         rotation = Integer.parseInt(rot_str);
-                    }
-                    catch(NumberFormatException err)
+                    } catch (NumberFormatException err)
                     {
                         sendSystemMessage(self, new string_id(STF, "rotate_params"));
                         return SCRIPT_CONTINUE;
@@ -485,7 +523,7 @@ public class player_building extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 rotation = getFurnitureRotationDegree(self);
             }
@@ -505,13 +543,13 @@ public class player_building extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 if (!canRollAndPitch)
                 {
                     sendSystemMessage(self, new string_id(STF, "formet_rotratefurniture_degrees"));
                 }
-                else 
+                else
                 {
                     sendSystemMessage(self, new string_id(STF, "formet_enhanced_rotratefurniture_degrees"));
                 }
@@ -551,7 +589,7 @@ public class player_building extends script.base_script
         {
             target = obj_id.getObjId(Long.valueOf(st.nextToken()));
         }
-        else 
+        else
         {
             if (!actionCopy)
             {
@@ -564,7 +602,7 @@ public class player_building extends script.base_script
                     target = lookAtTarget;
                 }
             }
-            else 
+            else
             {
                 if (isIdValid(lookAtTarget))
                 {
@@ -602,7 +640,7 @@ public class player_building extends script.base_script
             {
                 modifyYaw(target, rand(-180, 180));
             }
-            else 
+            else
             {
                 modifyYaw(target, rotation);
             }
@@ -613,7 +651,7 @@ public class player_building extends script.base_script
             {
                 modifyPitch(target, rand(-180, 180));
             }
-            else 
+            else
             {
                 modifyPitch(target, rotation);
             }
@@ -624,7 +662,7 @@ public class player_building extends script.base_script
             {
                 modifyRoll(target, rand(-180, 180));
             }
-            else 
+            else
             {
                 modifyRoll(target, rotation);
             }
@@ -676,7 +714,7 @@ public class player_building extends script.base_script
                 {
                     setQuaternion(target, quaternion[0], quaternion[1], quaternion[2], quaternion[3]);
                 }
-                else 
+                else
                 {
                     prose_package pp = prose.getPackage(SID_ROTATE_RESTORE_EMPTY_SLOT);
                     prose.setDI(pp, saveSlot);
@@ -691,6 +729,7 @@ public class player_building extends script.base_script
         messageTo(target, "furniture_rotated", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int moveFurniture(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (hasScript(self, performance.MUSIC_HEARTBEAT_SCRIPT))
@@ -719,7 +758,7 @@ public class player_building extends script.base_script
                 sendSystemMessage(self, new string_id(STF, "format_movefurniture_distance"));
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 dist_str = direction;
                 if (targetName.startsWith("UP"))
@@ -768,13 +807,13 @@ public class player_building extends script.base_script
                 {
                     copyHeight = true;
                 }
-                else 
+                else
                 {
                     sendSystemMessage(self, new string_id(STF, "format_movefurniture_distance"));
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 int dist_int = utils.stringToInt(dist_str);
                 if (dist_int != -1)
@@ -804,13 +843,13 @@ public class player_building extends script.base_script
                 {
                     copyHeight = true;
                 }
-                else 
+                else
                 {
                     sendSystemMessage(self, new string_id(STF, "format_movefurniture_distance"));
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 int dist_int = utils.stringToInt(dist_str);
                 if (dist_int != -1)
@@ -832,7 +871,7 @@ public class player_building extends script.base_script
             sendSystemMessage(self, new string_id(STF, "format_movefurniture_distance"));
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             distance = 100;
         }
@@ -842,7 +881,7 @@ public class player_building extends script.base_script
         {
             target = obj_id.getObjId(Long.valueOf(st.nextToken()));
         }
-        else 
+        else
         {
             if (!direction.equals("COPY"))
             {
@@ -855,7 +894,7 @@ public class player_building extends script.base_script
                     target = lookAtTarget;
                 }
             }
-            else 
+            else
             {
                 if (isIdValid(lookAtTarget))
                 {
@@ -904,7 +943,7 @@ public class player_building extends script.base_script
                 direction = "FORWARD";
             }
             float dist_scaled = distance / 100.0f;
-            float facing_rad = (float)Math.toRadians(facing);
+            float facing_rad = (float) Math.toRadians(facing);
             float x = dist_scaled * (float) StrictMath.sin(facing_rad);
             float z = dist_scaled * (float) StrictMath.cos(facing_rad);
             if (direction.equals("BACK"))
@@ -935,7 +974,8 @@ public class player_building extends script.base_script
             {
                 move_loc = new location(loc.x, y + loc.y, loc.z, loc.area);
             }
-            else {
+            else
+            {
                 move_loc = new location(loc.x, y + loc.y, loc.z, loc.area, loc.cell);
             }
             loc.area = getCurrentSceneName();
@@ -1003,6 +1043,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int DoRestoreItemDecorationLayout(obj_id self, obj_id item, obj_id cell, location loc, boolean restoreRotation, float qw, float qx, float qy, float qz) throws InterruptedException
     {
         if (!isIdValid(item) || !exists(item) || !isIdValid(cell) || !exists(cell) || (loc == null))
@@ -1045,6 +1086,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int DoRestoreItemDecorationLayoutRotationOnly(obj_id self, obj_id item, float qw, float qx, float qy, float qz) throws InterruptedException
     {
         if (!isIdValid(item) || !exists(item))
@@ -1066,6 +1108,7 @@ public class player_building extends script.base_script
         messageTo(item, "furniture_rotated", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int nameStructure(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);
@@ -1145,7 +1188,7 @@ public class player_building extends script.base_script
         {
             sendSystemMessage(self, new string_id(STF, "structure_renamed"));
         }
-        else 
+        else
         {
             setObjVar(structure, player_structure.VAR_SIGN_NAME, params);
             prose_package ppSignNamed = prose.getPackage(PROSE_SIGN_NAME_UPDATED, params);
@@ -1153,6 +1196,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int paWithdraw(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);
@@ -1191,24 +1235,27 @@ public class player_building extends script.base_script
             LOG("LOG_CHANNEL", self + " ->Insufficent funds for withdrawal.");
             sendSystemMessage(self, new string_id(STF, "insufficient_funds_withdrawal"));
         }
-        else 
+        else
         {
             player_structure.withdrawMaintenance(self, structure, amt);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int itemRotateRight(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         int rotateDegrees = getFurnitureRotationDegree(self);
         queueCommand(self, (-1460986552), target, "yaw -" + rotateDegrees + " " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int itemRotateLeft(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         int rotateDegrees = getFurnitureRotationDegree(self);
         queueCommand(self, (-1460986552), target, "yaw " + rotateDegrees + " " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int itemRotateForward(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (player_structure.canRotateFurnitureInPitchRollAxes(self) || isGod(self))
@@ -1218,6 +1265,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int itemRotateBackward(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (player_structure.canRotateFurnitureInPitchRollAxes(self) || isGod(self))
@@ -1227,6 +1275,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int itemRotateClockwise(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (player_structure.canRotateFurnitureInPitchRollAxes(self) || isGod(self))
@@ -1236,6 +1285,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int itemRotateCounterclockwise(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (player_structure.canRotateFurnitureInPitchRollAxes(self) || isGod(self))
@@ -1245,6 +1295,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int itemRotateRandom(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (player_structure.canRotateFurnitureInPitchRollAxes(self) || isGod(self))
@@ -1253,11 +1304,13 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int itemRotateRandomYaw(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (-1460986552), target, "yaw random " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int itemRotateRandomPitch(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (player_structure.canRotateFurnitureInPitchRollAxes(self) || isGod(self))
@@ -1266,6 +1319,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int itemRotateRandomRoll(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (player_structure.canRotateFurnitureInPitchRollAxes(self) || isGod(self))
@@ -1274,56 +1328,67 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int itemRotateReset(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (-1460986552), target, "reset " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int itemRotateCopy(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (-1460986552), target, "copy " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int itemMoveForward(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (1265935363), target, "forward 10 " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int itemMoveBack(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (1265935363), target, "back 10 " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int itemMoveLeft(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (1265935363), target, "left 10 " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int itemMoveRight(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (1265935363), target, "right 10 " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int itemMoveUp(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (1265935363), target, "up 1 " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int itemMoveDown(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (1265935363), target, "down 1 " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int itemMoveCopyLocation(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (1265935363), target, "copy location " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int itemMoveCopyHeight(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (1265935363), target, "copy height " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdAddPower(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::cmdAddPower");
@@ -1368,7 +1433,7 @@ public class player_building extends script.base_script
         {
             int totalEnergy = resource.getEnergyTotalOnTarget(self);
             int maint_pool = getBankBalance(structure);
-            int pid = sui.transfer(self, self, getString(new string_id(STF, "select_power_amount")) + "\n\n" + getString(new string_id(STF, "current_power_value")) + (int)getPowerValue(structure), "@player_structure:add_power", "@player_structure:total_energy", totalEnergy, "@player_structure:to_deposit", 0, "msgAddPower");
+            int pid = sui.transfer(self, self, getString(new string_id(STF, "select_power_amount")) + "\n\n" + getString(new string_id(STF, "current_power_value")) + (int) getPowerValue(structure), "@player_structure:add_power", "@player_structure:total_energy", totalEnergy, "@player_structure:to_deposit", 0, "msgAddPower");
             if (pid > -1)
             {
                 utils.setScriptVar(self, "addPower.pid", pid);
@@ -1376,7 +1441,7 @@ public class player_building extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             amt = utils.stringToInt(params);
             if (amt < 1)
@@ -1393,14 +1458,19 @@ public class player_building extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             int got = getGameObjectType(content);
-            if (isGameObjectTypeOf(got, GOT_resource_container)) {
+            if (isGameObjectTypeOf(got, GOT_resource_container))
+            {
                 obj_id crate = content;
-                if (isIdValid(crate)) {
+                if (isIdValid(crate))
+                {
                     obj_id rId = getResourceContainerResourceType(crate);
-                    if (isIdValid(rId)) {
-                        if (isResourceDerivedFrom(rId, "energy") || isResourceDerivedFrom(rId, "radioactive")) {
+                    if (isIdValid(rId))
+                    {
+                        if (isResourceDerivedFrom(rId, "energy") || isResourceDerivedFrom(rId, "radioactive"))
+                        {
                             int inCrate = resource.getPotentialEnergyValue(crate);
                             inInv += inCrate;
                             d.put(crate.toString(), inCrate);
@@ -1423,7 +1493,7 @@ public class player_building extends script.base_script
         java.util.Enumeration keys = d.keys();
         while (keys.hasMoreElements())
         {
-            String key = (String)(keys.nextElement());
+            String key = (String) (keys.nextElement());
             obj_id crate = utils.stringToObjId(key);
             if (isIdValid(crate))
             {
@@ -1433,12 +1503,12 @@ public class player_building extends script.base_script
                     obj_id rId = getResourceContainerResourceType(crate);
                     if (isIdValid(rId))
                     {
-                        int toRemove = (int)(Math.ceil(toTransfer / resource.getEnergyPowerRatio(rId)));
+                        int toRemove = (int) (Math.ceil(toTransfer / resource.getEnergyPowerRatio(rId)));
                         removeResourceFromContainer(crate, rId, toRemove);
                         toTransfer -= toTransfer;
                     }
                 }
-                else 
+                else
                 {
                     destroyObject(crate);
                     toTransfer -= inCrate;
@@ -1458,14 +1528,15 @@ public class player_building extends script.base_script
         if (cur > -1.0f)
         {
             sendSystemMessageProse(self, prose.getPackage(new string_id(STF, "deposit_successful"), amt));
-            sendSystemMessageProse(self, prose.getPackage(new string_id(STF, "reserve_report"), (int)cur));
+            sendSystemMessageProse(self, prose.getPackage(new string_id(STF, "reserve_report"), (int) cur));
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_POWER_DEPOSIT_FAIL);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int assignDroid(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);
@@ -1510,6 +1581,7 @@ public class player_building extends script.base_script
         sui.listbox(self, self, prompt, sui.OK_CANCEL, title, list, "msgAssignDroid");
         return SCRIPT_CONTINUE;
     }
+
     public int cmdDepositPowerIncubator(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id player = self;
@@ -1562,13 +1634,13 @@ public class player_building extends script.base_script
                     utils.setScriptVar(self, "powerIncubator.resourceName", resourceName);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_NO_GEO_POWER);
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             amt = utils.stringToInt(params);
             if (amt < 1)
@@ -1593,16 +1665,22 @@ public class player_building extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             int got = getGameObjectType(content);
-            if (isGameObjectTypeOf(got, GOT_resource_container)) {
+            if (isGameObjectTypeOf(got, GOT_resource_container))
+            {
                 obj_id resourceCrate = content;
-                if (isIdValid(resourceCrate)) {
+                if (isIdValid(resourceCrate))
+                {
                     obj_id resourceId = getResourceContainerResourceType(resourceCrate);
-                    if (isIdValid(resourceId)) {
-                        if (isResourceDerivedFrom(resourceId, "energy_renewable_site_limited_geothermal")) {
+                    if (isIdValid(resourceId))
+                    {
+                        if (isResourceDerivedFrom(resourceId, "energy_renewable_site_limited_geothermal"))
+                        {
                             String tempResourceName = getResourceName(resourceId);
-                            if (tempList.contains(tempResourceName)) {
+                            if (tempList.contains(tempResourceName))
+                            {
                                 resourceQuality = getResourceAttribute(resourceId, "res_quality");
                                 int inCrate = getResourceContainerQuantity(resourceCrate);
                                 inInventory += inCrate;
@@ -1632,7 +1710,7 @@ public class player_building extends script.base_script
         java.util.Enumeration keys = resourceInfo.keys();
         while (keys.hasMoreElements())
         {
-            String key = (String)(keys.nextElement());
+            String key = (String) (keys.nextElement());
             obj_id resourceCrate = utils.stringToObjId(key);
             if (isIdValid(resourceCrate))
             {
@@ -1647,7 +1725,7 @@ public class player_building extends script.base_script
                         toTransfer -= toTransfer;
                     }
                 }
-                else 
+                else
                 {
                     destroyObject(resourceCrate);
                     toTransfer -= inCrate;
@@ -1668,12 +1746,13 @@ public class player_building extends script.base_script
             sendSystemMessageProse(player, prose.getPackage((SID_DEPOSIT_SUCCESS), amt));
             sendSystemMessageProse(player, prose.getPackage((SID_RESERVE_REPORT), incubator.getStationPowerAmount(station)));
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_POWER_DEPOSIT_FAIL);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdRemovePowerIncubator(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id player = self;
@@ -1689,17 +1768,20 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int placeStructureMode(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         player_structure.tryEnterPlacementMode(target, self);
         return SCRIPT_CONTINUE;
     }
+
     public int failPlaceStructureMode(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::failPlaceStructureMode");
         sendSystemMessage(self, SID_WRONG_STATE);
         return SCRIPT_CONTINUE;
     }
+
     public int setPermission(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::setPermission-- params ->" + params + " target ->" + target);
@@ -1756,7 +1838,7 @@ public class player_building extends script.base_script
         {
             target_str = st.nextToken();
             // fixup for tokenizer and city names
-            if(target_str.startsWith("city:"))
+            if (target_str.startsWith("city:"))
             {
                 target_str = params.substring(params.indexOf("city:", 1));
             }
@@ -1833,41 +1915,41 @@ public class player_building extends script.base_script
             switch (perm_switch)
             {
                 case 1:
-                if (isGod(self))
-                {
-                    dsrc = player_structure.getCompleteEntryList(structure);
-                }
-                else 
-                {
-                    dsrc = player_structure.getEntryList(structure);
-                }
-                title = getString(new string_id(STF, "entry_permissions_list"));
-                handler = "msgEnterPermissions";
-                break;
+                    if (isGod(self))
+                    {
+                        dsrc = player_structure.getCompleteEntryList(structure);
+                    }
+                    else
+                    {
+                        dsrc = player_structure.getEntryList(structure);
+                    }
+                    title = getString(new string_id(STF, "entry_permissions_list"));
+                    handler = "msgEnterPermissions";
+                    break;
                 case 2:
-                dsrc = player_structure.getBanList(structure);
-                title = getString(new string_id(STF, "ban_list"));
-                handler = "msgBanPermissions";
-                break;
+                    dsrc = player_structure.getBanList(structure);
+                    title = getString(new string_id(STF, "ban_list"));
+                    handler = "msgBanPermissions";
+                    break;
                 case 3:
-                dsrc = player_structure.getAdminListNames(structure);
-                title = getString(new string_id(STF, "admin_permissions_list"));
-                handler = "msgAdminPermissions";
-                break;
+                    dsrc = player_structure.getAdminListNames(structure);
+                    title = getString(new string_id(STF, "admin_permissions_list"));
+                    handler = "msgAdminPermissions";
+                    break;
                 case 4:
-                dsrc = player_structure.getVendorList(structure);
-                title = getString(new string_id(STF, "vendor_permissions_list"));
-                handler = "msgVendorPermissions";
-                break;
+                    dsrc = player_structure.getVendorList(structure);
+                    title = getString(new string_id(STF, "vendor_permissions_list"));
+                    handler = "msgVendorPermissions";
+                    break;
                 case 5:
-                dsrc = player_structure.getHopperListNames(structure);
-                title = getString(new string_id(STF, "hopper_permissions_list"));
-                handler = "msgHopperPermissions";
-                break;
+                    dsrc = player_structure.getHopperListNames(structure);
+                    title = getString(new string_id(STF, "hopper_permissions_list"));
+                    handler = "msgHopperPermissions";
+                    break;
                 default:
-                LOG("LOG_CHANNEL", "You must specify a valid permission list (Entry, Ban, Admin, Hopper)");
-                sendSystemMessage(self, new string_id(STF, "must_specify_list"));
-                return SCRIPT_CONTINUE;
+                    LOG("LOG_CHANNEL", "You must specify a valid permission list (Entry, Ban, Admin, Hopper)");
+                    sendSystemMessage(self, new string_id(STF, "must_specify_list"));
+                    return SCRIPT_CONTINUE;
             }
             if (dsrc == null)
             {
@@ -1878,7 +1960,7 @@ public class player_building extends script.base_script
             {
                 players = getPlayerCreaturesInRange(structure, 30.0f);
             }
-            else 
+            else
             {
                 players = player_structure.getPlayersNearInstallation(structure);
             }
@@ -1886,11 +1968,13 @@ public class player_building extends script.base_script
             player_names.setSize(0);
             if (players != null)
             {
-                for (obj_id player : players) {
+                for (obj_id player : players)
+                {
                     String player_name = getFirstName(player);
                     LOG("LOG_CHANNEL", "Found " + player_name);
                     int idx = utils.getElementPositionInArray(dsrc, player_name);
-                    if (idx == -1) {
+                    if (idx == -1)
+                    {
                         LOG("LOG_CHANNEL", "   ...Adding " + player_name);
                         player_names = utils.addElement(player_names, player_name);
                     }
@@ -1905,61 +1989,62 @@ public class player_building extends script.base_script
             }
             displayStructurePermissionData(self, dsrc, player_names_array, perm_type);
         }
-        else 
+        else
         {
             if (target_str.equals(""))
             {
                 switch (perm_switch)
                 {
                     case 1:
-                    player_structure.modifyEntryList(structure, target, self);
-                    break;
+                        player_structure.modifyEntryList(structure, target, self);
+                        break;
                     case 2:
-                    player_structure.modifyBanList(structure, target, self);
-                    break;
+                        player_structure.modifyBanList(structure, target, self);
+                        break;
                     case 3:
-                    player_structure.modifyAdminList(structure, target, self);
-                    break;
+                        player_structure.modifyAdminList(structure, target, self);
+                        break;
                     case 4:
-                    player_structure.modifyVendorList(structure, target, self);
-                    break;
+                        player_structure.modifyVendorList(structure, target, self);
+                        break;
                     case 5:
-                    player_structure.modifyHopperList(structure, target, self);
-                    break;
+                        player_structure.modifyHopperList(structure, target, self);
+                        break;
                     default:
-                    LOG("LOG_CHANNEL", "You must specify a valid permission list (Entry, Ban, Admin, Hopper)");
-                    sendSystemMessage(self, new string_id(STF, "must_specify_list"));
-                    return SCRIPT_CONTINUE;
+                        LOG("LOG_CHANNEL", "You must specify a valid permission list (Entry, Ban, Admin, Hopper)");
+                        sendSystemMessage(self, new string_id(STF, "must_specify_list"));
+                        return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 switch (perm_switch)
                 {
                     case 1:
-                    player_structure.modifyEntryList(structure, target_str, self);
-                    break;
+                        player_structure.modifyEntryList(structure, target_str, self);
+                        break;
                     case 2:
-                    player_structure.modifyBanList(structure, target_str, self);
-                    break;
+                        player_structure.modifyBanList(structure, target_str, self);
+                        break;
                     case 3:
-                    player_structure.modifyAdminList(structure, target_str, self);
-                    break;
+                        player_structure.modifyAdminList(structure, target_str, self);
+                        break;
                     case 4:
-                    player_structure.modifyVendorList(structure, target_str, self);
-                    break;
+                        player_structure.modifyVendorList(structure, target_str, self);
+                        break;
                     case 5:
-                    player_structure.modifyHopperList(structure, target_str, self);
-                    break;
+                        player_structure.modifyHopperList(structure, target_str, self);
+                        break;
                     default:
-                    LOG("LOG_CHANNEL", "You must specify a valid permission list (Entry, Ban, Admin, Hopper)");
-                    sendSystemMessage(self, new string_id(STF, "must_specify_list"));
-                    return SCRIPT_CONTINUE;
+                        LOG("LOG_CHANNEL", "You must specify a valid permission list (Entry, Ban, Admin, Hopper)");
+                        sendSystemMessage(self, new string_id(STF, "must_specify_list"));
+                        return SCRIPT_CONTINUE;
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int structureStatus(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("house", "commandHandler:structureStatus");
@@ -1977,7 +2062,7 @@ public class player_building extends script.base_script
             {
                 structure = target;
             }
-            else 
+            else
             {
                 structure = player_structure.getStructure(target);
             }
@@ -2042,7 +2127,7 @@ public class player_building extends script.base_script
                 string_id public_structure = new string_id(STF, "structure_public");
                 dsrc = utils.addElement(dsrc, getString(public_structure));
             }
-            else 
+            else
             {
                 string_id private_structure = new string_id(STF, "structure_private");
                 dsrc = utils.addElement(dsrc, getString(private_structure));
@@ -2055,17 +2140,17 @@ public class player_building extends script.base_script
                 string_id condition_prompt_text = new string_id(STF, "condition_prompt");
                 dsrc = utils.addElement(dsrc, getString(condition_prompt_text) + perc_condition + "%");
             }
-            else 
+            else
             {
                 int maint_rate = player_structure.getBaseMaintenanceRate(structure);
-                int total_cost = (int)((max_condition - condition) * maint_rate / 3.0f);
+                int total_cost = (int) ((max_condition - condition) * maint_rate / 3.0f);
                 string_id condition_prompt_text_damaged = new string_id(STF, "condition_prompt");
                 string_id credits_to_repair_suffix = new string_id(STF, "credits_to_repair");
                 if (!buildingTemplateName.contains("object/building/faction_perk/hq/"))
                 {
                     dsrc = utils.addElement(dsrc, getString(condition_prompt_text_damaged) + perc_condition + "%" + "   (" + total_cost + getString(credits_to_repair_suffix));
                 }
-                else 
+                else
                 {
                     dsrc = utils.addElement(dsrc, getString(condition_prompt_text_damaged) + perc_condition + "%");
                 }
@@ -2073,20 +2158,20 @@ public class player_building extends script.base_script
             int m_pool = player_structure.getMaintenancePool(structure);
             m_rate = player_structure.getMaintenanceRate(structure);
             m_rate_base = player_structure.getBaseMaintenanceRate(structure);
-            double time_remaining = (double)m_pool * player_structure.getMaintenanceHeartbeat() / m_rate;
+            double time_remaining = (double) m_pool * player_structure.getMaintenanceHeartbeat() / m_rate;
             if (time_remaining < 0 || time_remaining > Integer.MAX_VALUE)
             {
                 time_remaining = Integer.MAX_VALUE;
             }
             if (m_pool > 0)
             {
-                String time_str = utils.assembleTimeRemainToUse((int)time_remaining, false);
+                String time_str = utils.assembleTimeRemainToUse((int) time_remaining, false);
                 if (player_structure.isGuildHall(structure))
                 {
                     string_id treasury_prompt_text = new string_id(STF, "treasury_prompt");
                     dsrc = utils.addElement(dsrc, getString(treasury_prompt_text) + m_pool + "   (" + time_str + ")");
                 }
-                else 
+                else
                 {
                     if (!buildingTemplateName.contains("object/building/faction_perk/hq/"))
                     {
@@ -2095,14 +2180,14 @@ public class player_building extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 if (player_structure.isGuildHall(structure))
                 {
                     string_id treasury_empty_text = new string_id(STF, "treasury_prompt");
                     dsrc = utils.addElement(dsrc, getString(treasury_empty_text) + m_pool);
                 }
-                else 
+                else
                 {
                     if (!buildingTemplateName.contains("object/building/faction_perk/hq/"))
                     {
@@ -2123,13 +2208,13 @@ public class player_building extends script.base_script
             if (m_rate == m_rate_base)
             {
                 string_id maintenance_rate_text = new string_id(STF, "maintenance_rate_prompt");
-                dsrc = utils.addElement(dsrc, getString(maintenance_rate_text) + Integer.toString(hourly_m_rate) + " cr/hr");
+                dsrc = utils.addElement(dsrc, getString(maintenance_rate_text) + hourly_m_rate + " cr/hr");
             }
-            else 
+            else
             {
                 int hourly_m_rate_base = m_rate_base * (3600 / player_structure.getMaintenanceHeartbeat());
                 string_id maintenance_rate_mod_text = new string_id(STF, "maintenance_rate_prompt");
-                dsrc = utils.addElement(dsrc, getString(maintenance_rate_mod_text) + Integer.toString(hourly_m_rate) + " cr/hr (" + hourly_m_rate_base + ")");
+                dsrc = utils.addElement(dsrc, getString(maintenance_rate_mod_text) + hourly_m_rate + " cr/hr (" + hourly_m_rate_base + ")");
             }
         }
         if (!buildingTemplateName.contains("object/building/faction_perk/hq/"))
@@ -2150,16 +2235,16 @@ public class player_building extends script.base_script
             {
                 String p_time_string = utils.assembleTimeRemainToUse(p_time, false);
                 string_id power_reserve_empty_text = new string_id(STF, "power_reserve_prompt");
-                dsrc = utils.addElement(dsrc, getString(power_reserve_empty_text) + (int)p_pool + "   (" + p_time_string + ")");
+                dsrc = utils.addElement(dsrc, getString(power_reserve_empty_text) + (int) p_pool + "   (" + p_time_string + ")");
             }
-            else 
+            else
             {
                 string_id power_reserve_text = new string_id(STF, "power_reserve_prompt");
-                dsrc = utils.addElement(dsrc, getString(power_reserve_text) + (int)p_pool);
+                dsrc = utils.addElement(dsrc, getString(power_reserve_text) + (int) p_pool);
             }
             string_id power_consumption_text = new string_id(STF, "power_consumption_prompt");
             string_id units_per_hour_text = new string_id(STF, "units_per_hour");
-            dsrc = utils.addElement(dsrc, getString(power_consumption_text) + Integer.toString((int)p_rate) + getString(units_per_hour_text));
+            dsrc = utils.addElement(dsrc, getString(power_consumption_text) + (int) p_rate + getString(units_per_hour_text));
         }
         if (sGot == GOT_building_factional && hasObjVar(structure, hq.VAR_HQ_BASE))
         {
@@ -2185,9 +2270,9 @@ public class player_building extends script.base_script
                 {
                     long current = System.currentTimeMillis();
                     long curTime = ((current / 1000) - 1072224000);
-                    int currentTime = (int)curTime;
+                    int currentTime = (int) curTime;
                     int stamp = getIntObjVar(structure, hq.VAR_OBJECTIVE_STAMP);
-                    int objective_delta = stamp + (int)(hq.VULNERABILITY_CYCLE) - currentTime;
+                    int objective_delta = stamp + (int) (hq.VULNERABILITY_CYCLE) - currentTime;
                     if (objective_delta > 0)
                     {
                         int[] oTime = player_structure.convertSecondsTime(objective_delta);
@@ -2237,10 +2322,10 @@ public class player_building extends script.base_script
             {
                 prompt += prepaidTimeString;
             }
-            else 
+            else
             {
                 string_id seconds_suffix_text = new string_id(STF, "seconds_suffix");
-                prompt += Integer.toString(prepaid_delta) + getString(seconds_suffix_text);
+                prompt += prepaid_delta + getString(seconds_suffix_text);
             }
         }
         String maint_mods_string = "";
@@ -2249,20 +2334,20 @@ public class player_building extends script.base_script
             string_id civic_structure_alert_text = new string_id(STF, "civic_structure_alert");
             maint_mods_string += "\n- " + getString(civic_structure_alert_text);
         }
-        else 
+        else
         {
             if (hasObjVar(structure, player_structure.VAR_MAINTENANCE_MOD_MERCHANT))
             {
                 float merchant_mod = getFloatObjVar(structure, player_structure.VAR_MAINTENANCE_MOD_MERCHANT);
                 string_id merch_mod_text = new string_id(STF, "merch_mod_prompt");
-                maint_mods_string += "\n- " + getString(merch_mod_text) + Integer.toString((int)(merchant_mod * 100.0f)) + "%";
+                maint_mods_string += "\n- " + getString(merch_mod_text) + (int) (merchant_mod * 100.0f) + "%";
             }
             int maint_property_tax = player_structure.getMaintenancePropertyTax(structure);
             if (maint_property_tax > 0)
             {
                 int hourly_tax = Math.round(maint_property_tax * (3600.0f / player_structure.getMaintenanceHeartbeat()));
                 string_id property_tax_rate_text = new string_id(STF, "property_tax_rate_prompt");
-                maint_mods_string += "\n- " + getString(property_tax_rate_text) + Integer.toString(hourly_tax) + "cr/hr";
+                maint_mods_string += "\n- " + getString(property_tax_rate_text) + hourly_tax + "cr/hr";
             }
         }
         if (maint_mods_string != null && !maint_mods_string.equals(""))
@@ -2283,6 +2368,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int payMaintenance(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id structure = null;
@@ -2292,7 +2378,7 @@ public class player_building extends script.base_script
             {
                 structure = target;
             }
-            else 
+            else
             {
                 structure = player_structure.getStructure(target);
             }
@@ -2365,14 +2451,14 @@ public class player_building extends script.base_script
                     utils.setScriptVar(self, "payMaintenance.target", structure);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(self, new string_id(STF, "no_money"));
             }
             return SCRIPT_CONTINUE;
         }
         int amt = utils.stringToInt(st.nextToken());
-		if (amt < 1 || amt > MAX_DEPOSIT)
+        if (amt < 1 || amt > MAX_DEPOSIT)
         {
             LOG("LOG_CHANNEL", "The amount must be between 1 and 1000000");
             sendSystemMessage(self, new string_id(STF, "amount_params"));
@@ -2381,6 +2467,7 @@ public class player_building extends script.base_script
         player_structure.payMaintenance(self, structure, amt);
         return SCRIPT_CONTINUE;
     }
+
     public int setPrivacy(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::setPrivacy");
@@ -2427,12 +2514,16 @@ public class player_building extends script.base_script
             String[] cells = getCellNames(structure);
             if (cells != null)
             {
-                for (String cell : cells) {
+                for (String cell : cells)
+                {
                     obj_id cellid = getCellId(structure, cell);
-                    obj_id contents[] = getContents(cellid);
-                    if (contents != null) {
-                        for (obj_id content : contents) {
-                            if (hasCondition(content, CONDITION_VENDOR)) {
+                    obj_id[] contents = getContents(cellid);
+                    if (contents != null)
+                    {
+                        for (obj_id content : contents)
+                        {
+                            if (hasCondition(content, CONDITION_VENDOR))
+                            {
                                 sendSystemMessage(self, new string_id(STF, "vendor_no_private"));
                                 return SCRIPT_CONTINUE;
                             }
@@ -2446,13 +2537,17 @@ public class player_building extends script.base_script
             String[] entry_list = player_structure.getCompleteEntryList(structure);
             if (objects != null)
             {
-                for (obj_id object : objects) {
-                    if (hasObjVar(object, "noEject")) {
+                for (obj_id object : objects)
+                {
+                    if (hasObjVar(object, "noEject"))
+                    {
                         continue;
                     }
-                    if (isPlayer(object) || (isMob(object) && isIdValid(getMaster(object))) || (isMob(object) && (getLevel(object)) >= 10)) {
+                    if (isPlayer(object) || (isMob(object) && isIdValid(getMaster(object))) || (isMob(object) && (getLevel(object)) >= 10))
+                    {
                         int idx = utils.getElementPositionInArray(entry_list, getFirstName(object));
-                        if (idx == -1) {
+                        if (idx == -1)
+                        {
                             expelFromBuilding(object);
                         }
                     }
@@ -2460,7 +2555,7 @@ public class player_building extends script.base_script
             }
             permissionsMakePrivate(structure);
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", "This structure is now public.");
             sendSystemMessage(self, new string_id(STF, "structure_now_public"));
@@ -2472,6 +2567,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int declareResidence(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);
@@ -2543,6 +2639,7 @@ public class player_building extends script.base_script
         skill.grantAllPoliticianSkills(self);
         return SCRIPT_CONTINUE;
     }
+
     public int transferStructure(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);
@@ -2639,8 +2736,10 @@ public class player_building extends script.base_script
             boolean found = false;
             if (buildingPlayers != null)
             {
-                for (obj_id buildingPlayer : buildingPlayers) {
-                    if (buildingPlayer == self) {
+                for (obj_id buildingPlayer : buildingPlayers)
+                {
+                    if (buildingPlayer == self)
+                    {
                         found = true;
                         break;
                     }
@@ -2658,7 +2757,7 @@ public class player_building extends script.base_script
             }
             notradeItem = utils.findNoTradeItemNotVendor(player_structure.getObjectsInBuilding(structure), false);
         }
-        else 
+        else
         {
             obj_id[] structureArray = new obj_id[1];
             structureArray[0] = structure;
@@ -2756,6 +2855,7 @@ public class player_building extends script.base_script
         CustomerServiceLog("c", "Structure " + structure + " has been transfered from " + getFirstName(self) + " to " + getFirstName(target));
         return SCRIPT_CONTINUE;
     }
+
     public int destroyStructure(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isFactionBaseEmpty(trial.getTop(self), self))
@@ -2902,14 +3002,18 @@ public class player_building extends script.base_script
                 return SCRIPT_CONTINUE;
             }
             obj_id[] houseContents = trial.getAllObjectsInDungeon(structure);
-            if (houseContents != null && houseContents.length > 0)
+            if (houseContents != null)
             {
-                for (obj_id houseContent : houseContents) {
-                    if (isMob(houseContent)) {
+                for (obj_id houseContent : houseContents)
+                {
+                    if (isMob(houseContent))
+                    {
                         int callableType = callable.getCallableType(houseContent);
-                        if (callableType > 0) {
+                        if (callableType > 0)
+                        {
                             prose_package pp = prose.getPackage(SID_STORE_PETS_FOR_DELETE, self);
-                            if (pp != null) {
+                            if (pp != null)
+                            {
                                 sendSystemMessageProse(self, pp);
                             }
                             return SCRIPT_CONTINUE;
@@ -2942,27 +3046,27 @@ public class player_building extends script.base_script
                     LOG("LOG_CHANNEL", self + " ->Structure destroyed and deed reclaimed.");
                     sendSystemMessage(self, new string_id(STF, "deed_reclaimed"));
                 }
-                else 
+                else
                 {
                     sendSystemMessage(self, new string_id(STF, "deed_reclaimed_failed"));
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 if (player_structure.destroyStructure(structure, false))
                 {
                     LOG("LOG_CHANNEL", self + " ->Structure destroyed.");
                     sendSystemMessage(self, new string_id(STF, "structure_destroyed"));
                 }
-                else 
+                else
                 {
                     sendSystemMessage(self, new string_id(STF, "structure_destroy_failed"));
                     return SCRIPT_CONTINUE;
                 }
             }
         }
-        else 
+        else
         {
             string_id confirm_destruction_title = new string_id(STF, "confirm_destruction_t");
             String title = getString(confirm_destruction_title);
@@ -3002,7 +3106,7 @@ public class player_building extends script.base_script
                     willRedeed = false;
                 }
                 string_id redeed_condition_text = new string_id(STF, "redeed_condition");
-                entries = utils.addElement(entries, " - " + getString(redeed_condition_text) + colors_hex.HEADER + conditionColor + condition + "/" + max_condition+ colors_hex.FOOTER);
+                entries = utils.addElement(entries, " - " + getString(redeed_condition_text) + colors_hex.HEADER + conditionColor + condition + "/" + max_condition + colors_hex.FOOTER);
                 int pool = player_structure.getMaintenancePool(structure);
                 int reclaim_pool = player_structure.getRedeedCost(structure);
                 String maintColor = colors_hex.LIMEGREEN;
@@ -3014,7 +3118,7 @@ public class player_building extends script.base_script
                 string_id redeed_maintenance_text = new string_id(STF, "redeed_maintenance");
                 entries = utils.addElement(entries, " - " + getString(redeed_maintenance_text) + colors_hex.HEADER + maintColor + pool + "/" + reclaim_pool);
             }
-            else 
+            else
             {
                 string_id redeed_alert_text = new string_id(STF, "can_redeed_alert");
                 string_id redeed_no_alert_text = new string_id(STF, "can_redeed_no_suffix");
@@ -3027,7 +3131,7 @@ public class player_building extends script.base_script
                 string_id redeed_yes_alert_text = new string_id(STF, "can_redeed_yes_suffix");
                 prompt += "\n" + getString(redeed_confirmation_text) + colors_hex.HEADER + colors_hex.LIMEGREEN + getString(redeed_yes_alert_text);
             }
-            else 
+            else
             {
                 string_id redeed_confirmation_text = new string_id(STF, "redeed_confirmation");
                 string_id redeed_no_alert_text = new string_id(STF, "can_redeed_no_suffix");
@@ -3044,6 +3148,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int createVendor(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         blog("player_building:createVendor");
@@ -3055,6 +3160,7 @@ public class player_building extends script.base_script
         requestPlayerVendorCount(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSaveDecorationLayout(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SCRIPTVAR_SAVE_RESTORE_DECORATION_SUI_ID))
@@ -3087,7 +3193,7 @@ public class player_building extends script.base_script
             {
                 columnData[0][2] = getCalendarTimeStringLocal(saveTime);
             }
-            else 
+            else
             {
                 columnData[0][2] = "";
             }
@@ -3097,7 +3203,7 @@ public class player_building extends script.base_script
                 columnData[0][3] = "";
             }
         }
-        else 
+        else
         {
             columnData[0][1] = "<EMPTY>";
             columnData[0][2] = "<EMPTY>";
@@ -3116,7 +3222,7 @@ public class player_building extends script.base_script
             {
                 columnData[1][2] = getCalendarTimeStringLocal(saveTime);
             }
-            else 
+            else
             {
                 columnData[1][2] = "";
             }
@@ -3126,7 +3232,7 @@ public class player_building extends script.base_script
                 columnData[1][3] = "";
             }
         }
-        else 
+        else
         {
             columnData[1][1] = "<EMPTY>";
             columnData[1][2] = "<EMPTY>";
@@ -3145,7 +3251,7 @@ public class player_building extends script.base_script
             {
                 columnData[2][2] = getCalendarTimeStringLocal(saveTime);
             }
-            else 
+            else
             {
                 columnData[2][2] = "";
             }
@@ -3155,30 +3261,31 @@ public class player_building extends script.base_script
                 columnData[2][3] = "";
             }
         }
-        else 
+        else
         {
             columnData[2][1] = "<EMPTY>";
             columnData[2][2] = "<EMPTY>";
             columnData[2][3] = "<EMPTY>";
         }
-        String[] columnHeader = 
-        {
-            "Save Slot #",
-            "Structure/Ship Type",
-            "Save Time",
-            "Description"
-        };
-        String[] columnHeaderType = 
-        {
-            "integer",
-            "text",
-            "text",
-            "text"
-        };
+        String[] columnHeader =
+                {
+                        "Save Slot #",
+                        "Structure/Ship Type",
+                        "Save Time",
+                        "Description"
+                };
+        String[] columnHeaderType =
+                {
+                        "integer",
+                        "text",
+                        "text",
+                        "text"
+                };
         int pid = sui.tableRowMajor(self, self, sui.OK_CANCEL, "Save Decoration Layout", "handleSelectSaveDecorationLayout", "Select the save slot where you want to save this decoration layout.", columnHeader, columnHeaderType, columnData);
         utils.setScriptVar(self, SCRIPTVAR_SAVE_RESTORE_DECORATION_SUI_ID, pid);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSelectSaveDecorationLayout(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, SCRIPTVAR_SAVE_RESTORE_DECORATION_SUI_ID))
@@ -3209,7 +3316,7 @@ public class player_building extends script.base_script
                 int pid = sui.msgbox(self, self, "Are you sure you want to overwrite the decoration layout currently saved in slot " + saveSlotId + "?", sui.YES_NO, "Save Decoration Layout", "handleConfirmOverwriteSaveDecorationLayout");
                 utils.setScriptVar(self, SCRIPTVAR_SAVE_RESTORE_DECORATION_SUI_ID, pid);
             }
-            else 
+            else
             {
                 int pid = sui.inputbox(self, self, "Enter an optional (40 characters max) description for the decoration layout that will be saved in slot " + saveSlotId + ".", "Save Decoration Layout", "handleSaveDecorationLayoutEnterDescription", 39, false, "");
                 setSUIProperty(pid, sui.INPUTBOX_INPUT, "MaxLength", String.valueOf(39));
@@ -3219,6 +3326,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleConfirmOverwriteSaveDecorationLayout(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, SCRIPTVAR_SAVE_RESTORE_DECORATION_SUI_ID))
@@ -3245,12 +3353,13 @@ public class player_building extends script.base_script
             utils.setScriptVar(self, SCRIPTVAR_SAVE_RESTORE_DECORATION_SAVE_SLOT_ID, saveSlotId);
             showSUIPage(pid);
         }
-        else 
+        else
         {
             messageTo(self, "handleSaveDecorationLayout", null, 0.1f, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSaveDecorationLayoutEnterDescription(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, SCRIPTVAR_SAVE_RESTORE_DECORATION_SUI_ID))
@@ -3280,7 +3389,7 @@ public class player_building extends script.base_script
             {
                 sendSystemMessage(self, "You must be standing inside a structure or POB ship to do this.", null);
             }
-            else 
+            else
             {
                 String description = sui.getInputBoxText(params);
                 if (description == null)
@@ -3290,40 +3399,35 @@ public class player_building extends script.base_script
                 saveDecorationLayout(self, structure, saveSlotId, description);
             }
         }
-        else 
+        else
         {
             messageTo(self, "handleSaveDecorationLayout", null, 0.1f, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void displayRestoreDecorationRoomMapping(obj_id player, String[] savedRooms, String[] targetRooms, int saveSlotId) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
         {
             return;
         }
-        String[] columnHeader = 
-        {
-            "Items that were in this room at the time the layout was saved",
-            "Will be moved/restored into this room"
-        };
-        String[] columnHeaderType = 
-        {
-            "text",
-            "text"
-        };
+        String[] columnHeader =
+                {
+                        "Items that were in this room at the time the layout was saved",
+                        "Will be moved/restored into this room"
+                };
+        String[] columnHeaderType =
+                {
+                        "text",
+                        "text"
+                };
         String[][] columnData = new String[2][0];
         String[] tempSavedRooms = new String[savedRooms.length + 1];
-        for (int i = 0; i < savedRooms.length; ++i)
-        {
-            tempSavedRooms[i] = savedRooms[i];
-        }
+        System.arraycopy(savedRooms, 0, tempSavedRooms, 0, savedRooms.length);
         tempSavedRooms[savedRooms.length] = "Restore Decoration Layout";
         String[] tempTargetRooms = new String[targetRooms.length + 1];
-        for (int i = 0; i < targetRooms.length; ++i)
-        {
-            tempTargetRooms[i] = targetRooms[i];
-        }
+        System.arraycopy(targetRooms, 0, tempTargetRooms, 0, targetRooms.length);
         tempTargetRooms[targetRooms.length] = "";
         columnData[0] = tempSavedRooms;
         columnData[1] = tempTargetRooms;
@@ -3332,6 +3436,7 @@ public class player_building extends script.base_script
         utils.setScriptVar(player, SCRIPTVAR_SAVE_RESTORE_DECORATION_SAVE_SLOT_ID, saveSlotId);
         utils.setScriptVar(player, SCRIPTVAR_RESTORE_DECORATION_TARGET_ROOMS, targetRooms);
     }
+
     public int handleRestoreDecorationLayout(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SCRIPTVAR_SAVE_RESTORE_DECORATION_SUI_ID))
@@ -3423,12 +3528,12 @@ public class player_building extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String[][] columnData = new String[numberOfSavedSlots][0];
-        int[] choicesSaveSlot = 
-        {
-            0,
-            0,
-            0
-        };
+        int[] choicesSaveSlot =
+                {
+                        0,
+                        0,
+                        0
+                };
         int choicesSaveSlotIndex = 0;
         if (saveSlot1 != null)
         {
@@ -3448,25 +3553,26 @@ public class player_building extends script.base_script
             choicesSaveSlot[choicesSaveSlotIndex] = 3;
             ++choicesSaveSlotIndex;
         }
-        String[] columnHeader = 
-        {
-            "Save Slot #",
-            "Structure/Ship Type",
-            "Save Time",
-            "Description"
-        };
-        String[] columnHeaderType = 
-        {
-            "integer",
-            "text",
-            "text",
-            "text"
-        };
+        String[] columnHeader =
+                {
+                        "Save Slot #",
+                        "Structure/Ship Type",
+                        "Save Time",
+                        "Description"
+                };
+        String[] columnHeaderType =
+                {
+                        "integer",
+                        "text",
+                        "text",
+                        "text"
+                };
         int pid = sui.tableRowMajor(self, self, sui.OK_CANCEL, "Restore Decoration Layout", "handleSelectRestoreDecorationLayout", "Select the decoration layout save slot you wish to restore.", columnHeader, columnHeaderType, columnData);
         utils.setScriptVar(self, SCRIPTVAR_SAVE_RESTORE_DECORATION_SUI_ID, pid);
         utils.setScriptVar(self, SCRIPTVAR_RESTORE_DECORATION_SAVE_SLOT_CHOICE, choicesSaveSlot);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSelectRestoreDecorationLayout(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, SCRIPTVAR_SAVE_RESTORE_DECORATION_SUI_ID))
@@ -3533,8 +3639,10 @@ public class player_building extends script.base_script
                 for (int i = 0; i < targetRooms.length; ++i)
                 {
                     boolean found = false;
-                    for (String s : roomsOfCurrentPob) {
-                        if (targetRooms[i].equals(s)) {
+                    for (String s : roomsOfCurrentPob)
+                    {
+                        if (targetRooms[i].equals(s))
+                        {
                             found = true;
                             break;
                         }
@@ -3545,14 +3653,16 @@ public class player_building extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 targetRooms = new String[savedRooms.length];
                 for (int i = 0; i < savedRooms.length; ++i)
                 {
                     boolean found = false;
-                    for (String s : roomsOfCurrentPob) {
-                        if (savedRooms[i].equals(s)) {
+                    for (String s : roomsOfCurrentPob)
+                    {
+                        if (savedRooms[i].equals(s))
+                        {
                             targetRooms[i] = savedRooms[i];
                             found = true;
                             break;
@@ -3568,6 +3678,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSelectRestoreDecorationRoomMapping(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, SCRIPTVAR_SAVE_RESTORE_DECORATION_SUI_ID))
@@ -3641,8 +3752,10 @@ public class player_building extends script.base_script
                         continue;
                     }
                     boolean found = false;
-                    for (String s : roomsOfCurrentPob) {
-                        if (targetRooms[i].equals(s)) {
+                    for (String s : roomsOfCurrentPob)
+                    {
+                        if (targetRooms[i].equals(s))
+                        {
                             hasValidTargetRoom = true;
                             found = true;
                             break;
@@ -3704,10 +3817,7 @@ public class player_building extends script.base_script
             }
             String[] roomsSelection = new String[roomsOfCurrentPob.length + 1];
             roomsSelection[0] = "do not move/restore items in room " + savedRooms[rowsSelected];
-            for (int i = 1; i < roomsSelection.length; ++i)
-            {
-                roomsSelection[i] = roomsOfCurrentPob[i - 1];
-            }
+            System.arraycopy(roomsOfCurrentPob, 0, roomsSelection, 1, roomsSelection.length - 1);
             int pid = sui.listbox(self, self, "Select the room into which you wish to move/restore the items that were in room " + savedRooms[rowsSelected] + " at the time the decoration layout was saved.", sui.OK_CANCEL, "Restore Decoration Layout", roomsSelection, "handleSelectRestoreDecorationTargetRoom", true, true);
             utils.setScriptVar(self, SCRIPTVAR_SAVE_RESTORE_DECORATION_SUI_ID, pid);
             utils.setScriptVar(self, SCRIPTVAR_SAVE_RESTORE_DECORATION_SAVE_SLOT_ID, saveSlotId);
@@ -3715,12 +3825,13 @@ public class player_building extends script.base_script
             utils.setScriptVar(self, SCRIPTVAR_RESTORE_DECORATION_TARGET_ROOM_INDEX, rowsSelected);
             utils.setScriptVar(self, SCRIPTVAR_RESTORE_DECORATION_CURRENT_POB_ROOMS, roomsSelection);
         }
-        else 
+        else
         {
             messageTo(self, "handleRestoreDecorationLayout", null, 0.1f, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRestoreDecorationReturnToRoomMapping(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, SCRIPTVAR_SAVE_RESTORE_DECORATION_SUI_ID))
@@ -3761,6 +3872,7 @@ public class player_building extends script.base_script
         displayRestoreDecorationRoomMapping(self, savedRooms, targetRooms, saveSlotId);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSelectRestoreDecorationTargetRoom(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, SCRIPTVAR_SAVE_RESTORE_DECORATION_SUI_ID))
@@ -3824,7 +3936,7 @@ public class player_building extends script.base_script
                 {
                     targetRooms[targetRoomIndex] = "(will not be moved/restored)";
                 }
-                else 
+                else
                 {
                     targetRooms[targetRoomIndex] = roomsOfCurrentPob[rowsSelected];
                 }
@@ -3833,6 +3945,7 @@ public class player_building extends script.base_script
         displayRestoreDecorationRoomMapping(self, savedRooms, targetRooms, saveSlotId);
         return SCRIPT_CONTINUE;
     }
+
     public int handleVendorTypeSelect(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -3858,117 +3971,127 @@ public class player_building extends script.base_script
             return SCRIPT_CONTINUE;
         }
         blog("player_building.handleVendorTypeSelect: idx: " + idx);
-        String[] randomOnly = 
-        {
-            "@player_structure:random"
-        };
+        String[] randomOnly =
+                {
+                        "@player_structure:random"
+                };
         utils.setScriptVar(player, "vendor.checkGender", 0);
         int hiringMod = getSkillStatMod(player, "hiring");
         blog("handleVendorTypeSelect - hiringMod: " + hiringMod);
         switch (idx)
         {
             case 0:
-            blog("player_building.handleVendorTypeSelect: selected TERMINAL VENDOR TYPE: ");
-            String[] rawTerminalTypes = dataTableGetStringColumn(TBL_TERMINAL_TYPES, 0);
-            int test = 10;
-            Vector vendorTypes = new Vector();
-            vendorTypes.setSize(0);
-                for (String rawTerminalType : rawTerminalTypes) {
-                    if (hiringMod >= test) {
+                blog("player_building.handleVendorTypeSelect: selected TERMINAL VENDOR TYPE: ");
+                String[] rawTerminalTypes = dataTableGetStringColumn(TBL_TERMINAL_TYPES, 0);
+                int test = 10;
+                Vector vendorTypes = new Vector();
+                vendorTypes.setSize(0);
+                for (String rawTerminalType : rawTerminalTypes)
+                {
+                    if (hiringMod >= test)
+                    {
                         vendorTypes = utils.addElement(vendorTypes, "@player_structure:terminal_" + rawTerminalType);
                     }
                     test += 20;
                 }
-            sui.listbox(player, player, "@player_structure:terminal_type_d", sui.OK_CANCEL, "@player_structure:terminal_type_t", vendorTypes, "handleTerminalDesignSelect", true);
-            break;
+                sui.listbox(player, player, "@player_structure:terminal_type_d", sui.OK_CANCEL, "@player_structure:terminal_type_t", vendorTypes, "handleTerminalDesignSelect", true);
+                break;
             case 1:
-            blog("player_building.handleVendorTypeSelect: selected TERMINAL DROID TYPE: ");
-            String[] rawDroidTypes = dataTableGetStringColumn(TBL_DROID_TYPES, 0);
-            int dtest = 20;
-            Vector droidTypes = null;
-                for (String rawDroidType : rawDroidTypes) {
-                    if (hiringMod >= dtest) {
+                blog("player_building.handleVendorTypeSelect: selected TERMINAL DROID TYPE: ");
+                String[] rawDroidTypes = dataTableGetStringColumn(TBL_DROID_TYPES, 0);
+                int dtest = 20;
+                Vector droidTypes = null;
+                for (String rawDroidType : rawDroidTypes)
+                {
+                    if (hiringMod >= dtest)
+                    {
                         droidTypes = utils.addElement(droidTypes, "@player_structure:droid_" + rawDroidType);
                     }
                     dtest += 20;
                 }
-            sui.listbox(player, player, "@player_structure:droid_type_d", sui.OK_CANCEL, "@player_structure:droid_type_t", droidTypes, "handleDroidModelSelect", true);
-            break;
-            case 2:
-            blog("player_building.handleVendorTypeSelect: selected TERMINAL NPC TYPE: ");
-            if (hiringMod < 50)
-            {
-                blog("player_building.handleVendorTypeSelect: player hiringMod < 50");
-                sui.listbox(player, player, "@player_structure:race_type_d", sui.OK_CANCEL, "@player_structure:race_type_t", randomOnly, "handleVendorRaceSelect", true);
+                sui.listbox(player, player, "@player_structure:droid_type_d", sui.OK_CANCEL, "@player_structure:droid_type_t", droidTypes, "handleDroidModelSelect", true);
                 break;
-            }
-            else 
-            {
-                blog("player_building.handleVendorTypeSelect: player hiringMod > 50");
-                String[] allSpecialVendors = getSpecialVendors(self, hiringMod);
-                blog("player_building.handleVendorTypeSelect: allSpecialVendors.length: " + allSpecialVendors.length);
-                Vector localizedRaceTypes = new Vector();
-                localizedRaceTypes.setSize(0);
-                Vector modifiedRawRaceTypes = new Vector();
-                modifiedRawRaceTypes.setSize(0);
-                if (hiringMod >= 60)
+            case 2:
+                blog("player_building.handleVendorTypeSelect: selected TERMINAL NPC TYPE: ");
+                if (hiringMod < 50)
                 {
-                    blog("player_building.handleVendorTypeSelect: player hiringMod >= 60");
-                    String[] rawRaceTypesHiLvl = dataTableGetStringColumn(TBL_ALLNPC_TYPES, 0);
-                    if (rawRaceTypesHiLvl == null)
-                    {
-                        break;
-                    }
-                    for (String s : rawRaceTypesHiLvl) {
-                        utils.addElement(localizedRaceTypes, "@player_structure:race_" + s);
-                        utils.addElement(modifiedRawRaceTypes, s);
-                    }
-                    utils.setScriptVar(self, "vendor.checkGender", 1);
-                }
-                else 
-                {
-                    String[] rawRaceTypesLowLvl = dataTableGetStringColumn(TBL_PLAYER_TYPES, 0);
-                    if (rawRaceTypesLowLvl == null)
-                    {
-                        break;
-                    }
-                    for (String s : rawRaceTypesLowLvl) {
-                        utils.addElement(localizedRaceTypes, "@player_structure:race_" + s);
-                        utils.addElement(modifiedRawRaceTypes, s);
-                    }
-                }
-                if (allSpecialVendors != null)
-                {
-                    for (String allSpecialVendor : allSpecialVendors) {
-                        utils.addElement(localizedRaceTypes, "@player_structure:race_" + allSpecialVendor);
-                        utils.addElement(modifiedRawRaceTypes, allSpecialVendor);
-                    }
-                    utils.setScriptVar(self, "vendor.checkGender", 1);
-                }
-                if (localizedRaceTypes == null || modifiedRawRaceTypes == null)
-                {
+                    blog("player_building.handleVendorTypeSelect: player hiringMod < 50");
+                    sui.listbox(player, player, "@player_structure:race_type_d", sui.OK_CANCEL, "@player_structure:race_type_t", randomOnly, "handleVendorRaceSelect", true);
                     break;
                 }
-                utils.setScriptVar(player, "vendor.races", modifiedRawRaceTypes);
-                sui.listbox(self, self, "@player_structure:race_type_d", sui.OK_CANCEL, "@player_structure:race_type_t", localizedRaceTypes, "handleVendorRaceSelect", true);
-            }
-            break;
+                else
+                {
+                    blog("player_building.handleVendorTypeSelect: player hiringMod > 50");
+                    String[] allSpecialVendors = getSpecialVendors(self, hiringMod);
+                    blog("player_building.handleVendorTypeSelect: allSpecialVendors.length: " + allSpecialVendors.length);
+                    Vector localizedRaceTypes = new Vector();
+                    localizedRaceTypes.setSize(0);
+                    Vector modifiedRawRaceTypes = new Vector();
+                    modifiedRawRaceTypes.setSize(0);
+                    if (hiringMod >= 60)
+                    {
+                        blog("player_building.handleVendorTypeSelect: player hiringMod >= 60");
+                        String[] rawRaceTypesHiLvl = dataTableGetStringColumn(TBL_ALLNPC_TYPES, 0);
+                        if (rawRaceTypesHiLvl == null)
+                        {
+                            break;
+                        }
+                        for (String s : rawRaceTypesHiLvl)
+                        {
+                            utils.addElement(localizedRaceTypes, "@player_structure:race_" + s);
+                            utils.addElement(modifiedRawRaceTypes, s);
+                        }
+                        utils.setScriptVar(self, "vendor.checkGender", 1);
+                    }
+                    else
+                    {
+                        String[] rawRaceTypesLowLvl = dataTableGetStringColumn(TBL_PLAYER_TYPES, 0);
+                        if (rawRaceTypesLowLvl == null)
+                        {
+                            break;
+                        }
+                        for (String s : rawRaceTypesLowLvl)
+                        {
+                            utils.addElement(localizedRaceTypes, "@player_structure:race_" + s);
+                            utils.addElement(modifiedRawRaceTypes, s);
+                        }
+                    }
+                    if (allSpecialVendors != null)
+                    {
+                        for (String allSpecialVendor : allSpecialVendors)
+                        {
+                            utils.addElement(localizedRaceTypes, "@player_structure:race_" + allSpecialVendor);
+                            utils.addElement(modifiedRawRaceTypes, allSpecialVendor);
+                        }
+                        utils.setScriptVar(self, "vendor.checkGender", 1);
+                    }
+                    if (localizedRaceTypes == null || modifiedRawRaceTypes == null)
+                    {
+                        break;
+                    }
+                    utils.setScriptVar(player, "vendor.races", modifiedRawRaceTypes);
+                    sui.listbox(self, self, "@player_structure:race_type_d", sui.OK_CANCEL, "@player_structure:race_type_t", localizedRaceTypes, "handleVendorRaceSelect", true);
+                }
+                break;
             default:
-            String[] defaultTerminalTypes = dataTableGetStringColumn(TBL_TERMINAL_TYPES, 0);
-            int hireVar = 10;
-            Vector defaultVendorTypes = new Vector();
-            defaultVendorTypes.setSize(0);
-                for (String defaultTerminalType : defaultTerminalTypes) {
-                    if (hiringMod >= hireVar) {
+                String[] defaultTerminalTypes = dataTableGetStringColumn(TBL_TERMINAL_TYPES, 0);
+                int hireVar = 10;
+                Vector defaultVendorTypes = new Vector();
+                defaultVendorTypes.setSize(0);
+                for (String defaultTerminalType : defaultTerminalTypes)
+                {
+                    if (hiringMod >= hireVar)
+                    {
                         vendorTypes = utils.addElement(defaultVendorTypes, "@player_structure:terminal_" + defaultTerminalType);
                     }
                     hireVar += 20;
                 }
-            sui.listbox(player, player, "@player_structure:terminal_type_d", sui.OK_CANCEL, "@player_structure:terminal_type_t", defaultVendorTypes, "handleTerminalDesignSelect", true);
-            break;
+                sui.listbox(player, player, "@player_structure:terminal_type_d", sui.OK_CANCEL, "@player_structure:terminal_type_t", defaultVendorTypes, "handleTerminalDesignSelect", true);
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTerminalDesignSelect(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -3989,6 +4112,7 @@ public class player_building extends script.base_script
         sui.inputbox(player, player, "@player_structure:name_d", sui.OK_CANCEL, "@player_structure:name_t", sui.INPUT_NORMAL, null, "handleSetVendorName", null);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDroidModelSelect(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -4009,6 +4133,7 @@ public class player_building extends script.base_script
         sui.inputbox(player, player, "@player_structure:name_d", sui.OK_CANCEL, "@player_structure:name_t", sui.INPUT_NORMAL, null, "handleSetVendorName", null);
         return SCRIPT_CONTINUE;
     }
+
     public int handleVendorRaceSelect(obj_id self, dictionary params) throws InterruptedException
     {
         blog("player_building.handleVendorRaceSelect: init");
@@ -4062,7 +4187,7 @@ public class player_building extends script.base_script
                 {
                     utils.setScriptVar(player, "vendor.special_vendor_basic", 1);
                 }
-                else 
+                else
                 {
                     utils.setScriptVar(player, "vendor.special_vendor_basic", 0);
                 }
@@ -4072,7 +4197,7 @@ public class player_building extends script.base_script
                 {
                     utils.setScriptVar(player, "vendor.special_vendor_clothing", 1);
                 }
-                else 
+                else
                 {
                     utils.setScriptVar(player, "vendor.special_vendor_clothing", 0);
                 }
@@ -4113,7 +4238,7 @@ public class player_building extends script.base_script
                     utils.setScriptVar(player, "vendor.gender.male_only_no_female", false);
                 }
             }
-            else 
+            else
             {
                 blog("player_building.handleVendorRaceSelect: NOT A Special Vendor");
                 int row = dataTableSearchColumnForString(raceChosen, "VENDOR_TYPES", TBL_ALLNPC_TYPES);
@@ -4126,7 +4251,7 @@ public class player_building extends script.base_script
                     utils.setScriptVar(player, "vendor.genderIndex", 0);
                     utils.setScriptVar(player, "vendor.gender.male_only_no_female", true);
                 }
-                else 
+                else
                 {
                     blog("player_building.handleVendorRaceSelect: Female exists, we'll need to decide which gender");
                     utils.setScriptVar(player, "vendor.genderIndex", 1);
@@ -4146,14 +4271,15 @@ public class player_building extends script.base_script
         utils.setScriptVar(player, "vendor.gender.female_only_no_male", false);
         utils.setScriptVar(player, "vendor.gender.male_only_no_female", false);
         blog("player_building.handleVendorRaceSelect: Setting female and male only to false");
-        String[] possibleNPCGender = 
-        {
-            "@player_structure:male",
-            "@player_structure:female"
-        };
+        String[] possibleNPCGender =
+                {
+                        "@player_structure:male",
+                        "@player_structure:female"
+                };
         sui.listbox(player, player, "@player_structure:gender_d", sui.OK_CANCEL, "@player_structure:gender_t", possibleNPCGender, "handleVendorGenderSelect", true);
         return SCRIPT_CONTINUE;
     }
+
     public int handleVendorGenderSelect(obj_id self, dictionary params) throws InterruptedException
     {
         blog("player_building.handleVendorGenderSelect: init");
@@ -4179,6 +4305,7 @@ public class player_building extends script.base_script
         sui.inputbox(player, player, "@player_structure:name_d", sui.OK_CANCEL, "@player_structure:name_t", sui.INPUT_NORMAL, null, "handleSetVendorName", null);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetVendorName(obj_id self, dictionary params) throws InterruptedException
     {
         blog("player_building.handleSetVendorName: init");
@@ -4210,6 +4337,7 @@ public class player_building extends script.base_script
         messageTo(player, "buildVendor", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int buildVendor(obj_id self, dictionary params) throws InterruptedException
     {
         blog("player_building.buildVendor: init");
@@ -4421,6 +4549,7 @@ public class player_building extends script.base_script
         sendSystemMessage(player, SID_SYS_CREATE_SUCCESS);
         return SCRIPT_CONTINUE;
     }
+
     public int msgAssignDroid(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::msgAssignDroid --" + self);
@@ -4477,7 +4606,7 @@ public class player_building extends script.base_script
                         {
                             prose.setTO(ppDroidAssigned, getStringObjVar(structure, player_structure.VAR_SIGN_NAME));
                         }
-                        else 
+                        else
                         {
                             prose.setTO(ppDroidAssigned, structure);
                         }
@@ -4490,6 +4619,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int turnstileExpire(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -4509,6 +4639,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgEnterPermissions(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::msgEnterPermissions--" + params);
@@ -4525,7 +4656,7 @@ public class player_building extends script.base_script
             {
                 enter_list = player_structure.getCompleteEntryList(structure);
             }
-            else 
+            else
             {
                 enter_list = player_structure.getEntryList(structure);
             }
@@ -4534,6 +4665,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgBanPermissions(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::msgBanPermissions--" + params);
@@ -4551,6 +4683,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgAdminPermissions(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::msgAdminPermissions--" + params);
@@ -4568,6 +4701,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgVendorPermissions(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::msgVendorPermissions--" + params);
@@ -4585,6 +4719,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgHopperPermissions(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::msgHopperPermissions--" + params);
@@ -4602,6 +4737,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgPayMaintenance(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::msgPayMaintenance --" + self);
@@ -4631,12 +4767,13 @@ public class player_building extends script.base_script
         {
             queueCommand(self, (-404530384), target, Integer.toString(amt), COMMAND_PRIORITY_DEFAULT);
         }
-        else 
+        else
         {
             queueCommand(self, (-404530384), null, Integer.toString(amt), COMMAND_PRIORITY_DEFAULT);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgAddPower(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::msgAddPower --" + self);
@@ -4660,6 +4797,7 @@ public class player_building extends script.base_script
         queueCommand(self, (-1893504550), null, Integer.toString(amt), COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int msgDepositPowerIncubator(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = utils.getObjIdScriptVar(self, "depositPowerIncubator.target");
@@ -4683,6 +4821,7 @@ public class player_building extends script.base_script
         queueCommand(self, (1833062743), target, Integer.toString(amt), COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int msgWithdrawMaintenance(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::msgWithdrawMaintenance --" + self);
@@ -4693,6 +4832,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgNameStructure(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::msgNameStructure --" + self);
@@ -4711,6 +4851,7 @@ public class player_building extends script.base_script
         queueCommand(self, (-1016613791), null, name, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAddStructure(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::OnAddStructure");
@@ -4726,6 +4867,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnRemoveStructure(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::OnRemoveStructure");
@@ -4738,23 +4880,28 @@ public class player_building extends script.base_script
             destroyWaypointInDatapad(waypoint, self);
         }
         obj_id[] callables = callable.getDatapadCallablesByType(self, callable.CALLABLE_TYPE_COMBAT_PET);
-        if (callables == null || callables.length <= 0)
+        if (callables == null)
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id c : callables) {
-            if (!isIdValid(c) || !exists(c)) {
+        for (obj_id c : callables)
+        {
+            if (!isIdValid(c) || !exists(c))
+            {
                 continue;
             }
-            if (!hasObjVar(c, "module_data.maint_list.ids")) {
+            if (!hasObjVar(c, "module_data.maint_list.ids"))
+            {
                 continue;
             }
             obj_id[] struct_list = getObjIdArrayObjVar(c, "module_data.maint_list.ids");
-            if (struct_list == null || struct_list.length <= 0) {
+            if (struct_list == null || struct_list.length <= 0)
+            {
                 continue;
             }
             int structureIndex = utils.getElementPositionInArray(struct_list, structure);
-            if (structureIndex < 0) {
+            if (structureIndex < 0)
+            {
                 continue;
             }
             obj_id droid = callable.getCDCallable(c);
@@ -4762,12 +4909,14 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAdjustLotCount(obj_id self, dictionary params) throws InterruptedException
     {
         int numLots = params.getInt("lotAdjust");
         adjustLotCount(getPlayerObject(self), numLots);
         return SCRIPT_CONTINUE;
     }
+
     public int OnClearConfirmDestroy(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::OnClearConfirmDestroy");
@@ -4777,6 +4926,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnConstructionComplete(obj_id self, dictionary params) throws InterruptedException
     {
         string_id structure_name = params.getStringId("structure_name");
@@ -4786,12 +4936,13 @@ public class player_building extends script.base_script
         pp_msg.actor.set(self);
         pp_msg.other.set(structure_name);
         pp_msg.digitInteger = ((lots_remaining >= 0) ? lots_remaining : -lots_remaining);
-        String send_msg = "@" + SID_CONSTRUCTION_COMPLETE_SENDER.toString();
-        String subject_str = "@" + SID_CONSTRUCTION_COMPLETE_SUBJECT.toString();
+        String send_msg = "@" + SID_CONSTRUCTION_COMPLETE_SENDER;
+        String subject_str = "@" + SID_CONSTRUCTION_COMPLETE_SUBJECT;
         String body_msg = chatMakePersistentMessageOutOfBandBody(null, pp_msg);
         chatSendPersistentMessage(send_msg, getFirstName(self), subject_str, null, body_msg);
         return SCRIPT_CONTINUE;
     }
+
     public int msgPAWithdrawSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -4804,11 +4955,13 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgPAWithdrawFail(obj_id self, dictionary params) throws InterruptedException
     {
         sendSystemMessage(self, new string_id(STF, "withdrawal_failed"));
         return SCRIPT_CONTINUE;
     }
+
     public int handleStatusUi(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = utils.getObjIdScriptVar(self, "player_structure.status.target");
@@ -4822,13 +4975,13 @@ public class player_building extends script.base_script
             {
                 sendSystemMessage(self, new string_id(STF, "no_valid_structurestatus"));
             }
-            else 
+            else
             {
                 if (newTarget == target)
                 {
                     queueCommand(self, (335013253), fromScd ? newTarget : null, "", COMMAND_PRIORITY_DEFAULT);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(self, new string_id(STF, "changed_structurestatus"));
                 }
@@ -4836,6 +4989,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroyUi(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "player_structure.destroy.pid");
@@ -4861,7 +5015,7 @@ public class player_building extends script.base_script
             string_id will_redeed_confirm_text = new string_id(STF, "will_redeed_confirm");
             prompt += colors_hex.HEADER + colors_hex.LIMEGREEN + getString(will_redeed_confirm_text);
         }
-        else 
+        else
         {
             string_id will_not_redeed_confirm_text = new string_id(STF, "will_not_redeed_confirm");
             prompt += colors_hex.HEADER + colors_hex.TOMATO + getString(will_not_redeed_confirm_text);
@@ -4885,6 +5039,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroyConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "player_structure.destroy.pid");
@@ -4918,24 +5073,26 @@ public class player_building extends script.base_script
                 utils.setScriptVar(self, "player_structure.destroy.barn_text", text);
                 sui.showSUIPage(pid);
             }
-            else 
+            else
             {
                 utils.setScriptVar(self, player_structure.VAR_CONFIRM_DESTROY, target);
                 sendSystemMessage(self, new string_id(STF, "processing_destruction"));
                 queueCommand(self, (419174182), null, text, COMMAND_PRIORITY_DEFAULT);
             }
         }
-        else 
+        else
         {
             sui.msgbox(self, "@player_structure:incorrect_destroy_code");
             utils.removeScriptVarTree(self, "player_structure.destroy");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroyBarnAndBeastsConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerStructurePackupLockout(obj_id self, dictionary params) throws InterruptedException
     {
         if (!params.containsKey("house"))
@@ -4960,12 +5117,14 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerStructurePackupLockoutRemoval(obj_id self, dictionary params) throws InterruptedException
     {
         blog("player_buidling.handlePlayerStructurePackupLockoutRemoval() Message received by player to remove lockout timer.");
         utils.removeScriptVarTree(self, player_structure.SCRIPTVAR_HOUSE_PACKUP_TREE_PREFIX);
         return SCRIPT_CONTINUE;
     }
+
     public int handleFailedStructurePackup(obj_id self, dictionary params) throws InterruptedException
     {
         blog("player_buidling.handleFailedStructurePackup() Message received by player to handle failed packup.");
@@ -4977,6 +5136,7 @@ public class player_building extends script.base_script
         CustomerServiceLog("housepackup", "Player: " + getPlayerName(self) + " (" + self + ") has" + " had lockout timer removed early due to structure packup problems.");
         return SCRIPT_CONTINUE;
     }
+
     public int callAirStrikePackAbandonedStructure(obj_id self, dictionary params) throws InterruptedException
     {
         blog("player_buidling.callAirStrikePackAbandonedStructure() Message received by player to send animation, tally success.");
@@ -5012,6 +5172,7 @@ public class player_building extends script.base_script
         blog("player_buidling.callAirStrikePackAbandonedStructure() The animation will eventually play.");
         return SCRIPT_CONTINUE;
     }
+
     public int msgConfirmHousePackup(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "packup.structure"))
@@ -5049,6 +5210,7 @@ public class player_building extends script.base_script
         messageTo(self, "msgFinalizePackup", params, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFinalizePackup(obj_id self, dictionary params) throws InterruptedException
     {
         blog("player_building.msgFinalizePackup() init!");
@@ -5079,6 +5241,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int packUpCityAbandonedStructure(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -5115,6 +5278,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgConfirmVendorPackup(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "packup.vendor"))
@@ -5141,6 +5305,7 @@ public class player_building extends script.base_script
         vendor_lib.finalizePackUp(vendorOwner, vendor, self, false);
         return SCRIPT_CONTINUE;
     }
+
     public int getVendorInfoForPlayerRsp(obj_id self, dictionary params) throws InterruptedException
     {
         String summary = params.getString("summary");
@@ -5213,38 +5378,38 @@ public class player_building extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        String[] columnHeader = 
-        {
-            "Name",
-            "Location",
-            "Status",
-            "Active Items",
-            "Stockroom Items",
-            "Offered Items",
-            "% Tax",
-            "Tax City",
-            "Searchable",
-            "Entrance Fee",
-            "Last Access Date",
-            "Empty Date",
-            "Inactive Date"
-        };
-        String[] columnHeaderType = 
-        {
-            "text",
-            "text",
-            "text",
-            "integer",
-            "integer",
-            "integer",
-            "integer",
-            "text",
-            "text",
-            "integer",
-            "text",
-            "text",
-            "text"
-        };
+        String[] columnHeader =
+                {
+                        "Name",
+                        "Location",
+                        "Status",
+                        "Active Items",
+                        "Stockroom Items",
+                        "Offered Items",
+                        "% Tax",
+                        "Tax City",
+                        "Searchable",
+                        "Entrance Fee",
+                        "Last Access Date",
+                        "Empty Date",
+                        "Inactive Date"
+                };
+        String[] columnHeaderType =
+                {
+                        "text",
+                        "text",
+                        "text",
+                        "integer",
+                        "integer",
+                        "integer",
+                        "integer",
+                        "text",
+                        "text",
+                        "integer",
+                        "text",
+                        "text",
+                        "text"
+                };
         String[][] columnData = new String[13][0];
         columnData[0] = name;
         columnData[1] = location;
@@ -5262,6 +5427,7 @@ public class player_building extends script.base_script
         sui.tableColumnMajor(self, self, sui.OK_ONLY, "Vendor Information", null, summary, columnHeader, columnHeaderType, columnData, true);
         return SCRIPT_CONTINUE;
     }
+
     public boolean isMoveCommandValid(obj_id player, obj_id target) throws InterruptedException
     {
         int city_id = getCityAtLocation(getLocation(player), 0);
@@ -5333,8 +5499,10 @@ public class player_building extends script.base_script
         obj_id[] base_objects = player_structure.getStructureBaseObjects(structure);
         if (base_objects != null)
         {
-            for (obj_id base_object : base_objects) {
-                if (target == base_object) {
+            for (obj_id base_object : base_objects)
+            {
+                if (target == base_object)
+                {
                     LOG("LOG_CHANNEL", player + " -> You cannot move that object.");
                     sendSystemMessage(player, new string_id(STF, "cant_move_item"));
                     return false;
@@ -5343,17 +5511,21 @@ public class player_building extends script.base_script
         }
         return true;
     }
+
     public String getCellName(obj_id building, obj_id cell) throws InterruptedException
     {
         String[] cellNames = getCellNames(building);
-        for (String cellName : cellNames) {
+        for (String cellName : cellNames)
+        {
             obj_id thisCell = getCellId(building, cellName);
-            if (thisCell == cell) {
+            if (thisCell == cell)
+            {
                 return cellName;
             }
         }
         return "";
     }
+
     public boolean canPlaceCivic(obj_id player, obj_id deed, location position, String template) throws InterruptedException
     {
         int city_id = getCityAtLocation(position, 0);
@@ -5362,12 +5534,9 @@ public class player_building extends script.base_script
             return false;
         }
         obj_id mayor = cityGetLeader(city_id);
-        if (mayor != player)
-        {
-            return false;
-        }
-        return true;
+        return mayor == player;
     }
+
     public boolean canPlaceUnique(obj_id player, obj_id deed, location position, String template) throws InterruptedException
     {
         int city_id = getCityAtLocation(position, 0);
@@ -5378,14 +5547,7 @@ public class player_building extends script.base_script
         if (player_structure.isShuttleportTemplate(template))
         {
             int travelCost = cityGetTravelCost(city_id);
-            if (travelCost > 0)
-            {
-                return false;
-            }
-            else 
-            {
-                return true;
-            }
+            return travelCost <= 0;
         }
         else if (player_structure.isCloneTemplate(template))
         {
@@ -5393,20 +5555,23 @@ public class player_building extends script.base_script
             if (isIdValid(clone))
             {
                 obj_id[] structures = cityGetStructureIds(city_id);
-                for (obj_id structure : structures) {
-                    if ((structure == clone) && (structure != null)) {
+                for (obj_id structure : structures)
+                {
+                    if ((structure == clone) && (structure != null))
+                    {
                         return false;
                     }
                 }
                 return true;
             }
-            else 
+            else
             {
                 return true;
             }
         }
         return true;
     }
+
     public boolean confirmDestroyTarget(obj_id structure, obj_id target) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -5422,6 +5587,7 @@ public class player_building extends script.base_script
         }
         return true;
     }
+
     public boolean isFactionBaseEmpty(obj_id base, obj_id player) throws InterruptedException
     {
         if (!hasScript(base, "faction_perk.hq.loader"))
@@ -5433,12 +5599,9 @@ public class player_building extends script.base_script
         {
             return true;
         }
-        if (players.length > 1)
-        {
-            return false;
-        }
-        return true;
+        return players.length <= 1;
     }
+
     public boolean removeVendorVars(obj_id self) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -5450,6 +5613,7 @@ public class player_building extends script.base_script
         blog("player_building.removeVendorVars: removed VENDOR_VAR_PREFIX Vars ");
         return true;
     }
+
     public boolean handleVendorTypeSelect(obj_id self) throws InterruptedException
     {
         blog("player_building:handleVendorTypeSelect() - about to requestPlayerVendorCount");
@@ -5466,6 +5630,7 @@ public class player_building extends script.base_script
         requestPlayerVendorCount(self);
         return true;
     }
+
     public boolean validateVendorPlacement(obj_id self) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -5486,6 +5651,7 @@ public class player_building extends script.base_script
         blog("player_building:validateVendorPlacement() - Everything is good, player can place.");
         return true;
     }
+
     public String[] getSpecialVendors(obj_id self, int hireMod) throws InterruptedException
     {
         blog("player_building.getSpecialVendors: init");
@@ -5572,6 +5738,7 @@ public class player_building extends script.base_script
         }
         return _allSpecialVendors;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))
@@ -5580,6 +5747,7 @@ public class player_building extends script.base_script
         }
         return true;
     }
+
     public int pickupAllRoomItemsIntoInventory(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);
@@ -5605,6 +5773,7 @@ public class player_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dropAllInventoryItemsIntoRoom(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);

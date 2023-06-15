@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.badge;
@@ -8,44 +14,44 @@ import script.library.utils;
 
 public class loveday_ewok_cupid extends script.base_script
 {
+    public static String c_stringFile = "conversation/loveday_ewok_cupid";
+
     public loveday_ewok_cupid()
     {
     }
-    public static String c_stringFile = "conversation/loveday_ewok_cupid";
+
     public boolean loveday_ewok_cupid_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean loveday_ewok_cupid_condition_alreadyHasBadge(obj_id player, obj_id npc) throws InterruptedException
     {
         return badge.hasBadge(player, "loveday_cupid_badge_23");
     }
+
     public boolean loveday_ewok_cupid_condition_hasCardBundle(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id lovedayCardBundle = utils.getStaticItemInInventory(player, "item_event_loveday_card_stack");
-        if (isIdValid(lovedayCardBundle))
-        {
-            return true;
-        }
-        return false;
+        return isIdValid(lovedayCardBundle);
     }
+
     public boolean loveday_ewok_cupid_condition_hasChakHearts(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id lovedayCardBundle = utils.getStaticItemInInventory(player, "item_event_loveday_chak_heart");
-        if (isIdValid(lovedayCardBundle) && getCount(lovedayCardBundle) >= 2)
-        {
-            return true;
-        }
-        return false;
+        return isIdValid(lovedayCardBundle) && getCount(lovedayCardBundle) >= 2;
     }
+
     public boolean loveday_ewok_cupid_condition_preparingToLeave(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(npc, "preparingForDespawn");
     }
+
     public boolean loveday_ewok_cupid_condition_preparingToLeave_hasBadge(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(npc, "preparingForDespawn") && badge.hasBadge(player, "loveday_cupid_badge_23");
     }
+
     public void loveday_ewok_cupid_action_hearts_grantCupidBadge(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id lovedayChakHearts = utils.getStaticItemInInventory(player, "item_event_loveday_chak_heart");
@@ -62,8 +68,8 @@ public class loveday_ewok_cupid extends script.base_script
                 modifyCollectionSlotValue(player, "loveday_2023_found_kyoopid", 1);
             }
         }
-        return;
     }
+
     public void loveday_ewok_cupid_action_cards_grantCupidBadge(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id lovedayCardBundle = utils.getStaticItemInInventory(player, "item_event_loveday_card_stack");
@@ -76,16 +82,16 @@ public class loveday_ewok_cupid extends script.base_script
                 modifyCollectionSlotValue(player, "loveday_2023_found_kyoopid", 1);
             }
         }
-        return;
     }
+
     public void loveday_ewok_cupid_action_grant_collectionSlot(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasCompletedCollectionSlot(player, "loveday_2023_found_kyoopid"))
         {
             modifyCollectionSlotValue(player, "loveday_2023_found_kyoopid", 1);
         }
-        return;
     }
+
     public int loveday_ewok_cupid_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_12"))
@@ -120,7 +126,7 @@ public class loveday_ewok_cupid extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_19");
@@ -137,7 +143,7 @@ public class loveday_ewok_cupid extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_ewok_cupid.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -157,6 +163,7 @@ public class loveday_ewok_cupid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int loveday_ewok_cupid_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_19"))
@@ -211,6 +218,7 @@ public class loveday_ewok_cupid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -221,18 +229,21 @@ public class loveday_ewok_cupid extends script.base_script
         setCondition(self, CONDITION_HOLIDAY_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_HOLIDAY_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int prepareForDespawn(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "preparingForDespawn", true);
         messageTo(self, "handleMyDespawn", null, 180, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMyDespawn(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
@@ -240,19 +251,22 @@ public class loveday_ewok_cupid extends script.base_script
         messageTo(self, "handleDestroySelf", null, 0.25f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("idiot", "Loveday Cupid Conversation: handleDestroySelf called... ");
         obj_id[] players = getPlayerCreaturesInRange(getLocation(self), 20.0f);
-        if (players != null && players.length > 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 npcEndConversation(player);
             }
         }
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -262,6 +276,7 @@ public class loveday_ewok_cupid extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
@@ -269,12 +284,14 @@ public class loveday_ewok_cupid extends script.base_script
         detachScript(self, "conversation.loveday_ewok_cupid");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -324,7 +341,7 @@ public class loveday_ewok_cupid extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_12");
@@ -336,7 +353,7 @@ public class loveday_ewok_cupid extends script.base_script
                 utils.setScriptVar(player, "conversation.loveday_ewok_cupid.branchId", 4);
                 npcStartConversation(player, npc, "loveday_ewok_cupid", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -345,6 +362,7 @@ public class loveday_ewok_cupid extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("loveday_ewok_cupid"))

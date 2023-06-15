@@ -1,5 +1,11 @@
 package script.systems.crafting.droid.crafted_items;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -64,6 +70,7 @@ public class crafting_interplanetary_survey_droid extends script.systems.craftin
                                     new resource_weight.weight(craftinglib.RESOURCE_TOUGHNESS, 1)
                             })
             };
+
     public crafting_interplanetary_survey_droid()
     {
     }

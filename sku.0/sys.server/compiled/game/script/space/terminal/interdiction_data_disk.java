@@ -1,26 +1,33 @@
 package script.space.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.static_item;
 import script.library.utils;
 import script.*;
 
 public class interdiction_data_disk extends script.base_script
 {
+    public static final string_id SID_READY_ITEM = new string_id("space/space_terminal", "encode_item");
+    public static final String[] VALID_REGIONS =
+            {
+                    "space_tatooine",
+                    "space_corellia",
+                    "space_dantooine",
+                    "space_dathomir",
+                    "space_endor",
+                    "space_lok",
+                    "space_naboo",
+                    "space_yavin4"
+            };
     public interdiction_data_disk()
     {
     }
-    public static final string_id SID_READY_ITEM = new string_id("space/space_terminal", "encode_item");
-    public static final String[] VALID_REGIONS = 
-    {
-        "space_tatooine",
-        "space_corellia",
-        "space_dantooine",
-        "space_dathomir",
-        "space_endor",
-        "space_lok",
-        "space_naboo",
-        "space_yavin4"
-    };
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -41,6 +48,7 @@ public class interdiction_data_disk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -54,6 +62,7 @@ public class interdiction_data_disk extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_READY_ITEM);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self) || item <= 0)
@@ -76,6 +85,7 @@ public class interdiction_data_disk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getTerminal(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -84,12 +94,15 @@ public class interdiction_data_disk extends script.base_script
         }
         obj_id inventory = utils.getInventoryContainer(player);
         obj_id[] inventoryContents = getContents(inventory);
-        for (obj_id inventoryContent : inventoryContents) {
+        for (obj_id inventoryContent : inventoryContents)
+        {
             String strItemTemplate = getTemplateName(inventoryContent);
 
             {
-                if (strItemTemplate.equals("object/tangible/space/mission_objects/interdiction_terminal.iff")) {
-                    if (!hasObjVar(inventoryContent, "difficulty")) {
+                if (strItemTemplate.equals("object/tangible/space/mission_objects/interdiction_terminal.iff"))
+                {
+                    if (!hasObjVar(inventoryContent, "difficulty"))
+                    {
                         return inventoryContent;
                     }
                 }
@@ -97,6 +110,7 @@ public class interdiction_data_disk extends script.base_script
         }
         return null;
     }
+
     public void encodeTerminal(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id terminal = getTerminal(player);
@@ -118,6 +132,5 @@ public class interdiction_data_disk extends script.base_script
             setObjVar(terminal, "difficulty", dif);
         }
         static_item.decrementStaticItem(self);
-        return;
     }
 }

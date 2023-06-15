@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.create;
@@ -8,14 +14,17 @@ import script.*;
 
 public class death_watch_technician extends script.base_script
 {
+    public static String c_stringFile = "conversation/death_watch_technician";
+
     public death_watch_technician()
     {
     }
-    public static String c_stringFile = "conversation/death_watch_technician";
+
     public boolean death_watch_technician_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean death_watch_technician_condition_ventOff(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(npc);
@@ -27,12 +36,9 @@ public class death_watch_technician extends script.base_script
         {
             return false;
         }
-        if (!hasObjVar(structure, "death_watch.air_vent_on") && !hasObjVar(structure, "death_watch.missionTaker"))
-        {
-            return true;
-        }
-        return false;
+        return !hasObjVar(structure, "death_watch.air_vent_on") && !hasObjVar(structure, "death_watch.missionTaker");
     }
+
     public boolean death_watch_technician_condition_ventOn(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(npc);
@@ -40,12 +46,9 @@ public class death_watch_technician extends script.base_script
         {
             return false;
         }
-        if (hasObjVar(structure, "death_watch.air_vent_on") && !hasObjVar(player, "death_watch.air_vent_success"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(structure, "death_watch.air_vent_on") && !hasObjVar(player, "death_watch.air_vent_success");
     }
+
     public boolean death_watch_technician_condition_ventOffCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(npc);
@@ -57,12 +60,9 @@ public class death_watch_technician extends script.base_script
         {
             return false;
         }
-        if (!hasObjVar(structure, "death_watch.air_vent_on") && hasObjVar(player, "death_watch.air_vent_success"))
-        {
-            return true;
-        }
-        return false;
+        return !hasObjVar(structure, "death_watch.air_vent_on") && hasObjVar(player, "death_watch.air_vent_success");
     }
+
     public boolean death_watch_technician_condition_ventOffNewPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(npc);
@@ -75,12 +75,9 @@ public class death_watch_technician extends script.base_script
             return false;
         }
         obj_id taker = getObjIdObjVar(structure, "death_watch.missionTaker");
-        if (!hasObjVar(structure, "death_watch.air_vent_on") && taker != player)
-        {
-            return true;
-        }
-        return false;
+        return !hasObjVar(structure, "death_watch.air_vent_on") && taker != player;
     }
+
     public boolean death_watch_technician_condition_ventFailure(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(npc);
@@ -92,12 +89,9 @@ public class death_watch_technician extends script.base_script
         {
             return false;
         }
-        if (!hasObjVar(structure, "death_watch.air_vent_on") && hasObjVar(player, "death_watch.air_vent_fail"))
-        {
-            return true;
-        }
-        return false;
+        return !hasObjVar(structure, "death_watch.air_vent_on") && hasObjVar(player, "death_watch.air_vent_fail");
     }
+
     public boolean death_watch_technician_condition_ventOnOldPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(npc);
@@ -105,34 +99,25 @@ public class death_watch_technician extends script.base_script
         {
             return false;
         }
-        if (hasObjVar(structure, "death_watch.air_vent_on") && hasObjVar(player, "death_watch.air_vent_success"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(structure, "death_watch.air_vent_on") && hasObjVar(player, "death_watch.air_vent_success");
     }
+
     public boolean death_watch_technician_condition_toSoon(obj_id player, obj_id npc) throws InterruptedException
     {
         int oldTime = getIntObjVar(player, "death_watch.air_vent_fail");
         int refreshTime = oldTime + 1800;
         int curTime = getGameTime();
-        if (curTime < refreshTime)
-        {
-            return true;
-        }
-        return false;
+        return curTime < refreshTime;
     }
+
     public boolean death_watch_technician_condition_readyToGoAgain(obj_id player, obj_id npc) throws InterruptedException
     {
         int oldTime = getIntObjVar(player, "death_watch.air_vent_fail");
         int refreshTime = oldTime + 1800;
         int curTime = getGameTime();
-        if (curTime > refreshTime)
-        {
-            return true;
-        }
-        return false;
+        return curTime > refreshTime;
     }
+
     public boolean death_watch_technician_condition_goProtectDroid(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(npc);
@@ -145,12 +130,9 @@ public class death_watch_technician extends script.base_script
             return false;
         }
         obj_id taker = getObjIdObjVar(structure, "death_watch.missionTaker");
-        if (!hasObjVar(structure, "death_watch.air_vent_on") && taker == player)
-        {
-            return true;
-        }
-        return false;
+        return !hasObjVar(structure, "death_watch.air_vent_on") && taker == player;
     }
+
     public void death_watch_technician_action_startEvent(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(npc);
@@ -169,6 +151,7 @@ public class death_watch_technician extends script.base_script
         obj_id spawnedCreature = create.object("mand_bunker_repair_droid", spawnPoint);
         attachScript(spawnedCreature, "theme_park.dungeon.death_watch_bunker.repair_droid");
     }
+
     public int death_watch_technician_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_bb1676fc"))
@@ -188,7 +171,7 @@ public class death_watch_technician extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1cc2ceff");
@@ -197,7 +180,7 @@ public class death_watch_technician extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_technician.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -229,7 +212,7 @@ public class death_watch_technician extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c4446dd7");
@@ -242,7 +225,7 @@ public class death_watch_technician extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_technician.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -252,6 +235,7 @@ public class death_watch_technician extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_technician_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1cc2ceff"))
@@ -278,7 +262,7 @@ public class death_watch_technician extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c4446dd7");
@@ -291,7 +275,7 @@ public class death_watch_technician extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_technician.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -301,6 +285,7 @@ public class death_watch_technician extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_technician_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c4446dd7"))
@@ -320,7 +305,7 @@ public class death_watch_technician extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a0c1a32f");
@@ -329,7 +314,7 @@ public class death_watch_technician extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_technician.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -361,7 +346,7 @@ public class death_watch_technician extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bd5476c4");
@@ -374,7 +359,7 @@ public class death_watch_technician extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_technician.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -384,6 +369,7 @@ public class death_watch_technician extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_technician_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a0c1a32f"))
@@ -410,7 +396,7 @@ public class death_watch_technician extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bd5476c4");
@@ -423,7 +409,7 @@ public class death_watch_technician extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_technician.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -433,6 +419,7 @@ public class death_watch_technician extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_technician_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_bd5476c4"))
@@ -459,7 +446,7 @@ public class death_watch_technician extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_17aa7854");
@@ -472,7 +459,7 @@ public class death_watch_technician extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_technician.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -504,7 +491,7 @@ public class death_watch_technician extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_20");
@@ -517,7 +504,7 @@ public class death_watch_technician extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_technician.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -527,6 +514,7 @@ public class death_watch_technician extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_technician_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_17aa7854"))
@@ -552,6 +540,7 @@ public class death_watch_technician extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_technician_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_20"))
@@ -578,7 +567,7 @@ public class death_watch_technician extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_17aa7854");
@@ -591,7 +580,7 @@ public class death_watch_technician extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.death_watch_technician.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -611,6 +600,7 @@ public class death_watch_technician extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_technician_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7d875e15"))
@@ -643,6 +633,7 @@ public class death_watch_technician extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int death_watch_technician_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_373533eb"))
@@ -668,6 +659,7 @@ public class death_watch_technician extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -677,6 +669,7 @@ public class death_watch_technician extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -685,6 +678,7 @@ public class death_watch_technician extends script.base_script
         setName(self, "Labsol Renuffi (a technician)");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -693,18 +687,21 @@ public class death_watch_technician extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.death_watch_technician");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -734,7 +731,7 @@ public class death_watch_technician extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_bb1676fc");
@@ -746,7 +743,7 @@ public class death_watch_technician extends script.base_script
                 utils.setScriptVar(player, "conversation.death_watch_technician.branchId", 1);
                 npcStartConversation(player, npc, "death_watch_technician", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -774,7 +771,7 @@ public class death_watch_technician extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_7d875e15");
@@ -786,7 +783,7 @@ public class death_watch_technician extends script.base_script
                 utils.setScriptVar(player, "conversation.death_watch_technician.branchId", 11);
                 npcStartConversation(player, npc, "death_watch_technician", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -826,7 +823,7 @@ public class death_watch_technician extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_373533eb");
@@ -838,7 +835,7 @@ public class death_watch_technician extends script.base_script
                 utils.setScriptVar(player, "conversation.death_watch_technician.branchId", 17);
                 npcStartConversation(player, npc, "death_watch_technician", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -859,6 +856,7 @@ public class death_watch_technician extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("death_watch_technician"))

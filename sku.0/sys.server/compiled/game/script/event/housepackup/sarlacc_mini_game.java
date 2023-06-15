@@ -1,5 +1,11 @@
 package script.event.housepackup;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.HashSet;
 
 public class sarlacc_mini_game extends script.base_script
 {
-    public sarlacc_mini_game()
-    {
-    }
     public static final boolean BLOGGING_ON = true;
     public static final String BLOG_CATEGORY = "sarlacc";
     public static final string_id SID_MENU_FEED = new string_id("sarlacc_minigame", "mnu_feed");
@@ -28,16 +31,22 @@ public class sarlacc_mini_game extends script.base_script
     public static final String SOUND_BREATHING = "sound/sarlacc_breathing.snd";
     public static final String ANIMATON_GROWL = "vocalize";
     public static final String ANIMATON_FEED = "eat";
+    public sarlacc_mini_game()
+    {
+    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         house_pet.stopPlayingMusic(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkTriggerVolume", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.isNestedWithin(self, player))
@@ -73,6 +82,7 @@ public class sarlacc_mini_game extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (utils.isNestedWithin(self, player))
@@ -103,6 +113,7 @@ public class sarlacc_mini_game extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         obj_id controller = getObjIdObjVar(self, house_pet.PARENT_OBJ_ID);
@@ -148,7 +159,7 @@ public class sarlacc_mini_game extends script.base_script
                     {
                         attribs[idx] = "Now";
                     }
-                    else 
+                    else
                     {
                         attribs[idx] = "Hopefully Soon";
                     }
@@ -158,7 +169,7 @@ public class sarlacc_mini_game extends script.base_script
                     idx++;
                 }
             }
-            else 
+            else
             {
                 names[idx] = "last_fed";
                 attribs[idx] = "Never";
@@ -188,6 +199,7 @@ public class sarlacc_mini_game extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -222,6 +234,7 @@ public class sarlacc_mini_game extends script.base_script
         playClientEffectObj(breacher, SOUND_BREATHING, self, "", new transform(), house_pet.PET_SOUND_LABEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -235,6 +248,7 @@ public class sarlacc_mini_game extends script.base_script
         stopClientEffectObjByLabel(breacher, self, house_pet.PET_SOUND_LABEL);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSarlaccEatSui(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -259,7 +273,7 @@ public class sarlacc_mini_game extends script.base_script
             cleanupSui(player);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id[] junkFood = utils.getObjIdBatchScriptVar(player, house_pet.EDIBLES_IDS);
             if ((junkFood == null) || (junkFood.length == 0))
@@ -280,6 +294,7 @@ public class sarlacc_mini_game extends script.base_script
         cleanupSui(player);
         return SCRIPT_CONTINUE;
     }
+
     public int playBurp(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -299,6 +314,7 @@ public class sarlacc_mini_game extends script.base_script
         doAnimationAction(self, ANIMATON_GROWL);
         return SCRIPT_CONTINUE;
     }
+
     public int playCute(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -318,6 +334,7 @@ public class sarlacc_mini_game extends script.base_script
         doAnimationAction(self, ANIMATON_GROWL);
         return SCRIPT_CONTINUE;
     }
+
     public int checkTriggerVolume(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -332,6 +349,7 @@ public class sarlacc_mini_game extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int updateSarlaccPet(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -379,7 +397,7 @@ public class sarlacc_mini_game extends script.base_script
                 blog("updateSarlaccPet - TOO SOOOOON messageTo in : " + later);
                 messageTo(self, "updateSarlaccPet", null, later, false);
             }
-            else 
+            else
             {
                 blog("updateSarlaccPet - WRONG messageTo, Resending in : " + updateDay);
                 messageTo(self, "updateSarlaccPet", null, updateDay, false);
@@ -403,7 +421,7 @@ public class sarlacc_mini_game extends script.base_script
         {
             setObjVar(controller, house_pet.SARLACC_CURRENT_PHASE, house_pet.SARLACC_DEATH);
         }
-        else 
+        else
         {
             setObjVar(controller, house_pet.SARLACC_CURRENT_PHASE, currentPhase);
         }
@@ -451,6 +469,7 @@ public class sarlacc_mini_game extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean getEdibleContents(obj_id player, obj_id controller, obj_id sarlacc) throws InterruptedException
     {
         blog("getEdibleContents - Init");
@@ -511,6 +530,7 @@ public class sarlacc_mini_game extends script.base_script
         }
         return true;
     }
+
     public boolean eatJunkItem(obj_id self, obj_id player, obj_id item) throws InterruptedException
     {
         blog("eatJunkItem - Init");
@@ -554,7 +574,7 @@ public class sarlacc_mini_game extends script.base_script
             feedingList[0] = templateName;
             setObjVar(controller, house_pet.SARLACC_FEED_ARRAY, feedingList);
         }
-        else 
+        else
         {
             String[] feedingList = getStringArrayObjVar(controller, house_pet.SARLACC_FEED_ARRAY);
             if (feedingList == null || feedingList.length <= 0)
@@ -596,6 +616,7 @@ public class sarlacc_mini_game extends script.base_script
         messageTo(self, "playBurp", params, 3, false);
         return true;
     }
+
     public boolean validateItemForSarlacc(obj_id player, obj_id item) throws InterruptedException
     {
         if (utils.getContainingPlayer(item) != (player))
@@ -610,12 +631,9 @@ public class sarlacc_mini_game extends script.base_script
         {
             return false;
         }
-        if (hasObjVar(item, "quest_item"))
-        {
-            return false;
-        }
-        return true;
+        return !hasObjVar(item, "quest_item");
     }
+
     public String getSarlaccCollectionColumn(obj_id controller) throws InterruptedException
     {
         blog("getSarlaccCollectionColumn - Init");
@@ -676,7 +694,7 @@ public class sarlacc_mini_game extends script.base_script
             {
                 return "generic_collectible";
             }
-            else 
+            else
             {
                 String[] possibleCols = split(lootColumn, ',');
                 if (possibleCols == null || possibleCols.length <= 0)
@@ -687,13 +705,13 @@ public class sarlacc_mini_game extends script.base_script
                 {
                     return possibleCols[0];
                 }
-                else 
+                else
                 {
                     return possibleCols[rand(0, possibleCols.length - 1)];
                 }
             }
         }
-        else 
+        else
         {
             String randTemplate = templateArray[rand(0, templateArray.length - 1)];
             int lootRow = dataTableSearchColumnForString(randTemplate, "item", house_pet.SARLACC_CTS_CRC_TABLE);
@@ -703,7 +721,7 @@ public class sarlacc_mini_game extends script.base_script
             {
                 return "generic_collectible";
             }
-            else 
+            else
             {
                 String[] possibleCols = split(lootColumn, ',');
                 if (possibleCols == null || possibleCols.length <= 0)
@@ -714,13 +732,14 @@ public class sarlacc_mini_game extends script.base_script
                 {
                     return possibleCols[0];
                 }
-                else 
+                else
                 {
                     return possibleCols[rand(0, possibleCols.length - 1)];
                 }
             }
         }
     }
+
     public boolean getPlayerReward(obj_id owner, obj_id controller) throws InterruptedException
     {
         if (!isValidId(owner) || !exists(owner))
@@ -757,6 +776,7 @@ public class sarlacc_mini_game extends script.base_script
         blog("rewardPlayer - REWARD GIVEN");
         return true;
     }
+
     public boolean checkPlayerInventoryForSarlaccFood(obj_id player) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -769,35 +789,43 @@ public class sarlacc_mini_game extends script.base_script
             return false;
         }
         obj_id[] contents = utils.getContents(inventory, true);
-        if (contents == null || contents.length <= 0)
+        if (contents == null)
         {
             return false;
         }
-        for (obj_id content : contents) {
-            if (!validateItemForSarlacc(player, content)) {
+        for (obj_id content : contents)
+        {
+            if (!validateItemForSarlacc(player, content))
+            {
                 continue;
             }
-            if (hasObjVar(content, "noTrade") || utils.isEquipped(content)) {
+            if (hasObjVar(content, "noTrade") || utils.isEquipped(content))
+            {
                 continue;
             }
-            if (isCrafted(content)) {
+            if (isCrafted(content))
+            {
                 continue;
             }
-            if (static_item.getStaticObjectValue(getStaticItemName(content)) > 0) {
+            if (static_item.getStaticObjectValue(getStaticItemName(content)) > 0)
+            {
                 return true;
             }
             String itemTemplate = getTemplateName(content);
-            if (dataTableSearchColumnForString(itemTemplate, "items", smuggler.TBL) > -1) {
+            if (dataTableSearchColumnForString(itemTemplate, "items", smuggler.TBL) > -1)
+            {
                 return true;
             }
         }
         return false;
     }
+
     public void cleanupSui(obj_id player) throws InterruptedException
     {
         utils.removeScriptVar(player, house_pet.EDIBLES_SUI);
         utils.removeBatchScriptVar(player, house_pet.EDIBLES_IDS);
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (BLOGGING_ON)

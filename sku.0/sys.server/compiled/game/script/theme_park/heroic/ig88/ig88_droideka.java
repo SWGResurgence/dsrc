@@ -1,5 +1,11 @@
 package script.theme_park.heroic.ig88;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.hue;
@@ -12,6 +18,7 @@ public class ig88_droideka extends script.base_script
     public ig88_droideka()
     {
     }
+
     public void findNextTarget(obj_id self) throws InterruptedException
     {
         if (ai_lib.isDead(self))
@@ -44,6 +51,7 @@ public class ig88_droideka extends script.base_script
         }
         setHate(self, target, 5000);
     }
+
     public int findTarget(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -55,6 +63,7 @@ public class ig88_droideka extends script.base_script
         messageTo(self, "findTarget", sessionDict, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -64,6 +73,7 @@ public class ig88_droideka extends script.base_script
         findNextTarget(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -79,6 +89,7 @@ public class ig88_droideka extends script.base_script
         messageTo(self, "colorize", sessionDict, 0.25f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int colorize(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))

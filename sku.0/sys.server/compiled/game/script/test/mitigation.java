@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.combat_engine.hit_result;
 import script.combat_engine.weapon_data;
 import script.dictionary;
@@ -11,46 +17,49 @@ import script.obj_id;
 
 public class mitigation extends script.base_script
 {
-    public mitigation()
-    {
-    }
     public static final String PID_SCRIPTVAR = "mitigationPid";
     public static final String SCRIPTVAR = "mitigation";
     public static final String MITIGATION_TOOL_PROMPT = "SELECT AN ATTACK LOCATION.\n\r\n\rThe mitigation tool tests armor mitigation based on the attacker weapon.  No actual damage is performed on the target.  Damage and mitigation is simulated using the current mitigation system (without elemental damage).  When the test is conducted a report will be exported to your client directory.";
     public static final String MITIGATION_TOOL_TITLE = "MITIGATION TOOL";
-    public static final String[] MITIGATION_HIT_LOCATIONS = 
+    public static final String[] MITIGATION_HIT_LOCATIONS =
+            {
+                    "Body",
+                    "Head",
+                    "Right Arm",
+                    "Left Arm",
+                    "Right Leg",
+                    "Left Leg"
+            };
+    public static final String[] WEAPON_DAMAGE_TYPE =
+            {
+                    "DAMAGE_NONE",
+                    "DAMAGE_KINETIC",
+                    "DAMAGE_ENERGY",
+                    "DAMAGE_BLAST",
+                    "DAMAGE_STUN",
+                    "DAMAGE_RESTRAINT",
+                    "DAMAGE_ELEMENTAL_HEAT",
+                    "DAMAGE_ELEMENTAL_COLD",
+                    "DAMAGE_ELEMENTAL_ACID",
+                    "DAMAGE_ELEMENTAL_ELECTRICAL",
+                    "DAMAGE_ENVIRONMENTAL_HEAT",
+                    "DAMAGE_ENVIRONMENTAL_COLD",
+                    "DAMAGE_ENVIRONMENTAL_ACID",
+                    "DAMAGE_ENVIRONMENTAL_ELECTRICAL"
+            };
+    public mitigation()
     {
-        "Body",
-        "Head",
-        "Right Arm",
-        "Left Arm",
-        "Right Leg",
-        "Left Leg"
-    };
-    public static final String[] WEAPON_DAMAGE_TYPE = 
-    {
-        "DAMAGE_NONE",
-        "DAMAGE_KINETIC",
-        "DAMAGE_ENERGY",
-        "DAMAGE_BLAST",
-        "DAMAGE_STUN",
-        "DAMAGE_RESTRAINT",
-        "DAMAGE_ELEMENTAL_HEAT",
-        "DAMAGE_ELEMENTAL_COLD",
-        "DAMAGE_ELEMENTAL_ACID",
-        "DAMAGE_ELEMENTAL_ELECTRICAL",
-        "DAMAGE_ENVIRONMENTAL_HEAT",
-        "DAMAGE_ENVIRONMENTAL_COLD",
-        "DAMAGE_ENVIRONMENTAL_ACID",
-        "DAMAGE_ENVIRONMENTAL_ELECTRICAL"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 10) {
+        if (!isGod(self) || getGodLevel(self) < 10)
+        {
             detachScript(self, "test.mitigation");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -66,8 +75,8 @@ public class mitigation extends script.base_script
                         if (isIdValid(objWeapon))
                         {
                             weapon_data newWpnData = getWeaponData(objWeapon);
-                            utils.setScriptVar(self, SCRIPTVAR + ".lookAtTarget", "" + lookAtTarget);
-                            utils.setScriptVar(self, SCRIPTVAR + ".objWeapon", "" + objWeapon);
+                            utils.setScriptVar(self, SCRIPTVAR + ".lookAtTarget", String.valueOf(lookAtTarget));
+                            utils.setScriptVar(self, SCRIPTVAR + ".objWeapon", String.valueOf(objWeapon));
                             utils.setScriptVar(self, SCRIPTVAR + ".minDamage", newWpnData.minDamage);
                             utils.setScriptVar(self, SCRIPTVAR + ".maxDamage", newWpnData.maxDamage);
                             String[] dmgMenu = new String[3];
@@ -77,17 +86,17 @@ public class mitigation extends script.base_script
                             utils.setScriptVar(self, SCRIPTVAR + ".dmgMenu", dmgMenu);
                             qa.refreshMenu(self, MITIGATION_TOOL_PROMPT, MITIGATION_TOOL_TITLE, MITIGATION_HIT_LOCATIONS, "handleAttackLocationOptions", true, PID_SCRIPTVAR + ".pid", SCRIPTVAR + ".hitLocationMenu");
                         }
-                        else 
+                        else
                         {
                             broadcast(self, "Equip a weapon before attempting to use this tool.");
                         }
                     }
-                    else 
+                    else
                     {
                         broadcast(self, "You must have a valid mob or player targeted.");
                     }
                 }
-                else 
+                else
                 {
                     broadcast(self, "You must have a valid mob or player targeted.");
                 }
@@ -96,6 +105,7 @@ public class mitigation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAttackLocationOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -110,7 +120,7 @@ public class mitigation extends script.base_script
                     removePlayer(self, "Tool Exiting.");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     if (idx > -1)
                     {
@@ -118,7 +128,7 @@ public class mitigation extends script.base_script
                         String[] hitAmountArray = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".dmgMenu");
                         qa.refreshMenu(self, MITIGATION_TOOL_PROMPT, MITIGATION_TOOL_TITLE, hitAmountArray, "handleDamageOptions", PID_SCRIPTVAR + ".pid", sui.OK_CANCEL);
                     }
-                    else 
+                    else
                     {
                         removePlayer(self, "There was an error.  Tool Exiting.");
                         return SCRIPT_CONTINUE;
@@ -128,6 +138,7 @@ public class mitigation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDamageOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -148,7 +159,7 @@ public class mitigation extends script.base_script
                     qa.refreshMenu(self, MITIGATION_TOOL_PROMPT, MITIGATION_TOOL_TITLE, MITIGATION_HIT_LOCATIONS, "handleAttackLocationOptions", true, PID_SCRIPTVAR + ".pid", SCRIPTVAR + ".hitLocationMenu");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     if (idx > -1)
                     {
@@ -158,25 +169,25 @@ public class mitigation extends script.base_script
                         switch (idx)
                         {
                             case 0:
-                            testDamage = utils.getIntScriptVar(self, SCRIPTVAR + ".minDamage");
-                            utils.setScriptVar(self, SCRIPTVAR + ".damage", testDamage);
-                            break;
+                                testDamage = utils.getIntScriptVar(self, SCRIPTVAR + ".minDamage");
+                                utils.setScriptVar(self, SCRIPTVAR + ".damage", testDamage);
+                                break;
                             case 1:
-                            testDamage = utils.getIntScriptVar(self, SCRIPTVAR + ".maxDamage");
-                            utils.setScriptVar(self, SCRIPTVAR + ".damage", testDamage);
-                            break;
+                                testDamage = utils.getIntScriptVar(self, SCRIPTVAR + ".maxDamage");
+                                utils.setScriptVar(self, SCRIPTVAR + ".damage", testDamage);
+                                break;
                             case 2:
-                            utils.setScriptVar(self, SCRIPTVAR + ".damage", testDamage);
-                            break;
+                                utils.setScriptVar(self, SCRIPTVAR + ".damage", testDamage);
+                                break;
                             default:
-                            removePlayer(self, "");
-                            return SCRIPT_CONTINUE;
+                                removePlayer(self, "");
+                                return SCRIPT_CONTINUE;
                         }
                         int pid = sui.transfer(self, self, "Give the amount of tests you would like to conduct on the location specified", "TEST ITERATION", "Maximum", 1000, "Amount", 1, "mitigationReport");
                         sui.showSUIPage(pid);
                         utils.setScriptVar(self, PID_SCRIPTVAR + ".pid", pid);
                     }
-                    else 
+                    else
                     {
                         removePlayer(self, "There was an error.  Tool Exiting.");
                         return SCRIPT_CONTINUE;
@@ -186,6 +197,7 @@ public class mitigation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mitigationReport(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -208,7 +220,7 @@ public class mitigation extends script.base_script
                     qa.refreshMenu(self, MITIGATION_TOOL_PROMPT, MITIGATION_TOOL_TITLE, MITIGATION_HIT_LOCATIONS, "handleAttackLocationOptions", true, PID_SCRIPTVAR + ".pid", SCRIPTVAR + ".hitLocationMenu");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String testData = "";
                     int damageTotal = damage;
@@ -236,6 +248,7 @@ public class mitigation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void removePlayer(obj_id self, String err) throws InterruptedException
     {
         broadcast(self, err);

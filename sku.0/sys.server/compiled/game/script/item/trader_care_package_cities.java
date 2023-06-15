@@ -1,5 +1,11 @@
 package script.item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.static_item;
 import script.library.sui;
@@ -14,6 +20,7 @@ public class trader_care_package_cities extends script.base_script
             "Naboo",
             "Tatooine"
     };
+
     public static void grantTraderCarePackageCities(obj_id player, String planet) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -25,15 +32,17 @@ public class trader_care_package_cities extends script.base_script
         createObject("object/tangible/deed/player_house_deed/" + planet + "_house_small_deed.iff", pInv, "");
         createObject("object/tangible/deed/player_house_deed/" + planet + "_house_small_deed.iff", pInv, "");
         createObject("object/tangible/deed/player_house_deed/" + planet + "_house_small_deed.iff", pInv, "");
-        obj_id[] items= new obj_id[theSet.size()];
+        obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);
         showLootBox(player, items);
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, unlocalized("Use Care Package"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -43,6 +52,7 @@ public class trader_care_package_cities extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCarePackageCities(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);

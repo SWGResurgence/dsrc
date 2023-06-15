@@ -1,38 +1,52 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class cyborg_install_tatooine extends script.base_script
 {
+    public static String c_stringFile = "conversation/cyborg_install_tatooine";
+
     public cyborg_install_tatooine()
     {
     }
-    public static String c_stringFile = "conversation/cyborg_install_tatooine";
+
     public boolean cyborg_install_tatooine_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean cyborg_install_tatooine_condition_tooManyInstalled(obj_id player, obj_id npc) throws InterruptedException
     {
         return cybernetic.hasMaxInstalled(player);
     }
+
     public boolean cyborg_install_tatooine_condition_hasCyberneticOnHand(obj_id player, obj_id npc) throws InterruptedException
     {
         return cybernetic.hasCyberneticItemInInventory(player);
     }
+
     public boolean cyborg_install_tatooine_condition_hasCyberneticInstalled(obj_id player, obj_id npc) throws InterruptedException
     {
         return cybernetic.hasCyberneticItem(player);
     }
+
     public boolean cyborg_install_tatooine_condition_canGetRepairs(obj_id player, obj_id npc) throws InterruptedException
     {
         return cybernetic.hasCyberneticsToRepair(player);
     }
+
     public void cyborg_install_tatooine_action_listCyberneticsToInstall(obj_id player, obj_id npc) throws InterruptedException
     {
         cybernetic.installCybernetics(player, npc);
     }
+
     public int handleInstallCybernetics(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = sui.getPlayerId(params);
@@ -68,10 +82,12 @@ public class cyborg_install_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void cyborg_install_tatooine_action_listCyberneticsToRemove(obj_id player, obj_id npc) throws InterruptedException
     {
         cybernetic.unInstallCybernetics(player, npc);
     }
+
     public int handleUnInstallCybernetics(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = sui.getPlayerId(params);
@@ -107,10 +123,12 @@ public class cyborg_install_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void cyborg_install_tatooine_action_listCyberneticsToRepair(obj_id player, obj_id npc) throws InterruptedException
     {
         cybernetic.repairCybernetics(player, npc);
     }
+
     public int OnCyberneticChangeRequest(obj_id self, obj_id player, int changeType, obj_id cyberneticPiece) throws InterruptedException
     {
         if (isIdValid(player) && isIdValid(cyberneticPiece))
@@ -130,6 +148,7 @@ public class cyborg_install_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRepairCybernetics(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = sui.getPlayerId(params);
@@ -165,11 +184,13 @@ public class cyborg_install_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void cyborg_install_tatooine_action_trackAppearanceTabCyb(obj_id player, obj_id npc) throws InterruptedException
     {
         LOG("sissynoid", "Entered: trackAppearanceTabCyb - Setting Appearance ScriptVar");
         utils.setScriptVar(player, "cybernetic.appearance_install", 1);
     }
+
     public void cyborg_install_tatooine_action_resetAppearanceTabTracker(obj_id player, obj_id npc) throws InterruptedException
     {
         LOG("sissynoid", "Entered: resetAppearanceTabTracker");
@@ -179,6 +200,7 @@ public class cyborg_install_tatooine extends script.base_script
             utils.removeScriptVar(player, "cybernetic.appearance_install");
         }
     }
+
     public int cyborg_install_tatooine_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -198,7 +220,7 @@ public class cyborg_install_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_43");
@@ -207,7 +229,7 @@ public class cyborg_install_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.cyborg_install_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -239,7 +261,7 @@ public class cyborg_install_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -252,7 +274,7 @@ public class cyborg_install_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.cyborg_install_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -304,6 +326,7 @@ public class cyborg_install_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cyborg_install_tatooine_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_43"))
@@ -323,7 +346,7 @@ public class cyborg_install_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -332,7 +355,7 @@ public class cyborg_install_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.cyborg_install_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -342,6 +365,7 @@ public class cyborg_install_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cyborg_install_tatooine_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -361,7 +385,7 @@ public class cyborg_install_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -370,7 +394,7 @@ public class cyborg_install_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.cyborg_install_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -380,6 +404,7 @@ public class cyborg_install_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cyborg_install_tatooine_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -399,7 +424,7 @@ public class cyborg_install_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_49");
@@ -408,7 +433,7 @@ public class cyborg_install_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.cyborg_install_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -418,6 +443,7 @@ public class cyborg_install_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cyborg_install_tatooine_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_49"))
@@ -437,7 +463,7 @@ public class cyborg_install_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -446,7 +472,7 @@ public class cyborg_install_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.cyborg_install_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -456,6 +482,7 @@ public class cyborg_install_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cyborg_install_tatooine_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_62"))
@@ -504,7 +531,7 @@ public class cyborg_install_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -529,7 +556,7 @@ public class cyborg_install_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.cyborg_install_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -539,6 +566,7 @@ public class cyborg_install_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cyborg_install_tatooine_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -583,7 +611,7 @@ public class cyborg_install_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_32");
@@ -596,7 +624,7 @@ public class cyborg_install_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.cyborg_install_tatooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -606,6 +634,7 @@ public class cyborg_install_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cyborg_install_tatooine_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32"))
@@ -647,6 +676,7 @@ public class cyborg_install_tatooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -659,6 +689,7 @@ public class cyborg_install_tatooine extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
@@ -669,6 +700,7 @@ public class cyborg_install_tatooine extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -677,18 +709,21 @@ public class cyborg_install_tatooine extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.cyborg_install_tatooine");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -740,7 +775,7 @@ public class cyborg_install_tatooine extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -764,7 +799,7 @@ public class cyborg_install_tatooine extends script.base_script
                 utils.setScriptVar(player, "conversation.cyborg_install_tatooine.branchId", 1);
                 npcStartConversation(player, npc, "cyborg_install_tatooine", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -773,6 +808,7 @@ public class cyborg_install_tatooine extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("cyborg_install_tatooine"))

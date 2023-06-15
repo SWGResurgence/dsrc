@@ -1,5 +1,11 @@
 package script.npc;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.static_item;
 import script.library.sui;
@@ -23,6 +29,7 @@ public class token_vendor extends script.base_script
     public static final byte FORCE_SENSITIVE = 7;
     public static final byte TRADER = 8;
     public static final byte ENTERTAINER = 9;
+
     public int showInventorySUI(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -35,12 +42,13 @@ public class token_vendor extends script.base_script
             int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, purchaseList, "handleItemSelect", true, false);
             setWindowPid(player, pid);
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("set_bonus", "vendor_not_qualified"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public String[] getPurchaseList(obj_id self, obj_id player) throws InterruptedException
     {
         int numRowsInTable = dataTableGetNumRows(VENDOR_TABLE);
@@ -71,6 +79,7 @@ public class token_vendor extends script.base_script
         }
         return _purchaseList;
     }
+
     public int handleItemSelect(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -81,7 +90,7 @@ public class token_vendor extends script.base_script
         int btn = sui.getIntButtonPressed(params);
         int idx = sui.getListboxSelectedRow(params);
         int[] purchaseList = utils.getIntArrayScriptVar(player, "item.set.token_vendor_list");
-        int tokenCosts[] = new int[trial.HEROIC_TOKENS.length + 1];
+        int[] tokenCosts = new int[trial.HEROIC_TOKENS.length + 1];
         if (btn == sui.BP_CANCEL)
         {
             cleanScriptVars(player);
@@ -127,6 +136,7 @@ public class token_vendor extends script.base_script
         refreshMenu(player, prompt, title, inventoryTokens, "handlePaymentUpdate", false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePaymentUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -173,11 +183,14 @@ public class token_vendor extends script.base_script
         utils.setScriptVar(player, "item.set.owed_tokens", tokensOwed);
         utils.setScriptVar(player, "item.set.intended_payment", intendedPayment);
         int tokensPaidInFull = 0;
-        for (int i1 : tokensOwed) {
-            if (i1 == 0) {
+        for (int i1 : tokensOwed)
+        {
+            if (i1 == 0)
+            {
                 tokensPaidInFull++;
             }
-            if (tokensPaidInFull == trial.HEROIC_TOKENS.length + 1) {
+            if (tokensPaidInFull == trial.HEROIC_TOKENS.length + 1)
+            {
                 processItemPurchase(player);
                 closeOldWindow(player);
                 return SCRIPT_CONTINUE;
@@ -187,6 +200,7 @@ public class token_vendor extends script.base_script
         refreshMenu(player, prompt, title, getInventoryTokens(player), "handlePaymentUpdate", false);
         return SCRIPT_CONTINUE;
     }
+
     public String[] getInventoryTokens(obj_id player) throws InterruptedException
     {
         int[] totalTokens = new int[trial.HEROIC_TOKENS.length + 1];
@@ -198,23 +212,33 @@ public class token_vendor extends script.base_script
         obj_id inventory = utils.getInventoryContainer(player);
         obj_id[] inventoryContents = getContents(inventory);
         boolean foundTokenHolderBox = false;
-        for (obj_id inventoryContent : inventoryContents) {
+        for (obj_id inventoryContent : inventoryContents)
+        {
             String itemName = getStaticItemName(inventoryContent);
-            if (itemName != null && !itemName.isEmpty()) {
-                for (int j = 0; j < trial.HEROIC_TOKENS.length; j++) {
-                    if (itemName.equals(trial.HEROIC_TOKENS[j])) {
-                        if (getCount(inventoryContent) > 1) {
+            if (itemName != null && !itemName.isEmpty())
+            {
+                for (int j = 0; j < trial.HEROIC_TOKENS.length; j++)
+                {
+                    if (itemName.equals(trial.HEROIC_TOKENS[j]))
+                    {
+                        if (getCount(inventoryContent) > 1)
+                        {
                             totalTokens[j] += getCount(inventoryContent);
-                        } else {
+                        }
+                        else
+                        {
                             totalTokens[j]++;
                         }
                     }
                 }
-                if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01")) {
+                if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01"))
+                {
                     foundTokenHolderBox = true;
-                    if (hasObjVar(inventoryContent, "item.set.tokens_held")) {
+                    if (hasObjVar(inventoryContent, "item.set.tokens_held"))
+                    {
                         int[] virtualTokens = getIntArrayObjVar(inventoryContent, "item.set.tokens_held");
-                        for (int k = 0; k < trial.HEROIC_TOKENS.length; k++) {
+                        for (int k = 0; k < trial.HEROIC_TOKENS.length; k++)
+                        {
                             int thisTokenCount = virtualTokens[k];
                             totalTokens[k] += thisTokenCount;
                         }
@@ -238,6 +262,7 @@ public class token_vendor extends script.base_script
         utils.setScriptVar(player, "item.set.inventory_token_strings", inventoryTokens);
         return inventoryTokens;
     }
+
     public void processItemPurchase(obj_id player) throws InterruptedException
     {
         int intendedPurchaseRow = utils.getIntScriptVar(player, "item.set.intended_purchase");
@@ -263,28 +288,41 @@ public class token_vendor extends script.base_script
         }
         obj_id[] inventoryContents = getContents(inventory);
         boolean foundTokenHolderBox = false;
-        for (obj_id inventoryContent : inventoryContents) {
+        for (obj_id inventoryContent : inventoryContents)
+        {
             String itemName = getStaticItemName(inventoryContent);
-            if (itemName != null && !itemName.isEmpty()) {
-                for (int j = 0; j < trial.HEROIC_TOKENS.length; j++) {
-                    if (itemName.equals(trial.HEROIC_TOKENS[j]) && intendedPayment[j] > 0) {
-                        if (getCount(inventoryContent) > 1) {
+            if (itemName != null && !itemName.isEmpty())
+            {
+                for (int j = 0; j < trial.HEROIC_TOKENS.length; j++)
+                {
+                    if (itemName.equals(trial.HEROIC_TOKENS[j]) && intendedPayment[j] > 0)
+                    {
+                        if (getCount(inventoryContent) > 1)
+                        {
                             setCount(inventoryContent, getCount(inventoryContent) - 1);
-                        } else {
+                        }
+                        else
+                        {
                             destroyObject(inventoryContent);
                         }
                         intendedPayment[j]--;
                     }
                 }
-                if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01")) {
+                if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01"))
+                {
                     foundTokenHolderBox = true;
-                    if (hasObjVar(inventoryContent, "item.set.tokens_held")) {
+                    if (hasObjVar(inventoryContent, "item.set.tokens_held"))
+                    {
                         int[] virtualTokens = getIntArrayObjVar(inventoryContent, "item.set.tokens_held");
-                        for (int k = 0; k < trial.HEROIC_TOKENS.length; k++) {
-                            if (intendedPayment[k] > 0 && virtualTokens[k] > 0) {
+                        for (int k = 0; k < trial.HEROIC_TOKENS.length; k++)
+                        {
+                            if (intendedPayment[k] > 0 && virtualTokens[k] > 0)
+                            {
                                 int paymentCounter = intendedPayment[k];
-                                for (int l = 0; l < paymentCounter; l++) {
-                                    if (virtualTokens[k] >= 0) {
+                                for (int l = 0; l < paymentCounter; l++)
+                                {
+                                    if (virtualTokens[k] >= 0)
+                                    {
                                         virtualTokens[k]--;
                                         intendedPayment[k]--;
                                     }
@@ -298,8 +336,8 @@ public class token_vendor extends script.base_script
         }
         cleanScriptVars(player);
         closeOldWindow(player);
-        return;
     }
+
     public boolean verifyTokens(obj_id player, int[] intendedPayment) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(player);
@@ -308,40 +346,53 @@ public class token_vendor extends script.base_script
         int tokensNeeded = 0;
         int tokensIGot = 0;
         int[] payment = new int[trial.HEROIC_TOKENS.length];
-        for (int z = 0; z < payment.length; z++)
+        System.arraycopy(intendedPayment, 0, payment, 0, payment.length);
+        for (int i1 : payment)
         {
-            payment[z] = intendedPayment[z];
-        }
-        for (int i1 : payment) {
             tokensNeeded += i1;
         }
-        for (obj_id inventoryContent : inventoryContents) {
+        for (obj_id inventoryContent : inventoryContents)
+        {
             String itemName = getStaticItemName(inventoryContent);
-            if (itemName != null && !itemName.equals("")) {
-                for (int j = 0; j < trial.HEROIC_TOKENS.length; j++) {
-                    if (itemName.equals(trial.HEROIC_TOKENS[j]) && payment[j] > 0) {
-                        if (getCount(inventoryContent) > 1) {
-                            for (int m = 0; m < getCount(inventoryContent); m++) {
-                                if (payment[j] > 0) {
+            if (itemName != null && !itemName.equals(""))
+            {
+                for (int j = 0; j < trial.HEROIC_TOKENS.length; j++)
+                {
+                    if (itemName.equals(trial.HEROIC_TOKENS[j]) && payment[j] > 0)
+                    {
+                        if (getCount(inventoryContent) > 1)
+                        {
+                            for (int m = 0; m < getCount(inventoryContent); m++)
+                            {
+                                if (payment[j] > 0)
+                                {
                                     payment[j]--;
                                     tokensIGot++;
                                 }
                             }
-                        } else {
+                        }
+                        else
+                        {
                             payment[j]--;
                             tokensIGot++;
                         }
                     }
                 }
-                if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01")) {
+                if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01"))
+                {
                     foundTokenHolderBox = true;
-                    if (hasObjVar(inventoryContent, "item.set.tokens_held")) {
+                    if (hasObjVar(inventoryContent, "item.set.tokens_held"))
+                    {
                         int[] virtualTokens = getIntArrayObjVar(inventoryContent, "item.set.tokens_held");
-                        for (int k = 0; k < trial.HEROIC_TOKENS.length; k++) {
-                            if (payment[k] > 0 && virtualTokens[k] > 0) {
+                        for (int k = 0; k < trial.HEROIC_TOKENS.length; k++)
+                        {
+                            if (payment[k] > 0 && virtualTokens[k] > 0)
+                            {
                                 int paymentIterations = payment[k];
-                                for (int l = 0; l < paymentIterations; l++) {
-                                    if (virtualTokens[k] > 0) {
+                                for (int l = 0; l < paymentIterations; l++)
+                                {
+                                    if (virtualTokens[k] > 0)
+                                    {
                                         virtualTokens[k]--;
                                         payment[k]--;
                                         tokensIGot++;
@@ -353,12 +404,9 @@ public class token_vendor extends script.base_script
                 }
             }
         }
-        if (tokensNeeded != tokensIGot)
-        {
-            return false;
-        }
-        return true;
+        return tokensNeeded == tokensIGot;
     }
+
     public String getTokensOwedPrompt(obj_id player) throws InterruptedException
     {
         int[] tokensOwed = utils.getIntArrayScriptVar(player, "item.set.owed_tokens");
@@ -377,12 +425,14 @@ public class token_vendor extends script.base_script
         }
         return prompt;
     }
+
     public void cleanScriptVars(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
         utils.removeScriptVarTree(player, "item.set");
         utils.removeScriptVarTree(self, "item.set");
     }
+
     public void refreshMenu(obj_id player, String prompt, String title, String[] options, String myHandler, boolean draw) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -392,19 +442,20 @@ public class token_vendor extends script.base_script
             cleanScriptVars(player);
             return;
         }
-        if (draw == false)
+        if (!draw)
         {
             int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, options, myHandler, false, false);
             sui.showSUIPage(pid);
             setWindowPid(player, pid);
         }
-        else 
+        else
         {
             int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, options, myHandler, true, false);
             sui.showSUIPage(pid);
             setWindowPid(player, pid);
         }
     }
+
     public void closeOldWindow(obj_id player) throws InterruptedException
     {
         String playerPath = "item.set.";
@@ -415,6 +466,7 @@ public class token_vendor extends script.base_script
             utils.removeScriptVar(player, "item.set.pid");
         }
     }
+
     public void setWindowPid(obj_id player, int pid) throws InterruptedException
     {
         if (pid > -1)
@@ -422,6 +474,7 @@ public class token_vendor extends script.base_script
             utils.setScriptVar(player, "item.set.pid", pid);
         }
     }
+
     public boolean outOfRange(obj_id self, obj_id player, boolean message) throws InterruptedException
     {
         if (isGod(player))

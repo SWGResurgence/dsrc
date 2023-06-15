@@ -1,14 +1,17 @@
 package script.theme_park.naboo;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 import script.string_id;
 
 public class naboo_convo extends script.base_script
 {
-    public naboo_convo()
-    {
-    }
     public static final String CONVO = "naboo_convo";
     public static final location theed = new location(3355, 6, -5018, "naboo", null);
     public static final location deeja = new location(-2882, 7, 2097, "naboo");
@@ -49,6 +52,10 @@ public class naboo_convo extends script.base_script
     public static final location university_trainer_deeja = new location(-1100, 0, -3737, "naboo");
     public static final location university_trainer_keren = new location(-1100, 0, -3737, "naboo");
     public static final location university_trainer_moenia = new location(-1100, 0, -3737, "naboo");
+    public naboo_convo()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "npc.converse.npc_converse_menu"))
@@ -57,10 +64,11 @@ public class naboo_convo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         string_id greeting = new string_id(CONVO, "greeting_1");
-        string_id response[] = new string_id[4];
+        string_id[] response = new string_id[4];
         response[0] = new string_id(CONVO, "player_1");
         response[1] = new string_id(CONVO, "player_3");
         response[2] = new string_id(CONVO, "player_2");
@@ -68,6 +76,7 @@ public class naboo_convo extends script.base_script
         npcStartConversation(speaker, self, CONVO, greeting, response);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if ((response.getAsciiId()).equals("player_1"))
@@ -663,6 +672,7 @@ public class naboo_convo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void makeWaypoint(location loc, obj_id player) throws InterruptedException
     {
         obj_id waypoint = createWaypointInDatapad(player, loc);

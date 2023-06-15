@@ -1,5 +1,11 @@
 package script.event.housepackup;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.cts;
 import script.library.utils;
 import script.menu_info;
@@ -9,13 +15,14 @@ import script.string_id;
 
 public class cts_unrestricted_gift extends script.base_script
 {
-    public cts_unrestricted_gift()
-    {
-    }
     public static final boolean BLOGGING_ON = true;
     public static final String BLOG_CATEGORY = "CharacterTransfer";
     public static final String STF_FILE = "veteran_new";
     public static final string_id SID_OPEN_GIFT = new string_id(STF_FILE, "open_gift");
+    public cts_unrestricted_gift()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         blog("OnObjectMenuRequest init");
@@ -42,6 +49,7 @@ public class cts_unrestricted_gift extends script.base_script
         int mnu = mi.addRootMenu(menu_info_types.ITEM_USE, SID_OPEN_GIFT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -65,6 +73,7 @@ public class cts_unrestricted_gift extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -85,6 +94,7 @@ public class cts_unrestricted_gift extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (BLOGGING_ON)

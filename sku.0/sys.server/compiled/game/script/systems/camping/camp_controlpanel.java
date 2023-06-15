@@ -1,5 +1,11 @@
 package script.systems.camping;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -28,6 +34,7 @@ public class camp_controlpanel extends script.base_script
     public static final string_id SID_SUI_CAMP_STATUS_TOT_VIS = new string_id("camp", "sui_camp_status_tot_vis");
     public static final string_id SID_SUI_CAMP_STATUS_CUR_VIS = new string_id("camp", "sui_camp_status_cur_vis");
     public static final string_id SID_SUI_CAMP_STATUS_HEAL = new string_id("camp", "sui_camp_status_heal");
+
     public camp_controlpanel()
     {
     }

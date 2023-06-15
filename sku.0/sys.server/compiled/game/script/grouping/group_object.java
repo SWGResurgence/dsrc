@@ -1,5 +1,11 @@
 package script.grouping;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.deltadictionary;
 import script.dictionary;
 import script.location;
@@ -12,10 +18,12 @@ public class group_object extends script.base_script
     public group_object()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int volleyTargetDone(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] members = getGroupMemberIds(self);
@@ -23,11 +31,13 @@ public class group_object extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id member : members) {
+        for (obj_id member : members)
+        {
             messageTo(member, "volleyTargetDone", params, 0, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int addGroupMember(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -44,6 +54,7 @@ public class group_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeGroupMember(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -60,6 +71,7 @@ public class group_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     private location calculateNearestGroupMission(obj_id self) throws InterruptedException
     {
         location result;
@@ -81,9 +93,9 @@ public class group_object extends script.base_script
             {
                 if (missionLocations.length > 0)
                 {
-                    nearestGroupMission = (location)missionLocations[0].clone();
+                    nearestGroupMission = (location) missionLocations[0].clone();
                 }
-                else 
+                else
                 {
                     return null;
                 }
@@ -97,7 +109,7 @@ public class group_object extends script.base_script
                 float bestDistance = -1;
                 for (missionLocationIndex = 0; missionLocationIndex < missionLocations.length; ++missionLocationIndex)
                 {
-                    location currentLocation = (location)missionLocations[missionLocationIndex].clone();
+                    location currentLocation = (location) missionLocations[missionLocationIndex].clone();
                     if (currentLocation.area.equals(memberLocations[memberLocationIndex].area))
                     {
                         float currentDistance = currentLocation.distance(memberLocations[memberLocationIndex]);
@@ -117,7 +129,7 @@ public class group_object extends script.base_script
                         votes = votes + 1;
                         bestLocations.put(p, votes);
                     }
-                    else 
+                    else
                     {
                         Integer votes = 1;
                         bestLocations.put(p, votes);
@@ -130,15 +142,15 @@ public class group_object extends script.base_script
             Integer locationIndex;
             while (votesIterator.hasNext())
             {
-                locationIndex = (Integer)(votesIterator.next());
+                locationIndex = (Integer) (votesIterator.next());
                 int votes = (Integer) bestLocations.get(locationIndex);
                 if (votes > mostVotes)
                 {
-                    nearestGroupMission = (location)missionLocations[locationIndex].clone();
+                    nearestGroupMission = (location) missionLocations[locationIndex].clone();
                     mostVotes = votes;
                 }
             }
-            result = (location)nearestGroupMission.clone();
+            result = (location) nearestGroupMission.clone();
             scriptVars.put("nearestGroupMission", nearestGroupMission);
         }
         else
@@ -147,6 +159,7 @@ public class group_object extends script.base_script
         }
         return result;
     }
+
     public int missionLocationResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params != null) && (params.containsKey("requestMissionLocationsNumber")))
@@ -180,7 +193,7 @@ public class group_object extends script.base_script
                             location nearestGroupMission = scriptVars.getLocation("nearestGroupMission");
                             if (nearestGroupMission == null)
                             {
-                                nearestGroupMission = (location)missionLocation[0].clone();
+                                nearestGroupMission = (location) missionLocation[0].clone();
                                 scriptVars.put("nearestGroupMission", nearestGroupMission);
                             }
                         }
@@ -194,6 +207,7 @@ public class group_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     private void tellMembersAboutNearestGroupMission(obj_id self, location nearestGroupMission) throws InterruptedException
     {
         if (nearestGroupMission != null)
@@ -208,12 +222,14 @@ public class group_object extends script.base_script
                 sequence++;
                 scriptVars.put("updateSequence", sequence);
                 msgData.put("updateSequence", sequence);
-                for (obj_id member : members) {
+                for (obj_id member : members)
+                {
                     messageTo(member, "updateGroupWaypoint", msgData, 0, false);
                 }
             }
         }
     }
+
     private void selectNearestGroupMission(obj_id self) throws InterruptedException
     {
         deltadictionary scriptVars = self.getScriptVars();
@@ -242,11 +258,13 @@ public class group_object extends script.base_script
             }
         }
     }
+
     public int recaclulateNearestGroupWaypoint(obj_id self, dictionary params) throws InterruptedException
     {
         selectNearestGroupMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int removeMissionLocation(obj_id self, dictionary params) throws InterruptedException
     {
         selectNearestGroupMission(self);

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.ArrayList;
@@ -61,6 +67,7 @@ public class space_combat extends script.base_script
     public static final int NPC_DAMAGE_MULTIPLIER = 4;
     public static final string_id SID_DISABLED = new string_id("space/space_interaction", "disabled");
     public static final String SPACE_COLLECTIONS_LOOT_TABLE = "datatables/space_loot/space_collection_loot.iff";
+
     public space_combat()
     {
     }

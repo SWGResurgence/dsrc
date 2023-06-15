@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.myyydril;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 
 import script.library.ai_lib;
@@ -8,34 +14,45 @@ import script.library.utils;
 
 import script.obj_id;
 
-public class loot_controller_grevious extends script.base_script {
-    public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException {
+public class loot_controller_grevious extends script.base_script
+{
+    public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
+    {
         obj_id corpseInventory = utils.getInventoryContainer(self);
-        if (corpseInventory == null) {
+        if (corpseInventory == null)
+        {
             return SCRIPT_CONTINUE;
         }
-        if (!isIdValid(self)) {
+        if (!isIdValid(self))
+        {
             return SCRIPT_CONTINUE;
         }
         createMyLoot(self);
         return SCRIPT_CONTINUE;
     }
-    public void createMyLoot(obj_id self) throws InterruptedException {
+
+    public void createMyLoot(obj_id self) throws InterruptedException
+    {
         obj_id corpseInventory = utils.getInventoryContainer(self);
-        if (corpseInventory == null) {
+        if (corpseInventory == null)
+        {
             return;
         }
         String mobType = ai_lib.getCreatureName(self);
-        if (mobType == null) {
+        if (mobType == null)
+        {
             return;
         }
         int x = rand(1, 100);
-        if(x < 31){  // 30% Chance to Drop General Grevious Painting
+        if (x < 31)
+        {  // 30% Chance to Drop General Grevious Painting
             static_item.createNewItemFunction("item_general_grevious_painting_01_01", corpseInventory);
-            if(x < 15){  // 14% chance at dropping bonus loot (at least a Bane's Heart crystal) 
+            if (x < 15)
+            {  // 14% chance at dropping bonus loot (at least a Bane's Heart crystal)
                 static_item.createNewItemFunction("item_color_crystal_02_16", corpseInventory);
             }
-            if(x < 3){ // 2% chance to drop Grievous Gutsack
+            if (x < 3)
+            { // 2% chance to drop Grievous Gutsack
                 static_item.createNewItemFunction("item_tcg_loot_reward_series3_general_grievous_gutsack", corpseInventory);
             }
         }
@@ -43,6 +60,5 @@ public class loot_controller_grevious extends script.base_script {
         String myLoot2 = "object/tangible/wearables/cybernetic/s02/cybernetic_s02_arm_r.iff";
         createObject(myLoot1, corpseInventory, "");
         createObject(myLoot2, corpseInventory, "");
-        return;
     }
 }

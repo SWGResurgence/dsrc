@@ -1,18 +1,25 @@
 package script.theme_park.dungeon.mustafar_trials.obiwan_finale;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class obiwan_event_manager extends script.base_script
 {
-    public obiwan_event_manager()
-    {
-    }
     public static final String STF_OBI_CONVO = "conversation/som_kenobi_obi_wan";
     public static final string_id SID_LAUNCH = new string_id(mustafar.STF_OBI_MSGS, "obiwan_finale_launch");
     public static final string_id SID_EJECT = new string_id(mustafar.STF_OBI_MSGS, "obiwan_finale_eject");
     public static final string_id SID_LEAVE_YOUR_GROUP = new string_id(mustafar.STF_OBI_MSGS, "obi_leave_your_group");
     public static final boolean CONST_FLAG_DO_LOGGING = false;
+    public obiwan_event_manager()
+    {
+    }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (isGod(speaker))
@@ -24,6 +31,7 @@ public class obiwan_event_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void debugLogging(String section, String message) throws InterruptedException
     {
         if (CONST_FLAG_DO_LOGGING)
@@ -31,6 +39,7 @@ public class obiwan_event_manager extends script.base_script
             LOG("debug/obiwan_event_manager/" + section, message);
         }
     }
+
     public void clearEventArea(obj_id dungeon) throws InterruptedException
     {
         obj_id cell = getCellId(dungeon, "mainroom");
@@ -40,16 +49,21 @@ public class obiwan_event_manager extends script.base_script
             debugLogging("clearEventArea", "Dungeon was empty, return");
             return;
         }
-        for (obj_id content : contents) {
-            if (isPlayer(content)) {
+        for (obj_id content : contents)
+        {
+            if (isPlayer(content))
+            {
                 debugLogging("clearEventArea", "Validating player(" + getName(content) + "/" + content + ") from event area");
-            } else {
+            }
+            else
+            {
                 debugLogging("clearEventArea", "Destroying object(" + getName(content) + "/" + content + ")");
                 trial.cleanupNpc(content);
             }
         }
         cleanupDungeonScriptvars();
     }
+
     public void eventWon() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -66,8 +80,8 @@ public class obiwan_event_manager extends script.base_script
         {
             removeObjVar(player, "sawObiwanAtLauncher");
         }
-        return;
     }
+
     public void cleanupDungeonScriptvars() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -96,16 +110,19 @@ public class obiwan_event_manager extends script.base_script
             utils.removeScriptVar(self, "darkJedi");
         }
     }
+
     public int dungeonCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         clearEventArea(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         clearEventArea(self);
         return SCRIPT_CONTINUE;
     }
+
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         clearEventArea(self);
@@ -113,6 +130,7 @@ public class obiwan_event_manager extends script.base_script
         obj_id player = utils.getObjIdScriptVar(self, "player");
         return SCRIPT_CONTINUE;
     }
+
     public int obiwanSpeechDelay(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "player");
@@ -125,6 +143,7 @@ public class obiwan_event_manager extends script.base_script
         messageTo(self, "obiwanSpeechContinued", params, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int obiwanSpeechContinued(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "player");
@@ -138,6 +157,7 @@ public class obiwan_event_manager extends script.base_script
         messageTo(self, "spawnBossDelay", params, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int lightsCameraAction(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "player");
@@ -236,6 +256,7 @@ public class obiwan_event_manager extends script.base_script
         utils.setScriptVar(self, "intermission", intermissionNum);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnBossDelay(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "player");
@@ -244,6 +265,7 @@ public class obiwan_event_manager extends script.base_script
         mustafar.spawnContents(self, "boss", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int darkJediThrowsDownPartOne(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "player");
@@ -255,6 +277,7 @@ public class obiwan_event_manager extends script.base_script
         messageTo(self, "minionWaveLaunch", waveParams, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int obiSaysBeCareful(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "player");
@@ -266,6 +289,7 @@ public class obiwan_event_manager extends script.base_script
         chat.chat(obiwan, player, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int obiSaysBeCareful2(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "player");
@@ -278,6 +302,7 @@ public class obiwan_event_manager extends script.base_script
         messageTo(self, "moveObiwanHomeAfterCommenting", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int obiwanWarnsOfSpecialAttack(obj_id self, dictionary params) throws InterruptedException
     {
         debugLogging("//***// obiwanWarnsOfSpecialAttack: ", "////>>>> -------------------------------	ENTERED");
@@ -298,6 +323,7 @@ public class obiwan_event_manager extends script.base_script
         chat.chat(obiwan, player, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int obiwanCongratsSpecialAttackBlock(obj_id self, dictionary params) throws InterruptedException
     {
         debugLogging("//***// obiwanCongratsSpecialAttackBlock: ", "////>>>> -------------------------------	ENTERED");
@@ -314,6 +340,7 @@ public class obiwan_event_manager extends script.base_script
         chat.chat(obiwan, player, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int darkJediThrowsDownPartTwo(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "player");
@@ -326,6 +353,7 @@ public class obiwan_event_manager extends script.base_script
         chat.chat(darkJedi, player, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int minionWaveLaunch(obj_id self, dictionary params) throws InterruptedException
     {
         debugLogging("minionWaveLaunch", "entered");
@@ -352,27 +380,27 @@ public class obiwan_event_manager extends script.base_script
         switch (waveNumber)
         {
             case 1:
-            
+
             {
                 mustafar.spawnContents(self, "minionA", 1);
             }
             break;
             case 2:
-            
+
             {
                 mustafar.spawnContents(self, "minionA", 2);
                 mustafar.spawnContents(self, "minionB", 1);
             }
             break;
             case 3:
-            
+
             {
                 mustafar.spawnContents(self, "minionB", 2);
                 mustafar.spawnContents(self, "minionB", 3);
             }
             break;
             default:
-            
+
             {
                 debugLogging("minionWaveLaunch", "can't figure out wave number. Doing default.");
                 debugLogging("//***// minionWaveLaunch: ", "////>>>> messaging ------------------------------- 'lightsCameraAction.'");
@@ -383,6 +411,7 @@ public class obiwan_event_manager extends script.base_script
         messageTo(self, "moveObiwanOuttaTheWay", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int minionDied(obj_id self, dictionary params) throws InterruptedException
     {
         debugLogging("minionDied", "entered");
@@ -395,6 +424,7 @@ public class obiwan_event_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int obiScoldsPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "player");
@@ -411,6 +441,7 @@ public class obiwan_event_manager extends script.base_script
         messageTo(self, "playerGetsCrystal", null, 30, false);
         return SCRIPT_CONTINUE;
     }
+
     public int playerGetsCrystal(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id crystal = utils.getObjIdScriptVar(self, "crystal");
@@ -430,6 +461,7 @@ public class obiwan_event_manager extends script.base_script
         messageTo(self, "obiLeaves", null, 15, false);
         return SCRIPT_CONTINUE;
     }
+
     public int obiCongratulatesPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "player");
@@ -446,6 +478,7 @@ public class obiwan_event_manager extends script.base_script
         messageTo(self, "obiLeaves", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int obiLeaves(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "player");
@@ -462,6 +495,7 @@ public class obiwan_event_manager extends script.base_script
         eventWon();
         return SCRIPT_CONTINUE;
     }
+
     public int moveBossToPostureLoc(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id darkJedi = utils.getObjIdScriptVar(self, "darkJedi");
@@ -475,6 +509,7 @@ public class obiwan_event_manager extends script.base_script
         setHomeLocation(darkJedi, home);
         return SCRIPT_CONTINUE;
     }
+
     public int moveBossToHomeLoc(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id darkJedi = utils.getObjIdScriptVar(self, "darkJedi");
@@ -488,6 +523,7 @@ public class obiwan_event_manager extends script.base_script
         setHomeLocation(darkJedi, home);
         return SCRIPT_CONTINUE;
     }
+
     public int obiSaysDestroyCrystal(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "player");
@@ -501,6 +537,7 @@ public class obiwan_event_manager extends script.base_script
         messageTo(self, "obiRepeatsDestroyCrystal", null, rand(20, 40), false);
         return SCRIPT_CONTINUE;
     }
+
     public int obiRepeatsDestroyCrystal(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id obiwan = utils.getObjIdScriptVar(self, "obiwan");
@@ -529,6 +566,7 @@ public class obiwan_event_manager extends script.base_script
         messageTo(self, "obiRepeatsDestroyCrystal", null, rand(20, 40), false);
         return SCRIPT_CONTINUE;
     }
+
     public int moveMinionIntoRoom(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id minion = params.getObjId("minion");
@@ -543,6 +581,7 @@ public class obiwan_event_manager extends script.base_script
         setHomeLocation(minion, newDestination);
         return SCRIPT_CONTINUE;
     }
+
     public int moveObiwanToPostureLocation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id obiwan = utils.getObjIdScriptVar(self, "obiwan");
@@ -557,6 +596,7 @@ public class obiwan_event_manager extends script.base_script
         messageTo(obiwan, "obiwanFacePlayer", null, 7, false);
         return SCRIPT_CONTINUE;
     }
+
     public int moveObiwanOuttaTheWay(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id obiwan = utils.getObjIdScriptVar(self, "obiwan");
@@ -571,6 +611,7 @@ public class obiwan_event_manager extends script.base_script
         messageTo(obiwan, "obiwanFacePlayer", null, 6, false);
         return SCRIPT_CONTINUE;
     }
+
     public int moveObiwanForCrystalComment(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id obiwan = utils.getObjIdScriptVar(self, "obiwan");
@@ -586,6 +627,7 @@ public class obiwan_event_manager extends script.base_script
         messageTo(obiwan, "obiwanFacePlayer", null, 6, false);
         return SCRIPT_CONTINUE;
     }
+
     public int moveObiwanHomeAfterCommenting(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id obiwan = utils.getObjIdScriptVar(self, "obiwan");
@@ -600,11 +642,13 @@ public class obiwan_event_manager extends script.base_script
         messageTo(obiwan, "obiwanFacePlayer", null, 7, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupScriptVars(obj_id self, dictionary params) throws InterruptedException
     {
         cleanupDungeonScriptvars();
         return SCRIPT_CONTINUE;
     }
+
     public int moveObiwanToCrystalSuckLocation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id obiwan = utils.getObjIdScriptVar(self, "obiwan");
@@ -620,6 +664,7 @@ public class obiwan_event_manager extends script.base_script
         messageTo(obiwan, "obiwanFaceCrystal", null, 7, false);
         return SCRIPT_CONTINUE;
     }
+
     public int blowUpCrystal(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id crystal = utils.getObjIdScriptVar(self, "crystal");

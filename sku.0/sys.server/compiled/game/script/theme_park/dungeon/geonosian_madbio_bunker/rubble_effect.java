@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.geonosian_madbio_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class rubble_effect extends script.base_script
     public rubble_effect()
     {
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -22,12 +29,14 @@ public class rubble_effect extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int playedAnim(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(getSelf(), "played", 1);
         messageTo(getSelf(), "resetAnim", null, 120, false);
         return SCRIPT_CONTINUE;
     }
+
     public int resetAnim(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(getSelf(), "played"))

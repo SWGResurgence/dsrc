@@ -1,5 +1,11 @@
 package script.systems.crafting.community_crafting.component;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.resource_weight;
 
 public class lightweight_turret extends script.systems.crafting.community_crafting.component.base_component
@@ -23,6 +29,7 @@ public class lightweight_turret extends script.systems.crafting.community_crafti
     public static final resource_weight[] OBJ_MAX_ATTRIBUTE_RESOURCES =
             {
             };
+
     public lightweight_turret()
     {
     }

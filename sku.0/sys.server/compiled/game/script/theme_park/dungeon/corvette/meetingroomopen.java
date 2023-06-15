@@ -1,13 +1,21 @@
 package script.theme_park.dungeon.corvette;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class meetingroomopen extends script.base_script
 {
+    public static final String MSGS = "dungeon/corvette";
+
     public meetingroomopen()
     {
     }
-    public static final String MSGS = "dungeon/corvette";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -18,6 +26,7 @@ public class meetingroomopen extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -32,7 +41,7 @@ public class meetingroomopen extends script.base_script
                 sendSystemMessage(player, open);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 string_id already = new string_id(MSGS, "already_open");
                 sendSystemMessage(player, already);

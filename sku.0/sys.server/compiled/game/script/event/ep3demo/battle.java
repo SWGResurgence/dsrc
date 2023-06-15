@@ -1,5 +1,11 @@
 package script.event.ep3demo;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.utils;
@@ -10,119 +16,120 @@ import java.util.StringTokenizer;
 
 public class battle extends script.base_script
 {
+    public static final String[] VICTIM1 =
+            {
+                    "ep3_npc_wookiee_battleleader",
+                    "ep3_npc_wookiee_commando",
+                    "ep3_npc_wookiee_forest_stalker",
+                    "ep3_npc_wookiee_freedom_fighters"
+            };
+    public static final String[] AGGRESSOR1 =
+            {
+                    "ep3_slaver_blackscale_assault",
+                    "ep3_slaver_blackscale_guard",
+                    "ep3_slaver_blackscale_trooper"
+            };
+    public static final String[] VICTIM2 =
+            {
+                    "ep3_hracca_kkorrwrot",
+                    "ep3_hracca_kkorrwrot"
+            };
+    public static final String[] AGGRESSOR2 =
+            {
+                    "stormtrooper",
+                    "stormtrooper"
+            };
+    public static final String[] VICTIM3 =
+            {
+                    "ep3_rryatt_katarn",
+                    "ep3_rryatt_katarn"
+            };
+    public static final String[] AGGRESSOR3 =
+            {
+                    "stormtrooper",
+                    "stormtrooper"
+            };
+    public static final String[] VICTIM4 =
+            {
+                    "ep3_etyyy_mouf",
+                    "ep3_etyyy_mouf"
+            };
+    public static final String[] AGGRESSOR4 =
+            {
+                    "stormtrooper",
+                    "stormtrooper"
+            };
+    public static final String[] VICTIM5 =
+            {
+                    "ep3_etyyy_walluga",
+                    "ep3_etyyy_walluga"
+            };
+    public static final String[] AGGRESSOR5 =
+            {
+                    "stormtrooper",
+                    "stormtrooper"
+            };
+    public static final String[] VICTIM6 =
+            {
+                    "ep3_kachirho_uller",
+                    "ep3_kachirho_uller"
+            };
+    public static final String[] AGGRESSOR6 =
+            {
+                    "stormtrooper",
+                    "stormtrooper"
+            };
+    public static final String[] VICTIM7 =
+            {
+                    "ep3_etyyy_webweaver",
+                    "ep3_etyyy_webweaver"
+            };
+    public static final String[] AGGRESSOR7 =
+            {
+                    "stormtrooper",
+                    "stormtrooper"
+            };
+    public static final String[] VICTIM8 =
+            {
+                    "ep3_urnsoris_worker",
+                    "ep3_urnsoris_worker"
+            };
+    public static final String[] AGGRESSOR8 =
+            {
+                    "stormtrooper",
+                    "stormtrooper"
+            };
+    public static final String[] VICTIM9 =
+            {
+                    "ep3_rryatt_minstyngar_breeder",
+                    "ep3_rryatt_minstyngar_breeder"
+            };
+    public static final String[] AGGRESSOR9 =
+            {
+                    "stormtrooper",
+                    "stormtrooper"
+            };
+    public static final String[] VICTIM10 =
+            {
+                    "ep3_hracca_kkorrwrot",
+                    "ep3_rryatt_katarn",
+                    "ep3_etyyy_mouf",
+                    "ep3_etyyy_walluga",
+                    "ep3_kachirho_uller",
+                    "ep3_kachirho_uller",
+                    "ep3_etyyy_webweaver",
+                    "ep3_urnsoris_worker",
+                    "ep3_rryatt_minstyngar_breeder"
+            };
+    public static final String[] AGGRESSOR10 =
+            {
+                    "stormtrooper",
+                    "stormtrooper"
+            };
     public battle()
     {
     }
-    public static final String[] VICTIM1 = 
-    {
-        "ep3_npc_wookiee_battleleader",
-        "ep3_npc_wookiee_commando",
-        "ep3_npc_wookiee_forest_stalker",
-        "ep3_npc_wookiee_freedom_fighters"
-    };
-    public static final String[] AGGRESSOR1 = 
-    {
-        "ep3_slaver_blackscale_assault",
-        "ep3_slaver_blackscale_guard",
-        "ep3_slaver_blackscale_trooper"
-    };
-    public static final String[] VICTIM2 = 
-    {
-        "ep3_hracca_kkorrwrot",
-        "ep3_hracca_kkorrwrot"
-    };
-    public static final String[] AGGRESSOR2 = 
-    {
-        "stormtrooper",
-        "stormtrooper"
-    };
-    public static final String[] VICTIM3 = 
-    {
-        "ep3_rryatt_katarn",
-        "ep3_rryatt_katarn"
-    };
-    public static final String[] AGGRESSOR3 = 
-    {
-        "stormtrooper",
-        "stormtrooper"
-    };
-    public static final String[] VICTIM4 = 
-    {
-        "ep3_etyyy_mouf",
-        "ep3_etyyy_mouf"
-    };
-    public static final String[] AGGRESSOR4 = 
-    {
-        "stormtrooper",
-        "stormtrooper"
-    };
-    public static final String[] VICTIM5 = 
-    {
-        "ep3_etyyy_walluga",
-        "ep3_etyyy_walluga"
-    };
-    public static final String[] AGGRESSOR5 = 
-    {
-        "stormtrooper",
-        "stormtrooper"
-    };
-    public static final String[] VICTIM6 = 
-    {
-        "ep3_kachirho_uller",
-        "ep3_kachirho_uller"
-    };
-    public static final String[] AGGRESSOR6 = 
-    {
-        "stormtrooper",
-        "stormtrooper"
-    };
-    public static final String[] VICTIM7 = 
-    {
-        "ep3_etyyy_webweaver",
-        "ep3_etyyy_webweaver"
-    };
-    public static final String[] AGGRESSOR7 = 
-    {
-        "stormtrooper",
-        "stormtrooper"
-    };
-    public static final String[] VICTIM8 = 
-    {
-        "ep3_urnsoris_worker",
-        "ep3_urnsoris_worker"
-    };
-    public static final String[] AGGRESSOR8 = 
-    {
-        "stormtrooper",
-        "stormtrooper"
-    };
-    public static final String[] VICTIM9 = 
-    {
-        "ep3_rryatt_minstyngar_breeder",
-        "ep3_rryatt_minstyngar_breeder"
-    };
-    public static final String[] AGGRESSOR9 = 
-    {
-        "stormtrooper",
-        "stormtrooper"
-    };
-    public static final String[] VICTIM10 = 
-    {
-        "ep3_hracca_kkorrwrot",
-        "ep3_rryatt_katarn",
-        "ep3_etyyy_mouf",
-        "ep3_etyyy_walluga",
-        "ep3_kachirho_uller",
-        "ep3_kachirho_uller",
-        "ep3_etyyy_webweaver",
-        "ep3_urnsoris_worker",
-        "ep3_rryatt_minstyngar_breeder"
-    };
-    public static final String[] AGGRESSOR10 = 
-    {
-        "stormtrooper",
-        "stormtrooper"
-    };
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (objSpeaker != self)
@@ -159,11 +166,13 @@ public class battle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int allowMoreBattles(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "ep3demoSanityChecker");
         return SCRIPT_CONTINUE;
     }
+
     public void startBattle(obj_id self, int battleIndex) throws InterruptedException
     {
         float timeStamp = getGameTime();
@@ -241,6 +250,5 @@ public class battle extends script.base_script
         }
         setObjVar(battleSpawner, "ep3demo.timeStamp", timeStamp);
         attachScript(battleSpawner, "event.ep3demo.battle_spawner");
-        return;
     }
 }

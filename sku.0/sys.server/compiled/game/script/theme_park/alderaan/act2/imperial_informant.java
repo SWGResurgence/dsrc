@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act2;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -10,10 +16,12 @@ import java.util.Vector;
 
 public class imperial_informant extends script.base_script
 {
+    public static final String IMPERIAL_STF = "theme_park/alderaan/act2/imperial_missions";
+
     public imperial_informant()
     {
     }
-    public static final String IMPERIAL_STF = "theme_park/alderaan/act2/imperial_missions";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -22,6 +30,7 @@ public class imperial_informant extends script.base_script
         createTriggerVolume("someoneApproaching", 15, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(speaker))
@@ -40,7 +49,7 @@ public class imperial_informant extends script.base_script
             response = new string_id(IMPERIAL_STF, "m1_informant_reprimand");
             dialogResponse = utils.addElement(dialogResponse, response);
         }
-        else 
+        else
         {
             openDialog = new string_id(IMPERIAL_STF, "m1_informant_invalid");
         }
@@ -52,6 +61,7 @@ public class imperial_informant extends script.base_script
         npcStartConversation(speaker, self, "imperialInformant", openDialog, dialogResponse);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if (!convo.equals("imperialInformant"))
@@ -74,6 +84,7 @@ public class imperial_informant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (hasObjVar(breacher, "gm"))

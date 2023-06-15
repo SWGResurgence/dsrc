@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.old_republic_facility;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.prose;
@@ -10,6 +16,7 @@ public class quest_object_01 extends script.base_script
     public quest_object_01()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("mustafar/old_republic_facility", "quest_object_01_use"));
@@ -20,6 +27,7 @@ public class quest_object_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -29,7 +37,7 @@ public class quest_object_01 extends script.base_script
             {
                 activateObject(self, player);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("mustafar/old_republic_facility", "quest_object_01_msg_already_active"));
             }
@@ -37,6 +45,7 @@ public class quest_object_01 extends script.base_script
         sendDirtyObjectMenuNotification(self);
         return SCRIPT_CONTINUE;
     }
+
     public void activateObject(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);
@@ -64,12 +73,15 @@ public class quest_object_01 extends script.base_script
             {
                 return;
             }
-            for (obj_id member : members) {
-                if (member != player) {
+            for (obj_id member : members)
+            {
+                if (member != player)
+                {
                     prose_package pp = new prose_package();
                     pp = prose.setStringId(pp, new string_id("mustafar/old_republic_facility", "quest_object_01_msg_other"));
                     pp = prose.setTU(pp, player);
-                    if (!groundquests.isQuestActive(member, "som_story_arc_chapter_one_03")) {
+                    if (!groundquests.isQuestActive(member, "som_story_arc_chapter_one_03"))
+                    {
                         sendSystemMessageProse(member, pp);
                     }
                 }
@@ -78,17 +90,19 @@ public class quest_object_01 extends script.base_script
         dictionary d = new dictionary();
         d.put("members", members);
         messageTo(self, "advanceQuest", d, 3.0f, false);
-        return;
     }
+
     public int advanceQuest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] members = params.getObjIdArray("members");
-        if (members == null || members.length == 0)
+        if (members == null)
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id member : members) {
-            if (isIdValid(member)) {
+        for (obj_id member : members)
+        {
+            if (isIdValid(member))
+            {
                 groundquests.sendSignal(member, "mustafar_uplink_power");
             }
         }

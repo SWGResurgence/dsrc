@@ -1,5 +1,11 @@
 package script.systems.image_designer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.buff;
 import script.library.prose;
@@ -44,6 +50,7 @@ public class image_designer_response extends script.base_script
     public static final int IMAGE_DESIGN_EXPERIENCE_COSMETIC = 100;
     public static final int IMAGE_DESIGN_EXPERIENCE_PHYSICAL = 300;
     public static final int IMAGE_DESIGN_EXPERIENCE_STAT_MIG = 2000;
+
     public image_designer_response()
     {
     }

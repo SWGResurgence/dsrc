@@ -1,5 +1,11 @@
 package script.event.lifeday;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.space_transition;
 import script.library.space_utils;
@@ -7,9 +13,6 @@ import script.library.utils;
 
 public class proton_chair extends script.base_script
 {
-    public proton_chair()
-    {
-    }
     private static final String LIFEDAY = "event/life_day";
     private static final String SOUND_1 = "sound/proton_chair_adorable.snd";
     private static final String SOUND_2 = "sound/proton_chair_create_me.snd";
@@ -20,17 +23,22 @@ public class proton_chair extends script.base_script
     private static final String SOUND_7 = "sound/proton_chair_voice_for_you_alone.snd";
     private static final string_id SID_TURN_ON = new string_id(LIFEDAY, "chair_on");
     private static final string_id SID_TURN_OFF = new string_id(LIFEDAY, "chair_off");
+    public proton_chair()
+    {
+    }
 
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         removeObjVar(self, "chairOn");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         removeObjVar(self, "chairOn");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (inHouse(self) && getPosture(player) == POSTURE_SITTING)
@@ -47,6 +55,7 @@ public class proton_chair extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -69,6 +78,7 @@ public class proton_chair extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     private boolean inHouse(obj_id device) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(getContainedBy(device));
@@ -79,6 +89,7 @@ public class proton_chair extends script.base_script
         }
         return (utils.isInHouseCellSpace(device) || space_utils.isPobType(templateName)) && !utils.isNestedWithinAPlayer(device);
     }
+
     public int soundLoop(obj_id self, dictionary params) throws InterruptedException
     {
         if (!inHouse(self))
@@ -124,7 +135,7 @@ public class proton_chair extends script.base_script
                 params.put("player", player);
                 messageTo(self, "soundLoop", params, 10, false);
             }
-            else 
+            else
             {
                 removeObjVar(self, "chairOn");
             }

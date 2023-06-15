@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.utils;
@@ -12,6 +18,7 @@ public class weak_droid extends script.base_script
     public weak_droid()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id weapon = aiGetPrimaryWeapon(self);
@@ -21,6 +28,7 @@ public class weak_droid extends script.base_script
         setRegenRate(self, HEALTH, 3);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id weapon = aiGetPrimaryWeapon(self);
@@ -30,22 +38,26 @@ public class weak_droid extends script.base_script
         setRegenRate(self, HEALTH, 3);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         kill(self);
         playClientEffectObj(killer, "clienteffect/npe_training_droid_explode.cef", self, "");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         messageTo(self, "cleanUpSelf", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHateTargetChanged(obj_id self, obj_id target) throws InterruptedException
     {
         removeHateTarget(self, target);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpSelf(obj_id self, dictionary params) throws InterruptedException
     {
         location myLoc = getLocation(self);

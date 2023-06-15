@@ -1,15 +1,23 @@
 package script.theme_park.dungeon.mustafar_trials.volcano_battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.trial;
 import script.obj_id;
 
 public class hk_risen_guard extends script.base_script
 {
+    public static final boolean LOGGING = false;
+
     public hk_risen_guard()
     {
     }
-    public static final boolean LOGGING = false;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "beginAttack", trial.getSessionDict(self), 3, false);
@@ -17,17 +25,20 @@ public class hk_risen_guard extends script.base_script
         trial.setHp(self, trial.HP_VOLCANO_HK_RISEN_GUARD);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, "destroySelf", null, 5, false);
         trial.bumpSession(self);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int healBoss(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -41,6 +52,7 @@ public class hk_risen_guard extends script.base_script
         messageTo(self, "healBoss", trial.getSessionDict(self), 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int beginAttack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = trial.getValidTargetsInRadius(self, 90.0f);
@@ -58,6 +70,7 @@ public class hk_risen_guard extends script.base_script
         startCombat(self, toAttack);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VOLCANO_LOGGING)

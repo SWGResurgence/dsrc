@@ -1,5 +1,11 @@
 package script.npc.celebrity;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.hue;
 import script.obj_id;
@@ -7,10 +13,12 @@ import script.string_id;
 
 public class kais extends script.base_script
 {
+    public static final String CONVO = "celebrity/kais";
+
     public kais()
     {
     }
-    public static final String CONVO = "celebrity/kais";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id dress = createObject("object/tangible/wearables/pants/nightsister_pants_s01.iff", self, "");
@@ -30,6 +38,7 @@ public class kais extends script.base_script
         debugSpeakMsg(self, "I'm the Nightsister Doctor.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(speaker))
@@ -37,12 +46,13 @@ public class kais extends script.base_script
             return SCRIPT_OVERRIDE;
         }
         string_id greeting = new string_id(CONVO, "npc_1");
-        string_id response[] = new string_id[2];
+        string_id[] response = new string_id[2];
         response[0] = new string_id(CONVO, "player_1");
         response[1] = new string_id(CONVO, "player_2");
         npcStartConversation(speaker, self, "celebConvo", greeting, response);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if ((response.getAsciiId()).equals("player_1"))

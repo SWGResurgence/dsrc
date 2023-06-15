@@ -1,5 +1,11 @@
 package script.item.loot_schematic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -49,6 +55,7 @@ public class loot_schematic extends script.base_script
     public static final string_id SID_WAYPOINT_GRANTED = new string_id("loot_schematic", "waypoint_granted");
     public static final string_id SID_SKILL_GRANTED = new string_id("loot_schematic", "skill_granted");
     public static final string_id SID_SCHEMATIC_ERROR = new string_id("loot_schematic", "schematic_error");
+
     public loot_schematic()
     {
     }

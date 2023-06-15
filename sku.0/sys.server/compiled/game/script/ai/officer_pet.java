@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.pet_lib;
 import script.obj_id;
@@ -10,18 +16,21 @@ public class officer_pet extends script.base_script
     public officer_pet()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "getAndFollowMaster", null, 3, false);
         messageTo(self, "verifyReinforcementsSkill", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "getAndFollowMaster", null, 3, false);
         messageTo(self, "verifyReinforcementsSkill", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int getAndFollowMaster(obj_id self, dictionary params) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -33,6 +42,7 @@ public class officer_pet extends script.base_script
         pet_lib.doCommandNum(self, pet_lib.COMMAND_FOLLOW, master);
         return SCRIPT_CONTINUE;
     }
+
     public int verifyReinforcementsSkill(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = getMaster(self);

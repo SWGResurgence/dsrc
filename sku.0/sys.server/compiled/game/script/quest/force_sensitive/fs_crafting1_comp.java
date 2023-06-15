@@ -1,27 +1,34 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 import script.string_id;
 
 public class fs_crafting1_comp extends script.base_script
 {
-    public fs_crafting1_comp()
-    {
-    }
     public static final String QUEST_OBJVAR = "quest.fs_crafting1";
     public static final String STATUS_OBJVAR = QUEST_OBJVAR + ".status";
     public static final String ANALYZED_OBJVAR = QUEST_OBJVAR + ".analyzed";
     public static final string_id STATUS_OPERATIONAL = new string_id("quest/force_sensitive/fs_crafting", "phase1_status_operational");
     public static final string_id STATUS_DAMAGED = new string_id("quest/force_sensitive/fs_crafting", "phase1_status_damaged");
     public static final string_id STATUS_NOT_CALIBRATED = new string_id("quest/force_sensitive/fs_crafting", "phase1_status_not_calibrated");
-    public static final String[] TEMPLATES = 
+    public static final String[] TEMPLATES =
+            {
+                    "object/tangible/item/quest/force_sensitive/fs_craft_puzzle_config_processor.iff",
+                    "object/tangible/item/quest/force_sensitive/fs_craft_puzzle_gyro_receiver.iff",
+                    "object/tangible/item/quest/force_sensitive/fs_craft_puzzle_signal_amp.iff",
+                    "object/tangible/item/quest/force_sensitive/fs_craft_puzzle_solid_state_array.iff"
+            };
+    public fs_crafting1_comp()
     {
-        "object/tangible/item/quest/force_sensitive/fs_craft_puzzle_config_processor.iff",
-        "object/tangible/item/quest/force_sensitive/fs_craft_puzzle_gyro_receiver.iff",
-        "object/tangible/item/quest/force_sensitive/fs_craft_puzzle_signal_amp.iff",
-        "object/tangible/item/quest/force_sensitive/fs_craft_puzzle_solid_state_array.iff"
-    };
+    }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -42,17 +49,18 @@ public class fs_crafting1_comp extends script.base_script
             {
                 attribs[idx] = " " + localize(STATUS_DAMAGED);
             }
-            else 
+            else
             {
                 attribs[idx] = " " + localize(STATUS_NOT_CALIBRATED);
             }
         }
-        else 
+        else
         {
             attribs[idx] = " " + localize(STATUS_NOT_CALIBRATED);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (isCrafted(self))
@@ -99,7 +107,7 @@ public class fs_crafting1_comp extends script.base_script
                 setObjVar(owner, STATUS_OBJVAR, status);
             }
         }
-        else 
+        else
         {
             status[index] = -1;
             setObjVar(owner, STATUS_OBJVAR, status);

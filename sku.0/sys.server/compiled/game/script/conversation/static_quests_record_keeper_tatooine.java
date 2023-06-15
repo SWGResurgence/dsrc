@@ -1,63 +1,78 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.*;
 
 public class static_quests_record_keeper_tatooine extends script.base_script
 {
+    public static String c_stringFile = "conversation/static_quests_record_keeper_tatooine";
+
     public static_quests_record_keeper_tatooine()
     {
     }
-    public static String c_stringFile = "conversation/static_quests_record_keeper_tatooine";
+
     public boolean static_quests_record_keeper_tatooine_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean static_quests_record_keeper_tatooine_condition_static_quests_on_player(obj_id player, obj_id npc) throws InterruptedException
     {
         String datatable = "datatables/npc/static_quest/static_quest_records_tatooine.iff";
         String[] static_quest = dataTableGetStringColumn(datatable, "static_quest");
-        for (String s : static_quest) {
-            if (hasObjVar(player, "static." + s)) {
+        for (String s : static_quest)
+        {
+            if (hasObjVar(player, "static." + s))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public boolean static_quests_record_keeper_tatooine_condition_already_reset(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(player, "static_quests_reset.tatooine"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "static_quests_reset.tatooine");
     }
+
     public void static_quests_record_keeper_tatooine_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void static_quests_record_keeper_tatooine_action_reset_gating(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "static_quests_reset.tatooine", true);
         String datatable = "datatables/npc/static_quest/static_quest_records_tatooine.iff";
         String[] static_quest = dataTableGetStringColumn(datatable, "static_quest");
-        for (String s : static_quest) {
-            if (hasObjVar(player, "static." + s)) {
+        for (String s : static_quest)
+        {
+            if (hasObjVar(player, "static." + s))
+            {
                 removeObjVar(player, "static." + s);
             }
         }
         int gating = getIntObjVar(player, "static_quests_reset.tatooine");
         CustomerServiceLog("StaticQuestTatooine", "RESET OPTION: Static quests on Tatooine -- " + getName(player) + " (" + player + ") has opted to RESET his/her Tatooine static quest obj vars [" + gating + "] and START OVER");
     }
+
     public void static_quests_record_keeper_tatooine_action_set_redo(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "static_quests_reset.tatooine", true);
         CustomerServiceLog("StaticQuestTatooine", "RESET OPTION: Static quests on Tatooine -- " + getName(player) + " (" + player + ") has opted to NOT RESET his/her Tatooine static quest obj vars and CONTINUE");
     }
+
     public void static_quests_record_keeper_tatooine_action_face_to(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -68,12 +83,14 @@ public class static_quests_record_keeper_tatooine extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -82,12 +99,14 @@ public class static_quests_record_keeper_tatooine extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.static_quests_record_keeper_tatooine");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -124,7 +143,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_f51b07ff");
@@ -136,7 +155,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 setObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId", 2);
                 npcStartConversation(player, self, "static_quests_record_keeper_tatooine", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -152,6 +171,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("static_quests_record_keeper_tatooine"))
@@ -183,7 +203,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_edb238bc");
@@ -196,7 +216,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -244,7 +264,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_12936cce");
@@ -257,7 +277,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -305,7 +325,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9ef848f9");
@@ -318,7 +338,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -387,7 +407,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b1f6ba02");
@@ -412,7 +432,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -474,7 +494,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14693cf1");
@@ -495,7 +515,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -544,7 +564,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a76f22bf");
@@ -565,7 +585,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -600,7 +620,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d0902f5e");
@@ -613,7 +633,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -648,7 +668,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5db2d1c9");
@@ -661,7 +681,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -723,7 +743,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a76f22bf");
@@ -744,7 +764,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -779,7 +799,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d0902f5e");
@@ -792,7 +812,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -827,7 +847,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5db2d1c9");
@@ -840,7 +860,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -902,7 +922,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14693cf1");
@@ -923,7 +943,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -958,7 +978,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d0902f5e");
@@ -971,7 +991,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -1006,7 +1026,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5db2d1c9");
@@ -1019,7 +1039,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -1102,7 +1122,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b1f6ba02");
@@ -1127,7 +1147,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -1176,7 +1196,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14693cf1");
@@ -1197,7 +1217,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -1246,7 +1266,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a76f22bf");
@@ -1267,7 +1287,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -1302,7 +1322,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d0902f5e");
@@ -1315,7 +1335,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -1350,7 +1370,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5db2d1c9");
@@ -1363,7 +1383,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -1446,7 +1466,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b1f6ba02");
@@ -1471,7 +1491,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -1520,7 +1540,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14693cf1");
@@ -1541,7 +1561,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -1590,7 +1610,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a76f22bf");
@@ -1611,7 +1631,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -1646,7 +1666,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d0902f5e");
@@ -1659,7 +1679,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);
@@ -1694,7 +1714,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5db2d1c9");
@@ -1707,7 +1727,7 @@ public class static_quests_record_keeper_tatooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.static_quests_record_keeper_tatooine.branchId");
                     npcSpeak(player, message);

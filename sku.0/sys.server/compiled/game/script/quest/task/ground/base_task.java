@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.utils;
@@ -7,9 +13,6 @@ import script.obj_id;
 
 public class base_task extends script.base.remote_object_requester
 {
-    public base_task()
-    {
-    }
     public static final String taskType = "base_task";
     public static final String dataTableColumnQuestOnComplete = "GRANT_QUEST_ON_COMPLETE";
     public static final String dataTableColumnQuestOnFail = "GRANT_QUEST_ON_FAIL";
@@ -27,6 +30,10 @@ public class base_task extends script.base.remote_object_requester
     public static final String dot = ".";
     public static final String objvarWaypoint = "waypoint";
     public static final String objvarEntranceWaypoint = "entranceWaypoint";
+    public base_task()
+    {
+    }
+
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         int isVisible = groundquests.getTaskIntDataEntry(questCrc, taskId, dataTableColumnVisible);
@@ -43,21 +50,22 @@ public class base_task extends script.base.remote_object_requester
         if (timerLength > 0)
         {
             groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskActivated", "Setting timer for " + timerLength + " seconds.");
-            final float playerPlayedTimeWhenTimerEnds = (float)getPlayerPlayedTime(self) + timerLength;
+            final float playerPlayedTimeWhenTimerEnds = (float) getPlayerPlayedTime(self) + timerLength;
             final String objVar = groundquests.setBaseObjVar(self, taskType, questGetQuestName(questCrc), taskId) + dot + groundquests.timeObjVar;
             setObjVar(self, objVar, playerPlayedTimeWhenTimerEnds);
             dictionary params = new dictionary();
             params.put("questcrc", questCrc);
             params.put("taskid", taskId);
-            params.put("endTime", (int)getFloatObjVar(self, objVar));
+            params.put("endTime", (int) getFloatObjVar(self, objVar));
             messageTo(self, "QuestBaseTaskTimerTaskCompleted", params, timerLength, true);
             if (isVisible != 0)
             {
-                questSetQuestTaskTimer(self, questGetQuestName(questCrc), taskId, "quest/groundquests:timer_timertext", (int)playerPlayedTimeWhenTimerEnds);
+                questSetQuestTaskTimer(self, questGetQuestName(questCrc), taskId, "quest/groundquests:timer_timertext", (int) playerPlayedTimeWhenTimerEnds);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int QuestBaseTaskTimerTaskCompleted(obj_id self, dictionary params) throws InterruptedException
     {
         final int questCrc = params.getInt("questcrc");
@@ -69,7 +77,7 @@ public class base_task extends script.base.remote_object_requester
             if (params.containsKey("endTime"))
             {
                 final int endTime = params.getInt("endTime");
-                if (endTime != (int)playerPlayedTimeWhenTimerEnds)
+                if (endTime != (int) playerPlayedTimeWhenTimerEnds)
                 {
                     return SCRIPT_CONTINUE;
                 }
@@ -79,17 +87,18 @@ public class base_task extends script.base.remote_object_requester
             {
                 questFailTask(questCrc, taskId, self);
             }
-            else 
+            else
             {
                 dictionary newParams = new dictionary();
                 newParams.put("questcrc", questCrc);
                 newParams.put("taskid", taskId);
-                newParams.put("endTime", (int)playerPlayedTimeWhenTimerEnds);
+                newParams.put("endTime", (int) playerPlayedTimeWhenTimerEnds);
                 messageTo(self, "QuestBaseTaskTimerTaskCompleted", newParams, timeLeft, true);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTaskCompleted(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         String questOnComplete = groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableColumnQuestOnComplete);
@@ -111,6 +120,7 @@ public class base_task extends script.base.remote_object_requester
         baseCleanup(self, questCrc, taskId);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTaskFailed(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         String questOnFail = groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableColumnQuestOnFail);
@@ -132,11 +142,13 @@ public class base_task extends script.base.remote_object_requester
         baseCleanup(self, questCrc, taskId);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTaskCleared(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         baseCleanup(self, questCrc, taskId);
         return SCRIPT_CONTINUE;
     }
+
     public void baseCleanup(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         String baseObjVar = groundquests.getBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
@@ -154,6 +166,7 @@ public class base_task extends script.base.remote_object_requester
         }
         removeObjVar(player, baseObjVar);
     }
+
     public void sendTaskSignals(obj_id player, int questCrc, int taskId, String dataTableColumnName) throws InterruptedException
     {
         String signals = groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableColumnName);
@@ -162,6 +175,7 @@ public class base_task extends script.base.remote_object_requester
             groundquests.sendSignals(player, split(signals, ','));
         }
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         dictionary tasks = groundquests.getActiveTasksForTaskType(self, taskType);
@@ -170,21 +184,27 @@ public class base_task extends script.base.remote_object_requester
             java.util.Enumeration keys = tasks.keys();
             while (keys.hasMoreElements())
             {
-                String questCrcString = (String)keys.nextElement();
+                String questCrcString = (String) keys.nextElement();
                 int questCrc = utils.stringToInt(questCrcString);
                 int[] tasksForCurrentQuest = tasks.getIntArray(questCrcString);
-                for (int taskId : tasksForCurrentQuest) {
+                for (int taskId : tasksForCurrentQuest)
+                {
                     String baseObjVar = groundquests.getBaseObjVar(self, taskType, questGetQuestName(questCrc), taskId);
-                    if (hasObjVar(self, baseObjVar + dot + groundquests.objvarWaypointInActive)) {
-                        if (hasObjVar(self, baseObjVar + dot + groundquests.objvarEntranceWaypoint)) {
+                    if (hasObjVar(self, baseObjVar + dot + groundquests.objvarWaypointInActive))
+                    {
+                        if (hasObjVar(self, baseObjVar + dot + groundquests.objvarEntranceWaypoint))
+                        {
                             obj_id entranceWaypoint = getObjIdObjVar(self, baseObjVar + dot + groundquests.objvarEntranceWaypoint);
-                            if (isIdValid(entranceWaypoint)) {
+                            if (isIdValid(entranceWaypoint))
+                            {
                                 groundquests.setQuestWaypointActive(entranceWaypoint, self, baseObjVar);
                             }
                         }
-                        if (hasObjVar(self, baseObjVar + dot + groundquests.objvarWaypoint)) {
+                        if (hasObjVar(self, baseObjVar + dot + groundquests.objvarWaypoint))
+                        {
                             obj_id waypoint = getObjIdObjVar(self, baseObjVar + dot + groundquests.objvarWaypoint);
-                            if (isIdValid(waypoint)) {
+                            if (isIdValid(waypoint))
+                            {
                                 groundquests.setQuestWaypointActive(waypoint, self, baseObjVar);
                             }
                         }

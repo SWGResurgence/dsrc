@@ -1,20 +1,29 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.location;
 import script.obj_id;
 
 public class world_delta extends script.base_script
 {
+    public static final String VAR_DELTA_TARGET = "delta_target";
+
     public world_delta()
     {
     }
-    public static final String VAR_DELTA_TARGET = "delta_target";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "world delta script attached!");
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (text.startsWith("delta"))
@@ -31,7 +40,7 @@ public class world_delta extends script.base_script
                         target = getObjIdObjVar(self, VAR_DELTA_TARGET);
                     }
                 }
-                else 
+                else
                 {
                     debugSpeakMsg(self, "using my lookAtTarget: " + target);
                 }
@@ -46,7 +55,7 @@ public class world_delta extends script.base_script
                     debugSpeakMsg(self, "(" + target + ") world delta = " + dx + " " + dy + " " + dz);
                 }
             }
-            else 
+            else
             {
                 st.nextToken();
                 String param = st.nextToken();

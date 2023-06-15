@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_quest;
 import script.obj_id;
@@ -9,11 +15,12 @@ public class delivery_no_pickup extends script.space.quest_logic.delivery
     public delivery_no_pickup()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "delivering", 1);
         setObjVar(self, "delivery_nopickup", 1);
-		String questName = getStringObjVar(self, space_quest.QUEST_NAME);
+        String questName = getStringObjVar(self, space_quest.QUEST_NAME);
         String questType = getStringObjVar(self, space_quest.QUEST_TYPE);
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         if ((questName == null) || (questType == null))
@@ -21,7 +28,7 @@ public class delivery_no_pickup extends script.space.quest_logic.delivery
             return SCRIPT_CONTINUE;
         }
         String qTable = "datatables/spacequest/" + questType + "/" + questName + ".iff";
-		dictionary questInfo = dataTableGetRow(qTable, 0);
+        dictionary questInfo = dataTableGetRow(qTable, 0);
         if (questInfo == null && isGod(player))
         {
             broadcast(player, "Debug: Failed to open quest table " + qTable);
@@ -54,6 +61,7 @@ public class delivery_no_pickup extends script.space.quest_logic.delivery
         }
         return SCRIPT_CONTINUE;
     }
+
     public int deliveryNoPickupAttack(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)

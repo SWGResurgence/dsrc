@@ -1,5 +1,11 @@
 package script.creature_spawner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -10,11 +16,13 @@ public class jedi_sentinel_dark_spawner extends script.base_script
     public jedi_sentinel_dark_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnCreatures(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnCreatures(obj_id self) throws InterruptedException
     {
         obj_id spawned = create.object("dark_jedi_sentinel", getLocation(self));
@@ -26,6 +34,7 @@ public class jedi_sentinel_dark_spawner extends script.base_script
 
         ai_lib.setDefaultCalmBehavior(spawned, ai_lib.BEHAVIOR_SENTINEL);
     }
+
     public int npcDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnCreatures(self);

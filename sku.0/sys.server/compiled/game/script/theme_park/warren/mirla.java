@@ -1,16 +1,23 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class mirla extends script.base_script
 {
-    public mirla()
-    {
-    }
     public static final String CONVO_FILE = "theme_park/warren/warren";
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public static final String PASSKEYCODE = "object/tangible/mission/quest_item/warren_passkey_s01.iff";
+    public mirla()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -19,6 +26,7 @@ public class mirla extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -26,6 +34,7 @@ public class mirla extends script.base_script
         mdata.setServerNotify(false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(speaker) || ai_lib.aiIsDead(self))
@@ -39,7 +48,7 @@ public class mirla extends script.base_script
             {
                 chat.chat(self, new string_id(CONVO_FILE, "mirla_done"));
             }
-            else 
+            else
             {
                 chat.chat(self, new string_id(CONVO_FILE, "mirla_get_teraud"));
             }
@@ -47,12 +56,13 @@ public class mirla extends script.base_script
         }
         faceToBehavior(self, speaker);
         string_id greeting = new string_id(CONVO_FILE, "mirla_start");
-        string_id response[] = new string_id[1];
+        string_id[] response = new string_id[1];
         response[0] = new string_id(CONVO_FILE, "mirla_reply_1");
         npcStartConversation(speaker, self, CONVO_FILE, greeting, response);
         doAnimationAction(self, "weeping");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if (!convo.equals(CONVO_FILE))
@@ -106,12 +116,14 @@ public class mirla extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id warren = getObjIdObjVar(self, "warren.bldg");
         messageTo(warren, "handleMirlaDied", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasLetter(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -120,13 +132,16 @@ public class mirla extends script.base_script
         {
             return false;
         }
-        for (obj_id content : contents) {
-            if ((getTemplateName(content)).equals("object/tangible/mission/quest_item/warren_farewell_letter.iff")) {
+        for (obj_id content : contents)
+        {
+            if ((getTemplateName(content)).equals("object/tangible/mission/quest_item/warren_farewell_letter.iff"))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public boolean takeLetter(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -135,14 +150,17 @@ public class mirla extends script.base_script
         {
             return false;
         }
-        for (obj_id content : contents) {
-            if ((getTemplateName(content)).equals("object/tangible/mission/quest_item/warren_farewell_letter.iff")) {
+        for (obj_id content : contents)
+        {
+            if ((getTemplateName(content)).equals("object/tangible/mission/quest_item/warren_farewell_letter.iff"))
+            {
                 destroyObject(content);
                 return true;
             }
         }
         return false;
     }
+
     public String getCellPassword(obj_id npc) throws InterruptedException
     {
         obj_id bldg = getTopMostContainer(npc);

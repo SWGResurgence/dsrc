@@ -1,5 +1,11 @@
 package script.systems.crafting.armor.component;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.draft_schematic;
 import script.obj_id;
 import script.resource_weight;
@@ -25,6 +31,7 @@ public class crafting_new_armor_nostat_factional_final extends script.systems.cr
     public static final resource_weight[] OBJ_MAX_ATTRIBUTE_RESOURCES =
             {
             };
+
     public crafting_new_armor_nostat_factional_final()
     {
     }

@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.badge;
 import script.library.groundquests;
@@ -7,20 +13,22 @@ import script.library.space_dungeon;
 
 public class terminal_main_console extends script.base_script
 {
-    public terminal_main_console()
-    {
-    }
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id ENTER_CODE = new string_id(STF, "enter_code");
     public static final string_id WARNING_DESTRUCT = new string_id(STF, "warning_destruct");
     public static final string_id WARNING_ALREADY = new string_id(STF, "warning_already");
     public static final string_id NO_EFFECT = new string_id(STF, "no_effect");
     public static final string_id INCORRECT_CODE = new string_id(STF, "incorrect_code");
+    public terminal_main_console()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, ENTER_CODE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -35,7 +43,7 @@ public class terminal_main_console extends script.base_script
                 sendSystemMessage(player, WARNING_ALREADY);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, NO_EFFECT);
                 return SCRIPT_CONTINUE;
@@ -43,6 +51,7 @@ public class terminal_main_console extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void keypad(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -50,8 +59,8 @@ public class terminal_main_console extends script.base_script
         subscribeToSUIProperty(pid, "result.numberBox", "localtext");
         subscribeToSUIProperty(pid, "buttonEnter", "ButtonPressed");
         showSUIPage(pid);
-        return;
     }
+
     public int KeypadCallback(obj_id self, dictionary params) throws InterruptedException
     {
         String result = params.getString("result.numberBox" + "." + "localtext");
@@ -87,8 +96,10 @@ public class terminal_main_console extends script.base_script
                 int numPlayers = players.length;
                 if (numPlayers > 0)
                 {
-                    for (obj_id player1 : players) {
-                        if (groundquests.isTaskActive(player1, "ep3_avatar_self_destruct", "selfDestruct")) {
+                    for (obj_id player1 : players)
+                    {
+                        if (groundquests.isTaskActive(player1, "ep3_avatar_self_destruct", "selfDestruct"))
+                        {
                             groundquests.sendSignal(player1, "destructSequenceStarted");
                             groundquests.sendSignal(player1, "avatarDestructSequence");
                         }
@@ -102,7 +113,7 @@ public class terminal_main_console extends script.base_script
                 messageTo(structure, "handleDestruct", who, 1.0f, false);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, INCORRECT_CODE);
             }

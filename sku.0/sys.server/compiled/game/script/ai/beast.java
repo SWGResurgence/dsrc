@@ -1,13 +1,16 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class beast extends script.base_script
 {
-    public beast()
-    {
-    }
     public static final String MENU_FILE = "pet/pet_menu";
     public static final int MAX_UNACKNOWLEDGED_MESSAGE_COUNT = 3;
     public static final int PING_INTERVAL = 120;
@@ -15,6 +18,10 @@ public class beast extends script.base_script
     public static final float MAX_DISTANCE_FROM_MASTER = 128.0f;
     public static final boolean BEAST_DEBUG = false;
     public static final string_id PCOLOR = new string_id("sui", "set_primary_color");
+    public beast()
+    {
+    }
+
     public void blog(String text) throws InterruptedException
     {
         if (BEAST_DEBUG)
@@ -22,6 +29,7 @@ public class beast extends script.base_script
             LOG("beast.script", text);
         }
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "beast.pingMessageNumber", 0);
@@ -30,11 +38,13 @@ public class beast extends script.base_script
         messageTo(self, "beastPing", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleSetupBeast", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (!isMob(self))
@@ -63,7 +73,7 @@ public class beast extends script.base_script
             }
         }
         names[idx] = "health";
-        attribs[idx] = " " + (int)getMaxAttrib(self, HEALTH);
+        attribs[idx] = " " + getMaxAttrib(self, HEALTH);
         idx++;
         int level = getLevel(self);
         if (level < 90)
@@ -92,10 +102,10 @@ public class beast extends script.base_script
             int experiencePercentage = 0;
             if (experienceProgress > 0)
             {
-                experiencePercentage = (int)(((float)experienceProgress / experienceNeeded) * 100);
+                experiencePercentage = (int) (((float) experienceProgress / experienceNeeded) * 100);
             }
             names[idx] = "level_progress";
-            attribs[idx] = String.valueOf(experiencePercentage) + "%";
+            attribs[idx] = experiencePercentage + "%";
             idx++;
         }
         if (beast_lib.getBeastCanLevel(self))
@@ -104,7 +114,7 @@ public class beast extends script.base_script
             attribs[idx] = "true";
             idx++;
         }
-        else 
+        else
         {
             names[idx] = "exp_off";
             attribs[idx] = "true";
@@ -114,7 +124,7 @@ public class beast extends script.base_script
         String currentHappiness = utils.packStringId(beast_lib.convertHappinessString(beastBCD));
         if (currentHappiness != null)
         {
-            attribs[idx] = String.valueOf(currentHappiness);
+            attribs[idx] = currentHappiness;
             idx++;
             if (idx >= names.length)
             {
@@ -125,7 +135,7 @@ public class beast extends script.base_script
         String currentLoyalty = utils.packStringId(beast_lib.convertLoyaltyString(beastBCD));
         if (currentLoyalty != null)
         {
-            attribs[idx] = String.valueOf(currentLoyalty);
+            attribs[idx] = currentLoyalty;
             idx++;
             if (idx >= names.length)
             {
@@ -136,7 +146,7 @@ public class beast extends script.base_script
         if (loyaltyPercentage >= 0)
         {
             names[idx] = beast_lib.BEAST_LOYALTY_PERCENTAGE_TITLE;
-            attribs[idx] = String.valueOf(loyaltyPercentage) + "%";
+            attribs[idx] = loyaltyPercentage + "%";
             idx++;
             if (idx >= names.length)
             {
@@ -178,8 +188,8 @@ public class beast extends script.base_script
             int minDamage = getWeaponMinDamage(beastWeapon);
             int maxDamage = getWeaponMaxDamage(beastWeapon);
             int expertiseDamageBonus = getEnhancedSkillStatisticModifierUncapped(self, "expertise_damage_all");
-            minDamage = (int)(minDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
-            maxDamage = (int)(maxDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
+            minDamage = (int) (minDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
+            maxDamage = (int) (maxDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
             float weaponSpeed = getWeaponAttackSpeed(beastWeapon);
             names[idx] = "damage";
             attribs[idx] = minDamage + " - " + maxDamage;
@@ -192,7 +202,7 @@ public class beast extends script.base_script
             attribs[idx] = String.valueOf(beastDPS);
             idx++;
         }
-        else 
+        else
         {
             obj_id defaultWeapon = getDefaultWeapon(self);
             if (isIdValid(defaultWeapon))
@@ -201,8 +211,8 @@ public class beast extends script.base_script
                 int maxDamage = getWeaponMaxDamage(defaultWeapon);
                 float weaponSpeed = getWeaponAttackSpeed(defaultWeapon);
                 int expertiseDamageBonus = getEnhancedSkillStatisticModifierUncapped(self, "expertise_damage_all");
-                minDamage = (int)(minDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
-                maxDamage = (int)(maxDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
+                minDamage = (int) (minDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
+                maxDamage = (int) (maxDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
                 names[idx] = "damage";
                 attribs[idx] = minDamage + " - " + maxDamage;
                 idx++;
@@ -225,10 +235,10 @@ public class beast extends script.base_script
                     if (!name.equals("block_value_bonus"))
                     {
                         names[idx] = beast_lib.DISPLAY_NAMES[i];
-                        attribs[idx] = String.valueOf(utils.roundFloatByDecimal((utils.getFloatScriptVar(self, beast_lib.ARRAY_BEAST_INCUBATION_STATS[i]) * beast_lib.DISPLAY_CONVERSION_RATES[i]))) + "%";
+                        attribs[idx] = utils.roundFloatByDecimal((utils.getFloatScriptVar(self, beast_lib.ARRAY_BEAST_INCUBATION_STATS[i]) * beast_lib.DISPLAY_CONVERSION_RATES[i])) + "%";
                         idx++;
                     }
-                    else 
+                    else
                     {
                         names[idx] = beast_lib.DISPLAY_NAMES[i];
                         attribs[idx] = String.valueOf(utils.roundFloatByDecimal(utils.getFloatScriptVar(self, beast_lib.ARRAY_BEAST_INCUBATION_STATS[i])));
@@ -236,7 +246,7 @@ public class beast extends script.base_script
                     }
                     continue;
                 }
-                else 
+                else
                 {
                     names[idx] = beast_lib.DISPLAY_NAMES[i];
                     attribs[idx] = String.valueOf(utils.roundFloatByDecimal(utils.getFloatScriptVar(self, beast_lib.ARRAY_BEAST_INCUBATION_STATS[i])));
@@ -249,7 +259,7 @@ public class beast extends script.base_script
         if (glanceReduct > 0)
         {
             names[idx] = "bm_glance_reduct";
-            attribs[idx] = String.valueOf(glanceReduct) + "%";
+            attribs[idx] = glanceReduct + "%";
             idx++;
             if (idx >= names.length)
             {
@@ -260,7 +270,7 @@ public class beast extends script.base_script
         if (damageReduct > 0)
         {
             names[idx] = "bm_damage_reduct";
-            attribs[idx] = String.valueOf(damageReduct) + "%";
+            attribs[idx] = damageReduct + "%";
             idx++;
             if (idx >= names.length)
             {
@@ -271,7 +281,7 @@ public class beast extends script.base_script
         if (punishReduct > 0)
         {
             names[idx] = "bm_punish_reduct";
-            attribs[idx] = String.valueOf(punishReduct) + "%";
+            attribs[idx] = punishReduct + "%";
             idx++;
             if (idx >= names.length)
             {
@@ -280,6 +290,7 @@ public class beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (!isMob(self))
@@ -297,6 +308,7 @@ public class beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!isMob(self))
@@ -314,6 +326,7 @@ public class beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetupBeast(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isMob(self))
@@ -338,6 +351,7 @@ public class beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int beastPing(obj_id self, dictionary params) throws InterruptedException
     {
         int lastMessage = getIntObjVar(self, "beast.pingMessageNumber");
@@ -354,7 +368,7 @@ public class beast extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 blog("beastPing() failed to destroy the beast with no master online");
             }
@@ -368,7 +382,7 @@ public class beast extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 blog("beastPing() failed to destroy the beast with no BCD online");
             }
@@ -392,6 +406,7 @@ public class beast extends script.base_script
         messageTo(self, "beastPing", null, nextCallbackInterval, false);
         return SCRIPT_CONTINUE;
     }
+
     public int bcdPingResponse(obj_id self, dictionary params) throws InterruptedException
     {
         int ack = params.getInt("messageId");
@@ -402,6 +417,7 @@ public class beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int resumeDefaultCalmBehavior(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isMob(self))
@@ -422,27 +438,31 @@ public class beast extends script.base_script
         if (isIdValid(master))
         {
             location masterLoc = getLocation(master);
-            if(isValidLocation(masterLoc))
+            if (isValidLocation(masterLoc))
                 setHomeLocation(self, masterLoc);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkMovementSpeed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
         beast_lib.validateFollowTarget(self, target);
         return SCRIPT_CONTINUE;
     }
+
     public int OnFollowWaiting(obj_id self, obj_id target) throws InterruptedException
     {
         beast_lib.validateFollowTarget(self, target);
         return SCRIPT_CONTINUE;
     }
+
     public int OnFollowMoving(obj_id self, obj_id target) throws InterruptedException
     {
         beast_lib.validateFollowTarget(self, target);
         return SCRIPT_CONTINUE;
     }
+
     public int OnBehaviorChange(obj_id self, int newBehavior, int oldBehavior, int[] changeFlags) throws InterruptedException
     {
         if (ai_lib.isAiDead(self))
@@ -460,78 +480,83 @@ public class beast extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 return SCRIPT_OVERRIDE;
             }
         }
-        else 
+        else
         {
             if (doAgitatedBehavior(self, newBehavior, oldBehavior) == SCRIPT_CONTINUE)
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 return SCRIPT_OVERRIDE;
             }
         }
     }
+
     public int doCalmerBehavior(obj_id npc, int newBehavior, int oldBehavior) throws InterruptedException
     {
         switch (newBehavior)
         {
             case BEHAVIOR_CALM:
-            break;
+                break;
             case BEHAVIOR_ALERT:
-            break;
+                break;
             case BEHAVIOR_THREATEN:
-            break;
+                break;
             case BEHAVIOR_FLEE:
-            break;
+                break;
             case BEHAVIOR_PANIC:
-            break;
+                break;
             case BEHAVIOR_ATTACK:
-            break;
+                break;
             case BEHAVIOR_FRENZY:
-            break;
+                break;
             default:
-            break;
+                break;
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int doAgitatedBehavior(obj_id npc, int newBehavior, int oldBehavior) throws InterruptedException
     {
         switch (newBehavior)
         {
             case BEHAVIOR_CALM:
-            break;
+                break;
             case BEHAVIOR_ALERT:
-            break;
+                break;
             case BEHAVIOR_THREATEN:
-            break;
+                break;
             case BEHAVIOR_FLEE:
-            break;
+                break;
             case BEHAVIOR_PANIC:
-            break;
+                break;
             case BEHAVIOR_ATTACK:
-            break;
+                break;
             case BEHAVIOR_FRENZY:
-            break;
+                break;
             default:
-            break;
+                break;
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int lairThreatened(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         beast_lib.killBeast(self, attacker);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBeastIncappedDecay(obj_id self, dictionary params) throws InterruptedException
     {
         int incapTimer = utils.getIntScriptVar(self, "incapTimer");
@@ -556,11 +581,13 @@ public class beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnRecapacitated(obj_id self) throws InterruptedException
     {
         beast_lib.beastFollowTarget(self, getMaster(self));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -590,7 +617,7 @@ public class beast extends script.base_script
             {
                 mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id(MENU_FILE, "exp_on"));
             }
-            else 
+            else
             {
                 mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id(MENU_FILE, "exp_off"));
             }
@@ -614,6 +641,7 @@ public class beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -692,6 +720,7 @@ public class beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePrimaryColorize(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id beast = self;
@@ -718,6 +747,7 @@ public class beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetBeastName(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -751,10 +781,12 @@ public class beast extends script.base_script
         beast_lib.setBeastName(self, beastName);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGroupInvite(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int postCombatPathHome(obj_id self, dictionary params) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "pet::postCombatPathHome() self(" + self + ":" + getName(self) + ") master(" + getMaster(self) + ":" + getName(getMaster(self)) + ")");
@@ -779,20 +811,21 @@ public class beast extends script.base_script
         {
             ai_lib.resumeFormationFollowing(self);
         }
-        else 
+        else
         {
             obj_id master = getMaster(self);
             if (isIdValid(master) && master.isLoaded())
             {
                 pet_lib.petFollow(self, master);
             }
-            else 
+            else
             {
                 stop(self);
             }
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int handleAbandonment(obj_id self, dictionary params) throws InterruptedException
     {
         int ignoredForDays = getIntObjVar(self, "ai.pet.ignoredForDays");
@@ -802,13 +835,14 @@ public class beast extends script.base_script
             pet_lib.releasePet(self);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             setObjVar(self, "ai.pet.ignoredForDays", ignoredForDays);
         }
         messageTo(self, "handleAbandonment", null, 86400, false);
         return SCRIPT_CONTINUE;
     }
+
     public int resumePetTrick(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = params.getObjId("master");
@@ -816,6 +850,7 @@ public class beast extends script.base_script
         pet_lib.doStupidPetTrick(self, master, trickNum);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         if (!isMob(self))
@@ -854,6 +889,7 @@ public class beast extends script.base_script
         putIn(item, petInv);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMoveToMaster(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isMob(self))
@@ -872,6 +908,7 @@ public class beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePackRequest(obj_id self, dictionary params) throws InterruptedException
     {
         blog("handlePackRequest() destroying beast.");
@@ -881,6 +918,7 @@ public class beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAddToStomach(obj_id self, dictionary params) throws InterruptedException
     {
         int stomach = params.getInt("stomach");
@@ -888,6 +926,7 @@ public class beast extends script.base_script
         player_stomach.addToStomach(self, stomach, vol);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetColors(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -897,6 +936,7 @@ public class beast extends script.base_script
         setColors(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public boolean setColors(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -907,12 +947,13 @@ public class beast extends script.base_script
         java.util.Enumeration keys = params.keys();
         while (keys.hasMoreElements())
         {
-            String var = (String)keys.nextElement();
+            String var = (String) keys.nextElement();
             int idx = params.getInt(var);
             litmus &= hue.setColor(self, var, idx);
         }
         return litmus;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         if (!isMob(self))
@@ -924,12 +965,13 @@ public class beast extends script.base_script
         {
             aiSetHomeLocation(self, getLocation(master));
         }
-        else 
+        else
         {
             aiSetHomeLocation(self, getLocation(self));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDefenderCombatAction(obj_id self, obj_id attacker, obj_id weapon, int combatResult) throws InterruptedException
     {
         if (!beast_lib.getBeastDefensive(self))
@@ -948,18 +990,22 @@ public class beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSawAttack(obj_id self, obj_id defender, obj_id[] attackers) throws InterruptedException
     {
         if (beast_lib.isBeast(self) && beast_lib.getBeastDefensive(self))
         {
-            for (final obj_id attacker : attackers) {
-                if (isIdValid(attacker) && !ai_lib.isInCombat(self) && defender == getMaster(self)) {
+            for (final obj_id attacker : attackers)
+            {
+                if (isIdValid(attacker) && !ai_lib.isInCombat(self) && defender == getMaster(self))
+                {
                     addHate(self, attacker, 0.0f);
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (!isMob(self))
@@ -982,19 +1028,19 @@ public class beast extends script.base_script
                     utils.setScriptVar(self, "petIgnoreAttacks", getGameTime());
                 }
             }
-            else 
+            else
             {
                 aiSetHomeLocation(self, getLocation(self));
             }
         }
-        else 
+        else
         {
             obj_id master = getMaster(self);
             if (isIdValid(master) && master.isLoaded())
             {
                 beast_lib.doStayCommand(self, master);
             }
-            else 
+            else
             {
                 ai_lib.aiStopFollowing(self);
                 location myLocation = getLocation(self);
@@ -1005,6 +1051,7 @@ public class beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSawEmote(obj_id self, obj_id performer, String emote) throws InterruptedException
     {
         obj_id master = getMaster(self);
@@ -1042,7 +1089,7 @@ public class beast extends script.base_script
                     {
                         ai_lib.aiSetPosture(self, POSTURE_SITTING);
                     }
-                    else 
+                    else
                     {
                         ai_lib.aiSetPosture(self, POSTURE_LYING_DOWN);
                     }
@@ -1052,7 +1099,7 @@ public class beast extends script.base_script
                     ai_lib.aiSetPosture(self, POSTURE_LYING_DOWN);
                 }
             }
-            else 
+            else
             {
                 ai_lib.doAction(self, "happy");
             }
@@ -1071,19 +1118,21 @@ public class beast extends script.base_script
             {
                 ai_lib.doAction(self, "confused");
             }
-            else 
+            else
             {
                 beast_lib.doFollowCommand(self, master);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         obj_id master = getMaster(self);
         CustomerServiceLog("Beasts", "*Beast DEATH: (" + self + ": " + getName(self) + ") has died. Their master was, (" + master + " sid:" + getPlayerObject(master));
         return SCRIPT_CONTINUE;
     }
+
     public int receiveCreditForKill(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = getMaster(self);
@@ -1096,6 +1145,7 @@ public class beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleHealOverTimeTick(obj_id self, dictionary params) throws InterruptedException
     {
         float duration = params.getFloat("duration");
@@ -1144,7 +1194,7 @@ public class beast extends script.base_script
                 pp = prose.setTO(pp, self);
                 pp = prose.setDI(pp, delta);
                 healing.sendMedicalSpam(medic, self, pp, true, true, true, COMBAT_RESULT_MEDICAL);
-                delta = (int)(delta * healing.HEAL_OVER_TIME_AGGRO_REDUCER);
+                delta = (int) (delta * healing.HEAL_OVER_TIME_AGGRO_REDUCER);
                 healing._addMedicalHate(medic, self, delta);
             }
         }
@@ -1170,14 +1220,17 @@ public class beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int defensiveModePing(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = getMaster(self);
         if (isIdValid(master) && ai_lib.isInCombat(master))
         {
             obj_id[] masterAttackers = getHateList(master);
-            for (obj_id masterAttacker : masterAttackers) {
-                if (getHateTarget(masterAttacker) == master) {
+            for (obj_id masterAttacker : masterAttackers)
+            {
+                if (getHateTarget(masterAttacker) == master)
+                {
                     utils.removeScriptVar(self, "petIgnoreAttacks");
                     startCombat(self, masterAttacker);
                     addHate(self, masterAttacker, 0.0f);
@@ -1188,6 +1241,7 @@ public class beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doBeastFlourish(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id beast = (self);

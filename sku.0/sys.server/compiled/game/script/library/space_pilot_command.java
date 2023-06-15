@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Vector;
@@ -29,6 +35,7 @@ public class space_pilot_command extends script.base_script
     public static final string_id SID_RELOAD_AND_REPAIR_COST = new string_id("space/space_pilot_command", "reload_and_repair_cost");
     public static final string_id SID_MUNITIONS_COST = new string_id("space/space_pilot_command", "munitions_cost");
     public static final string_id SID_SPACEREPAIR_NO_STATION = new string_id("space/space_pilot_command", "spacerepair_no_station");
+
     public space_pilot_command()
     {
     }

@@ -1,13 +1,16 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class fs_reflex2_player extends script.base_script
 {
-    public fs_reflex2_player()
-    {
-    }
     public static final string_id MSG_FIND_THEATER_WAYPOINT = new string_id("quest/force_sensitive/fs_reflex", "msg_phase_02_find_theater_waypoint");
     public static final string_id MSG_GOT_CRATE = new string_id("quest/force_sensitive/fs_reflex", "msg_phase_02_got_crate");
     public static final string_id MSG_QUEST_FINISHED = new string_id("quest/force_sensitive/fs_reflex", "msg_phase_02_quest_finished");
@@ -23,6 +26,10 @@ public class fs_reflex2_player extends script.base_script
     public static final String FAILED_OBJVAR = QUEST_OBJVAR + ".failed";
     public static final String MASTER_OBJVAR = QUEST_OBJVAR + ".master";
     public static final String ABORTED_OBJVAR = QUEST_OBJVAR + ".aborted";
+    public fs_reflex2_player()
+    {
+    }
+
     public int msgQuestAbortPhaseChange(obj_id self, dictionary params) throws InterruptedException
     {
         sendSystemMessage(self, MSG_QUEST_FAIL_PHASE_DONE);
@@ -35,6 +42,7 @@ public class fs_reflex2_player extends script.base_script
         detachScript(self, "quest.force_sensitive.fs_reflex2_player");
         return SCRIPT_CONTINUE;
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         String questName = quests.getDataEntry(questRow, "NAME");
@@ -42,13 +50,15 @@ public class fs_reflex2_player extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        switch (questName) {
+        switch (questName)
+        {
             case "fs_reflex_fetch_quest_01":
                 setObjVar(self, IN_PROGRESS_OBJVAR, 1);
                 break;
             case "fs_reflex_fetch_quest_02":
                 obj_id crate = createObjectInInventoryAllowOverload("object/tangible/item/quest/force_sensitive/fs_reflex_supply_crate.iff", self);
-                if (isIdValid(crate)) {
+                if (isIdValid(crate))
+                {
                     setObjVar(crate, "player", self);
                     sendSystemMessage(self, MSG_GOT_CRATE);
                     quests.complete("fs_reflex_fetch_quest_02", self, true);
@@ -60,9 +70,12 @@ public class fs_reflex2_player extends script.base_script
                 String wp_objvar = "quest." + questName + ".waypoint";
                 obj_id wp = createWaypointInDatapad(self, loc);
                 String summary = quests.getDataEntry(questName, "JOURNAL_ENTRY_SUMMARY");
-                if (summary != null && summary.length() > 0) {
+                if (summary != null && summary.length() > 0)
+                {
                     setWaypointName(wp, summary);
-                } else {
+                }
+                else
+                {
                     setWaypointName(wp, "missing task summary for " + questName);
                 }
                 setWaypointColor(wp, "yellow");
@@ -71,13 +84,17 @@ public class fs_reflex2_player extends script.base_script
                 break;
             case "fs_reflex_fetch_quest_04":
                 int rescued = 0;
-                if (hasObjVar(self, RESCUED_OBJVAR)) {
+                if (hasObjVar(self, RESCUED_OBJVAR))
+                {
                     rescued = getIntObjVar(self, RESCUED_OBJVAR);
                 }
                 rescued++;
-                if (rescued >= 6) {
+                if (rescued >= 6)
+                {
                     finishQuest(self, questName);
-                } else {
+                }
+                else
+                {
                     setObjVar(self, RESCUED_OBJVAR, rescued);
                     continueQuest(self, questName, rescued);
                 }
@@ -97,6 +114,7 @@ public class fs_reflex2_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String locationName) throws InterruptedException
     {
         if (locationName.equals("fs_reflex_fetch_quest_01_waypoint"))
@@ -109,6 +127,7 @@ public class fs_reflex2_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (quests.isActive("fs_reflex_fetch_quest_03", self))
@@ -126,6 +145,7 @@ public class fs_reflex2_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMasterIdResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = params.getObjId(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER);
@@ -135,6 +155,7 @@ public class fs_reflex2_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void continueQuest(obj_id self, String questName, int rescued) throws InterruptedException
     {
         int left = (6 - rescued);
@@ -144,6 +165,7 @@ public class fs_reflex2_player extends script.base_script
         setObjVar(self, CONTINUE_OBJVAR, 1);
         resetQuest(self);
     }
+
     public void finishQuest(obj_id self, String questName) throws InterruptedException
     {
         sendSystemMessage(self, MSG_QUEST_FINISHED);
@@ -167,6 +189,7 @@ public class fs_reflex2_player extends script.base_script
             destroyObject(theater);
         }
     }
+
     public void resetQuest(obj_id self) throws InterruptedException
     {
         for (int i = 6; i >= 0; i--)
@@ -190,6 +213,7 @@ public class fs_reflex2_player extends script.base_script
             destroyObject(theater);
         }
     }
+
     public int OnPlayerTheaterFail(obj_id self, String datatable, String name) throws InterruptedException
     {
         if (datatable.equals("datatables/theater/quest/fs_quest/fs_reflex2.iff"))
@@ -212,6 +236,7 @@ public class fs_reflex2_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleReactivateFailedTask(obj_id self, dictionary params) throws InterruptedException
     {
         quests.activate("fs_reflex_fetch_quest_01", self, null);

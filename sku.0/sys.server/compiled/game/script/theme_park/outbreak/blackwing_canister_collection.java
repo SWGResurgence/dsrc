@@ -1,13 +1,16 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class blackwing_canister_collection extends script.base_script
 {
-    public blackwing_canister_collection()
-    {
-    }
     public static final String OUTBREAK = "theme_park/outbreak/outbreak";
     public static final string_id SID_YOU_DIED = new string_id(OUTBREAK, "canister_death");
     public static final string_id SID_NOT_WHILE_MOUNTED = new string_id(OUTBREAK, "canister_not_while_mounted");
@@ -16,6 +19,10 @@ public class blackwing_canister_collection extends script.base_script
     public static final string_id SID_NOT_SURE_HOW_DESTROY = new string_id(OUTBREAK, "canister_no_collection_prerequisite");
     public static final string_id SID_ALRDY_COMPLETED_COLLECTION = new string_id(OUTBREAK, "canister_already_completed_collection");
     public static final int COUNTDOWN_TIMER = 3;
+    public blackwing_canister_collection()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -26,6 +33,7 @@ public class blackwing_canister_collection extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_MNU_DESTROY);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -103,6 +111,7 @@ public class blackwing_canister_collection extends script.base_script
         CustomerServiceLog("outbreak_themepark", "blackwing_canister_collection.OnObjectMenuSelect() Player: " + player + " is destroying blackwing canister: " + self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleObjectSwapTimer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.equals(""))
@@ -195,6 +204,7 @@ public class blackwing_canister_collection extends script.base_script
         messageTo(self, "destroySelf", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

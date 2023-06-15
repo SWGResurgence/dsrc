@@ -1,5 +1,11 @@
 package script.systems.collections.publish_gift;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.mustafar;
@@ -18,6 +24,7 @@ public class chapter_8_quest_object extends script.base_script
     public static final String ACTIVATION_SLOT_NAME = "chapter_collection_activation";
     public static final String PID_NAME = "chapter8_starter_quest_pid";
     public static final String QUEST_NAME = "chapter8_publish_gift_activation";
+
     public chapter_8_quest_object()
     {
     }

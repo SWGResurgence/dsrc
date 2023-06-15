@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,51 +14,62 @@ import script.*;
 
 public class naboo_theed_jorgellansel extends script.base_script
 {
+    public static String c_stringFile = "conversation/naboo_theed_jorgellansel";
+
     public naboo_theed_jorgellansel()
     {
     }
-    public static String c_stringFile = "conversation/naboo_theed_jorgellansel";
+
     public boolean naboo_theed_jorgellansel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean naboo_theed_jorgellansel_condition_startDarkwalkerQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "naboo_theed_goto_jorgellansel") || groundquests.hasCompletedQuest(player, "naboo_theed_hugo_borvo");
     }
+
     public boolean naboo_theed_jorgellansel_condition_onDarkwalkerQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "naboo_theed_hugo_darkwalker");
     }
+
     public boolean naboo_theed_jorgellansel_condition_completedDarkwalkerQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "naboo_theed_hugo_darkwalker");
     }
+
     public boolean naboo_theed_jorgellansel_condition_lastStepDarkwalkerQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_theed_hugo_darkwalker", "theed_hugo_darkwalker_05");
     }
+
     public boolean naboo_theed_jorgellansel_condition_reGiveHugoPointer(obj_id player, obj_id npc) throws InterruptedException
     {
         return !groundquests.isQuestActive(player, "naboo_theed_hugo_return") && (!groundquests.isQuestActiveOrComplete(player, "naboo_theed_hugo_rescue") && !groundquests.isQuestActiveOrComplete(player, "naboo_theed_hugo_rescue_skaak") && !groundquests.isQuestActiveOrComplete(player, "naboo_theed_hugo_rescue_darkwalker"));
     }
+
     public void naboo_theed_jorgellansel_action_grantDarkwalker(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_theed_hugo_darkwalker");
     }
+
     public void naboo_theed_jorgellansel_action_signal_darkwalker_05(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "theed_hugo_darkwalker_05");
     }
+
     public void naboo_theed_jorgellansel_action_endGotoJorgellansel(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "theed_goto_jorgellansel");
     }
+
     public void naboo_theed_jorgellansel_action_sendBackToHugo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_theed_hugo_return");
-        return;
     }
+
     public int naboo_theed_jorgellansel_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_14"))
@@ -68,6 +85,7 @@ public class naboo_theed_jorgellansel extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_theed_jorgellansel_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_74"))
@@ -83,6 +101,7 @@ public class naboo_theed_jorgellansel extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_theed_jorgellansel_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_39"))
@@ -102,7 +121,7 @@ public class naboo_theed_jorgellansel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24");
@@ -111,7 +130,7 @@ public class naboo_theed_jorgellansel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_theed_jorgellansel.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -121,6 +140,7 @@ public class naboo_theed_jorgellansel extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_theed_jorgellansel_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_24"))
@@ -136,6 +156,7 @@ public class naboo_theed_jorgellansel extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -145,11 +166,13 @@ public class naboo_theed_jorgellansel extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -158,18 +181,21 @@ public class naboo_theed_jorgellansel extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.naboo_theed_jorgellansel");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -192,7 +218,7 @@ public class naboo_theed_jorgellansel extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_14");
@@ -200,7 +226,7 @@ public class naboo_theed_jorgellansel extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_theed_jorgellansel.branchId", 1);
                 npcStartConversation(player, npc, "naboo_theed_jorgellansel", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -222,7 +248,7 @@ public class naboo_theed_jorgellansel extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -230,7 +256,7 @@ public class naboo_theed_jorgellansel extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_theed_jorgellansel.branchId", 3);
                 npcStartConversation(player, npc, "naboo_theed_jorgellansel", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -258,7 +284,7 @@ public class naboo_theed_jorgellansel extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_39");
@@ -266,7 +292,7 @@ public class naboo_theed_jorgellansel extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_theed_jorgellansel.branchId", 6);
                 npcStartConversation(player, npc, "naboo_theed_jorgellansel", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -281,6 +307,7 @@ public class naboo_theed_jorgellansel extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("naboo_theed_jorgellansel"))

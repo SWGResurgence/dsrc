@@ -1,5 +1,11 @@
 package script.systems.battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -714,6 +720,5 @@ public class player_battlefield extends script.base_script
         }
         removeObjVar(player, battlefield.VAR_BATTLEFIELD);
         detachScript(player, battlefield.SCRIPT_PLAYER_BATTLEFIELD);
-        return;
     }
 }

@@ -1,5 +1,11 @@
 package script.faction_perk.minefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.combat_engine.attacker_data;
 import script.combat_engine.defender_data;
 import script.combat_engine.hit_result;
@@ -11,9 +17,6 @@ import java.util.Vector;
 
 public class field extends script.systems.combat.combat_base_old
 {
-    public field()
-    {
-    }
     public static final String BLAST_PARTICLE_TEMPLATE = "object/static/particle/particle_sm_explosion.iff";
     public static final String WARNING_PARTICLE_TEMPLATE = "object/static/particle/particle_mine_warning.iff";
     public static final String VOL_MINEFIELD = "volMineField";
@@ -47,6 +50,10 @@ public class field extends script.systems.combat.combat_base_old
     public static final string_id SID_DEFUSE_MINE = new string_id("player_structure", "disarm_minefield");
     public static final string_id SID_DONATE_MINES = new string_id("player_structure", "mnu_donate_mines");
     public static final String HANDLER_BLAST_CLEANUP = "handleBlastCleanup";
+    public field()
+    {
+    }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id who) throws InterruptedException
     {
         if (volumeName.equals(VOL_MINEFIELD))
@@ -65,6 +72,7 @@ public class field extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id who) throws InterruptedException
     {
         if (volumeName.equals(VOL_MINEFIELD))
@@ -83,6 +91,7 @@ public class field extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!player_structure.isInstallation(self))
@@ -103,7 +112,7 @@ public class field extends script.systems.combat.combat_base_old
                 {
                     mi.addRootMenu(menu_info_types.SERVER_HEAL_WOUND, SID_MINE_INV);
                 }
-                else 
+                else
                 {
                     mi.addRootMenu(menu_info_types.SERVER_HEAL_WOUND_HEALTH, SID_DONATE_MINES);
                 }
@@ -118,6 +127,7 @@ public class field extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!player_structure.isInstallation(self))
@@ -159,10 +169,12 @@ public class field extends script.systems.combat.combat_base_old
                 }
                 Vector entries = new Vector();
                 entries.setSize(0);
-                for (obj_id mine : mines) {
+                for (obj_id mine : mines)
+                {
                     obj_id container = getContainedBy(mine);
                     String containerName = getTemplateName(container);
-                    if (!containerName.equals("object/factory/factory_crate_weapon.iff")) {
+                    if (!containerName.equals("object/factory/factory_crate_weapon.iff"))
+                    {
                         prose_package ppElement = prose.getPackage(SID_MINE_COUNT, mine, getCount(mine));
                         entries = utils.addElement(entries, " \0" + packOutOfBandProsePackage(null, ppElement));
                     }
@@ -198,6 +210,7 @@ public class field extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToOpenContainer(obj_id self, obj_id who) throws InterruptedException
     {
         if (isPlayer(who) && (isGod(who) || getOwner(self) == who))
@@ -207,6 +220,7 @@ public class field extends script.systems.combat.combat_base_old
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(transferer) && (getOwner(self) != transferer))
@@ -216,6 +230,7 @@ public class field extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(transferer) && (pvpGetAlignedFaction(self) == pvpGetAlignedFaction(transferer)) && (pvpGetType(transferer) != PVPTYPE_NEUTRAL))
@@ -235,6 +250,7 @@ public class field extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id[] contents = getContents(self);
@@ -244,6 +260,7 @@ public class field extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (hasObjVar(self, VAR_EMPTY_BASE))
@@ -252,15 +269,18 @@ public class field extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         updateMinefieldExtents();
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "faction_perk.hq.defense_object"))
@@ -279,6 +299,7 @@ public class field extends script.systems.combat.combat_base_old
         createMinefieldVolume();
         return SCRIPT_CONTINUE;
     }
+
     public int handleMinefieldTick(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] targets = utils.getObjIdBatchScriptVar(self, faction_perk.VAR_MINEFIELD_TARGET_IDS);
@@ -306,7 +327,7 @@ public class field extends script.systems.combat.combat_base_old
             {
                 toRemove = utils.addElement(toRemove, targets[i]);
             }
-            else 
+            else
             {
                 location spot = getLocation(targets[i]);
                 if (spot != null)
@@ -314,7 +335,7 @@ public class field extends script.systems.combat.combat_base_old
                     if (!noMines)
                     {
                         float dist = getDistance(locs[i], spot);
-                        int chance = (int)(dist * faction_perk.CHANCE_PER_METER);
+                        int chance = (int) (dist * faction_perk.CHANCE_PER_METER);
                         int roll = rand(0, 100);
                         if (roll < chance)
                         {
@@ -334,13 +355,15 @@ public class field extends script.systems.combat.combat_base_old
         }
         if ((toRemove != null) && (toRemove.size() > 0))
         {
-            for (Object o : toRemove) {
+            for (Object o : toRemove)
+            {
                 removeMinefieldTarget(self, ((obj_id) o));
             }
         }
         messageTo(self, HANDLER_MINEFIELD_TICK, null, faction_perk.BASE_MINEFIELD_TICK, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBlastCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -354,6 +377,7 @@ public class field extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMinefieldEmpty(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, VAR_EMPTY_BASE))
@@ -383,6 +407,7 @@ public class field extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMineDonation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -420,13 +445,14 @@ public class field extends script.systems.combat.combat_base_old
             prose_package ppSuccess = prose.getPackage(SID_SUCCESSFULLY_DONATE, self, mines[idx]);
             sendSystemMessageProse(player, ppSuccess);
         }
-        else 
+        else
         {
             prose_package ppUnsuccess = prose.getPackage(SID_UNSUCCESSFUL_DONATE, self, mines[idx]);
             sendSystemMessageProse(player, ppUnsuccess);
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean addMinefieldTarget(obj_id self, obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(self))
@@ -447,7 +473,7 @@ public class field extends script.systems.combat.combat_base_old
         {
             locs = utils.addElement(locs, target_loc);
         }
-        else 
+        else
         {
             return false;
         }
@@ -459,6 +485,7 @@ public class field extends script.systems.combat.combat_base_old
         utils.setBatchScriptVar(self, faction_perk.VAR_MINEFIELD_TARGET_LOCS, locs);
         return true;
     }
+
     public boolean removeMinefieldTarget(obj_id self, obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(self))
@@ -483,13 +510,14 @@ public class field extends script.systems.combat.combat_base_old
             utils.removeBatchScriptVar(self, faction_perk.VAR_MINEFIELD_TARGET_IDS);
             utils.removeBatchScriptVar(self, faction_perk.VAR_MINEFIELD_TARGET_LOCS);
         }
-        else 
+        else
         {
             utils.setBatchScriptVar(self, faction_perk.VAR_MINEFIELD_TARGET_IDS, targets);
             utils.setBatchScriptVar(self, faction_perk.VAR_MINEFIELD_TARGET_LOCS, locs);
         }
         return true;
     }
+
     public boolean createMinefieldVolume() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -511,6 +539,7 @@ public class field extends script.systems.combat.combat_base_old
         createTriggerVolume(VOL_MINEFIELD, range, true);
         return true;
     }
+
     public void removeMinefieldVolume() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -520,6 +549,7 @@ public class field extends script.systems.combat.combat_base_old
         }
         removeTriggerVolume(VOL_MINEFIELD);
     }
+
     public void notifyMinefieldNear(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target))
@@ -534,6 +564,7 @@ public class field extends script.systems.combat.combat_base_old
         cnt++;
         utils.setScriptVar(target, SCRIPTVAR_MINEFIELD_NEAR, cnt);
     }
+
     public void notifyMinefieldExited(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -550,6 +581,7 @@ public class field extends script.systems.combat.combat_base_old
         }
         utils.setScriptVar(target, SCRIPTVAR_MINEFIELD_NEAR, cnt);
     }
+
     public void explodeMine(obj_id minefield, obj_id mine, obj_id target, location detonation) throws InterruptedException
     {
         if (!isIdValid(minefield) || !isIdValid(mine) || !isIdValid(target))
@@ -561,17 +593,23 @@ public class field extends script.systems.combat.combat_base_old
         Vector combatTargets = new Vector();
         combatTargets.setSize(0);
         obj_id[] creatures = getCreaturesInRange(detonation, damageRadius);
-        if ((creatures != null) && (creatures.length > 0))
+        if (creatures != null)
         {
-            for (obj_id creature : creatures) {
+            for (obj_id creature : creatures)
+            {
                 int cFac = pvpGetAlignedFaction(creature);
-                if (pvpGetType(creature) == PVPTYPE_NEUTRAL) {
+                if (pvpGetType(creature) == PVPTYPE_NEUTRAL)
+                {
                     cFac = 0;
                 }
-                if (pvpAreFactionsOpposed(fieldFac, cFac)) {
-                    if (isPlayer(creature) && getPosture(creature) == POSTURE_INCAPACITATED) {
+                if (pvpAreFactionsOpposed(fieldFac, cFac))
+                {
+                    if (isPlayer(creature) && getPosture(creature) == POSTURE_INCAPACITATED)
+                    {
                         pclib.coupDeGrace(creature, minefield);
-                    } else {
+                    }
+                    else
+                    {
                         pvpSetFactionEnemyFlag(creature, fieldFac);
                         combatTargets = utils.addElement(combatTargets, creature);
                     }
@@ -595,6 +633,7 @@ public class field extends script.systems.combat.combat_base_old
             }
         }
     }
+
     public obj_id getRandomMine(obj_id minefield) throws InterruptedException
     {
         if (!isIdValid(minefield))
@@ -610,6 +649,7 @@ public class field extends script.systems.combat.combat_base_old
         setMinefieldEmpty(minefield);
         return null;
     }
+
     public boolean detonateMine(obj_id minefield, obj_id target) throws InterruptedException
     {
         if (!isIdValid(minefield) || !isIdValid(target))
@@ -640,6 +680,7 @@ public class field extends script.systems.combat.combat_base_old
         }
         return false;
     }
+
     public location getRandomLocationInMinefield(obj_id minefield) throws InterruptedException
     {
         if (!isIdValid(minefield))
@@ -655,6 +696,7 @@ public class field extends script.systems.combat.combat_base_old
         float z = rand(minZ, maxZ);
         return new location(x, fieldLoc.y, z);
     }
+
     public void setMinefieldEmpty(obj_id minefield) throws InterruptedException
     {
         if (!isIdValid(minefield))
@@ -668,6 +710,7 @@ public class field extends script.systems.combat.combat_base_old
             messageTo(minefield, HANDLER_MINEFIELD_EMPTY, null, 360, true);
         }
     }
+
     public void updateMinefieldExtents() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -682,6 +725,7 @@ public class field extends script.systems.combat.combat_base_old
         setObjVar(self, faction_perk.VAR_MINEFIELD_MAX_X, here.x + 4.0f);
         setObjVar(self, faction_perk.VAR_MINEFIELD_MAX_Z, here.z + 4.0f);
     }
+
     public boolean isInMinefield(location here, float minx, float minz, float maxx, float maxz) throws InterruptedException
     {
         if (here == null)
@@ -700,6 +744,7 @@ public class field extends script.systems.combat.combat_base_old
         }
         return (inX && inZ);
     }
+
     public boolean isInMinefield(obj_id target, obj_id minefield) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(minefield))
@@ -726,6 +771,7 @@ public class field extends script.systems.combat.combat_base_old
         float maxZ = mineLoc.z + getFloatObjVar(minefield, faction_perk.VAR_MINEFIELD_MAX_Z);
         return isInMinefield(here, minX, minZ, maxX, maxZ);
     }
+
     public void doMineDamage(obj_id minefield, obj_id mine, obj_id target, obj_id[] combatTargets) throws InterruptedException
     {
         if (!isIdValid(minefield) || !isIdValid(mine) || !isIdValid(target))
@@ -738,38 +784,38 @@ public class field extends script.systems.combat.combat_base_old
         final float ACTION_COST_MODIFIER = 0.0f;
         final int BASE_TO_HIT_MODIFIER = 75;
         final float AMMO_COST_MODIFIER = 1.0f;
-        String[] strTimeMods = 
-        {
-        };
-        String[] strDamageMods = 
-        {
-        };
-        String[] strCostMods = 
-        {
-        };
-        String[] strToHitMods = 
-        {
-        };
-        String[] strBlockMods = 
-        {
-        };
-        String[] strEvadeMods = 
-        {
-        };
-        String[] strCounterAttackMods = 
-        {
-        };
+        String[] strTimeMods =
+                {
+                };
+        String[] strDamageMods =
+                {
+                };
+        String[] strCostMods =
+                {
+                };
+        String[] strToHitMods =
+                {
+                };
+        String[] strBlockMods =
+                {
+                };
+        String[] strEvadeMods =
+                {
+                };
+        String[] strCounterAttackMods =
+                {
+                };
         int intBlockMod = 1000;
         int intEvadeMod = 1000;
         int intCounterAttackMod = 1000;
         int intAttackerEndPosture = POSTURE_NONE;
         int intDefenderEndPosture = POSTURE_NONE;
-        int[] intEffects = 
-        {
-        };
-        float[] fltEffectDurations = 
-        {
-        };
+        int[] intEffects =
+                {
+                };
+        float[] fltEffectDurations =
+                {
+                };
         int intChanceToApplyEffect = 0;
         int intToHitMod = 0;
         float fltAttackRange = 5;
@@ -815,6 +861,7 @@ public class field extends script.systems.combat.combat_base_old
         finalizeMineDamage(cbtAttackerData.id, cbtWeaponData, cbtDefenderData, cbtHitData, cbtDefenderResults);
         doMineFieldResults("clienteffect/combat_explosion_lair_large.cef", cbtAttackerResults, cbtDefenderResults, cbtHitData, target, cbtWeaponData);
     }
+
     public int cmdDefuseMinefield(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -860,12 +907,12 @@ public class field extends script.systems.combat.combat_base_old
             pvpSetFactionEnemyFlag(target, mFac);
         }
         location here = getLocation(target);
-        location there = (location)locs[idx].clone();
+        location there = (location) locs[idx].clone();
         float travel = getDistance(here, there);
         location minefield = getLocation(self);
         float range = getDistance(here, minefield);
         float magicRatio = 3.0f / 2.0f;
-        int chance = (int)(travel * faction_perk.CHANCE_PER_METER * magicRatio) + 10 - (int)range;
+        int chance = (int) (travel * faction_perk.CHANCE_PER_METER * magicRatio) + 10 - (int) range;
         int roll = rand(0, 100);
         float delay = 5.0f;
         boolean locatedMine = false;
@@ -892,7 +939,7 @@ public class field extends script.systems.combat.combat_base_old
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             if (roll < chance)
             {
@@ -905,7 +952,7 @@ public class field extends script.systems.combat.combat_base_old
             defuseLocateMineFail(target);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sendSystemMessage(target, SID_SUCCESS_LOCATE_MINE);
             if (locomotion != LOCOMOTION_KNEELING)
@@ -919,6 +966,7 @@ public class field extends script.systems.combat.combat_base_old
         messageTo(self, "handleMineDefuse", defuseData, delay, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdDefuseMinefieldFail(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -928,6 +976,7 @@ public class field extends script.systems.combat.combat_base_old
         sendSystemMessage(target, SID_CANNOT_DEFUSE_STATE);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMineDefuse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -965,7 +1014,7 @@ public class field extends script.systems.combat.combat_base_old
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             if (roll < generalAssembly)
             {
@@ -976,7 +1025,7 @@ public class field extends script.systems.combat.combat_base_old
         {
             defuseMineFail(self, target);
         }
-        else 
+        else
         {
             sendSystemMessage(target, SID_SUCCESS_DISARM_MINE);
             messageTo(mine, "grenadeUsed", null, 0, true);
@@ -984,10 +1033,12 @@ public class field extends script.systems.combat.combat_base_old
         queueCommand(target, (-1465754503), null, "", COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public void defuseLocateMineFail(obj_id target) throws InterruptedException
     {
         sendSystemMessage(target, SID_NO_LOCATE_MINE);
     }
+
     public void defuseMineFail(obj_id minefield, obj_id target) throws InterruptedException
     {
         sendSystemMessage(target, SID_NO_SUCCESS_DISARM);

@@ -1,5 +1,11 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -9,13 +15,14 @@ import script.string_id;
 
 public class trooper extends script.base_script
 {
-    public trooper()
-    {
-    }
     public static final String CONVO_FILE = "theme_park/warren/warren";
     public static final String ALERT_VOLUME_NAME = "alertVolume";
     public static final String ACTION_ALERT = "alert";
     public static final String ACTION_THREATEN = "threaten";
+    public trooper()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "ai.diction"))
@@ -33,6 +40,7 @@ public class trooper extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (hasObjVar(breacher, "gm"))
@@ -68,7 +76,7 @@ public class trooper extends script.base_script
                 {
                     chat.chat(self, new string_id(CONVO_FILE, "trooper_greeting_m"));
                 }
-                else 
+                else
                 {
                     chat.chat(self, new string_id(CONVO_FILE, "trooper_greeting_f"));
                 }
@@ -78,6 +86,7 @@ public class trooper extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSawAttack(obj_id self, obj_id defender, obj_id[] attackers) throws InterruptedException
     {
         if (getConfigSetting("GameServer", "disableAICombat") != null)
@@ -99,24 +108,29 @@ public class trooper extends script.base_script
             startCombat(self, attackers[rand(0, attackers.length - 1)]);
             return SCRIPT_CONTINUE;
         }
-        for (obj_id attacker : attackers) {
-            if (hasScript(attacker, "theme_park.warren.trooper")) {
+        for (obj_id attacker : attackers)
+        {
+            if (hasScript(attacker, "theme_park.warren.trooper"))
+            {
                 startCombat(self, defender);
                 return SCRIPT_OVERRIDE;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMoveMoving(obj_id self) throws InterruptedException
     {
         aiEquipPrimaryWeapon(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         aiEquipPrimaryWeapon(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLoiterWaiting(obj_id self, modifiable_float time) throws InterruptedException
     {
         aiEquipPrimaryWeapon(self);

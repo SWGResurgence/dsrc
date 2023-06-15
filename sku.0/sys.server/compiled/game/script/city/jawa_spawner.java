@@ -1,5 +1,11 @@
 package script.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.utils;
@@ -11,11 +17,13 @@ public class jawa_spawner extends script.base_script
     public jawa_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkForStart", null, 30, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "current"))
@@ -23,12 +31,13 @@ public class jawa_spawner extends script.base_script
             killAll(self);
             messageTo(self, "checkForStart", null, 30, true);
         }
-        else 
+        else
         {
             messageTo(self, "checkForStart", null, 30, true);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!hasObjVar(speaker, "gm"))
@@ -36,7 +45,7 @@ public class jawa_spawner extends script.base_script
             return SCRIPT_OVERRIDE;
         }
         int stringCheck = text.indexOf("max");
-        String population = text.substring(text.indexOf(" ") + 1, text.length());
+        String population = text.substring(text.indexOf(" ") + 1);
         int maxPop = utils.stringToInt(population);
         if (stringCheck > -1)
         {
@@ -52,6 +61,7 @@ public class jawa_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkForStart(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "pop"))
@@ -59,13 +69,14 @@ public class jawa_spawner extends script.base_script
             messageTo(self, "startSpawning", null, 10, true);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             setObjVar(self, "pop", 20);
             messageTo(self, "checkForStart", null, 30, true);
             return SCRIPT_CONTINUE;
         }
     }
+
     public int startSpawning(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id spawner = getSelf();
@@ -75,20 +86,21 @@ public class jawa_spawner extends script.base_script
             setObjVar(self, "current", 1);
             doSpawn(self);
         }
-        else 
+        else
         {
             int currentPop = getIntObjVar(self, "current");
             if (currentPop <= maxPop)
             {
                 doSpawn(self);
             }
-            else 
+            else
             {
                 return SCRIPT_OVERRIDE;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doSpawn(obj_id self) throws InterruptedException
     {
         int currentPop = getIntObjVar(self, "current");
@@ -103,8 +115,8 @@ public class jawa_spawner extends script.base_script
         currentPop = currentPop + 1;
         setObjVar(self, "current", currentPop);
         messageTo(self, "startSpawning", null, 10, true);
-        return;
     }
+
     public void killAll(obj_id self) throws InterruptedException
     {
         int increment = 1;
@@ -121,8 +133,8 @@ public class jawa_spawner extends script.base_script
         }
         removeObjVar(self, "current");
         removeObjVar(self, "spawn");
-        return;
     }
+
     public String npcToSpawn() throws InterruptedException
     {
         int choice = rand(1, 12);
@@ -130,41 +142,41 @@ public class jawa_spawner extends script.base_script
         switch (choice)
         {
             case 1:
-            spawn = "jawa_warlord";
-            break;
+                spawn = "jawa_warlord";
+                break;
             case 2:
-            spawn = "jawa_engineer";
-            break;
+                spawn = "jawa_engineer";
+                break;
             case 3:
-            spawn = "jawa_healer";
-            break;
+                spawn = "jawa_healer";
+                break;
             case 4:
-            spawn = "jawa";
-            break;
+                spawn = "jawa";
+                break;
             case 5:
-            spawn = "jawa_henchman";
-            break;
+                spawn = "jawa_henchman";
+                break;
             case 6:
-            spawn = "jawa";
-            break;
+                spawn = "jawa";
+                break;
             case 7:
-            spawn = "jawa_smuggler";
-            break;
+                spawn = "jawa_smuggler";
+                break;
             case 8:
-            spawn = "jawa";
-            break;
+                spawn = "jawa";
+                break;
             case 9:
-            spawn = "jawa_thief";
-            break;
+                spawn = "jawa_thief";
+                break;
             case 10:
-            spawn = "jawa";
-            break;
+                spawn = "jawa";
+                break;
             case 11:
-            spawn = "jawa";
-            break;
+                spawn = "jawa";
+                break;
             case 12:
-            spawn = "jawa";
-            break;
+                spawn = "jawa";
+                break;
         }
         return spawn;
     }

@@ -1,5 +1,11 @@
 package script.quest.task;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.fs_quests_sad;
 import script.library.quests;
@@ -12,6 +18,7 @@ public class wait_for_signal extends script.base_script
     public wait_for_signal()
     {
     }
+
     public int OnFinishQuestSignal(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newquests", "wait_for_signal - OnFinishQuestSignal()");
@@ -31,6 +38,7 @@ public class wait_for_signal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         if (quests.isMyQuest(questRow, "quest.task.wait_for_signal"))
@@ -45,7 +53,7 @@ public class wait_for_signal extends script.base_script
                 {
                     setWaypointName(wp, summary);
                 }
-                else 
+                else
                 {
                     setWaypointName(wp, "missing task summary for " + questName);
                 }

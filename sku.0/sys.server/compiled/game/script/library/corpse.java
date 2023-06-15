@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Vector;
@@ -94,6 +100,7 @@ public class corpse extends script.base_script
     public static final float GROUP_BONUS = 1.2f;
     public static final float GROUP_BONUS_SCOUT = 1.3f;
     public static final float GROUP_BONUS_MASTERSCOUT = 1.4f;
+
     public corpse()
     {
     }

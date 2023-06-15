@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,14 +13,17 @@ import script.*;
 
 public class sean_trenwell extends script.base_script
 {
+    public static String c_stringFile = "conversation/sean_trenwell";
+
     public sean_trenwell()
     {
     }
-    public static String c_stringFile = "conversation/sean_trenwell";
+
     public boolean sean_trenwell_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean sean_trenwell_condition_RivalObj(obj_id player, obj_id npc) throws InterruptedException
     {
         if (sean_trenwell_condition_votedSeanCurrentElection(player, npc))
@@ -27,14 +36,12 @@ public class sean_trenwell extends script.base_script
             if (hasObjVar(player, "bestine.rival"))
             {
                 int electionPlayerIsIn = getIntObjVar(player, "bestine.rival");
-                if (electionPlayerIsIn >= electionNum)
-                {
-                    return true;
-                }
+                return electionPlayerIsIn >= electionNum;
             }
         }
         return false;
     }
+
     public boolean sean_trenwell_condition_NoRoom(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionStarted"))
@@ -43,14 +50,12 @@ public class sean_trenwell extends script.base_script
             if (hasObjVar(player, "bestine.sean_noroom"))
             {
                 int electionPlayerIsIn = getIntObjVar(player, "bestine.sean_noroom");
-                if (electionPlayerIsIn >= electionNum)
-                {
-                    return true;
-                }
+                return electionPlayerIsIn >= electionNum;
             }
         }
         return false;
     }
+
     public boolean sean_trenwell_condition_inOffice_newElection(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionStarted"))
@@ -59,7 +64,7 @@ public class sean_trenwell extends script.base_script
             {
                 return true;
             }
-            else 
+            else
             {
                 int currentElection = getIntObjVar(npc, "bestine.electionStarted");
                 int electionVotedIn = 0;
@@ -71,14 +76,12 @@ public class sean_trenwell extends script.base_script
                 {
                     electionVotedIn = getIntObjVar(player, "bestine.votedVictor");
                 }
-                if (electionVotedIn != currentElection)
-                {
-                    return true;
-                }
+                return electionVotedIn != currentElection;
             }
         }
         return false;
     }
+
     public boolean sean_trenwell_condition_checkForVoteReward(obj_id player, obj_id npc) throws InterruptedException
     {
         int electionNum = 1;
@@ -93,13 +96,11 @@ public class sean_trenwell extends script.base_script
         if (hasObjVar(player, "bestine.votedSean"))
         {
             int electionPlayerIsIn = getIntObjVar(player, "bestine.votedSean");
-            if (electionPlayerIsIn <= electionNum)
-            {
-                return true;
-            }
+            return electionPlayerIsIn <= electionNum;
         }
         return false;
     }
+
     public boolean sean_trenwell_condition_Campaign(obj_id player, obj_id npc) throws InterruptedException
     {
         if (sean_trenwell_condition_votedSeanCurrentElection(player, npc))
@@ -114,15 +115,13 @@ public class sean_trenwell extends script.base_script
                 int electionPlayerIsIn = getIntObjVar(player, "bestine.campaign");
                 if (electionPlayerIsIn >= electionNum)
                 {
-                    if (!hasObjVar(player, "bestine.sean_noroom"))
-                    {
-                        return true;
-                    }
+                    return !hasObjVar(player, "bestine.sean_noroom");
                 }
             }
         }
         return false;
     }
+
     public boolean sean_trenwell_condition_NegquestsObj(obj_id player, obj_id npc) throws InterruptedException
     {
         if (sean_trenwell_condition_votedSeanCurrentElection(player, npc))
@@ -135,14 +134,12 @@ public class sean_trenwell extends script.base_script
             if (hasObjVar(player, "bestine.negativeq"))
             {
                 int electionPlayerIsIn = getIntObjVar(player, "bestine.negativeq");
-                if (electionPlayerIsIn >= electionNum)
-                {
-                    return true;
-                }
+                return electionPlayerIsIn >= electionNum;
             }
         }
         return false;
     }
+
     public boolean sean_trenwell_condition_Evidence1(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id objInventory = utils.getInventoryContainer(player);
@@ -151,17 +148,21 @@ public class sean_trenwell extends script.base_script
             obj_id[] objContents = utils.getContents(objInventory);
             if (objContents != null)
             {
-                for (obj_id objContent : objContents) {
+                for (obj_id objContent : objContents)
+                {
                     String strItemTemplate = getTemplateName(objContent);
-                    if (strItemTemplate.equals("object/tangible/loot/quest/victor_questn_hlist.iff")) {
+                    if (strItemTemplate.equals("object/tangible/loot/quest/victor_questn_hlist.iff"))
+                    {
                         destroyObject(objContent);
                         return true;
                     }
-                    if (strItemTemplate.equals("object/tangible/loot/quest/victor_questn_dseal.iff")) {
+                    if (strItemTemplate.equals("object/tangible/loot/quest/victor_questn_dseal.iff"))
+                    {
                         destroyObject(objContent);
                         return true;
                     }
-                    if (strItemTemplate.equals("object/tangible/loot/quest/victor_questn_journal.iff")) {
+                    if (strItemTemplate.equals("object/tangible/loot/quest/victor_questn_journal.iff"))
+                    {
                         destroyObject(objContent);
                         return true;
                     }
@@ -170,6 +171,7 @@ public class sean_trenwell extends script.base_script
         }
         return false;
     }
+
     public boolean sean_trenwell_condition_Itemfound(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.itemfound"))
@@ -179,27 +181,28 @@ public class sean_trenwell extends script.base_script
                 String winner = getStringObjVar(npc, "bestine.electionWinner");
                 if ((winner.equals("sean")) || (winner.equals("Sean")))
                 {
-                    if (utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/sean_history_disk.iff"))
-                    {
-                        return true;
-                    }
+                    return utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/sean_history_disk.iff");
                 }
             }
         }
         return false;
     }
+
     public boolean sean_trenwell_condition_Diskdestroyed(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "bestine.destroyed");
     }
+
     public boolean sean_trenwell_condition_Hutt(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "bestine.hutt");
     }
+
     public boolean sean_trenwell_condition_Mess1(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "bestine.mess");
     }
+
     public boolean sean_trenwell_condition_find1(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.find"))
@@ -207,18 +210,17 @@ public class sean_trenwell extends script.base_script
             if (hasObjVar(npc, "bestine.electionWinner"))
             {
                 String winner = getStringObjVar(npc, "bestine.electionWinner");
-                if ((winner.equals("sean")) || (winner.equals("Sean")))
-                {
-                    return true;
-                }
+                return (winner.equals("sean")) || (winner.equals("Sean"));
             }
         }
         return false;
     }
+
     public boolean sean_trenwell_condition_hquestObj(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "bestine.hquest");
     }
+
     public boolean sean_trenwell_condition_notInOffice_noElection(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionEnded"))
@@ -226,26 +228,22 @@ public class sean_trenwell extends script.base_script
             if (hasObjVar(npc, "bestine.electionWinner"))
             {
                 String winner = getStringObjVar(npc, "bestine.electionWinner");
-                if ((!winner.equals("sean")) && (!winner.equals("Sean")))
-                {
-                    return true;
-                }
+                return (!winner.equals("sean")) && (!winner.equals("Sean"));
             }
         }
         return false;
     }
+
     public boolean sean_trenwell_condition_inOffice(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionWinner"))
         {
             String winner = getStringObjVar(npc, "bestine.electionWinner");
-            if ((winner.equals("sean")) || (winner.equals("Sean")))
-            {
-                return true;
-            }
+            return (winner.equals("sean")) || (winner.equals("Sean"));
         }
         return false;
     }
+
     public boolean sean_trenwell_condition_noInventorySpace(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean hasNoInvRoom = false;
@@ -260,6 +258,7 @@ public class sean_trenwell extends script.base_script
         }
         return hasNoInvRoom;
     }
+
     public boolean sean_trenwell_condition_CheckRewardGiven(obj_id player, obj_id npc) throws InterruptedException
     {
         int electionNum = 1;
@@ -274,13 +273,11 @@ public class sean_trenwell extends script.base_script
         if (hasObjVar(player, "bestine.rewardgivensean"))
         {
             int electionPlayerRewarded = getIntObjVar(player, "bestine.rewardgivensean");
-            if (electionPlayerRewarded <= electionNum)
-            {
-                return true;
-            }
+            return electionPlayerRewarded <= electionNum;
         }
         return false;
     }
+
     public boolean sean_trenwell_condition_hasEvidence(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/victor_questn_hlist.iff"))
@@ -291,16 +288,14 @@ public class sean_trenwell extends script.base_script
         {
             return true;
         }
-        if (utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/victor_questn_journal.iff"))
-        {
-            return true;
-        }
-        return false;
+        return utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/victor_questn_journal.iff");
     }
+
     public boolean sean_trenwell_condition_hasNoRoomHistoryReward(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "bestine.sean_historyreward_noroom");
     }
+
     public boolean sean_trenwell_condition_votedSeanCurrentElection(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionStarted"))
@@ -309,14 +304,12 @@ public class sean_trenwell extends script.base_script
             if (hasObjVar(player, "bestine.votedSean"))
             {
                 int electionPlayerIsIn = getIntObjVar(player, "bestine.votedSean");
-                if (electionPlayerIsIn == electionNum)
-                {
-                    return true;
-                }
+                return electionPlayerIsIn == electionNum;
             }
         }
         return false;
     }
+
     public boolean sean_trenwell_condition_tellAboutHistoryQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "bestine.hquest"))
@@ -335,7 +328,7 @@ public class sean_trenwell extends script.base_script
                                 {
                                     return true;
                                 }
-                                else 
+                                else
                                 {
                                     int playerQuestNum = getIntObjVar(player, "bestine.completedSeanHistroyQuest");
                                     int currentQuestNum = 0;
@@ -347,10 +340,7 @@ public class sean_trenwell extends script.base_script
                                     {
                                         currentQuestNum = getIntObjVar(npc, "bestine.electionEnded");
                                     }
-                                    if (playerQuestNum < currentQuestNum)
-                                    {
-                                        return true;
-                                    }
+                                    return playerQuestNum < currentQuestNum;
                                 }
                             }
                         }
@@ -360,6 +350,7 @@ public class sean_trenwell extends script.base_script
         }
         return false;
     }
+
     public boolean sean_trenwell_condition_votedVictorCurrentElection(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionStarted"))
@@ -368,17 +359,16 @@ public class sean_trenwell extends script.base_script
             if (hasObjVar(player, "bestine.votedVictor"))
             {
                 int electionPlayerIsIn = getIntObjVar(player, "bestine.votedVictor");
-                if (electionPlayerIsIn >= electionNum)
-                {
-                    return true;
-                }
+                return electionPlayerIsIn >= electionNum;
             }
         }
         return false;
     }
+
     public void sean_trenwell_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void sean_trenwell_action_giveDiskandJoinCampaign(obj_id player, obj_id npc) throws InterruptedException
     {
         int electionNum = getIntObjVar(npc, "bestine.electionStarted");
@@ -413,8 +403,8 @@ public class sean_trenwell extends script.base_script
                 obj_id item = createObject(DISK, playerInv, "");
             }
         }
-        return;
     }
+
     public void sean_trenwell_action_NQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         int electionNum = getIntObjVar(npc, "bestine.electionStarted");
@@ -429,16 +419,19 @@ public class sean_trenwell extends script.base_script
             removeObjVar(player, "bestine.already_searched");
         }
     }
+
     public void sean_trenwell_action_NoRoomObj(obj_id player, obj_id npc) throws InterruptedException
     {
         int electionNum = getIntObjVar(npc, "bestine.electionStarted");
         setObjVar(player, "bestine.sean_noroom", electionNum);
     }
+
     public void sean_trenwell_action_noRoomForHistoryReward(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "bestine.sean_historyreward_noroom", 1);
         removeObjVar(player, "bestine.destroyed");
     }
+
     public void sean_trenwell_action_GiveMainReward(obj_id player, obj_id npc) throws InterruptedException
     {
         int electionNum = 1;
@@ -477,8 +470,8 @@ public class sean_trenwell extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public void sean_trenwell_action_Hquest(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "bestine.hquest", true);
@@ -494,6 +487,7 @@ public class sean_trenwell extends script.base_script
         setWaypointActive(waypoint, true);
         setObjVar(player, "bestine.historianWaypoint", waypoint);
     }
+
     public void sean_trenwell_action_mess(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "bestine.mess", true);
@@ -506,6 +500,7 @@ public class sean_trenwell extends script.base_script
         setWaypointActive(waypoint, true);
         setObjVar(player, "bestine.contactWaypoint", waypoint);
     }
+
     public void sean_trenwell_action_GiveHistoryReward(obj_id player, obj_id npc) throws InterruptedException
     {
         String REWARD = "object/tangible/painting/bestine_history_quest_painting.iff";
@@ -539,8 +534,8 @@ public class sean_trenwell extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public void sean_trenwell_action_removeNoroomObjVar(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.sean_noroom"))
@@ -548,6 +543,7 @@ public class sean_trenwell extends script.base_script
             removeObjVar(player, "bestine.sean_noroom");
         }
     }
+
     public void sean_trenwell_action_resetMessWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "bestine.contactWaypoint"))
@@ -561,6 +557,7 @@ public class sean_trenwell extends script.base_script
             setObjVar(player, "bestine.contactWaypoint", waypoint);
         }
     }
+
     public void sean_trenwell_action_removeHquest(obj_id player, obj_id npc) throws InterruptedException
     {
         removeObjVar(player, "bestine.hquest");
@@ -574,6 +571,7 @@ public class sean_trenwell extends script.base_script
             removeObjVar(player, "bestine.historianWaypoint");
         }
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -583,11 +581,13 @@ public class sean_trenwell extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -596,12 +596,14 @@ public class sean_trenwell extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.sean_trenwell");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -636,7 +638,7 @@ public class sean_trenwell extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ff7aeed7");
@@ -648,7 +650,7 @@ public class sean_trenwell extends script.base_script
                 setObjVar(player, "conversation.sean_trenwell.branchId", 2);
                 npcStartConversation(player, self, "sean_trenwell", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -683,7 +685,7 @@ public class sean_trenwell extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_d1f385de");
@@ -699,7 +701,7 @@ public class sean_trenwell extends script.base_script
                 setObjVar(player, "conversation.sean_trenwell.branchId", 6);
                 npcStartConversation(player, self, "sean_trenwell", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -727,7 +729,7 @@ public class sean_trenwell extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_338ea1e3");
@@ -739,7 +741,7 @@ public class sean_trenwell extends script.base_script
                 setObjVar(player, "conversation.sean_trenwell.branchId", 11);
                 npcStartConversation(player, self, "sean_trenwell", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -767,7 +769,7 @@ public class sean_trenwell extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b826b85a");
@@ -779,7 +781,7 @@ public class sean_trenwell extends script.base_script
                 setObjVar(player, "conversation.sean_trenwell.branchId", 17);
                 npcStartConversation(player, self, "sean_trenwell", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -870,7 +872,7 @@ public class sean_trenwell extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_9fa98668");
@@ -918,7 +920,7 @@ public class sean_trenwell extends script.base_script
                 setObjVar(player, "conversation.sean_trenwell.branchId", 22);
                 npcStartConversation(player, self, "sean_trenwell", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -978,7 +980,7 @@ public class sean_trenwell extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6ba0df1d");
@@ -998,7 +1000,7 @@ public class sean_trenwell extends script.base_script
                 setObjVar(player, "conversation.sean_trenwell.branchId", 53);
                 npcStartConversation(player, self, "sean_trenwell", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -1007,6 +1009,7 @@ public class sean_trenwell extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("sean_trenwell"))
@@ -1121,7 +1124,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_641d98d5");
@@ -1134,7 +1137,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -1218,7 +1221,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a8b339fd");
@@ -1231,7 +1234,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -1322,7 +1325,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a907268e");
@@ -1331,7 +1334,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -1379,7 +1382,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b30bd73c");
@@ -1392,7 +1395,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -1440,7 +1443,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1059c36e");
@@ -1453,7 +1456,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -1481,7 +1484,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4ff8cd88");
@@ -1490,7 +1493,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -1552,7 +1555,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6ba0df1d");
@@ -1573,7 +1576,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -1667,7 +1670,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81a382e3");
@@ -1676,7 +1679,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -1717,7 +1720,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fcf4d778");
@@ -1726,7 +1729,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -1802,7 +1805,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9a679e7f");
@@ -1815,7 +1818,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -1863,7 +1866,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b45b3794");
@@ -1876,7 +1879,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -1931,7 +1934,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_540ac7e9");
@@ -1940,7 +1943,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -1982,7 +1985,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6ba0df1d");
@@ -1999,7 +2002,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2027,7 +2030,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_540ac7e9");
@@ -2036,7 +2039,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2077,7 +2080,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_540ac7e9");
@@ -2086,7 +2089,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2128,7 +2131,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6ba0df1d");
@@ -2145,7 +2148,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2173,7 +2176,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_540ac7e9");
@@ -2182,7 +2185,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2237,7 +2240,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f2b0fbc2");
@@ -2254,7 +2257,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2296,7 +2299,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6ba0df1d");
@@ -2313,7 +2316,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2341,7 +2344,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_540ac7e9");
@@ -2350,7 +2353,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2391,7 +2394,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_540ac7e9");
@@ -2400,7 +2403,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2428,7 +2431,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_540ac7e9");
@@ -2437,7 +2440,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2485,7 +2488,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d6a9a15d");
@@ -2498,7 +2501,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2526,7 +2529,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_540ac7e9");
@@ -2535,7 +2538,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2590,7 +2593,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ef067f71");
@@ -2607,7 +2610,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2649,7 +2652,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ef067f71");
@@ -2666,7 +2669,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2708,7 +2711,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ef067f71");
@@ -2725,7 +2728,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2753,7 +2756,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_540ac7e9");
@@ -2762,7 +2765,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2790,7 +2793,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_540ac7e9");
@@ -2799,7 +2802,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2847,7 +2850,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d6a9a15d");
@@ -2860,7 +2863,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2888,7 +2891,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_540ac7e9");
@@ -2897,7 +2900,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -2952,7 +2955,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ef067f71");
@@ -2969,7 +2972,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -3011,7 +3014,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ef067f71");
@@ -3028,7 +3031,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);
@@ -3070,7 +3073,7 @@ public class sean_trenwell extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ef067f71");
@@ -3087,7 +3090,7 @@ public class sean_trenwell extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.sean_trenwell.branchId");
                     npcSpeak(player, message);

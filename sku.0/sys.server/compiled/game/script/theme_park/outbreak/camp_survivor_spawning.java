@@ -1,5 +1,11 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -7,10 +13,12 @@ import script.obj_id;
 
 public class camp_survivor_spawning extends script.base_script
 {
+    public static final int RADIUS = 1000;
+
     public camp_survivor_spawning()
     {
     }
-    public static final int RADIUS = 1000;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "camp_survivor_spawning.OnAttach() Initializing spawning functionality for spawner: " + self);
@@ -28,6 +36,7 @@ public class camp_survivor_spawning extends script.base_script
         messageTo(self, "destroySelf", null, 600, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnSurvivor(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "child"))
@@ -86,6 +95,7 @@ public class camp_survivor_spawning extends script.base_script
         CustomerServiceLog("outbreak_themepark", "camp_survivor_spawning.spawnSurvivor() the mob is now set to run path.");
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "child"))

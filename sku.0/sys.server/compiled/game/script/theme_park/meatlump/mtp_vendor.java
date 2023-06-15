@@ -1,5 +1,11 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.library.static_item;
@@ -10,25 +16,28 @@ import script.string_id;
 
 public class mtp_vendor extends script.base_script
 {
-    public mtp_vendor()
-    {
-    }
     public static final String VENDOR_TABLE_DIRECTORY = "datatables/item/vendor/";
     public static final String VENDOR_TABLE_OBJVAR = "item.vendor.vendor_table";
     public static final String VENDOR_CONTAINER_TEMPLATE = "object/tangible/container/vendor/npc_only.iff";
     public static final String OBJECT_FOR_SALE_CASH_COST = "item.object_for_sale.cash_cost";
     public static final String OBJECT_FOR_SALE_RESOURCE_COST = "item.object_for_sale.resource_cost";
     public static final String VENDOR_CONTAINER_LIST_OBJVAR = "item.vendor.container_list";
+    public mtp_vendor()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitializeVendor", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitializeVendor", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleInitializeVendor(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, VENDOR_TABLE_OBJVAR))
@@ -71,7 +80,7 @@ public class mtp_vendor extends script.base_script
                         {
                             attachScript(objectForSale, datatableObjectScript);
                         }
-                        else 
+                        else
                         {
                             attachScript(objectForSale, township.MTP_OBJECT_FOR_SALE_SCRIPT);
                         }
@@ -83,6 +92,7 @@ public class mtp_vendor extends script.base_script
         chat.chat(self, "I'm open for business");
         return SCRIPT_CONTINUE;
     }
+
     public int showInventorySUI(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -98,7 +108,7 @@ public class mtp_vendor extends script.base_script
         {
             container = containerList[profession];
         }
-        else 
+        else
         {
             container = containerList[0];
         }
@@ -110,6 +120,7 @@ public class mtp_vendor extends script.base_script
         queueCommand(player, (1880585606), container, "", COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int showNonClassInventory(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

@@ -1,5 +1,11 @@
 package script.item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -91,7 +97,7 @@ public class static_item_base extends script.base_script
             }
             canTransfer = true;
         }
-        else 
+        else
         {
             if (static_item.isUniqueStaticItem(self))
             {
@@ -108,7 +114,7 @@ public class static_item_base extends script.base_script
         if (static_item.isUniqueStaticItem(self))
         {
             obj_id[] destContents = getContents(destContainer);
-            if (destContents != null && destContents.length > 0)
+            if (destContents != null)
             {
                 for (obj_id destContent : destContents)
                 {
@@ -383,6 +389,7 @@ public class static_item_base extends script.base_script
         equip(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isGod(player))
@@ -394,6 +401,7 @@ public class static_item_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int mi) throws InterruptedException
     {
         if (isGod(player))

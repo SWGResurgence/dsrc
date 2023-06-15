@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,124 +14,119 @@ import script.*;
 
 public class ep3_forest_aveso extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_forest_aveso";
+
     public ep3_forest_aveso()
     {
     }
-    public static String c_stringFile = "conversation/ep3_forest_aveso";
+
     public boolean ep3_forest_aveso_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_forest_aveso_condition_isGoodguy(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_forest_wirartu_epic_3", 0) || groundquests.hasCompletedQuest(player, "ep3_forest_wirartu_epic_3") || groundquests.hasCompletedQuest(player, "ep3_forest_kerritamba_epic_7"));
     }
+
     public boolean ep3_forest_aveso_condition_isBadGuy(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_forest_wirartu_epic_2", 0) || groundquests.hasCompletedQuest(player, "ep3_forest_wirartu_epic_2"));
     }
+
     public boolean ep3_forest_aveso_condition_isTaskActiveInitial(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_forest_outcast_contact", 0) || groundquests.hasCompletedTask(player, "ep3_forest_outcast_contact", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_forest_outcast_contact", 0) || groundquests.hasCompletedTask(player, "ep3_forest_outcast_contact", 0);
     }
+
     public boolean ep3_forest_aveso_condition_isTaskActiveOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_forest_aveso_quest_1", 1) || groundquests.hasCompletedTask(player, "ep3_forest_aveso_quest_1", 1))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_forest_aveso_quest_1", 1) || groundquests.hasCompletedTask(player, "ep3_forest_aveso_quest_1", 1);
     }
+
     public boolean ep3_forest_aveso_condition_hasCompletedTaskOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_forest_aveso_quest_1", 1) && !groundquests.hasCompletedQuest(player, "ep3_forest_aveso_quest_1"));
     }
+
     public boolean ep3_forest_aveso_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_forest_aveso_quest_1");
     }
+
     public boolean ep3_forest_aveso_condition_isTaskActiveTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_forest_aveso_quest_2", 0) || groundquests.hasCompletedTask(player, "ep3_forest_aveso_quest_2", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_forest_aveso_quest_2", 0) || groundquests.hasCompletedTask(player, "ep3_forest_aveso_quest_2", 0);
     }
+
     public boolean ep3_forest_aveso_condition_hasCompletedTaskTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_forest_aveso_quest_2", 0) && !groundquests.hasCompletedQuest(player, "ep3_forest_aveso_quest_2"));
     }
+
     public boolean ep3_forest_aveso_condition_hasCompletedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_forest_aveso_quest_2");
     }
+
     public boolean ep3_forest_aveso_condition_isTaskActiveThree(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_forest_aveso_quest_3", 0) || groundquests.hasCompletedTask(player, "ep3_forest_aveso_quest_3", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_forest_aveso_quest_3", 0) || groundquests.hasCompletedTask(player, "ep3_forest_aveso_quest_3", 0);
     }
+
     public boolean ep3_forest_aveso_condition_hasCompletedTaskThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_forest_aveso_quest_3", 0) && !groundquests.hasCompletedQuest(player, "ep3_forest_aveso_quest_3"));
     }
+
     public boolean ep3_forest_aveso_condition_hasCompletedQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_forest_aveso_quest_3");
     }
+
     public void ep3_forest_aveso_action_giveQuestAssassin(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_outcast_assassin");
     }
+
     public void ep3_forest_aveso_action_giveQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_aveso_quest_1");
     }
+
     public void ep3_forest_aveso_action_giveQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_aveso_quest_2");
     }
+
     public void ep3_forest_aveso_action_giveSignalOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "meat");
         sendSystemMessage(player, new string_id("dungeon/myyydril", "reward_aveso_quest_1"));
     }
+
     public void ep3_forest_aveso_action_giveSignalTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "boxes");
         sendSystemMessage(player, new string_id("dungeon/myyydril", "reward_aveso_quest_2"));
     }
+
     public void ep3_forest_aveso_action_giveQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_aveso_quest_3");
     }
+
     public void ep3_forest_aveso_action_giveSignalThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "escort");
     }
+
     public void ep3_forest_aveso_action_giveSignalContact(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "contact");
     }
+
     public int ep3_forest_aveso_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1175"))
@@ -140,6 +141,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_aveso_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1181"))
@@ -160,7 +162,7 @@ public class ep3_forest_aveso extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1185");
@@ -169,7 +171,7 @@ public class ep3_forest_aveso extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_aveso.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -179,6 +181,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_aveso_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1185"))
@@ -198,7 +201,7 @@ public class ep3_forest_aveso extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1189");
@@ -207,7 +210,7 @@ public class ep3_forest_aveso extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_aveso.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -217,6 +220,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_aveso_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1189"))
@@ -231,6 +235,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_aveso_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1197"))
@@ -250,7 +255,7 @@ public class ep3_forest_aveso extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1201");
@@ -259,7 +264,7 @@ public class ep3_forest_aveso extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_aveso.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -269,6 +274,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_aveso_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1201"))
@@ -295,7 +301,7 @@ public class ep3_forest_aveso extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1205");
@@ -308,7 +314,7 @@ public class ep3_forest_aveso extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_aveso.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -318,6 +324,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_aveso_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1205"))
@@ -343,6 +350,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_aveso_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1215"))
@@ -363,7 +371,7 @@ public class ep3_forest_aveso extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1219");
@@ -372,7 +380,7 @@ public class ep3_forest_aveso extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_aveso.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -382,6 +390,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_aveso_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1219"))
@@ -396,6 +405,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_aveso_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1225"))
@@ -410,6 +420,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_aveso_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1231"))
@@ -431,7 +442,7 @@ public class ep3_forest_aveso extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1235");
@@ -440,7 +451,7 @@ public class ep3_forest_aveso extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_aveso.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -466,7 +477,7 @@ public class ep3_forest_aveso extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1255");
@@ -475,7 +486,7 @@ public class ep3_forest_aveso extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_aveso.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -485,6 +496,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_aveso_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1235"))
@@ -518,7 +530,7 @@ public class ep3_forest_aveso extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1239");
@@ -535,7 +547,7 @@ public class ep3_forest_aveso extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_aveso.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -545,6 +557,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_aveso_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1239"))
@@ -581,6 +594,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_aveso_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1255"))
@@ -600,7 +614,7 @@ public class ep3_forest_aveso extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1259");
@@ -609,7 +623,7 @@ public class ep3_forest_aveso extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_aveso.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -619,6 +633,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_aveso_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1259"))
@@ -645,7 +660,7 @@ public class ep3_forest_aveso extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1263");
@@ -658,7 +673,7 @@ public class ep3_forest_aveso extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_aveso.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -668,6 +683,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_aveso_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1263"))
@@ -693,6 +709,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_aveso_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1273"))
@@ -707,6 +724,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_aveso_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1279"))
@@ -722,6 +740,7 @@ public class ep3_forest_aveso extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -733,6 +752,7 @@ public class ep3_forest_aveso extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -740,6 +760,7 @@ public class ep3_forest_aveso extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -749,18 +770,21 @@ public class ep3_forest_aveso extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_forest_aveso");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -783,7 +807,7 @@ public class ep3_forest_aveso extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1175");
@@ -791,7 +815,7 @@ public class ep3_forest_aveso extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_aveso.branchId", 1);
                 npcStartConversation(player, npc, "ep3_forest_aveso", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -812,7 +836,7 @@ public class ep3_forest_aveso extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1181");
@@ -820,7 +844,7 @@ public class ep3_forest_aveso extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_aveso.branchId", 3);
                 npcStartConversation(player, npc, "ep3_forest_aveso", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -847,7 +871,7 @@ public class ep3_forest_aveso extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1197");
@@ -855,7 +879,7 @@ public class ep3_forest_aveso extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_aveso.branchId", 8);
                 npcStartConversation(player, npc, "ep3_forest_aveso", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -876,7 +900,7 @@ public class ep3_forest_aveso extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1215");
@@ -884,7 +908,7 @@ public class ep3_forest_aveso extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_aveso.branchId", 13);
                 npcStartConversation(player, npc, "ep3_forest_aveso", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -905,7 +929,7 @@ public class ep3_forest_aveso extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1225");
@@ -913,7 +937,7 @@ public class ep3_forest_aveso extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_aveso.branchId", 16);
                 npcStartConversation(player, npc, "ep3_forest_aveso", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -941,7 +965,7 @@ public class ep3_forest_aveso extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1231");
@@ -953,7 +977,7 @@ public class ep3_forest_aveso extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_aveso.branchId", 18);
                 npcStartConversation(player, npc, "ep3_forest_aveso", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -974,7 +998,7 @@ public class ep3_forest_aveso extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1273");
@@ -982,7 +1006,7 @@ public class ep3_forest_aveso extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_aveso.branchId", 29);
                 npcStartConversation(player, npc, "ep3_forest_aveso", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1003,7 +1027,7 @@ public class ep3_forest_aveso extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1279");
@@ -1011,7 +1035,7 @@ public class ep3_forest_aveso extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_aveso.branchId", 31);
                 npcStartConversation(player, npc, "ep3_forest_aveso", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1026,6 +1050,7 @@ public class ep3_forest_aveso extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_forest_aveso"))

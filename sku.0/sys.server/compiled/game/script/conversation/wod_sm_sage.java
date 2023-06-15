@@ -1,42 +1,52 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class wod_sm_sage extends script.base_script
 {
+    public static String c_stringFile = "conversation/wod_sm_sage";
+
     public wod_sm_sage()
     {
     }
-    public static String c_stringFile = "conversation/wod_sm_sage";
+
     public boolean wod_sm_sage_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean wod_sm_sage_condition_hasPreqComplete(obj_id player, obj_id npc) throws InterruptedException
     {
-        if ((hasObjVar(player, "wod_prologue_quests")) && (groundquests.hasCompletedQuest(player, "wod_rubina_goto_sm")) && (!groundquests.hasCompletedQuest(player, "wod_sm_repair_alter_01")))
-        {
-            return true;
-        }
-        return false;
+        return (hasObjVar(player, "wod_prologue_quests")) && (groundquests.hasCompletedQuest(player, "wod_rubina_goto_sm")) && (!groundquests.hasCompletedQuest(player, "wod_sm_repair_alter_01"));
     }
+
     public boolean wod_sm_sage_condition_onReturnAlter01SM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_sm_repair_alter_01", "returnToSage");
     }
+
     public boolean wod_sm_sage_condition_onReturnAlter02SM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_sm_repair_alter_02", "returnToSage");
     }
+
     public boolean wod_sm_sage_condition_onReturnAlter03SM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_sm_repair_alter_03", "returnToSage");
     }
+
     public boolean wod_sm_sage_condition_onReturnAlter04SM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_sm_repair_alter_04", "returnToSage");
     }
+
     public boolean wod_sm_sage_condition_IsNS(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "wod_prologue_quests"))
@@ -44,12 +54,9 @@ public class wod_sm_sage extends script.base_script
             return false;
         }
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if (status > -1)
-        {
-            return true;
-        }
-        return false;
+        return status > -1;
     }
+
     public boolean wod_sm_sage_condition_IsIndifferent(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "wod_prologue_quests"))
@@ -57,72 +64,79 @@ public class wod_sm_sage extends script.base_script
             return false;
         }
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if ((status < 0) && (status > -8))
-        {
-            return true;
-        }
-        return false;
+        return (status < 0) && (status > -8);
     }
+
     public boolean wod_sm_sage_condition_IsNoTrader(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (content.isCrafter(player))
-        {
-            return false;
-        }
-        return true;
+        return !content.isCrafter(player);
     }
+
     public boolean wod_sm_sage_condition_hasQuestActive(obj_id player, obj_id npc) throws InterruptedException
     {
         return questIsQuestActive(questGetQuestId("quest/wod_ns_repair_alter_01"), player) || questIsQuestActive(questGetQuestId("quest/wod_ns_repair_alter_02"), player) || questIsQuestActive(questGetQuestId("quest/wod_ns_repair_alter_03"), player) || questIsQuestActive(questGetQuestId("quest/wod_ns_repair_alter_04"), player) || questIsQuestActive(questGetQuestId("quest/wod_sm_repair_alter_01"), player) || questIsQuestActive(questGetQuestId("quest/wod_sm_repair_alter_02"), player) || questIsQuestActive(questGetQuestId("quest/wod_sm_repair_alter_03"), player) || questIsQuestActive(questGetQuestId("quest/wod_sm_repair_alter_04"), player);
     }
+
     public boolean wod_sm_sage_condition_hasCompletedAlter04SM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_sm_repair_alter_04", "returnToSage") || groundquests.hasCompletedQuest(player, "wod_sm_repair_alter_04");
     }
+
     public boolean wod_sm_sage_condition_hasCompletedAlter03SM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_sm_repair_alter_03", "returnToSage") || groundquests.hasCompletedQuest(player, "wod_sm_repair_alter_03");
     }
+
     public boolean wod_sm_sage_condition_hasCompletedAlter02SM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_sm_repair_alter_02", "returnToSage") || groundquests.hasCompletedQuest(player, "wod_sm_repair_alter_02");
     }
+
     public boolean wod_sm_sage_condition_hasCompletedAlter01SM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_sm_repair_alter_01", "returnToSage") || groundquests.hasCompletedQuest(player, "wod_sm_repair_alter_01");
     }
+
     public void wod_sm_sage_action_grantTPAlter01SM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_sm_repair_alter_01");
     }
+
     public void wod_sm_sage_action_grantTPAlter02SM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_sm_repair_alter_02");
     }
+
     public void wod_sm_sage_action_grantTPAlter03SM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_sm_repair_alter_03");
     }
+
     public void wod_sm_sage_action_grantTPAlter04SM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_sm_repair_alter_04");
     }
+
     public void wod_sm_sage_action_sendReturnedSignalAlter01SM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "returnToSage");
     }
+
     public void wod_sm_sage_action_sendReturnedSignalAlter02SM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "returnToSage");
     }
+
     public void wod_sm_sage_action_sendReturnedSignalAlter03SM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "returnToSage");
     }
+
     public void wod_sm_sage_action_sendReturnedSignalAlter04SM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "returnToSage");
     }
+
     public int wod_sm_sage_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_39"))
@@ -150,7 +164,7 @@ public class wod_sm_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -163,7 +177,7 @@ public class wod_sm_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -173,6 +187,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_sage_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -198,6 +213,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_sage_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_114"))
@@ -225,7 +241,7 @@ public class wod_sm_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -238,7 +254,7 @@ public class wod_sm_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -248,6 +264,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_sage_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_91"))
@@ -273,6 +290,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_sage_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_115"))
@@ -300,7 +318,7 @@ public class wod_sm_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_117");
@@ -313,7 +331,7 @@ public class wod_sm_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -323,6 +341,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_sage_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_117"))
@@ -348,6 +367,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_sage_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116"))
@@ -368,7 +388,7 @@ public class wod_sm_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_130");
@@ -377,7 +397,7 @@ public class wod_sm_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -387,6 +407,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_sage_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_130"))
@@ -401,6 +422,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_sage_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_100"))
@@ -420,7 +442,7 @@ public class wod_sm_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -429,7 +451,7 @@ public class wod_sm_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -439,6 +461,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_sage_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_104"))
@@ -458,7 +481,7 @@ public class wod_sm_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_108");
@@ -467,7 +490,7 @@ public class wod_sm_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -477,6 +500,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_sage_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_108"))
@@ -491,6 +515,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_sage_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_117"))
@@ -516,6 +541,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_sage_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_91"))
@@ -541,6 +567,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_sage_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -566,6 +593,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_sage_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53"))
@@ -585,7 +613,7 @@ public class wod_sm_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_57");
@@ -594,7 +622,7 @@ public class wod_sm_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -604,6 +632,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_sage_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57"))
@@ -630,7 +659,7 @@ public class wod_sm_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -643,7 +672,7 @@ public class wod_sm_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -653,6 +682,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_sage_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_61"))
@@ -672,7 +702,7 @@ public class wod_sm_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_65");
@@ -681,7 +711,7 @@ public class wod_sm_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -701,6 +731,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_sage_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_65"))
@@ -716,6 +747,7 @@ public class wod_sm_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -725,11 +757,13 @@ public class wod_sm_sage extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -738,18 +772,21 @@ public class wod_sm_sage extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.wod_sm_sage");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -790,7 +827,7 @@ public class wod_sm_sage extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_39");
@@ -798,7 +835,7 @@ public class wod_sm_sage extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_sm_sage.branchId", 4);
                 npcStartConversation(player, npc, "wod_sm_sage", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -819,7 +856,7 @@ public class wod_sm_sage extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_114");
@@ -827,7 +864,7 @@ public class wod_sm_sage extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_sm_sage.branchId", 6);
                 npcStartConversation(player, npc, "wod_sm_sage", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -848,7 +885,7 @@ public class wod_sm_sage extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -856,7 +893,7 @@ public class wod_sm_sage extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_sm_sage.branchId", 8);
                 npcStartConversation(player, npc, "wod_sm_sage", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -877,7 +914,7 @@ public class wod_sm_sage extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_116");
@@ -885,7 +922,7 @@ public class wod_sm_sage extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_sm_sage.branchId", 10);
                 npcStartConversation(player, npc, "wod_sm_sage", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -906,7 +943,7 @@ public class wod_sm_sage extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -914,7 +951,7 @@ public class wod_sm_sage extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_sm_sage.branchId", 13);
                 npcStartConversation(player, npc, "wod_sm_sage", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -948,7 +985,7 @@ public class wod_sm_sage extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_117");
@@ -960,7 +997,7 @@ public class wod_sm_sage extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_sm_sage.branchId", 18);
                 npcStartConversation(player, npc, "wod_sm_sage", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -988,7 +1025,7 @@ public class wod_sm_sage extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -1000,7 +1037,7 @@ public class wod_sm_sage extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_sm_sage.branchId", 21);
                 npcStartConversation(player, npc, "wod_sm_sage", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1028,7 +1065,7 @@ public class wod_sm_sage extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -1040,7 +1077,7 @@ public class wod_sm_sage extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_sm_sage.branchId", 24);
                 npcStartConversation(player, npc, "wod_sm_sage", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1061,7 +1098,7 @@ public class wod_sm_sage extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_53");
@@ -1069,7 +1106,7 @@ public class wod_sm_sage extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_sm_sage.branchId", 27);
                 npcStartConversation(player, npc, "wod_sm_sage", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1084,6 +1121,7 @@ public class wod_sm_sage extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("wod_sm_sage"))

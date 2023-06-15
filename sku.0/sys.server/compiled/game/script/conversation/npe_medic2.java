@@ -1,115 +1,138 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class npe_medic2 extends script.base_script
 {
+    public static String c_stringFile = "conversation/npe_medic2";
+
     public npe_medic2()
     {
     }
-    public static String c_stringFile = "conversation/npe_medic2";
+
     public boolean npe_medic2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean npe_medic2_condition_needsNewPack(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean needsItem = false;
         boolean hasItem = false;
         obj_id[] playerStuff = getInventoryAndEquipment(player);
-        for (obj_id obj_id : playerStuff) {
+        for (obj_id obj_id : playerStuff)
+        {
             String templateName = static_item.getStaticItemName(obj_id);
-            if (templateName != null) {
-                if (templateName.equals("item_bactapack_01_01")) {
+            if (templateName != null)
+            {
+                if (templateName.equals("item_bactapack_01_01"))
+                {
                     hasItem = true;
                 }
             }
         }
-        if ((groundquests.isTaskActive(player, "npe_medic2", "npe_medic2_heal") || groundquests.isTaskActive(player, "npe_medic2", 0)) && hasItem == false)
+        if ((groundquests.isTaskActive(player, "npe_medic2", "npe_medic2_heal") || groundquests.isTaskActive(player, "npe_medic2", 0)) && !hasItem)
         {
             needsItem = true;
         }
         return needsItem;
     }
+
     public boolean npe_medic2_condition_onEntQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_prof_entertainer2", "play");
     }
+
     public boolean npe_medic2_condition_hasPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "npe.hasMetSerissu");
     }
+
     public boolean npe_medic2_condition_wantsMedic(obj_id player, obj_id npc) throws InterruptedException
     {
         return (npe_medic2_condition_isMedTemplate(player, npc) && !groundquests.isQuestActiveOrComplete(player, "npe_medic2"));
     }
+
     public boolean npe_medic2_condition_hasPack(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id[] playerStuff = getInventoryAndEquipment(player);
-        for (obj_id obj_id : playerStuff) {
+        for (obj_id obj_id : playerStuff)
+        {
             String templateName = static_item.getStaticItemName(obj_id);
-            if (templateName != null) {
-                if (templateName.equals("item_bactapack_01_01")) {
+            if (templateName != null)
+            {
+                if (templateName.equals("item_bactapack_01_01"))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public boolean npe_medic2_condition_busy(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "npe_medic", "npe_medic_heal_1") || groundquests.isTaskActive(player, "npe_medic", "npe_medic_return") || groundquests.isTaskActive(player, "npe_medic2", 0) || groundquests.isTaskActive(player, "npe_medic2", "npe_medic2_heal") || groundquests.isTaskActive(player, "npe_medic2", "talk_technician") || groundquests.isTaskActive(player, "npe_medic2", "ingredients") || groundquests.isTaskActive(player, "npe_medic2", 9) || groundquests.isTaskActive(player, "npe_medic2", "return_technician"));
     }
+
     public boolean npe_medic2_condition_finishedGather(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_medic2", "return2");
     }
+
     public boolean npe_medic2_condition_finishedLastTask(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_medic2", "final_return");
     }
+
     public boolean npe_medic2_condition_fromMedic(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "npe_pointer_med_template") && groundquests.hasCompletedQuest(player, "npe_medic"));
     }
+
     public boolean npe_medic2_condition_finishedMedTask(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_medic2", "return1");
     }
+
     public boolean npe_medic2_condition_isMedTemplate(obj_id player, obj_id npc) throws InterruptedException
     {
         String pTemplate = getSkillTemplate(player);
-        if (pTemplate.contains("medic"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return pTemplate.contains("medic");
     }
+
     public void npe_medic2_action_giveMedQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "npe_medic2");
         groundquests.sendSignal(player, "found_medic");
         groundquests.sendSignal(player, "npe_medic_done");
     }
+
     public void npe_medic2_action_giveReward(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "npe.finishedTemplate", 1);
         groundquests.sendSignal(player, "npe_return_billingsly3");
         groundquests.grantQuest(player, "npe_job_pointer_han");
     }
+
     public void npe_medic2_action_giveAjaPointer(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "npe_pointer_medic");
         groundquests.sendSignal(player, "found_medic");
     }
+
     public void npe_medic2_action_giveFirstSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_return_billingsly1");
     }
+
     public void npe_medic2_action_giveNewPack(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id bactaPack = static_item.createNewItemFunction("item_bactapack_01_01", player);
@@ -123,15 +146,18 @@ public class npe_medic2 extends script.base_script
         dic.put("time", 5.0f);
         messageTo(player, "makeUiElementAnimate", dic, 0.25f, true);
     }
+
     public void npe_medic2_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void npe_medic2_action_giveComm(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "npe_medic_comm", false);
         npe_medic2_action_facePlayer(player, npc);
     }
+
     public void npe_medic2_action_GiveMedQuestAndPack(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "npe_medic2");
@@ -145,10 +171,12 @@ public class npe_medic2 extends script.base_script
         messageTo(player, "makeUiElementAnimate", dic, 0.25f, true);
         groundquests.sendSignal(player, "npe_medic_done");
     }
+
     public void npe_medic2_action_give2ndSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_return_billingsly2");
     }
+
     public int npe_medic2_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_67"))
@@ -164,6 +192,7 @@ public class npe_medic2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic2_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -183,7 +212,7 @@ public class npe_medic2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -192,7 +221,7 @@ public class npe_medic2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_medic2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -202,6 +231,7 @@ public class npe_medic2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic2_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50"))
@@ -221,7 +251,7 @@ public class npe_medic2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -230,7 +260,7 @@ public class npe_medic2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_medic2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -240,6 +270,7 @@ public class npe_medic2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic2_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -255,6 +286,7 @@ public class npe_medic2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic2_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -275,7 +307,7 @@ public class npe_medic2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_43");
@@ -284,7 +316,7 @@ public class npe_medic2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_medic2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -294,6 +326,7 @@ public class npe_medic2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic2_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_43"))
@@ -309,6 +342,7 @@ public class npe_medic2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic2_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -328,7 +362,7 @@ public class npe_medic2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_83");
@@ -337,7 +371,7 @@ public class npe_medic2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_medic2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -347,6 +381,7 @@ public class npe_medic2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic2_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_83"))
@@ -366,7 +401,7 @@ public class npe_medic2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_33");
@@ -375,7 +410,7 @@ public class npe_medic2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_medic2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -385,6 +420,7 @@ public class npe_medic2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic2_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33"))
@@ -400,6 +436,7 @@ public class npe_medic2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic2_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -419,7 +456,7 @@ public class npe_medic2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -428,7 +465,7 @@ public class npe_medic2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_medic2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -438,6 +475,7 @@ public class npe_medic2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic2_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -461,6 +499,7 @@ public class npe_medic2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic2_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57"))
@@ -480,7 +519,7 @@ public class npe_medic2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -489,7 +528,7 @@ public class npe_medic2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_medic2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -499,6 +538,7 @@ public class npe_medic2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic2_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_62"))
@@ -518,7 +558,7 @@ public class npe_medic2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_66");
@@ -527,7 +567,7 @@ public class npe_medic2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_medic2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -537,6 +577,7 @@ public class npe_medic2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic2_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_66"))
@@ -552,6 +593,7 @@ public class npe_medic2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_medic2_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_80"))
@@ -566,6 +608,7 @@ public class npe_medic2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -579,6 +622,7 @@ public class npe_medic2 extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -588,6 +632,7 @@ public class npe_medic2 extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -596,18 +641,21 @@ public class npe_medic2 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.npe_medic2");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -643,7 +691,7 @@ public class npe_medic2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -651,7 +699,7 @@ public class npe_medic2 extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_medic2.branchId", 3);
                 npcStartConversation(player, npc, "npe_medic2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -680,7 +728,7 @@ public class npe_medic2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -692,7 +740,7 @@ public class npe_medic2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "npe_medic2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -718,7 +766,7 @@ public class npe_medic2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -726,7 +774,7 @@ public class npe_medic2 extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_medic2.branchId", 10);
                 npcStartConversation(player, npc, "npe_medic2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -748,7 +796,7 @@ public class npe_medic2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -756,7 +804,7 @@ public class npe_medic2 extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_medic2.branchId", 13);
                 npcStartConversation(player, npc, "npe_medic2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -778,7 +826,7 @@ public class npe_medic2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -786,7 +834,7 @@ public class npe_medic2 extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_medic2.branchId", 17);
                 npcStartConversation(player, npc, "npe_medic2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -808,7 +856,7 @@ public class npe_medic2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_57");
@@ -820,7 +868,7 @@ public class npe_medic2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "npe_medic2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -853,7 +901,7 @@ public class npe_medic2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_80");
@@ -861,7 +909,7 @@ public class npe_medic2 extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_medic2.branchId", 26);
                 npcStartConversation(player, npc, "npe_medic2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -870,6 +918,7 @@ public class npe_medic2 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("npe_medic2"))

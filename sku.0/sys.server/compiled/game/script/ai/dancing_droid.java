@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.callable;
 import script.library.create;
@@ -7,13 +13,14 @@ import script.library.utils;
 
 public class dancing_droid extends script.base_script
 {
-    public dancing_droid()
-    {
-    }
     public static final string_id SID_DANCE = new string_id("pet/pet_menu", "dance");
     public static final String TRIG_VOLUME = "droid_trig_volume";
     public static final int TRIG_RADIUS = 20;
     public static final boolean PROMISCUOUS = true;
+    public dancing_droid()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         if (getMaster(self) != player)
@@ -26,6 +33,7 @@ public class dancing_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (getMaster(self) != player)
@@ -44,7 +52,7 @@ public class dancing_droid extends script.base_script
             {
                 droidName = "@" + droidName;
             }
-            location holoOneLocation = (location)startLocation.clone();
+            location holoOneLocation = (location) startLocation.clone();
             boolean goodLocation = false;
             for (int i = 0; i < 10; ++i)
             {
@@ -57,7 +65,7 @@ public class dancing_droid extends script.base_script
                         break;
                     }
                 }
-                else 
+                else
                 {
                     goodLocation = true;
                     break;
@@ -68,7 +76,7 @@ public class dancing_droid extends script.base_script
             setInvulnerable(holo_01, true);
             setHologramType(holo_01, HOLOGRAM_TYPE1_QUALITY3);
             setName(holo_01, droidName);
-            location holoTwoLocation = (location)startLocation.clone();
+            location holoTwoLocation = (location) startLocation.clone();
             goodLocation = false;
             for (int i = 0; i < 10; ++i)
             {
@@ -109,10 +117,12 @@ public class dancing_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id petControlDevice = callable.getCallableCD(self);
@@ -137,6 +147,7 @@ public class dancing_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (volumeName.equals(TRIG_VOLUME))
@@ -159,6 +170,7 @@ public class dancing_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int clearDancingDroidScriptVar(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "music.stillPlaying"))
@@ -178,6 +190,7 @@ public class dancing_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moveDancingDroidStartLocation(obj_id self, dictionary params) throws InterruptedException
     {
         location startLocation = getLocation(self);
@@ -190,12 +203,13 @@ public class dancing_droid extends script.base_script
         {
             messageTo(self, "moveDancingDroidNewLocation", null, 3, false);
         }
-        else 
+        else
         {
             utils.removeScriptVar(self, "dancingDroid.startLocation");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moveDancingDroidNewLocation(obj_id self, dictionary params) throws InterruptedException
     {
         location startLocation = getLocation(self);
@@ -205,7 +219,7 @@ public class dancing_droid extends script.base_script
         }
         if (utils.hasScriptVar(self, "music.stillPlaying"))
         {
-            location moveToLoc = (location)startLocation.clone();
+            location moveToLoc = (location) startLocation.clone();
             boolean goodLocation = false;
             for (int i = 0; i < 10; ++i)
             {
@@ -218,7 +232,7 @@ public class dancing_droid extends script.base_script
                         break;
                     }
                 }
-                else 
+                else
                 {
                     goodLocation = true;
                     break;
@@ -229,6 +243,7 @@ public class dancing_droid extends script.base_script
         messageTo(self, "moveDancingDroidStartLocation", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroyDancingDroidSoundObject(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())

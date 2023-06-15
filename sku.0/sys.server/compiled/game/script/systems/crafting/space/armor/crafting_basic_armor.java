@@ -1,5 +1,11 @@
 package script.systems.crafting.space.armor;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -92,6 +98,7 @@ public class crafting_basic_armor extends script.systems.crafting.space.armor.cr
                                     new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
                             })
             };
+
     public crafting_basic_armor()
     {
     }

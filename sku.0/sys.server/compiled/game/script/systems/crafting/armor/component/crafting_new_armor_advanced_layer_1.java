@@ -1,5 +1,11 @@
 package script.systems.crafting.armor.component;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -34,6 +40,7 @@ public class crafting_new_armor_advanced_layer_1 extends script.systems.crafting
                                     new resource_weight.weight(craftinglib.RESOURCE_SHOCK_RESIST, 1)
                             })
             };
+
     public crafting_new_armor_advanced_layer_1()
     {
     }

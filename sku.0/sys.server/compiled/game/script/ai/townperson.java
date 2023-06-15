@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -7,9 +13,6 @@ import script.obj_id;
 
 public class townperson extends script.base_script
 {
-    public townperson()
-    {
-    }
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public static final String SOCIAL_VOLUME = "npc_socialization";
     public static final float SOCIAL_RANGE = 15.0f;
@@ -17,6 +20,10 @@ public class townperson extends script.base_script
     public static final String ACTION_THREATEN = "threaten";
     public static final int CONVO_LENGTH = 300;
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
+    public townperson()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (getConfigSetting("GameServer", "disableAITriggerVolumes") == null)
@@ -27,29 +34,30 @@ public class townperson extends script.base_script
         switch (rand(1, 3))
         {
             case 1:
-            diction = "townperson_fancy";
-            break;
+                diction = "townperson_fancy";
+                break;
             case 2:
-            diction = "townperson_slang";
-            break;
+                diction = "townperson_slang";
+                break;
             case 3:
-            diction = "townperson";
-            break;
+                diction = "townperson";
+                break;
         }
         setObjVar(self, "ai.diction", diction);
         factions.setFaction(self, "townperson");
         switch (rand(1, 5))
         {
             case 1:
-            factions.setFaction(self, "ImperialCitizen");
-            break;
+                factions.setFaction(self, "ImperialCitizen");
+                break;
             case 2:
-            factions.setFaction(self, "RebelCitizen");
-            break;
+                factions.setFaction(self, "RebelCitizen");
+                break;
         }
         attachScript(self, "theme_park.tatooine.city_convo");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         utils.removeScriptVar(self, "ai.speaking");
@@ -61,6 +69,7 @@ public class townperson extends script.base_script
         setAttributeInterested(self, attrib.TOWNSPERSON);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (hasObjVar(breacher, "gm"))
@@ -93,6 +102,7 @@ public class townperson extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (volumeName.equals(ALERT_VOLUME_NAME))
@@ -105,6 +115,7 @@ public class townperson extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cancelFacing(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "ai.speaking");
@@ -114,6 +125,7 @@ public class townperson extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void initiateDialog(obj_id talker, obj_id listener) throws InterruptedException
     {
         if (ai_lib.isInCombat(talker) || ai_lib.isInCombat(listener))
@@ -151,7 +163,7 @@ public class townperson extends script.base_script
         {
             pathToLoc.x += 1.5f;
         }
-        else 
+        else
         {
             pathToLoc.x -= 1.5f;
         }
@@ -159,12 +171,13 @@ public class townperson extends script.base_script
         {
             pathToLoc.z += 1.5f;
         }
-        else 
+        else
         {
             pathToLoc.z -= 1.5f;
         }
         pathTo(talker, pathToLoc);
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "ai.pathingToSocialize"))
@@ -183,6 +196,7 @@ public class townperson extends script.base_script
         messageTo(self, "handleEndSocializing", null, CONVO_LENGTH, isObjectPersisted(self));
         return SCRIPT_CONTINUE;
     }
+
     public int handleEndSocializing(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "ai.pathingToSocialize"))
@@ -193,6 +207,7 @@ public class townperson extends script.base_script
         endSocializing(self, listener);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathNotFound(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "ai.pathingToSocialize"))
@@ -203,6 +218,7 @@ public class townperson extends script.base_script
         endSocializing(self, listener);
         return SCRIPT_CONTINUE;
     }
+
     public void endSocializing(obj_id talker, obj_id listener) throws InterruptedException
     {
         if (getBehavior(talker) == BEHAVIOR_CALM)
@@ -222,6 +238,7 @@ public class townperson extends script.base_script
         utils.removeScriptVar(talker, "ai.speaking");
         utils.removeScriptVar(listener, "ai.speaking");
     }
+
     public int OnBehaviorChange(obj_id self, int newBehavior, int oldBehavior, int[] changeFlags) throws InterruptedException
     {
         if (isIncapacitated(self))
@@ -240,7 +257,7 @@ public class townperson extends script.base_script
                 doAgitateBehavior(self, newBehavior);
                 return SCRIPT_OVERRIDE;
             }
-            else 
+            else
             {
             }
             return SCRIPT_CONTINUE;
@@ -260,14 +277,15 @@ public class townperson extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doAgitateBehavior(obj_id npc, int behavior) throws InterruptedException
     {
         if (isInvulnerable(npc))
         {
             return;
         }
-        return;
     }
+
     public int OnTargeted(obj_id self, obj_id attacker) throws InterruptedException
     {
         if (isInvulnerable(self))
@@ -277,6 +295,7 @@ public class townperson extends script.base_script
         addToMentalStateToward(self, attacker, FEAR, 100.0f);
         return SCRIPT_OVERRIDE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         if (isInvulnerable(self))
@@ -285,6 +304,7 @@ public class townperson extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "ai.speaking"))
@@ -298,6 +318,7 @@ public class townperson extends script.base_script
         utils.setScriptVar(self, "ai.speaking", speaker);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEndNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         utils.removeScriptVar(self, "ai.speaking");
@@ -307,6 +328,7 @@ public class townperson extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int resumeDefaultCalmBehavior(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "ai.speaking"))
@@ -319,6 +341,7 @@ public class townperson extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSawAttack(obj_id self, obj_id defender, obj_id[] attackers) throws InterruptedException
     {
         if (getConfigSetting("GameServer", "disableAICombat") != null)

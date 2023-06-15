@@ -1,5 +1,11 @@
 package script.quest.utility;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class encounter_death_multi_notification extends script.base_script
     public encounter_death_multi_notification()
     {
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         String objvarName = "quest.owner";
@@ -29,27 +36,28 @@ public class encounter_death_multi_notification extends script.base_script
                         destroyNotificationParameters.put("questName", questName);
                         messageTo(owner, "destroyNotification", destroyNotificationParameters, 0.0f, false);
                     }
-                    else 
+                    else
                     {
                         LOG("newquests", "encounter_death_multi_notification - OnDestroy() - questName is null or empty. Failint to send notification");
                     }
                 }
-                else 
+                else
                 {
                     LOG("newquests", "encounter_death_multi_notification - OnDestroy() - could not retrieve objvar " + objvarName + " to identify the quest. Failing to send notification");
                 }
             }
-            else 
+            else
             {
                 LOG("newquests", "encounter_death_multi_notification - OnDestroy() - " + objvarName + "=" + owner + " is invalid. Failing to send notification");
             }
         }
-        else 
+        else
         {
             LOG("newquests", "encounter_death_multi_notification - OnDestroy() - could not retrieve " + objvarName + " objvar. Failing to send notification");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         String objvarName = "quest.owner";
@@ -70,27 +78,28 @@ public class encounter_death_multi_notification extends script.base_script
                         deathNotificationParameters.put("questName", questName);
                         messageTo(owner, "deathNotification", deathNotificationParameters, 0.0f, false);
                     }
-                    else 
+                    else
                     {
                         LOG("newquests", "encounter_death_multi_notification - OnDeath() - questName is null or empty. Failint to send notification");
                     }
                 }
-                else 
+                else
                 {
                     LOG("newquests", "encounter_death_multi_notification - OnDeath() - could not retrieve objvar " + objvarName + " to identify the quest. Failing to send notification");
                 }
             }
-            else 
+            else
             {
                 LOG("newquests", "encounter_death_multi_notification - OnDeath() - " + objvarName + "=" + owner + " is invalid. Failing to send notification");
             }
         }
-        else 
+        else
         {
             LOG("newquests", "encounter_death_multi_notification - OnDeath() - could not retrieve " + objvarName + " objvar. Failing to send notification");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanup(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

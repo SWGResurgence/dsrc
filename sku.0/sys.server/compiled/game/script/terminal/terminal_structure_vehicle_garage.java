@@ -1,13 +1,16 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class terminal_structure_vehicle_garage extends script.base_script
 {
-    public terminal_structure_vehicle_garage()
-    {
-    }
     public static final String PID_NAME = "garage";
     public static final String SCRIPT_VAR_VCD_LIST = "garage.vcds";
     public static final String SCRIPT_VAR_RESTORING_VEHICLE = "garage.restoring";
@@ -41,6 +44,10 @@ public class terminal_structure_vehicle_garage extends script.base_script
     public static final string_id SID_PLACE_VEHICLE_DECORATION_SUCCESS = new string_id("player_structure", "garage_place_display_vehicle_success");
     public static final string_id SID_REMOVE_VEHICLE_DECORATION_SUCCESS = new string_id("player_structure", "garage_remove_display_vehicle_success");
     public static final String GARAGE_DISPLAY_VEHICLES_TABLE = "datatables/vehicle/vehicle_template.iff";
+    public terminal_structure_vehicle_garage()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id structure = self;
@@ -88,6 +95,7 @@ public class terminal_structure_vehicle_garage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -138,6 +146,7 @@ public class terminal_structure_vehicle_garage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -165,7 +174,7 @@ public class terminal_structure_vehicle_garage extends script.base_script
             attribs[idx] = "none";
             idx++;
         }
-        else 
+        else
         {
             String[] storedVehicleNames = new String[storedVehicles.length];
             for (int i = 0; i < storedVehicles.length; ++i)
@@ -179,12 +188,13 @@ public class terminal_structure_vehicle_garage extends script.base_script
                 attribs[idx] = "none";
                 idx++;
             }
-            else 
+            else
             {
                 names[idx] = "vehicles_in_garage_amount";
-                attribs[idx] = "" + storedVehicles.length;
+                attribs[idx] = String.valueOf(storedVehicles.length);
                 idx++;
-                for (String storedVehicleName : storedVehicleNames) {
+                for (String storedVehicleName : storedVehicleNames)
+                {
                     names[idx] = "vehicle_in_garage";
                     attribs[idx] = storedVehicleName;
                     idx++;
@@ -193,6 +203,7 @@ public class terminal_structure_vehicle_garage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void placeDisplayVehicle(obj_id player, obj_id garageControls, obj_id playerHangarSlot) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -227,6 +238,7 @@ public class terminal_structure_vehicle_garage extends script.base_script
         int pid = sui.listbox(garageControls, player, "@" + SID_PLACE_VEHICLE_DECORATION_PROMPT, sui.OK_CANCEL, "@" + SID_LIST_TITLE, localizedList, "onDisplayVehicleResponse", true, false);
         sui.setPid(player, pid, PID_NAME);
     }
+
     public boolean callSuiOfVehiclesToStore(obj_id player, obj_id terminal, obj_id hangar) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -263,6 +275,7 @@ public class terminal_structure_vehicle_garage extends script.base_script
         sui.setPid(player, pid, PID_NAME);
         return true;
     }
+
     public boolean callSuiOfStoredVehicles(obj_id player, obj_id terminal, obj_id hangar) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -294,6 +307,7 @@ public class terminal_structure_vehicle_garage extends script.base_script
         sui.setPid(player, pid, PID_NAME);
         return true;
     }
+
     public int handleHangarInitialize(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -326,12 +340,13 @@ public class terminal_structure_vehicle_garage extends script.base_script
         {
             callSuiOfVehiclesToStore(player, self, playerHangar);
         }
-        else 
+        else
         {
             callSuiOfStoredVehicles(player, self, playerHangar);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onDisplayVehicleResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -411,7 +426,7 @@ public class terminal_structure_vehicle_garage extends script.base_script
             removeObjVar(vehicleSelected, VEHICLE_OBJVAR_DISPLAYED_VEHICLE);
             sendSystemMessage(player, SID_REMOVE_VEHICLE_DECORATION_SUCCESS);
         }
-        else 
+        else
         {
             String vehicleReference = vehicle.getVehicleReference(vehicleSelected);
             dictionary vehicleTemplateData = dataTableGetRow(GARAGE_DISPLAY_VEHICLES_TABLE, vehicleReference);
@@ -448,7 +463,7 @@ public class terminal_structure_vehicle_garage extends script.base_script
                 persistObject(toyVehicle);
                 setYaw(toyVehicle, -90);
                 String houseName = getName(house);
-                houseName = localize(new string_id(houseName.substring(0, houseName.indexOf(":")), houseName.substring(houseName.indexOf(":") + 1, houseName.length())));
+                houseName = localize(new string_id(houseName.substring(0, houseName.indexOf(":")), houseName.substring(houseName.indexOf(":") + 1)));
                 setObjVar(vehicleSelected, VEHICLE_OBJVAR_DISPLAYED_VEHICLE, toyVehicle);
                 setObjVar(toyVehicle, "validHouse", "object/building/player/player_house_tcg_vehicle_garage.iff");
                 setObjVar(toyVehicle, "validHouseName", houseName);
@@ -459,6 +474,7 @@ public class terminal_structure_vehicle_garage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onVehicleListResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -542,6 +558,7 @@ public class terminal_structure_vehicle_garage extends script.base_script
         sui.setPid(player, newPid, PID_NAME);
         return SCRIPT_CONTINUE;
     }
+
     public int handlerConfirmVehicleMove(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -630,13 +647,13 @@ public class terminal_structure_vehicle_garage extends script.base_script
                 prose.setTT(pp, getEncodedName(vehicleSelected));
                 sendSystemMessageProse(player, pp);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_TRANSFER_FAILED_GENERIC);
                 CustomerServiceLog(CUSTOMER_SERVICE_LOG, "VCD " + getEncodedName(vehicleSelected) + " (" + vehicleSelected + ") was NOT transferred to Player " + getPlayerName(player) + "(" + player + ")'s hangar slot (" + playerHangar + "), the putIn command failed.");
             }
         }
-        else 
+        else
         {
             if (putIn(vehicleSelected, datapad, player))
             {
@@ -645,7 +662,7 @@ public class terminal_structure_vehicle_garage extends script.base_script
                 {
                     removeObjVar(vehicleSelected, VEHICLE_OBJVAR_DISPLAYED_VEHICLE);
                 }
-                else 
+                else
                 {
                     destroyObject(displayVehicle);
                     removeObjVar(vehicleSelected, VEHICLE_OBJVAR_DISPLAYED_VEHICLE);
@@ -656,7 +673,7 @@ public class terminal_structure_vehicle_garage extends script.base_script
                 prose.setTT(pp, getEncodedName(vehicleSelected));
                 sendSystemMessageProse(player, pp);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_TRANSFER_FAILED_GENERIC);
                 CustomerServiceLog(CUSTOMER_SERVICE_LOG, "VCD " + getEncodedName(vehicleSelected) + " (" + vehicleSelected + ") was NOT transferred to Player " + getPlayerName(player) + "(" + player + ")'s datapad (" + datapad + "), the putIn command failed.");

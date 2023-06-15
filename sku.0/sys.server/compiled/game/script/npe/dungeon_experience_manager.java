@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.library.utils;
 import script.location;
@@ -10,6 +16,7 @@ public class dungeon_experience_manager extends script.base_script
     public dungeon_experience_manager()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id droidCell = getCellId(self, "cave_entrance");

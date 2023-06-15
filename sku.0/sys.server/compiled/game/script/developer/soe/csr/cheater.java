@@ -1,17 +1,24 @@
 package script.developer.soe.csr;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class cheater extends script.base_script
 {
-    public cheater()
-    {
-    }
     public static final String CHEATER_SCRIPT = "csr.cheater";
     public static final String CHEATER_OBJVAR = "cheater";
     public static final String DURATION_OBJVAR = "cheater_days";
     public static final int DEFAULT_DURATION = 7;
     public static final int MAX_DURATION = 30;
+    public cheater()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isPlayer(self))
@@ -24,6 +31,7 @@ public class cheater extends script.base_script
         CustomerServiceLog("SuspectedCheaterChannel", "Begin Tracking: " + getName(self) + " (" + self + ") has been flagged as a suspected cheater");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, CHEATER_OBJVAR))
@@ -44,7 +52,7 @@ public class cheater extends script.base_script
                 setObjVar(self, DURATION_OBJVAR, MAX_DURATION);
             }
         }
-        else 
+        else
         {
             days = DEFAULT_DURATION;
         }

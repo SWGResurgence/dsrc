@@ -1,5 +1,11 @@
 package script.planet;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.cloninglib;
 import script.library.gcw;
@@ -19,6 +25,7 @@ public class planet_base extends script.base_script
         messageTo(self, "doSpawnSetup", dctParams, 60, true);
         return SCRIPT_CONTINUE;
     }
+
     public int doSpawnSetup(obj_id self, dictionary params) throws InterruptedException
     {
         //CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: messageHandler initialized.");
@@ -51,16 +58,18 @@ public class planet_base extends script.base_script
                 //CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: Tatooine Planet detected. Script Not Attached. Attaching event.planet_event_handler");
                 attachScript(tatooinePlanet, "event.planet_event_handler");
             }
-            if(scheduled_drop.isSystemEnabled()) {
+            if (scheduled_drop.isSystemEnabled())
+            {
                 scheduled_drop.instantiatePromotionsOnCluster();
             }
         }
-        else 
+        else
         {
             //CustomerServiceLog("holidayEvent", "planet_base.doSpawnSetup: Tatooine Planet not found!! Notify development.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         String strPlanet = getCurrentSceneName();
@@ -75,6 +84,7 @@ public class planet_base extends script.base_script
         detachScript(self, strRegionScript + "regions_" + strPlanet);
         return SCRIPT_CONTINUE;
     }
+
     public int registerCloningFacility(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id facilityId = params.getObjId("id");
@@ -108,7 +118,7 @@ public class planet_base extends script.base_script
             if (cloneTypeList != null)
                 cloneTypeList.add(cloneType);
         }
-        else 
+        else
         {
             int pos = utils.getElementPositionInArray(idList, facilityId);
             if (pos >= 0)
@@ -120,7 +130,7 @@ public class planet_base extends script.base_script
                 respawnList.set(pos, facilityRespawn);
                 cloneTypeList.set(pos, cloneType);
             }
-            else 
+            else
             {
                 idList = utils.addElement(idList, facilityId);
                 nameList = utils.addElement(nameList, cloneName);
@@ -140,6 +150,7 @@ public class planet_base extends script.base_script
         utils.setScriptVar(self, cloninglib.VAR_PLANET_CLONE_TYPE, cloneTypeList);
         return SCRIPT_CONTINUE;
     }
+
     public int unregisterCloningFacility(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id facilityId = params.getObjId("id");
@@ -173,6 +184,7 @@ public class planet_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void gcwInvasionMessage(obj_id self, obj_id citySequencer, String city) throws InterruptedException
     {
         if (isIdValid(self) && exists(self) && isIdValid(citySequencer))
@@ -184,6 +196,7 @@ public class planet_base extends script.base_script
             messageTo(citySequencer, "beginInvasion", null, 1.0f, false);
         }
     }
+
     public int gcwInvasionTracker(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -191,7 +204,7 @@ public class planet_base extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String city = params.getString("city");
-        if(!gcw.gcwIsInvasionCityOn(city))
+        if (!gcw.gcwIsInvasionCityOn(city))
         {
             return SCRIPT_CONTINUE;
         }
@@ -238,7 +251,7 @@ public class planet_base extends script.base_script
                 messageTo(self, "gcwInvasionTracker", params, 5.0f, false);
             }
             // the invasion is scheduled to start at some point... check this calc again when it is scheduled to start.
-            else 
+            else
             {
                 LOG("gcwlog", "gcwInvasionTracker city: " + city + " has not been run today.  timeToInvasion: " + timeToInvasion);
                 messageTo(self, "gcwInvasionTracker", params, timeToInvasion, false); // check again when invasion is expected to start.
@@ -251,11 +264,12 @@ public class planet_base extends script.base_script
             gcwInvasionMessage(self, sequencer, city);
             messageTo(self, "gcwInvasionTracker", params, timeToInvasion, false);
         }
-        else if(timeToInvasion >= 0){
-            LOG("gcwlog","gcwInvasionTracker city: " + city + " is not ready to start.  Next invasion is scheduled to start in " + timeToInvasion / 60 + " minutes.");
+        else if (timeToInvasion >= 0)
+        {
+            LOG("gcwlog", "gcwInvasionTracker city: " + city + " is not ready to start.  Next invasion is scheduled to start in " + timeToInvasion / 60 + " minutes.");
             messageTo(self, "gcwInvasionTracker", params, timeToInvasion, false);
         }
-        else 
+        else
         {
             LOG("gcwlog", "gcwInvasionTracker city: " + city + " has an invalid time.  Retrying the calculation.");
             utils.removeScriptVar(self, "gcw.calendar_time." + city);
@@ -263,6 +277,7 @@ public class planet_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int gcwGetInvasionObject(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)

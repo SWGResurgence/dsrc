@@ -1,5 +1,11 @@
 package script.item.armor;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.armor;
 import script.library.combat;
 import script.library.static_item;
@@ -12,6 +18,7 @@ public class dynamic_armor extends script.base_script
     public static final string_id SID_ITEM_LEVEL_TOO_LOW = new string_id("base_player", "level_too_low");
     public static final string_id SID_ITEM_NOT_ENOUGH_SKILL = new string_id("base_player", "not_correct_skill");
     public static final string_id SID_ITEM_MUST_NOT_BE_EQUIP = new string_id("base_player", "not_while_equipped");
+
     public dynamic_armor()
     {
     }
@@ -96,7 +103,8 @@ public class dynamic_armor extends script.base_script
             if (isIdValid(transferer))
             {
                 obj_id owner = getOwner(self);
-                if (destContainer == owner) {
+                if (destContainer == owner)
+                {
                     transferer = owner;
                 }
                 else if (isAPlayerAppearanceInventoryContainer(destContainer))

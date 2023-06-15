@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.player_structure;
 import script.library.static_item;
@@ -8,15 +14,16 @@ import script.library.vendor_lib;
 
 public class nonvendor extends script.terminal.base.base_terminal
 {
-    public nonvendor()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "nonvendor";
     public static final string_id SID_FACE_ME = new string_id("player_vendor", "face_me");
     public static final string_id SID_RECOVER = new string_id("player_vendor", "recover_nonvendor");
     public static final string_id SID_MAKE_ROOM = new string_id("player_vendor", "recover_nonvendor_make_room");
     public static final string_id SID_NO_USE_WHILE_DEAD = new string_id("player_structure", "while_dead");
+    public nonvendor()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!isValidId(self))
@@ -39,6 +46,7 @@ public class nonvendor extends script.terminal.base.base_terminal
         }
         return super.OnInitialize(self);
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!isValidId(self))
@@ -58,6 +66,7 @@ public class nonvendor extends script.terminal.base.base_terminal
         CustomerServiceLog("tcg", "TCG NonVendor: " + self + " is about to be destroyed and given to the owner. The nonvendor is being destroyed (probably via structure terminal).");
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id ownerId = getObjIdObjVar(self, vendor_lib.GREETER_OWNER_OBJVAR);
@@ -74,6 +83,7 @@ public class nonvendor extends script.terminal.base.base_terminal
         CustomerServiceLog("tcg", "TCG NonVendor: " + self + " is about to be destroyed and given to: " + ownerId + ". The nonvendor is being transferred (probably picked up).");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -96,6 +106,7 @@ public class nonvendor extends script.terminal.base.base_terminal
         }
         return super.OnObjectMenuRequest(self, player, mi);
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -118,6 +129,7 @@ public class nonvendor extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroyNonVendor(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -160,7 +172,7 @@ public class nonvendor extends script.terminal.base.base_terminal
             CustomerServiceLog("tcg", "TCG NonVendor " + self + " owner " + ownerId + " is not online. The TCG NonVendor will be reimbursed at next login.");
             messageTo(ownerId, "reimburseTcgItem", reimburseParams, 0, true);
         }
-        else 
+        else
         {
             blog("terminal.nonvendor.handleDestroyNonVendor OWNER LOADED");
             obj_id pInv = utils.getInventoryContainer(ownerId);
@@ -184,6 +196,7 @@ public class nonvendor extends script.terminal.base.base_terminal
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnPack(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("tcg", "TCG NonVendor " + self + " is being packed up.");
@@ -215,6 +228,7 @@ public class nonvendor extends script.terminal.base.base_terminal
         messageTo(self, "handleDestroyNonVendor", msgparams, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))

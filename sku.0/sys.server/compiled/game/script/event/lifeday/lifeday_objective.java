@@ -1,13 +1,16 @@
 package script.event.lifeday;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class lifeday_objective extends script.base_script
 {
-    public lifeday_objective()
-    {
-    }
     private static final String LIFEDAY = "event/life_day";
     private static final string_id SID_ALREADY_DRESSED = new string_id(LIFEDAY, "already_dressed");
     private static final string_id SID_ALREADY_STOMPED = new string_id(LIFEDAY, "already_stomped");
@@ -55,12 +58,15 @@ public class lifeday_objective extends script.base_script
     private static final float MAX_DESTROY_TIME = 180;
     private static final int COUNTDOWN_TIMER = 3;
     private static final int NON_DECLARED_TOKENS = utils.getIntConfigSetting("GameServer", "lifedayNonDeclaredBonus");
-    private static final int DECLARED_TOKENS = utils.getIntConfigSetting("GameServer","lifedayDeclaredBonus");
+    private static final int DECLARED_TOKENS = utils.getIntConfigSetting("GameServer", "lifedayDeclaredBonus");
     //private static final int NON_DECLARED_TOKENS = 5;
     //private static final int DECLARED_TOKENS = 15;
     private static final int REBEL = 1;
     private static final int IMPERIAL = 2;
     private static final int DAILY_COUNTER_LIMIT = 9;
+    public lifeday_objective()
+    {
+    }
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
@@ -76,10 +82,12 @@ public class lifeday_objective extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         obj_id target = getIntendedTarget(speaker);
@@ -139,6 +147,7 @@ public class lifeday_objective extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         String objectTemplate = getTemplateName(self);
@@ -157,6 +166,7 @@ public class lifeday_objective extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -196,13 +206,14 @@ public class lifeday_objective extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     private void treeDressed(obj_id self, obj_id player) throws InterruptedException
     {
         if (!factions.isDeclared(player))
         {
             giveTreat(player, NON_DECLARED_TOKENS, REBEL);
         }
-        else 
+        else
         {
             if (factions.isDeclared(player))
             {
@@ -226,28 +237,29 @@ public class lifeday_objective extends script.base_script
                     attachScript(dressedTree, "systems.spawning.spawned_tracker");
                     trial.cleanupObject(self);
                 }
-                else 
+                else
                 {
                     LOG("Lifeday: ", "Something went wrong, object " + self + "doesn't have the right objvars and script vars on it as it should if it had been spawned correctly. Recommend destroying object.");
                 }
             }
-            else 
+            else
             {
                 LOG("Lifeday: ", "Something went wrong, object " + self + "doesn't have the right objvars and script vars on it as it should if it had been spawned correctly. Recommend destroying object.");
             }
         }
-        else 
+        else
         {
             LOG("Lifeday: ", "Something went wrong, object " + self + "doesn't have the right objvars and script vars on it as it should if it had been spawned correctly. Recommend destroying object.");
         }
     }
+
     private void presentsStomped(obj_id self, obj_id player) throws InterruptedException
     {
         if (!factions.isDeclared(player))
         {
             giveTreat(player, NON_DECLARED_TOKENS, IMPERIAL);
         }
-        else 
+        else
         {
             if (factions.isDeclared(player))
             {
@@ -269,16 +281,17 @@ public class lifeday_objective extends script.base_script
                 attachScript(stompedPresents, "systems.spawning.spawned_tracker");
                 trial.cleanupObject(self);
             }
-            else 
+            else
             {
                 LOG("Lifeday: ", "Something went wrong, object " + self + "doesn't have the right objvars and script vars on it as it should if it had been spawned correctly. Recommend destroying object.");
             }
         }
-        else 
+        else
         {
             LOG("Lifeday: ", "Something went wrong, object " + self + "doesn't have the right objvars and script vars on it as it should if it had been spawned correctly. Recommend destroying object.");
         }
     }
+
     private void giveTreat(obj_id player, int quantity, int faction) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -290,7 +303,7 @@ public class lifeday_objective extends script.base_script
                 int currentTokens = getCount(rebelTokens);
                 setCount(rebelTokens, currentTokens + quantity);
             }
-            else 
+            else
             {
                 static_item.createNewItemFunction(REBEL_TOKEN, pInv, quantity);
             }
@@ -299,7 +312,7 @@ public class lifeday_objective extends script.base_script
             {
                 sendSystemMessage(player, SID_TOKENS_REBEL_HIGH);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_TOKENS_REBEL);
             }
@@ -312,7 +325,7 @@ public class lifeday_objective extends script.base_script
                 int currentTokens = getCount(imperialTokens);
                 setCount(imperialTokens, currentTokens + quantity);
             }
-            else 
+            else
             {
                 static_item.createNewItemFunction(IMPERIAL_TOKEN, pInv, quantity);
             }
@@ -321,7 +334,7 @@ public class lifeday_objective extends script.base_script
             {
                 sendSystemMessage(player, SID_TOKENS_IMPERIAL_HIGH);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_TOKENS_IMPERIAL);
             }
@@ -339,11 +352,12 @@ public class lifeday_objective extends script.base_script
             int newTokens = tokens + quantity;
             setObjVar(player, TOKEN_COUNTER, newTokens);
         }
-        else 
+        else
         {
             setObjVar(player, TOKEN_COUNTER, quantity);
         }
     }
+
     private void applyCorrectBuff(obj_id self, obj_id player) throws InterruptedException
     {
         int lifeDayBuff = buff.getBuffOnTargetFromGroup(player, "lifeday_tracker");
@@ -386,7 +400,7 @@ public class lifeday_objective extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 if (objectTemplate.equals(PRESENTS))
                 {
@@ -421,6 +435,7 @@ public class lifeday_objective extends script.base_script
             }
         }
     }
+
     private boolean newDay(obj_id player) throws InterruptedException
     {
         if (hasObjVar(player, LIFEDAY_TIMESTAMP))
@@ -431,6 +446,7 @@ public class lifeday_objective extends script.base_script
         }
         return true;
     }
+
     private boolean canInteract(obj_id player, obj_id self) throws InterruptedException
     {
         int now = getCalendarTime();
@@ -515,6 +531,7 @@ public class lifeday_objective extends script.base_script
         }
         return true;
     }
+
     public int handleDressingCountdownTimer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -570,7 +587,7 @@ public class lifeday_objective extends script.base_script
                 setObjVar(player, LOCKED_OUT, 1);
                 sendSystemMessage(player, SID_REACHED_LIMIT);
             }
-            else 
+            else
             {
                 buff.applyBuff(player, REBEL_COUNTER_BUFF);
             }
@@ -578,6 +595,7 @@ public class lifeday_objective extends script.base_script
         treeDressed(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStompingCountdownTimer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -633,7 +651,7 @@ public class lifeday_objective extends script.base_script
                 setObjVar(player, LOCKED_OUT, 1);
                 sendSystemMessage(player, SID_REACHED_LIMIT);
             }
-            else 
+            else
             {
                 buff.applyBuff(player, IMPERIAL_COUNTER_BUFF);
             }
@@ -641,6 +659,7 @@ public class lifeday_objective extends script.base_script
         presentsStomped(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 import script.string_id;
@@ -54,6 +60,7 @@ public class minefield_util extends script.base_script
     public static final String MINEFIELD_BREACHER_SCRIPT = "structures.general.military.minefields.minefield_breacher";
     public static final String BLAST_PARTICLE_TEMPLATE = "object/static/particle/particle_sm_explosion.iff";
     public static final String WARNING_PARTICLE_TEMPLATE = "object/static/particle/particle_mine_warning.iff";
+
     public minefield_util()
     {
     }

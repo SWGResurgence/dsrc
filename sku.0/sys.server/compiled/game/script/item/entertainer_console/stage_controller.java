@@ -1,5 +1,11 @@
 package script.item.entertainer_console;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -38,6 +44,7 @@ public class stage_controller extends script.terminal.base.base_terminal
     public static final string_id SID_START_CONTROLLER = new string_id("spam", "activate_stage_controller");
     public static final string_id SID_NOT_IN_HOUSE = new string_id("spam", "stage_controller_not_in_house");
     public static final string_id SID_NO_PROPS = new string_id("spam", "stage_controller_no_props");
+
     public stage_controller()
     {
     }

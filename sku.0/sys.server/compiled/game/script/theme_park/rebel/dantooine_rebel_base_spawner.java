@@ -1,5 +1,11 @@
 package script.theme_park.rebel;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -11,6 +17,7 @@ public class dantooine_rebel_base_spawner extends script.base_script
     public dantooine_rebel_base_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);
@@ -19,12 +26,13 @@ public class dantooine_rebel_base_spawner extends script.base_script
         messageTo(self, "doGating", null, 20, true);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Spawning Everyone");
         spawnCelebs(self);
-        return;
     }
+
     public void spawnCelebs(obj_id self) throws InterruptedException
     {
         spawnLieutenant(self);
@@ -34,6 +42,7 @@ public class dantooine_rebel_base_spawner extends script.base_script
         spawnCaptain(self);
         spawnLeia(self);
     }
+
     public void spawnLieutenant(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "meeting3");
@@ -42,8 +51,8 @@ public class dantooine_rebel_base_spawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.lieutenant", lieutenant);
         setObjVar(lieutenant, "Hideout", self);
         setYaw(lieutenant, -82);
-        return;
     }
+
     public void spawnAckbar(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "jailcell2");
@@ -52,8 +61,8 @@ public class dantooine_rebel_base_spawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.ackbar", ackbar);
         setObjVar(ackbar, "Hideout", self);
         setYaw(ackbar, -4);
-        return;
     }
+
     public void spawnLeia(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "jailcell2");
@@ -64,8 +73,8 @@ public class dantooine_rebel_base_spawner extends script.base_script
         ai_lib.setDefaultCalmMood(leia, "conversation");
         setObjVar(self, "HideoutInhabitants.leia", leia);
         setObjVar(leia, "Hideout", self);
-        return;
     }
+
     public void spawnMothma(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "hall2");
@@ -74,8 +83,8 @@ public class dantooine_rebel_base_spawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.mothma", mothma);
         setObjVar(mothma, "Hideout", self);
         setYaw(mothma, -27);
-        return;
     }
+
     public void spawnGeneral(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "hall2");
@@ -84,8 +93,8 @@ public class dantooine_rebel_base_spawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.general", general);
         setObjVar(general, "Hideout", self);
         setYaw(general, 119);
-        return;
     }
+
     public void spawnCaptain(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "hall2");
@@ -94,8 +103,8 @@ public class dantooine_rebel_base_spawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.captain", captain);
         setObjVar(captain, "Hideout", self);
         setYaw(captain, -169);
-        return;
     }
+
     public int doGating(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id foyer1 = getCellId(self, "foyer1");
@@ -104,6 +113,7 @@ public class dantooine_rebel_base_spawner extends script.base_script
         attachScript(foyer2, "theme_park.gating.rebel.foyer1_gate");
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!hasObjVar(speaker, "gm"))
@@ -124,6 +134,7 @@ public class dantooine_rebel_base_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void killCelebs(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "HideoutInhabitants.lance"));
@@ -138,8 +149,8 @@ public class dantooine_rebel_base_spawner extends script.base_script
         removeObjVar(self, "HideoutInhabitants.general");
         destroyObject(getObjIdObjVar(self, "HideoutInhabitants.captain"));
         removeObjVar(self, "HideoutInhabitants.captain");
-        return;
     }
+
     public void killDroids(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "HideoutInhabitants.mouse1"));
@@ -150,6 +161,5 @@ public class dantooine_rebel_base_spawner extends script.base_script
         removeObjVar(self, "HideoutInhabitants.mouse3");
         destroyObject(getObjIdObjVar(self, "HideoutInhabitants.ra1"));
         removeObjVar(self, "HideoutInhabitants.ra1");
-        return;
     }
 }

@@ -4,6 +4,12 @@ package script.developer.bubbajoe;/*
 @Purpose:
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.sui;
 import script.obj_id;
 import script.location;
@@ -12,10 +18,11 @@ import script.dictionary;
 @SuppressWarnings("unused")
 public class decor_panel extends script.base_script
 {
-    public String PID = "dp.pid";
     public static final String DP_PAGE = "/Script.decorationPanel";
-    public static final String DP_RENAME_FIELD ="renameInput.txtName.LocalText";
+    public static final String DP_RENAME_FIELD = "renameInput.txtName.LocalText";
     public static final String DP_MOVEMENT_FIELD = "movementInput.txtAmt.LocalText";
+    public String PID = "dp.pid";
+
     public int OnAttach(obj_id self)
     {
         return SCRIPT_CONTINUE;
@@ -25,6 +32,7 @@ public class decor_panel extends script.base_script
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text)
     {
         if (text.equals("decoration_panel"))
@@ -88,6 +96,7 @@ public class decor_panel extends script.base_script
         loc.z += currentMovementAmount(params);
         setLocation(target, loc);
     }
+
     public void handleMoveEast(obj_id self, dictionary params)
     {
         obj_id target = getTarget(self);
@@ -95,6 +104,7 @@ public class decor_panel extends script.base_script
         loc.x += currentMovementAmount(params);
         setLocation(target, loc);
     }
+
     public void handleMoveSouth(obj_id self, dictionary params)
     {
         obj_id target = getIntendedTarget(self);
@@ -102,6 +112,7 @@ public class decor_panel extends script.base_script
         loc.z -= currentMovementAmount(params);
         setLocation(target, loc);
     }
+
     public void handleMoveWest(obj_id self, dictionary params)
     {
         obj_id target = getIntendedTarget(self);
@@ -109,6 +120,7 @@ public class decor_panel extends script.base_script
         loc.x -= currentMovementAmount(params);
         setLocation(target, loc);
     }
+
     public void handleMoveUp(obj_id self, dictionary params)
     {
         obj_id target = getIntendedTarget(self);
@@ -124,6 +136,7 @@ public class decor_panel extends script.base_script
         loc.y -= currentMovementAmount(params);
         setLocation(target, loc);
     }
+
     public void handleRename(obj_id self, dictionary params)
     {
         obj_id target = getIntendedTarget(self);
@@ -146,6 +159,7 @@ public class decor_panel extends script.base_script
         loc.y = myLoc.y;
         setLocation(target, loc);
     }
+
     public float currentMovementAmount(dictionary params)
     {
         return params.getFloat(DP_MOVEMENT_FIELD);

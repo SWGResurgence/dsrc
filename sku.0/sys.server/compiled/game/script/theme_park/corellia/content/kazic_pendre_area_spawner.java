@@ -1,5 +1,11 @@
 package script.theme_park.corellia.content;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -11,6 +17,7 @@ public class kazic_pendre_area_spawner extends script.base_script
     public kazic_pendre_area_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (canSpawnByConfigSetting())
@@ -19,6 +26,7 @@ public class kazic_pendre_area_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (canSpawnByConfigSetting())
@@ -27,6 +35,7 @@ public class kazic_pendre_area_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doSpawnEvent(obj_id self, dictionary params) throws InterruptedException
     {
         String whatToSpawn = "corellia_chirq_kazic_pendre";
@@ -54,11 +63,13 @@ public class kazic_pendre_area_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "doSpawnEvent", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean canSpawnByConfigSetting() throws InterruptedException
     {
         String disableSpawners = getConfigSetting("GameServer", "disableAreaSpawners");
@@ -66,10 +77,6 @@ public class kazic_pendre_area_spawner extends script.base_script
         {
             return true;
         }
-        if (disableSpawners.equals("true") || disableSpawners.equals("1"))
-        {
-            return false;
-        }
-        return true;
+        return !disableSpawners.equals("true") && !disableSpawners.equals("1");
     }
 }

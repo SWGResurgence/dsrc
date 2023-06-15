@@ -1,5 +1,11 @@
 package script.item.publish_gift;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.beast_lib;
 import script.library.utils;
 import script.obj_id;
@@ -35,13 +41,9 @@ public class holopet_data_cube extends script.base_script
         {
             int holobeastColor = getIntObjVar(self, beast_lib.HOLO_BEAST_RARE_COLOR_OBJVAR);
             String rareColor = "";
-            switch (holobeastColor)
+            if (holobeastColor == beast_lib.HOLO_BEAST_TYPE3_QUALITY3)
             {
-                case beast_lib.HOLO_BEAST_TYPE3_QUALITY3:
-                    rareColor = "Burnt Orange";
-                    break;
-                default:
-                    break;
+                rareColor = "Burnt Orange";
             }
             if (rareColor.length() > 0)
             {

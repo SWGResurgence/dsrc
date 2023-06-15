@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,31 +13,38 @@ import script.*;
 
 public class som_diskret_stahn extends script.base_script
 {
+    public static String c_stringFile = "conversation/som_diskret_stahn";
+
     public som_diskret_stahn()
     {
     }
-    public static String c_stringFile = "conversation/som_diskret_stahn";
+
     public boolean som_diskret_stahn_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean som_diskret_stahn_condition_isEntertainer(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.isProfession(player, utils.ENTERTAINER);
     }
+
     public boolean som_diskret_stahn_condition_isMusician(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "social_musician_novice");
     }
+
     public boolean som_diskret_stahn_condition_hasSong(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCommand(player, "startMusic+calypso");
     }
+
     public void som_diskret_stahn_action_grantSong(obj_id player, obj_id npc) throws InterruptedException
     {
         sendSystemMessage(player, new string_id("som/som_quest", "grant_song"));
         grantCommand(player, "startMusic+calypso");
     }
+
     public int som_diskret_stahn_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -46,6 +59,7 @@ public class som_diskret_stahn extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_diskret_stahn_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9"))
@@ -72,7 +86,7 @@ public class som_diskret_stahn extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_13");
@@ -85,7 +99,7 @@ public class som_diskret_stahn extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_diskret_stahn.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -117,7 +131,7 @@ public class som_diskret_stahn extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_25");
@@ -130,7 +144,7 @@ public class som_diskret_stahn extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_diskret_stahn.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -150,6 +164,7 @@ public class som_diskret_stahn extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_diskret_stahn_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_13"))
@@ -176,7 +191,7 @@ public class som_diskret_stahn extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_25");
@@ -189,7 +204,7 @@ public class som_diskret_stahn extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_diskret_stahn.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -209,6 +224,7 @@ public class som_diskret_stahn extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_diskret_stahn_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25"))
@@ -235,7 +251,7 @@ public class som_diskret_stahn extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -248,7 +264,7 @@ public class som_diskret_stahn extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_diskret_stahn.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -268,6 +284,7 @@ public class som_diskret_stahn extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_diskret_stahn_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25"))
@@ -294,7 +311,7 @@ public class som_diskret_stahn extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -307,7 +324,7 @@ public class som_diskret_stahn extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_diskret_stahn.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -327,6 +344,7 @@ public class som_diskret_stahn extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_diskret_stahn_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -353,7 +371,7 @@ public class som_diskret_stahn extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_33");
@@ -366,7 +384,7 @@ public class som_diskret_stahn extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_diskret_stahn.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -386,6 +404,7 @@ public class som_diskret_stahn extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_diskret_stahn_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33"))
@@ -412,7 +431,7 @@ public class som_diskret_stahn extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -425,7 +444,7 @@ public class som_diskret_stahn extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_diskret_stahn.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -445,6 +464,7 @@ public class som_diskret_stahn extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_diskret_stahn_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -471,7 +491,7 @@ public class som_diskret_stahn extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -484,7 +504,7 @@ public class som_diskret_stahn extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_diskret_stahn.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -504,6 +524,7 @@ public class som_diskret_stahn extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_diskret_stahn_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -530,7 +551,7 @@ public class som_diskret_stahn extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -543,7 +564,7 @@ public class som_diskret_stahn extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_diskret_stahn.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -563,6 +584,7 @@ public class som_diskret_stahn extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_diskret_stahn_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -595,6 +617,7 @@ public class som_diskret_stahn extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -604,11 +627,13 @@ public class som_diskret_stahn extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -617,18 +642,21 @@ public class som_diskret_stahn extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.som_diskret_stahn");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -651,7 +679,7 @@ public class som_diskret_stahn extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -659,7 +687,7 @@ public class som_diskret_stahn extends script.base_script
                 utils.setScriptVar(player, "conversation.som_diskret_stahn.branchId", 1);
                 npcStartConversation(player, npc, "som_diskret_stahn", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -694,7 +722,7 @@ public class som_diskret_stahn extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_9");
@@ -710,7 +738,7 @@ public class som_diskret_stahn extends script.base_script
                 utils.setScriptVar(player, "conversation.som_diskret_stahn.branchId", 3);
                 npcStartConversation(player, npc, "som_diskret_stahn", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -719,6 +747,7 @@ public class som_diskret_stahn extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("som_diskret_stahn"))

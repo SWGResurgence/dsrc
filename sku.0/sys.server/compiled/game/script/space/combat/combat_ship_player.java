@@ -1,5 +1,11 @@
 package script.space.combat;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 import script.systems.gcw.space.battle_controller;
@@ -34,6 +40,7 @@ public class combat_ship_player extends script.base_script
     public static final String POB_SHIP_OPERATIONS_SLOT_NAME = "ship_operations_pob";
     public static final string_id SID_SHIP_DOESNT_HAVE_WINGS = new string_id("space/space_interaction", "ship_doesnt_have_wings");
     public static final string_id SID_NOT_PILOTING_A_SHIP = new string_id("space/space_interaction", "not_piloting_a_ship");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "jtlNewbie"))
@@ -42,6 +49,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "jtlNewbie"))
@@ -50,11 +58,13 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleScriptAttachment(obj_id self, dictionary params) throws InterruptedException
     {
         newPlayerCheck(self);
         return SCRIPT_CONTINUE;
     }
+
     public void newPlayerCheck(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "jtlNewbie") && features.isSpaceEdition(self))
@@ -65,6 +75,7 @@ public class combat_ship_player extends script.base_script
             }
         }
     }
+
     public void createSwoop(obj_id self) throws InterruptedException
     {
         obj_id datapad = utils.getPlayerDatapad(self);
@@ -76,6 +87,7 @@ public class combat_ship_player extends script.base_script
         setObjVar(petControlDevice, "ai.pet.trainedMount", 1);
         setName(petControlDevice, "(swoop)");
     }
+
     public int cmdPilotShip(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(self);
@@ -93,7 +105,7 @@ public class combat_ship_player extends script.base_script
                             broadcast(self, "** Passing certification test due to god mode. **");
                         }
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(self, new string_id("space/space_interaction", "no_ship_certification"));
                         return SCRIPT_CONTINUE;
@@ -106,7 +118,7 @@ public class combat_ship_player extends script.base_script
                     {
                         broadcast(self, "Now piloting ship [" + ship + "], pilot slot object [" + pilotSlotObject + "]");
                     }
-                    else 
+                    else
                     {
                         broadcast(self, "pilotShip failed for ship [" + ship + "], pilot slot object [" + pilotSlotObject + "]");
                     }
@@ -128,6 +140,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdLeaveStation(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id container = getContainedBy(self);
@@ -158,7 +171,7 @@ public class combat_ship_player extends script.base_script
                 location dest = new location(pos.x, pos.y, pos.z, getCurrentSceneName(), getLocation(container).cell);
                 setLocation(self, dest);
             }
-            else 
+            else
             {
                 boolean inGunnerSlot = false;
                 for (int i = 0; i < space_utils.POB_SHIP_GUNNER_SLOT_NAMES.length; ++i)
@@ -184,7 +197,7 @@ public class combat_ship_player extends script.base_script
                         {
                             space_transition.handleLogout(self);
                         }
-                        else 
+                        else
                         {
                             setLocation(self, getLocation(ship));
                         }
@@ -194,6 +207,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdOpenWings(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id shipId = space_transition.getContainingShip(self);
@@ -203,17 +217,18 @@ public class combat_ship_player extends script.base_script
             {
                 setCondition(shipId, CONDITION_WINGS_OPENED);
             }
-            else 
+            else
             {
                 sendSystemMessage(self, SID_SHIP_DOESNT_HAVE_WINGS);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_NOT_PILOTING_A_SHIP);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdCloseWings(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id shipId = space_transition.getContainingShip(self);
@@ -223,17 +238,18 @@ public class combat_ship_player extends script.base_script
             {
                 clearCondition(shipId, CONDITION_WINGS_OPENED);
             }
-            else 
+            else
             {
                 sendSystemMessage(self, SID_SHIP_DOESNT_HAVE_WINGS);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_NOT_PILOTING_A_SHIP);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (params == null)
@@ -247,26 +263,27 @@ public class combat_ship_player extends script.base_script
         space_combat.performDroidCommands(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public boolean canCreateShip(obj_id self) throws InterruptedException
     {
         if (isGod(self))
         {
             obj_id containingShip = space_transition.getContainingShip(self);
-            if (!isIdValid(containingShip) || getOwner(containingShip) != self)
-            {
-                return true;
-            }
+            return !isIdValid(containingShip) || getOwner(containingShip) != self;
         }
         return false;
     }
+
     public int board(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int evacuate(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
     {
         if (!isGod(self))
@@ -275,7 +292,7 @@ public class combat_ship_player extends script.base_script
         }
         String[] strCommands = split(strText, ' ');
         String strCommand = strCommands[0];
-        String command = new String(strText);
+        String command = strText;
         if (command.equalsIgnoreCase("nextCommand"))
         {
             obj_id objShip = space_transition.getContainingShip(self);
@@ -339,20 +356,27 @@ public class combat_ship_player extends script.base_script
             obj_id[] shipControlDevices = space_transition.findShipControlDevicesForPlayer(self);
             if (shipControlDevices != null && shipControlDevices.length > 0)
             {
-                for (obj_id shipControlDevice : shipControlDevices) {
+                for (obj_id shipControlDevice : shipControlDevices)
+                {
                     obj_id ship = space_transition.getShipFromShipControlDevice(shipControlDevice);
-                    if (isIdValid(ship)) {
-                        if (!hasCertificationsForItem(self, ship)) {
+                    if (isIdValid(ship))
+                    {
+                        if (!hasCertificationsForItem(self, ship))
+                        {
                             broadcast(self, "Warning: You do NOT have the appropriate certification for ship " + ship + "! BAH.");
-                        } else {
+                        }
+                        else
+                        {
                             broadcast(self, "Warning: You DO have the appropriate certification for ship " + ship + ". YEAH!");
                         }
-                    } else {
+                    }
+                    else
+                    {
                         broadcast(self, "Error: Ship control device " + shipControlDevice + " has no ship, so cannot check certifications.");
                     }
                 }
             }
-            else 
+            else
             {
                 broadcast(self, "You do not have any ships, so cannot check certifications.");
             }
@@ -432,7 +456,7 @@ public class combat_ship_player extends script.base_script
             {
                 bomberSquadId = utils.getIntLocalVar(self, "cmd.bmb.bmbrSquadId");
             }
-            else 
+            else
             {
                 broadcast(self, "NO squad ID LOCALVAR ON YOUR PERSON ");
                 return SCRIPT_CONTINUE;
@@ -475,7 +499,7 @@ public class combat_ship_player extends script.base_script
                     removeObjVar(objShip, "intInvincible");
                     broadcast(self, "You're ship is no longer invincible");
                 }
-                else 
+                else
                 {
                     setObjVar(objShip, "intInvincible", 1);
                     broadcast(self, "You're ship is now invincible");
@@ -498,7 +522,7 @@ public class combat_ship_player extends script.base_script
             {
                 debugSpeakMsg(self, "launchmissile returned true.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "launchMissile returned false.");
             }
@@ -511,7 +535,7 @@ public class combat_ship_player extends script.base_script
                 removeObjVar(self, "intCombatDebug");
                 broadcast(self, "Debug Spam Disabled!");
             }
-            else 
+            else
             {
                 setObjVar(self, "intCombatDebug", 1);
                 broadcast(self, "Debug Spam Enabled!");
@@ -520,6 +544,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int abortHyperspace(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id objShip = space_transition.getContainingShip(self);
@@ -538,6 +563,7 @@ public class combat_ship_player extends script.base_script
         hyperspaceRestoreShipOnClientFromAbortedHyperspace(self);
         return SCRIPT_CONTINUE;
     }
+
     public int hyperspaceToHyperspacePoint(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (space_utils.isHyperspaceBlocked(self))
@@ -585,8 +611,9 @@ public class combat_ship_player extends script.base_script
         LOG("space", "params is " + params);
         String hyperspacePoint = strParams[0];
         String sceneName = getSceneForHyperspacePoint(hyperspacePoint);
-        if(sceneName == null || sceneName.equals("")){
-            LOG("space","WARNING: Unable to get hyperspace scene name from hyperspacePoint (" + hyperspacePoint + ").  Self (" + self + ":" + getName(self) + "), Target(" + target + ":" + getName(target) + ").");
+        if (sceneName == null || sceneName.equals(""))
+        {
+            LOG("space", "WARNING: Unable to get hyperspace scene name from hyperspacePoint (" + hyperspacePoint + ").  Self (" + self + ":" + getName(self) + "), Target(" + target + ":" + getName(target) + ").");
         }
         if (!isGod(self))
         {
@@ -599,9 +626,11 @@ public class combat_ship_player extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
                 Vector passengers = space_transition.getContainedPlayers(objShip);
-                for (Object passenger1 : passengers) {
+                for (Object passenger1 : passengers)
+                {
                     obj_id passenger = (obj_id) passenger1;
-                    if (!features.hasEpisode3Expansion(passenger)) {
+                    if (!features.hasEpisode3Expansion(passenger))
+                    {
                         string_id strSpam = new string_id("space/space_interaction", "no_ep3_passengers");
                         sendSystemMessage(self, strSpam);
                         return SCRIPT_CONTINUE;
@@ -609,7 +638,7 @@ public class combat_ship_player extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             string_id strSpam = new string_id("space/space_interaction", "godmode_bypassing_ep3_check");
             sendSystemMessage(self, strSpam);
@@ -641,7 +670,7 @@ public class combat_ship_player extends script.base_script
             {
                 broadcast(self, "Allowing hyperspace to overpopulated zone because you are in god mode.");
             }
-            else 
+            else
             {
                 string_id tooFull = new string_id("shared_hyperspace", "zone_too_full");
                 sendSystemMessage(self, tooFull);
@@ -686,6 +715,7 @@ public class combat_ship_player extends script.base_script
         messageTo(self, "hyperspacePlayer", dctParams, intDelay + 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int doHyperspaceMessaging(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objShip = space_transition.getContainingShip(self);
@@ -712,7 +742,8 @@ public class combat_ship_player extends script.base_script
             Vector objGunners = space_utils.getGunnersInShip(objShip);
             if (objGunners != null)
             {
-                for (Object objGunner : objGunners) {
+                for (Object objGunner : objGunners)
+                {
                     playMusic(((obj_id) objGunner), "sound/ship_hyperspace_countdown.snd");
                 }
             }
@@ -729,6 +760,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hyperspacePlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objShip = space_transition.getContainingShip(self);
@@ -762,6 +794,7 @@ public class combat_ship_player extends script.base_script
         hyperspacePlayerToHyperspacePoint(self, strPoint, null, true, isGod(self));
         return SCRIPT_CONTINUE;
     }
+
     public int OnHyperspaceToHomeLocation(obj_id self) throws InterruptedException
     {
         obj_id objShip = space_transition.getContainingShip(self);
@@ -773,17 +806,20 @@ public class combat_ship_player extends script.base_script
         space_transition.teleportPlayerToLaunchLoc(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMadeAuthoritative(obj_id self) throws InterruptedException
     {
         space_transition.handlePotentialSceneChange(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         space_transition.handleLogout(self);
         space_combat.strikeBomberCleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int openContainer(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (hasObjVar(target, "objLooters"))
@@ -799,6 +835,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroyTarget(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id objLookAtTarget = getLookAtTarget(self);
@@ -842,6 +879,7 @@ public class combat_ship_player extends script.base_script
         messageTo(objLookAtTarget, "megaDamage", dctParams, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int disableTarget(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id objLookAtTarget = getLookAtTarget(self);
@@ -871,6 +909,7 @@ public class combat_ship_player extends script.base_script
         messageTo(objLookAtTarget, "disableSelf", dctParams, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdLaunchMissile(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugSpeakMsg(self, "got launch missile command");
@@ -887,18 +926,20 @@ public class combat_ship_player extends script.base_script
         {
             debugSpeakMsg(self, "launchmissile returned true.");
         }
-        else 
+        else
         {
             debugSpeakMsg(self, "launchMissile returned false.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doDelayedSystemMessage(obj_id self, dictionary params) throws InterruptedException
     {
         string_id strSpam = params.getStringId("strSpam");
         sendSystemMessage(self, strSpam);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdReactorPumpPulse(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got Reactor Pulse Command");
@@ -924,12 +965,13 @@ public class combat_ship_player extends script.base_script
             utils.setScriptVar(self, "cmd.reactorPumpPulse", 1);
             space_combat.initializeCommandTimer(self, CMD_REACTOR_PUMP_DELAY);
         }
-        else 
+        else
         {
             debugServerConsoleMsg(null, "reactor pulse returned false.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdIffScramble(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got IFF Scramble Command");
@@ -958,12 +1000,13 @@ public class combat_ship_player extends script.base_script
             String cefPlayBackHardpoint = space_combat.targetHardpointForCefPlayback(ship);
             playClientEffectObj(self, "clienteffect/space_command/shp_shocked_radio_01.cef", ship, cefPlayBackHardpoint);
         }
-        else 
+        else
         {
             debugServerConsoleMsg(null, "Iff Scramble returned false.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int unIffScramble(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id pilot = params.getObjId("pilot");
@@ -971,6 +1014,7 @@ public class combat_ship_player extends script.base_script
         utils.removeLocalVar(pilot, "cmd.iffScramble");
         return SCRIPT_CONTINUE;
     }
+
     public int muteDroid(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(null, "Just entered MUTEDROID message handler.");
@@ -986,7 +1030,7 @@ public class combat_ship_player extends script.base_script
             sendSystemMessage(self, strSpam);
             utils.removeLocalVar(ship, "droidcmd.muteDroid");
         }
-        else 
+        else
         {
             string_id strSpam = new string_id("space/space_interaction", "mute_droid");
             sendSystemMessage(self, strSpam);
@@ -994,6 +1038,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int zoneToKessel(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "space.zoneDestination"))
@@ -1027,6 +1072,7 @@ public class combat_ship_player extends script.base_script
         zoneToCommand(self);
         return SCRIPT_CONTINUE;
     }
+
     public int zoneToImperialDeepSpace(obj_id self, dictionary params) throws InterruptedException
     {
         if (space_flags.isRebelPilot(self) || factions.isRebel(self))
@@ -1065,6 +1111,7 @@ public class combat_ship_player extends script.base_script
         zoneToCommand(self);
         return SCRIPT_CONTINUE;
     }
+
     public int zoneToRebelDeepSpace(obj_id self, dictionary params) throws InterruptedException
     {
         if (space_flags.isImperialPilot(self) || factions.isImperial(self))
@@ -1103,6 +1150,7 @@ public class combat_ship_player extends script.base_script
         zoneToCommand(self);
         return SCRIPT_CONTINUE;
     }
+
     public int zoneTimer(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "space.zoneDestination"))
@@ -1112,6 +1160,7 @@ public class combat_ship_player extends script.base_script
         zoneToCommand(self);
         return SCRIPT_CONTINUE;
     }
+
     public int spacePvpRebel(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(self);
@@ -1198,6 +1247,7 @@ public class combat_ship_player extends script.base_script
         CustomerServiceLog("space_commands", "Player " + self + " in ship " + ship + " has been flagged as Rebel Special Forces");
         return SCRIPT_CONTINUE;
     }
+
     public int spacePvpImperial(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(self);
@@ -1284,6 +1334,7 @@ public class combat_ship_player extends script.base_script
         CustomerServiceLog("space_commands", "Player " + self + " in ship " + ship + " has been flagged as Imperial Special Forces");
         return SCRIPT_CONTINUE;
     }
+
     public int spaceRebelHelper(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(self);
@@ -1337,6 +1388,7 @@ public class combat_ship_player extends script.base_script
         CustomerServiceLog("space_commands", "Player " + self + " in ship " + ship + " has been flagged as Rebel Factional Helper");
         return SCRIPT_CONTINUE;
     }
+
     public int spaceImperialHelper(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(self);
@@ -1390,6 +1442,7 @@ public class combat_ship_player extends script.base_script
         CustomerServiceLog("space_commands", "Player " + self + " in ship " + ship + " has been flagged as Imperial Factional Helper");
         return SCRIPT_CONTINUE;
     }
+
     public void zoneToCommand(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -1486,8 +1539,8 @@ public class combat_ship_player extends script.base_script
         percentToZone = percentToZone + 25;
         utils.setScriptVar(ship, "space.countZoneToBattlefield", percentToZone);
         messageTo(self, "zoneTimer", null, 5, false);
-        return;
     }
+
     public int cmdEmergencyWeapons(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got Emergency Weapons Command");
@@ -1538,21 +1591,25 @@ public class combat_ship_player extends script.base_script
         }
         float fltGeneralEfficiency = 5.0f;
         float fltEnergyEfficiency = 5.0f;
-        final int[] WEAPON_SLOTS = 
+        final int[] WEAPON_SLOTS =
+                {
+                        ship_chassis_slot_type.SCST_weapon_0,
+                        ship_chassis_slot_type.SCST_weapon_1,
+                        ship_chassis_slot_type.SCST_weapon_2,
+                        ship_chassis_slot_type.SCST_weapon_3,
+                        ship_chassis_slot_type.SCST_weapon_4,
+                        ship_chassis_slot_type.SCST_weapon_5,
+                        ship_chassis_slot_type.SCST_weapon_6,
+                        ship_chassis_slot_type.SCST_weapon_7
+                };
+        for (int weapon_slot : WEAPON_SLOTS)
         {
-            ship_chassis_slot_type.SCST_weapon_0,
-            ship_chassis_slot_type.SCST_weapon_1,
-            ship_chassis_slot_type.SCST_weapon_2,
-            ship_chassis_slot_type.SCST_weapon_3,
-            ship_chassis_slot_type.SCST_weapon_4,
-            ship_chassis_slot_type.SCST_weapon_5,
-            ship_chassis_slot_type.SCST_weapon_6,
-            ship_chassis_slot_type.SCST_weapon_7
-        };
-        for (int weapon_slot : WEAPON_SLOTS) {
-            if (isShipSlotInstalled(ship, weapon_slot)) {
-                if ((fltGeneralEfficiency != 0) && (fltEnergyEfficiency != 0)) {
-                    if (space_combat.isEfficiencyModified(weapon_slot, ship)) {
+            if (isShipSlotInstalled(ship, weapon_slot))
+            {
+                if ((fltGeneralEfficiency != 0) && (fltEnergyEfficiency != 0))
+                {
+                    if (space_combat.isEfficiencyModified(weapon_slot, ship))
+                    {
                         space_combat.setEfficiencyModifier(weapon_slot, ship, 1.0f, 1.0f);
                     }
                     space_combat.setEfficiencyModifier(weapon_slot, ship, fltGeneralEfficiency, fltEnergyEfficiency);
@@ -1572,6 +1629,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdEmergencyShields(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got Emergency Shields Command");
@@ -1643,6 +1701,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdEmergencyThrust(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got Emergency Thrust Command");
@@ -1719,6 +1778,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdVampiricRepair(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got Vampiric Repair Command");
@@ -1749,7 +1809,7 @@ public class combat_ship_player extends script.base_script
         {
             broadcast(self, "Failure in system canibalization sub-routines! Aborting Process!");
         }
-        else 
+        else
         {
             space_combat.vampiricTypeShipsSystemsRepair(self, ship, successLevel);
         }
@@ -1758,6 +1818,7 @@ public class combat_ship_player extends script.base_script
         float emergencyPowerTime = (rand(5.0f, (CMD_VAMPIRIC_REPAIR_DELAY)));
         return SCRIPT_CONTINUE;
     }
+
     public int cmdVampiricRepairOther(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got Vampiric Repair Other Command");
@@ -1794,7 +1855,7 @@ public class combat_ship_player extends script.base_script
         {
             broadcast(self, "Failure in system canibalization sub-routines! Aborting Process!");
         }
-        else 
+        else
         {
             space_pilot_command.vampiricOtherTypeShipsSystemsRepair(self, ship, targetShip, successLevel);
         }
@@ -1803,6 +1864,7 @@ public class combat_ship_player extends script.base_script
         float emergencyPowerTime = (rand(5.0f, (CMD_VAMPIRIC_REPAIR_DELAY)));
         return SCRIPT_CONTINUE;
     }
+
     public int cmdLightBomberStrike(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got light Bomber Strike Command");
@@ -1829,6 +1891,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdMediumBomberStrike(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got medium Bomber Strike Command");
@@ -1855,6 +1918,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdHeavyBomberStrike(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got heavy Bomber Strike Command");
@@ -1881,6 +1945,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int bomberStrikeUnitDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id deadBomberId = params.getObjId("deadBomberId");
@@ -1895,13 +1960,13 @@ public class combat_ship_player extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             int bomberSquadId = ship_ai.unitGetSquadId(deadBomberId);
             tauntEmitterSquadId = bomberSquadId;
             int numBombers = (ship_ai.squadGetSize(bomberSquadId) - 1);
             utils.setLocalVar(self, "cmd.bmb.currentStrikePackSize", numBombers);
-            if (numBombers < (int)(initialStrikePackageSize / 2))
+            if (numBombers < (initialStrikePackageSize / 2))
             {
                 obj_id[] bomberSquaddyList = ship_ai.squadGetUnitList(tauntEmitterSquadId);
                 string_id sid = new string_id("space/space_interaction", "bombers_evacuating");
@@ -1926,9 +1991,10 @@ public class combat_ship_player extends script.base_script
         string_id sid = new string_id("space/space_interaction", "bomber_down");
         prose_package pp = new prose_package();
         pp.stringId = sid;
-        if(isIdValid(bomberSquaddyList[0]) && isIdValid(self)) dogfightTauntPlayer(bomberSquaddyList[0], self, pp);
+        if (isIdValid(bomberSquaddyList[0]) && isIdValid(self)) dogfightTauntPlayer(bomberSquaddyList[0], self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int bomberStrikeEscortUnitDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id deadFighterId = params.getObjId("deadFighterId");
@@ -1937,12 +2003,15 @@ public class combat_ship_player extends script.base_script
         {
             int bomberSquadId = utils.getIntLocalVar(self, "cmd.bmb.bmbrSquadId");
             obj_id[] bomberSquaddyList = ship_ai.squadGetUnitList(bomberSquadId);
-            for (obj_id obj_id1 : bomberSquaddyList) {
+            for (obj_id obj_id1 : bomberSquaddyList)
+            {
                 int escortSquadId = utils.getIntLocalVar(obj_id1, "escortSquadId");
                 currentTotalEscortFighters += ship_ai.squadGetSize(escortSquadId);
                 obj_id[] escortSquaddyList = ship_ai.squadGetUnitList(escortSquadId);
-                for (obj_id obj_id : escortSquaddyList) {
-                    if (obj_id == deadFighterId) {
+                for (obj_id obj_id : escortSquaddyList)
+                {
+                    if (obj_id == deadFighterId)
+                    {
                         int oldEscortUnitCount = utils.getIntLocalVar(obj_id1, "crrntEscrtSqdSz");
                         utils.setLocalVar(obj_id1, "crrntEscrtSqdSz", --oldEscortUnitCount);
                     }
@@ -1950,7 +2019,7 @@ public class combat_ship_player extends script.base_script
             }
         }
         int initialEscortPackageSize = utils.getIntLocalVar(self, "cmd.bmb.initEscrtPckSize");
-        if (currentTotalEscortFighters < (int)(initialEscortPackageSize / 2))
+        if (currentTotalEscortFighters < (initialEscortPackageSize / 2))
         {
             int bomberSquadId = utils.getIntLocalVar(self, "cmd.bmb.bmbrSquadId");
             space_combat.strikePackageEvac(self, bomberSquadId, -1);
@@ -1967,6 +2036,7 @@ public class combat_ship_player extends script.base_script
         sendSystemMessage(self, strSpam);
         return SCRIPT_CONTINUE;
     }
+
     public int bomberStrikeTargetDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id deadBomberTargetId = params.getObjId("deadTargetId");
@@ -1994,13 +2064,14 @@ public class combat_ship_player extends script.base_script
                 int bomberSquadId = utils.getIntLocalVar(self, "cmd.bmb.bmbrSquadId");
                 space_combat.strikePackageEvac(self, bomberSquadId, -1);
             }
-            else 
+            else
             {
                 utils.setLocalVar(self, "cmd.bmb.targetSquadCrrntSz", targetSquadSize);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdPirateLure(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got Pirate Lure Command");
@@ -2034,6 +2105,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdPirateLureAdvanced(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got Pirate Lure Command");
@@ -2067,6 +2139,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void pirateCommandCleanup(obj_id self) throws InterruptedException
     {
         if (utils.hasLocalVar(self, "cmd.pirate.squadId"))
@@ -2074,8 +2147,8 @@ public class combat_ship_player extends script.base_script
             int pirateSquadId = utils.getIntLocalVar(self, "cmd.pirate.squadId");
             space_combat.piratePackageEvac(self, pirateSquadId);
         }
-        return;
     }
+
     public int pirateUnitDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id deadPirateId = params.getObjId("deadPirateId");
@@ -2086,13 +2159,14 @@ public class combat_ship_player extends script.base_script
         int initialPiratePackageSize = utils.getIntLocalVar(self, "cmd.pirate.initialSize");
         int pirateSquadId = ship_ai.unitGetSquadId(deadPirateId);
         int numPirates = (ship_ai.squadGetSize(pirateSquadId) - 1);
-        if (numPirates < (int)(initialPiratePackageSize / 2))
+        if (numPirates < (initialPiratePackageSize / 2))
         {
             space_combat.piratePackageEvac(self, pirateSquadId);
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdEnergyPulseOne(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got Energy Pulse One Command");
@@ -2125,6 +2199,7 @@ public class combat_ship_player extends script.base_script
         space_combat.initializeCommandTimer(self, CMD_ENERGY_PULSE_ONE_DELAY);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdEnergyPulseTwo(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got Energy Pulse Two Command");
@@ -2157,6 +2232,7 @@ public class combat_ship_player extends script.base_script
         space_combat.initializeCommandTimer(self, CMD_ENERGY_PULSE_TWO_DELAY);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdEnergyPulseThree(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got Energy Pulse Three Command");
@@ -2189,6 +2265,7 @@ public class combat_ship_player extends script.base_script
         space_combat.initializeCommandTimer(self, CMD_ENERGY_PULSE_THREE_DELAY);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdNebulaBlast(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got nebula blast Command");
@@ -2212,7 +2289,7 @@ public class combat_ship_player extends script.base_script
         {
             playClientEffectObj(self, "clienteffect/space_command/aftershock_small.cef", ship, "");
         }
-        else 
+        else
         {
             playClientEffectObj(self, "clienteffect/space_command/aftershock_medium.cef", ship, "");
         }
@@ -2221,6 +2298,7 @@ public class combat_ship_player extends script.base_script
         space_combat.initializeCommandTimer(self, CMD_NEBULA_BLAST_DELAY);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdJstartOne(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got Jstart One Command");
@@ -2255,6 +2333,7 @@ public class combat_ship_player extends script.base_script
         space_combat.initializeCommandTimer(self, CMD_JUMP_START_ONE_DELAY);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdJstartTwo(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got Jstart Two Command");
@@ -2289,6 +2368,7 @@ public class combat_ship_player extends script.base_script
         space_combat.initializeCommandTimer(self, CMD_JUMP_START_TWO_DELAY);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdJstartThree(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got Jstart Three Command");
@@ -2323,6 +2403,7 @@ public class combat_ship_player extends script.base_script
         space_combat.initializeCommandTimer(self, CMD_JUMP_START_THREE_DELAY);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdInSpaceRepair(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got Repair Command");
@@ -2346,17 +2427,18 @@ public class combat_ship_player extends script.base_script
             {
                 space_combat.initializeCommandTimer(self, CMD_REPAIR_SHIP_DELAY);
             }
-            else 
+            else
             {
                 debugServerConsoleMsg(null, "COMBAT_SHIP_PLAYER.cmdInSpaceRepair - prepInSpaceRepair failed!");
             }
         }
-        else 
+        else
         {
             debugServerConsoleMsg(null, "COMBAT_SHIP_PLAYER.cmdInSpaceRepair - commandTimePassed failed");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int escapePod(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!(params.equals("yes")))
@@ -2365,7 +2447,7 @@ public class combat_ship_player extends script.base_script
             sendSystemMessage(self, strSpam);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id objShip = space_transition.getContainingShip(self);
             if (space_utils.isShipWithInterior(objShip))
@@ -2390,7 +2472,7 @@ public class combat_ship_player extends script.base_script
                 space_combat.clearHyperspace(objShip);
                 messageTo(objShip, "megaDamage", dctParams, 2, false);
             }
-            else 
+            else
             {
                 string_id strSpam = new string_id("space/space_interaction", "already_ejecting");
                 sendSystemMessage(self, strSpam);
@@ -2398,11 +2480,13 @@ public class combat_ship_player extends script.base_script
             return SCRIPT_CONTINUE;
         }
     }
+
     public int requestSpaceTrainer(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (80588750), space_transition.getContainingShip(self), "0   ", COMMAND_PRIORITY_FRONT);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSpaceFaction(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(self);
@@ -2472,7 +2556,7 @@ public class combat_ship_player extends script.base_script
                 sendSystemMessage(self, "Your ship is registered as Combatant with the Empire.", null);
             }
         }
-        else 
+        else
         {
             if (space_flags.isRebelPilot(self))
             {
@@ -2489,6 +2573,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSpacepvprebel(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(self);
@@ -2532,6 +2617,7 @@ public class combat_ship_player extends script.base_script
         messageTo(self, "spacePvpRebel", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSpacepvpimperial(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(self);
@@ -2575,6 +2661,7 @@ public class combat_ship_player extends script.base_script
         messageTo(self, "spacePvpImperial", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSpaceRebelHelper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(self);
@@ -2613,6 +2700,7 @@ public class combat_ship_player extends script.base_script
         messageTo(self, "spaceRebelHelper", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSpaceImperialHelper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(self);
@@ -2651,23 +2739,28 @@ public class combat_ship_player extends script.base_script
         messageTo(self, "spaceImperialHelper", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdBattleStatus(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         String[] args = params.split(" ");
-        if(args.length > 1){
+        if (args.length > 1)
+        {
             sendSystemMessage(self, "Please specify only one space zone to provide status for.", null);
             return SCRIPT_CONTINUE;
         }
-        else if(args.length == 1 && args[0].length() >= 3) {
+        else if (args.length == 1 && args[0].length() >= 3)
+        {
             sendSpaceBattleStatusMessage(self, args[0].toLowerCase());
         }
-        else{
+        else
+        {
             sendSpaceBattleStatusMessage(self, null);
         }
         return SCRIPT_CONTINUE;
     }
 
-    private void sendSpaceBattleStatusMessage(obj_id self, String zone){
+    private void sendSpaceBattleStatusMessage(obj_id self, String zone)
+    {
         String scene = zone == null ? getCurrentSceneName() : "space_" + zone;
 
         String lastBattleType = battle_controller.getLastBattleType(self, scene);
@@ -2675,23 +2768,27 @@ public class combat_ship_player extends script.base_script
         int secondsUntilNextBattle = battle_controller.getTimeUntilNextBattleForZone(scene);
         String sys = getSpaceSystemName(scene.substring(6));
 
-        if(secondsUntilNextBattle == -1){
+        if (secondsUntilNextBattle == -1)
+        {
             sendSystemMessage(self, "No GCW Space Battles were identified for the zone you specified.", null);
             return;
         }
-        else if(secondsUntilNextBattle == -2){
+        else if (secondsUntilNextBattle == -2)
+        {
             sendSystemMessage(self, "There is currently a GCW Space Battle for the " + sys + " System in progress.", null);
             return;
         }
         sendSystemMessage(self, "The next battle scheduled to take place in the " + sys + " System will start in " + getBattleTimeString(secondsUntilNextBattle), null);
-        if(lastBattleType.equals(battle_spawner.BATTLE_TYPE_PVE) || currentBattleType.equals(battle_spawner.BATTLE_TYPE_PVP))
+        if (lastBattleType.equals(battle_spawner.BATTLE_TYPE_PVE) || currentBattleType.equals(battle_spawner.BATTLE_TYPE_PVP))
             sendSystemMessage(self, "The battle will require you to be Special Forces to participate", null);
     }
 
-    private String getSpaceSystemName(String zone) {
-        if(zone == null)
+    private String getSpaceSystemName(String zone)
+    {
+        if (zone == null)
             zone = getCurrentSceneName().substring(6);
-        switch(zone){
+        switch (zone)
+        {
             case "tatooine":
                 return "Tatoo";
             case "corellia":
@@ -2707,24 +2804,29 @@ public class combat_ship_player extends script.base_script
         }
     }
 
-    private String getBattleTimeString(int secondsUntilNextBattle){
+    private String getBattleTimeString(int secondsUntilNextBattle)
+    {
         String timeString = secondsUntilNextBattle + " seconds";
-        if(secondsUntilNextBattle > 59){
+        if (secondsUntilNextBattle > 59)
+        {
             int seconds = Double.valueOf(secondsUntilNextBattle % 60).intValue();
             int minutes = Double.valueOf((secondsUntilNextBattle / 60) % 60).intValue();
             int hours = Double.valueOf(Math.floor(secondsUntilNextBattle / 60 / 60)).intValue();
             timeString = hours > 0 ? hours + " hours" : "";
-            if(minutes > 0 && seconds > 0){
+            if (minutes > 0 && seconds > 0)
+            {
                 timeString += ", ";
             }
-            else if(minutes > 0 && seconds == 0){
+            else if (minutes > 0 && seconds == 0)
+            {
                 timeString += " and ";
             }
             timeString += (minutes > 0 ? Double.valueOf(minutes).intValue() + " minutes" : "");
-            timeString += (seconds > 0 ? " and " + Double.valueOf(seconds).intValue() +  " seconds" : "");
+            timeString += (seconds > 0 ? " and " + Double.valueOf(seconds).intValue() + " seconds" : "");
         }
         return timeString + ".";
     }
+
     public int ionizeArea(obj_id self, dictionary params) throws InterruptedException
     {
         int radius = 100;
@@ -2738,23 +2840,28 @@ public class combat_ship_player extends script.base_script
         messageTo(self, "ionizeTarget", dict, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int ionizeTarget(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] objects = params.getObjIdArray("ionizeObjects");
-        if (objects == null || objects.length <= 0)
+        if (objects == null)
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id object : objects) {
-            if (!isIdValid(object) || !exists(object)) {
+        for (obj_id object : objects)
+        {
+            if (!isIdValid(object) || !exists(object))
+            {
                 continue;
             }
-            if (space_utils.isPlayerControlledShip(object) && pvpCanAttack(object, self) && getDistance(self, object) < 100) {
+            if (space_utils.isPlayerControlledShip(object) && pvpCanAttack(object, self) && getDistance(self, object) < 100)
+            {
                 space_pilot_command.doSubSystemStun(object, ship_chassis_slot_type.SCST_engine, 10);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spaceTaunt(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         final int TAUNT_DELAY = 10;
@@ -2784,6 +2891,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdInSpaceReload(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got Reload Command");
@@ -2809,17 +2917,18 @@ public class combat_ship_player extends script.base_script
             {
                 space_combat.initializeCommandTimer(self, CMD_REPAIR_SHIP_DELAY);
             }
-            else 
+            else
             {
                 debugServerConsoleMsg(null, "COMBAT_SHIP_PLAYER.cmdInSpaceReload - prepInSpaceRepair failed!");
             }
         }
-        else 
+        else
         {
             debugServerConsoleMsg(null, "COMBAT_SHIP_PLAYER.cmdInSpaceReload - commandTimePassed failed");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdInSpaceRepairAndReload(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "got repairAndReload Command");
@@ -2845,17 +2954,18 @@ public class combat_ship_player extends script.base_script
             {
                 space_combat.initializeCommandTimer(self, CMD_REPAIR_SHIP_DELAY);
             }
-            else 
+            else
             {
                 debugServerConsoleMsg(null, "COMBAT_SHIP_PLAYER.cmdInSpaceRepairAndReload - prepInSpaceRepair failed!");
             }
         }
-        else 
+        else
         {
             debugServerConsoleMsg(null, "COMBAT_SHIP_PLAYER.cmdInSpaceRepairAndReload - commandTimePassed failed");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int repairShipComponentInSlot(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         String[] paramsArray = split(params, ' ');
@@ -2881,6 +2991,7 @@ public class combat_ship_player extends script.base_script
         space_crafting.repairComponentOnShip(intSlot, objRepairKits, self, shipId);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNewbieTutorialResponse(obj_id self, String strAction) throws InterruptedException
     {
         if (!isSpaceScene())
@@ -2914,6 +3025,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dumpZoneInformation(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         String strFileName = "";
@@ -2929,13 +3041,16 @@ public class combat_ship_player extends script.base_script
         location locTest = getLocation(objShip);
         obj_id[] objObjects = getAllObjectsWithScript(locTest, 320000, "space.combat.combat_ship");
         StringBuilder strOutputToFile = new StringBuilder();
-        for (obj_id objObject : objObjects) {
-            if (!space_utils.isPlayerControlledShip(objObject)) {
+        for (obj_id objObject : objObjects)
+        {
+            if (!space_utils.isPlayerControlledShip(objObject))
+            {
                 String strTest = "";
                 strTest += "OBJECT_ID: " + objObject + ", ";
                 strTest += "TYPE: " + getStringObjVar(objObject, "ship.shipName");
                 strTest += ", LOCATION " + getLocation(objObject);
-                if (!strFileName.equals("")) {
+                if (!strFileName.equals(""))
+                {
                     strOutputToFile.append(strTest).append("\r\n");
                 }
                 debugConsoleMsg(self, strTest);
@@ -2943,13 +3058,16 @@ public class combat_ship_player extends script.base_script
             }
         }
         objObjects = getAllObjectsWithScript(locTest, 320000, "space.combat.combat_ship_capital");
-        for (obj_id objObject : objObjects) {
-            if (!space_utils.isPlayerControlledShip(objObject)) {
+        for (obj_id objObject : objObjects)
+        {
+            if (!space_utils.isPlayerControlledShip(objObject))
+            {
                 String strTest = "";
                 strTest += "OBJECT_ID: " + objObject + ", ";
                 strTest += "TYPE: " + getStringObjVar(objObject, "ship.shipName");
                 strTest += ", LOCATION " + getLocation(objObject);
-                if (!strFileName.equals("")) {
+                if (!strFileName.equals(""))
+                {
                     strOutputToFile.append(strTest).append("\r\n");
                 }
                 debugConsoleMsg(self, strTest);
@@ -2965,6 +3083,7 @@ public class combat_ship_player extends script.base_script
         broadcast(self, "Dumped");
         return SCRIPT_CONTINUE;
     }
+
     public int OnImmediateLogout(obj_id self) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(self);
@@ -2977,6 +3096,7 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpaceEjectPlayerFromShip(obj_id self) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(self);
@@ -2987,6 +3107,7 @@ public class combat_ship_player extends script.base_script
         space_transition.teleportPlayerToLaunchLoc(self);
         return SCRIPT_CONTINUE;
     }
+
     public int toggleCombatTaunts(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (hasObjVar(self, "jtl.combatTauntsDisabled"))
@@ -2995,7 +3116,7 @@ public class combat_ship_player extends script.base_script
             string_id strSpam = new string_id("space/space_interaction", "taunt_on");
             sendSystemMessage(self, strSpam);
         }
-        else 
+        else
         {
             setObjVar(self, "jtl.combatTauntsDisabled", 1);
             string_id strSpam = new string_id("space/space_interaction", "taunt_off");
@@ -3003,17 +3124,20 @@ public class combat_ship_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCommitDroidProgramCommands(obj_id self, obj_id objControlDevice, String[] strCommands, obj_id[] objChipsToAdd, obj_id[] objChipsToRemove) throws InterruptedException
     {
         obj_id objDatapad = utils.getDatapad(objControlDevice);
-        if(getVolumeFree(objDatapad) <= 0 || !isIdValid(objDatapad) || !exists(objDatapad) || objDatapad == null || objDatapad.equals(obj_id.NULL_ID)){
+        if (getVolumeFree(objDatapad) <= 0 || !isIdValid(objDatapad) || !exists(objDatapad) || objDatapad == null || objDatapad.equals(obj_id.NULL_ID))
+        {
             debugSpeakMsg(self, "The control device datapad was full or not found - not creating droid command.");
             return SCRIPT_CONTINUE;
         }
         if (objChipsToRemove != null)
         {
-            for (obj_id anObjChipsToRemove : objChipsToRemove) {
-                if(hasObjVar(anObjChipsToRemove, "strDroidCommand"))
+            for (obj_id anObjChipsToRemove : objChipsToRemove)
+            {
+                if (hasObjVar(anObjChipsToRemove, "strDroidCommand"))
                 {
                     space_combat.destroyObject(anObjChipsToRemove);
                 }
@@ -3021,24 +3145,28 @@ public class combat_ship_player extends script.base_script
         }
         if (strCommands != null)
         {
-            for (String strCommand : strCommands) {
+            for (String strCommand : strCommands)
+            {
                 space_combat.addModuleToDatapad(strCommand, objDatapad);
             }
         }
         if (objChipsToAdd != null)
         {
-            for (obj_id anObjChipsToAdd : objChipsToAdd) {
+            for (obj_id anObjChipsToAdd : objChipsToAdd)
+            {
                 space_combat.addModuleToDatapad(anObjChipsToAdd, objDatapad);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int commandTimerTimeout(obj_id self, dictionary params) throws InterruptedException
     {
         string_id strSpam = new string_id("space/space_interaction", "pilot_command_timer_compelete");
         sendSystemMessage(self, strSpam);
         return SCRIPT_CONTINUE;
     }
+
     public int doDelayedPilot(obj_id self, dictionary params) throws InterruptedException
     {
         space_transition.handlePotentialSceneChange(self);

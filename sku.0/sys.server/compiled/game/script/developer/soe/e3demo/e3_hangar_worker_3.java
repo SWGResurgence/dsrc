@@ -1,5 +1,11 @@
 package script.developer.soe.e3demo;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.factions;
 import script.location;
@@ -10,6 +16,7 @@ public class e3_hangar_worker_3 extends script.base_script
     public e3_hangar_worker_3()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "moveToLocationOne", null, 5, false);
@@ -17,11 +24,13 @@ public class e3_hangar_worker_3 extends script.base_script
         factions.setFaction(self, "Imperial");
         return SCRIPT_CONTINUE;
     }
+
     public int moveToLocationOne(obj_id self, dictionary params) throws InterruptedException
     {
         pathToLocationOne(self);
         return SCRIPT_CONTINUE;
     }
+
     public void pathToLocationOne(obj_id self) throws InterruptedException
     {
         location destLoc = new location(getLocation(self));
@@ -31,6 +40,7 @@ public class e3_hangar_worker_3 extends script.base_script
         setObjVar(self, "intIndex", 1);
         pathTo(self, destLoc);
     }
+
     public void pathToLocationTwo(obj_id self) throws InterruptedException
     {
         location destLoc = new location(getLocation(self));
@@ -40,6 +50,7 @@ public class e3_hangar_worker_3 extends script.base_script
         setObjVar(self, "intIndex", 2);
         pathTo(self, destLoc);
     }
+
     public void pathToLocationThree(obj_id self) throws InterruptedException
     {
         location destLoc = new location(getLocation(self));
@@ -49,6 +60,7 @@ public class e3_hangar_worker_3 extends script.base_script
         setObjVar(self, "intIndex", 3);
         pathTo(self, destLoc);
     }
+
     public void pathToLocationFour(obj_id self) throws InterruptedException
     {
         location destLoc = new location(getLocation(self));
@@ -58,6 +70,7 @@ public class e3_hangar_worker_3 extends script.base_script
         setObjVar(self, "intIndex", 4);
         pathTo(self, destLoc);
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         int intIndex = getIntObjVar(self, "intIndex");
@@ -72,7 +85,7 @@ public class e3_hangar_worker_3 extends script.base_script
                 dctParams.put("strObjVar", strObjVar);
                 messageTo(self, "doFaceTo", dctParams, 1.5f, false);
             }
-            else 
+            else
             {
                 if (intIndex == 1)
                 {
@@ -88,7 +101,7 @@ public class e3_hangar_worker_3 extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             if (intIndex == 1)
             {
@@ -98,7 +111,7 @@ public class e3_hangar_worker_3 extends script.base_script
                 dctParams.put("strObjVar", strObjVar);
                 messageTo(self, "doFaceTo", dctParams, 1.5f, false);
             }
-            else 
+            else
             {
                 if (intIndex == 2)
                 {
@@ -116,6 +129,7 @@ public class e3_hangar_worker_3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doFaceTo(obj_id self, dictionary params) throws InterruptedException
     {
         String strObjVar = params.getString("strObjVar");
@@ -124,26 +138,31 @@ public class e3_hangar_worker_3 extends script.base_script
         messageTo(self, "doTwiddle", null, 1.5f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int doLocationOne(obj_id self, dictionary params) throws InterruptedException
     {
         pathToLocationOne(self);
         return SCRIPT_CONTINUE;
     }
+
     public int doLocationTwo(obj_id self, dictionary params) throws InterruptedException
     {
         pathToLocationTwo(self);
         return SCRIPT_CONTINUE;
     }
+
     public int doLocationThree(obj_id self, dictionary params) throws InterruptedException
     {
         pathToLocationThree(self);
         return SCRIPT_CONTINUE;
     }
+
     public int doLocationFour(obj_id self, dictionary params) throws InterruptedException
     {
         pathToLocationFour(self);
         return SCRIPT_CONTINUE;
     }
+
     public int doTwiddle(obj_id self, dictionary params) throws InterruptedException
     {
         float fltWait = rand(2, 5);
@@ -153,7 +172,7 @@ public class e3_hangar_worker_3 extends script.base_script
         {
             messageTo(self, "doLocationThree", null, fltWait, false);
         }
-        else 
+        else
         {
             messageTo(self, "doLocationTwo", null, fltWait, false);
         }

@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.prose;
@@ -8,9 +14,6 @@ import script.library.utils;
 
 public class fs_crafting4_computer_core extends script.base_script
 {
-    public fs_crafting4_computer_core()
-    {
-    }
     public static final int NO_WIRE = 0;
     public static final int RED_WIRE = 1;
     public static final int BLUE_WIRE = 2;
@@ -80,11 +83,16 @@ public class fs_crafting4_computer_core extends script.base_script
     public static final string_id SID_COMPUTER_CORE_RUINED = new string_id("quest/force_sensitive/fs_crafting", "crafting4_core_ruined");
     public static final string_id SID_COMPUTER_CORE_DESTROYED = new string_id("quest/force_sensitive/fs_crafting", "crafting4_core_destroyed");
     public static final string_id SID_COMPUTER_CORE_DESTROYED_OVER = new string_id("quest/force_sensitive/fs_crafting", "crafting4_core_destroyed_over");
+    public fs_crafting4_computer_core()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handlePuzzleSetup", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canUse(player))
@@ -102,6 +110,7 @@ public class fs_crafting4_computer_core extends script.base_script
         int menuExtras = mi.addRootMenu(menu_info_types.SERVER_MENU6, SID_MENU_COMPUTER_CORE_STATUS);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_ITEM_OPTIONS)
@@ -183,7 +192,7 @@ public class fs_crafting4_computer_core extends script.base_script
                 str_msg = str_msg + " \\#. \\#pcontrast1 " + utils.packStringId(SID_COMPUTER_CORE_INDICATORS_FLICKERING) + " \\#pcontrast2 " + numCorrectWiresUsed;
                 str_msg = str_msg + " \\#. \\#pcontrast1 " + utils.packStringId(SID_COMPUTER_CORE_INTEGRITY) + " \\#pcontrast2 " + integrity + "% \\#. ";
             }
-            else 
+            else
             {
                 str_msg = str_msg + " \\#. " + utils.packStringId(SID_COMPUTER_CORE_CURRENT_NO_TESTING);
             }
@@ -195,11 +204,13 @@ public class fs_crafting4_computer_core extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePuzzleSetup(obj_id self, dictionary params) throws InterruptedException
     {
         resetTheFlightRecorder(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetConnection(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -216,33 +227,33 @@ public class fs_crafting4_computer_core extends script.base_script
             switch (connectionNum)
             {
                 case 0:
-                sid_message = SID_COMPUTER_CORE_CONNECTION_ONE_SET;
-                break;
+                    sid_message = SID_COMPUTER_CORE_CONNECTION_ONE_SET;
+                    break;
                 case 1:
-                sid_message = SID_COMPUTER_CORE_CONNECTION_TWO_SET;
-                break;
+                    sid_message = SID_COMPUTER_CORE_CONNECTION_TWO_SET;
+                    break;
                 case 2:
-                sid_message = SID_COMPUTER_CORE_CONNECTION_THREE_SET;
-                break;
+                    sid_message = SID_COMPUTER_CORE_CONNECTION_THREE_SET;
+                    break;
                 case 3:
-                sid_message = SID_COMPUTER_CORE_CONNECTION_FOUR_SET;
-                break;
+                    sid_message = SID_COMPUTER_CORE_CONNECTION_FOUR_SET;
+                    break;
             }
             string_id sid_wire = SID_COMPUTER_CORE_ERROR;
             switch (idx)
             {
                 case 0:
-                sid_wire = SID_NOTHING;
-                break;
+                    sid_wire = SID_NOTHING;
+                    break;
                 case 1:
-                sid_wire = SID_A_RED_WIRE;
-                break;
+                    sid_wire = SID_A_RED_WIRE;
+                    break;
                 case 2:
-                sid_wire = SID_A_BLUE_WIRE;
-                break;
+                    sid_wire = SID_A_BLUE_WIRE;
+                    break;
                 case 3:
-                sid_wire = SID_A_YELLOW_WIRE;
-                break;
+                    sid_wire = SID_A_YELLOW_WIRE;
+                    break;
             }
             int[] puzzleGuess = getIntArrayObjVar(self, PUZZLE_GUESS_OBJVAR);
             if (puzzleGuess == null || puzzleGuess.length == 0)
@@ -255,18 +266,20 @@ public class fs_crafting4_computer_core extends script.base_script
             sendSystemMessageProse(player, msg);
             sendDirtyObjectMenuNotification(self);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_NO_SELECTION_MADE);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpSelf(obj_id self, dictionary params) throws InterruptedException
     {
         utils.setScriptVar(self, "cleaningUp", true);
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(self);
@@ -287,18 +300,17 @@ public class fs_crafting4_computer_core extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean canUse(obj_id player) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "star_destroyer_intro_imperial", "star_destroyer_intro_04") || groundquests.isTaskActive(player, "star_destroyer_intro_rebel", "star_destroyer_intro_04") || groundquests.isTaskActive(player, "star_destroyer_intro_neutral", "star_destroyer_intro_04"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "star_destroyer_intro_imperial", "star_destroyer_intro_04") || groundquests.isTaskActive(player, "star_destroyer_intro_rebel", "star_destroyer_intro_04") || groundquests.isTaskActive(player, "star_destroyer_intro_neutral", "star_destroyer_intro_04");
     }
+
     public boolean isConfigured(obj_id self) throws InterruptedException
     {
         return hasObjVar(self, PUZZLE_CONFIGURED_OBJVAR);
     }
+
     public void resetTheFlightRecorder(obj_id self) throws InterruptedException
     {
         obj_id owner = utils.getContainingPlayer(self);
@@ -307,13 +319,13 @@ public class fs_crafting4_computer_core extends script.base_script
             setObjVar(self, "owner", owner);
         }
         removeObjVar(self, "fs_crafting4");
-        int[] puzzleGuess = 
-        {
-            NO_WIRE,
-            NO_WIRE,
-            NO_WIRE,
-            NO_WIRE
-        };
+        int[] puzzleGuess =
+                {
+                        NO_WIRE,
+                        NO_WIRE,
+                        NO_WIRE,
+                        NO_WIRE
+                };
         int[] puzzleSolution = new int[PUZZLE_LENGTH];
         for (int i = 0; i < PUZZLE_LENGTH; i++)
         {
@@ -326,25 +338,25 @@ public class fs_crafting4_computer_core extends script.base_script
             setObjVar(self, PUZZLE_GUESS_OBJVAR, puzzleGuess);
             setObjVar(self, PUZZLE_INTEGRITY_OBJVAR, rand(93, 99));
         }
-        return;
     }
+
     public void setConnection(obj_id self, obj_id player, int connectionNum) throws InterruptedException
     {
         string_id sid_message = SID_COMPUTER_CORE_ERROR;
         switch (connectionNum)
         {
             case 0:
-            sid_message = SID_COMPUTER_CORE_SET_CONNECTION_ONE;
-            break;
+                sid_message = SID_COMPUTER_CORE_SET_CONNECTION_ONE;
+                break;
             case 1:
-            sid_message = SID_COMPUTER_CORE_SET_CONNECTION_TWO;
-            break;
+                sid_message = SID_COMPUTER_CORE_SET_CONNECTION_TWO;
+                break;
             case 2:
-            sid_message = SID_COMPUTER_CORE_SET_CONNECTION_THREE;
-            break;
+                sid_message = SID_COMPUTER_CORE_SET_CONNECTION_THREE;
+                break;
             case 3:
-            sid_message = SID_COMPUTER_CORE_SET_CONNECTION_FOUR;
-            break;
+                sid_message = SID_COMPUTER_CORE_SET_CONNECTION_FOUR;
+                break;
         }
         string_id sid_wire = getWireSid(self, PUZZLE_GUESS_OBJVAR, connectionNum);
         if (utils.hasScriptVar(player, "crafting4.openSui"))
@@ -358,13 +370,13 @@ public class fs_crafting4_computer_core extends script.base_script
         }
         String str_msg = utils.packStringId(sid_message) + " " + utils.packStringId(sid_wire);
         String str_title = utils.packStringId(SID_COMPUTER_CORE_MSGBOX_TITLE);
-        String[] connectionList = 
-        {
-            "No Wire",
-            "Red Wire",
-            "Blue Wire",
-            "Yellow Wire"
-        };
+        String[] connectionList =
+                {
+                        "No Wire",
+                        "Red Wire",
+                        "Blue Wire",
+                        "Yellow Wire"
+                };
         int pid = sui.listbox(self, player, str_msg, sui.OK_CANCEL, str_title, connectionList, "handleSetConnection", false, false);
         if (pid > -1)
         {
@@ -373,8 +385,8 @@ public class fs_crafting4_computer_core extends script.base_script
             setSUIProperty(pid, "", "Size", "500,250");
             showSUIPage(pid);
         }
-        return;
     }
+
     public string_id getWireSid(obj_id self, String objvarName, int connectionNum) throws InterruptedException
     {
         string_id sid_wire = SID_COMPUTER_CORE_ERROR;
@@ -387,20 +399,21 @@ public class fs_crafting4_computer_core extends script.base_script
         switch (currentSetting)
         {
             case 0:
-            sid_wire = SID_NOTHING;
-            break;
+                sid_wire = SID_NOTHING;
+                break;
             case 1:
-            sid_wire = SID_A_RED_WIRE;
-            break;
+                sid_wire = SID_A_RED_WIRE;
+                break;
             case 2:
-            sid_wire = SID_A_BLUE_WIRE;
-            break;
+                sid_wire = SID_A_BLUE_WIRE;
+                break;
             case 3:
-            sid_wire = SID_A_YELLOW_WIRE;
-            break;
+                sid_wire = SID_A_YELLOW_WIRE;
+                break;
         }
         return sid_wire;
     }
+
     public void checkPuzzleSolutionAttempt(obj_id self, obj_id player) throws InterruptedException
     {
         int[] puzzleGuess = getIntArrayObjVar(self, PUZZLE_GUESS_OBJVAR);
@@ -413,13 +426,13 @@ public class fs_crafting4_computer_core extends script.base_script
         {
             return;
         }
-        boolean[] completeResults = 
-        {
-            false,
-            false,
-            false,
-            false
-        };
+        boolean[] completeResults =
+                {
+                        false,
+                        false,
+                        false,
+                        false
+                };
         int numWiresConnectedCorrectly = 0;
         for (int j = 0; j < puzzleSolution.length; j++)
         {
@@ -441,14 +454,11 @@ public class fs_crafting4_computer_core extends script.base_script
             String str_message = utils.packStringId(SID_COMPUTER_CORE_COMPLETED);
             oneButtonMsgBox(self, player, "noHandler", str_message);
         }
-        else 
+        else
         {
             int numCorrectWiresUsed = 0;
             boolean[] partialResults = new boolean[completeResults.length];
-            for (int i = 0; i < completeResults.length; i++)
-            {
-                partialResults[i] = completeResults[i];
-            }
+            System.arraycopy(completeResults, 0, partialResults, 0, completeResults.length);
             for (int q = 0; q < puzzleSolution.length; q++)
             {
                 boolean alreadySolved = completeResults[q];
@@ -484,7 +494,7 @@ public class fs_crafting4_computer_core extends script.base_script
                 CustomerServiceLog("Star_Destroyer_Intro", custLogMsg, player);
                 resetTheFlightRecorder(self);
             }
-            else 
+            else
             {
                 String str_msg = utils.packStringId(SID_COMPUTER_CORE_CURRENT_RESULT);
                 str_msg = str_msg + " \\#pcontrast1 " + utils.packStringId(SID_COMPUTER_CORE_INDICATORS_LIT) + " \\#pcontrast2 " + numWiresConnectedCorrectly;
@@ -493,8 +503,8 @@ public class fs_crafting4_computer_core extends script.base_script
                 oneButtonMsgBox(self, player, "noHandler", str_msg);
             }
         }
-        return;
     }
+
     public string_id getConnectionMenuName(obj_id self, int connectionNum) throws InterruptedException
     {
         string_id menuName = SID_COMPUTER_CORE_ERROR;
@@ -507,68 +517,69 @@ public class fs_crafting4_computer_core extends script.base_script
         switch (connectionNum)
         {
             case 0:
-            menuName = SID_MENU_CONNECTION_ONE_NOTHING;
-            if (currentSetting == RED_WIRE)
-            {
-                menuName = SID_MENU_CONNECTION_ONE_RED;
-            }
-            else if (currentSetting == BLUE_WIRE)
-            {
-                menuName = SID_MENU_CONNECTION_ONE_BLUE;
-            }
-            else if (currentSetting == YELLOW_WIRE)
-            {
-                menuName = SID_MENU_CONNECTION_ONE_YELLOW;
-            }
-            break;
+                menuName = SID_MENU_CONNECTION_ONE_NOTHING;
+                if (currentSetting == RED_WIRE)
+                {
+                    menuName = SID_MENU_CONNECTION_ONE_RED;
+                }
+                else if (currentSetting == BLUE_WIRE)
+                {
+                    menuName = SID_MENU_CONNECTION_ONE_BLUE;
+                }
+                else if (currentSetting == YELLOW_WIRE)
+                {
+                    menuName = SID_MENU_CONNECTION_ONE_YELLOW;
+                }
+                break;
             case 1:
-            menuName = SID_MENU_CONNECTION_TWO_NOTHING;
-            if (currentSetting == RED_WIRE)
-            {
-                menuName = SID_MENU_CONNECTION_TWO_RED;
-            }
-            else if (currentSetting == BLUE_WIRE)
-            {
-                menuName = SID_MENU_CONNECTION_TWO_BLUE;
-            }
-            else if (currentSetting == YELLOW_WIRE)
-            {
-                menuName = SID_MENU_CONNECTION_TWO_YELLOW;
-            }
-            break;
+                menuName = SID_MENU_CONNECTION_TWO_NOTHING;
+                if (currentSetting == RED_WIRE)
+                {
+                    menuName = SID_MENU_CONNECTION_TWO_RED;
+                }
+                else if (currentSetting == BLUE_WIRE)
+                {
+                    menuName = SID_MENU_CONNECTION_TWO_BLUE;
+                }
+                else if (currentSetting == YELLOW_WIRE)
+                {
+                    menuName = SID_MENU_CONNECTION_TWO_YELLOW;
+                }
+                break;
             case 2:
-            menuName = SID_MENU_CONNECTION_THREE_NOTHING;
-            if (currentSetting == RED_WIRE)
-            {
-                menuName = SID_MENU_CONNECTION_THREE_RED;
-            }
-            else if (currentSetting == BLUE_WIRE)
-            {
-                menuName = SID_MENU_CONNECTION_THREE_BLUE;
-            }
-            else if (currentSetting == YELLOW_WIRE)
-            {
-                menuName = SID_MENU_CONNECTION_THREE_YELLOW;
-            }
-            break;
+                menuName = SID_MENU_CONNECTION_THREE_NOTHING;
+                if (currentSetting == RED_WIRE)
+                {
+                    menuName = SID_MENU_CONNECTION_THREE_RED;
+                }
+                else if (currentSetting == BLUE_WIRE)
+                {
+                    menuName = SID_MENU_CONNECTION_THREE_BLUE;
+                }
+                else if (currentSetting == YELLOW_WIRE)
+                {
+                    menuName = SID_MENU_CONNECTION_THREE_YELLOW;
+                }
+                break;
             case 3:
-            menuName = SID_MENU_CONNECTION_FOUR_NOTHING;
-            if (currentSetting == RED_WIRE)
-            {
-                menuName = SID_MENU_CONNECTION_FOUR_RED;
-            }
-            else if (currentSetting == BLUE_WIRE)
-            {
-                menuName = SID_MENU_CONNECTION_FOUR_BLUE;
-            }
-            else if (currentSetting == YELLOW_WIRE)
-            {
-                menuName = SID_MENU_CONNECTION_FOUR_YELLOW;
-            }
-            break;
+                menuName = SID_MENU_CONNECTION_FOUR_NOTHING;
+                if (currentSetting == RED_WIRE)
+                {
+                    menuName = SID_MENU_CONNECTION_FOUR_RED;
+                }
+                else if (currentSetting == BLUE_WIRE)
+                {
+                    menuName = SID_MENU_CONNECTION_FOUR_BLUE;
+                }
+                else if (currentSetting == YELLOW_WIRE)
+                {
+                    menuName = SID_MENU_CONNECTION_FOUR_YELLOW;
+                }
+                break;
         }
         return menuName;
     }
+
     public int oneButtonMsgBox(obj_id controller, obj_id player, String handler, String textMsg) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "crafting4.openSui"))
@@ -592,20 +603,22 @@ public class fs_crafting4_computer_core extends script.base_script
         sui.showSUIPage(pid);
         return pid;
     }
+
     public void printBooleanArray(boolean[] stuff, obj_id player, String msg) throws InterruptedException
     {
-        for (boolean one : stuff) {
+        for (boolean one : stuff)
+        {
             msg = msg + one + " ";
         }
         sendSystemMessage(player, msg, "");
-        return;
     }
+
     public void printIntArray(int[] stuff, obj_id player, String msg) throws InterruptedException
     {
-        for (int one : stuff) {
+        for (int one : stuff)
+        {
             msg = msg + one + " ";
         }
         sendSystemMessage(player, msg, "");
-        return;
     }
 }

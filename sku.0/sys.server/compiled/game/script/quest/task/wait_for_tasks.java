@@ -1,5 +1,11 @@
 package script.quest.task;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.quests;
 import script.obj_id;
 import script.obj_var_list;
@@ -11,6 +17,7 @@ public class wait_for_tasks extends script.base_script
     public wait_for_tasks()
     {
     }
+
     public int OnForceSensitiveQuestCompleted(obj_id self, String questName, boolean succeeded) throws InterruptedException
     {
         if (quests.isMyQuest(quests.getQuestId(questName), "quest.task.wait_for_tasks"))
@@ -27,7 +34,7 @@ public class wait_for_tasks extends script.base_script
                 int iter = 0;
                 for (iter = 0; iter < waiting.size(); )
                 {
-                    String waitingTaskName = ((String)waiting.get(iter));
+                    String waitingTaskName = ((String) waiting.get(iter));
                     if (waitingTaskName != null && waitingTaskName.length() > 0)
                     {
                         String waitingObjVarName = "quest." + waitingTaskName + ".target";
@@ -65,7 +72,7 @@ public class wait_for_tasks extends script.base_script
                                             return SCRIPT_CONTINUE;
                                         }
                                     }
-                                    else 
+                                    else
                                     {
                                         tasks.removeElement(questName);
                                         setObjVar(self, waitingObjVarName, tasks);
@@ -77,41 +84,41 @@ public class wait_for_tasks extends script.base_script
                                         LOG("newquests", "wait_for_tasks: OnForceSensitiveQuestCompleted() - there are " + tasks.size() + " tasks remaining");
                                     }
                                 }
-                                else 
+                                else
                                 {
                                     ++iter;
                                     LOG("newquests", "wait_for_tasks: OnForceSensitiveQuestCompleted() - the task was not found in the pending list, ignoring it");
                                 }
                             }
-                            else 
+                            else
                             {
                                 quests.complete(waitingTaskName, self, false);
                                 waiting.removeElement(waitingTaskName);
                                 LOG("newquests", "wait_for_tasks: OnForceSensitiveQuestCompleted() - ERROR: no task list is associated with " + waitingTaskName);
                             }
                         }
-                        else 
+                        else
                         {
                             quests.complete(waitingTaskName, self, false);
                             waiting.removeElement(waitingTaskName);
                             LOG("newquests", "wait_for_tasks: OnForceSensitiveQuestCompleted() - ERROR: the task is in an undefined state, missing the tracking objvar " + waitingObjVarName);
                         }
                     }
-                    else 
+                    else
                     {
                         waiting.removeElementAt(iter);
                         LOG("newquests", "wait_for_tasks: OnForceSensitiveQuestCompleted() - ERROR: a null entry was in the task list");
                     }
                 }
             }
-            else 
+            else
             {
                 safeRemoveObjVar(self, objvarName);
                 detachScript(self, "quest.task.wait_for_tasks");
                 LOG("newquests", "wait_for_tasks: OnForceSensitiveQuestCompleted() - ERROR: there are no tasks in the task list " + objvarName);
             }
         }
-        else 
+        else
         {
             detachScript(self, "quest.task.wait_for_tasks");
             LOG("newquests", "wait_for_tasks: OnForceSensitiveQuestCompleted() - ERROR: missing tracking objvar " + objvarName);
@@ -119,6 +126,7 @@ public class wait_for_tasks extends script.base_script
         LOG("newquests", "wait_for_tasks: OnForceSensitiveQuestCompleted() returning");
         return SCRIPT_CONTINUE;
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         if (quests.isMyQuest(questRow, "quest.task.wait_for_tasks"))
@@ -131,7 +139,7 @@ public class wait_for_tasks extends script.base_script
             {
                 tasks = getStringArrayObjVar(self, objvarName);
             }
-            else 
+            else
             {
                 target = quests.getDataEntry(questRow, "TARGET");
                 if (target != null && target.length() > 0)
@@ -144,7 +152,7 @@ public class wait_for_tasks extends script.base_script
                 setObjVar(self, objvarName, tasks);
                 LOG("newquests", "wait_for_tasks: OnQuestActivated - set " + objvarName);
             }
-            else 
+            else
             {
                 LOG("newquests", "wait_for_tasks: OnQuestActivated - failed to set " + objvarName);
             }
@@ -158,7 +166,7 @@ public class wait_for_tasks extends script.base_script
                     waiting = new Vector();
                 }
             }
-            else 
+            else
             {
                 waiting = new Vector();
             }
@@ -170,22 +178,23 @@ public class wait_for_tasks extends script.base_script
                     setObjVar(self, objvarName, waiting);
                     LOG("newquests", "wait_for_tasks: OnQuestActivated - set " + objvarName);
                 }
-                else 
+                else
                 {
                     LOG("newquests", "wait_for_tasks: OnQuestActivated - failed to set " + objvarName);
                 }
             }
-            else 
+            else
             {
                 LOG("newquests", "wait_for_tasks: OnQuestActivated - " + objvarName + " already contains " + questName);
             }
         }
-        else 
+        else
         {
             LOG("newquests", "wait_for_tasks: OnQuestActivated Ignoring OnQuestActivated for task that is not mine");
         }
         return SCRIPT_CONTINUE;
     }
+
     public void safeRemoveObjVar(obj_id self, String objvarName) throws InterruptedException
     {
         obj_var_list ovl = getObjVarList(self, objvarName);
@@ -197,7 +206,7 @@ public class wait_for_tasks extends script.base_script
                 setObjVar(self, objvarName, emptyValue);
                 CustomerServiceLog("fs_quests", "wait_for_tasks: safeRemoveObjvar(): setting " + objvarName + " to empty because obj_var_list of same name is in use (on %TU)", self, null);
             }
-            else 
+            else
             {
                 removeObjVar(self, objvarName);
             }

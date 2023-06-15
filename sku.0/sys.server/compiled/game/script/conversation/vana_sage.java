@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,77 +14,93 @@ import script.*;
 
 public class vana_sage extends script.base_script
 {
+    public static String c_stringFile = "conversation/vana_sage";
+
     public vana_sage()
     {
     }
-    public static String c_stringFile = "conversation/vana_sage";
+
     public boolean vana_sage_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean vana_sage_condition_hasInitialQuestTask(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.hasCompletedQuest(player, "u16_nym_themepark_pointer_01") || groundquests.hasCompletedQuest(player, "u16_nym_themepark_pointer_02") && !groundquests.isQuestActive(player, "u16_nym_themepark_interview_choster")) || (groundquests.isTaskActive(player, "u16_nym_themepark_pointer_01", "findVanaSage") || groundquests.isTaskActive(player, "u16_nym_themepark_pointer_02", "findVanaSage"));
     }
+
     public boolean vana_sage_condition_hasntSpokenChosterHasQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.hasCompletedQuest(player, "u16_nym_themepark_pointer_01") || groundquests.hasCompletedQuest(player, "u16_nym_themepark_pointer_02")) && (groundquests.isQuestActive(player, "u16_nym_themepark_interview_choster"));
     }
+
     public boolean vana_sage_condition_hasNotCompletedChoster(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "u16_nym_themepark_interview_choster");
     }
+
     public boolean vana_sage_condition_playerIsHighLvl(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return getLevel(player) >= 56;
     }
+
     public boolean vana_sage_condition_hasMetChoster(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_interview_choster", "tellVanaChosterMsg");
     }
+
     public boolean vana_sage_condition_metChosterNoPirateQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "u16_nym_themepark_interview_choster") && !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_pirate_hideout");
     }
+
     public boolean vana_sage_condition_hasntCompletedPirate(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "u16_nym_themepark_pirate_hideout");
     }
+
     public boolean vana_sage_condition_hasReturnedWithDroid(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_pirate_hideout", "returnPirateComplete");
     }
+
     public boolean vana_sage_condition_hasCompletedPirate(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "u16_nym_themepark_pirate_hideout");
     }
+
     public boolean vana_sage_condition_allQuestsComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "u16_nym_themepark_vana_to_jinkins");
     }
+
     public boolean vana_sage_condition_hasCompletedThemePark(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "u16_nym_themepark_shuttle_ambush");
     }
+
     public void vana_sage_action_giveChosterQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_interview_choster");
     }
+
     public void vana_sage_action_finishInitialQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasFoundVanaSage");
     }
+
     public void vana_sage_action_givePirateQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_pirate_hideout");
@@ -87,18 +109,22 @@ public class vana_sage extends script.base_script
             modifyCollectionSlotValue(player, "kill_nyms_themepark_sulfur_lake_pirate_activate", 1);
         }
     }
+
     public void vana_sage_action_finishChoster(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasToldVanaChosterMsg");
     }
+
     public void vana_sage_action_finishPirateQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasCompletedPirate");
     }
+
     public void vana_sage_action_gotoJinkins(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_vana_to_jinkins");
     }
+
     public int vana_sage_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_90"))
@@ -115,6 +141,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_101"))
@@ -135,7 +162,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -144,7 +171,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -154,6 +181,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -174,7 +202,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70");
@@ -183,7 +211,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -193,6 +221,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_70"))
@@ -213,7 +242,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -222,7 +251,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -232,6 +261,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_95"))
@@ -247,6 +277,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33"))
@@ -273,6 +304,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_26"))
@@ -293,7 +325,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -302,7 +334,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -342,7 +374,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -359,7 +391,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -369,6 +401,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -396,7 +429,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_26");
@@ -409,7 +442,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -419,6 +452,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_26"))
@@ -439,7 +473,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -448,7 +482,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -488,7 +522,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -505,7 +539,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -515,6 +549,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -535,7 +570,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -544,7 +579,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -570,7 +605,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -579,7 +614,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -612,7 +647,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_26");
@@ -625,7 +660,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -635,6 +670,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -655,7 +691,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -664,7 +700,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -674,6 +710,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50"))
@@ -693,7 +730,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -702,7 +739,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -712,6 +749,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_54"))
@@ -738,7 +776,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -751,7 +789,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -761,6 +799,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_58"))
@@ -781,7 +820,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -790,7 +829,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -823,7 +862,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -836,7 +875,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -846,6 +885,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_62"))
@@ -862,6 +902,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_58"))
@@ -882,7 +923,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -891,7 +932,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -924,7 +965,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -937,7 +978,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -947,6 +988,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_26"))
@@ -967,7 +1009,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -976,7 +1018,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1016,7 +1058,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -1033,7 +1075,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1043,6 +1085,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
@@ -1070,7 +1113,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92");
@@ -1083,7 +1126,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1093,6 +1136,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92"))
@@ -1127,7 +1171,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -1144,7 +1188,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1170,7 +1214,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -1179,7 +1223,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1189,6 +1233,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vana_sage_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -1209,7 +1254,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -1218,7 +1263,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1244,7 +1289,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -1253,7 +1298,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1286,7 +1331,7 @@ public class vana_sage extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_26");
@@ -1299,7 +1344,7 @@ public class vana_sage extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.vana_sage.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1309,6 +1354,7 @@ public class vana_sage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -1319,12 +1365,14 @@ public class vana_sage extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1333,18 +1381,21 @@ public class vana_sage extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.vana_sage");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1396,7 +1447,7 @@ public class vana_sage extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_90");
@@ -1404,7 +1455,7 @@ public class vana_sage extends script.base_script
                 utils.setScriptVar(player, "conversation.vana_sage.branchId", 4);
                 npcStartConversation(player, npc, "vana_sage", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1432,7 +1483,7 @@ public class vana_sage extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -1440,7 +1491,7 @@ public class vana_sage extends script.base_script
                 utils.setScriptVar(player, "conversation.vana_sage.branchId", 7);
                 npcStartConversation(player, npc, "vana_sage", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1462,7 +1513,7 @@ public class vana_sage extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -1470,7 +1521,7 @@ public class vana_sage extends script.base_script
                 utils.setScriptVar(player, "conversation.vana_sage.branchId", 8);
                 npcStartConversation(player, npc, "vana_sage", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1491,7 +1542,7 @@ public class vana_sage extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_33");
@@ -1499,7 +1550,7 @@ public class vana_sage extends script.base_script
                 utils.setScriptVar(player, "conversation.vana_sage.branchId", 12);
                 npcStartConversation(player, npc, "vana_sage", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1529,7 +1580,7 @@ public class vana_sage extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_26");
@@ -1545,7 +1596,7 @@ public class vana_sage extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "vana_sage", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1571,7 +1622,7 @@ public class vana_sage extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_85");
@@ -1579,7 +1630,7 @@ public class vana_sage extends script.base_script
                 utils.setScriptVar(player, "conversation.vana_sage.branchId", 27);
                 npcStartConversation(player, npc, "vana_sage", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1602,6 +1653,7 @@ public class vana_sage extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("vana_sage"))

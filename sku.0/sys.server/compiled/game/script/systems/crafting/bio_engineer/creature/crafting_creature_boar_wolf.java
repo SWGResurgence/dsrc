@@ -1,5 +1,11 @@
 package script.systems.crafting.bio_engineer.creature;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.draft_schematic;
 import script.library.craftinglib;
 import script.library.hue;
@@ -41,6 +47,7 @@ public class crafting_creature_boar_wolf extends script.systems.crafting.bio_eng
                                     new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
                             })
             };
+
     public crafting_creature_boar_wolf()
     {
     }

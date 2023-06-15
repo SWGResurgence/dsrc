@@ -1,5 +1,11 @@
 package script.systems.collections;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.badge;
 import script.library.collection;
@@ -16,6 +22,7 @@ public class no_consume_badge_grant extends script.base_script
     public static final string_id SID_REPORT_CONSUME_ITEM_FAIL = new string_id("collection", "report_consume_item_fail");
     public static final string_id SID_ALREADY_HAVE_SLOT = new string_id("collection", "already_have_slot");
     public static final string_id SID_ALREADY_FINISHED_COLLECTION = new string_id("collection", "already_finished_collection");
+
     public no_consume_badge_grant()
     {
     }

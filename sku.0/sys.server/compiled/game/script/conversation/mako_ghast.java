@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,86 +14,104 @@ import script.*;
 
 public class mako_ghast extends script.base_script
 {
+    public static String c_stringFile = "conversation/mako_ghast";
+
     public mako_ghast()
     {
     }
-    public static String c_stringFile = "conversation/mako_ghast";
+
     public boolean mako_ghast_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean mako_ghast_condition_canDoEliteHideout(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_elite_kill_pirate_cave_collection") && groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_pirate_hideout");
     }
+
     public boolean mako_ghast_condition_hasEliteHideoutNotComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "u16_nym_themepark_elite_kill_pirate_cave_collection");
     }
+
     public boolean mako_ghast_condition_hasReturnedEliteHideout(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_elite_kill_pirate_cave_collection", "returnKillCaveTrollComplete");
     }
+
     public boolean mako_ghast_condition_canDoEliteCave(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_elite_kill_miner_cave_collection") && groundquests.hasCompletedQuest(player, "u16_nym_themepark_elite_kill_pirate_cave_collection") && groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_mine");
     }
+
     public boolean mako_ghast_condition_hasEliteCaveNotComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "u16_nym_themepark_elite_kill_miner_cave_collection");
     }
+
     public boolean mako_ghast_condition_hasReturnedEliteCave(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_elite_kill_miner_cave_collection", "returnMineElitesComplete");
     }
+
     public boolean mako_ghast_condition_canDoEliteLab(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_elite_kill_imperial_facility_collection") && groundquests.hasCompletedQuest(player, "u16_nym_themepark_elite_kill_miner_cave_collection") && groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_research_facility");
     }
+
     public boolean mako_ghast_condition_hasEliteLabNotComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "u16_nym_themepark_elite_kill_imperial_facility_collection");
     }
+
     public boolean mako_ghast_condition_hasReturnedEliteLab(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_elite_kill_imperial_facility_collection", "returnResearchFacilityElitesComplete");
     }
+
     public boolean mako_ghast_condition_hasntDoneLab(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_research_facility") && groundquests.hasCompletedQuest(player, "u16_nym_themepark_mine") && groundquests.hasCompletedQuest(player, "u16_nym_themepark_elite_kill_miner_cave_collection");
     }
+
     public boolean mako_ghast_condition_hasntDoneCave(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_mine") && groundquests.hasCompletedQuest(player, "u16_nym_themepark_pirate_hideout") && groundquests.hasCompletedQuest(player, "u16_nym_themepark_elite_kill_pirate_cave_collection");
     }
+
     public boolean mako_ghast_condition_hasntDoneHideout(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_pirate_hideout");
     }
+
     public boolean mako_ghast_condition_hasCompletedPirateEliteCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollection(player, "kill_nyms_themepark_elite_hideout") && groundquests.isQuestActive(player, "u16_nym_themepark_elite_kill_pirate_cave_collection");
     }
+
     public boolean mako_ghast_condition_hasCompletedLabEliteCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollection(player, "kill_nyms_themepark_elite_lab") && groundquests.isQuestActive(player, "u16_nym_themepark_elite_kill_imperial_facility_collection");
     }
+
     public boolean mako_ghast_condition_hasCompletedMinerEliteCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollection(player, "kill_nyms_themepark_elite_cave") && groundquests.isQuestActive(player, "u16_nym_themepark_elite_kill_miner_cave_collection");
     }
+
     public void mako_ghast_action_grantHideoutKill(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_elite_kill_pirate_cave_collection");
@@ -96,10 +120,12 @@ public class mako_ghast extends script.base_script
             modifyCollectionSlotValue(player, "kill_nyms_themepark_cave_troll_activate", 1);
         }
     }
+
     public void mako_ghast_action_completeHideoutKill(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasCompletedKillCaveTroll");
     }
+
     public void mako_ghast_action_grantCaveKill(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_elite_kill_miner_cave_collection");
@@ -108,10 +134,12 @@ public class mako_ghast extends script.base_script
             modifyCollectionSlotValue(player, "kill_nyms_themepark_elite_cave_activate", 1);
         }
     }
+
     public void mako_ghast_action_completeCaveKill(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasCompletedMineElites");
     }
+
     public void mako_ghast_action_grantLabKill(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_elite_kill_imperial_facility_collection");
@@ -120,10 +148,12 @@ public class mako_ghast extends script.base_script
             modifyCollectionSlotValue(player, "kill_nyms_themepark_elite_lab_activate", 1);
         }
     }
+
     public void mako_ghast_action_completeLabKill(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasCompletedResearchFacilityElites");
     }
+
     public void mako_ghast_action_BruteForceCompletePirateElite(obj_id player, obj_id npc) throws InterruptedException
     {
         if (mako_ghast_condition_hasCompletedPirateEliteCollection(player, npc))
@@ -139,6 +169,7 @@ public class mako_ghast extends script.base_script
             }
         }
     }
+
     public void mako_ghast_action_BruteForceCompleteLabElite(obj_id player, obj_id npc) throws InterruptedException
     {
         if (mako_ghast_condition_hasCompletedLabEliteCollection(player, npc))
@@ -154,6 +185,7 @@ public class mako_ghast extends script.base_script
             }
         }
     }
+
     public void mako_ghast_action_BruteForceCompleteMinerElite(obj_id player, obj_id npc) throws InterruptedException
     {
         if (mako_ghast_condition_hasCompletedMinerEliteCollection(player, npc))
@@ -169,6 +201,7 @@ public class mako_ghast extends script.base_script
             }
         }
     }
+
     public int mako_ghast_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -188,7 +221,7 @@ public class mako_ghast extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -201,7 +234,7 @@ public class mako_ghast extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mako_ghast.branchId");
                     prose_package pp = new prose_package();
@@ -215,6 +248,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -230,6 +264,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34"))
@@ -244,6 +279,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32"))
@@ -263,7 +299,7 @@ public class mako_ghast extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_88");
@@ -272,7 +308,7 @@ public class mako_ghast extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mako_ghast.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -282,6 +318,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_88"))
@@ -301,7 +338,7 @@ public class mako_ghast extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90");
@@ -310,7 +347,7 @@ public class mako_ghast extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mako_ghast.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -320,6 +357,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_90"))
@@ -339,7 +377,7 @@ public class mako_ghast extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92");
@@ -348,7 +386,7 @@ public class mako_ghast extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mako_ghast.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -358,6 +396,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92"))
@@ -373,6 +412,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -388,6 +428,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -402,6 +443,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -421,7 +463,7 @@ public class mako_ghast extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -430,7 +472,7 @@ public class mako_ghast extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mako_ghast.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -440,6 +482,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_67"))
@@ -459,7 +502,7 @@ public class mako_ghast extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_69");
@@ -468,7 +511,7 @@ public class mako_ghast extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mako_ghast.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -478,6 +521,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_69"))
@@ -497,7 +541,7 @@ public class mako_ghast extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -506,7 +550,7 @@ public class mako_ghast extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mako_ghast.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -516,6 +560,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -535,7 +580,7 @@ public class mako_ghast extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73");
@@ -544,7 +589,7 @@ public class mako_ghast extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mako_ghast.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -554,6 +599,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_73"))
@@ -573,7 +619,7 @@ public class mako_ghast extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_75");
@@ -582,7 +628,7 @@ public class mako_ghast extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mako_ghast.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -592,6 +638,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_75"))
@@ -607,6 +654,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -622,6 +670,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_81"))
@@ -636,6 +685,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_87"))
@@ -655,7 +705,7 @@ public class mako_ghast extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -664,7 +714,7 @@ public class mako_ghast extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mako_ghast.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -674,6 +724,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_99"))
@@ -693,7 +744,7 @@ public class mako_ghast extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -702,7 +753,7 @@ public class mako_ghast extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mako_ghast.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -712,6 +763,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mako_ghast_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_103"))
@@ -727,6 +779,7 @@ public class mako_ghast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -737,12 +790,14 @@ public class mako_ghast extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -751,18 +806,21 @@ public class mako_ghast extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.mako_ghast");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -785,7 +843,7 @@ public class mako_ghast extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -793,7 +851,7 @@ public class mako_ghast extends script.base_script
                 utils.setScriptVar(player, "conversation.mako_ghast.branchId", 1);
                 npcStartConversation(player, npc, "mako_ghast", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -821,7 +879,7 @@ public class mako_ghast extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -829,7 +887,7 @@ public class mako_ghast extends script.base_script
                 utils.setScriptVar(player, "conversation.mako_ghast.branchId", 5);
                 npcStartConversation(player, npc, "mako_ghast", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -850,7 +908,7 @@ public class mako_ghast extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_32");
@@ -862,7 +920,7 @@ public class mako_ghast extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "mako_ghast", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -893,7 +951,7 @@ public class mako_ghast extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -901,7 +959,7 @@ public class mako_ghast extends script.base_script
                 utils.setScriptVar(player, "conversation.mako_ghast.branchId", 13);
                 npcStartConversation(player, npc, "mako_ghast", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -929,7 +987,7 @@ public class mako_ghast extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -937,7 +995,7 @@ public class mako_ghast extends script.base_script
                 utils.setScriptVar(player, "conversation.mako_ghast.branchId", 16);
                 npcStartConversation(player, npc, "mako_ghast", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -958,7 +1016,7 @@ public class mako_ghast extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -966,7 +1024,7 @@ public class mako_ghast extends script.base_script
                 utils.setScriptVar(player, "conversation.mako_ghast.branchId", 18);
                 npcStartConversation(player, npc, "mako_ghast", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -993,7 +1051,7 @@ public class mako_ghast extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -1001,7 +1059,7 @@ public class mako_ghast extends script.base_script
                 utils.setScriptVar(player, "conversation.mako_ghast.branchId", 26);
                 npcStartConversation(player, npc, "mako_ghast", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1029,7 +1087,7 @@ public class mako_ghast extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_81");
@@ -1037,7 +1095,7 @@ public class mako_ghast extends script.base_script
                 utils.setScriptVar(player, "conversation.mako_ghast.branchId", 29);
                 npcStartConversation(player, npc, "mako_ghast", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1058,7 +1116,7 @@ public class mako_ghast extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_87");
@@ -1070,7 +1128,7 @@ public class mako_ghast extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "mako_ghast", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1095,6 +1153,7 @@ public class mako_ghast extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("mako_ghast"))

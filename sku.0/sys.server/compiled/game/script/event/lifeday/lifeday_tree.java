@@ -1,5 +1,11 @@
 package script.event.lifeday;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.badge;
 import script.library.static_item;
 import script.library.utils;
@@ -10,9 +16,6 @@ import script.string_id;
 
 public class lifeday_tree extends script.base_script
 {
-    public lifeday_tree()
-    {
-    }
     private static final string_id TREE_USE = new string_id("spam", "tree_use");
     private static final string_id NOT_OLD_ENOUGH = new string_id("spam", "not_old_enough");
     private static final string_id GIFT_GRANTED = new string_id("spam", "gift_granted");
@@ -20,11 +23,15 @@ public class lifeday_tree extends script.base_script
     private static final String GIFT_OTHER = "item_lifeday_gift_other_01_0";
     private static final String LIFEDAY_BADGE = "lifeday_badge_20";
     private static final string_id TREE_BADGE = new string_id("spam", "tree_badge");
+    public lifeday_tree()
+    {
+    }
 
     private String currentYearObjVar() throws InterruptedException
     {
         return "gift.xmas22";
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         String config = getConfigSetting("GameServer", "grantGift");
@@ -42,6 +49,7 @@ public class lifeday_tree extends script.base_script
         //mi.addRootMenu(menu_info_types.SERVER_MENU2, TREE_BADGE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -72,6 +80,7 @@ public class lifeday_tree extends script.base_script
         }*/ // NO NEW BADGES = NO NEW BADGES. BUY THEM OFF THE ELDER WOOKIEE FFS.
         return SCRIPT_CONTINUE;
     }
+
     private boolean grantGift(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))

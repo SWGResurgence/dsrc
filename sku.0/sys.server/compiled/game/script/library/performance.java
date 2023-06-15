@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Vector;
@@ -331,6 +337,7 @@ public class performance extends script.base_script
     public static final string_id SID_PERFORM_CC_QUERY_TITLE = new string_id("performance", "cc_query_t");
     public static final string_id BUFF_TIME_FAILED = new string_id("performance", "buff_time_failed");
     public static final string_id SHAPECHANGE = new string_id("spam", "not_while_shapechanged");
+
     public performance()
     {
     }

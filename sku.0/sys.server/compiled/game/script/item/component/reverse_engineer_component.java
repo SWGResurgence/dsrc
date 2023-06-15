@@ -1,5 +1,11 @@
 package script.item.component;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class reverse_engineer_component extends script.base_script

@@ -1,5 +1,11 @@
 package script.space.quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_flags;
 import script.library.utils;
@@ -8,13 +14,14 @@ import script.string_id;
 
 public class corellia_station_mission_mail extends script.base_script
 {
-    public corellia_station_mission_mail()
-    {
-    }
     public static final string_id SUBJECT_ONE = new string_id("space/quest_mail", "corellia_station_mission_subject_one");
     public static final string_id SUBJECT_TWO = new string_id("space/quest_mail", "corellia_station_mission_subject_two");
     public static final string_id BODY_ONE = new string_id("space/quest_mail", "corellia_station_mission_body_one");
     public static final string_id BODY_TWO = new string_id("space/quest_mail", "corellia_station_mission_body_two");
+    public corellia_station_mission_mail()
+    {
+    }
+
     public int mailMessageOne(obj_id self, dictionary params) throws InterruptedException
     {
         if (space_flags.isSpaceTrack(self, space_flags.PRIVATEER_CORELLIA))
@@ -23,6 +30,7 @@ public class corellia_station_mission_mail extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mailMessageTwo(obj_id self, dictionary params) throws InterruptedException
     {
         if (space_flags.isSpaceTrack(self, space_flags.PRIVATEER_CORELLIA))
@@ -31,6 +39,7 @@ public class corellia_station_mission_mail extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int sendMessageOne(obj_id self, dictionary params) throws InterruptedException
     {
         utils.sendMail(SUBJECT_ONE, BODY_ONE, self, "Sender blocked: Data not available");
@@ -38,6 +47,7 @@ public class corellia_station_mission_mail extends script.base_script
         detachScript(self, "space.quest.corellia_station_mission_mail");
         return SCRIPT_CONTINUE;
     }
+
     public int sendMessageTwo(obj_id self, dictionary params) throws InterruptedException
     {
         utils.sendMail(SUBJECT_TWO, BODY_TWO, self, "Sender blocked: Data not available");

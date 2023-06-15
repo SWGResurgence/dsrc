@@ -1,5 +1,11 @@
 package script.systems.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.craftinglib;
 
@@ -9,6 +15,7 @@ public class crafting_structure_meditation extends script.base_script
     public static final String INVISIBLE_CRAFTING_STATION_TEMPLATE = "object/tangible/crafting/station/inivisible_crafting_station.iff";
     public static final String PLAYER_HOUSE_JEDI_MEDITATION_ROOM = "player_house_jedi_meditation_room";
     public static final String PLAYER_HOUSE_SITH_MEDITATION_ROOM = "player_house_sith_meditation_room";
+
     public int OnInitialize(obj_id self)
     {
         String buildingTemplate = getTemplateName(self);
@@ -26,10 +33,12 @@ public class crafting_structure_meditation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean spawnInvCraftingStation(obj_id building, int craftingBuff)
     {
         return spawnInvCraftingStation(building, craftingBuff, null);
     }
+
     public boolean spawnInvCraftingStation(obj_id building, int craftingBuff, String specificCell)
     {
         if (!isValidId(building) || !exists(building))

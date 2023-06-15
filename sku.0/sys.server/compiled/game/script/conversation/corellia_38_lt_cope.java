@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,86 +14,107 @@ import script.*;
 
 public class corellia_38_lt_cope extends script.base_script
 {
+    public static String c_stringFile = "conversation/corellia_38_lt_cope";
+
     public corellia_38_lt_cope()
     {
     }
-    public static String c_stringFile = "conversation/corellia_38_lt_cope";
+
     public boolean corellia_38_lt_cope_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean corellia_38_lt_cope_condition_luckyMayorActive(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_38_corsec_files_03", "corsec_files_03_01");
     }
+
     public boolean corellia_38_lt_cope_condition_luckyMayorComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_38_corsec_files_03", "corsec_files_03_08") || groundquests.hasCompletedQuest(player, "corellia_38_corsec_files_03");
     }
+
     public boolean corellia_38_lt_cope_condition_luckyMayorInProgress(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "corellia_38_corsec_files_03") && groundquests.hasCompletedTask(player, "corellia_38_corsec_files_03", "corsec_files_03_01") && !groundquests.isTaskActive(player, "corellia_38_corsec_files_03", "corsec_files_03_08") && !groundquests.hasCompletedTask(player, "corellia_38_corsec_files_03", "corsec_files_03_08");
     }
+
     public boolean corellia_38_lt_cope_condition_ryllInProgress(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "corellia_38_corsec_files_04") && !groundquests.isTaskActive(player, "corellia_38_corsec_files_04", "corsec_files_04_08") && !groundquests.hasCompletedTask(player, "corellia_38_corsec_files_04", "corsec_files_04_08");
     }
+
     public boolean corellia_38_lt_cope_condition_ryllComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_38_corsec_files_04", "corsec_files_04_08") || groundquests.hasCompletedQuest(player, "corellia_38_corsec_files_04");
     }
+
     public boolean corellia_38_lt_cope_condition_unluckyMayorInProgress(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "corellia_38_corsec_files_05") && !groundquests.isTaskActive(player, "corellia_38_corsec_files_05", "corsec_files_05_03") && !groundquests.hasCompletedTask(player, "corellia_38_corsec_files_05", "corsec_files_05_03") && !groundquests.isTaskActive(player, "corellia_38_corsec_files_05", "corsec_files_05_08") && !groundquests.hasCompletedTask(player, "corellia_38_corsec_files_05", "corsec_files_05_08");
     }
+
     public boolean corellia_38_lt_cope_condition_redCircleBasePrompt(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_38_corsec_files_05", "corsec_files_05_03");
     }
+
     public boolean corellia_38_lt_cope_condition_redCircleInProgress(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "corellia_38_corsec_files_05") && groundquests.hasCompletedTask(player, "corellia_38_corsec_files_05", "corsec_files_05_03") && !groundquests.isTaskActive(player, "corellia_38_corsec_files_05", "corsec_files_05_08") && !groundquests.hasCompletedTask(player, "corellia_38_corsec_files_05", "corsec_files_05_08");
     }
+
     public boolean corellia_38_lt_cope_condition_redCircleComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_38_corsec_files_05", "corsec_files_05_08") || groundquests.hasCompletedQuest(player, "corellia_38_corsec_files_05");
     }
+
     public boolean corellia_38_lt_cope_condition_AllCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "corellia_38_corsec_files_05") && (groundquests.isQuestActiveOrComplete(player, "corellia_39_corsec_files_01") || groundquests.isQuestActive(player, "corellia_39_pointer"));
     }
+
     public void corellia_38_lt_cope_action_ryllGranted(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "corellia_38_corsec_files_04");
     }
+
     public void corellia_38_lt_cope_action_luckyMayorContinueSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "corsec_files_03_01");
     }
+
     public void corellia_38_lt_cope_action_ryllCompletedSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "corsec_files_04_08");
     }
+
     public void corellia_38_lt_cope_action_luckyMayorCompletedSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "corsec_files_03_08");
     }
+
     public void corellia_38_lt_cope_action_unluckyMayorGranted(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "corellia_38_corsec_files_05");
     }
+
     public void corellia_38_lt_cope_action_redCircleContinueSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "corsec_files_05_03");
     }
+
     public void corellia_38_lt_cope_action_redCircleCompleteSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "corsec_files_05_08");
     }
+
     public void corellia_38_lt_cope_action_grant39Pointer(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "corellia_39_pointer");
     }
+
     public int corellia_38_lt_cope_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_73"))
@@ -113,6 +140,7 @@ public class corellia_38_lt_cope extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_38_lt_cope_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_67"))
@@ -132,7 +160,7 @@ public class corellia_38_lt_cope extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_69");
@@ -141,7 +169,7 @@ public class corellia_38_lt_cope extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_38_lt_cope.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -151,6 +179,7 @@ public class corellia_38_lt_cope extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_38_lt_cope_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_69"))
@@ -170,7 +199,7 @@ public class corellia_38_lt_cope extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -179,7 +208,7 @@ public class corellia_38_lt_cope extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_38_lt_cope.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -189,6 +218,7 @@ public class corellia_38_lt_cope extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_38_lt_cope_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -204,6 +234,7 @@ public class corellia_38_lt_cope extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_38_lt_cope_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63"))
@@ -219,6 +250,7 @@ public class corellia_38_lt_cope extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_38_lt_cope_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57"))
@@ -238,7 +270,7 @@ public class corellia_38_lt_cope extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -247,7 +279,7 @@ public class corellia_38_lt_cope extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_38_lt_cope.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -267,6 +299,7 @@ public class corellia_38_lt_cope extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_38_lt_cope_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34"))
@@ -282,6 +315,7 @@ public class corellia_38_lt_cope extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_38_lt_cope_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -308,7 +342,7 @@ public class corellia_38_lt_cope extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_53");
@@ -321,7 +355,7 @@ public class corellia_38_lt_cope extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_38_lt_cope.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -331,6 +365,7 @@ public class corellia_38_lt_cope extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_38_lt_cope_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53"))
@@ -356,6 +391,7 @@ public class corellia_38_lt_cope extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -365,11 +401,13 @@ public class corellia_38_lt_cope extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -378,18 +416,21 @@ public class corellia_38_lt_cope extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.corellia_38_lt_cope");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -426,7 +467,7 @@ public class corellia_38_lt_cope extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_73");
@@ -438,7 +479,7 @@ public class corellia_38_lt_cope extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_38_lt_cope.branchId", 2);
                 npcStartConversation(player, npc, "corellia_38_lt_cope", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -465,7 +506,7 @@ public class corellia_38_lt_cope extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -473,7 +514,7 @@ public class corellia_38_lt_cope extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_38_lt_cope.branchId", 6);
                 npcStartConversation(player, npc, "corellia_38_lt_cope", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -501,7 +542,7 @@ public class corellia_38_lt_cope extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_63");
@@ -509,7 +550,7 @@ public class corellia_38_lt_cope extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_38_lt_cope.branchId", 11);
                 npcStartConversation(player, npc, "corellia_38_lt_cope", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -544,7 +585,7 @@ public class corellia_38_lt_cope extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_57");
@@ -556,7 +597,7 @@ public class corellia_38_lt_cope extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_38_lt_cope.branchId", 14);
                 npcStartConversation(player, npc, "corellia_38_lt_cope", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -583,7 +624,7 @@ public class corellia_38_lt_cope extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -591,7 +632,7 @@ public class corellia_38_lt_cope extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_38_lt_cope.branchId", 19);
                 npcStartConversation(player, npc, "corellia_38_lt_cope", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -606,6 +647,7 @@ public class corellia_38_lt_cope extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("corellia_38_lt_cope"))

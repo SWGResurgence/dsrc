@@ -1,5 +1,11 @@
 package script.theme_park.tatooine.bestine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.hue;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class bestine_museum_owner extends script.base_script
     public bestine_museum_owner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id robe = createObject("object/tangible/wearables/jacket/jacket_s22.iff", self, "");

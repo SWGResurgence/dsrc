@@ -1,5 +1,11 @@
 package script.item.loot_kits;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -14,6 +20,7 @@ public class simple_kit extends script.base_script
     public static final string_id ALREADY_CONTAINS = new string_id(STF, "already_contains");
     public static final string_id NEW_ITEM_CREATED = new string_id(STF, "new_item_created");
     public static final string_id ITEM_USED = new string_id(STF, "item_used");
+
     public simple_kit()
     {
     }
@@ -257,7 +264,7 @@ public class simple_kit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        if (useful == false)
+        if (!useful)
         {
             return SCRIPT_OVERRIDE;
         }
@@ -325,7 +332,6 @@ public class simple_kit extends script.base_script
         else
         {
         }
-        return;
     }
 
     public int destroyPart(obj_id self, dictionary params) throws InterruptedException
@@ -369,7 +375,7 @@ public class simple_kit extends script.base_script
         for (Object o : overview)
         {
             String thisItem = ((String) o);
-            if (itemTemplate.equals(thisItem) && itemsNeeded.indexOf(thisItem) < 0)
+            if (itemTemplate.equals(thisItem) && !itemsNeeded.contains(thisItem))
             {
                 itemsNeeded = utils.addElement(itemsNeeded, thisItem);
             }

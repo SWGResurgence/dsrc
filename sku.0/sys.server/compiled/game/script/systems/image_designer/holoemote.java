@@ -1,5 +1,11 @@
 package script.systems.image_designer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.sui;
 import script.library.utils;
@@ -33,6 +39,7 @@ public class holoemote extends script.base_script
     public static final String HOLO_EMOTE_HELP = "help";
     public static final String STF_FILE = "image_designer";
     public static final int MINUTE = 60;
+
     public holoemote()
     {
     }

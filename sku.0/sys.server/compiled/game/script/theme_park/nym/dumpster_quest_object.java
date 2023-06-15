@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.pet_lib;
@@ -8,9 +14,6 @@ import script.library.sui;
 
 public class dumpster_quest_object extends script.base_script
 {
-    public dumpster_quest_object()
-    {
-    }
     public static final String QUEST_NAME = "u16_nym_themepark_weed_pulling_ver2";
     public static final String QUEST_TASK = "disposeOfWeeds";
     public static final String QUEST_SIGNAL = "hasDisposedOfWeeds";
@@ -23,6 +26,10 @@ public class dumpster_quest_object extends script.base_script
     public static final int COUNTDOWN_TIMER = 3;
     public static final String SOUND_CUTE = "sound/dianoga_dumpster.snd";
     public static final String ANIMATON_FEED = "eat";
+    public dumpster_quest_object()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -36,6 +43,7 @@ public class dumpster_quest_object extends script.base_script
         int mnu2 = mi.addRootMenu(menu_info_types.ITEM_USE, SID_MNU_USE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -77,6 +85,7 @@ public class dumpster_quest_object extends script.base_script
         CustomerServiceLog("nyms_themepark", "weed_quest_object.OnObjectMenuSelect() Player: " + player + " is destroying blackwing canister: " + self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleObjectSwapTimer(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))

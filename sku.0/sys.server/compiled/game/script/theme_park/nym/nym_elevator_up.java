@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.groundquests;
 import script.menu_info;
@@ -9,10 +15,12 @@ import script.string_id;
 
 public class nym_elevator_up extends script.base_script
 {
+    public static final String STF_FILE = "theme_park_nym/messages";
+
     public nym_elevator_up()
     {
     }
-    public static final String STF_FILE = "theme_park_nym/messages";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_nym_arena"))
@@ -22,6 +30,7 @@ public class nym_elevator_up extends script.base_script
         int mnu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id(STF_FILE, "ladder_up"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item != menu_info_types.ITEM_USE)

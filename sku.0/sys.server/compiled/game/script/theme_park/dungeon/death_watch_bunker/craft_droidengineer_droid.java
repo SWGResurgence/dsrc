@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -10,11 +16,12 @@ import script.string_id;
 
 public class craft_droidengineer_droid extends script.base_script
 {
+    public static final String TBL_JETPACK_WAVE = "datatables/dungeon/death_watch/jetpack_crafting_attack_wave.iff";
+    public static final String MSGS = "dungeon/death_watch";
     public craft_droidengineer_droid()
     {
     }
-    public static final String TBL_JETPACK_WAVE = "datatables/dungeon/death_watch/jetpack_crafting_attack_wave.iff";
-    public static final String MSGS = "dungeon/death_watch";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -28,6 +35,7 @@ public class craft_droidengineer_droid extends script.base_script
         messageTo(room, "addEngineerDroid", droid, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id giver) throws InterruptedException
     {
         CustomerServiceLog("DUNGEON_DeathWatchBunker", "*Mandalorian Armor: Player %TU has put an item in the droidengineer droid");
@@ -49,7 +57,7 @@ public class craft_droidengineer_droid extends script.base_script
             setObjVar(self, "giver", giver);
             messageTo(self, "cleanUp", null, 300, false);
         }
-        else 
+        else
         {
             obj_id user = getObjIdObjVar(self, "giver");
             if (user != giver)
@@ -79,7 +87,7 @@ public class craft_droidengineer_droid extends script.base_script
                 sendSystemMessage(giver, other);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 CustomerServiceLog("DUNGEON_DeathWatchBunker", "*Mandalorian Armor: Player %TU placed a left bracer into the droid, and everything is functioning properly");
                 setObjVar(self, "have.bracer_l", 1);
@@ -105,7 +113,7 @@ public class craft_droidengineer_droid extends script.base_script
                 sendSystemMessage(giver, other);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 CustomerServiceLog("DUNGEON_DeathWatchBunker", "*Mandalorian Armor: Player %TU placed a left bracer into the droid, and everything is functioning properly");
                 setObjVar(self, "have.helmet", 1);
@@ -131,7 +139,7 @@ public class craft_droidengineer_droid extends script.base_script
                 sendSystemMessage(giver, other);
                 return SCRIPT_CONTINUE;
             }
-            
+
             {
                 CustomerServiceLog("DUNGEON_DeathWatchBunker", "*Mandalorian Armor: Player %TU placed a right bracer into the droid, and everything is functioning properly");
                 setObjVar(self, "making.bracer_r", 1);
@@ -149,7 +157,7 @@ public class craft_droidengineer_droid extends script.base_script
                 sendSystemMessage(giver, already);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 CustomerServiceLog("DUNGEON_DeathWatchBunker", "*Mandalorian Armor: Player %TU placed alum into the droid, and everything is functioning properly");
                 setObjVar(self, "have.alum", 1);
@@ -166,7 +174,7 @@ public class craft_droidengineer_droid extends script.base_script
                 sendSystemMessage(giver, already);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 CustomerServiceLog("DUNGEON_DeathWatchBunker", "*Mandalorian Armor: Player %TU placed binary liquid into the droid, and everything is functioning properly");
                 setObjVar(self, "have.binary", 1);
@@ -183,7 +191,7 @@ public class craft_droidengineer_droid extends script.base_script
                 sendSystemMessage(giver, already);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 CustomerServiceLog("DUNGEON_DeathWatchBunker", "*Mandalorian Armor: Player %TU placed emulsifier into the droid, and everything is functioning properly");
                 setObjVar(self, "have.emulsifier", 1);
@@ -193,6 +201,7 @@ public class craft_droidengineer_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void checkForComplete(obj_id self, obj_id player) throws InterruptedException
     {
         if (hasObjVar(self, "making"))
@@ -208,19 +217,19 @@ public class craft_droidengineer_droid extends script.base_script
                 CustomerServiceLog("DUNGEON_DeathWatchBunker", "*Mandalorian Armor: Player %TU is now waiting on the first button.");
                 return;
             }
-            else 
+            else
             {
                 CustomerServiceLog("DUNGEON_DeathWatchBunker", "*Mandalorian Armor: Player %TU attempted to start the process but needed more ingredients.");
                 ingredientMessages(self, player);
             }
         }
-        else 
+        else
         {
             CustomerServiceLog("DUNGEON_DeathWatchBunker", "*Mandalorian Armor: Player %TU attempted to start the process but needed more ingredients.");
             ingredientMessages(self, player);
         }
-        return;
     }
+
     public int craftItem(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -258,6 +267,7 @@ public class craft_droidengineer_droid extends script.base_script
         messageTo(self, "removePlayer", web, 15, false);
         return SCRIPT_CONTINUE;
     }
+
     public void ingredientMessages(obj_id self, obj_id player) throws InterruptedException
     {
         string_id needs = new string_id(MSGS, "items_still_needed");
@@ -298,8 +308,8 @@ public class craft_droidengineer_droid extends script.base_script
             string_id bracer_l = new string_id(MSGS, "bounty_hunter_bracer_l");
             sendSystemMessage(player, bracer_l);
         }
-        return;
     }
+
     public void createTerminal(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -309,15 +319,15 @@ public class craft_droidengineer_droid extends script.base_script
         setObjVar(term, "droid", self);
         attachScript(term, "theme_park.dungeon.death_watch_bunker.mandalorian_crafting");
         setName(term, "Mandalorian Engineering Unit");
-        return;
     }
+
     public void makeArmorPiece(String type, obj_id player) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(player);
         obj_id armor = createObject(type, playerInv, null);
         CustomerServiceLog("DUNGEON_DeathWatchBunker", "*Mandalorian Armor: Player %TU has created a" + type + ".", player);
-        return;
     }
+
     public int roomReset(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id droid = getSelf();
@@ -329,6 +339,7 @@ public class craft_droidengineer_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removePlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -337,6 +348,7 @@ public class craft_droidengineer_droid extends script.base_script
         detachScript(player, "theme_park.dungeon.death_watch_bunker.death_script");
         return SCRIPT_CONTINUE;
     }
+
     public void spawnGuards(obj_id self) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -358,8 +370,8 @@ public class craft_droidengineer_droid extends script.base_script
             attachScript(spawnedCreature, "theme_park.dungeon.death_watch_bunker.attacker_wave");
             x = x + 1;
         }
-        return;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "giver"))

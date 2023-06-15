@@ -1,5 +1,11 @@
 package script.object;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.static_item;
 import script.library.sui;
@@ -10,6 +16,7 @@ public class ch5_powerup_unstack extends script.base_script
     public ch5_powerup_unstack()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (getCount(self) > 1)
@@ -20,13 +27,14 @@ public class ch5_powerup_unstack extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 mid.setServerNotify(true);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (getCount(self) > 1)
@@ -38,6 +46,7 @@ public class ch5_powerup_unstack extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int free = getFirstFreeIndex(names);
@@ -47,9 +56,10 @@ public class ch5_powerup_unstack extends script.base_script
         }
         int numInStack = getCount(self);
         names[free] = "num_in_stack";
-        attribs[free] = "" + numInStack;
+        attribs[free] = String.valueOf(numInStack);
         return SCRIPT_CONTINUE;
     }
+
     public void unstackIt(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isInSecureTrade(self))
@@ -58,12 +68,13 @@ public class ch5_powerup_unstack extends script.base_script
             {
                 createNewStack(player, self, 1, 2);
             }
-            else 
+            else
             {
                 sui.inputbox(self, player, "@autostack:stacksize", "msgUnstackItem");
             }
         }
     }
+
     public int msgUnstackItem(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -91,6 +102,7 @@ public class ch5_powerup_unstack extends script.base_script
         createNewStack(player, self, newStackSize, oldStackSize);
         return SCRIPT_CONTINUE;
     }
+
     public void createNewStack(obj_id player, obj_id item, int newStackSize, int oldStackSize) throws InterruptedException
     {
         obj_id container = getContainedBy(item);
@@ -110,7 +122,7 @@ public class ch5_powerup_unstack extends script.base_script
         {
             newItem = static_item.createNewItemFunction(getStaticItemName(item), container);
         }
-        else 
+        else
         {
             newItem = createObject(item, container, "");
         }

@@ -1,5 +1,11 @@
 package script.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class remote_object_requester extends script.base.remote_object
     public remote_object_requester()
     {
     }
+
     public int OnClusterWideDataResponse(obj_id self, String managerName, String elementNameExp, int requestId, String[] elementNameList, dictionary[] dictionaryList, int lockKey) throws InterruptedException
     {
         if (logsEnabled())
@@ -34,7 +41,7 @@ public class remote_object_requester extends script.base.remote_object
             {
                 logError("Wrong scene! [" + elementNameExp + "][" + getSceneName(self, requestId) + "]");
             }
-            else 
+            else
             {
                 obj_id remoteObjectCreator = getRemoteObjectCreator(self, requestId, elementNameList, dictionaryList);
                 if (isValidId(remoteObjectCreator))
@@ -42,7 +49,7 @@ public class remote_object_requester extends script.base.remote_object
                     messageTo(remoteObjectCreator, CREATE_REMOTE_OBJECT, getRemoteCreateParams(self, requestId), 0.0f, false);
                     log("Remote object creation request sent!");
                 }
-                else 
+                else
                 {
                     logError("No valid remote object creator found!");
                 }
@@ -51,6 +58,7 @@ public class remote_object_requester extends script.base.remote_object
         }
         return SCRIPT_CONTINUE;
     }
+
     public int createRemoteObjectResponse(obj_id self, dictionary params) throws InterruptedException
     {
         log("createRemoteObjectResponse: " + params.toString());
@@ -59,12 +67,13 @@ public class remote_object_requester extends script.base.remote_object
         {
             log("Successfully created " + remoteObject);
         }
-        else 
+        else
         {
             logError("Creation failed!");
         }
         return SCRIPT_CONTINUE;
     }
+
     public void remoteCreate(String sceneName, String objectName, float x, float y, float z) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -76,6 +85,7 @@ public class remote_object_requester extends script.base.remote_object
         utils.setScriptVar(self, getYVarName(requestId), y);
         utils.setScriptVar(self, getZVarName(requestId), z);
     }
+
     public void remoteCreate(String sceneName, String objectName) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -84,59 +94,73 @@ public class remote_object_requester extends script.base.remote_object
         utils.setScriptVar(self, getObjectNameVarName(requestId), objectName);
         utils.setScriptVar(self, getUseRandomLocationVarName(requestId), true);
     }
+
     public int remoteCreate() throws InterruptedException
     {
         obj_id self = getSelf();
         return getClusterWideData(REMOTE_OBJECT_MANAGER, "*", false, self);
     }
+
     public String getSceneNameVarName(int requestId) throws InterruptedException
     {
         return SCENE_NAME + "." + requestId;
     }
+
     public String getSceneName(obj_id self, int requestId) throws InterruptedException
     {
         return utils.getStringScriptVar(self, getSceneNameVarName(requestId));
     }
+
     public String getObjectNameVarName(int requestId) throws InterruptedException
     {
         return OBJECT_NAME + "." + requestId;
     }
+
     public String getObjectName(obj_id self, int requestId) throws InterruptedException
     {
         return utils.getStringScriptVar(self, getObjectNameVarName(requestId));
     }
+
     public String getXVarName(int requestId) throws InterruptedException
     {
         return X + "." + requestId;
     }
+
     public float getX(obj_id self, int requestId) throws InterruptedException
     {
         return utils.getFloatScriptVar(self, getXVarName(requestId));
     }
+
     public String getYVarName(int requestId) throws InterruptedException
     {
         return Y + "." + requestId;
     }
+
     public float getY(obj_id self, int requestId) throws InterruptedException
     {
         return utils.getFloatScriptVar(self, getYVarName(requestId));
     }
+
     public String getZVarName(int requestId) throws InterruptedException
     {
         return Z + "." + requestId;
     }
+
     public float getZ(obj_id self, int requestId) throws InterruptedException
     {
         return utils.getFloatScriptVar(self, getZVarName(requestId));
     }
+
     public String getUseRandomLocationVarName(int requestId) throws InterruptedException
     {
         return USE_RANDOM_LOCATION + "." + requestId;
     }
+
     public boolean getUseRandomLocationVarName(obj_id self, int requestId) throws InterruptedException
     {
         return utils.getBooleanScriptVar(self, getUseRandomLocationVarName(requestId));
     }
+
     public void removeRemoteCreateScriptVars(obj_id self, int requestId) throws InterruptedException
     {
         utils.removeScriptVar(self, getSceneNameVarName(requestId));
@@ -145,10 +169,12 @@ public class remote_object_requester extends script.base.remote_object
         utils.removeScriptVar(self, getYVarName(requestId));
         utils.removeScriptVar(self, getZVarName(requestId));
     }
+
     public boolean hasValidCreateScriptVars(obj_id self, int requestId) throws InterruptedException
     {
         return utils.hasScriptVar(self, getSceneNameVarName(requestId)) && utils.hasScriptVar(self, getObjectNameVarName(requestId));
     }
+
     public dictionary getRemoteCreateParams(obj_id self, int requestId) throws InterruptedException
     {
         dictionary createParams = new dictionary();
@@ -160,6 +186,7 @@ public class remote_object_requester extends script.base.remote_object
         createParams.put(Z, getZ(self, requestId));
         return createParams;
     }
+
     public obj_id getRemoteObjectCreator(obj_id self, int requestId, String[] elementNameList, dictionary[] dictionaryList) throws InterruptedException
     {
         int randomIndex = rand(0, dictionaryList.length);

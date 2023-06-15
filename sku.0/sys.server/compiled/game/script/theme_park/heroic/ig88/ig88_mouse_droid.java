@@ -1,5 +1,11 @@
 package script.theme_park.heroic.ig88;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.utils;
@@ -11,6 +17,7 @@ public class ig88_mouse_droid extends script.base_script
     public ig88_mouse_droid()
     {
     }
+
     public void findNextTarget(obj_id self) throws InterruptedException
     {
         if (ai_lib.isDead(self))
@@ -37,7 +44,7 @@ public class ig88_mouse_droid extends script.base_script
         {
             waypoint = 0;
         }
-        else 
+        else
         {
             waypoint = lastWaypoint = utils.getIntScriptVar(self, "currentWaypoint");
         }
@@ -48,18 +55,19 @@ public class ig88_mouse_droid extends script.base_script
             {
                 waypoint = (waypoint + 1 > 3 ? 0 : waypoint + 1);
             }
-            else 
+            else
             {
                 waypoint = (waypoint - 1 < 0 ? 3 : waypoint - 1);
             }
         }
         utils.setScriptVar(self, "currentWaypoint", waypoint);
-        
+
         {
             setHomeLocation(self, waypoints[waypoint]);
             pathTo(self, waypoints[waypoint]);
         }
     }
+
     public int findTarget(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -74,9 +82,9 @@ public class ig88_mouse_droid extends script.base_script
         }
         if (getLocomotion(self) != LOCOMOTION_RUNNING)
         {
-            
+
         }
-        
+
         {
             setMovementRun(self);
         }

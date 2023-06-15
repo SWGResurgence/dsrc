@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.valley_battleground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.instance;
@@ -9,25 +15,28 @@ import script.obj_id;
 
 public class end_point_monitor extends script.base_script
 {
-    public end_point_monitor()
-    {
-    }
     public static final String VOLUME_NAME = "finish_monitor";
     public static final float VOLUME_RANGE = 18.0f;
     public static final int RESCAN = 10;
     public static final String CAN_SCAN = "canScan";
     public static final String STAGE = "stage";
+    public end_point_monitor()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setInterest(self);
         messageTo(self, "scan", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int scan(obj_id self, dictionary params) throws InterruptedException
     {
         checkForDroidArmy(self);
         return SCRIPT_CONTINUE;
     }
+
     public int getStage(obj_id self) throws InterruptedException
     {
         int stage = 0;
@@ -37,12 +46,14 @@ public class end_point_monitor extends script.base_script
         }
         return stage;
     }
+
     public void incrementStage(obj_id self) throws InterruptedException
     {
         int stage = getStage(self);
         stage += 1;
         utils.setScriptVar(self, STAGE, stage);
     }
+
     public void decrementStage(obj_id self) throws InterruptedException
     {
         int stage = getStage(self);
@@ -53,6 +64,7 @@ public class end_point_monitor extends script.base_script
         }
         utils.setScriptVar(self, STAGE, stage);
     }
+
     public void checkForDroidArmy(obj_id self) throws InterruptedException
     {
         messageTo(self, "scan", null, RESCAN, false);
@@ -61,11 +73,13 @@ public class end_point_monitor extends script.base_script
         {
             decrementStage(self);
         }
-        else 
+        else
         {
             boolean living = false;
-            for (obj_id droid : droids) {
-                if (!isDead(droid) && !ai_lib.isInCombat(droid)) {
+            for (obj_id droid : droids)
+            {
+                if (!isDead(droid) && !ai_lib.isInCombat(droid))
+                {
                     living = true;
                 }
             }
@@ -73,7 +87,7 @@ public class end_point_monitor extends script.base_script
             {
                 incrementStage(self);
             }
-            else 
+            else
             {
                 decrementStage(self);
                 return;
@@ -83,16 +97,16 @@ public class end_point_monitor extends script.base_script
         switch (stage)
         {
             case 1:
-            instance.sendInstanceSystemMessage(trial.getParent(self), trial.BATTLEFIELD_LOSE_1);
-            return;
+                instance.sendInstanceSystemMessage(trial.getParent(self), trial.BATTLEFIELD_LOSE_1);
+                return;
             case 2:
-            instance.sendInstanceSystemMessage(trial.getParent(self), trial.BATTLEFIELD_LOSE_2);
-            return;
+                instance.sendInstanceSystemMessage(trial.getParent(self), trial.BATTLEFIELD_LOSE_2);
+                return;
             case 3:
-            instance.sendInstanceSystemMessage(trial.getParent(self), trial.BATTLEFIELD_LOSE_3);
-            return;
+                instance.sendInstanceSystemMessage(trial.getParent(self), trial.BATTLEFIELD_LOSE_3);
+                return;
             case 4:
-            messageTo(trial.getParent(self), "loseTrial", null, 0, false);
+                messageTo(trial.getParent(self), "loseTrial", null, 0, false);
         }
     }
 }

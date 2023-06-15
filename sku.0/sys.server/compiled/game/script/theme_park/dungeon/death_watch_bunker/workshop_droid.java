@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.utils;
@@ -8,14 +14,15 @@ import script.string_id;
 
 public class workshop_droid extends script.base_script
 {
-    public workshop_droid()
-    {
-    }
     public static final String FACETO_VOLUME_NAME = "faceToTriggerVolume";
     public static final string_id BATTERY_CLEANED = new string_id("dungeon/death_watch", "battery_cleaned");
     public static final string_id NEED_BATTERY = new string_id("dungeon/death_watch", "need_battery");
     public static final string_id NOT_AUTHORIZED = new string_id("dungeon/death_watch", "not_authorized");
     public static final String CONVO = "dungeon/death_watch";
+    public workshop_droid()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "conversation.death_watch_treadwell");
@@ -25,6 +32,7 @@ public class workshop_droid extends script.base_script
         setName(self, "WED15-I643 (a workshop droid)");
         return SCRIPT_CONTINUE;
     }
+
     public int handleCleanBattery(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -40,15 +48,19 @@ public class workshop_droid extends script.base_script
         obj_id[] objContents = utils.getContents(player, true);
         if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 String strItemTemplate = getTemplateName(objContent);
-                if (strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/drill_battery.iff")) {
+                if (strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/drill_battery.iff"))
+                {
                     obj_id battery = objContent;
                     destroyObject(battery);
                     obj_id playerInv = getObjectInSlot(player, "inventory");
-                    if (isIdValid(playerInv)) {
+                    if (isIdValid(playerInv))
+                    {
                         obj_id item = createObject("object/tangible/dungeon/death_watch_bunker/drill_battery_clean.iff", playerInv, "");
-                        if (isIdValid(item)) {
+                        if (isIdValid(item))
+                        {
                             sendSystemMessage(player, BATTERY_CLEANED);
                             return SCRIPT_CONTINUE;
                         }

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.string_id;
 
@@ -15,6 +21,7 @@ public class furniture extends script.base_script
     public static final String SCRIPT_CHAIR = "item.furniture.chair";
     public static final String SCRIPT_PLAYER_SEATED = "player.player_seated";
     public static final string_id SID_SEAT_FULL = new string_id("error_message", "seat_full");
+
     public furniture()
     {
     }

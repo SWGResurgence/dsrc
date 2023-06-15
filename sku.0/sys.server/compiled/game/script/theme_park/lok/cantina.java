@@ -1,5 +1,11 @@
 package script.theme_park.lok;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.create;
 import script.location;
@@ -10,17 +16,19 @@ public class cantina extends script.base_script
     public cantina()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Spawning Everyone");
         spawnCelebs(self);
-        return;
     }
+
     public void spawnCelebs(obj_id self) throws InterruptedException
     {
         spawnHan(self);
@@ -31,6 +39,7 @@ public class cantina extends script.base_script
         spawnRetired(self);
         spawnEngineer(self);
     }
+
     public obj_id spawnHan(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "private_room2");
@@ -41,6 +50,7 @@ public class cantina extends script.base_script
         setObjVar(han, "cantina", self);
         return han;
     }
+
     public obj_id spawnChewie(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "private_room2");
@@ -51,6 +61,7 @@ public class cantina extends script.base_script
         setObjVar(chewie, "cantina", self);
         return chewie;
     }
+
     public obj_id spawnPadawanTrialsNpc(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "stage");
@@ -66,6 +77,7 @@ public class cantina extends script.base_script
         setObjVar(npc, "cantina", self);
         return npc;
     }
+
     public obj_id spawnNien(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "alcove5");
@@ -77,6 +89,7 @@ public class cantina extends script.base_script
         setObjVar(nien, "cantina", self);
         return nien;
     }
+
     public obj_id spawnGamblor(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "alcove2");
@@ -89,6 +102,7 @@ public class cantina extends script.base_script
         setObjVar(gamblor, "cantina", self);
         return gamblor;
     }
+
     public obj_id spawnEngineer(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "alcove3");
@@ -99,6 +113,7 @@ public class cantina extends script.base_script
         setObjVar(engineer, "cantina", self);
         return engineer;
     }
+
     public obj_id spawnRetired(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "back_hallway");
@@ -109,6 +124,7 @@ public class cantina extends script.base_script
         setObjVar(retired, "cantina", self);
         return retired;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!hasObjVar(speaker, "gm"))
@@ -141,11 +157,12 @@ public class cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void killAll(obj_id self) throws InterruptedException
     {
         killCelebs(self);
-        return;
     }
+
     public void killCelebs(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "cantinaInhabitants.han"));
@@ -174,6 +191,5 @@ public class cantina extends script.base_script
         removeObjVar(self, "cantinaInhabitants.spellweaver");
         destroyObject(getObjIdObjVar(self, "cantinaInhabitants.stalker"));
         removeObjVar(self, "cantinaInhabitants.stalker");
-        return;
     }
 }

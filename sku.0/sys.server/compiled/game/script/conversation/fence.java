@@ -1,18 +1,27 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class fence extends script.base_script
 {
+    public static String c_stringFile = "conversation/fence";
+
     public fence()
     {
     }
-    public static String c_stringFile = "conversation/fence";
+
     public boolean fence_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean fence_condition_hasContrabandToGive(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -27,7 +36,7 @@ public class fence extends script.base_script
             {
                 questName = getStringObjVar(npc, "alternate_quest_name");
             }
-            else 
+            else
             {
                 return false;
             }
@@ -39,13 +48,17 @@ public class fence extends script.base_script
         }
         String itemToGive = groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableItemToGive);
         obj_id[] contents = getInventoryAndEquipment(player);
-        if (contents != null && contents.length > 0)
+        if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (static_item.isStaticItem(content)) {
+            for (obj_id content : contents)
+            {
+                if (static_item.isStaticItem(content))
+                {
                     String itemName = getStaticItemName(content);
-                    if (itemName.equals(itemToGive)) {
-                        if (!ai_lib.isInCombat(player)) {
+                    if (itemName.equals(itemToGive))
+                    {
+                        if (!ai_lib.isInCombat(player))
+                        {
                             dictionary webster = new dictionary();
                             webster.put("questName", questName);
                             webster.put("taskName", taskName);
@@ -59,15 +72,13 @@ public class fence extends script.base_script
         }
         return false;
     }
+
     public boolean fence_condition_inCombat(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
-        if (ai_lib.isInCombat(player))
-        {
-            return true;
-        }
-        return false;
+        return ai_lib.isInCombat(player);
     }
+
     public boolean fence_condition_pvpTimer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -82,7 +93,7 @@ public class fence extends script.base_script
             {
                 questName = getStringObjVar(npc, "alternate_quest_name");
             }
-            else 
+            else
             {
                 return false;
             }
@@ -94,13 +105,17 @@ public class fence extends script.base_script
         }
         String itemToGive = groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableItemToGive);
         obj_id[] contents = getInventoryAndEquipment(player);
-        if (contents != null && contents.length > 0)
+        if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (static_item.isStaticItem(content)) {
+            for (obj_id content : contents)
+            {
+                if (static_item.isStaticItem(content))
+                {
                     String itemName = getStaticItemName(content);
-                    if (itemName.equals(itemToGive)) {
-                        if (groundquests.isTimeRemainingBeforeCompletion(player, questCrc, taskId)) {
+                    if (itemName.equals(itemToGive))
+                    {
+                        if (groundquests.isTimeRemainingBeforeCompletion(player, questCrc, taskId))
+                        {
                             return true;
                         }
                     }
@@ -109,11 +124,13 @@ public class fence extends script.base_script
         }
         return false;
     }
+
     public boolean fence_condition_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return true;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -123,11 +140,13 @@ public class fence extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -136,18 +155,21 @@ public class fence extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.fence");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -182,6 +204,7 @@ public class fence extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("fence"))

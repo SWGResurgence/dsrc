@@ -1,5 +1,11 @@
 package script.theme_park.restuss_event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.location;
@@ -7,20 +13,24 @@ import script.obj_id;
 
 public class st3_south_battle extends script.base_script
 {
+    public static final String VOLUME_NAME = "quest_area";
+
     public st3_south_battle()
     {
     }
-    public static final String VOLUME_NAME = "quest_area";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume(VOLUME_NAME, 10.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume(VOLUME_NAME, 10.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         location spawnerLocation = getLocation(self);
@@ -36,6 +46,7 @@ public class st3_south_battle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int test(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id waveSpawner = createObject("object/tangible/theme_park/invisible_object.iff", getLocation(self));
@@ -46,6 +57,7 @@ public class st3_south_battle extends script.base_script
         messageTo(self, "readyToSpawn", null, 900.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int readyToSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "spawnedAlready");

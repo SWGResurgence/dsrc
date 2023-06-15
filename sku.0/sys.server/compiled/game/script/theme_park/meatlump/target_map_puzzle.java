@@ -1,13 +1,16 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class target_map_puzzle extends script.base_script
 {
-    public target_map_puzzle()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String VAR_PREFIX = "meatlump_target_map";
     public static final String NONIMPERATIVE_VAR_PREFIX = "meatlump_target_map_nonimperative";
@@ -38,350 +41,355 @@ public class target_map_puzzle extends script.base_script
     public static final string_id YOU_HAVE_DEBUFF = new string_id("meatlump/meatlump", "you_have_debuff");
     public static final string_id YOU_NEED_DEVICE = new string_id("meatlump/meatlump", "you_need_device");
     public static final string_id YOU_BUFFED_LATE = new string_id("meatlump/meatlump", "you_buff_late");
-    public static final char[][] CIPHER_ARRAY_1 = 
+    public static final char[][] CIPHER_ARRAY_1 =
+            {
+
+                    {
+                            'a',
+                            'b',
+                            'c',
+                            'd',
+                            'e',
+                            'f',
+                            'g',
+                            'h',
+                            'i',
+                            'j',
+                            'k',
+                            'l',
+                            'm',
+                            'n',
+                            'o',
+                            'p',
+                            'q',
+                            'r',
+                            's',
+                            't',
+                            'u',
+                            'v',
+                            'w',
+                            'x',
+                            'y',
+                            'z',
+                            'A',
+                            'B',
+                            'C',
+                            'D',
+                            'E',
+                            'F',
+                            'G',
+                            'H',
+                            'I',
+                            'J',
+                            'K',
+                            'L',
+                            'M',
+                            'N',
+                            'O',
+                            'P',
+                            'Q',
+                            'R',
+                            'S',
+                            'T',
+                            'U',
+                            'V',
+                            'W',
+                            'X',
+                            'Y',
+                            'Z'
+                    },
+
+                    {
+                            '!',
+                            '@',
+                            '#',
+                            '$',
+                            '3',
+                            '^',
+                            '&',
+                            '*',
+                            '(',
+                            ')',
+                            '_',
+                            '+',
+                            '-',
+                            '=',
+                            '[',
+                            ']',
+                            '/',
+                            '|',
+                            '?',
+                            '/',
+                            '>',
+                            '<',
+                            '`',
+                            '~',
+                            ';',
+                            '2',
+                            '!',
+                            '@',
+                            '#',
+                            '$',
+                            '3',
+                            '^',
+                            '&',
+                            '*',
+                            '(',
+                            ')',
+                            '_',
+                            '+',
+                            '-',
+                            '=',
+                            '[',
+                            ']',
+                            '/',
+                            '|',
+                            '?',
+                            '/',
+                            '>',
+                            '<',
+                            '`',
+                            '~',
+                            ';',
+                            '2'
+                    }
+            };
+    public static final char[][] CIPHER_ARRAY_2 =
+            {
+
+                    {
+                            'a',
+                            'b',
+                            'c',
+                            'd',
+                            'e',
+                            'f',
+                            'g',
+                            'h',
+                            'i',
+                            'j',
+                            'k',
+                            'l',
+                            'm',
+                            'n',
+                            'o',
+                            'p',
+                            'q',
+                            'r',
+                            's',
+                            't',
+                            'u',
+                            'v',
+                            'w',
+                            'x',
+                            'y',
+                            'z',
+                            'A',
+                            'B',
+                            'C',
+                            'D',
+                            'E',
+                            'F',
+                            'G',
+                            'H',
+                            'I',
+                            'J',
+                            'K',
+                            'L',
+                            'M',
+                            'N',
+                            'O',
+                            'P',
+                            'Q',
+                            'R',
+                            'S',
+                            'T',
+                            'U',
+                            'V',
+                            'W',
+                            'X',
+                            'Y',
+                            'Z'
+                    },
+
+                    {
+                            '¤',
+                            'þ',
+                            '#',
+                            'ð',
+                            'ê',
+                            'f',
+                            '&',
+                            '*',
+                            'î',
+                            'j',
+                            '_',
+                            '¶',
+                            '-',
+                            'n',
+                            'Ø',
+                            '¿',
+                            '/',
+                            '®',
+                            's',
+                            '^',
+                            'ü',
+                            '<',
+                            '`',
+                            '~',
+                            '¥',
+                            'z',
+                            '¤',
+                            'þ',
+                            '#',
+                            'ð',
+                            'ê',
+                            'f',
+                            '&',
+                            '*',
+                            'î',
+                            'j',
+                            '_',
+                            '¶',
+                            '-',
+                            'n',
+                            'Ø',
+                            '¿',
+                            '/',
+                            '®',
+                            's',
+                            '^',
+                            'ü',
+                            '<',
+                            '`',
+                            '~',
+                            '¥',
+                            'z'
+                    }
+            };
+    public static final char[][] CIPHER_ARRAY_3 =
+            {
+
+                    {
+                            'a',
+                            'b',
+                            'c',
+                            'd',
+                            'e',
+                            'f',
+                            'g',
+                            'h',
+                            'i',
+                            'j',
+                            'k',
+                            'l',
+                            'm',
+                            'n',
+                            'o',
+                            'p',
+                            'q',
+                            'r',
+                            's',
+                            't',
+                            'u',
+                            'v',
+                            'w',
+                            'x',
+                            'y',
+                            'z',
+                            'A',
+                            'B',
+                            'C',
+                            'D',
+                            'E',
+                            'F',
+                            'G',
+                            'H',
+                            'I',
+                            'J',
+                            'K',
+                            'L',
+                            'M',
+                            'N',
+                            'O',
+                            'P',
+                            'Q',
+                            'R',
+                            'S',
+                            'T',
+                            'U',
+                            'V',
+                            'W',
+                            'X',
+                            'Y',
+                            'Z'
+                    },
+
+                    {
+                            '4',
+                            '8',
+                            '©',
+                            'd',
+                            '3',
+                            'f',
+                            '6',
+                            '#',
+                            '1',
+                            'j',
+                            '_',
+                            '|',
+                            'm',
+                            'n',
+                            '0',
+                            'Þ',
+                            'ð',
+                            '®',
+                            '5',
+                            '+',
+                            'ü',
+                            '<',
+                            'w',
+                            '~',
+                            '/',
+                            '2',
+                            '4',
+                            '8',
+                            '©',
+                            'd',
+                            '3',
+                            'f',
+                            '6',
+                            '#',
+                            '1',
+                            'j',
+                            '_',
+                            '|',
+                            'm',
+                            'n',
+                            '0',
+                            'Þ',
+                            'ð',
+                            '®',
+                            '5',
+                            '+',
+                            'ü',
+                            '<',
+                            'w',
+                            '~',
+                            '/',
+                            '2'
+                    }
+            };
+    public target_map_puzzle()
     {
-        
-        {
-            'a',
-            'b',
-            'c',
-            'd',
-            'e',
-            'f',
-            'g',
-            'h',
-            'i',
-            'j',
-            'k',
-            'l',
-            'm',
-            'n',
-            'o',
-            'p',
-            'q',
-            'r',
-            's',
-            't',
-            'u',
-            'v',
-            'w',
-            'x',
-            'y',
-            'z',
-            'A',
-            'B',
-            'C',
-            'D',
-            'E',
-            'F',
-            'G',
-            'H',
-            'I',
-            'J',
-            'K',
-            'L',
-            'M',
-            'N',
-            'O',
-            'P',
-            'Q',
-            'R',
-            'S',
-            'T',
-            'U',
-            'V',
-            'W',
-            'X',
-            'Y',
-            'Z'
-        },
-        
-        {
-            '!',
-            '@',
-            '#',
-            '$',
-            '3',
-            '^',
-            '&',
-            '*',
-            '(',
-            ')',
-            '_',
-            '+',
-            '-',
-            '=',
-            '[',
-            ']',
-            '/',
-            '|',
-            '?',
-            '/',
-            '>',
-            '<',
-            '`',
-            '~',
-            ';',
-            '2',
-            '!',
-            '@',
-            '#',
-            '$',
-            '3',
-            '^',
-            '&',
-            '*',
-            '(',
-            ')',
-            '_',
-            '+',
-            '-',
-            '=',
-            '[',
-            ']',
-            '/',
-            '|',
-            '?',
-            '/',
-            '>',
-            '<',
-            '`',
-            '~',
-            ';',
-            '2'
-        }
-    };
-    public static final char[][] CIPHER_ARRAY_2 = 
-    {
-        
-        {
-            'a',
-            'b',
-            'c',
-            'd',
-            'e',
-            'f',
-            'g',
-            'h',
-            'i',
-            'j',
-            'k',
-            'l',
-            'm',
-            'n',
-            'o',
-            'p',
-            'q',
-            'r',
-            's',
-            't',
-            'u',
-            'v',
-            'w',
-            'x',
-            'y',
-            'z',
-            'A',
-            'B',
-            'C',
-            'D',
-            'E',
-            'F',
-            'G',
-            'H',
-            'I',
-            'J',
-            'K',
-            'L',
-            'M',
-            'N',
-            'O',
-            'P',
-            'Q',
-            'R',
-            'S',
-            'T',
-            'U',
-            'V',
-            'W',
-            'X',
-            'Y',
-            'Z'
-        },
-        
-    {
-            '¤',
-            'þ',
-            '#',
-            'ð',
-            'ê',
-            'f',
-            '&',
-            '*',
-            'î',
-            'j',
-            '_',
-            '¶',
-            '-',
-            'n',
-            'Ø',
-            '¿',
-            '/',
-            '®',
-            's',
-            '^',
-            'ü',
-            '<',
-            '`',
-            '~',
-            '¥',
-            'z',
-            '¤',
-            'þ',
-            '#',
-            'ð',
-            'ê',
-            'f',
-            '&',
-            '*',
-            'î',
-            'j',
-            '_',
-            '¶',
-            '-',
-            'n',
-            'Ø',
-            '¿',
-            '/',
-            '®',
-            's',
-            '^',
-            'ü',
-            '<',
-            '`',
-            '~',
-            '¥',
-            'z'
-        }
-    };
-    public static final char[][] CIPHER_ARRAY_3 = 
-    {
-        
-        {
-            'a',
-            'b',
-            'c',
-            'd',
-            'e',
-            'f',
-            'g',
-            'h',
-            'i',
-            'j',
-            'k',
-            'l',
-            'm',
-            'n',
-            'o',
-            'p',
-            'q',
-            'r',
-            's',
-            't',
-            'u',
-            'v',
-            'w',
-            'x',
-            'y',
-            'z',
-            'A',
-            'B',
-            'C',
-            'D',
-            'E',
-            'F',
-            'G',
-            'H',
-            'I',
-            'J',
-            'K',
-            'L',
-            'M',
-            'N',
-            'O',
-            'P',
-            'Q',
-            'R',
-            'S',
-            'T',
-            'U',
-            'V',
-            'W',
-            'X',
-            'Y',
-            'Z'
-        },
-        
-        {
-            '4',
-            '8',
-            '©',
-            'd',
-            '3',
-            'f',
-            '6',
-            '#',
-            '1',
-            'j',
-            '_',
-            '|',
-            'm',
-            'n',
-            '0',
-            'Þ',
-            'ð',
-            '®',
-            '5',
-            '+',
-            'ü',
-            '<',
-            'w',
-            '~',
-            '/',
-            '2',
-            '4',
-            '8',
-            '©',
-            'd',
-            '3',
-            'f',
-            '6',
-            '#',
-            '1',
-            'j',
-            '_',
-            '|',
-            'm',
-            'n',
-            '0',
-            'Þ',
-            'ð',
-            '®',
-            '5',
-            '+',
-            'ü',
-            '<',
-            'w',
-            '~',
-            '/',
-            '2'
-        }
-    };
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_OPEN);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id collectionItem = self;
@@ -408,6 +416,7 @@ public class target_map_puzzle extends script.base_script
         createMapText(collectionItem, player);
         return SCRIPT_CONTINUE;
     }
+
     public boolean createMapText(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         if (!isValidId(collectionItem) || !isValidId(player))
@@ -429,7 +438,7 @@ public class target_map_puzzle extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             closeOldWindow(player);
         }
@@ -488,6 +497,7 @@ public class target_map_puzzle extends script.base_script
         flushSUIPage(pid);
         return true;
     }
+
     public int handleDialogInput(obj_id self, dictionary params) throws InterruptedException
     {
         blog("handleDialogInput");
@@ -512,7 +522,8 @@ public class target_map_puzzle extends script.base_script
         }
         String textToBeSolved = utils.getStringScriptVar(player, TEXT_TO_BE_SOLVED);
         String correctPhrase = "";
-        switch (textToBeSolved) {
+        switch (textToBeSolved)
+        {
             case TEXT_TARGET:
                 correctPhrase = utils.getStringScriptVar(player, TARGET + "_" + self);
                 break;
@@ -534,6 +545,7 @@ public class target_map_puzzle extends script.base_script
         createMapText(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public boolean rerollPuzzleNeeded(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         if (!isValidId(collectionItem) || !exists(collectionItem))
@@ -601,6 +613,7 @@ public class target_map_puzzle extends script.base_script
         blog("rerollPuzzleNeeded - No special conditions found. NOT DISTURBING.");
         return false;
     }
+
     public boolean getRandomText(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         if (!isValidId(collectionItem) || !isValidId(player))
@@ -637,7 +650,7 @@ public class target_map_puzzle extends script.base_script
             utils.setScriptVar(player, BUFF_USED + "_" + collectionItem, true);
         }
         blog("HASBUFF: " + hasBuff);
-        char targetChar[] = targetString.toCharArray();
+        char[] targetChar = targetString.toCharArray();
         int arrayInt = rand(1, 2);
         if (hasBuff)
         {
@@ -647,28 +660,28 @@ public class target_map_puzzle extends script.base_script
         switch (arrayInt)
         {
             case 1:
-            for (int a = 0; a < CIPHER_ARRAY_1.length; a++)
-            {
-                System.arraycopy(CIPHER_ARRAY_1[a], 0, copiedArray[a], 0, CIPHER_ARRAY_1[a].length);
-            }
-            break;
+                for (int a = 0; a < CIPHER_ARRAY_1.length; a++)
+                {
+                    System.arraycopy(CIPHER_ARRAY_1[a], 0, copiedArray[a], 0, CIPHER_ARRAY_1[a].length);
+                }
+                break;
             case 2:
-            for (int a = 0; a < CIPHER_ARRAY_2.length; a++)
-            {
-                System.arraycopy(CIPHER_ARRAY_2[a], 0, copiedArray[a], 0, CIPHER_ARRAY_2[a].length);
-            }
-            break;
+                for (int a = 0; a < CIPHER_ARRAY_2.length; a++)
+                {
+                    System.arraycopy(CIPHER_ARRAY_2[a], 0, copiedArray[a], 0, CIPHER_ARRAY_2[a].length);
+                }
+                break;
             case 3:
-            for (int a = 0; a < CIPHER_ARRAY_3.length; a++)
-            {
-                System.arraycopy(CIPHER_ARRAY_3[a], 0, copiedArray[a], 0, CIPHER_ARRAY_3[a].length);
-            }
-            break;
+                for (int a = 0; a < CIPHER_ARRAY_3.length; a++)
+                {
+                    System.arraycopy(CIPHER_ARRAY_3[a], 0, copiedArray[a], 0, CIPHER_ARRAY_3[a].length);
+                }
+                break;
             default:
-            for (int a = 0; a < CIPHER_ARRAY_1.length; a++)
-            {
-                System.arraycopy(CIPHER_ARRAY_1[a], 0, copiedArray[a], 0, CIPHER_ARRAY_1[a].length);
-            }
+                for (int a = 0; a < CIPHER_ARRAY_1.length; a++)
+                {
+                    System.arraycopy(CIPHER_ARRAY_1[a], 0, copiedArray[a], 0, CIPHER_ARRAY_1[a].length);
+                }
         }
         if (copiedArray == null)
         {
@@ -676,22 +689,28 @@ public class target_map_puzzle extends script.base_script
             return false;
         }
         String listOfChars = "";
-        for (char c : targetChar) {
-            if (c == ' ') {
+        for (char c : targetChar)
+        {
+            if (c == ' ')
+            {
                 listOfChars += " ";
                 continue;
             }
-            for (int i = 0; i < copiedArray[0].length; i++) {
-                if (c != copiedArray[0][i]) {
+            for (int i = 0; i < copiedArray[0].length; i++)
+            {
+                if (c != copiedArray[0][i])
+                {
                     continue;
-                } else {
-                    listOfChars += "" + copiedArray[1][i];
+                }
+                else
+                {
+                    listOfChars += String.valueOf(copiedArray[1][i]);
                 }
             }
         }
         blog("listOfChars: " + listOfChars);
         blog("listOfChars length: " + listOfChars.length());
-        char cipherChar[] = listOfChars.toCharArray();
+        char[] cipherChar = listOfChars.toCharArray();
         blog("targetChar length: " + targetChar.length);
         blog("cipherChar length: " + cipherChar.length);
         if (cipherChar.length != targetChar.length)
@@ -733,16 +752,16 @@ public class target_map_puzzle extends script.base_script
         switch (selectPuzzle)
         {
             case 1:
-            utils.setScriptVar(player, TEXT_TO_BE_SOLVED + "_" + collectionItem, TEXT_TARGET + "_" + collectionItem);
-            break;
+                utils.setScriptVar(player, TEXT_TO_BE_SOLVED + "_" + collectionItem, TEXT_TARGET + "_" + collectionItem);
+                break;
             case 2:
-            utils.setScriptVar(player, TEXT_TO_BE_SOLVED + "_" + collectionItem, TEXT_LOCATION + "_" + collectionItem);
-            break;
+                utils.setScriptVar(player, TEXT_TO_BE_SOLVED + "_" + collectionItem, TEXT_LOCATION + "_" + collectionItem);
+                break;
             case 3:
-            utils.setScriptVar(player, TEXT_TO_BE_SOLVED + "_" + collectionItem, TEXT_PLANET + "_" + collectionItem);
-            break;
+                utils.setScriptVar(player, TEXT_TO_BE_SOLVED + "_" + collectionItem, TEXT_PLANET + "_" + collectionItem);
+                break;
             default:
-            utils.setScriptVar(player, TEXT_TO_BE_SOLVED + "_" + collectionItem, TEXT_TARGET + "_" + collectionItem);
+                utils.setScriptVar(player, TEXT_TO_BE_SOLVED + "_" + collectionItem, TEXT_TARGET + "_" + collectionItem);
         }
         blog("setting script var newPrefix: " + newPrefix);
         blog("setting script var newTarget: " + newTarget);
@@ -758,6 +777,7 @@ public class target_map_puzzle extends script.base_script
         utils.setScriptVar(player, PLANET + "_" + collectionItem, planetString);
         return true;
     }
+
     public boolean rewardPlayer(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         blog("rewardPlayer - init");
@@ -782,6 +802,7 @@ public class target_map_puzzle extends script.base_script
         removePlayerImperativeVars(player);
         return true;
     }
+
     public int closeSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -792,9 +813,9 @@ public class target_map_puzzle extends script.base_script
         blog("closeSui - init");
         if (buff.applyBuff(player, "target_map_puzzle_downer"))
         {
-            
+
         }
-        
+
         {
             sendSystemMessage(player, YOU_CANCELED_EARLY);
         }
@@ -803,6 +824,7 @@ public class target_map_puzzle extends script.base_script
         removePlayerNonImperativeVars(player);
         return SCRIPT_CONTINUE;
     }
+
     public void closeOldWindow(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -813,16 +835,19 @@ public class target_map_puzzle extends script.base_script
             sui.removePid(player, PID_NAME);
         }
     }
+
     public void removePlayerNonImperativeVars(obj_id player) throws InterruptedException
     {
         utils.removeScriptVarTree(player, NONIMPERATIVE_VAR_PREFIX);
         utils.removeObjVar(player, NONIMPERATIVE_VAR_PREFIX);
     }
+
     public void removePlayerImperativeVars(obj_id player) throws InterruptedException
     {
         utils.removeScriptVarTree(player, VAR_PREFIX);
         utils.removeObjVar(player, VAR_PREFIX);
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

@@ -1,5 +1,11 @@
 package script.item.comestible;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.consumable;
 import script.library.doctor_bag;
@@ -19,6 +25,7 @@ public class medicine extends script.base_script
     public static final string_id SID_ON_MOUNT = new string_id("error_message", "survey_on_mount");
     public static final string_id SID_NO_DOCTOR_BAG = new string_id("doctor_bag", "no_doctor_bag");
     public static final string_id SID_PLACE_IN_DOCTOR_BAG = new string_id("doctor_bag", "place_in_doctor_bag");
+
     public medicine()
     {
     }

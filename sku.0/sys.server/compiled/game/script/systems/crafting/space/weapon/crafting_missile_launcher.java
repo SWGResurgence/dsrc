@@ -1,5 +1,11 @@
 package script.systems.crafting.space.weapon;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -152,6 +158,7 @@ public class crafting_missile_launcher extends script.systems.crafting.space.wea
                                     new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
                             })
             };
+
     public crafting_missile_launcher()
     {
     }

@@ -1,6 +1,12 @@
 package script.conversation;
 
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -9,18 +15,18 @@ import script.library.create;
 
 public class gmf_the_spectre extends script.base_script
 {
+    public static final String c_stringFile = "conversation/gmf_the_spectre";
+    private static final String REQUIRED_SKILL = "social_language_basic_comprehend";
+    private static final String GMF_QUEST = "the_spectre";
     public gmf_the_spectre()
     {
     }
-    public static final String c_stringFile = "conversation/gmf_the_spectre";
-
-    private static final String REQUIRED_SKILL = "social_language_basic_comprehend";
-    private static final String GMF_QUEST = "the_spectre";
 
     public boolean spectre_defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean grave2_haunted(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "the_spectre.quest_state"))
@@ -29,6 +35,7 @@ public class gmf_the_spectre extends script.base_script
         }
         return getIntObjVar(player, "the_spectre.quest_state") == 3;
     }
+
     public boolean spectre_haunted(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "the_spectre.quest_state"))
@@ -37,6 +44,7 @@ public class gmf_the_spectre extends script.base_script
         }
         return getIntObjVar(player, "the_spectre.quest_state") == 4;
     }
+
     public boolean grave2_completeCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "the_spectre.quest_state"))
@@ -45,6 +53,7 @@ public class gmf_the_spectre extends script.base_script
         }
         return getIntObjVar(player, "the_spectre.quest_state") == 5;
     }
+
     /*
         This branch is our intro conversation.
         So this is the first dialog shown to the player
@@ -56,7 +65,7 @@ public class gmf_the_spectre extends script.base_script
             string_id message = new string_id(c_stringFile, "npc_darkside");
             int numberOfResponses = 3;
             int responseIndex = 0;
-            string_id responses[] = new string_id[numberOfResponses];
+            string_id[] responses = new string_id[numberOfResponses];
             responses[responseIndex++] = new string_id(c_stringFile, "player_why_dark");
             responses[responseIndex++] = new string_id(c_stringFile, "player_resist_dark");
             responses[responseIndex++] = new string_id(c_stringFile, "player_learn_dark");
@@ -70,7 +79,7 @@ public class gmf_the_spectre extends script.base_script
             string_id message = new string_id(c_stringFile, "npc_peace_lie");
             int numberOfResponses = 3;
             int responseIndex = 0;
-            string_id responses[] = new string_id[numberOfResponses];
+            string_id[] responses = new string_id[numberOfResponses];
             responses[responseIndex++] = new string_id(c_stringFile, "player_why_dark");
             responses[responseIndex++] = new string_id(c_stringFile, "player_resist_dark");
             responses[responseIndex++] = new string_id(c_stringFile, "player_learn_dark");
@@ -81,6 +90,7 @@ public class gmf_the_spectre extends script.base_script
         }
         return SCRIPT_DEFAULT;
     }
+
     public int spectre_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("player_why_dark"))
@@ -91,7 +101,7 @@ public class gmf_the_spectre extends script.base_script
 
             int responseIndex = 0;
 
-            string_id responses[] = new string_id[numberOfResponses];
+            string_id[] responses = new string_id[numberOfResponses];
 
             responses[responseIndex++] = new string_id(c_stringFile, "player_peace");
             responses[responseIndex++] = new string_id(c_stringFile, "player_destroy");
@@ -120,7 +130,7 @@ public class gmf_the_spectre extends script.base_script
 
             int responseIndex = 0;
 
-            string_id responses[] = new string_id[numberOfResponses];
+            string_id[] responses = new string_id[numberOfResponses];
 
             responses[responseIndex++] = new string_id(c_stringFile, "player_peace");
             responses[responseIndex++] = new string_id(c_stringFile, "player_destroy");
@@ -135,6 +145,7 @@ public class gmf_the_spectre extends script.base_script
         }
         return SCRIPT_DEFAULT;
     }
+
     public int spectre_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("player_peace"))
@@ -163,6 +174,7 @@ public class gmf_the_spectre extends script.base_script
         }
         return SCRIPT_DEFAULT;
     }
+
     public int spectre_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("player_force_free"))
@@ -183,6 +195,7 @@ public class gmf_the_spectre extends script.base_script
         }
         return SCRIPT_DEFAULT;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -190,6 +203,7 @@ public class gmf_the_spectre extends script.base_script
         setName(self, "The spectre");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -198,12 +212,14 @@ public class gmf_the_spectre extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id npc, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(npc) || ai_lib.isInCombat(player))
@@ -226,7 +242,7 @@ public class gmf_the_spectre extends script.base_script
             int responseIndex = 0;
 
             //Prepare the responses
-            string_id responses[] = new string_id[numberOfResponses];
+            string_id[] responses = new string_id[numberOfResponses];
 
             //Ensure numberOfResponses equals the amount of responses below
             responses[responseIndex++] = new string_id(c_stringFile, "player_peace");
@@ -243,7 +259,7 @@ public class gmf_the_spectre extends script.base_script
             string_id message = new string_id(c_stringFile, "npc_i_have_risen");
             int numberOfResponses = 1;
             int responseIndex = 0;
-            string_id responses[] = new string_id[numberOfResponses];
+            string_id[] responses = new string_id[numberOfResponses];
             responses[responseIndex++] = new string_id(c_stringFile, "player_why");
             utils.setScriptVar(player, "conversation.spectre.branchId", 1);
             npcStartConversation(player, npc, "spectre", message, responses);
@@ -253,13 +269,14 @@ public class gmf_the_spectre extends script.base_script
             string_id message = new string_id(c_stringFile, "npc_ignore");
             int numberOfResponses = 1;
             int responseIndex = 0;
-            string_id responses[] = new string_id[numberOfResponses];
+            string_id[] responses = new string_id[numberOfResponses];
             utils.setScriptVar(player, "conversation.spectre.branchId", 1);
 
             npcStartConversation(player, npc, "spectre", message, responses);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id npc, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("spectre"))

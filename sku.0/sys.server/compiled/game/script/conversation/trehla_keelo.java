@@ -1,55 +1,73 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class trehla_keelo extends script.base_script
 {
+    public static String c_stringFile = "conversation/trehla_keelo";
+
     public trehla_keelo()
     {
     }
-    public static String c_stringFile = "conversation/trehla_keelo";
+
     public boolean trehla_keelo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean trehla_keelo_condition_questActiveOrComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActiveOrComplete(player, "c_newbie_quest1") || groundquests.isQuestActiveOrComplete(player, "c_newbie_quest1a"));
     }
+
     public boolean trehla_keelo_condition_playerOnBankStep(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "c_newbie_quest1a", "bankstep") || groundquests.isTaskActive(player, "c_newbie_quest1", "bankstep") || groundquests.isTaskActive(player, "c_newbie_quest1a", "bankbox1") || groundquests.isTaskActive(player, "c_newbie_quest1", "bankbox1") || groundquests.isTaskActive(player, "c_newbie_quest1a", "bankbox2") || groundquests.isTaskActive(player, "c_newbie_quest1", "bankbox2"));
     }
+
     public boolean trehla_keelo_condition_playerDidNewTutorial(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_hall_jedi");
         return questIsQuestComplete(questId1, player);
     }
+
     public boolean trehla_keelo_condition_playerOnBankReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "c_newbie_quest1", "bankreturn") || groundquests.isTaskActive(player, "c_newbie_quest1a", "bankreturn"));
     }
+
     public boolean trehla_keelo_condition_playerOnBazaarStep(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "c_newbie_quest1a", "bazaarstep") || groundquests.isTaskActive(player, "c_newbie_quest1", "bazaarstep") || groundquests.isTaskActive(player, "c_newbie_quest1a", "bazaarbox1") || groundquests.isTaskActive(player, "c_newbie_quest1", "bazaarbox1") || groundquests.isTaskActive(player, "c_newbie_quest1a", "bazaarbox2") || groundquests.isTaskActive(player, "c_newbie_quest1", "bazaarbox2"));
     }
+
     public boolean trehla_keelo_condition_playerOnBazaarReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "c_newbie_quest1", "bazaarreturn") || groundquests.isTaskActive(player, "c_newbie_quest1a", "bazaarreturn"));
     }
+
     public boolean trehla_keelo_condition_playerOnCloneStep(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "c_newbie_quest1a", "clonestep") || groundquests.isTaskActive(player, "c_newbie_quest1", "clonestep") || groundquests.isTaskActive(player, "c_newbie_quest1a", "clonebox1") || groundquests.isTaskActive(player, "c_newbie_quest1", "clonebox1"));
     }
+
     public boolean trehla_keelo_condition_playerOnCloneReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "c_newbie_quest1", "clonereturn") || groundquests.isTaskActive(player, "c_newbie_quest1a", "clonereturn"));
     }
+
     public boolean trehla_keelo_condition_startedVourk(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "newbie_goto_vourk");
     }
+
     public boolean trehla_keelo_condition_playerLearnDroid(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest4");
@@ -57,18 +75,21 @@ public class trehla_keelo extends script.base_script
         int droidbox1 = groundquests.getTaskId(questId1, "droidbox1");
         return questIsTaskActive(questId1, groupbox1, player) || questIsTaskActive(questId1, droidbox1, player);
     }
+
     public boolean trehla_keelo_condition_playerOnVehicleInfo(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest4");
         int vehiclebox1 = groundquests.getTaskId(questId1, "vehiclebox1");
         return questIsTaskActive(questId1, vehiclebox1, player);
     }
+
     public boolean trehla_keelo_condition_playerOnMedCenterReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest3");
         int medcenterreturn = groundquests.getTaskId(questId1, "medcenterreturn");
         return questIsTaskActive(questId1, medcenterreturn, player);
     }
+
     public boolean trehla_keelo_condition_playerOnJunkStep(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest3");
@@ -76,26 +97,26 @@ public class trehla_keelo extends script.base_script
         int junkbox1 = groundquests.getTaskId(questId1, "junkbox1");
         return questIsTaskActive(questId1, junkstep, player) || questIsTaskActive(questId1, junkbox1, player);
     }
+
     public boolean trehla_keelo_condition_playerOnJunkReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest3");
         int junkreturn = groundquests.getTaskId(questId1, "junkreturn");
         return questIsTaskActive(questId1, junkreturn, player);
     }
+
     public boolean trehla_keelo_condition_crafterPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (content.isCrafter(player) || content.isEntertainer(player))
-        {
-            return true;
-        }
-        return false;
+        return content.isCrafter(player) || content.isEntertainer(player);
     }
+
     public boolean trehla_keelo_condition_playerOnLearnGroup(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest4");
         int learngroup = groundquests.getTaskId(questId1, "learngroup");
         return questIsTaskActive(questId1, learngroup, player);
     }
+
     public boolean trehla_keelo_condition_playerOnShuttleStep(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest5");
@@ -105,49 +126,54 @@ public class trehla_keelo extends script.base_script
         int shuttlestep4 = groundquests.getTaskId(questId1, "shuttlestep4");
         return questIsTaskActive(questId1, shuttlestep1, player) || questIsTaskActive(questId1, shuttlestep2, player) || questIsTaskActive(questId1, shuttlestep3, player) || questIsTaskActive(questId1, shuttlestep4, player);
     }
+
     public boolean trehla_keelo_condition_playerOnAssociateStep(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest5");
         int associatestep = groundquests.getTaskId(questId1, "associatestep");
         return questIsTaskActive(questId1, associatestep, player);
     }
+
     public boolean trehla_keelo_condition_playerOnLastStep(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/c_newbie_quest5");
         int laststep = groundquests.getTaskId(questId1, "laststep");
         return questIsTaskActive(questId1, laststep, player);
     }
+
     public boolean trehla_keelo_condition_combatPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!content.isCrafter(player) && !content.isEntertainer(player))
-        {
-            return true;
-        }
-        return false;
+        return !content.isCrafter(player) && !content.isEntertainer(player);
     }
+
     public void trehla_keelo_action_giveQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "c_newbie_quest1a");
         detachScript(player, "theme_park.newbie_tutorial.new_player_ribbon");
         destroyClientPath(player);
     }
+
     public void trehla_keelo_action_faceplayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void trehla_keelo_action_signalBankReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_newbie_bankreturn");
     }
+
     public void trehla_keelo_action_signalBazaarReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_newbie_bazaarreturn");
     }
+
     public void trehla_keelo_action_signalCloneReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.sendSignal(player, "c_newbie_clonereturn");
     }
+
     public void trehla_keelo_action_signalJunkReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_newbie_quest4");
@@ -157,6 +183,7 @@ public class trehla_keelo extends script.base_script
         String templateName = "object/tangible/deed/vehicle_deed/landspeeder_x31_deed.iff";
         createObject(templateName, playerInventory, "");
     }
+
     public void trehla_keelo_action_signalMedCenterReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_newbie_medcenterreturn");
@@ -164,16 +191,19 @@ public class trehla_keelo extends script.base_script
         String templateName = "object/tangible/loot/tool/datapad_broken.iff";
         createObject(templateName, playerInventory, "");
     }
+
     public void trehla_keelo_action_signalLearnGroup(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_newbie_quest5");
         groundquests.sendSignal(player, "c_newbie_learngroup");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void trehla_keelo_action_signalLastStep(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_newbie_laststep");
     }
+
     public void trehla_keelo_action_giveWaypointImpTat(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -186,6 +216,7 @@ public class trehla_keelo extends script.base_script
         setWaypointName(waypoint, "Lt. Akal Colzet (Imperial Pilot Trainer)");
         setWaypointActive(waypoint, true);
     }
+
     public void trehla_keelo_action_giveWaypointImpNab(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -198,6 +229,7 @@ public class trehla_keelo extends script.base_script
         setWaypointName(waypoint, "Lt. Barn Sinkko (Imperial Pilot Trainer)");
         setWaypointActive(waypoint, true);
     }
+
     public void trehla_keelo_action_giveWaypointImpTalus(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -210,6 +242,7 @@ public class trehla_keelo extends script.base_script
         setWaypointName(waypoint, "Hakasha Sireen (Imperial Pilot Trainer)");
         setWaypointActive(waypoint, true);
     }
+
     public void trehla_keelo_action_giveWaypointRebTat(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -222,6 +255,7 @@ public class trehla_keelo extends script.base_script
         setWaypointName(waypoint, "Commander Da'la Socuna (Rebel Pilot Trainer)");
         setWaypointActive(waypoint, true);
     }
+
     public void trehla_keelo_action_giveWaypointRebNab(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -234,6 +268,7 @@ public class trehla_keelo extends script.base_script
         setWaypointName(waypoint, "V3-FX (Rebel Pilot Training Droid)");
         setWaypointActive(waypoint, true);
     }
+
     public void trehla_keelo_action_giveWaypointRebCore(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -246,6 +281,7 @@ public class trehla_keelo extends script.base_script
         setWaypointName(waypoint, "Captain Kreezo (Rebel Pilot Trainer)");
         setWaypointActive(waypoint, true);
     }
+
     public void trehla_keelo_action_giveWaypointNeuTat(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -258,6 +294,7 @@ public class trehla_keelo extends script.base_script
         setWaypointName(waypoint, "Dravis (Privateer Pilot Trainer)");
         setWaypointActive(waypoint, true);
     }
+
     public void trehla_keelo_action_giveWaypointNeuNab(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -270,6 +307,7 @@ public class trehla_keelo extends script.base_script
         setWaypointName(waypoint, "Captain Dinge (RSF Pilot Trainer)");
         setWaypointActive(waypoint, true);
     }
+
     public void trehla_keelo_action_giveWaypointNeuCore(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id top = getTopMostContainer(player);
@@ -282,19 +320,23 @@ public class trehla_keelo extends script.base_script
         setWaypointName(waypoint, "Sergeant Rhea (CorSec Pilot Trainer)");
         setWaypointActive(waypoint, true);
     }
+
     public void trehla_keelo_action_giveMayorQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_newbie_quest6");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void trehla_keelo_action_sendToVourk(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/newbie_goto_vourk");
     }
+
     public void trehla_keelo_action_sendToGendra(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/newbie_gendra");
     }
+
     public int trehla_keelo_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_305"))
@@ -323,7 +365,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_309");
@@ -340,7 +382,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     prose_package pp = new prose_package();
@@ -354,6 +396,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_309"))
@@ -375,7 +418,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_313");
@@ -384,7 +427,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -418,7 +461,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_321");
@@ -431,7 +474,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -441,6 +484,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_313"))
@@ -468,7 +512,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_321");
@@ -481,7 +525,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -491,6 +535,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_321"))
@@ -512,7 +557,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_329");
@@ -521,7 +566,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -548,7 +593,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_329");
@@ -557,7 +602,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -567,6 +612,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_321"))
@@ -588,7 +634,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_329");
@@ -597,7 +643,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -624,7 +670,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_329");
@@ -633,7 +679,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -643,6 +689,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_329"))
@@ -669,7 +716,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_333");
@@ -682,7 +729,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -692,6 +739,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_329"))
@@ -718,7 +766,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_333");
@@ -731,7 +779,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -741,6 +789,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_333"))
@@ -769,7 +818,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_337");
@@ -782,7 +831,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -803,6 +852,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_337"))
@@ -831,6 +881,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_353"))
@@ -852,7 +903,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_361");
@@ -861,7 +912,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -888,7 +939,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_361");
@@ -897,7 +948,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -907,6 +958,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_361"))
@@ -927,7 +979,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_365");
@@ -936,7 +988,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -946,6 +998,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_361"))
@@ -966,7 +1019,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_365");
@@ -975,7 +1028,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -985,6 +1038,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_365"))
@@ -999,6 +1053,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_373"))
@@ -1019,7 +1074,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_385");
@@ -1028,7 +1083,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1054,7 +1109,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_385");
@@ -1063,7 +1118,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1089,7 +1144,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_385");
@@ -1098,7 +1153,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1108,6 +1163,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_385"))
@@ -1128,7 +1184,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_389");
@@ -1137,7 +1193,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1147,6 +1203,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_385"))
@@ -1167,7 +1224,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_389");
@@ -1176,7 +1233,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1186,6 +1243,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_385"))
@@ -1206,7 +1264,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_389");
@@ -1215,7 +1273,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1225,6 +1283,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_389"))
@@ -1246,7 +1305,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_393");
@@ -1255,7 +1314,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1265,6 +1324,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_393"))
@@ -1285,7 +1345,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_397");
@@ -1294,7 +1354,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1304,6 +1364,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_397"))
@@ -1320,6 +1381,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_405"))
@@ -1339,7 +1401,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_413");
@@ -1348,7 +1410,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1373,7 +1435,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_413");
@@ -1382,7 +1444,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1392,6 +1454,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_413"))
@@ -1439,7 +1502,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1135");
@@ -1464,7 +1527,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1474,6 +1537,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_413"))
@@ -1521,7 +1585,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1135");
@@ -1546,7 +1610,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1556,6 +1620,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1135"))
@@ -1589,7 +1654,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -1606,7 +1671,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1666,7 +1731,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_228");
@@ -1683,7 +1748,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1715,7 +1780,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -1728,7 +1793,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1738,6 +1803,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_569"))
@@ -1757,7 +1823,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_575");
@@ -1766,7 +1832,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1791,7 +1857,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_591");
@@ -1800,7 +1866,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1810,6 +1876,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_575"))
@@ -1830,7 +1897,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_580");
@@ -1839,7 +1906,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1849,6 +1916,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_580"))
@@ -1864,6 +1932,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_591"))
@@ -1884,7 +1953,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_596");
@@ -1893,7 +1962,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1903,6 +1972,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_596"))
@@ -1918,6 +1988,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_606"))
@@ -1937,7 +2008,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_611");
@@ -1946,7 +2017,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1971,7 +2042,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_621");
@@ -1980,7 +2051,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1990,6 +2061,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_611"))
@@ -2007,6 +2079,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_621"))
@@ -2026,7 +2099,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_627");
@@ -2035,7 +2108,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2045,6 +2118,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_627"))
@@ -2061,6 +2135,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_721"))
@@ -2080,7 +2155,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_727");
@@ -2089,7 +2164,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2099,6 +2174,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_727"))
@@ -2119,7 +2195,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_734");
@@ -2128,7 +2204,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2138,6 +2214,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_734"))
@@ -2152,6 +2229,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_749"))
@@ -2200,7 +2278,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -2225,7 +2303,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2235,6 +2313,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -2268,7 +2347,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -2285,7 +2364,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2310,7 +2389,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -2319,7 +2398,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2344,7 +2423,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -2353,7 +2432,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2378,7 +2457,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -2387,7 +2466,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2419,7 +2498,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -2432,7 +2511,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2442,6 +2521,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_759"))
@@ -2475,7 +2555,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_764");
@@ -2492,7 +2572,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2531,7 +2611,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_859");
@@ -2548,7 +2628,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2587,7 +2667,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_963");
@@ -2604,7 +2684,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2614,6 +2694,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_764"))
@@ -2647,7 +2728,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_768");
@@ -2664,7 +2745,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2703,7 +2784,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_795");
@@ -2720,7 +2801,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2759,7 +2840,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_827");
@@ -2776,7 +2857,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2786,6 +2867,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_768"))
@@ -2834,7 +2916,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -2859,7 +2941,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2898,7 +2980,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_764");
@@ -2915,7 +2997,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2968,7 +3050,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -2993,7 +3075,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3003,6 +3085,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -3036,7 +3119,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -3053,7 +3136,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3078,7 +3161,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -3087,7 +3170,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3112,7 +3195,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -3121,7 +3204,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3146,7 +3229,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -3155,7 +3238,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3187,7 +3270,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -3200,7 +3283,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3210,6 +3293,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_764"))
@@ -3243,7 +3327,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_768");
@@ -3260,7 +3344,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3299,7 +3383,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_795");
@@ -3316,7 +3400,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3355,7 +3439,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_827");
@@ -3372,7 +3456,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3382,6 +3466,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -3415,7 +3500,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -3432,7 +3517,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3457,7 +3542,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -3466,7 +3551,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3491,7 +3576,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -3500,7 +3585,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3525,7 +3610,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -3534,7 +3619,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3566,7 +3651,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -3579,7 +3664,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3589,6 +3674,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_795"))
@@ -3637,7 +3723,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -3662,7 +3748,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3701,7 +3787,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_764");
@@ -3718,7 +3804,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3771,7 +3857,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -3796,7 +3882,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3806,6 +3892,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -3839,7 +3926,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -3856,7 +3943,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3881,7 +3968,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -3890,7 +3977,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3915,7 +4002,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -3924,7 +4011,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3949,7 +4036,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -3958,7 +4045,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3990,7 +4077,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -4003,7 +4090,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4013,6 +4100,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_764"))
@@ -4046,7 +4134,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_768");
@@ -4063,7 +4151,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4102,7 +4190,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_795");
@@ -4119,7 +4207,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4158,7 +4246,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_827");
@@ -4175,7 +4263,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4185,6 +4273,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -4218,7 +4307,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -4235,7 +4324,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4260,7 +4349,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -4269,7 +4358,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4294,7 +4383,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -4303,7 +4392,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4328,7 +4417,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -4337,7 +4426,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4369,7 +4458,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -4382,7 +4471,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4392,6 +4481,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch67(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_827"))
@@ -4440,7 +4530,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -4465,7 +4555,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4504,7 +4594,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_764");
@@ -4521,7 +4611,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4574,7 +4664,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -4599,7 +4689,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4609,6 +4699,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -4642,7 +4733,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -4659,7 +4750,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4684,7 +4775,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -4693,7 +4784,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4718,7 +4809,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -4727,7 +4818,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4752,7 +4843,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -4761,7 +4852,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4793,7 +4884,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -4806,7 +4897,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4816,6 +4907,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_764"))
@@ -4849,7 +4941,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_768");
@@ -4866,7 +4958,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4905,7 +4997,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_795");
@@ -4922,7 +5014,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4961,7 +5053,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_827");
@@ -4978,7 +5070,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4988,6 +5080,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -5021,7 +5114,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -5038,7 +5131,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5063,7 +5156,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -5072,7 +5165,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5097,7 +5190,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -5106,7 +5199,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5131,7 +5224,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -5140,7 +5233,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5172,7 +5265,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -5185,7 +5278,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5195,6 +5288,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_859"))
@@ -5228,7 +5322,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_867");
@@ -5245,7 +5339,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5284,7 +5378,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_899");
@@ -5301,7 +5395,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5340,7 +5434,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_931");
@@ -5357,7 +5451,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5367,6 +5461,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_867"))
@@ -5415,7 +5510,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -5440,7 +5535,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5479,7 +5574,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_859");
@@ -5496,7 +5591,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5549,7 +5644,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -5574,7 +5669,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5584,6 +5679,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch73(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -5617,7 +5713,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -5634,7 +5730,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5659,7 +5755,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -5668,7 +5764,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5693,7 +5789,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -5702,7 +5798,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5727,7 +5823,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -5736,7 +5832,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5768,7 +5864,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -5781,7 +5877,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5791,6 +5887,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_859"))
@@ -5824,7 +5921,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_867");
@@ -5841,7 +5938,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5880,7 +5977,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_899");
@@ -5897,7 +5994,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5936,7 +6033,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_931");
@@ -5953,7 +6050,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5963,6 +6060,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -5996,7 +6094,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -6013,7 +6111,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6038,7 +6136,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -6047,7 +6145,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6072,7 +6170,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -6081,7 +6179,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6106,7 +6204,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -6115,7 +6213,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6147,7 +6245,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -6160,7 +6258,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6170,6 +6268,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_899"))
@@ -6218,7 +6317,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -6243,7 +6342,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6282,7 +6381,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_859");
@@ -6299,7 +6398,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6352,7 +6451,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -6377,7 +6476,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6387,6 +6486,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -6420,7 +6520,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -6437,7 +6537,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6462,7 +6562,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -6471,7 +6571,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6496,7 +6596,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -6505,7 +6605,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6530,7 +6630,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -6539,7 +6639,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6571,7 +6671,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -6584,7 +6684,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6594,6 +6694,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_859"))
@@ -6627,7 +6728,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_867");
@@ -6644,7 +6745,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6683,7 +6784,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_899");
@@ -6700,7 +6801,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6739,7 +6840,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_931");
@@ -6756,7 +6857,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6766,6 +6867,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch79(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -6799,7 +6901,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -6816,7 +6918,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6841,7 +6943,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -6850,7 +6952,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6875,7 +6977,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -6884,7 +6986,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6909,7 +7011,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -6918,7 +7020,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6950,7 +7052,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -6963,7 +7065,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6973,6 +7075,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_931"))
@@ -7021,7 +7124,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -7046,7 +7149,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7085,7 +7188,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_859");
@@ -7102,7 +7205,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7155,7 +7258,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -7180,7 +7283,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7190,6 +7293,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch81(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -7223,7 +7327,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -7240,7 +7344,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7265,7 +7369,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -7274,7 +7378,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7299,7 +7403,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -7308,7 +7412,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7333,7 +7437,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -7342,7 +7446,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7374,7 +7478,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -7387,7 +7491,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7397,6 +7501,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_859"))
@@ -7430,7 +7535,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_867");
@@ -7447,7 +7552,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7486,7 +7591,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_899");
@@ -7503,7 +7608,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7542,7 +7647,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_931");
@@ -7559,7 +7664,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7569,6 +7674,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch83(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -7602,7 +7708,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -7619,7 +7725,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7644,7 +7750,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -7653,7 +7759,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7678,7 +7784,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -7687,7 +7793,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7712,7 +7818,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -7721,7 +7827,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7753,7 +7859,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -7766,7 +7872,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7776,6 +7882,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch84(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_963"))
@@ -7809,7 +7916,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_971");
@@ -7826,7 +7933,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7865,7 +7972,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1003");
@@ -7882,7 +7989,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7921,7 +8028,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1035");
@@ -7938,7 +8045,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7948,6 +8055,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch85(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_971"))
@@ -7996,7 +8104,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -8021,7 +8129,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8060,7 +8168,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_963");
@@ -8077,7 +8185,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8130,7 +8238,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -8155,7 +8263,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8165,6 +8273,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -8198,7 +8307,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -8215,7 +8324,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8240,7 +8349,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -8249,7 +8358,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8274,7 +8383,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -8283,7 +8392,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8308,7 +8417,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -8317,7 +8426,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8349,7 +8458,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -8362,7 +8471,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8372,6 +8481,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch87(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_963"))
@@ -8405,7 +8515,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_971");
@@ -8422,7 +8532,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8461,7 +8571,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1003");
@@ -8478,7 +8588,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8517,7 +8627,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1035");
@@ -8534,7 +8644,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8544,6 +8654,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch88(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -8577,7 +8688,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -8594,7 +8705,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8619,7 +8730,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -8628,7 +8739,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8653,7 +8764,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -8662,7 +8773,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8687,7 +8798,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -8696,7 +8807,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8728,7 +8839,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -8741,7 +8852,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8751,6 +8862,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch89(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1003"))
@@ -8799,7 +8911,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -8824,7 +8936,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8863,7 +8975,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_963");
@@ -8880,7 +8992,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8933,7 +9045,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -8958,7 +9070,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8968,6 +9080,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch90(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -9001,7 +9114,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -9018,7 +9131,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9043,7 +9156,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -9052,7 +9165,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9077,7 +9190,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -9086,7 +9199,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9111,7 +9224,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -9120,7 +9233,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9152,7 +9265,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -9165,7 +9278,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9175,6 +9288,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch91(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_963"))
@@ -9208,7 +9322,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_971");
@@ -9225,7 +9339,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9264,7 +9378,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1003");
@@ -9281,7 +9395,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9320,7 +9434,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1035");
@@ -9337,7 +9451,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9347,6 +9461,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch92(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -9380,7 +9495,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -9397,7 +9512,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9422,7 +9537,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -9431,7 +9546,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9456,7 +9571,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -9465,7 +9580,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9490,7 +9605,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -9499,7 +9614,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9531,7 +9646,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -9544,7 +9659,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9554,6 +9669,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch93(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1035"))
@@ -9602,7 +9718,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -9627,7 +9743,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9666,7 +9782,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_963");
@@ -9683,7 +9799,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9736,7 +9852,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -9761,7 +9877,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9771,6 +9887,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch94(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -9804,7 +9921,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -9821,7 +9938,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9846,7 +9963,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -9855,7 +9972,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9880,7 +9997,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -9889,7 +10006,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9914,7 +10031,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -9923,7 +10040,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9955,7 +10072,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -9968,7 +10085,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -9978,6 +10095,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch95(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_963"))
@@ -10011,7 +10129,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_971");
@@ -10028,7 +10146,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10067,7 +10185,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1003");
@@ -10084,7 +10202,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10123,7 +10241,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1035");
@@ -10140,7 +10258,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10150,6 +10268,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch96(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -10183,7 +10302,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -10200,7 +10319,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10225,7 +10344,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -10234,7 +10353,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10259,7 +10378,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -10268,7 +10387,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10293,7 +10412,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -10302,7 +10421,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10334,7 +10453,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -10347,7 +10466,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10357,6 +10476,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch97(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1067"))
@@ -10404,7 +10524,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -10429,7 +10549,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10439,6 +10559,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch98(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -10472,7 +10593,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -10489,7 +10610,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10514,7 +10635,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -10523,7 +10644,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10548,7 +10669,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -10557,7 +10678,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10582,7 +10703,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -10591,7 +10712,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10623,7 +10744,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -10636,7 +10757,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10646,6 +10767,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch99(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1083"))
@@ -10693,7 +10815,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -10718,7 +10840,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10728,6 +10850,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch100(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -10761,7 +10884,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -10778,7 +10901,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10803,7 +10926,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -10812,7 +10935,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10837,7 +10960,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -10846,7 +10969,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10871,7 +10994,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -10880,7 +11003,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10912,7 +11035,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -10925,7 +11048,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10935,6 +11058,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch101(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1099"))
@@ -10982,7 +11106,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_754");
@@ -11007,7 +11131,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11017,6 +11141,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch102(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_754"))
@@ -11050,7 +11175,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -11067,7 +11192,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11092,7 +11217,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -11101,7 +11226,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11126,7 +11251,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -11135,7 +11260,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11160,7 +11285,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -11169,7 +11294,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11201,7 +11326,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -11214,7 +11339,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11224,6 +11349,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch103(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_206"))
@@ -11244,7 +11370,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_218");
@@ -11253,7 +11379,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11279,7 +11405,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_220");
@@ -11288,7 +11414,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11298,6 +11424,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch104(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_218"))
@@ -11312,6 +11439,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch106(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_220"))
@@ -11326,6 +11454,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch108(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1135"))
@@ -11359,7 +11488,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_759");
@@ -11376,7 +11505,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11436,7 +11565,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_228");
@@ -11453,7 +11582,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11485,7 +11614,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -11498,7 +11627,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11508,6 +11637,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trehla_keelo_handleBranch111(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_228"))
@@ -11527,7 +11657,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1083");
@@ -11536,7 +11666,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11561,7 +11691,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -11570,7 +11700,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11595,7 +11725,7 @@ public class trehla_keelo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -11604,7 +11734,7 @@ public class trehla_keelo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11614,6 +11744,7 @@ public class trehla_keelo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -11627,6 +11758,7 @@ public class trehla_keelo extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -11636,6 +11768,7 @@ public class trehla_keelo extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -11644,18 +11777,21 @@ public class trehla_keelo extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.trehla_keelo");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -11680,7 +11816,7 @@ public class trehla_keelo extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_305");
@@ -11688,7 +11824,7 @@ public class trehla_keelo extends script.base_script
                 utils.setScriptVar(player, "conversation.trehla_keelo.branchId", 1);
                 npcStartConversation(player, npc, "trehla_keelo", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -11725,7 +11861,7 @@ public class trehla_keelo extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_353");
@@ -11737,7 +11873,7 @@ public class trehla_keelo extends script.base_script
                 utils.setScriptVar(player, "conversation.trehla_keelo.branchId", 14);
                 npcStartConversation(player, npc, "trehla_keelo", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -11781,7 +11917,7 @@ public class trehla_keelo extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_373");
@@ -11797,7 +11933,7 @@ public class trehla_keelo extends script.base_script
                 utils.setScriptVar(player, "conversation.trehla_keelo.branchId", 20);
                 npcStartConversation(player, npc, "trehla_keelo", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -11834,7 +11970,7 @@ public class trehla_keelo extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_405");
@@ -11846,7 +11982,7 @@ public class trehla_keelo extends script.base_script
                 utils.setScriptVar(player, "conversation.trehla_keelo.branchId", 29);
                 npcStartConversation(player, npc, "trehla_keelo", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -11875,7 +12011,7 @@ public class trehla_keelo extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_569");
@@ -11887,7 +12023,7 @@ public class trehla_keelo extends script.base_script
                 utils.setScriptVar(player, "conversation.trehla_keelo.branchId", 33);
                 npcStartConversation(player, npc, "trehla_keelo", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -11923,7 +12059,7 @@ public class trehla_keelo extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_606");
@@ -11935,7 +12071,7 @@ public class trehla_keelo extends script.base_script
                 utils.setScriptVar(player, "conversation.trehla_keelo.branchId", 41);
                 npcStartConversation(player, npc, "trehla_keelo", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -11969,7 +12105,7 @@ public class trehla_keelo extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_721");
@@ -11977,7 +12113,7 @@ public class trehla_keelo extends script.base_script
                 utils.setScriptVar(player, "conversation.trehla_keelo.branchId", 49);
                 npcStartConversation(player, npc, "trehla_keelo", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12013,7 +12149,7 @@ public class trehla_keelo extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_749");
@@ -12021,7 +12157,7 @@ public class trehla_keelo extends script.base_script
                 utils.setScriptVar(player, "conversation.trehla_keelo.branchId", 55);
                 npcStartConversation(player, npc, "trehla_keelo", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -12071,7 +12207,7 @@ public class trehla_keelo extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1135");
@@ -12099,7 +12235,7 @@ public class trehla_keelo extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "trehla_keelo", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -12112,6 +12248,7 @@ public class trehla_keelo extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("trehla_keelo"))

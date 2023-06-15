@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class vehicle extends script.base_script
@@ -102,6 +108,7 @@ public class vehicle extends script.base_script
     public static final String VAR_PALVAR_VARS = VAR_PALVAR_BASE + ".vars";
     public static final String VAR_PALVAR_CNT = VAR_PALVAR_BASE + ".cnt";
     public static final String VAR_DECONSTRUCT_SCHEMATIC = "schematic.name";
+
     public vehicle()
     {
     }

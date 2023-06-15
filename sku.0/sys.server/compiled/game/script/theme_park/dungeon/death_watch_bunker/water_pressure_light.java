@@ -1,21 +1,29 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.player_structure;
 import script.library.utils;
 
 public class water_pressure_light extends script.base_script
 {
+    public static final string_id ACCESS_DENIED = new string_id("dungeon/death_watch", "access_denied");
+    public static final string_id MNU_WATER_VALVE = new string_id("dungeon/death_watch", "mnu_water_valve");
     public water_pressure_light()
     {
     }
-    public static final string_id ACCESS_DENIED = new string_id("dungeon/death_watch", "access_denied");
-    public static final string_id MNU_WATER_VALVE = new string_id("dungeon/death_watch", "mnu_water_valve");
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleLightObjVar", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleLightObjVar(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);

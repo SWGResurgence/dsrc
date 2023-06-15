@@ -1,5 +1,11 @@
 package script.space.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.attrib;
 import script.library.ship_ai;
@@ -12,16 +18,19 @@ public class space_ai extends script.base_script
     public space_ai()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setupShip(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setupShip(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnShipWasHit(obj_id self, obj_id attacker, int weaponIndex, boolean isMissile, int missileType, int intSlot, boolean fromPlayerAutoTurret, float hitLocationX_o, float hitLocationY_o, float hitLocationZ_o) throws InterruptedException
     {
         int lastBroadcast = utils.getIntScriptVar(self, "ship.lastHitBroadcast");
@@ -36,14 +45,17 @@ public class space_ai extends script.base_script
         broadcastMessage("handleGuardedTargetHit", parms);
         return SCRIPT_CONTINUE;
     }
+
     public int OnShipIsHitting(obj_id self, obj_id target, int weaponIndex, int intSlot) throws InterruptedException
     {
         if (ship_ai.isShipDead(target))
         {
             // get my target list and only attempt to remove the target if it's on my list.
             obj_id[] targetList = ship_ai.unitGetAttackTargetList(self);
-            for(obj_id listMember : targetList){
-                if(listMember.equals(target)){
+            for (obj_id listMember : targetList)
+            {
+                if (listMember.equals(target))
+                {
                     ship_ai.spaceStopAttack(self, target);
                     break;
                 }
@@ -51,10 +63,12 @@ public class space_ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnShipBehaviorChanged(obj_id self, int oldBehavior, int newBehavior) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void setupShip(obj_id ship) throws InterruptedException
     {
         if (utils.hasScriptVar(ship, "ship.setupComplete"))
@@ -68,6 +82,7 @@ public class space_ai extends script.base_script
         setAttributeAttained(ship, attrib.SPACE_SHIP);
         utils.setScriptVar(ship, "ship.setupComplete", true);
     }
+
     public int OnArrivedAtLocation(obj_id self, String strName) throws InterruptedException
     {
         if (strName.equals("spawnerArrival"))
@@ -82,7 +97,7 @@ public class space_ai extends script.base_script
                 obj_id objAttackTarget = getObjIdObjVar(self, "objAttackTarget");
                 ship_ai.unitAddDamageTaken(self, objAttackTarget, 100.0f);
             }
-            else 
+            else
             {
                 setObjVar(self, "intHyperspacing", 1);
                 destroyObjectHyperspace(self);
@@ -94,14 +109,17 @@ public class space_ai extends script.base_script
             if (hasObjVar(self, "objAttackTarget"))
             {
                 obj_id objAttackTarget = getObjIdObjVar(self, "objAttackTarget");
-                for (obj_id objMember : objMembers) {
+                for (obj_id objMember : objMembers)
+                {
                     ship_ai.unitAddDamageTaken(objMember, objAttackTarget, 100.0f);
                 }
             }
-            else 
+            else
             {
-                for (obj_id objMember : objMembers) {
-                    if (objMember != self) {
+                for (obj_id objMember : objMembers)
+                {
+                    if (objMember != self)
+                    {
                         setObjVar(objMember, "intCleaningUp", 1);
                         setObjVar(objMember, "intHyperspacing", 1);
                         destroyObjectHyperspace(objMember);
@@ -113,6 +131,7 @@ public class space_ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpaceUnitDocked(obj_id self, obj_id objStation) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
@@ -120,6 +139,7 @@ public class space_ai extends script.base_script
         space_utils.notifyObject(objStation, "objectDocked", dctParams);
         return SCRIPT_CONTINUE;
     }
+
     public int handleUnitIncreaseHate(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id unitToHate = params.getObjId("unitToHate");

@@ -1,5 +1,11 @@
 package script.systems.skills.performance;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.performance;
 import script.library.utils;
@@ -12,6 +18,7 @@ public class instrument extends script.base_script
     public static final string_id SID_MUSIC_TOO_FAR_AWAY = new string_id("performance", "music_too_far_away");
     public static final float INSTRUMENT_CHECK_TIME = 5.0f;
     public static final float MAX_INSTRUMENT_DISTANCE = 3.0f;
+
     public instrument()
     {
     }
@@ -97,7 +104,7 @@ public class instrument extends script.base_script
                 }
                 obj_id newPlacedObj = createObject(getTemplateName(self), getLocation(player));
                 custom_var[] customVars = getAllCustomVars(self);
-                if (customVars != null && customVars.length > 0)
+                if (customVars != null)
                 {
                     for (custom_var customVar : customVars)
                     {

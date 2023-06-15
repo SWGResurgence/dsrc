@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.trando_slave_camp;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.library.weapons;
 import script.menu_info;
@@ -9,9 +15,6 @@ import script.string_id;
 
 public class broken_shock_lance extends script.base_script
 {
-    public broken_shock_lance()
-    {
-    }
     public static final String weapon_smith = "class_munitions_phase1_master";
     public static final String STF = "ep3/sidequests";
     public static final string_id reverse_engineer = new string_id(STF, "re_broken_shock_lance");
@@ -19,6 +22,10 @@ public class broken_shock_lance extends script.base_script
     public static final string_id re_success = new string_id(STF, "re_success");
     public static final String weapon_hash = "object/weapon/melee/polearm/lance_shock.iff";
     public static final int num_uses = 50;
+    public broken_shock_lance()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (hasSkill(player, weapon_smith))
@@ -27,6 +34,7 @@ public class broken_shock_lance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU2)

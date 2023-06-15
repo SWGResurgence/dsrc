@@ -1,5 +1,11 @@
 package script.systems.veteran_reward;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.utils;
 
@@ -9,6 +15,7 @@ public class animate_object extends script.base_script
     public static final String LOCKOUT_TIME = "lockout_time";
     public static final String USE_STRING = "use_string";
     public static final String ANIMATION_NAME = "animation_name";
+
     public animate_object()
     {
     }

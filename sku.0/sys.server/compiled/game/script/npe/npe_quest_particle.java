@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class npe_quest_particle extends script.base_script
@@ -7,6 +13,7 @@ public class npe_quest_particle extends script.base_script
     public npe_quest_particle()
     {
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         String itemTemplate = getTemplateName(item);

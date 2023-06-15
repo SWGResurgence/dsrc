@@ -1,5 +1,11 @@
 package script.sui.filter;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.sui;
 import script.library.utils;
@@ -10,11 +16,13 @@ public class owner extends script.base_script
     public owner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, sui.SCRIPT_FILTER_OWNER);
         return SCRIPT_CONTINUE;
     }
+
     public int handleFilterInput(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);

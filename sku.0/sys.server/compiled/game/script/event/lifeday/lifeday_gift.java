@@ -1,5 +1,11 @@
 package script.event.lifeday;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.static_item;
 import script.library.utils;
@@ -8,15 +14,16 @@ import java.util.HashSet;
 
 public class lifeday_gift extends script.base_script
 {
-    public lifeday_gift()
-    {
-    }
     private static final string_id CRATE_USED = new string_id("spam", "opened_crate");
     private static final string_id GIVE_AWAY = new string_id("spam", "give_away");
     private static final string_id OUTSIDE = new string_id("spam", "must_be_outside");
     private static final string_id MOUNTED = new string_id("spam", "mounted");
     private static final string_id UNABLE = new string_id("spam", "no_data");
     private static final String LIFEDAY_TABLE = "datatables/event/lifeday/lifeday_gift.iff";
+    public lifeday_gift()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, true, true, 5, true))
@@ -28,7 +35,7 @@ public class lifeday_gift extends script.base_script
                 {
                     mid.setServerNotify(true);
                 }
-                else 
+                else
                 {
                     mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("ui_radial", "item_use"));
                 }
@@ -36,6 +43,7 @@ public class lifeday_gift extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (utils.getContainingPlayer(self) != player)
@@ -74,13 +82,13 @@ public class lifeday_gift extends script.base_script
                         return SCRIPT_CONTINUE;
                     }
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, GIVE_AWAY);
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 String giftsSelfUnparsed = giftData.getString("gift_self");
                 String[] giftsSelf = split(giftsSelfUnparsed, ',');
@@ -100,6 +108,7 @@ public class lifeday_gift extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean grantReward(obj_id player, String[] itemNames, dictionary giftData) throws InterruptedException
     {
         if (isIdValid(getMountId(player)))
@@ -122,7 +131,8 @@ public class lifeday_gift extends script.base_script
             if (isIdValid(pInv) && (itemNames != null && itemNames.length > 0))
             {
                 HashSet theSet = new HashSet();
-                for (String itemName : itemNames) {
+                for (String itemName : itemNames)
+                {
                     theSet.add(static_item.createNewItemFunction(itemName, pInv));
                 }
                 obj_id[] gift = new obj_id[theSet.size()];

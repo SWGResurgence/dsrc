@@ -1,5 +1,11 @@
 package script.developer.soe.e3demo;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.pet_lib;
 import script.library.utils;
@@ -10,6 +16,7 @@ public class makepet extends script.base_script
     public makepet()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createBantha(self);
@@ -17,11 +24,13 @@ public class makepet extends script.base_script
         messageTo(self, "handleDetachMakePet", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDetachMakePet(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "e3demo.makepet");
         return SCRIPT_CONTINUE;
     }
+
     public void createBantha(obj_id self) throws InterruptedException
     {
         String controlTemplate = "object/intangible/pet/bantha_hue.iff";
@@ -34,6 +43,7 @@ public class makepet extends script.base_script
         setObjVar(petControlDevice, "ai.pet.type", petType);
         setObjVar(petControlDevice, "ai.pet.trainedMount", 1);
     }
+
     public void createLandSpeeder(obj_id self) throws InterruptedException
     {
         obj_id datapad = utils.getPlayerDatapad(self);

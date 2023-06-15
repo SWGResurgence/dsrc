@@ -1,5 +1,11 @@
 package script.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.utils;
@@ -17,13 +23,13 @@ public class guard_wander extends script.city.base.base_wander
                     "patrol5",
                     "patrol6"
             };
+    public static final int PATH_VERIFICATION_TIME = 30;
+    public static final int PATH_FAILURES_MAXIMUM = 5;
     public guard_wander()
     {
         super.patrolPoints = patrolPoints;
     }
 
-    public static final int PATH_VERIFICATION_TIME = 30;
-    public static final int PATH_FAILURES_MAXIMUM = 5;
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "guard_wander.OnAttach enter");
@@ -32,6 +38,7 @@ public class guard_wander extends script.city.base.base_wander
         removeObjVar(self, "combat.intCombatXP");
         return super.OnAttach(self);
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "guard_wander.OnInitialize enter name: " + getName(self));
@@ -39,11 +46,13 @@ public class guard_wander extends script.city.base.base_wander
         utils.setScriptVar(self, "path.pathFailures", 0);
         return super.OnInitialize(self);
     }
+
     public int OnLoiterMoving(obj_id self) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "guard_wander.OnLoiterMoving enter name: " + getName(self));
         return super.OnLoiterMoving(self);
     }
+
     public int pathRandom(obj_id self, dictionary params) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "guard_wander.pathRandom enter name: " + getName(self));
@@ -54,13 +63,14 @@ public class guard_wander extends script.city.base.base_wander
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             LOGC(aiLoggingEnabled(self), "debug_ai", "guard_wander.pathRandom setting patrol points");
             ai_lib.setPatrolRandomNamedPath(self, patrolPoints);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int pathVerify(obj_id self, dictionary params) throws InterruptedException
     {
         if (aiGetMovementState(self) != MOVEMENT_PATROL || hasCondition(self, CONDITION_HIBERNATING))
@@ -116,6 +126,7 @@ public class guard_wander extends script.city.base.base_wander
         messageTo(self, "pathRandom", params, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "guard_wander.OnMovePathComplete enter name: " + getName(self));
@@ -124,12 +135,14 @@ public class guard_wander extends script.city.base.base_wander
         messageTo(self, "pathRandom", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathNotFound(obj_id self) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "guard_wander.OnMovePathNotFound enter name: " + getName(self));
         messageTo(self, "pathRandom", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (text.equals("GO") && isGod(speaker))
@@ -138,6 +151,7 @@ public class guard_wander extends script.city.base.base_wander
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHibernateEnd(obj_id self) throws InterruptedException
     {
         dictionary params = new dictionary();

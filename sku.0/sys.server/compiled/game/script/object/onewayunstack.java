@@ -1,5 +1,11 @@
 package script.object;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.library.utils;
 import script.*;
@@ -9,6 +15,7 @@ public class onewayunstack extends script.base_script
     public onewayunstack()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!canUnstack(player))
@@ -24,6 +31,7 @@ public class onewayunstack extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!canUnstack(player))
@@ -36,6 +44,7 @@ public class onewayunstack extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void unstackIt(obj_id stackedItem, obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -65,8 +74,8 @@ public class onewayunstack extends script.base_script
             detachScript(stackedItem, "object.onewayunstack");
             sendDirtyObjectMenuNotification(stackedItem);
         }
-        return;
     }
+
     public boolean canUnstack(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();

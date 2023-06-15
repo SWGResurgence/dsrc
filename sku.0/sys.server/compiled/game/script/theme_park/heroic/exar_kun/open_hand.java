@@ -1,5 +1,11 @@
 package script.theme_park.heroic.exar_kun;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -11,23 +17,25 @@ public class open_hand extends script.base_script
     public open_hand()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_EXAR_OPEN);
-        String[] cultists = 
-        {
-            "one",
-            "two",
-            "three",
-            "four",
-            "five",
-            "six",
-            "seven",
-            "eight"
-        };
+        String[] cultists =
+                {
+                        "one",
+                        "two",
+                        "three",
+                        "four",
+                        "five",
+                        "six",
+                        "seven",
+                        "eight"
+                };
         utils.setScriptVar(self, "cultist", cultists);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (getCellId(trial.getTop(self), "r2") != destContainer)
@@ -43,6 +51,7 @@ public class open_hand extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         messageTo(self, "summonNextAdd", trial.getSessionDict(self, "add"), 5.0f, false);
@@ -51,6 +60,7 @@ public class open_hand extends script.base_script
         buff.applyBuff(self, "open_balance_buff", 1200.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int summonNextAdd(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] allSpawn = trial.getObjectsInDungeonWithObjVar(trial.getTop(self), "spawn_id");
@@ -68,6 +78,7 @@ public class open_hand extends script.base_script
         messageTo(self, "sacrificeAdd", dict, 40.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getNextCultist(obj_id[] allSpawn) throws InterruptedException
     {
         if (allSpawn == null || allSpawn.length == 0)
@@ -75,13 +86,16 @@ public class open_hand extends script.base_script
             return null;
         }
         String cultist = getCultistString(getSelf());
-        for (obj_id obj_id : allSpawn) {
-            if ((getStringObjVar(obj_id, "spawn_id")).equals(cultist)) {
+        for (obj_id obj_id : allSpawn)
+        {
+            if ((getStringObjVar(obj_id, "spawn_id")).equals(cultist))
+            {
                 return obj_id;
             }
         }
         return null;
     }
+
     public String getCultistString(obj_id self) throws InterruptedException
     {
         String[] masterList = utils.getStringArrayScriptVar(self, "cultist");
@@ -90,7 +104,7 @@ public class open_hand extends script.base_script
             return "none";
         }
         Vector cultList = new Vector(Arrays.asList(masterList));
-        String nextCultist = ((String)cultList.get(rand(0, cultList.size() - 1)));
+        String nextCultist = ((String) cultList.get(rand(0, cultList.size() - 1)));
         cultList.remove(nextCultist);
         if (cultList != null)
         {
@@ -101,6 +115,7 @@ public class open_hand extends script.base_script
         utils.setScriptVar(self, "cultist", masterList);
         return nextCultist;
     }
+
     public int sacrificeAdd(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id add = params.getObjId("sacrifice");
@@ -118,12 +133,13 @@ public class open_hand extends script.base_script
         }
         int healingReduction = getEnhancedSkillStatisticModifierUncapped(self, "expertise_healing_reduction");
         float redux = healingReduction / (healingReduction + 75.0f);
-        int toHeal = (int)(125000.0f - (125000.0f * redux));
+        int toHeal = (int) (125000.0f - (125000.0f * redux));
         toHeal = toHeal < 1 ? 1 : toHeal;
         healing.healDamage(self, HEALTH, toHeal);
         playClientEffectLoc(self, "clienteffect/bacta_bomb.cef", getLocation(self), 0);
         return SCRIPT_CONTINUE;
     }
+
     public String getSacrificeBuff(obj_id self) throws InterruptedException
     {
         int killed = getNumberAddsKilled(self);
@@ -131,42 +147,45 @@ public class open_hand extends script.base_script
         switch (killed)
         {
             case 1:
-            sacrifice = "kun_one_sacrifice";
-            break;
+                sacrifice = "kun_one_sacrifice";
+                break;
             case 2:
-            sacrifice = "kun_two_sacrifice";
-            break;
+                sacrifice = "kun_two_sacrifice";
+                break;
             case 3:
-            sacrifice = "kun_three_sacrifice";
-            break;
+                sacrifice = "kun_three_sacrifice";
+                break;
             case 4:
-            sacrifice = "kun_four_sacrifice";
-            break;
+                sacrifice = "kun_four_sacrifice";
+                break;
             case 5:
-            sacrifice = "kun_five_sacrifice";
-            break;
+                sacrifice = "kun_five_sacrifice";
+                break;
             case 6:
-            sacrifice = "kun_six_sacrifice";
-            break;
+                sacrifice = "kun_six_sacrifice";
+                break;
             case 7:
-            sacrifice = "kun_seven_sacrifice";
-            break;
+                sacrifice = "kun_seven_sacrifice";
+                break;
             case 8:
-            sacrifice = "kun_eight_sacrifice";
-            break;
+                sacrifice = "kun_eight_sacrifice";
+                break;
         }
         return sacrifice;
     }
+
     public void incrementAddsKilled(obj_id self) throws InterruptedException
     {
         int killed = getNumberAddsKilled(self);
         killed++;
         utils.setScriptVar(self, "killed", killed);
     }
+
     public int getNumberAddsKilled(obj_id self) throws InterruptedException
     {
         return utils.hasScriptVar(self, "killed") ? utils.getIntScriptVar(self, "killed") : 0;
     }
+
     public int sharePain(obj_id self, dictionary params) throws InterruptedException
     {
         if (isDead(self))
@@ -180,18 +199,20 @@ public class open_hand extends script.base_script
         vectorList = utils.shuffleArray(vectorList);
         for (int i = 0; i < vectorList.size() && i < maxSize; i++)
         {
-            utils.setScriptVar(self, "pain.list" + i, ((obj_id)vectorList.get(i)));
-            buff.applyBuff(((obj_id)vectorList.get(i)), "kun_open_share_pain_debuff");
+            utils.setScriptVar(self, "pain.list" + i, ((obj_id) vectorList.get(i)));
+            buff.applyBuff(((obj_id) vectorList.get(i)), "kun_open_share_pain_debuff");
         }
         buff.applyBuff(self, "kun_open_share_pain");
         messageTo(self, "sharePain", null, 18.0f, false);
         chat.chat(self, "My pain runs deep. Let me share it with you.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         int total = 0;
-        for (int i1 : damage) {
+        for (int i1 : damage)
+        {
             total += i1;
         }
         int split = Math.round(total / 5.0f);
@@ -216,6 +237,7 @@ public class open_hand extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int finalBuff(obj_id self, dictionary params) throws InterruptedException
     {
         String lastBuff = getSacrificeBuff(self);
@@ -226,6 +248,7 @@ public class open_hand extends script.base_script
         buff.removeBuff(self, "open_balance_buff");
         return SCRIPT_CONTINUE;
     }
+
     public int teslaZap(obj_id self, dictionary params) throws InterruptedException
     {
         if (isDead(self))
@@ -238,7 +261,7 @@ public class open_hand extends script.base_script
         vectorList = utils.shuffleArray(vectorList);
         for (int i = 0; i < vectorList.size() && i < maxSize; i++)
         {
-            buff.applyBuff(((obj_id)vectorList.get(i)), "kun_open_spark");
+            buff.applyBuff(((obj_id) vectorList.get(i)), "kun_open_spark");
         }
         messageTo(self, "teslaZap", null, 15.0f, false);
         return SCRIPT_CONTINUE;

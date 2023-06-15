@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,14 +14,17 @@ import script.*;
 
 public class emp_day_garrison_historian extends script.base_script
 {
+    public static String c_stringFile = "conversation/emp_day_garrison_historian";
+
     public emp_day_garrison_historian()
     {
     }
-    public static String c_stringFile = "conversation/emp_day_garrison_historian";
+
     public boolean emp_day_garrison_historian_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean emp_day_garrison_historian_condition_hasTask2or3(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/emp_day_imperial");
@@ -25,6 +34,7 @@ public class emp_day_garrison_historian extends script.base_script
         int task3c = groundquests.getTaskId(questId, "diskGuy3");
         return (questIsTaskActive(questId, task2, player) && !questIsTaskComplete(questId, task3c, player)) || (questIsTaskActive(questId, task3a, player) && !questIsTaskComplete(questId, task2, player)) || (questIsTaskActive(questId, task3b, player) && !questIsTaskComplete(questId, task2, player)) || (questIsTaskActive(questId, task3c, player) && !questIsTaskComplete(questId, task2, player));
     }
+
     public boolean emp_day_garrison_historian_condition_pastMyTasks(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/emp_day_imperial");
@@ -36,6 +46,7 @@ public class emp_day_garrison_historian extends script.base_script
         int task4 = groundquests.getTaskId(questId, "disksToHistorian");
         return questIsQuestComplete(questId, player) || (!questIsTaskActive(questId, task1, player) && !questIsTaskActive(questId, task2, player) && !questIsTaskActive(questId, task3a, player) && !questIsTaskActive(questId, task3b, player) && !questIsTaskActive(questId, task3c, player) && !questIsTaskActive(questId, task4, player) && questIsQuestActive(questId, player));
     }
+
     public boolean emp_day_garrison_historian_condition_hasDisks(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/emp_day_imperial");
@@ -45,48 +56,52 @@ public class emp_day_garrison_historian extends script.base_script
         int task3c = groundquests.getTaskId(questId, "diskGuy3");
         return questIsTaskComplete(questId, task2, player) || (questIsTaskComplete(questId, task3a, player) && questIsTaskComplete(questId, task3b, player) && questIsTaskComplete(questId, task3c, player));
     }
+
     public boolean emp_day_garrison_historian_condition_hasStartingTask(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/emp_day_imperial");
         return questIsTaskActive(questId, 0, player);
     }
+
     public boolean emp_day_garrison_historian_condition_hasTask2(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/emp_day_imperial");
         int task2 = groundquests.getTaskId(questId, "killRebels");
         return questIsTaskActive(questId, task2, player);
     }
+
     public boolean emp_day_garrison_historian_condition_hasTask3a(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/emp_day_imperial");
         int task3a = groundquests.getTaskId(questId, "diskGuy1");
         return questIsTaskActive(questId, task3a, player);
     }
+
     public boolean emp_day_garrison_historian_condition_hasTask3b(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/emp_day_imperial");
         int task3b = groundquests.getTaskId(questId, "diskGuy2");
         return questIsTaskActive(questId, task3b, player);
     }
+
     public boolean emp_day_garrison_historian_condition_hasTask3c(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/emp_day_imperial");
         int task3c = groundquests.getTaskId(questId, "diskGuy3");
         return questIsTaskActive(questId, task3c, player);
     }
+
     public boolean emp_day_garrison_historian_condition_isNeutral(obj_id player, obj_id npc) throws InterruptedException
     {
         int factionHashCode = pvpGetAlignedFaction(player);
-        if (factionHashCode == 0)
-        {
-            return true;
-        }
-        return false;
+        return factionHashCode == 0;
     }
+
     public void emp_day_garrison_historian_action_historianConversed(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "historian_conversed");
     }
+
     public void emp_day_garrison_historian_action_diskGuy1Wp(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "empire_day.waypoint"))
@@ -101,6 +116,7 @@ public class emp_day_garrison_historian extends script.base_script
         setWaypointName(waypoint, "Cantina Contact");
         sendSystemMessage(player, new string_id("event/empire_day", "sys_msg_wp_added"));
     }
+
     public void emp_day_garrison_historian_action_dataUplinkWp(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "empire_day.waypoint"))
@@ -115,6 +131,7 @@ public class emp_day_garrison_historian extends script.base_script
         setWaypointName(waypoint, "Data Officer");
         sendSystemMessage(player, new string_id("event/empire_day", "sys_msg_wp_added"));
     }
+
     public void emp_day_garrison_historian_action_diskGuy3Wp(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "empire_day.waypoint"))
@@ -129,6 +146,7 @@ public class emp_day_garrison_historian extends script.base_script
         setWaypointName(waypoint, "Theater Contact");
         sendSystemMessage(player, new string_id("event/empire_day", "sys_msg_wp_added"));
     }
+
     public void emp_day_garrison_historian_action_diskGuy2Wp(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "empire_day.waypoint"))
@@ -143,6 +161,7 @@ public class emp_day_garrison_historian extends script.base_script
         setWaypointName(waypoint, "Med Center Contact");
         sendSystemMessage(player, new string_id("event/empire_day", "sys_msg_wp_added"));
     }
+
     public void emp_day_garrison_historian_action_disksToHistorian(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/emp_day_imperial");
@@ -153,25 +172,26 @@ public class emp_day_garrison_historian extends script.base_script
         groundquests.sendSignal(player, "disk_to_historian");
         if (questIsTaskActive(questId, task2, player))
         {
-            
+
         }
         questCompleteTask(questId, task2, player);
         if (questIsTaskActive(questId, task3a, player))
         {
-            
+
         }
         questCompleteTask(questId, task3a, player);
         if (questIsTaskActive(questId, task3b, player))
         {
-            
+
         }
         questCompleteTask(questId, task3b, player);
         if (questIsTaskActive(questId, task3c, player))
         {
-            
+
         }
         questCompleteTask(questId, task3c, player);
     }
+
     public void emp_day_garrison_historian_action_dataOfficerWp(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "empire_day.waypoint"))
@@ -186,6 +206,7 @@ public class emp_day_garrison_historian extends script.base_script
         setWaypointName(waypoint, "Data Officer");
         sendSystemMessage(player, new string_id("event/empire_day", "sys_msg_wp_added"));
     }
+
     public int emp_day_garrison_historian_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_101"))
@@ -237,6 +258,7 @@ public class emp_day_garrison_historian extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_garrison_historian_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_124"))
@@ -256,7 +278,7 @@ public class emp_day_garrison_historian extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -265,7 +287,7 @@ public class emp_day_garrison_historian extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_garrison_historian.branchId");
                     chat.chat(npc, player, message);
@@ -276,6 +298,7 @@ public class emp_day_garrison_historian extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_garrison_historian_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -309,7 +332,7 @@ public class emp_day_garrison_historian extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_132");
@@ -326,7 +349,7 @@ public class emp_day_garrison_historian extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_garrison_historian.branchId");
                     chat.chat(npc, player, message);
@@ -337,6 +360,7 @@ public class emp_day_garrison_historian extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_garrison_historian_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_132"))
@@ -356,7 +380,7 @@ public class emp_day_garrison_historian extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -365,7 +389,7 @@ public class emp_day_garrison_historian extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_garrison_historian.branchId");
                     chat.chat(npc, player, message);
@@ -391,7 +415,7 @@ public class emp_day_garrison_historian extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -400,7 +424,7 @@ public class emp_day_garrison_historian extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_garrison_historian.branchId");
                     chat.chat(npc, player, message);
@@ -422,6 +446,7 @@ public class emp_day_garrison_historian extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_garrison_historian_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_136"))
@@ -439,6 +464,7 @@ public class emp_day_garrison_historian extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_garrison_historian_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_144"))
@@ -458,7 +484,7 @@ public class emp_day_garrison_historian extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_148");
@@ -467,7 +493,7 @@ public class emp_day_garrison_historian extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_garrison_historian.branchId");
                     chat.chat(npc, player, message);
@@ -478,6 +504,7 @@ public class emp_day_garrison_historian extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_garrison_historian_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_148"))
@@ -506,7 +533,7 @@ public class emp_day_garrison_historian extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -515,7 +542,7 @@ public class emp_day_garrison_historian extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_garrison_historian.branchId");
                     chat.chat(npc, player, message);
@@ -526,6 +553,7 @@ public class emp_day_garrison_historian extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_garrison_historian_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_136"))
@@ -543,6 +571,7 @@ public class emp_day_garrison_historian extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_garrison_historian_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_158"))
@@ -569,7 +598,7 @@ public class emp_day_garrison_historian extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -582,7 +611,7 @@ public class emp_day_garrison_historian extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_garrison_historian.branchId");
                     chat.chat(npc, player, message);
@@ -593,6 +622,7 @@ public class emp_day_garrison_historian extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_garrison_historian_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_162"))
@@ -621,6 +651,7 @@ public class emp_day_garrison_historian extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -630,11 +661,13 @@ public class emp_day_garrison_historian extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -643,18 +676,21 @@ public class emp_day_garrison_historian extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.emp_day_garrison_historian");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -704,7 +740,7 @@ public class emp_day_garrison_historian extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -724,7 +760,7 @@ public class emp_day_garrison_historian extends script.base_script
                 utils.setScriptVar(player, "conversation.emp_day_garrison_historian.branchId", 2);
                 npcStartConversation(player, npc, "emp_day_garrison_historian", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -745,7 +781,7 @@ public class emp_day_garrison_historian extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_124");
@@ -753,7 +789,7 @@ public class emp_day_garrison_historian extends script.base_script
                 utils.setScriptVar(player, "conversation.emp_day_garrison_historian.branchId", 7);
                 npcStartConversation(player, npc, "emp_day_garrison_historian", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -774,7 +810,7 @@ public class emp_day_garrison_historian extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_158");
@@ -782,7 +818,7 @@ public class emp_day_garrison_historian extends script.base_script
                 utils.setScriptVar(player, "conversation.emp_day_garrison_historian.branchId", 17);
                 npcStartConversation(player, npc, "emp_day_garrison_historian", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -797,6 +833,7 @@ public class emp_day_garrison_historian extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("emp_day_garrison_historian"))

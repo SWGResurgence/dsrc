@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -8,20 +14,22 @@ import script.string_id;
 
 public class smuggler_spawn_enemy extends script.base_script
 {
-    public smuggler_spawn_enemy()
-    {
-    }
     public static final String STRING_FILE = "smuggler/enemy";
     public static final int FLAG_CLEAN_UP = 1;
     public static final int FLAG_ATTACK = 2;
     public static final int FLAG_FOLLOW = 3;
     public static final String VOL_PATROL_WATCH = "smugglerPatrolWatch";
     public static final float VOL_PATROL_RANGE = 12.0f;
+    public smuggler_spawn_enemy()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "startContrabandCheck", null, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void doSnare(obj_id playerSmuggler, obj_id npc) throws InterruptedException
     {
         if (isIncapacitated(npc))
@@ -43,34 +51,46 @@ public class smuggler_spawn_enemy extends script.base_script
             chat.chat(npc, barkString);
         }
         buff.applyBuff(playerSmuggler, "caltropSnare");
-        return;
     }
+
     public void broadcastCondition(obj_id playerSmuggler, obj_id npc, int flag) throws InterruptedException
     {
         location here = getLocation(npc);
         obj_id[] objects = getObjectsInRange(here, 32);
-        for (obj_id object : objects) {
-            if (hasObjVar(object, "quest.owner")) {
-                if ((getObjIdObjVar(object, "quest.owner") == playerSmuggler) && (npc != object)) {
-                    switch (flag) {
+        for (obj_id object : objects)
+        {
+            if (hasObjVar(object, "quest.owner"))
+            {
+                if ((getObjIdObjVar(object, "quest.owner") == playerSmuggler) && (npc != object))
+                {
+                    switch (flag)
+                    {
                         case FLAG_CLEAN_UP:
                             messageTo(object, "handleCleanUp", null, 1.0f, false);
                             break;
                         case FLAG_ATTACK:
-                            if (isIncapacitated(playerSmuggler)) {
+                            if (isIncapacitated(playerSmuggler))
+                            {
                                 break;
                             }
-                            if (!ai_lib.isInCombat(object)) {
-                                if (!utils.hasScriptVar(object, "fastTalked")) {
+                            if (!ai_lib.isInCombat(object))
+                            {
+                                if (!utils.hasScriptVar(object, "fastTalked"))
+                                {
                                     startCombat(object, playerSmuggler);
                                 }
-                            } else {
+                            }
+                            else
+                            {
                                 obj_id enemyTarget = getHateTarget(object);
-                                if (!isIdValid(enemyTarget)) {
+                                if (!isIdValid(enemyTarget))
+                                {
                                     break;
                                 }
-                                if (enemyTarget != playerSmuggler) {
-                                    if (!utils.hasScriptVar(object, "fastTalked")) {
+                                if (enemyTarget != playerSmuggler)
+                                {
+                                    if (!utils.hasScriptVar(object, "fastTalked"))
+                                    {
                                         float hate = getMaxHate(object);
                                         addHate(object, playerSmuggler, (hate + 1000.0f));
                                     }
@@ -88,8 +108,8 @@ public class smuggler_spawn_enemy extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public void enemyPickFight(obj_id npc, obj_id victimNpc, obj_id playerSmuggler) throws InterruptedException
     {
         clearHateList(npc);
@@ -109,8 +129,8 @@ public class smuggler_spawn_enemy extends script.base_script
         params.put("playerSmuggler", playerSmuggler);
         messageTo(npc, "endConfusion", params, 15.0f, false);
         messageTo(victimNpc, "endConfusion", params, 15.0f, false);
-        return;
     }
+
     public void doConfuse(obj_id playerSmuggler, obj_id npc) throws InterruptedException
     {
         removeHateTarget(npc, playerSmuggler);
@@ -123,22 +143,28 @@ public class smuggler_spawn_enemy extends script.base_script
         dictionary params = new dictionary();
         params.put("playerSmuggler", playerSmuggler);
         messageTo(npc, "endConfusion", params, 15.0f, false);
-        return;
     }
+
     public void doConfuseAttack(obj_id playerSmuggler, obj_id npc) throws InterruptedException
     {
         location here = getLocation(npc);
         obj_id[] objects = getObjectsInRange(here, 25);
         obj_id victimEnemy = null;
         obj_id enemyTarget = null;
-        for (obj_id object : objects) {
-            if (hasScript(object, "ai.smuggler_spawn_enemy")) {
-                if (object != npc) {
+        for (obj_id object : objects)
+        {
+            if (hasScript(object, "ai.smuggler_spawn_enemy"))
+            {
+                if (object != npc)
+                {
                     victimEnemy = object;
-                    if (ai_lib.isInCombat(object)) {
+                    if (ai_lib.isInCombat(object))
+                    {
                         enemyTarget = getHateTarget(object);
-                        if (isIdValid(enemyTarget)) {
-                            if (enemyTarget == playerSmuggler) {
+                        if (isIdValid(enemyTarget))
+                        {
+                            if (enemyTarget == playerSmuggler)
+                            {
                                 enemyPickFight(npc, object, playerSmuggler);
                                 return;
                             }
@@ -151,12 +177,12 @@ public class smuggler_spawn_enemy extends script.base_script
         {
             enemyPickFight(npc, victimEnemy, playerSmuggler);
         }
-        else 
+        else
         {
             doConfuse(playerSmuggler, npc);
         }
-        return;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (hasObjVar(breacher, "gm"))
@@ -210,6 +236,7 @@ public class smuggler_spawn_enemy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int combatLoop(obj_id self, dictionary params) throws InterruptedException
     {
         if (isIncapacitated(self))
@@ -252,6 +279,7 @@ public class smuggler_spawn_enemy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int smugglerKilled(obj_id self, dictionary params) throws InterruptedException
     {
         if (isIncapacitated(self))
@@ -272,6 +300,7 @@ public class smuggler_spawn_enemy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startContrabandCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (isIncapacitated(self))
@@ -302,19 +331,20 @@ public class smuggler_spawn_enemy extends script.base_script
                         messageTo(self, "contrabandCheckResult", null, 11.0f, false);
                         utils.setScriptVar(self, "contrabandCheck", 1);
                     }
-                    else 
+                    else
                     {
                         broadcastCondition(playerSmuggler, self, FLAG_ATTACK);
                     }
                 }
             }
         }
-        else 
+        else
         {
             createTriggerVolume(VOL_PATROL_WATCH, VOL_PATROL_RANGE, true);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int contrabandCheckResult(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "contrabandCheck");
@@ -335,8 +365,8 @@ public class smuggler_spawn_enemy extends script.base_script
             {
                 float underworldFaction = factions.getFactionStanding(playerSmuggler, "underworld");
                 int smugglerRank = smuggler.getSmugglerRank(underworldFaction);
-                expertiseIncrease = 10 + (int)getSkillStatisticModifier(playerSmuggler, "expertise_sly_lie_bonus");
-                rankIncrease = (int)getSkillStatisticModifier(self, "expertise_sly_lie_rank") * smugglerRank;
+                expertiseIncrease = 10 + getSkillStatisticModifier(playerSmuggler, "expertise_sly_lie_bonus");
+                rankIncrease = getSkillStatisticModifier(self, "expertise_sly_lie_rank") * smugglerRank;
                 utils.removeScriptVar(self, "slyLie");
             }
             int finalChance = expertiseIncrease + rankIncrease;
@@ -353,7 +383,7 @@ public class smuggler_spawn_enemy extends script.base_script
                 {
                     startCombat(self, playerSmuggler);
                 }
-                else 
+                else
                 {
                     obj_id enemyTarget = getHateTarget(self);
                     if (!isIdValid(enemyTarget))
@@ -372,7 +402,7 @@ public class smuggler_spawn_enemy extends script.base_script
                     broadcastCondition(playerSmuggler, self, FLAG_ATTACK);
                 }
             }
-            else 
+            else
             {
                 if (!ai_lib.isInCombat(self))
                 {
@@ -385,7 +415,7 @@ public class smuggler_spawn_enemy extends script.base_script
                         broadcastCondition(playerSmuggler, self, FLAG_FOLLOW);
                     }
                 }
-                else 
+                else
                 {
                     if (!hasObjVar(self, "bossEnemy"))
                     {
@@ -403,6 +433,7 @@ public class smuggler_spawn_enemy extends script.base_script
         utils.removeScriptVar(self, "slyLie");
         return SCRIPT_CONTINUE;
     }
+
     public int fastTalkReaction(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id playerSmuggler = params.getObjId("playerSmuggler");
@@ -412,8 +443,8 @@ public class smuggler_spawn_enemy extends script.base_script
         }
         float underworldFaction = factions.getFactionStanding(playerSmuggler, "underworld");
         int smugglerRank = smuggler.getSmugglerRank(underworldFaction);
-        int expertiseIncrease = (int)getSkillStatisticModifier(playerSmuggler, "expertise_fast_talk_bonus");
-        int rankIncrease = (int)getSkillStatisticModifier(self, "expertise_fast_talk_rank") * smugglerRank;
+        int expertiseIncrease = getSkillStatisticModifier(playerSmuggler, "expertise_fast_talk_bonus");
+        int rankIncrease = getSkillStatisticModifier(self, "expertise_fast_talk_rank") * smugglerRank;
         int finalChance = expertiseIncrease + rankIncrease;
         int roll = rand(1, 100);
         if (roll > (finalChance + 25))
@@ -430,6 +461,7 @@ public class smuggler_spawn_enemy extends script.base_script
         doConfuse(playerSmuggler, self);
         return SCRIPT_CONTINUE;
     }
+
     public int endConfusion(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id playerSmuggler = params.getObjId("playerSmuggler");
@@ -448,7 +480,7 @@ public class smuggler_spawn_enemy extends script.base_script
         {
             startCombat(self, playerSmuggler);
         }
-        else 
+        else
         {
             obj_id enemyTarget = getHateTarget(self);
             if (enemyTarget != playerSmuggler)
@@ -460,11 +492,13 @@ public class smuggler_spawn_enemy extends script.base_script
         messageTo(self, "combatLoop", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "fastTalked"))

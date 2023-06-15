@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act2;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.utils;
@@ -10,47 +16,48 @@ import java.util.Vector;
 
 public class imperial_slicer extends script.base_script
 {
+    public static final String[] TEMPLATE_LIST =
+            {
+                    "coa2_imperial_slicer_gang",
+                    "coa2_imperial_slicer_gang",
+                    "coa2_imperial_slicer_gang",
+                    "coa2_imperial_slicer_gang"
+            };
+    public static final float[][] LOCATION_LIST =
+            {
+
+                    {
+                            -5.0f,
+                            0.0f,
+                            10.0f,
+                            0.0f
+                    },
+
+                    {
+                            -5.0f,
+                            0.0f,
+                            -5.0f,
+                            0.0f
+                    },
+
+                    {
+                            10.0f,
+                            0.0f,
+                            -5.0f,
+                            0.0f
+                    },
+
+                    {
+                            -8.0f,
+                            0.0f,
+                            -2.0f,
+                            0.0f
+                    }
+            };
     public imperial_slicer()
     {
     }
-    public static final String[] TEMPLATE_LIST = 
-    {
-        "coa2_imperial_slicer_gang",
-        "coa2_imperial_slicer_gang",
-        "coa2_imperial_slicer_gang",
-        "coa2_imperial_slicer_gang"
-    };
-    public static final float[][] LOCATION_LIST = 
-    {
-        
-        {
-            -5.0f,
-            0.0f,
-            10.0f,
-            0.0f
-        },
-        
-        {
-            -5.0f,
-            0.0f,
-            -5.0f,
-            0.0f
-        },
-        
-        {
-            10.0f,
-            0.0f,
-            -5.0f,
-            0.0f
-        },
-        
-        {
-            -8.0f,
-            0.0f,
-            -2.0f,
-            0.0f
-        }
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String name = getName(self);
@@ -60,6 +67,7 @@ public class imperial_slicer extends script.base_script
         messageTo(self, "spawnNextObject", params, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnNextObject(obj_id self, dictionary params) throws InterruptedException
     {
         int objectNum = params.getInt("index");
@@ -89,17 +97,19 @@ public class imperial_slicer extends script.base_script
             params.put("index", objectNum);
             messageTo(self, "spawnNextObject", params, 2, false);
         }
-        else 
+        else
         {
             initCamp();
         }
         return SCRIPT_CONTINUE;
     }
+
     public void initCamp() throws InterruptedException
     {
         obj_id self = getSelf();
         setObjVar(self, "coa2.imperial.numThugs", 4);
     }
+
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "coa2.imperial.playerId");
@@ -110,6 +120,7 @@ public class imperial_slicer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int thugKilled(obj_id self, dictionary params) throws InterruptedException
     {
         int numThugs = getIntObjVar(self, "coa2.imperial.numThugs");
@@ -117,11 +128,14 @@ public class imperial_slicer extends script.base_script
         setObjVar(self, "coa2.imperial.numThugs", numThugs);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanup(obj_id self, dictionary params) throws InterruptedException
     {
         Vector objectList = getResizeableObjIdArrayObjVar(self, "coa2.imperial.obj_list");
-        for (Object o : objectList) {
-            if (isIdValid(((obj_id) o))) {
+        for (Object o : objectList)
+        {
+            if (isIdValid(((obj_id) o)))
+            {
                 destroyObject(((obj_id) o));
             }
         }

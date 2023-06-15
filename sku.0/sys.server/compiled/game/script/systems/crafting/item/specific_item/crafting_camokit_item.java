@@ -1,5 +1,11 @@
 package script.systems.crafting.item.specific_item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.draft_schematic;
 import script.library.craftinglib;
 import script.obj_id;
@@ -42,6 +48,7 @@ public class crafting_camokit_item extends script.systems.crafting.item.crafting
                                     new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
                             })
             };
+
     public crafting_camokit_item()
     {
     }

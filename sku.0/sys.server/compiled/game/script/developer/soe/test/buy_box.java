@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.menu_info_types;
 import script.obj_id;
 
@@ -8,12 +14,16 @@ public class buy_box extends script.base_script
     public buy_box()
     {
     }
-    public int OnAttach(obj_id self) throws InterruptedException {
-        if (!isGod(self) || getGodLevel(self) < 10 || !isPlayer(self)) {
+
+    public int OnAttach(obj_id self) throws InterruptedException
+    {
+        if (!isGod(self) || getGodLevel(self) < 10 || !isPlayer(self))
+        {
             detachScript(self, "test.buy_box");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         LOG("tony_test", "player " + player + " item " + item);
@@ -23,6 +33,7 @@ public class buy_box extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (names == null || attribs == null || names.length != attribs.length)

@@ -1,5 +1,11 @@
 package script.theme_park.poi;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -7,10 +13,12 @@ import script.region;
 
 public class poi_object extends script.theme_park.poi.base
 {
+    public static final String POI_SCRIPT = "poi.script";
+
     public poi_object()
     {
     }
-    public static final String POI_SCRIPT = "poi.script";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (poiGetBaseObject(self) == self)
@@ -21,12 +29,12 @@ public class poi_object extends script.theme_park.poi.base
                 intInstantiation = intInstantiation + 1;
                 setObjVar(self, "poi.instantiation", intInstantiation);
             }
-            else 
+            else
             {
                 setObjVar(self, "poi.instantiation", 1);
             }
         }
-        else 
+        else
         {
             int instantiation = getIntObjVar(poiGetBaseObject(self), "poi.instantiation");
             setObjVar(self, "poi.instantiation", instantiation);
@@ -47,12 +55,12 @@ public class poi_object extends script.theme_park.poi.base
                     destroyObject(self);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     destroyObject(self);
                 }
             }
-            else 
+            else
             {
                 setObjVar(self, "lastWokeUp", getGameTime());
                 messageTo(self, "handlePOIExpiration", null, 36000, false);
@@ -67,6 +75,7 @@ public class poi_object extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         obj_id baseObj = poiGetBaseObject(self);
@@ -76,6 +85,7 @@ public class poi_object extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (isMob(self))
@@ -98,12 +108,13 @@ public class poi_object extends script.theme_park.poi.base
         {
             poiBaseObjectDestroyed(self);
         }
-        else 
+        else
         {
             poiObjectDestroyed(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpRoutine(obj_id self, dictionary params) throws InterruptedException
     {
         if (isMob(self))
@@ -137,7 +148,7 @@ public class poi_object extends script.theme_park.poi.base
             {
                 destroyObject(self);
             }
-            else 
+            else
             {
                 detachScript(self, "theme_park.poi_object");
             }
@@ -150,19 +161,20 @@ public class poi_object extends script.theme_park.poi.base
                 detachScript(self, "theme_park.poi.poi_object");
             }
         }
-        else 
+        else
         {
             if (!hasScript(self, "ai.pet"))
             {
                 destroyObject(self);
             }
-            else 
+            else
             {
                 detachScript(self, "theme_park.poi_object");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id baseObj = poiGetBaseObject(self);
@@ -181,12 +193,12 @@ public class poi_object extends script.theme_park.poi.base
                     destroyObject(self);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     destroyObject(self);
                 }
             }
-            else 
+            else
             {
                 setObjVar(self, "lastWokeUp", getGameTime());
                 createTriggerVolume("playerBreachPOI", 120.0f, true);
@@ -195,6 +207,7 @@ public class poi_object extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int POIdeathMsgReceived(obj_id self, dictionary params) throws InterruptedException
     {
         String handlerName = params.getString("destroyMsgName");
@@ -210,6 +223,7 @@ public class poi_object extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id objKiller) throws InterruptedException
     {
         obj_id baseObject = poiGetBaseObject(self);
@@ -225,7 +239,7 @@ public class poi_object extends script.theme_park.poi.base
             {
                 parms.put("name", name);
             }
-            else 
+            else
             {
                 final String creatureName = getCreatureName(self);
                 if (creatureName != null)
@@ -242,6 +256,7 @@ public class poi_object extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id baseObject = poiGetBaseObject(self);
@@ -274,6 +289,7 @@ public class poi_object extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDelayedDestruction(obj_id self, dictionary params) throws InterruptedException
     {
         int sequenceNumber = getIntObjVar(self, "destructionSeqNumber");
@@ -289,6 +305,7 @@ public class poi_object extends script.theme_park.poi.base
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void beginSleepMode(obj_id self) throws InterruptedException
     {
         if (poiIsCompleted(self))
@@ -310,6 +327,7 @@ public class poi_object extends script.theme_park.poi.base
         utils.removeScriptVar(self, "npc_lair.numbabies");
         utils.removeScriptVar(self, "npc_lair.babeCheck");
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         LOG("poi", "ENTERING " + volumeName);
@@ -343,7 +361,7 @@ public class poi_object extends script.theme_park.poi.base
         {
             LOG("spawning", self + " already got one script");
         }
-        else 
+        else
         {
             if (hasScript(self, "systems.spawning.spawn_template"))
             {
@@ -364,14 +382,17 @@ public class poi_object extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doTriggerValidation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] objContents = getTriggerVolumeContents(self, "playerBreachPOI");
         int intPlayers = 0;
-        if (objContents != null && objContents.length > 0)
+        if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
-                if (isPlayer(objContent)) {
+            for (obj_id objContent : objContents)
+            {
+                if (isPlayer(objContent))
+                {
                     intPlayers++;
                 }
             }
@@ -380,7 +401,7 @@ public class poi_object extends script.theme_park.poi.base
         {
             utils.setScriptVar(self, "poi.numPlayers", intPlayers);
         }
-        else 
+        else
         {
             utils.removeScriptVar(self, "poi.numPlayers");
             sendSleepModeMsg(self);
@@ -388,6 +409,7 @@ public class poi_object extends script.theme_park.poi.base
         messageTo(self, "doTriggerValidation", null, 900, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         LOG("poi", "EXITING" + volumeName);
@@ -408,12 +430,13 @@ public class poi_object extends script.theme_park.poi.base
             sendSleepModeMsg(self);
             utils.removeScriptVar(self, "poi.numPlayers");
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "poi.numPlayers", numPlayers);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePOIExpiration(obj_id self, dictionary params) throws InterruptedException
     {
         if (poiIsCompleted(self))
@@ -440,12 +463,13 @@ public class poi_object extends script.theme_park.poi.base
         {
             destroyObject(self);
         }
-        else 
+        else
         {
             messageTo(self, "handlePOIExpiration", null, 36000, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void sendSleepModeMsg(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "poi.sleepMode"))
@@ -458,6 +482,7 @@ public class poi_object extends script.theme_park.poi.base
             utils.setScriptVar(self, "npc_lair.sleepModeMessageSent", true);
         }
     }
+
     public int handleBeginSleepMode(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "npc_lair.sleepModeMessageSent");
@@ -468,6 +493,7 @@ public class poi_object extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int proximityCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         if (!poiIsCompleted())

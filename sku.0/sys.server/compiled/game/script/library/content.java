@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class content extends script.base_script
@@ -13,6 +19,7 @@ public class content extends script.base_script
     public static final String SECURITY_CLEARANCE_GORAX = "bdg_content_rsf_clearance_7";
     public static final String REBEL_PATH_OBJVAR_NAME = "legacy.faction.rebelPath";
     public static final String IMPERIAL_PATH_OBJVAR_NAME = "legacy.faction.imperialPath";
+
     public content()
     {
     }

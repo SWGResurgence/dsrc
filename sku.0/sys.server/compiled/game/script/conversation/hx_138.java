@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,131 +14,158 @@ import script.*;
 
 public class hx_138 extends script.base_script
 {
+    public static String c_stringFile = "conversation/hx_138";
+
     public hx_138()
     {
     }
-    public static String c_stringFile = "conversation/hx_138";
+
     public boolean hx_138_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean hx_138_condition_firstMeeting(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.isTaskActive(player, "outbreak_quest_02_imperial", "findTroopers") || groundquests.isTaskActive(player, "outbreak_quest_02_rebel", "findTroopers") || groundquests.isTaskActive(player, "outbreak_quest_02_neutral", "findTroopers"));
     }
+
     public boolean hx_138_condition_hasRescueQuestActive(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.isTaskActive(player, "outbreak_quest_rescue_01", "spawnSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_01", "coaxingPleyer") || groundquests.isTaskActive(player, "outbreak_quest_rescue_02", "spawnSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_02", "coaxingPleyer") || groundquests.isTaskActive(player, "outbreak_quest_rescue_03", "spawnSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_03", "coaxingPleyer") || groundquests.isTaskActive(player, "outbreak_quest_rescue_04", "spawnSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_04", "coaxingPleyer") || groundquests.isTaskActive(player, "outbreak_quest_rescue_05", "spawnSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_05", "coaxingPleyer") || groundquests.isTaskActive(player, "outbreak_quest_rescue_06", "spawnSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_06", "coaxingPleyer") || groundquests.isTaskActive(player, "outbreak_quest_rescue_07", "spawnSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_07", "coaxingPleyer") || groundquests.isTaskActive(player, "outbreak_quest_rescue_08", "spawnSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_08", "coaxingPleyer") || groundquests.isTaskActive(player, "outbreak_quest_rescue_09", "spawnSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_09", "coaxingPleyer") || groundquests.isTaskActive(player, "outbreak_quest_rescue_010", "spawnSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_010", "coaxingPleyer") || groundquests.isTaskActive(player, "outbreak_quest_rescue_011", "spawnSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_012", "coaxingPleyer") || groundquests.isTaskActive(player, "outbreak_quest_rescue_013", "spawnSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_013", "coaxingPleyer") || groundquests.isTaskActive(player, "outbreak_quest_rescue_014", "spawnSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_014", "coaxingPleyer") || groundquests.isTaskActive(player, "outbreak_quest_rescue_015", "spawnSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_015", "coaxingPleyer") || groundquests.isTaskActive(player, "outbreak_quest_rescue_016", "spawnSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_016", "coaxingPleyer"));
     }
+
     public boolean hx_138_condition_failedRescueOne(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "outbreak_quest_rescue_01_fail");
     }
+
     public boolean hx_138_condition_failedRescueTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "outbreak_quest_rescue_02_fail");
     }
+
     public boolean hx_138_condition_failedRescueThree(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "outbreak_quest_rescue_03_fail");
     }
+
     public boolean hx_138_condition_failedRescueFour(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "outbreak_quest_rescue_04_fail");
     }
+
     public boolean hx_138_condition_successRescueOne(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "outbreak_quest_rescue_01_success");
     }
+
     public boolean hx_138_condition_successRescueTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "outbreak_quest_rescue_02_success");
     }
+
     public boolean hx_138_condition_successRescueThree(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "outbreak_quest_rescue_03_success");
     }
+
     public boolean hx_138_condition_successRescueFour(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "outbreak_quest_rescue_04_success");
     }
+
     public boolean hx_138_condition_hasShuttlePartQuestActive(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "outbreak_quest_shuttle_parts");
     }
+
     public boolean hx_138_condition_isStuckRescuing(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.isTaskActive(player, "outbreak_quest_rescue_01", "rescueCompleted") || groundquests.isTaskActive(player, "outbreak_quest_rescue_02", "rescueCompleted") || groundquests.isTaskActive(player, "outbreak_quest_rescue_03", "rescueCompleted") || groundquests.isTaskActive(player, "outbreak_quest_rescue_04", "rescueCompleted") || groundquests.isTaskActive(player, "outbreak_quest_rescue_01", "speakSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_02", "speakSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_03", "speakSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_04", "speakSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_05", "rescueCompleted") || groundquests.isTaskActive(player, "outbreak_quest_rescue_06", "rescueCompleted") || groundquests.isTaskActive(player, "outbreak_quest_rescue_07", "rescueCompleted") || groundquests.isTaskActive(player, "outbreak_quest_rescue_08", "rescueCompleted") || groundquests.isTaskActive(player, "outbreak_quest_rescue_05", "speakSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_06", "speakSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_07", "speakSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_08", "speakSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_09", "rescueCompleted") || groundquests.isTaskActive(player, "outbreak_quest_rescue_010", "rescueCompleted") || groundquests.isTaskActive(player, "outbreak_quest_rescue_011", "rescueCompleted") || groundquests.isTaskActive(player, "outbreak_quest_rescue_012", "rescueCompleted") || groundquests.isTaskActive(player, "outbreak_quest_rescue_09", "speakSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_010", "speakSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_011", "speakSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_012", "speakSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_013", "rescueCompleted") || groundquests.isTaskActive(player, "outbreak_quest_rescue_014", "rescueCompleted") || groundquests.isTaskActive(player, "outbreak_quest_rescue_015", "rescueCompleted") || groundquests.isTaskActive(player, "outbreak_quest_rescue_016", "rescueCompleted") || groundquests.isTaskActive(player, "outbreak_quest_rescue_013", "speakSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_014", "speakSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_015", "speakSurvivor") || groundquests.isTaskActive(player, "outbreak_quest_rescue_016", "speakSurvivor"));
     }
+
     public boolean hx_138_condition_finishedRescueCanceledShuttle(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "outbreak_quest_rescue_04_success") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_shuttle_parts");
     }
+
     public boolean hx_138_condition_hasShuttlePartsNotMechanic(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "outbreak_quest_shuttle_parts", "deliverMechanic");
     }
+
     public boolean hx_138_condition_isImperialQuestPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "outbreak_quest_02_imperial");
     }
+
     public boolean hx_138_condition_isRebelQuestPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "outbreak_quest_02_rebel");
     }
+
     public boolean hx_138_condition_isNeutralQuestPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "outbreak_quest_02_neutral");
     }
+
     public boolean hx_138_condition_hasGivenPartsMechanic(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "outbreak_quest_shuttle_parts", "seeHX138");
     }
+
     public boolean hx_138_condition_readyFirstRescue(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.hasCompletedQuest(player, "outbreak_quest_02_imperial") || groundquests.hasCompletedQuest(player, "outbreak_quest_02_rebel") || groundquests.hasCompletedQuest(player, "outbreak_quest_02_neutral")) && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_01") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_05") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_06") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_07");
     }
+
     public boolean hx_138_condition_hasFinishedShuttleParts(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "outbreak_quest_shuttle_parts");
     }
+
     public boolean hx_138_condition_isPlayerGodMode(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return isGod(player);
     }
+
     public boolean hx_138_condition_hasCompletedRescue3Del4(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "outbreak_quest_rescue_03") || groundquests.hasCompletedQuest(player, "outbreak_quest_rescue_011") || groundquests.hasCompletedQuest(player, "outbreak_quest_rescue_012") || groundquests.hasCompletedQuest(player, "outbreak_quest_rescue_013")) && (!groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_04") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_014") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_015") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_016"));
     }
+
     public boolean hx_138_condition_hasCompletedRescue2Del3(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "outbreak_quest_rescue_02") || groundquests.hasCompletedQuest(player, "outbreak_quest_rescue_08") || groundquests.hasCompletedQuest(player, "outbreak_quest_rescue_09") || groundquests.hasCompletedQuest(player, "outbreak_quest_rescue_010")) && (!groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_03") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_011") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_012") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_013"));
     }
+
     public boolean hx_138_condition_hasCompletedRescue1Del2(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "outbreak_quest_rescue_01") || groundquests.hasCompletedQuest(player, "outbreak_quest_rescue_05") || groundquests.hasCompletedQuest(player, "outbreak_quest_rescue_06") || groundquests.hasCompletedQuest(player, "outbreak_quest_rescue_07")) && (!groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_02") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_08") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_09") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_010"));
     }
+
     public boolean hx_138_condition_isOnDungeonMissions(obj_id player, obj_id npc) throws InterruptedException
     {
         String faction = "";
@@ -144,7 +177,7 @@ public class hx_138 extends script.base_script
         {
             faction = "rebel";
         }
-        else 
+        else
         {
             faction = "neutral";
         }
@@ -164,24 +197,29 @@ public class hx_138 extends script.base_script
         }
         return hasAValidQuest;
     }
+
     public boolean hx_138_condition_shuttleEscape(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.isTaskActive(player, "outbreak_quest_facility_05_imperial", "seeHX138") || groundquests.isTaskActive(player, "outbreak_quest_facility_05_rebel", "seeHX138") || groundquests.isTaskActive(player, "outbreak_quest_facility_05_neutral", "seeHX138"));
     }
+
     public boolean hx_138_condition_hasCompletedRescue4DelShuttle(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "outbreak_quest_rescue_04") || groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_014") || groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_015") || groundquests.isQuestActiveOrComplete(player, "outbreak_quest_rescue_016") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_shuttle_parts"));
     }
+
     public boolean hx_138_condition_hasRadio(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "outbreak_radio_delivery_03", "findEpsilonContact");
     }
+
     public void hx_138_action_sendSignalMetHX138(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.sendSignal(player, "playerFoundStormtroopers");
     }
+
     public void hx_138_action_resetRescueOne(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -204,6 +242,7 @@ public class hx_138 extends script.base_script
         }
         hx_138_action_giveFirstSurvivorQuest(player, npc);
     }
+
     public void hx_138_action_giveSecondSurvivorQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -216,19 +255,20 @@ public class hx_138 extends script.base_script
         switch (randNum)
         {
             case 1:
-            groundquests.grantQuest(player, "outbreak_quest_rescue_02");
-            break;
+                groundquests.grantQuest(player, "outbreak_quest_rescue_02");
+                break;
             case 2:
-            groundquests.grantQuest(player, "outbreak_quest_rescue_08");
-            break;
+                groundquests.grantQuest(player, "outbreak_quest_rescue_08");
+                break;
             case 3:
-            groundquests.grantQuest(player, "outbreak_quest_rescue_09");
-            break;
+                groundquests.grantQuest(player, "outbreak_quest_rescue_09");
+                break;
             case 4:
-            groundquests.grantQuest(player, "outbreak_quest_rescue_010");
-            break;
+                groundquests.grantQuest(player, "outbreak_quest_rescue_010");
+                break;
         }
     }
+
     public void hx_138_action_giveThirdSurvivorQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -241,19 +281,20 @@ public class hx_138 extends script.base_script
         switch (randNum)
         {
             case 1:
-            groundquests.grantQuest(player, "outbreak_quest_rescue_03");
-            break;
+                groundquests.grantQuest(player, "outbreak_quest_rescue_03");
+                break;
             case 2:
-            groundquests.grantQuest(player, "outbreak_quest_rescue_011");
-            break;
+                groundquests.grantQuest(player, "outbreak_quest_rescue_011");
+                break;
             case 3:
-            groundquests.grantQuest(player, "outbreak_quest_rescue_012");
-            break;
+                groundquests.grantQuest(player, "outbreak_quest_rescue_012");
+                break;
             case 4:
-            groundquests.grantQuest(player, "outbreak_quest_rescue_013");
-            break;
+                groundquests.grantQuest(player, "outbreak_quest_rescue_013");
+                break;
         }
     }
+
     public void hx_138_action_giveFourthSurvivorQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -266,19 +307,20 @@ public class hx_138 extends script.base_script
         switch (randNum)
         {
             case 1:
-            groundquests.grantQuest(player, "outbreak_quest_rescue_04");
-            break;
+                groundquests.grantQuest(player, "outbreak_quest_rescue_04");
+                break;
             case 2:
-            groundquests.grantQuest(player, "outbreak_quest_rescue_014");
-            break;
+                groundquests.grantQuest(player, "outbreak_quest_rescue_014");
+                break;
             case 3:
-            groundquests.grantQuest(player, "outbreak_quest_rescue_015");
-            break;
+                groundquests.grantQuest(player, "outbreak_quest_rescue_015");
+                break;
             case 4:
-            groundquests.grantQuest(player, "outbreak_quest_rescue_016");
-            break;
+                groundquests.grantQuest(player, "outbreak_quest_rescue_016");
+                break;
         }
     }
+
     public void hx_138_action_resetRescueTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -301,6 +343,7 @@ public class hx_138 extends script.base_script
         }
         hx_138_action_giveSecondSurvivorQuest(player, npc);
     }
+
     public void hx_138_action_resetRescueThree(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -323,6 +366,7 @@ public class hx_138 extends script.base_script
         }
         hx_138_action_giveThirdSurvivorQuest(player, npc);
     }
+
     public void hx_138_action_resetRescueFour(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -345,6 +389,7 @@ public class hx_138 extends script.base_script
         }
         hx_138_action_giveFourthSurvivorQuest(player, npc);
     }
+
     public void hx_138_action_fixPlayerRescueQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -360,27 +405,31 @@ public class hx_138 extends script.base_script
         {
             hx_138_action_resetRescueThree(player, npc);
         }
-        else 
+        else
         {
             hx_138_action_resetRescueFour(player, npc);
         }
     }
+
     public void hx_138_action_finishRescueGiveShuttleQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.clearQuest(player, "outbreak_quest_rescue_04_success");
         hx_138_action_giveShuttleQuest(player, npc);
     }
+
     public void hx_138_action_giveShuttleQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.grantQuest(player, "outbreak_quest_shuttle_parts");
     }
+
     public void hx_138_action_finishShuttleParts(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.sendSignal(player, "deliveredShuttleSupplies");
     }
+
     public void hx_138_action_giveFirstSurvivorQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -392,19 +441,20 @@ public class hx_138 extends script.base_script
         switch (randNum)
         {
             case 1:
-            groundquests.grantQuest(player, "outbreak_quest_rescue_01");
-            break;
+                groundquests.grantQuest(player, "outbreak_quest_rescue_01");
+                break;
             case 2:
-            groundquests.grantQuest(player, "outbreak_quest_rescue_05");
-            break;
+                groundquests.grantQuest(player, "outbreak_quest_rescue_05");
+                break;
             case 3:
-            groundquests.grantQuest(player, "outbreak_quest_rescue_06");
-            break;
+                groundquests.grantQuest(player, "outbreak_quest_rescue_06");
+                break;
             case 4:
-            groundquests.grantQuest(player, "outbreak_quest_rescue_07");
-            break;
+                groundquests.grantQuest(player, "outbreak_quest_rescue_07");
+                break;
         }
     }
+
     public void hx_138_action_giveRandomInquisitorQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -417,11 +467,12 @@ public class hx_138 extends script.base_script
         {
             groundquests.grantQuest(player, "outbreak_quest_administrative_building_rebel_0" + randNumber);
         }
-        else 
+        else
         {
             groundquests.grantQuest(player, "outbreak_quest_administrative_building_neutral_0" + randNumber);
         }
     }
+
     public void hx_138_action_giveInquisitorQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -433,11 +484,12 @@ public class hx_138 extends script.base_script
         {
             groundquests.grantQuest(player, "outbreak_quest_administrative_building_rebel_01");
         }
-        else 
+        else
         {
             groundquests.grantQuest(player, "outbreak_quest_administrative_building_neutral_01");
         }
     }
+
     public void hx_138_action_giveInquisitorQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -449,11 +501,12 @@ public class hx_138 extends script.base_script
         {
             groundquests.grantQuest(player, "outbreak_quest_administrative_building_rebel_02");
         }
-        else 
+        else
         {
             groundquests.grantQuest(player, "outbreak_quest_administrative_building_neutral_02");
         }
     }
+
     public void hx_138_action_giveInquisitorQuestFive(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -465,11 +518,12 @@ public class hx_138 extends script.base_script
         {
             groundquests.grantQuest(player, "outbreak_quest_administrative_building_rebel_05");
         }
-        else 
+        else
         {
             groundquests.grantQuest(player, "outbreak_quest_administrative_building_neutral_05");
         }
     }
+
     public void hx_138_action_giveInquisitorQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -481,11 +535,12 @@ public class hx_138 extends script.base_script
         {
             groundquests.grantQuest(player, "outbreak_quest_administrative_building_rebel_04");
         }
-        else 
+        else
         {
             groundquests.grantQuest(player, "outbreak_quest_administrative_building_neutral_04");
         }
     }
+
     public void hx_138_action_giveInquisitorQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -497,11 +552,12 @@ public class hx_138 extends script.base_script
         {
             groundquests.grantQuest(player, "outbreak_quest_administrative_building_rebel_03");
         }
-        else 
+        else
         {
             groundquests.grantQuest(player, "outbreak_quest_administrative_building_neutral_03");
         }
     }
+
     public void hx_138_action_fixRescueGates(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -515,70 +571,87 @@ public class hx_138 extends script.base_script
             }
         }
     }
+
     public void hx_138_action_godModeRescue01a(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_quest_rescue_01");
     }
+
     public void hx_138_action_godModeRescue01d(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_quest_rescue_07");
     }
+
     public void hx_138_action_godModeRescue01c(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_quest_rescue_06");
     }
+
     public void hx_138_action_godModeRescue01b(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_quest_rescue_05");
     }
+
     public void hx_138_action_godModeRescue02a(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_quest_rescue_02");
     }
+
     public void hx_138_action_godModeRescue02d(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_quest_rescue_010");
     }
+
     public void hx_138_action_godModeRescue02c(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_quest_rescue_09");
     }
+
     public void hx_138_action_godModeRescue02b(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_quest_rescue_08");
     }
+
     public void hx_138_action_godModeRescue03d(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_quest_rescue_013");
     }
+
     public void hx_138_action_godModeRescue03c(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_quest_rescue_012");
     }
+
     public void hx_138_action_godModeRescue03b(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_quest_rescue_011");
     }
+
     public void hx_138_action_godModeRescue03a(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_quest_rescue_03");
     }
+
     public void hx_138_action_godModeRescue04d(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_quest_rescue_016");
     }
+
     public void hx_138_action_godModeRescue04c(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_quest_rescue_015");
     }
+
     public void hx_138_action_godModeRescue04b(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_quest_rescue_014");
     }
+
     public void hx_138_action_godModeRescue04a(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_quest_rescue_04");
     }
+
     public int hx_138_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_122"))
@@ -599,7 +672,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_138");
@@ -608,7 +681,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -661,7 +734,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_181");
@@ -686,7 +759,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -736,7 +809,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_191");
@@ -761,7 +834,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -811,7 +884,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_196");
@@ -836,7 +909,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -846,6 +919,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_138"))
@@ -866,7 +940,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_140");
@@ -875,7 +949,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -885,6 +959,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_140"))
@@ -904,7 +979,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_142");
@@ -913,7 +988,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -923,6 +998,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_142"))
@@ -942,7 +1018,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -951,7 +1027,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -961,6 +1037,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_144"))
@@ -980,7 +1057,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -989,7 +1066,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -999,6 +1076,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_146"))
@@ -1019,6 +1097,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_181"))
@@ -1078,6 +1157,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_191"))
@@ -1137,6 +1217,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_196"))
@@ -1196,6 +1277,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_104"))
@@ -1211,6 +1293,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63"))
@@ -1230,7 +1313,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -1239,7 +1322,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1249,6 +1332,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_67"))
@@ -1268,7 +1352,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -1277,7 +1361,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1287,6 +1371,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -1306,7 +1391,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_75");
@@ -1315,7 +1400,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1325,6 +1410,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_75"))
@@ -1344,7 +1430,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -1353,7 +1439,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1363,6 +1449,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -1378,6 +1465,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
@@ -1397,6 +1485,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_91"))
@@ -1416,7 +1505,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -1429,7 +1518,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     prose_package pp = new prose_package();
@@ -1494,7 +1583,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_358");
@@ -1515,7 +1604,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1525,6 +1614,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_95"))
@@ -1544,6 +1634,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_358"))
@@ -1592,6 +1683,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_121"))
@@ -1607,6 +1699,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_129"))
@@ -1626,7 +1719,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_133");
@@ -1635,7 +1728,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1681,7 +1774,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_347");
@@ -1702,7 +1795,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1712,6 +1805,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_133"))
@@ -1731,6 +1825,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_347"))
@@ -1779,6 +1874,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_159"))
@@ -1794,6 +1890,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_165"))
@@ -1845,7 +1942,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_325");
@@ -1866,7 +1963,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1876,6 +1973,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_325"))
@@ -1924,6 +2022,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_216"))
@@ -1940,6 +2039,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_305"))
@@ -1959,7 +2059,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_308");
@@ -1968,7 +2068,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2014,7 +2114,7 @@ public class hx_138 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_312");
@@ -2035,7 +2135,7 @@ public class hx_138 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.hx_138.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2045,6 +2145,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_308"))
@@ -2060,6 +2161,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_312"))
@@ -2108,6 +2210,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hx_138_handleBranch85(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_244"))
@@ -2123,6 +2226,7 @@ public class hx_138 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -2132,11 +2236,13 @@ public class hx_138 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2145,18 +2251,21 @@ public class hx_138 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.hx_138");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2199,7 +2308,7 @@ public class hx_138 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_122");
@@ -2215,7 +2324,7 @@ public class hx_138 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "hx_138", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -2271,7 +2380,7 @@ public class hx_138 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -2279,7 +2388,7 @@ public class hx_138 extends script.base_script
                 utils.setScriptVar(player, "conversation.hx_138.branchId", 32);
                 npcStartConversation(player, npc, "hx_138", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2300,7 +2409,7 @@ public class hx_138 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_63");
@@ -2312,7 +2421,7 @@ public class hx_138 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "hx_138", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -2337,7 +2446,7 @@ public class hx_138 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_85");
@@ -2349,7 +2458,7 @@ public class hx_138 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "hx_138", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -2388,7 +2497,7 @@ public class hx_138 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -2408,7 +2517,7 @@ public class hx_138 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "hx_138", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -2433,7 +2542,7 @@ public class hx_138 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -2445,7 +2554,7 @@ public class hx_138 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "hx_138", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -2477,7 +2586,7 @@ public class hx_138 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_129");
@@ -2489,7 +2598,7 @@ public class hx_138 extends script.base_script
                 utils.setScriptVar(player, "conversation.hx_138.branchId", 53);
                 npcStartConversation(player, npc, "hx_138", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2510,7 +2619,7 @@ public class hx_138 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_159");
@@ -2518,7 +2627,7 @@ public class hx_138 extends script.base_script
                 utils.setScriptVar(player, "conversation.hx_138.branchId", 61);
                 npcStartConversation(player, npc, "hx_138", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2546,7 +2655,7 @@ public class hx_138 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_165");
@@ -2558,7 +2667,7 @@ public class hx_138 extends script.base_script
                 utils.setScriptVar(player, "conversation.hx_138.branchId", 63);
                 npcStartConversation(player, npc, "hx_138", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2579,7 +2688,7 @@ public class hx_138 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_216");
@@ -2587,7 +2696,7 @@ public class hx_138 extends script.base_script
                 utils.setScriptVar(player, "conversation.hx_138.branchId", 70);
                 npcStartConversation(player, npc, "hx_138", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2650,7 +2759,7 @@ public class hx_138 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_305");
@@ -2662,7 +2771,7 @@ public class hx_138 extends script.base_script
                 utils.setScriptVar(player, "conversation.hx_138.branchId", 77);
                 npcStartConversation(player, npc, "hx_138", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2684,7 +2793,7 @@ public class hx_138 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_244");
@@ -2692,7 +2801,7 @@ public class hx_138 extends script.base_script
                 utils.setScriptVar(player, "conversation.hx_138.branchId", 85);
                 npcStartConversation(player, npc, "hx_138", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2713,6 +2822,7 @@ public class hx_138 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("hx_138"))

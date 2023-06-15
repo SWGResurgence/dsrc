@@ -1,22 +1,29 @@
 package script.event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.obj_id;
 
 public class shuttle_control extends script.base_script
 {
+    private static final float DECAY_TIME = 60 * 60 * 8;
+    private static final float[] LANDING_TIME =
+            {
+                    17,
+                    22,
+                    26,
+                    33
+            };
     public shuttle_control()
     {
     }
-    private static final float DECAY_TIME = 60 * 60 * 8;
-    private static final float[] LANDING_TIME =
-    {
-        17,
-        22,
-        26,
-        33
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         float timeStamp = getGameTime();
@@ -24,11 +31,13 @@ public class shuttle_control extends script.base_script
         messageTo(self, "cleanUp", null, DECAY_TIME, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         checkTimeLimit(self);
         return SCRIPT_CONTINUE;
     }
+
     public int landShuttle(obj_id self, dictionary params) throws InterruptedException
     {
         int shuttleType = getIntObjVar(self, "event.shuttle.shuttleType");
@@ -46,6 +55,7 @@ public class shuttle_control extends script.base_script
         sendSystemMessage(getObjIdObjVar(self, "event.shuttle.owner"), "SHUTTLE: I am landing.", null);
         return SCRIPT_CONTINUE;
     }
+
     public int takeOff(obj_id self, dictionary params) throws InterruptedException
     {
         int shuttleType = getIntObjVar(self, "event.shuttle.shuttleType");
@@ -63,6 +73,7 @@ public class shuttle_control extends script.base_script
         sendSystemMessage(getObjIdObjVar(self, "event.shuttle.owner"), "SHUTTLE: I am taking off.", null);
         return SCRIPT_CONTINUE;
     }
+
     public int performFlyBy(obj_id self, dictionary params) throws InterruptedException
     {
         int shuttleType = getIntObjVar(self, "event.shuttle.shuttleType");
@@ -70,6 +81,7 @@ public class shuttle_control extends script.base_script
         messageTo(self, "takeOff", null, LANDING_TIME[shuttleType] + 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int dropOffNpcs(obj_id self, dictionary params) throws InterruptedException
     {
         int numSpawns = getIntObjVar(self, "event.shuttle.numSpawns");
@@ -83,6 +95,7 @@ public class shuttle_control extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = getObjIdObjVar(self, "event.shuttle.owner");
@@ -91,6 +104,7 @@ public class shuttle_control extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void checkTimeLimit(obj_id self) throws InterruptedException
     {
         float timeStamp = getFloatObjVar(self, "event.shuttle.timeStamp");

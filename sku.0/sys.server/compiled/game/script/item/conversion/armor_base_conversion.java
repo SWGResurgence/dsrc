@@ -1,5 +1,11 @@
 package script.item.conversion;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.armor;
 import script.library.sui;
@@ -32,6 +38,7 @@ public class armor_base_conversion extends script.base_script
     public static final String[] RECON_TYPE =
             {
             };
+
     public armor_base_conversion()
     {
     }
@@ -73,7 +80,6 @@ public class armor_base_conversion extends script.base_script
         if (getVolumeFree(pInv) <= 1)
         {
             sendSystemMessage(player, new string_id("quest_armorsmith", "inventory_full"));
-            return;
         }
         else
         {
@@ -125,7 +131,6 @@ public class armor_base_conversion extends script.base_script
             else
             {
                 CustomerServiceLog("armor_converion", "Server attempted to create Armor " + newItemTemplate + " for %TU but failed", player);
-                return;
             }
         }
     }

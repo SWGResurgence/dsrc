@@ -4,6 +4,12 @@ package script.item;/*
 @Purpose: This item allows you to place an extractor unit that will mine resources for you, using messagTo to generate the resource.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.resource;
 import script.library.sui;
@@ -87,11 +93,13 @@ public class resource_extraction_beacon extends script.base_script
         messageTo(self, "firstPhase", d, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int firstPhase(obj_id self, dictionary params)
     {
         oneTimeHarvest(params.getObjId("resource"), rand(69, 420), getLocation(self));
         return SCRIPT_CONTINUE;
     }
+
     public int secondPhase(obj_id self, dictionary params)
     {
         oneTimeHarvest(params.getObjId("resource"), rand(69, 420), getLocation(self));

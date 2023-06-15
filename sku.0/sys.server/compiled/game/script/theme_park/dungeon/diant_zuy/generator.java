@@ -1,13 +1,21 @@
 package script.theme_park.dungeon.diant_zuy;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class generator extends script.base_script
 {
+    public static final String DIANT_BUNKER = "dungeon/diant_bunker";
+
     public generator()
     {
     }
-    public static final String DIANT_BUNKER = "dungeon/diant_bunker";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         string_id generatorUse = new string_id(DIANT_BUNKER, "generator_use");
@@ -16,12 +24,13 @@ public class generator extends script.base_script
         {
             mid.setServerNotify(true);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, generatorUse);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);

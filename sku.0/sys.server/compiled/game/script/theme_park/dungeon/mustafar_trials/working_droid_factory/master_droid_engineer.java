@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.working_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.trial;
@@ -8,9 +14,6 @@ import script.obj_id;
 
 public class master_droid_engineer extends script.base_script
 {
-    public master_droid_engineer()
-    {
-    }
     public static final String VOLUME_NAME = "mdeStartRange";
     public static final float VOLUME_RANGE = 25.0f;
     public static final float RAT_STAGE_1 = 0.90f;
@@ -20,10 +23,15 @@ public class master_droid_engineer extends script.base_script
     public static final float RAT_STAGE_5 = 0.30f;
     public static final float RAT_STAGE_6 = 0.15f;
     public static final boolean LOGGING = false;
+    public master_droid_engineer()
+    {
+    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id top = trial.getTop(self);
@@ -35,6 +43,7 @@ public class master_droid_engineer extends script.base_script
         removeAllObjVars(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_WORKING_MDE);
@@ -44,6 +53,7 @@ public class master_droid_engineer extends script.base_script
         setTriggerVolume(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id homeCell = utils.getObjIdScriptVar(self, "home");
@@ -54,11 +64,13 @@ public class master_droid_engineer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeInvulnerable(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, false);
         return SCRIPT_CONTINUE;
     }
+
     public void resetSelf(obj_id self) throws InterruptedException
     {
         int max = getMaxHealth(self);
@@ -72,17 +84,18 @@ public class master_droid_engineer extends script.base_script
         trial.setMdeEngaged(self, false);
         trial.bumpSession(trial.getTop(self), "mde_control");
         trial.resetAssemblyStage(self);
-        String[] healthObjVar = 
-        {
-            "stage1",
-            "stage2",
-            "stage3",
-            "stage4",
-            "stage5",
-            "stage6"
-        };
+        String[] healthObjVar =
+                {
+                        "stage1",
+                        "stage2",
+                        "stage3",
+                        "stage4",
+                        "stage5",
+                        "stage6"
+                };
         utils.removeObjVarList(self, healthObjVar);
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (!isDead(self))
@@ -91,10 +104,12 @@ public class master_droid_engineer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setTriggerVolume(obj_id self) throws InterruptedException
     {
         createTriggerVolume(VOLUME_NAME, VOLUME_RANGE, true);
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (volumeName.equals(VOLUME_NAME))
@@ -106,6 +121,7 @@ public class master_droid_engineer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void triggerEvent(obj_id self) throws InterruptedException
     {
         if (trial.isMdeEngaged(self))
@@ -122,6 +138,7 @@ public class master_droid_engineer extends script.base_script
         }
         utils.messageTo(rau, "triggerEvent", trial.getSessionDict(trial.getTop(self), "mde_control"), 0, false);
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         if (!trial.isMdeEngaged(self))
@@ -131,6 +148,7 @@ public class master_droid_engineer extends script.base_script
         verifyHealth(self);
         return SCRIPT_CONTINUE;
     }
+
     public void verifyHealth(obj_id self) throws InterruptedException
     {
         float max = getMaxHealth(self);
@@ -163,12 +181,12 @@ public class master_droid_engineer extends script.base_script
                 return;
             }
             activateRau(self, 1);
-            return;
         }
     }
+
     public void activateRau(obj_id self, int value) throws InterruptedException
     {
-        String stage = "stage" + Integer.toString(value);
+        String stage = "stage" + value;
         if (!hasObjVar(self, stage))
         {
             obj_id[] rau = trial.getObjectsInDungeonWithScript(self, "theme_park.dungeon.mustafar_trials.working_droid_factory.rapid_assembly_unit");
@@ -176,13 +194,15 @@ public class master_droid_engineer extends script.base_script
             {
                 return;
             }
-            for (obj_id obj_id : rau) {
+            for (obj_id obj_id : rau)
+            {
                 utils.setScriptVar(obj_id, trial.WORKING_ASSEMBLY_STAGE, value);
                 messageTo(obj_id, "triggerEvent", trial.getSessionDict(trial.getTop(self), "mde_control"), 0, false);
             }
             setObjVar(self, stage, true);
         }
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.WORKING_LOGGING)

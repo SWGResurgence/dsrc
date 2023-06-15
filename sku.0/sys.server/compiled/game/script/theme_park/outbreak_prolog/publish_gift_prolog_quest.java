@@ -1,5 +1,11 @@
 package script.theme_park.outbreak_prolog;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.factions;
 import script.library.groundquests;
@@ -8,9 +14,6 @@ import script.library.utils;
 
 public class publish_gift_prolog_quest extends script.base_script
 {
-    public publish_gift_prolog_quest()
-    {
-    }
     public static final string_id CALL_JABBA = new string_id("quest/ground/util/quest_giver_object", "call_jabba");
     public static final string_id OFFER_QUEST_MSG = new string_id("quest/ground/util/quest_giver_object", "offer_quest_comlink");
     public static final string_id SUI_TITLE = new string_id("quest/ground/util/quest_giver_object", "sui_title");
@@ -23,6 +26,10 @@ public class publish_gift_prolog_quest extends script.base_script
     public static final String QUEST_NAME_NEG_FACTION = "quest_01_comlink_call_to_adventure_neg_faction";
     public static final String QUEST_NAME_NEUT_FACTION = "quest_01_comlink_call_to_adventure_neut_faction";
     public static final String QUEST_NAME_POS_FACTION = "quest_01_comlink_call_to_adventure_pos_faction";
+    public publish_gift_prolog_quest()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -36,6 +43,7 @@ public class publish_gift_prolog_quest extends script.base_script
         int menuOption = mi.addRootMenu(menu_info_types.ITEM_USE, CALL_JABBA);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -90,6 +98,7 @@ public class publish_gift_prolog_quest extends script.base_script
         sui.showSUIPage(pid);
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestOfferResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -111,19 +120,21 @@ public class publish_gift_prolog_quest extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            grantTheCorrectQuest(self, player);
-            break;
+                grantTheCorrectQuest(self, player);
+                break;
             case sui.BP_CANCEL:
-            sendSystemMessage(player, DECLINED_QUEST);
-            break;
+                sendSystemMessage(player, DECLINED_QUEST);
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void destroySelf(obj_id self) throws InterruptedException
     {
         detachScript(self, "item.special.nodestroy");
         destroyObject(self);
     }
+
     public boolean grantTheCorrectQuest(obj_id comlink, obj_id player) throws InterruptedException
     {
         if (!isIdValid(comlink) || !exists(comlink))
@@ -138,7 +149,7 @@ public class publish_gift_prolog_quest extends script.base_script
         {
             groundquests.grantQuest(player, QUEST_NAME_POS_FACTION);
         }
-        else 
+        else
         {
             float factionAmount = factions.getFactionStanding(player, "jabba");
             if (factionAmount < -2000)
@@ -149,7 +160,7 @@ public class publish_gift_prolog_quest extends script.base_script
             {
                 groundquests.grantQuest(player, QUEST_NAME_POS_FACTION);
             }
-            else 
+            else
             {
                 groundquests.grantQuest(player, QUEST_NAME_NEUT_FACTION);
             }

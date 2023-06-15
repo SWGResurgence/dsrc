@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -8,6 +14,7 @@ public class escort_target extends script.base_script
     public escort_target()
     {
     }
+
     public int objectDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id quest = getObjIdObjVar(self, "quest");
@@ -17,6 +24,7 @@ public class escort_target extends script.base_script
         space_utils.notifyObject(quest, "escortFailed", outparams);
         return SCRIPT_CONTINUE;
     }
+
     public int registerDestination(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -44,6 +52,7 @@ public class escort_target extends script.base_script
         messageTo(self, "checkPlayerLocation", outparams, 60.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         obj_id quest = getObjIdObjVar(self, "quest");
@@ -55,6 +64,7 @@ public class escort_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkPlayerLocation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -63,7 +73,8 @@ public class escort_target extends script.base_script
         }
         obj_id player = params.getObjId("player");
         obj_id quest = getObjIdObjVar(self, "quest");
-        if(!isIdValid(quest) || !exists(quest) || quest == null || quest == obj_id.NULL_ID){
+        if (!isIdValid(quest) || !exists(quest) || quest == null || quest == obj_id.NULL_ID)
+        {
             return SCRIPT_CONTINUE;
         }
         String questName = getStringObjVar(quest, space_quest.QUEST_NAME);
@@ -84,16 +95,18 @@ public class escort_target extends script.base_script
             obj_id[] members = space_utils.getSpaceGroupMemberIds(gid);
             if (members != null)
             {
-                for (obj_id member : members) {
+                for (obj_id member : members)
+                {
                     float dist = getDistance(space_transition.getContainingShip(member), self);
                     closeenough = Math.abs(dist) <= space_quest.ESCORT_ROAM_TOLERANCE;
-                    if (closeenough) {
+                    if (closeenough)
+                    {
                         break;
                     }
                 }
             }
         }
-        else 
+        else
         {
             float dist = getDistance(space_transition.getContainingShip(player), self);
             closeenough = Math.abs(dist) <= space_quest.ESCORT_ROAM_TOLERANCE;
@@ -105,52 +118,52 @@ public class escort_target extends script.base_script
             switch (too_far)
             {
                 case 0:
-                string_id warning;
-                if (hasObjVar(self, "customMsgs"))
-                {
-                    warning = new string_id("spacequest/" + questType + "/" + questName, "escort_too_far1");
-                }
-                else 
-                {
-                    warning = new string_id("space/quest", "escort_too_far1");
-                }
-                prose_package pp = prose.getPackage(warning, 0);
-                space_quest.groupTaunt(self, player, pp);
-                setObjVar(self, "too_far", 1);
-                break;
+                    string_id warning;
+                    if (hasObjVar(self, "customMsgs"))
+                    {
+                        warning = new string_id("spacequest/" + questType + "/" + questName, "escort_too_far1");
+                    }
+                    else
+                    {
+                        warning = new string_id("space/quest", "escort_too_far1");
+                    }
+                    prose_package pp = prose.getPackage(warning, 0);
+                    space_quest.groupTaunt(self, player, pp);
+                    setObjVar(self, "too_far", 1);
+                    break;
                 case 1:
-                if (hasObjVar(self, "customMsgs"))
-                {
-                    warning = new string_id("spacequest/" + questType + "/" + questName, "escort_too_far2");
-                }
-                else 
-                {
-                    warning = new string_id("space/quest", "escort_too_far2");
-                }
-                pp = prose.getPackage(warning, 0);
-                space_quest.groupTaunt(self, player, pp);
-                setObjVar(self, "too_far", 2);
-                break;
+                    if (hasObjVar(self, "customMsgs"))
+                    {
+                        warning = new string_id("spacequest/" + questType + "/" + questName, "escort_too_far2");
+                    }
+                    else
+                    {
+                        warning = new string_id("space/quest", "escort_too_far2");
+                    }
+                    pp = prose.getPackage(warning, 0);
+                    space_quest.groupTaunt(self, player, pp);
+                    setObjVar(self, "too_far", 2);
+                    break;
                 case 2:
-                if (hasObjVar(self, "customMsgs"))
-                {
-                    warning = new string_id("spacequest/" + questType + "/" + questName, "escort_too_far3");
-                }
-                else 
-                {
-                    warning = new string_id("space/quest", "escort_too_far3");
-                }
-                pp = prose.getPackage(warning, 0);
-                space_quest.groupTaunt(self, player, pp);
-                dictionary outparams = new dictionary();
-                outparams.put("ship", self);
-                outparams.put("reason", 0);
-                space_utils.notifyObject(quest, "escortFailed", outparams);
-                destroyObjectHyperspace(self);
-                break;
+                    if (hasObjVar(self, "customMsgs"))
+                    {
+                        warning = new string_id("spacequest/" + questType + "/" + questName, "escort_too_far3");
+                    }
+                    else
+                    {
+                        warning = new string_id("space/quest", "escort_too_far3");
+                    }
+                    pp = prose.getPackage(warning, 0);
+                    space_quest.groupTaunt(self, player, pp);
+                    dictionary outparams = new dictionary();
+                    outparams.put("ship", self);
+                    outparams.put("reason", 0);
+                    space_utils.notifyObject(quest, "escortFailed", outparams);
+                    destroyObjectHyperspace(self);
+                    break;
             }
         }
-        else 
+        else
         {
             space_utils.matchEngineSpeed(player, self, 0.5f, true);
             removeObjVar(self, "too_far");
@@ -158,11 +171,13 @@ public class escort_target extends script.base_script
         messageTo(self, "checkPlayerLocation", params, 60.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int missionAbort(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObjectHyperspace(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnShieldsDepleted(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "shieldsComplain"))
@@ -179,6 +194,7 @@ public class escort_target extends script.base_script
         space_quest.groupTaunt(self, player, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHullNearlyDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "hullComplain"))

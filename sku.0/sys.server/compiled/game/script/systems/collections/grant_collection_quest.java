@@ -1,5 +1,11 @@
 package script.systems.collections;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.sui;
@@ -15,6 +21,7 @@ public class grant_collection_quest extends script.base_script
     public static final string_id UNABLE = new string_id(STF, "unable_to_examine");
     public static final string_id DECLINE = new string_id(STF, "quest_decline");
     public static final String QUEST_OBJVAR = "collection.quest";
+
     public grant_collection_quest()
     {
     }

@@ -1,18 +1,27 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class emp_day_reb_bartender extends script.base_script
 {
+    public static String c_stringFile = "conversation/emp_day_reb_bartender";
+
     public emp_day_reb_bartender()
     {
     }
-    public static String c_stringFile = "conversation/emp_day_reb_bartender";
+
     public boolean emp_day_reb_bartender_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean emp_day_reb_bartender_condition_isReb(obj_id player, obj_id npc) throws InterruptedException
     {
         int factionHashCode = factions.pvpGetAlignedFaction(player);
@@ -21,12 +30,9 @@ public class emp_day_reb_bartender extends script.base_script
         {
             return false;
         }
-        if (whichFaction.equals("Rebel"))
-        {
-            return true;
-        }
-        return false;
+        return whichFaction.equals("Rebel");
     }
+
     public boolean emp_day_reb_bartender_condition_isImp(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/emp_day_imperial");
@@ -36,18 +42,16 @@ public class emp_day_reb_bartender extends script.base_script
         {
             return false;
         }
-        if (whichFaction.equals("Imperial"))
-        {
-            return true;
-        }
-        return false;
+        return whichFaction.equals("Imperial");
     }
+
     public boolean emp_day_reb_bartender_condition_pastTask1(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/emp_day_rebel");
         int task1 = groundquests.getTaskId(questId, "converseContact");
         return ((!questIsTaskActive(questId, task1, player) && questIsQuestActive(questId, player)) || questIsQuestComplete(questId, player));
     }
+
     public void emp_day_reb_bartender_action_giveQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/emp_day_rebel");
@@ -57,6 +61,7 @@ public class emp_day_reb_bartender extends script.base_script
             groundquests.grantQuest(questId, player, npc, true);
         }
     }
+
     public int emp_day_reb_bartender_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_202"))
@@ -76,7 +81,7 @@ public class emp_day_reb_bartender extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_206");
@@ -85,7 +90,7 @@ public class emp_day_reb_bartender extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_reb_bartender.branchId");
                     chat.chat(npc, player, message);
@@ -96,6 +101,7 @@ public class emp_day_reb_bartender extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_reb_bartender_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_206"))
@@ -122,7 +128,7 @@ public class emp_day_reb_bartender extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_210");
@@ -135,7 +141,7 @@ public class emp_day_reb_bartender extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_reb_bartender.branchId");
                     chat.chat(npc, player, message);
@@ -146,6 +152,7 @@ public class emp_day_reb_bartender extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_reb_bartender_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_210"))
@@ -173,6 +180,7 @@ public class emp_day_reb_bartender extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_reb_bartender_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_241"))
@@ -192,7 +200,7 @@ public class emp_day_reb_bartender extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_243");
@@ -201,7 +209,7 @@ public class emp_day_reb_bartender extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_reb_bartender.branchId");
                     chat.chat(npc, player, message);
@@ -212,6 +220,7 @@ public class emp_day_reb_bartender extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_reb_bartender_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_243"))
@@ -238,7 +247,7 @@ public class emp_day_reb_bartender extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_245");
@@ -251,7 +260,7 @@ public class emp_day_reb_bartender extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_reb_bartender.branchId");
                     chat.chat(npc, player, message);
@@ -262,6 +271,7 @@ public class emp_day_reb_bartender extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_reb_bartender_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_245"))
@@ -281,7 +291,7 @@ public class emp_day_reb_bartender extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_235");
@@ -290,7 +300,7 @@ public class emp_day_reb_bartender extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_reb_bartender.branchId");
                     chat.chat(npc, player, message);
@@ -323,7 +333,7 @@ public class emp_day_reb_bartender extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_249");
@@ -336,7 +346,7 @@ public class emp_day_reb_bartender extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_reb_bartender.branchId");
                     chat.chat(npc, player, message);
@@ -347,6 +357,7 @@ public class emp_day_reb_bartender extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_reb_bartender_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_235"))
@@ -373,7 +384,7 @@ public class emp_day_reb_bartender extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_249");
@@ -386,7 +397,7 @@ public class emp_day_reb_bartender extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_reb_bartender.branchId");
                     chat.chat(npc, player, message);
@@ -397,6 +408,7 @@ public class emp_day_reb_bartender extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_reb_bartender_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_249"))
@@ -423,7 +435,7 @@ public class emp_day_reb_bartender extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_251");
@@ -436,7 +448,7 @@ public class emp_day_reb_bartender extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_reb_bartender.branchId");
                     chat.chat(npc, player, message);
@@ -458,6 +470,7 @@ public class emp_day_reb_bartender extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_reb_bartender_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_249"))
@@ -484,7 +497,7 @@ public class emp_day_reb_bartender extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_251");
@@ -497,7 +510,7 @@ public class emp_day_reb_bartender extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.emp_day_reb_bartender.branchId");
                     chat.chat(npc, player, message);
@@ -519,6 +532,7 @@ public class emp_day_reb_bartender extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emp_day_reb_bartender_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_251"))
@@ -546,6 +560,7 @@ public class emp_day_reb_bartender extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -555,11 +570,13 @@ public class emp_day_reb_bartender extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -568,18 +585,21 @@ public class emp_day_reb_bartender extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.emp_day_reb_bartender");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -614,7 +634,7 @@ public class emp_day_reb_bartender extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_202");
@@ -622,7 +642,7 @@ public class emp_day_reb_bartender extends script.base_script
                 utils.setScriptVar(player, "conversation.emp_day_reb_bartender.branchId", 3);
                 npcStartConversation(player, npc, "emp_day_reb_bartender", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -643,7 +663,7 @@ public class emp_day_reb_bartender extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_241");
@@ -651,7 +671,7 @@ public class emp_day_reb_bartender extends script.base_script
                 utils.setScriptVar(player, "conversation.emp_day_reb_bartender.branchId", 8);
                 npcStartConversation(player, npc, "emp_day_reb_bartender", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -660,6 +680,7 @@ public class emp_day_reb_bartender extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("emp_day_reb_bartender"))

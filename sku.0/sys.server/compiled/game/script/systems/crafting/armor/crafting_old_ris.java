@@ -1,5 +1,11 @@
 package script.systems.crafting.armor;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.string_id;
 
@@ -7,6 +13,7 @@ public class crafting_old_ris extends script.base_script
 {
     public static final String VERSION = "v0.00.00";
     public static final string_id SID_RIS_SCHEMATICS_UPDATED = new string_id("crafting", "ris_schematics_updated");
+
     public crafting_old_ris()
     {
     }
@@ -58,13 +65,11 @@ public class crafting_old_ris extends script.base_script
         grantSchematic(player, "object/draft_schematic/armor/armor_appearance_ris_gloves.iff");
         grantSchematic(player, "object/draft_schematic/armor/armor_appearance_ris_helmet.iff");
         grantSchematic(player, "object/draft_schematic/armor/armor_appearance_ris_leggings.iff");
-        return;
     }
 
     public void bootSchematicConversion(obj_id player) throws InterruptedException
     {
         revokeSchematic(player, "object/draft_schematic/clothing/clothing_armor_ris_boots.iff");
         grantSchematic(player, "object/draft_schematic/armor/armor_appearance_ris_boots.iff");
-        return;
     }
 }

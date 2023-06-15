@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.working_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -7,24 +13,26 @@ import script.obj_id;
 
 public class working_controller extends script.base_script
 {
-    public working_controller()
-    {
-    }
-    public static final String[] LOCKED_ROOMS = 
-    {
-        "mainroom27",
-        "hall2",
-        "hall7",
-        "hall13",
-        "centralroom28"
-    };
+    public static final String[] LOCKED_ROOMS =
+            {
+                    "mainroom27",
+                    "hall2",
+                    "hall7",
+                    "hall13",
+                    "centralroom28"
+            };
     public static final String BESH_ROOM = "smallroom24";
     public static final String AUREK_ROOM = "smallroom21";
     public static final boolean LOGGING = true;
+    public working_controller()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         setEventLocks(self);
@@ -35,10 +43,12 @@ public class working_controller extends script.base_script
         messageTo(self, "spawnDoomBringer", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int dungeonCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int remoteCommand(obj_id self, dictionary params) throws InterruptedException
     {
         String command = "null";
@@ -70,6 +80,7 @@ public class working_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnGuardians(obj_id self, dictionary params) throws InterruptedException
     {
         String guard1 = "som_working_hk_58_aurek";
@@ -82,11 +93,14 @@ public class working_controller extends script.base_script
         }
         location loc1 = null;
         location loc2 = null;
-        for (obj_id obj_id : bossWp) {
-            if ((getStringObjVar(obj_id, "boss_wp")).equals("aurek")) {
+        for (obj_id obj_id : bossWp)
+        {
+            if ((getStringObjVar(obj_id, "boss_wp")).equals("aurek"))
+            {
                 loc1 = getLocation(obj_id);
             }
-            if ((getStringObjVar(obj_id, "boss_wp")).equals("besh")) {
+            if ((getStringObjVar(obj_id, "boss_wp")).equals("besh"))
+            {
                 loc2 = getLocation(obj_id);
             }
         }
@@ -105,6 +119,7 @@ public class working_controller extends script.base_script
         attachScript(besh, "theme_park.dungeon.mustafar_trials.working_droid_factory.aurek_besh");
         return SCRIPT_CONTINUE;
     }
+
     public int spawnDevistator(obj_id self, dictionary params) throws InterruptedException
     {
         String devistatorString = "som_working_devistator";
@@ -117,14 +132,18 @@ public class working_controller extends script.base_script
         location devistatorLoc = null;
         location reactiveRepairLoc = null;
         location inhibitorSupplyLoc = null;
-        for (obj_id obj_id : bossWp) {
-            if ((getStringObjVar(obj_id, "boss_wp")).equals("devistator")) {
+        for (obj_id obj_id : bossWp)
+        {
+            if ((getStringObjVar(obj_id, "boss_wp")).equals("devistator"))
+            {
                 devistatorLoc = getLocation(obj_id);
             }
-            if ((getStringObjVar(obj_id, "boss_wp")).equals("reactive_repair_unit")) {
+            if ((getStringObjVar(obj_id, "boss_wp")).equals("reactive_repair_unit"))
+            {
                 reactiveRepairLoc = getLocation(obj_id);
             }
-            if ((getStringObjVar(obj_id, "boss_wp")).equals("inhibitor_supply")) {
+            if ((getStringObjVar(obj_id, "boss_wp")).equals("inhibitor_supply"))
+            {
                 inhibitorSupplyLoc = getLocation(obj_id);
             }
         }
@@ -145,6 +164,7 @@ public class working_controller extends script.base_script
         trial.markAsTempObject(inhibitorSupply, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnDroidEngineer(obj_id self, dictionary params) throws InterruptedException
     {
         String droidEngineerString = "som_working_master_droid_engineer";
@@ -159,20 +179,26 @@ public class working_controller extends script.base_script
         location clonerTwoLoc = null;
         location clonerOneExit = null;
         location clonerTwoExit = null;
-        for (obj_id obj_id : bossWp) {
-            if ((getStringObjVar(obj_id, "boss_wp")).equals("droid_engineer")) {
+        for (obj_id obj_id : bossWp)
+        {
+            if ((getStringObjVar(obj_id, "boss_wp")).equals("droid_engineer"))
+            {
                 mdeLoc = getLocation(obj_id);
             }
-            if ((getStringObjVar(obj_id, "boss_wp")).equals("cloner1")) {
+            if ((getStringObjVar(obj_id, "boss_wp")).equals("cloner1"))
+            {
                 clonerOneLoc = getLocation(obj_id);
             }
-            if ((getStringObjVar(obj_id, "boss_wp")).equals("cloner2")) {
+            if ((getStringObjVar(obj_id, "boss_wp")).equals("cloner2"))
+            {
                 clonerTwoLoc = getLocation(obj_id);
             }
-            if ((getStringObjVar(obj_id, "boss_wp")).equals("cloner_exit_1")) {
+            if ((getStringObjVar(obj_id, "boss_wp")).equals("cloner_exit_1"))
+            {
                 clonerOneExit = getLocation(obj_id);
             }
-            if ((getStringObjVar(obj_id, "boss_wp")).equals("cloner_exit_2")) {
+            if ((getStringObjVar(obj_id, "boss_wp")).equals("cloner_exit_2"))
+            {
                 clonerTwoExit = getLocation(obj_id);
             }
         }
@@ -194,6 +220,7 @@ public class working_controller extends script.base_script
         trial.markAsTempObject(clonerTwo, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnDoomBringer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] bossWp = trial.getObjectsInDungeonWithObjVar(self, "boss_wp");
@@ -204,11 +231,14 @@ public class working_controller extends script.base_script
         }
         location doomBringerLoc = null;
         location destructionPileLoc = null;
-        for (obj_id obj_id : bossWp) {
-            if ((getStringObjVar(obj_id, "boss_wp")).equals("doom_bringer")) {
+        for (obj_id obj_id : bossWp)
+        {
+            if ((getStringObjVar(obj_id, "boss_wp")).equals("doom_bringer"))
+            {
                 doomBringerLoc = getLocation(obj_id);
             }
-            if ((getStringObjVar(obj_id, "boss_wp")).equals("destruction_pile")) {
+            if ((getStringObjVar(obj_id, "boss_wp")).equals("destruction_pile"))
+            {
                 destructionPileLoc = getLocation(obj_id);
             }
         }
@@ -225,6 +255,7 @@ public class working_controller extends script.base_script
         messageTo(self, "spawnDoomGuards", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnDoomGuards(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] bossWp = trial.getObjectsInDungeonWithObjVar(self, "boss_wp");
@@ -233,8 +264,10 @@ public class working_controller extends script.base_script
             return SCRIPT_CONTINUE;
         }
         int k = 0;
-        for (obj_id obj_id : bossWp) {
-            if ((getStringObjVar(obj_id, "boss_wp")).equals("watcher" + k)) {
+        for (obj_id obj_id : bossWp)
+        {
+            if ((getStringObjVar(obj_id, "boss_wp")).equals("watcher" + k))
+            {
                 obj_id watcher = create.object("som_working_hand_of_doom", getLocation(obj_id));
                 attachScript(watcher, "theme_park.dungeon.mustafar_trials.working_droid_factory.doom_hand");
                 k++;
@@ -242,18 +275,23 @@ public class working_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setEventLocks(obj_id dungeon) throws InterruptedException
     {
-        for (String lockedRoom : LOCKED_ROOMS) {
+        for (String lockedRoom : LOCKED_ROOMS)
+        {
             permissionsMakePrivate(getCellId(dungeon, lockedRoom));
         }
     }
+
     public void removeEventLocks(obj_id dungeon) throws InterruptedException
     {
-        for (String lockedRoom : LOCKED_ROOMS) {
+        for (String lockedRoom : LOCKED_ROOMS)
+        {
             permissionsMakePublic(getCellId(dungeon, lockedRoom));
         }
     }
+
     public void setEventStates(obj_id dungeon) throws InterruptedException
     {
         trial.setAurekKilled(dungeon, false);
@@ -269,6 +307,7 @@ public class working_controller extends script.base_script
         trial.setHkSpawned(dungeon, false);
         trial.setHkDetonated(dungeon, false);
     }
+
     public int validateAurekBeshKill(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "validate_ab_kill"))
@@ -289,7 +328,7 @@ public class working_controller extends script.base_script
             messageTo(self, "validateAurekBeshKill", trial.getSessionDict(self, "validate_ab_kill"), trial.WORKING_AUREKBESH_RESPAWN_DELAY, false);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             int difference = getGameTime() - killTime;
             if (difference >= trial.WORKING_AUREKBESH_RESPAWN_DELAY)
@@ -301,7 +340,7 @@ public class working_controller extends script.base_script
                     utils.setScriptVar(self, trial.WORKING_AUREKBESH_KILL_TIME, 0);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     trial.bumpSession(self, "validate_ab_kill");
                     respawnBesh(self);
@@ -309,13 +348,13 @@ public class working_controller extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 if (aurekKilled && beshKilled)
                 {
                     guardiansDefeated(self);
                 }
-                else 
+                else
                 {
                     doLogging("validateAurekBeshKill", "This message came in less than 30 seconds, but both guardians aren't dead... wtf");
                     messageTo(self, "validateAurekBeshKill", trial.getSessionDict(self, "validate_ab_kill"), 5, false);
@@ -324,6 +363,7 @@ public class working_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void respawnAurek(obj_id dungeon) throws InterruptedException
     {
         trial.setAurekKilled(dungeon, false);
@@ -334,8 +374,10 @@ public class working_controller extends script.base_script
             return;
         }
         location loc1 = null;
-        for (obj_id obj_id : bossWp) {
-            if ((getStringObjVar(obj_id, "boss_wp")).equals("aurek")) {
+        for (obj_id obj_id : bossWp)
+        {
+            if ((getStringObjVar(obj_id, "boss_wp")).equals("aurek"))
+            {
                 loc1 = getLocation(obj_id);
             }
         }
@@ -350,6 +392,7 @@ public class working_controller extends script.base_script
         attachScript(aurek, "theme_park.dungeon.mustafar_trials.working_droid_factory.aurek_besh");
         utils.sendSystemMessagePob(dungeon, trial.TWINS_RESPAWN);
     }
+
     public void respawnBesh(obj_id dungeon) throws InterruptedException
     {
         trial.setBeshKilled(dungeon, false);
@@ -360,8 +403,10 @@ public class working_controller extends script.base_script
             return;
         }
         location loc1 = null;
-        for (obj_id obj_id : bossWp) {
-            if ((getStringObjVar(obj_id, "boss_wp")).equals("besh")) {
+        for (obj_id obj_id : bossWp)
+        {
+            if ((getStringObjVar(obj_id, "boss_wp")).equals("besh"))
+            {
                 loc1 = getLocation(obj_id);
             }
         }
@@ -376,12 +421,14 @@ public class working_controller extends script.base_script
         attachScript(aurek, "theme_park.dungeon.mustafar_trials.working_droid_factory.aurek_besh");
         utils.sendSystemMessagePob(dungeon, trial.TWINS_RESPAWN);
     }
+
     public void guardiansDefeated(obj_id dungeon) throws InterruptedException
     {
         utils.sendSystemMessagePob(dungeon, trial.TWINS_DEFEATED);
         trial.bumpSession(dungeon, "validate_ab_kill");
         trial.setAurekBeshEngaged(dungeon, false);
     }
+
     public int devistatorKilled(obj_id self, dictionary params) throws InterruptedException
     {
         trial.setDevistatorKilled(self, true);
@@ -390,6 +437,7 @@ public class working_controller extends script.base_script
         obj_id[] players = instance.getPlayersInInstanceArea(self);
         return SCRIPT_CONTINUE;
     }
+
     public int mdeKilled(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] fixers = trial.getObjectsInDungeonWithScript(self, "theme_park.dungeon.mustafar_trials.working_droid_factory.mde_repair_droid");
@@ -402,6 +450,7 @@ public class working_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fixerOneKilled(obj_id self, dictionary params) throws InterruptedException
     {
         trial.setMdeKilled(self, true);
@@ -409,9 +458,11 @@ public class working_controller extends script.base_script
         obj_id[] players = instance.getPlayersInInstanceArea(self);
         return SCRIPT_CONTINUE;
     }
+
     public void removeEventStates(obj_id dungeon) throws InterruptedException
     {
     }
+
     public int doomBringerKilled(obj_id self, dictionary params) throws InterruptedException
     {
         trial.bumpSession(self, "db_control");
@@ -422,9 +473,9 @@ public class working_controller extends script.base_script
         trial.sendCompletionSignal(self, trial.WORKING_WIN_SIGNAL);
         obj_id[] players = instance.getPlayersInInstanceArea(self);
         badge.grantBadge(players, "bdg_must_victory_odf");
-        
+
         // HEROIC SYSTEM BEGIN \\
-        
+
         dictionary dict = new dictionary();
         dict.put("tokenIndex", 7);
         dict.put("tokenCount", 10);
@@ -439,11 +490,12 @@ public class working_controller extends script.base_script
             String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
             CustomerServiceLog("instance-mustafar_trials_operational_droid_factory", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
         }
-        
+
         // HEROIC SYSTEM END \\
-        
+
         return SCRIPT_CONTINUE;
     }
+
     public int doomTargetDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         utils.sendSystemMessagePob(self, trial.WORKING_DOOM_FAILURE);
@@ -453,17 +505,21 @@ public class working_controller extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id[] objects = trial.getObjectsInDungeonWithObjVar(self, "boss_wp");
-        for (obj_id object : objects) {
-            if ((getStringObjVar(object, "boss_wp")).equals("doom_bringer")) {
+        for (obj_id object : objects)
+        {
+            if ((getStringObjVar(object, "boss_wp")).equals("doom_bringer"))
+            {
                 playClientEffectLoc(players[0], trial.PRT_WORKING_HK_BOOM_1, getLocation(object), 1.0f);
             }
-            if ((getStringObjVar(object, "boss_wp")).equals("destruction_pile")) {
+            if ((getStringObjVar(object, "boss_wp")).equals("destruction_pile"))
+            {
                 playClientEffectLoc(players[0], trial.PRT_WORKING_HK_BOOM_1, getLocation(object), 1.0f);
             }
         }
         messageTo(self, "handlePlayerForceRevive", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerForceRevive(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = trial.getPlayersInDungeon(trial.getTop(self));
@@ -474,11 +530,13 @@ public class working_controller extends script.base_script
         instance.closeInstance(self);
         return SCRIPT_CONTINUE;
     }
+
     public void lockCell(obj_id dungeon, dictionary params) throws InterruptedException
     {
         String cell = params.getString("cell");
         trial.makeCellPrivate(dungeon, cell);
     }
+
     public int spawnHK(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "spawn_hk"))
@@ -493,11 +551,14 @@ public class working_controller extends script.base_script
         }
         location startLoc = null;
         location endLoc = null;
-        for (obj_id obj_id : wp) {
-            if ((getStringObjVar(obj_id, "hk_sequence")).equals("hk_spawn")) {
+        for (obj_id obj_id : wp)
+        {
+            if ((getStringObjVar(obj_id, "hk_sequence")).equals("hk_spawn"))
+            {
                 startLoc = getLocation(obj_id);
             }
-            if ((getStringObjVar(obj_id, "hk_sequence")).equals("hk_moveto")) {
+            if ((getStringObjVar(obj_id, "hk_sequence")).equals("hk_moveto"))
+            {
                 endLoc = getLocation(obj_id);
             }
         }
@@ -522,6 +583,7 @@ public class working_controller extends script.base_script
         aiSetHomeLocation(HK, endLoc);
         return SCRIPT_CONTINUE;
     }
+
     public int detonateHK(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "spawn_hk"))
@@ -536,17 +598,22 @@ public class working_controller extends script.base_script
         }
         location[] fireLoc = new location[3];
         location blastLoc = null;
-        for (obj_id obj_id1 : wp) {
-            if ((getStringObjVar(obj_id1, "hk_sequence")).equals("fire1")) {
+        for (obj_id obj_id1 : wp)
+        {
+            if ((getStringObjVar(obj_id1, "hk_sequence")).equals("fire1"))
+            {
                 fireLoc[0] = getLocation(obj_id1);
             }
-            if ((getStringObjVar(obj_id1, "hk_sequence")).equals("fire2")) {
+            if ((getStringObjVar(obj_id1, "hk_sequence")).equals("fire2"))
+            {
                 fireLoc[1] = getLocation(obj_id1);
             }
-            if ((getStringObjVar(obj_id1, "hk_sequence")).equals("fire3")) {
+            if ((getStringObjVar(obj_id1, "hk_sequence")).equals("fire3"))
+            {
                 fireLoc[2] = getLocation(obj_id1);
             }
-            if ((getStringObjVar(obj_id1, "hk_sequence")).equals("player_blast_trigger")) {
+            if ((getStringObjVar(obj_id1, "hk_sequence")).equals("player_blast_trigger"))
+            {
                 blastLoc = getLocation(obj_id1);
             }
         }
@@ -563,9 +630,10 @@ public class working_controller extends script.base_script
             return SCRIPT_CONTINUE;
         }
         playClientEffectLoc(players[0], trial.PRT_WORKING_HK_BOOM_1, fireLoc[1], 1.0f);
-        if (playersInBlast != null && playersInBlast.length > 0)
+        if (playersInBlast != null)
         {
-            for (obj_id obj_id : playersInBlast) {
+            for (obj_id obj_id : playersInBlast)
+            {
                 buff.applyBuff(obj_id, "stop", 5);
                 warpPlayer(obj_id, blastLoc.area, 48, -24, -1, trial.getTop(self), trial.WORKING_MAIN_HALL, 48, -24, -1, "nullCallBack", false);
             }
@@ -578,6 +646,7 @@ public class working_controller extends script.base_script
         messageTo(self, "doExplosionThree", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int doExplosionTwo(obj_id self, dictionary params) throws InterruptedException
     {
         location[] wp = utils.getLocationArrayScriptVar(self, "wps");
@@ -585,6 +654,7 @@ public class working_controller extends script.base_script
         playClientEffectLoc(viewer, trial.PRT_WORKING_HK_BOOM_2, wp[0], 1.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int doExplosionThree(obj_id self, dictionary params) throws InterruptedException
     {
         location[] wp = utils.getLocationArrayScriptVar(self, "wps");
@@ -593,6 +663,7 @@ public class working_controller extends script.base_script
         messageTo(self, "doHkTaunt", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int doHkTaunt(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] hk = trial.getObjectsInDungeonWithScript(trial.getTop(self), "theme_park.dungeon.mustafar_trials.working_droid_factory.hk_movement");
@@ -606,11 +677,13 @@ public class working_controller extends script.base_script
         messageTo(doomBringer[0], "beginDestruction", null, 12, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startDuality(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "performDuality", trial.getSessionDict(self, "duality"), 12.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int performDuality(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "duality"))
@@ -621,11 +694,14 @@ public class working_controller extends script.base_script
         obj_id[] twins = trial.getObjectsInDungeonWithScriptVar(self, "name");
         obj_id aurek = null;
         obj_id besh = null;
-        for (obj_id twin : twins) {
-            if ((utils.getStringScriptVar(twin, "name")).equals("aurek")) {
+        for (obj_id twin : twins)
+        {
+            if ((utils.getStringScriptVar(twin, "name")).equals("aurek"))
+            {
                 aurek = twin;
             }
-            if ((utils.getStringScriptVar(twin, "name")).equals("besh")) {
+            if ((utils.getStringScriptVar(twin, "name")).equals("besh"))
+            {
                 besh = twin;
             }
         }
@@ -661,6 +737,7 @@ public class working_controller extends script.base_script
         messageTo(self, "performDuality", trial.getSessionDict(self, "duality"), 45.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.guild;
 import script.library.utils;
@@ -10,11 +16,13 @@ public class terminal_guild_screen extends script.base_script
     public terminal_guild_screen()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "validateScreen", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -52,6 +60,7 @@ public class terminal_guild_screen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id leaderPDA = getObjIdObjVar(self, guild.GUILD_SCREEN_ID);
@@ -63,11 +72,13 @@ public class terminal_guild_screen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlerGuildNewLeader(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int validateScreen(obj_id self, dictionary params) throws InterruptedException
     {
         int guildId = getIntObjVar(self, guild.REGISTERED_GUILD);

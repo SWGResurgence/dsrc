@@ -1,15 +1,23 @@
 package script.theme_park.meatlump.hideout;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.instance;
 import script.obj_id;
 
 public class mtp_instance_entrance_cell extends script.base_script
 {
+    public static final String LEVEL_CONTROL_TEMPLATE = "object/tangible/meatlump/hideout/mtp_hideout_instance_entryb_controller.iff";
+
     public mtp_instance_entrance_cell()
     {
     }
-    public static final String LEVEL_CONTROL_TEMPLATE = "object/tangible/meatlump/hideout/mtp_hideout_instance_entryb_controller.iff";
+
     public int OnReceivedItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -29,6 +37,7 @@ public class mtp_instance_entrance_cell extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleInstanceCombatLevel(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -64,13 +73,16 @@ public class mtp_instance_entrance_cell extends script.base_script
         messageTo(building, "setMtpInstanceCombatLevel", params, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getInstanceCombatLevelController(obj_id self) throws InterruptedException
     {
         obj_id[] myContents = getContents(self);
-        if (myContents != null && myContents.length > 0)
+        if (myContents != null)
         {
-            for (obj_id myContent : myContents) {
-                if ((getTemplateName(myContent)).equals(LEVEL_CONTROL_TEMPLATE)) {
+            for (obj_id myContent : myContents)
+            {
+                if ((getTemplateName(myContent)).equals(LEVEL_CONTROL_TEMPLATE))
+                {
                     return myContent;
                 }
             }

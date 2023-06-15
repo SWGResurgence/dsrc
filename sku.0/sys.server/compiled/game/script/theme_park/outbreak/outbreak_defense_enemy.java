@@ -1,5 +1,11 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.utils;
@@ -7,15 +13,18 @@ import script.obj_id;
 
 public class outbreak_defense_enemy extends script.base_script
 {
+    public static final String GUARD_OCCUPIED = "occupied";
+
     public outbreak_defense_enemy()
     {
     }
-    public static final String GUARD_OCCUPIED = "occupied";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkValidityOfOwner", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "outbreak_defense_enemy.OnMovePathComplete() initialized.");
@@ -32,6 +41,7 @@ public class outbreak_defense_enemy extends script.base_script
         startCombat(self, owner);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "outbreak_defense_enemy.OnDeath() Undead NPC has died. Crediting Player.");
@@ -76,6 +86,7 @@ public class outbreak_defense_enemy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitateTarget(obj_id self, obj_id victim) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "outbreak_defense_enemy.OnIncapacitateTarget() Player has died. Checking if quest needs updating.");
@@ -121,6 +132,7 @@ public class outbreak_defense_enemy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkValidityOfOwner(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "outbreak_defense_enemy.checkValidityOfOwner() Initalized Message Handler.");
@@ -166,12 +178,14 @@ public class outbreak_defense_enemy extends script.base_script
         messageTo(self, "checkValidityOfOwner", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpEnemy(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "outbreak_defense_enemy.cleanUpEnemy() Initalized Message Handler.");
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean removeGuardPostFlag(obj_id player) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))

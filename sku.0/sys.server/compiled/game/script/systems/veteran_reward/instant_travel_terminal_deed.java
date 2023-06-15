@@ -1,5 +1,11 @@
 package script.systems.veteran_reward;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.menu_info;
 import script.menu_info_types;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class instant_travel_terminal_deed extends script.base_script
 {
     public static final string_id LEARN_ABILITY = new string_id("item_n", "instant_travel_terminal_learn");
     private static final String ITV_COMMAND_TABLE = "datatables/item/itv_command_list.iff";
+
     public instant_travel_terminal_deed()
     {
     }

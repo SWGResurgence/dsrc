@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -11,6 +17,7 @@ public class barn_lite_device extends script.base_script
     public static final int MENU_DISPLAY_BEAST_OPTION = menu_info_types.SERVER_MENU4;
     public static final int MENU_REBOOT_DEVICE_OPTION = menu_info_types.SERVER_MENU5;
     public static final int MENU_TESTING_DEACTIVATE_OPTION = menu_info_types.SERVER_MENU6;
+
     public barn_lite_device()
     {
     }
@@ -73,7 +80,7 @@ public class barn_lite_device extends script.base_script
         }
         int max_beasts = tcg.getMaxBarnLiteBeasts(self);
         names[idx] = "max_beasts";
-        attribs[idx] = "" + max_beasts;
+        attribs[idx] = String.valueOf(max_beasts);
         idx++;
         return SCRIPT_CONTINUE;
     }
@@ -603,7 +610,6 @@ public class barn_lite_device extends script.base_script
             prose.setTO(pp, petName);
             sendSystemMessageProse(player, pp);
         }
-        return;
     }
 
     public String getPetNameForDisplayMessage(obj_id self, String bcdSlot) throws InterruptedException

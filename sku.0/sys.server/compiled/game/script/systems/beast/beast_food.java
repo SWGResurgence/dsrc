@@ -1,5 +1,11 @@
 package script.systems.beast;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.beast_lib;
 import script.library.static_item;
 import script.library.utils;
@@ -42,7 +48,7 @@ public class beast_food extends script.base_script
         if (count > 0)
         {
             names[idx] = "count";
-            attribs[idx] = "" + count;
+            attribs[idx] = String.valueOf(count);
             idx++;
             if (idx >= names.length)
             {

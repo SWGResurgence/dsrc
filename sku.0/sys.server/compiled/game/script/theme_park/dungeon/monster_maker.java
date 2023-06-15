@@ -1,5 +1,11 @@
 package script.theme_park.dungeon;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.obj_id;
@@ -9,30 +15,33 @@ public class monster_maker extends script.base_script
     public monster_maker()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("kwi_spawner", 10.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         if (!isPlayer(whoTriggeredMe))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (hasObjVar(self, "already_spawned"))
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 messageTo(self, "makeMonster", null, 1, false);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int makeMonster(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "already_spawned", 1);
@@ -49,6 +58,7 @@ public class monster_maker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeMonsterBlock(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "already_spawned"))

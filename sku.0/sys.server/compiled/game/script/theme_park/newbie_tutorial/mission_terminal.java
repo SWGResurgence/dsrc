@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.menu_info;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class mission_terminal extends script.theme_park.newbie_tutorial.tutorial
     public mission_terminal()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id missionNpc = getObjIdObjVar(getTopMostContainer(self), MISSION_NPC);
@@ -17,6 +24,7 @@ public class mission_terminal extends script.theme_park.newbie_tutorial.tutorial
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;

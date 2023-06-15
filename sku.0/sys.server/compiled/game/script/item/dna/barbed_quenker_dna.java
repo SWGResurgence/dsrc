@@ -1,5 +1,11 @@
 package script.item.dna;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.static_item;
 import script.library.utils;
@@ -9,6 +15,7 @@ public class barbed_quenker_dna extends script.base_script
 {
     public static final String BARBED_QUENKER_DNA_LOOT_ITEM = "item_barbed_quenker_dna";
     public static final int BARBED_QUENKER_DNA_LOOT_CHANCE = 5;
+
     public barbed_quenker_dna()
     {
     }

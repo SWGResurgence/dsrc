@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -8,14 +14,15 @@ import script.string_id;
 
 public class boss_nyms_themepark extends script.base_script
 {
-    public boss_nyms_themepark()
-    {
-    }
     public static final int RADIUS = 100;
     public static final int MIN_DIST = 25;
     public static final string_id SID_SYS_TOO_FAR = new string_id("spam", "too_far_from_spawn_point");
     public static final string_id SID_SYS_ONE_MINUTE_WARNING = new string_id("spam", "one_minute_warning_before_despawn");
     public static final String DISTANCE_CHECK = "distance_check";
+    public boss_nyms_themepark()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "moveCreatureToWaypoint", null, 1, false);
@@ -23,6 +30,7 @@ public class boss_nyms_themepark extends script.base_script
         messageTo(self, "willDespawn", null, 540, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         CustomerServiceLog("nyms_themepark", "boss_nyms_themepark.OnAboutToBeIncapacitated() Boss Mob " + self + " incapacitated by: " + killer);
@@ -62,52 +70,67 @@ public class boss_nyms_themepark extends script.base_script
         if (attackerList != null && attackerList.length > 0)
         {
             CustomerServiceLog("nyms_themepark", "boss_nyms_themepark.OnAboutToBeIncapacitated() Boss Mob attackerList = " + attackerList.length);
-            for (obj_id obj_id : attackerList) {
-                if (!isIdValid(obj_id)) {
+            for (obj_id obj_id : attackerList)
+            {
+                if (!isIdValid(obj_id))
+                {
                     continue;
                 }
-                if (hasCompletedCollectionSlot(obj_id, bossQuestSlot)) {
+                if (hasCompletedCollectionSlot(obj_id, bossQuestSlot))
+                {
                     CustomerServiceLog("nyms_themepark", "boss_nyms_themepark.OnAboutToBeIncapacitated() attackerList player " + obj_id + " already has the collection slot for this enemy completed. This player does NOT GET CREDIT.");
                     continue;
                 }
-                if (!groundquests.isQuestActive(obj_id, bossQuest)) {
+                if (!groundquests.isQuestActive(obj_id, bossQuest))
+                {
                     CustomerServiceLog("nyms_themepark", "boss_nyms_themepark.OnAboutToBeIncapacitated() attackerList player " + obj_id + " did not have the quest active. This player does NOT GET CREDIT.");
                     continue;
                 }
-                if (hasObjVar(self, "theme_park_task") && bossQuestTask != null) {
-                    if (!groundquests.isTaskActive(obj_id, bossQuest, bossQuestTask)) {
+                if (hasObjVar(self, "theme_park_task") && bossQuestTask != null)
+                {
+                    if (!groundquests.isTaskActive(obj_id, bossQuest, bossQuestTask))
+                    {
                         CustomerServiceLog("nyms_themepark", "boss_nyms_themepark.OnAboutToBeIncapacitated() Boss Mob attacker: " + obj_id + " did not have boss quest task: " + bossQuestTask);
                         continue;
                     }
                 }
-                if (!hasCompletedCollectionSlotPrereq(obj_id, bossQuestSlot)) {
+                if (!hasCompletedCollectionSlotPrereq(obj_id, bossQuestSlot))
+                {
                     CustomerServiceLog("nyms_themepark", "boss_nyms_themepark.OnAboutToBeIncapacitated() attackerList player " + obj_id + " did not have the collection prerequisite for this boss. This player does NOT GET CREDIT.");
                     continue;
                 }
                 CustomerServiceLog("nyms_themepark", "boss_nyms_themepark.OnAboutToBeIncapacitated() attackerList player " + obj_id + " had all prerequisites for the boss collection. This player received credit.");
                 modifyCollectionSlotValue(obj_id, bossQuestSlot, 1);
-                if (group.isGrouped(obj_id)) {
+                if (group.isGrouped(obj_id))
+                {
                     obj_id groupObj = getGroupObject(obj_id);
                     obj_id[] groupMembers = getGroupMemberIds(groupObj);
-                    for (obj_id groupMember : groupMembers) {
-                        if (!isIdValid(groupMember)) {
+                    for (obj_id groupMember : groupMembers)
+                    {
+                        if (!isIdValid(groupMember))
+                        {
                             continue;
                         }
-                        if (!groundquests.isQuestActive(groupMember, bossQuest)) {
+                        if (!groundquests.isQuestActive(groupMember, bossQuest))
+                        {
                             CustomerServiceLog("nyms_themepark", "boss_nyms_themepark.OnAboutToBeIncapacitated() attackerList player " + obj_id + " did not have the quest active. This player does NOT GET CREDIT.");
                             continue;
                         }
-                        if (hasObjVar(self, "theme_park_task") && bossQuestTask != null) {
-                            if (!groundquests.isTaskActive(groupMember, bossQuest, bossQuestTask)) {
+                        if (hasObjVar(self, "theme_park_task") && bossQuestTask != null)
+                        {
+                            if (!groundquests.isTaskActive(groupMember, bossQuest, bossQuestTask))
+                            {
                                 CustomerServiceLog("nyms_themepark", "boss_nyms_themepark.OnAboutToBeIncapacitated() Boss Mob attacker: " + obj_id + " did not have boss quest task: " + bossQuestTask);
                                 continue;
                             }
                         }
-                        if (hasCompletedCollectionSlot(groupMember, bossQuestSlot)) {
+                        if (hasCompletedCollectionSlot(groupMember, bossQuestSlot))
+                        {
                             CustomerServiceLog("nyms_themepark", "boss_nyms_themepark.OnAboutToBeIncapacitated() attackerList player " + obj_id + " already has the collection slot for this enemy completed. This player does NOT GET CREDIT.");
                             continue;
                         }
-                        if (!hasCompletedCollectionSlotPrereq(groupMember, bossQuestSlot)) {
+                        if (!hasCompletedCollectionSlotPrereq(groupMember, bossQuestSlot))
+                        {
                             CustomerServiceLog("nyms_themepark", "boss_nyms_themepark.OnAboutToBeIncapacitated() attackerList player " + obj_id + " did not have the collection prerequisite for this boss. This player does NOT GET CREDIT.");
                             continue;
                         }
@@ -119,6 +142,7 @@ public class boss_nyms_themepark extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -149,10 +173,12 @@ public class boss_nyms_themepark extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id[] players = getPlayerCreaturesInRange(self, maxDist);
-        if (players != null && players.length > 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
-                if (!isIdValid(player) && !exists(player) || isIncapacitated(player) || !isDead(player)) {
+            for (obj_id player : players)
+            {
+                if (!isIdValid(player) && !exists(player) || isIncapacitated(player) || !isDead(player))
+                {
                     continue;
                 }
                 addHate(self, player, 1000.0f);
@@ -162,6 +188,7 @@ public class boss_nyms_themepark extends script.base_script
         messageTo(self, "handleBossDistanceCheck", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitateTarget(obj_id self, obj_id victim) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -192,6 +219,7 @@ public class boss_nyms_themepark extends script.base_script
         messageTo(parent, "defaultEventReset", webster, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -221,6 +249,7 @@ public class boss_nyms_themepark extends script.base_script
         messageTo(parent, "defaultEventReset", webster, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBossDistanceCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -268,8 +297,10 @@ public class boss_nyms_themepark extends script.base_script
                 if (isValidId(myGroup))
                 {
                     obj_id[] members = getGroupMemberIds(myGroup);
-                    for (obj_id member : members) {
-                        if (!isIdValid(member)) {
+                    for (obj_id member : members)
+                    {
+                        if (!isIdValid(member))
+                        {
                             continue;
                         }
                         sendSystemMessage(member, SID_SYS_TOO_FAR);
@@ -280,12 +311,13 @@ public class boss_nyms_themepark extends script.base_script
             dictionary webster = trial.getSessionDict(parent);
             messageTo(parent, "defaultEventReset", webster, 2, false);
         }
-        else 
+        else
         {
             messageTo(self, "handleBossDistanceCheck", null, 3, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean getRandomCombatTarget(obj_id self, obj_id parent) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -313,16 +345,20 @@ public class boss_nyms_themepark extends script.base_script
             messageTo(parent, "defaultEventReset", webster, 2, false);
             return false;
         }
-        for (obj_id target : targets) {
-            if (!isIdValid(target)) {
+        for (obj_id target : targets)
+        {
+            if (!isIdValid(target))
+            {
                 continue;
             }
-            if (!isPlayer(target)) {
+            if (!isPlayer(target))
+            {
                 continue;
             }
             location a = getLocation(self);
             location b = getLocation(target);
-            if (a.cell != b.cell) {
+            if (a.cell != b.cell)
+            {
                 continue;
             }
             startCombat(self, target);
@@ -334,6 +370,7 @@ public class boss_nyms_themepark extends script.base_script
         messageTo(parent, "defaultEventReset", webster, 2, false);
         return false;
     }
+
     public int moveCreatureToWaypoint(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -367,6 +404,7 @@ public class boss_nyms_themepark extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkCombatStatus(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -394,6 +432,7 @@ public class boss_nyms_themepark extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int willDespawn(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -424,8 +463,10 @@ public class boss_nyms_themepark extends script.base_script
             if (isValidId(myGroup))
             {
                 obj_id[] members = getGroupMemberIds(myGroup);
-                for (obj_id member : members) {
-                    if (!isIdValid(member)) {
+                for (obj_id member : members)
+                {
+                    if (!isIdValid(member))
+                    {
                         continue;
                     }
                     sendSystemMessage(member, SID_SYS_ONE_MINUTE_WARNING);

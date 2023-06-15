@@ -1,5 +1,11 @@
 package script.systems.crafting.structure.specific_item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.draft_schematic;
 import script.library.craftinglib;
 import script.obj_id;
@@ -44,6 +50,7 @@ public class crafting_garden_exotic_dathomir extends script.systems.crafting.str
                                     new resource_weight.weight(craftinglib.RESOURCE_DECAY_RESIST, 1)
                             })
             };
+
     public crafting_garden_exotic_dathomir()
     {
     }

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.money;
@@ -8,79 +14,80 @@ import script.*;
 
 public class destroysample extends script.base_script
 {
+    public static String c_stringFile = "conversation/destroysample";
+
     public destroysample()
     {
     }
-    public static String c_stringFile = "conversation/destroysample";
+
     public boolean destroysample_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean destroysample_condition_completedQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasCompletedQuest(player, "destroy", "sampleDestroy") && space_quest.hasWonQuest(player, "destroy", "sampleDestroy"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasCompletedQuest(player, "destroy", "sampleDestroy") && space_quest.hasWonQuest(player, "destroy", "sampleDestroy");
     }
+
     public boolean destroysample_condition_onQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasQuest(player, "destroy", "sampleDestroy") || space_quest.hasCompletedQuest(player, "destroy", "sampleDestroy"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasQuest(player, "destroy", "sampleDestroy") || space_quest.hasCompletedQuest(player, "destroy", "sampleDestroy");
     }
+
     public boolean destroysample_condition_alreadyRewarded(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasReceivedReward(player, "destroy", "sampleDestroy");
     }
+
     public void destroysample_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void destroysample_action_anim_greet(obj_id player, obj_id npc) throws InterruptedException
     {
         faceToBehavior(npc, player);
         doAnimationAction(npc, "greet");
     }
+
     public void destroysample_action_anim_converse(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "conversation_1");
     }
+
     public void destroysample_action_anim_checkwatch(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "check_wrist_device");
     }
+
     public void destroysample_action_giveQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy", "sampleDestroy");
         doAnimationAction(npc, "standing_raise_fist");
     }
+
     public void destroysample_action_rewardPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "celebrate");
         money.bankTo(money.ACCT_REBEL, player, 3000);
         space_quest.setQuestRewarded(player, "destroy", "sampleDestroy");
     }
+
     public void destroysample_action_anim_shakeheaddisgust(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "shake_head_disgust");
     }
+
     public void destroysample_action_anim_wave(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "wave1");
     }
+
     public void destroysample_action_anim_rubchin(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "rub_chin_thoughtful");
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -90,11 +97,13 @@ public class destroysample extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -103,12 +112,14 @@ public class destroysample extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.destroysample");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -131,7 +142,7 @@ public class destroysample extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_e0f3deb6");
@@ -139,7 +150,7 @@ public class destroysample extends script.base_script
                 setObjVar(player, "conversation.destroysample.branchId", 1);
                 npcStartConversation(player, self, "destroysample", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -168,7 +179,7 @@ public class destroysample extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_5786ebef");
@@ -180,7 +191,7 @@ public class destroysample extends script.base_script
                 setObjVar(player, "conversation.destroysample.branchId", 3);
                 npcStartConversation(player, self, "destroysample", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -202,7 +213,7 @@ public class destroysample extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_5c09875a");
@@ -210,7 +221,7 @@ public class destroysample extends script.base_script
                 setObjVar(player, "conversation.destroysample.branchId", 7);
                 npcStartConversation(player, self, "destroysample", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -219,6 +230,7 @@ public class destroysample extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("destroysample"))
@@ -301,7 +313,7 @@ public class destroysample extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_157082a");
@@ -314,7 +326,7 @@ public class destroysample extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.destroysample.branchId");
                     npcSpeak(player, message);

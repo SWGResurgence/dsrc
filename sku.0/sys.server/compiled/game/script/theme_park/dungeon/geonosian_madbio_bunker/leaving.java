@@ -1,15 +1,23 @@
 package script.theme_park.dungeon.geonosian_madbio_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.string_id;
 
 public class leaving extends script.base_script
 {
+    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public leaving()
     {
     }
-    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -26,7 +34,7 @@ public class leaving extends script.base_script
                 sendSystemMessage(item, locked);
                 return SCRIPT_OVERRIDE;
             }
-            else 
+            else
             {
                 CustomerServiceLog("DUNGEON_GeonosianBunker", "*Geonosian Entry: " + item + ": " + getName(item) + " has entered the Geonosian Dungeon.");
                 attachScript(item, "theme_park.dungeon.geonosian_madbio_bunker.death_script");
@@ -34,6 +42,7 @@ public class leaving extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -49,11 +58,13 @@ public class leaving extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int relockDoor(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "locked", 1);
         return SCRIPT_CONTINUE;
     }
+
     public void reLockDoor(obj_id self, obj_id player) throws InterruptedException
     {
         String name = getFirstName(player);
@@ -68,48 +79,48 @@ public class leaving extends script.base_script
         obj_id hall = getCellId(cave, "hall3");
         dictionary doorStuff = new dictionary();
         doorStuff.put("player", player);
-        if (permissionsIsAllowed(trans2, player) == true)
+        if (permissionsIsAllowed(trans2, player))
         {
             doorStuff.put("room", trans2);
             messageTo(trans2, "removeFromList", doorStuff, 3, false);
         }
-        if (permissionsIsAllowed(lab1, player) == true)
+        if (permissionsIsAllowed(lab1, player))
         {
             doorStuff.put("room", lab1);
             messageTo(lab1, "removeFromList", doorStuff, 3, false);
         }
-        if (permissionsIsAllowed(office, player) == true)
+        if (permissionsIsAllowed(office, player))
         {
             doorStuff.put("room", office);
             messageTo(office, "removeFromList", doorStuff, 3, false);
         }
-        if (permissionsIsAllowed(oper1, player) == true)
+        if (permissionsIsAllowed(oper1, player))
         {
             doorStuff.put("room", oper1);
             messageTo(oper1, "removeFromList", doorStuff, 3, false);
         }
-        if (permissionsIsAllowed(oper2, player) == true)
+        if (permissionsIsAllowed(oper2, player))
         {
             doorStuff.put("room", oper2);
             messageTo(oper2, "removeFromList", doorStuff, 3, false);
         }
-        if (permissionsIsAllowed(cage, player) == true)
+        if (permissionsIsAllowed(cage, player))
         {
             doorStuff.put("room", cage);
             messageTo(cage, "removeFromList", doorStuff, 3, false);
         }
-        if (permissionsIsAllowed(endcave, player) == true)
+        if (permissionsIsAllowed(endcave, player))
         {
             doorStuff.put("room", endcave);
             messageTo(endcave, "removeFromList", doorStuff, 3, false);
         }
-        if (permissionsIsAllowed(hall, player) == true)
+        if (permissionsIsAllowed(hall, player))
         {
             doorStuff.put("room", hall);
             messageTo(hall, "removeFromList", doorStuff, 3, false);
         }
-        return;
     }
+
     public void clearPlayer(obj_id player) throws InterruptedException
     {
         if (hasObjVar(player, "geo_lock"))
@@ -164,6 +175,5 @@ public class leaving extends script.base_script
         {
             detachScript(player, "theme_park.dungeon.geonosian_madbio_bunker.death_script");
         }
-        return;
     }
 }

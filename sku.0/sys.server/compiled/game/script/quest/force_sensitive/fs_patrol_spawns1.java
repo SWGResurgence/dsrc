@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.quests;
@@ -10,22 +16,24 @@ import script.string_id;
 
 public class fs_patrol_spawns1 extends script.base_script
 {
+    public static final boolean DEBUGGING = false;
+    public static final String[] ENEMY_LIST =
+            {
+                    "shadow_mercenary",
+                    "shadow_thug",
+                    "shadow_pirate",
+                    "shadow_outlaw"
+            };
     public fs_patrol_spawns1()
     {
     }
-    public static final boolean DEBUGGING = false;
-    public static final String[] ENEMY_LIST = 
-    {
-        "shadow_mercenary",
-        "shadow_thug",
-        "shadow_pirate",
-        "shadow_outlaw"
-    };
+
     public int msgQuestAbortPhaseChange(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "quest.force_sensitive.fs_patrol_spawns1");
         return SCRIPT_CONTINUE;
     }
+
     public int handleDontKillPatrolFSNpc(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "quest.fs_patrol.current_patrol", false);
@@ -33,13 +41,14 @@ public class fs_patrol_spawns1 extends script.base_script
         sendSystemMessage(self, messageId);
         return SCRIPT_CONTINUE;
     }
+
     public int handleKillPatrolFSNpc(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "quest.fs_patrol.number_of_enemies"))
         {
-            
+
         }
-        
+
         {
             int numberOfEnemies = getIntObjVar(self, "quest.fs_patrol.number_of_enemies");
             numberOfEnemies--;
@@ -51,6 +60,7 @@ public class fs_patrol_spawns1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void spawnStuff(int numberOfEnemies, location startLocation, String questName, obj_id player) throws InterruptedException
     {
         setObjVar(player, "quest.fs_patrol.number_of_enemies", numberOfEnemies);
@@ -76,12 +86,13 @@ public class fs_patrol_spawns1 extends script.base_script
             {
                 attachScript(spawn, "systems.fs_quest.patrol.fs_killable_npc");
             }
-            else 
+            else
             {
                 attachScript(spawn, "systems.fs_quest.patrol.fs_dont_kill_npc");
             }
         }
     }
+
     public void cleanUpStuff(obj_id player) throws InterruptedException
     {
         String questName = "fs_patrol_quest_";
@@ -123,7 +134,7 @@ public class fs_patrol_spawns1 extends script.base_script
             clearCompletedQuest(player, quests.getQuestId(questName + "start"));
             quests.deactivate(questName + "start", player);
         }
-        else 
+        else
         {
             quests.complete(questName + "finish", player, true);
         }
@@ -137,6 +148,7 @@ public class fs_patrol_spawns1 extends script.base_script
             broadcast(player, "Cleanup Done");
         }
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         setObjVar(self, "quest.fs_patrol.current_patrol", false);
@@ -144,6 +156,7 @@ public class fs_patrol_spawns1 extends script.base_script
         sendSystemMessage(self, messageId);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String locationName) throws InterruptedException
     {
         if (DEBUGGING)
@@ -220,7 +233,7 @@ public class fs_patrol_spawns1 extends script.base_script
                     sendSystemMessage(self, messageId);
                     spawnStuff(numberOfEnemies, startLocation, questName, self);
                 }
-                else 
+                else
                 {
                     string_id messageId = new string_id("quest/force_sensitive/fs_patrol", "no_objective");
                     setObjVar(self, "quest.fs_patrol.current_patrol_point", true);
@@ -237,6 +250,7 @@ public class fs_patrol_spawns1 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (DEBUGGING)

@@ -1,15 +1,22 @@
 package script.gambling.slot;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.gambling;
 import script.obj_id;
 
 public class standard extends script.gambling.base.slot
 {
+    private static final String GAME_TYPE = "slot_standard";
+    public static final String TBL = "datatables/gambling/slot/" + GAME_TYPE + ".iff";
     public standard()
     {
     }
-    private static final String GAME_TYPE = "slot_standard";
-    public static final String TBL = "datatables/gambling/slot/" + GAME_TYPE + ".iff";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String gameType = GAME_TYPE;

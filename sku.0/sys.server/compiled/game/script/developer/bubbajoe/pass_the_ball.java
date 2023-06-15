@@ -4,6 +4,12 @@ package script.developer.bubbajoe;/*
 @Purpose: Hot potato game.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.menu_info;
 import script.menu_info_types;
@@ -78,6 +84,7 @@ public class pass_the_ball extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public attacker_results makeDummyAttackerResults(obj_id objAttacker) throws InterruptedException
     {
         attacker_results cbtAttackerResults = new attacker_results();
@@ -87,6 +94,7 @@ public class pass_the_ball extends script.base_script
         cbtAttackerResults.endPosture = getPosture(objAttacker);
         return cbtAttackerResults;
     }
+
     public defender_results[] makeDummyDefenderResults(obj_id objDefender) throws InterruptedException
     {
         defender_results[] cbtDefenderResults = new defender_results[1];
