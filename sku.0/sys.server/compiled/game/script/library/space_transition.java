@@ -1180,13 +1180,13 @@ public class space_transition extends script.base_script
         {
             ship_ai.unitSetAutoAggroImmuneTime(objShip, 60);
         }
-/*        if (hasObjVar(getOwner(objShip), "gm"))
+        if (hasObjVar(getOwner(objShip), "gm") && isGod(getOwner(objShip)))
         {
             ship_ai.unitRemoveFromAllAttackTargetLists(objShip);
             ship_ai.unitSetAutoAggroImmune(objShip, true);
             ship_ai.unitSetDamageAggroImmune(objShip, true);
             broadcast(getOwner(objShip), "aiIgnore[ON]: AI will no longer aggro you or fight back.");
-        }*/
+        }
     }
 
     public static void adjustShipTeleportFixupInSpaceScene(obj_id ship) throws InterruptedException
