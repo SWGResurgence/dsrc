@@ -5175,6 +5175,13 @@ public class base_class
     {
         chatSendToRoom(getGameChatCode() + "." + getGalaxyName() + ".system", localizedMessageText, null);
     }
+    /**
+     * Send a system message to a galaxy, neat.
+     */
+    public static void broadcastGalaxy(String localizedMessageText)
+    {
+        chatSendToRoom(getGameChatCode() + "." + getGalaxyName() + ".system", localizedMessageText, null);
+    }
 
     /**
      * Send a system message to a galaxy

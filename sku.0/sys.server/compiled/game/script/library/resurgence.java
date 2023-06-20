@@ -26,7 +26,6 @@ public class resurgence extends script.base_script
 {
     public static final string_id SID_PROMPT = new string_id("resurgence", "ui_list_objects_prompt");
     public static final string_id SID_TITLE = new string_id("resurgence", "ui_list_objects_title");
-    //note: add to this list, do not reindex these values!
     public static int WORLD_BOSS_PEKO = 0;
     public static int WORLD_BOSS_KRAYT = 1;
     public static int WORLD_BOSS_PAX = 2;
@@ -34,6 +33,9 @@ public class resurgence extends script.base_script
     public static int WORLD_BOSS_DONKDONK = 4;
     public static int WORLD_BOSS_AURRA = 5;
     public static int WORLD_BOSS_EMPERORS_HAND = 6;
+    public static String[] ADMIN_PREFIXES = {
+            "Dev-", "Admin-", "CSR-", "QA-", "IA-", "GM-", "Event-"
+    };
 
     public resurgence()
     {
@@ -53,37 +55,96 @@ public class resurgence extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public static void sendToOrigin(obj_id self)
+    public static boolean isEthereal(obj_id player)
     {
-        location loc = getLocation(self);
-        obj_id planet = getPlanetByName(loc.area);
-        warpPlayer(self, loc.area, loc.x, loc.y, loc.z, null, 0, 0, 0);
+        String name = getPlayerName(player);
+        for (String ADMIN_PREFIX : ADMIN_PREFIXES)
+        {
+            if (name.startsWith(ADMIN_PREFIX))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public static void listAllPumpkins(obj_id self)
+    public static boolean isDevelopment(obj_id player)
     {
-        obj_id[] allPumpkins = getAllObjectsWithTemplate(getLocation(self), 1000, "object/tangible/holiday/halloween/pumpkin_object.iff");
+        String name = getPlayerName(player);
+        if (name.startsWith(ADMIN_PREFIXES[0]))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public boolean getConfig(String configString) throws InterruptedException
+    {
+        String enabled = toLower(getConfigSetting("Resurgence", configString));
+        if (enabled == null)
+        {
+            return false;
+        }
+        return enabled.equals("true") || enabled.equals("1");
+    }
+    public float getConfigFloat(String configString) throws InterruptedException
+    {
+        String value = toLower(getConfigSetting("Resurgence", configString));
+        if (value == null)
+        {
+            return 0.0f;
+        }
+        return utils.stringToFloat(value);
+    }
+    public int getConfigInt(String configString) throws InterruptedException
+    {
+        String value = toLower(getConfigSetting("Resurgence", configString));
+        if (value == null)
+        {
+            return 0;
+        }
+        return utils.stringToInt(value);
+    }
+
+    public static void logEtherealAction(obj_id player, String action) throws InterruptedException
+    {
+        LOG("ethereal", getPlayerName(player) + " | " + action);
+    }
+
+    public static void sendToOrigin(obj_id player)
+    {
+        location loc = getLocation(player);
+        obj_id planet = getPlanetByName(loc.area);
+        warpPlayer(player, loc.area, loc.x, loc.y, loc.z, null, 0, 0, 0);
+    }
+
+    public static void listAllPumpkins(obj_id player)
+    {
+        obj_id[] allPumpkins = getAllObjectsWithTemplate(getLocation(player), 1000, "object/tangible/holiday/halloween/pumpkin_object.iff");
         if (allPumpkins == null || allPumpkins.length == 0)
         {
-            sendSystemMessage(self, "No pumpkins found.", null);
+            sendSystemMessage(player, "No pumpkins found.", null);
             return;
         }
         for (obj_id allPumpkin : allPumpkins)
         {
-            sendSystemMessage(self, "Pumpkin: " + allPumpkin, null);
+            sendSystemMessage(player, "Pumpkin: " + allPumpkin, null);
         }
     }
 
-    public static int moveAllPlayers(obj_id self, dictionary params)
+    public static int moveAllPlayers(obj_id who, dictionary params)
     {
         String planet = params.getString("planet");
         float x = params.getFloat("x");
         float y = params.getFloat("y");
         float z = params.getFloat("z");
-        obj_id[] players = getAllPlayers(getLocation(self), 1000);
+        obj_id[] players = getAllPlayers(getLocation(who), 1000);
         if (players == null || players.length == 0)
         {
-            sendSystemMessage(self, "No players found.", null);
+            sendSystemMessage(who, "No players found.", null);
             return SCRIPT_CONTINUE;
         }
         for (obj_id player : players)
@@ -93,29 +154,29 @@ public class resurgence extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public static void pushPlayer(obj_id self, obj_id target, float distance, float angle)
+    public static void pushPlayer(obj_id who, obj_id target, float distance, float angle)
     {
 
         location loc = getLocation(target);
         float x = loc.x + (float) Math.cos(angle) * distance;
         float z = loc.z + (float) Math.sin(angle) * distance;
         warpPlayer(target, loc.area, x, loc.y, z, null, 0, 0, 0);
-        debugServerConsoleMsg(self, "pushPlayer() - player pushed.");
+        debugServerConsoleMsg(who, "pushPlayer() - player pushed.");
     }
 
-    public static int explode(obj_id self, dictionary params) throws InterruptedException
+    public static int explode(obj_id who, dictionary params) throws InterruptedException
     {
-        location loc = getLocation(self);
-        playClientEffectLoc(self, "clienteffect/combat_explosion_lair_large.cef", loc, 0);
+        location loc = getLocation(who);
+        playClientEffectLoc(who, "clienteffect/combat_explosion_lair_large.cef", loc, 0);
         return SCRIPT_CONTINUE;
     }
 
-    public static void renameItems(obj_id self, obj_id target, String name)
+    public static void renameItems(obj_id who, obj_id target, String name)
     {
         obj_id[] items = getInventoryAndEquipment(target);
         if (items == null || items.length == 0)
         {
-            sendSystemMessage(self, "No items found.", null);
+            sendSystemMessage(who, "No items found.", null);
             return;
         }
         for (obj_id item : items)
@@ -124,7 +185,7 @@ public class resurgence extends script.base_script
         }
     }
 
-    public static void createCreatureGrid(obj_id self, obj_id target, String creature, int rows, int columns, float distance) throws InterruptedException
+    public static void createCreatureGrid(obj_id who, obj_id target, String creature, int rows, int columns, float distance) throws InterruptedException
     {
         location loc = getLocation(target);
         float x = loc.x;
@@ -139,7 +200,7 @@ public class resurgence extends script.base_script
             x = loc.x;
             z += distance;
         }
-        debugServerConsoleMsg(self, "createCreatureGrid() - creature grid created.");
+        debugServerConsoleMsg(who, "createCreatureGrid() - creature grid created.");
     }
 
     public static void createCircleSpawn(obj_id self, obj_id target, String creature, int amount, float distance) throws InterruptedException
@@ -395,7 +456,8 @@ public class resurgence extends script.base_script
                 {
                     if (noTrade)
                     {
-                        setObjVar(item_id, "noTrade", true);
+                        setObjVar(item_id, "noTrade", 1);
+                        attachScript(item_id, "item.special.nomove");
                     }
                 }
             }
@@ -429,25 +491,25 @@ public class resurgence extends script.base_script
         switch (worldboss)
         {
             case 0:
-                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The Mutated Peko-Peko Empress has been reported to have last been on Naboo. The Czerka Corporation is paying a high price for it's remains.");
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS: The Mutated Peko-Peko Empress has been reported to have last been on Naboo. The Czerka Corporation is paying a high price for it's remains.");
                 break;
             case 1:
-                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The Elder Ancient Krayt Dragon has been reported to have last been seen on Tatooine. The Czerka Corporation is paying a high price for it's remains.");
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS: The Elder Ancient Krayt Dragon has been reported to have last been seen on Tatooine. The Czerka Corporation is paying a high price for it's remains.");
                 break;
             case 2:
-                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\nThe Renegade Pax Vizla has been reported to have been last seen on Dxun near the Abandoned Mandalorian Outpost.The Czerka Corporation is paying a high price for it's remains.");
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS: The Renegade Pax Vizla has been reported to have been last seen on Dxun near the Abandoned Mandalorian Outpost.The Czerka Corporation is paying a high price for it's remains.");
                 break;
             case 3:
-                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The wretched and accursed, Darth Gizmo, has been reported to have been seen last on Endor at one of the Lake Villages. The Czerka Corporation is paying a high price for it's remains.");
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS: The wretched and accursed, Darth Gizmo, has been reported to have been seen last on Endor at one of the Lake Villages. The Czerka Corporation is paying a high price for it's remains.");
                 break;
             case 4:
-                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The wanted criminal, Donk-Donk Binks, has been reported to have been seen near the Rorgungan Lake Village on Rori. The Czerka Corporation is paying a high price for it's remains.");
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS: The wanted criminal, Donk-Donk Binks, has been spotted near the Rorgungan Lake Village on Rori. The Czerka Corporation is paying a high price for his corpse..");
                 break;
             case 5:
-                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The assassin, Aurra Sing, has been reported to have been seen on an island on Naboo. The Czerka Corporation is paying a high price for it's remains.");
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS: The assassin, Aurra Sing, has been reported to have been seen on an island on Naboo. The Czerka Corporation is paying a high price for it's remains.");
                 break;
             case 6:
-                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The Hand of his Royal Majesty, The Emperor himself, has been located near the Emperor's Retreat on Naboo. The Czerka Corporation is paying a high price for her dissected remains, and any Jedi that she has captured.");
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS: The Hand of his Royal Majesty, The Emperor himself, has been located near the Emperor's Retreat on Naboo. The Czerka Corporation is paying a high price for her dissected remains, and any Jedi that she has captured.");
         }
     }
 
@@ -456,12 +518,16 @@ public class resurgence extends script.base_script
         String[] attackerList = getAttackerList(target);
         if (attackerList.length > 0)
         {
-            String msg = "The world boss " + getEncodedName(target) + " has been defeated by the following adventurers: " + toUpper(attackerList[0], 0);
+            String msg = "The world boss " + getCreatureName(target) + " has been defeated by the following adventurers: " + toUpper(attackerList[0], 0);
             for (int i = 1; i < attackerList.length; i++)
             {
                 msg += ", " + toUpper(attackerList[i], 0);
             }
             msg += ". Congratulations to all!";
+            notifyGalacticFeed(msg);
+        }
+        else {
+            String msg = "The world boss " + getCreatureName(target) + " has been defeated. Congratulations to all!";
             notifyGalacticFeed(msg);
         }
     }

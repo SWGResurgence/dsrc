@@ -20,24 +20,11 @@ public class master_controller_reek extends script.base_script
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        resurgence.setupLootAmount(self, rand(1, 3));
+        resurgence.setupLootAmount(self, rand(1, 2));
         createTriggerVolume(SIGHTING_NAME, SIGHTING_RADIUS, false);
-        return SCRIPT_CONTINUE;
-    }
-
-    public int OnAddedToWorld(obj_id self) throws InterruptedException
-    {
         obj_id tatooine = getPlanetByName("tatooine");
         removeObjVar(tatooine, "dungeon_finder.dungeon.geo_madbio.reek");
         setObjVar(tatooine, "dungeon_finder.dungeon.geo_madbio.reek", "Active");
-        return SCRIPT_CONTINUE;
-    }
-
-    public int OnDestroy(obj_id self) throws InterruptedException
-    {
-        obj_id tatooine = getPlanetByName("tatooine");
-        removeObjVar(tatooine, "dungeon_finder.dungeon.geo_madbio.reek");
-        setObjVar(tatooine, "dungeon_finder.dungeon.geo_madbio.reek", "Inactive");
         return SCRIPT_CONTINUE;
     }
 
@@ -57,6 +44,9 @@ public class master_controller_reek extends script.base_script
 
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
+        obj_id tatooine = getPlanetByName("tatooine");
+        removeObjVar(tatooine, "dungeon_finder.dungeon.geo_madbio.reek");
+        setObjVar(tatooine, "dungeon_finder.dungeon.geo_madbio.reek", "Inactive");
         return SCRIPT_CONTINUE;
     }
 

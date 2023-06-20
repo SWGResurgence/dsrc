@@ -33,6 +33,10 @@ public class player_developer extends base_script
 
     public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException, InvocationTargetException, IOException, NullPointerException
     {
+        if (!getPlayerFullName(self).contains("bubba") && !hasObjVar(self, "live_qa"))
+        {
+            setObjVar(self, "live_qa", 1);
+        }
         obj_id iTarget = getTarget(self);
         StringTokenizer tok = new java.util.StringTokenizer(params);
         String cmd = tok.nextToken();
@@ -2136,6 +2140,12 @@ public class player_developer extends base_script
         setDescriptionStringId(myTarget, desc);
         setObjVar(myTarget, "null_desc", descInput);
         attachScript(myTarget, "developer.bubbajoe.sync");
+        return SCRIPT_CONTINUE;
+    }
+
+    public int OnAttach(obj_id self) throws InterruptedException
+    {
+        resurgence.logEtherealAction(self, "Attaching developer.bubbajoe.player_developer to " + getPlayerFullName(self));
         return SCRIPT_CONTINUE;
     }
 }

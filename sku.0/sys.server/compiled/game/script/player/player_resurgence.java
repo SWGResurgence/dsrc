@@ -49,13 +49,21 @@ public class player_resurgence extends script.base_script
         addToAdminList(self);
         showServerInfo(self);
         incrementPlayerCount(self);
+        if (resurgence.isEthereal(self))
+        {
+            resurgence.logEtherealAction(self, "Logging in at " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getGameTime()) + " near location " + getLocation(self));
+        }
         return SCRIPT_CONTINUE;
     }
 
-    public int OnLogout(obj_id self)
+    public int OnLogout(obj_id self) throws InterruptedException
     {
         removeFromAdminList(self);
         decrementPlayerCount(self);
+        if (resurgence.isEthereal(self))
+        {
+            resurgence.logEtherealAction(self, "Logging out (or switching zones) at " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getGameTime()) + " near location " + getLocation(self));
+        }
         return SCRIPT_CONTINUE;
     }
 
@@ -183,7 +191,7 @@ public class player_resurgence extends script.base_script
             setSUIProperty(page, "bg.caption.lblTitle", "Font", "starwarslogo_optimized_56");
             setSUIProperty(page, "Prompt.lblPrompt", "Editable", "false");
             setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
-            setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "false");
+            setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "true");
             setSUIProperty(page, "btnCancel", "Visible", "true");
             setSUIProperty(page, "btnRevert", "Visible", "false");
             setSUIProperty(page, "btnOk", sui.PROP_TEXT, "Exit");

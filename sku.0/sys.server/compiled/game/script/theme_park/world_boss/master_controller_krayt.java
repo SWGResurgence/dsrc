@@ -33,14 +33,6 @@ public class master_controller_krayt extends script.base_script
             return SCRIPT_CONTINUE;
         }
         showFlyText(self, new string_id("+ REGURGITATION + "), 10.5f, colors.DEEPPINK);
-        if (pet_lib.isPet(killer))
-        {
-            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerFullName(pet_lib.getMaster(killer)));
-        }
-        else
-        {
-            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerFullName(killer));
-        }
         resurgence.doWorldBossDeathMsg(self);
         obj_id[] attackerList = utils.getObjIdBatchScriptVar(self, "creditForKills.attackerList.attackers");
         for (obj_id anAttacker : attackerList)

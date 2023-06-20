@@ -42,17 +42,12 @@ public class master_controller_paxvizla extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        if (pet_lib.isPet(killer))
-        {
-            sendSystemMessageGalaxyTestingOnly("ATTENTION GALAXY BOUNTY HUNTERS: The Self-Proclaimed Mandalore, The Renegade, Pax Vizla has been reported to have been killed and the Czerka Corporation has paid out the out the bounty to " + getPlayerName(pet_lib.getMaster(killer)));
-        }
         obj_id tatooine = getPlanetByName("tatooine");
         if (hasObjVar(tatooine, "dungeon_finder.world_boss.pax"))
         {
             removeObjVar(tatooine, "dungeon_finder.world_boss.pax");
         }
         setObjVar(tatooine, "dungeon_finder.world_boss.pax", "Inactive");
-        sendSystemMessageGalaxyTestingOnly("ATTENTION GALAXY BOUNTY HUNTERS: The Self-Proclaimed Mandalore, The Renegade, Pax Vizla has been reported to have been killed and the Czerka Corporation has paid out the out the bounty to " + getName(killer));
         resurgence.doWorldBossDeathMsg(self);
         return SCRIPT_CONTINUE;
     }

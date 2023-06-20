@@ -89,8 +89,6 @@ public class death_watch_death extends script.base_script
             return SCRIPT_CONTINUE;
         }
         createMyLoot(self);
-        removeObjVar(getPlanetByName("tatooine"), "dungeon_finder.dungeon.death_watch_bunker.overlord");
-        setObjVar(getPlanetByName("tatooine"), "dungeon_finder.dungeon.death_watch_bunker.overlord", "Inactive");
         return SCRIPT_CONTINUE;
     }
 
@@ -117,6 +115,8 @@ public class death_watch_death extends script.base_script
                 {
                     String myLoot = "object/tangible/loot/dungeon/death_watch_bunker/jetpack_stabilizer.iff";
                     createObject(myLoot, corpseInventory, "");
+                    removeObjVar(getPlanetByName("tatooine"), "dungeon_finder.dungeon.death_watch_bunker.overlord");
+                    setObjVar(getPlanetByName("tatooine"), "dungeon_finder.dungeon.death_watch_bunker.overlord", "Inactive");
                     CustomerServiceLog("DEATH WATCH BUNKER:", "LOOT CREATED: " + realName + " created object in inventory " + myLoot);
                     return;
                 }

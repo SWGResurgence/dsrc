@@ -54,18 +54,6 @@ public class master_controller_emperors_hand extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        if (pet_lib.isPet(killer))
-        {
-            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: Aralina Silk, The Hand of his Royal Majesty, The Emperor has been slain, a bounty is now being offered for the capture or murder of " + getName(killer));
-        }
-        if (beast_lib.isBeast(killer))
-        {
-            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: Aralina Silk, The Hand of his Royal Majesty, The Emperor has been slain, a bounty is now being offered for the capture or murder of " + getName(killer));
-        }
-        if (!isPlayer(killer))
-        {
-            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: Aralina Silk, The Hand of his Royal Majesty, The Emperor has been slain, a bounty is now being offered for the capture or murder of " + getName(killer));
-        }
         obj_id tatooine = getPlanetByName("tatooine");
         if (hasObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand"))
         {
@@ -73,7 +61,6 @@ public class master_controller_emperors_hand extends script.base_script
         }
         setObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand", "Inactive");
         resurgence.doWorldBossDeathMsg(self);
-        sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: Aralina Silk, The Hand of his Royal Majesty, The Emperor has been slain, a bounty is now being offered for the capture or murder of " + getName(killer));
         return SCRIPT_CONTINUE;
     }
 

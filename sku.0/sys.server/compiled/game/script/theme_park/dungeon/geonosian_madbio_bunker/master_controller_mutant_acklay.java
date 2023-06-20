@@ -20,20 +20,15 @@ public class master_controller_mutant_acklay extends script.base_script
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        resurgence.setupLootAmount(self, rand(1, 3));
+        obj_id tatooine = getPlanetByName("tatooine");
+        removeObjVar(tatooine, "dungeon_finder.dungeon.geo_madbio.acklay");
+        setObjVar(tatooine, "dungeon_finder.dungeon.geo_madbio.acklay", "Active");
+        resurgence.setupLootAmount(self, rand(1, 2));
         createTriggerVolume(SIGHTING_NAME, SIGHTING_RADIUS, false);
         return SCRIPT_CONTINUE;
     }
 
-    public int OnAddedToWorld(obj_id self) throws InterruptedException
-    {
-        obj_id tatooine = getPlanetByName("tatooine");
-        removeObjVar(tatooine, "dungeon_finder.dungeon.geo_madbio.acklay");
-        setObjVar(tatooine, "dungeon_finder.dungeon.geo_madbio.acklay", "Active");
-        return SCRIPT_CONTINUE;
-    }
-
-    public int OnDestroy(obj_id self) throws InterruptedException
+    public int OnIncapacitated(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
         removeObjVar(tatooine, "dungeon_finder.dungeon.geo_madbio.acklay");
@@ -52,11 +47,6 @@ public class master_controller_mutant_acklay extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        return SCRIPT_CONTINUE;
-    }
-
-    public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
-    {
         return SCRIPT_CONTINUE;
     }
 
