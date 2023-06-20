@@ -53,7 +53,24 @@ public class player_resurgence extends script.base_script
         {
             resurgence.logEtherealAction(self, "Logging in at " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getGameTime()) + " near location " + getLocation(self));
         }
+        nukeFrog(self);
         return SCRIPT_CONTINUE;
+    }
+
+    public void nukeFrog(obj_id self) throws InterruptedException
+    {
+        //Nukes frogs from inventory regardless of how they got there and who they are in.
+        obj_id[] inventory = utils.getContents(self, true);
+        for (obj_id frog : inventory)
+        {
+            if (getTemplateName(frog).contains("terminal_character_builder"))
+            {
+                destroyObject(frog);
+                resurgence.logEtherealAction(self, "Player (" + getFirstName(self) + ") has illegal item inside their inventory. Nuking item with prejudice. | Location: " + getLocation(self) + ", Time: " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getGameTime()));
+                setObjVar(getPlanetByName("tatooine"), "skynet.nuked_frog." + self, true);
+                broadcast(self, "You had an illegal item in your inventory. The item has been removed and this incident has been logged.");
+            }
+        }
     }
 
     public int OnLogout(obj_id self) throws InterruptedException
@@ -277,9 +294,9 @@ public class player_resurgence extends script.base_script
         {
             prompt += "Current Game Masters Online\n";
             prompt += "\n";
-            for (int i = 0; i < admin_list.length; i++)
+            for (String s : admin_list)
             {
-                obj_id admin = utils.stringToObjId(admin_list[i]);
+                obj_id admin = utils.stringToObjId(s);
                 if (isIdValid(admin))
                 {
                     prompt += "\t" + getPlayerFullName(admin) + "\n";
