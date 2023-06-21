@@ -72,6 +72,29 @@ public class player_developer extends base_script
             reloadAllScripts(self);
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equalsIgnoreCase("sendMail"))
+        {
+            String mailFrom = tok.nextToken();
+            String mailSubject = tok.nextToken();
+            String mailBody = tok.nextToken();
+            while (tok.hasMoreTokens())
+            {
+                mailBody = mailBody + " " + tok.nextToken();
+            }
+            sendFakeMail(self, getAllPlayers(getLocation(self), 15f), mailFrom, mailSubject, mailBody, false);
+
+        }
+        if (cmd.equalsIgnoreCase("sendMailWaypoint"))
+        {
+            String mailFrom = tok.nextToken();
+            String mailSubject = tok.nextToken();
+            String mailBody = tok.nextToken();
+            while (tok.hasMoreTokens())
+            {
+                mailBody = mailBody + " " + tok.nextToken();
+            }
+            sendFakeMail(self, getAllPlayers(getLocation(self), 15f), mailFrom, mailSubject, mailBody, true);
+        }
         if (cmd.equals("listWattos"))
         {
             obj_id[] wattos = getAllObjectsWithObjVar(getLocation(self), 16000f, "watto_tag");
@@ -1506,7 +1529,7 @@ public class player_developer extends base_script
                 String corpseTemplate = "object/tangible/container/loot/large_container.iff";
                 location treasureLoc = getLocation(self);
                 obj_id treasureChest = createObject(corpseTemplate, treasureLoc);
-                attachScript(treasureChest, "item.container.loot_crate_opened");
+                attachScript (treasureChest, "item.container.loot_crate_opened");
                 setName(treasureChest, "\\#FFC0CBa cargo container\\#.");
                 loot.makeLootInContainer(treasureChest, table, amt, 300);
                 broadcast(self, "A cargo container was made with " + amt + " items from the loot table: " + table);
@@ -2108,14 +2131,12 @@ public class player_developer extends base_script
         location there = getLocation(target);
         createClientPathAdvanced(target, there, here, "default");
     }
-
     public void pathToWho(obj_id self, obj_id target)
     {
         location here = getLocation(self);
         location there = getLocation(target);
         createClientPathAdvanced(self, here, there, "default");
     }
-
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "live_qa")) // not valid for non-optimized clients.
@@ -2179,9 +2200,23 @@ public class player_developer extends base_script
         return SCRIPT_CONTINUE;
     }
 
-    public int OnAttach(obj_id self) throws InterruptedException
+    public int sendFakeMail(obj_id source, obj_id[] recipients, String from, String title, String body, boolean attachments) throws InterruptedException
     {
-        resurgence.logEtherealAction(self, "Attaching developer.bubbajoe.player_developer to " + getPlayerFullName(self));
+        location here = getLocation(source);
+        for (obj_id target : recipients)
+        {
+            if (!attachments)
+            {
+                utils.sendMail(unlocalized(title), unlocalized(body), target, from);
+            }
+            else
+            {
+                String waypointName = "Area of Interest";
+                String oob;
+                oob = chatAppendPersistentMessageWaypointData(null, here.area, here.x, here.z, null, waypointName);
+                chatSendPersistentMessage(from, target, title, body, oob);
+            }
+        }
         return SCRIPT_CONTINUE;
     }
 }
