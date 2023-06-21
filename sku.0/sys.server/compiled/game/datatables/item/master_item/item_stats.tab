@@ -2233,7 +2233,7 @@ item_deed_podracer_anakin			"string:vehicle_attribs.object_ref=podracer_anakin,f
 item_deed_snowspeeder_06_01			"string:vehicle_attribs.object_ref=snowspeeder,float:hit_points=15000"								
 item_deed_walker_06_02			"string:vehicle_attribs.object_ref=walker_at_rt_camo,float:hit_points=10000"								
 item_deed_walker_at_xt_06_02			"string:vehicle_attribs.object_ref=walker_at_xt,float:hit_points=10000"								
-item_development_combat_test_ring_06_01	"stamina_modified=200,agility_modified=200,constitution_modified=200,strength_modified=200,precision_modified=200,luck_modified=200"										
+item_development_combat_test_ring_06_01			"stamina_modified=200,agility_modified=200,constitution_modified=200,strength_modified=200,precision_modified=200,luck_modified=200"
 item_dianoga_dumpster											
 item_dna_kittle			"string:beast.dna.creature_template=object/mobile/beast_master/bm_kittle.iff,float:beast.dna.quality=90.000000,int:beast.dna.cs_item=1"								
 item_dna_minstyngar			"string:beast.dna.creature_template=object/mobile/beast_master/bm_minstyngar.iff,float:beast.dna.quality=90.000000,int:beast.dna.cs_item=1"								
@@ -4327,7 +4327,7 @@ item_tcg_loot_reward_series7_commando_painting			string:collection.slotName=tcg_
 item_tcg_loot_reward_series7_deed_commando_bunker			"string:player_structure.deed.template=object/building/player/player_house_tcg_commando_bunker.iff,int:player_structure.deed.buildtime=90"								
 item_tcg_loot_reward_series7_deed_vehicle_garage			"string:player_structure.deed.template=object/building/player/player_house_tcg_vehicle_garage.iff,int:player_structure.deed.buildtime=90"								
 item_tcg_loot_reward_series7_deed_vip_bunker			"string:player_structure.deed.template=object/building/player/player_house_tcg_vip_bunker.iff,int:player_structure.deed.buildtime=90"								
-item_tcg_loot_reward_series7_embroidered_sash			luck_modified=300,constitution_modified=50,expertise_damage_all=5,expertise_action_all=5,expertise_range_bonus_pistol=3,expertise_range_bonus_carbine=3
+item_tcg_loot_reward_series7_embroidered_sash	luck_modified=300,constitution_modified=50,expertise_damage_all=5,expertise_action_all=5,expertise_range_bonus_pistol=3,expertise_range_bonus_carbine=3
 item_tcg_loot_reward_series7_figrin_dan_diorama			string:soundFile=sound/music_figrin_dan_tcg_diorama.snd								
 item_tcg_loot_reward_series7_gold_cape											
 item_tcg_loot_reward_series7_handmade_sash											
