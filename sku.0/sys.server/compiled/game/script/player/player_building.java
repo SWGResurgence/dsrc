@@ -1587,6 +1587,10 @@ public class player_building extends script.base_script
         obj_id player = self;
         obj_id station = target;
         int amt = 0;
+        if (isGod(self))
+        {
+            resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") is a god and is attempting to deposit power" + params.toString() + " into an incubator (" + target + ") at " + getLocation(self).toClipboardFormat());
+        }
         if (!incubator.validateActiveUser(station, player))
         {
             return SCRIPT_CONTINUE;
@@ -2463,6 +2467,10 @@ public class player_building extends script.base_script
             LOG("LOG_CHANNEL", "The amount must be between 1 and 1000000");
             sendSystemMessage(self, new string_id(STF, "amount_params"));
             return SCRIPT_CONTINUE;
+        }
+        if (isGod(self))
+        {
+            resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") paid " + amt + " credits to " + structure + " (" + getTemplateName(structure) + ") at " + getLocation(self).toClipboardFormat() + " (" + getGameTime() + "))");
         }
         player_structure.payMaintenance(self, structure, amt);
         return SCRIPT_CONTINUE;
