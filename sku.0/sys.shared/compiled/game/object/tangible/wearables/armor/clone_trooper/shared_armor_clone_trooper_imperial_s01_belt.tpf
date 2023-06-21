@@ -7,5 +7,3 @@ detailedDescription = "wearables_detail" "armor_clone_trooper_imperial_s01_belt"
 
 appearanceFilename = "appearance/armor_clonetrooper_belt_m.sat"
 clientDataFile = "clientdata/armor/client_shared_armor_clone_trooper_imperial_belt.cdf"
-
-gameObjectType = GOT_armor_misc
