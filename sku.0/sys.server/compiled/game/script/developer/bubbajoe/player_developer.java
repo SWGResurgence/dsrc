@@ -84,6 +84,30 @@ public class player_developer extends base_script
             sendFakeMail(self, getAllPlayers(getLocation(self), 15f), mailFrom, mailSubject, mailBody, false);
 
         }
+        if (cmd.equalsIgnoreCase("mapLocations"))
+        {
+            String flag = tok.nextToken();
+            String category = tok.nextToken();
+            String subcategory = tok.nextToken();
+            String name ="";
+            while (tok.hasMoreTokens())
+            {
+                name = name + " " + tok.nextToken();
+            }
+            if (flag.equals("add"))
+            {
+                addDirtyPlanetMapLocation(self, name, getLocation(self), category, subcategory);
+            }
+            else if (flag.equals("remove"))
+            {
+                removeDirtyPlanetMapLocation(self, name);
+            }
+            else {
+                broadcast(self, "Usage: /developer mapLocations add [category] [subcategory] [name]");
+                broadcast(self, "Usage: /developer mapLocations remove [name]");
+                broadcast(self, "You may only have one active map location active at any given time.");
+            }
+        }
         if (cmd.equalsIgnoreCase("sendMailWaypoint"))
         {
             String mailFrom = tok.nextToken();
@@ -2219,6 +2243,21 @@ public class player_developer extends base_script
         }
         return SCRIPT_CONTINUE;
     }
+
+    public int addDirtyPlanetMapLocation(obj_id self, String name, location where, String category, String subcategory)
+    {
+        addPlanetaryMapLocation(self, name, (int) where.x, (int) where.y, category, subcategory, MLT_PERSIST, 0);
+        broadcast(self, "Added " + name + " to your planetary map under " + category + " " + subcategory);
+        return SCRIPT_CONTINUE;
+    }
+
+    public int removeDirtyPlanetMapLocation(obj_id self, String name)
+    {
+        removePlanetaryMapLocation(self);
+        broadcast(self, "Removed " + name + " from your planetary map");
+        return SCRIPT_CONTINUE;
+    }
+
 }
 
 
