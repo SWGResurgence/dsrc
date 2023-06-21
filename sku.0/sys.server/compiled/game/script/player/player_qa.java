@@ -54,7 +54,7 @@ public class player_qa extends script.base_script
         setSUIProperty(page, "pageText.text", "Editable", "True");
         setSUIProperty(page, "pageText.text", "GetsInput", "True");
         String bottomBox = "";
-        bottomBox += "\n" + getPlayerName(self) + "\n" + getLocation(self) + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getCalendarTime());
+        bottomBox += "\n" + getPlayerName(self) + "\n" + getLocation(self).toReadableFormat(true) + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getCalendarTime());
         setSUIProperty(page, "outputPage.text", "Text", bottomBox);
         setSUIProperty(page, "btnOk", "Text", "Submit Bug Report");
         setSUIProperty(page, "bg.caption.text", "LocalText", "Bug Report");
@@ -82,7 +82,7 @@ public class player_qa extends script.base_script
         mantisConnection.setRequestMethod("POST");
         mantisConnection.setRequestProperty("Content-Type", "application/json");
         mantisConnection.setRequestProperty("Authorization", "a06jSe36gkG7uHscL31gHdnkc_cpizmW");
-        String input = "{\"summary\": \"" + summary + "\", \"description\": \"" + description + "\", \"category\": { \"id\": \"138\" }, \"project\": { \"id\": 2 } }";
+        String input = "{\"summary\": \"" + summary + "\", \"description\": \"" + description + "\", \"category\": { \"id\": \"138\" }, \"project\": { \"id\": 2 }, \"tags\": {\"name:\": \"Scripted\"} }";
         OutputStream os = mantisConnection.getOutputStream();
         os.write(input.getBytes());
         os.flush();
