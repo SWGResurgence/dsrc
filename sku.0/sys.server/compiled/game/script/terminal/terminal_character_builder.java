@@ -1793,7 +1793,7 @@ public class terminal_character_builder extends script.base_script
     {
         if (item == menu_info_types.ITEM_USE && (isGod(player) || checkConfigSetting("builderEnabled")))
         {
-            LOG("CustomerService", "Player: " + getName(player) + "(" + player + ") used Character Builder Terminal");
+            resurgence.logEtherealAction(player,"Player: " + getName(player) + "(" + player + ") used Character Builder Terminal");
             startCharacterBuilder(player);
         }
         if (item == menu_info_types.SERVER_MENU1)
@@ -1803,11 +1803,13 @@ public class terminal_character_builder extends script.base_script
             {
                 removeObjVar(self, "locked");
                 broadcast(player, "You have lifted the restricted access to this terminal.");
+                resurgence.logEtherealAction(player, "Player " + getPlayerFullName(player) + " lifted the restricted access to a terminal located at " + getLocation(self).toClipboardFormat("orange"));
             }
             else
             {
                 setObjVar(self, "locked", true);
                 broadcast(player, "You have restricted access to this terminal.");
+                resurgence.logEtherealAction(player, "Player " + getPlayerFullName(player) + " restricted access to a terminal located at " + getLocation(self).toClipboardFormat("orange"));
             }
         }
         if (item == menu_info_types.SERVER_MENU2)
@@ -1825,6 +1827,8 @@ public class terminal_character_builder extends script.base_script
                     setObjVar(duplicate, "noTrade", 1);
                     attachScript(duplicate, "item.special.nomove");
                     setObjVar(duplicate, "owner", player);
+                    setObjVar(duplicate, "locked", true);
+                    resurgence.logEtherealAction(player, "Player " + getPlayerFullName(player) + " duplicated a character builder terminal.");
                     sendSystemMessage(player, "Terminal duplicated.", null);
                 }
             }
@@ -11074,6 +11078,7 @@ public class terminal_character_builder extends script.base_script
     public int OnInitialize(obj_id self)
     {
         setName(self, toUpper(GENERIC_TITLE, 0));
+        setObjVar(self, "locked", true);
         return SCRIPT_CONTINUE;
     }
 
