@@ -11,6 +11,7 @@ import script.library.*;
 import script.library.gcw;
 
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
@@ -12296,6 +12297,11 @@ public class base_player extends script.base_script
         {
             attribs[idx] = professionName;
         }
+        idx++;
+        names[idx] = utils.packStringId(new string_id("Net worth"));
+        int creditAmount = getTotalMoney(self);
+        DecimalFormat df = new DecimalFormat("###,###,###");
+        attribs[idx] = "" + df.format(creditAmount);
         idx++;
         names[idx] = utils.packStringId(new string_id("Level"));
         attribs[idx] = Integer.toString(getLevel(self));
