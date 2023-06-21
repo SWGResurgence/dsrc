@@ -102,7 +102,8 @@ public class player_developer extends base_script
             {
                 removeDirtyPlanetMapLocation(self, name);
             }
-            else {
+            else
+            {
                 broadcast(self, "Usage: /developer mapLocations add [category] [subcategory] [name]");
                 broadcast(self, "Usage: /developer mapLocations remove [name]");
                 broadcast(self, "You may only have one active map location active at any given time.");
