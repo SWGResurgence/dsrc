@@ -1,46 +1,62 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class crafting_contractor extends script.base_script
 {
+    public static String c_stringFile = "conversation/crafting_contractor";
+
     public crafting_contractor()
     {
     }
-    public static String c_stringFile = "conversation/crafting_contractor";
+
     public boolean crafting_contractor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean crafting_contractor_condition_is_artisan(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "crafting_artisan_novice");
     }
+
     public boolean crafting_contractor_condition_is_armorsmith(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "crafting_armorsmith_novice");
     }
+
     public boolean crafting_contractor_condition_is_weaponsmith(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "crafting_weaponsmith_novice");
     }
+
     public boolean crafting_contractor_condition_is_chef(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "crafting_chef_novice");
     }
+
     public boolean crafting_contractor_condition_is_tailor(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "crafting_tailor_novice");
     }
+
     public boolean crafting_contractor_condition_is_architect(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "crafting_architect_novice");
     }
+
     public boolean crafting_contractor_condition_is_droidengineer(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "crafting_droidengineer_novice");
     }
+
     public boolean crafting_contractor_condition_can_do_med(obj_id player, obj_id npc) throws InterruptedException
     {
         String prof = utils.getStringScriptVar(player, "contract.profession");
@@ -48,45 +64,54 @@ public class crafting_contractor extends script.base_script
         {
             return false;
         }
-        switch (prof) {
+        switch (prof)
+        {
             case "weaponsmith":
-                if (hasSkill(player, "crafting_weaponsmith_firearms_02") || hasSkill(player, "crafting_weaponsmith_melee_02") || hasSkill(player, "crafting_weaponsmith_munitions_02")) {
+                if (hasSkill(player, "crafting_weaponsmith_firearms_02") || hasSkill(player, "crafting_weaponsmith_melee_02") || hasSkill(player, "crafting_weaponsmith_munitions_02"))
+                {
                     return true;
                 }
                 break;
             case "tailor":
-                if (hasSkill(player, "crafting_tailor_casual_02") || hasSkill(player, "crafting_tailor_field_02") || hasSkill(player, "crafting_tailor_formal_02")) {
+                if (hasSkill(player, "crafting_tailor_casual_02") || hasSkill(player, "crafting_tailor_field_02") || hasSkill(player, "crafting_tailor_formal_02"))
+                {
                     return true;
                 }
                 break;
             case "droidengineer":
-                if (hasSkill(player, "crafting_droidengineer_production_02") || hasSkill(player, "crafting_droidengineer_techniques_02") || hasSkill(player, "crafting_droidengineer_refinement_02") || hasSkill(player, "crafting_droidengineer_blueprints_02")) {
+                if (hasSkill(player, "crafting_droidengineer_production_02") || hasSkill(player, "crafting_droidengineer_techniques_02") || hasSkill(player, "crafting_droidengineer_refinement_02") || hasSkill(player, "crafting_droidengineer_blueprints_02"))
+                {
                     return true;
                 }
                 break;
             case "chef":
-                if (hasSkill(player, "crafting_chef_dish_02") || hasSkill(player, "crafting_chef_dessert_02") || hasSkill(player, "crafting_chef_drink_02")) {
+                if (hasSkill(player, "crafting_chef_dish_02") || hasSkill(player, "crafting_chef_dessert_02") || hasSkill(player, "crafting_chef_drink_02"))
+                {
                     return true;
                 }
                 break;
             case "artisan":
-                if (hasSkill(player, "crafting_artisan_engineering_02") || hasSkill(player, "crafting_artisan_domestic_02")) {
+                if (hasSkill(player, "crafting_artisan_engineering_02") || hasSkill(player, "crafting_artisan_domestic_02"))
+                {
                     return true;
                 }
                 break;
             case "armorsmith":
-                if (hasSkill(player, "crafting_armorsmith_personal_02") || hasSkill(player, "crafting_armorsmith_heavy_02") || hasSkill(player, "crafting_armorsmith_deflectors_02")) {
+                if (hasSkill(player, "crafting_armorsmith_personal_02") || hasSkill(player, "crafting_armorsmith_heavy_02") || hasSkill(player, "crafting_armorsmith_deflectors_02"))
+                {
                     return true;
                 }
                 break;
             case "architect":
-                if (hasSkill(player, "crafting_architect_production_02") || hasSkill(player, "crafting_architect_techniques_02") || hasSkill(player, "crafting_architect_harvesting_02") || hasSkill(player, "crafting_architect_blueprints_02")) {
+                if (hasSkill(player, "crafting_architect_production_02") || hasSkill(player, "crafting_architect_techniques_02") || hasSkill(player, "crafting_architect_harvesting_02") || hasSkill(player, "crafting_architect_blueprints_02"))
+                {
                     return true;
                 }
                 break;
         }
         return false;
     }
+
     public boolean crafting_contractor_condition_can_do_hard(obj_id player, obj_id npc) throws InterruptedException
     {
         String prof = utils.getStringScriptVar(player, "contract.profession");
@@ -94,59 +119,65 @@ public class crafting_contractor extends script.base_script
         {
             return false;
         }
-        switch (prof) {
+        switch (prof)
+        {
             case "weaponsmith":
-                if (hasSkill(player, "crafting_weaponsmith_firearms_04") || hasSkill(player, "crafting_weaponsmith_melee_04") || hasSkill(player, "crafting_weaponsmith_munitions_04")) {
+                if (hasSkill(player, "crafting_weaponsmith_firearms_04") || hasSkill(player, "crafting_weaponsmith_melee_04") || hasSkill(player, "crafting_weaponsmith_munitions_04"))
+                {
                     return true;
                 }
                 break;
             case "tailor":
-                if (hasSkill(player, "crafting_tailor_casual_04") || hasSkill(player, "crafting_tailor_field_04") || hasSkill(player, "crafting_tailor_formal_04")) {
+                if (hasSkill(player, "crafting_tailor_casual_04") || hasSkill(player, "crafting_tailor_field_04") || hasSkill(player, "crafting_tailor_formal_04"))
+                {
                     return true;
                 }
                 break;
             case "droidengineer":
-                if (hasSkill(player, "crafting_droidengineer_production_04") || hasSkill(player, "crafting_droidengineer_techniques_04") || hasSkill(player, "crafting_droidengineer_refinement_04") || hasSkill(player, "crafting_droidengineer_blueprints_04")) {
+                if (hasSkill(player, "crafting_droidengineer_production_04") || hasSkill(player, "crafting_droidengineer_techniques_04") || hasSkill(player, "crafting_droidengineer_refinement_04") || hasSkill(player, "crafting_droidengineer_blueprints_04"))
+                {
                     return true;
                 }
                 break;
             case "chef":
-                if (hasSkill(player, "crafting_chef_dish_04") || hasSkill(player, "crafting_chef_dessert_04") || hasSkill(player, "crafting_chef_drink_04")) {
+                if (hasSkill(player, "crafting_chef_dish_04") || hasSkill(player, "crafting_chef_dessert_04") || hasSkill(player, "crafting_chef_drink_04"))
+                {
                     return true;
                 }
                 break;
             case "artisan":
-                if (hasSkill(player, "crafting_artisan_engineering_04") || hasSkill(player, "crafting_artisan_domestic_04")) {
+                if (hasSkill(player, "crafting_artisan_engineering_04") || hasSkill(player, "crafting_artisan_domestic_04"))
+                {
                     return true;
                 }
                 break;
             case "armorsmith":
-                if (hasSkill(player, "crafting_armorsmith_personal_04") || hasSkill(player, "crafting_armorsmith_heavy_04") || hasSkill(player, "crafting_armorsmith_deflectors_04")) {
+                if (hasSkill(player, "crafting_armorsmith_personal_04") || hasSkill(player, "crafting_armorsmith_heavy_04") || hasSkill(player, "crafting_armorsmith_deflectors_04"))
+                {
                     return true;
                 }
                 break;
             case "architect":
-                if (hasSkill(player, "crafting_architect_production_04") || hasSkill(player, "crafting_architect_techniques_04") || hasSkill(player, "crafting_architect_harvesting_04") || hasSkill(player, "crafting_architect_blueprints_04")) {
+                if (hasSkill(player, "crafting_architect_production_04") || hasSkill(player, "crafting_architect_techniques_04") || hasSkill(player, "crafting_architect_harvesting_04") || hasSkill(player, "crafting_architect_blueprints_04"))
+                {
                     return true;
                 }
                 break;
         }
         return false;
     }
+
     public boolean crafting_contractor_condition_is_inv_full(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(player);
         if (isIdValid(playerInv))
         {
             int free_space = getVolumeFree(playerInv);
-            if (free_space <= 0)
-            {
-                return true;
-            }
-            return false;
+            return free_space <= 0;
         }
         return true;
     }
+
     public boolean crafting_contractor_condition_has_box(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id objInventory = utils.getInventoryContainer(player);
@@ -155,9 +186,11 @@ public class crafting_contractor extends script.base_script
             obj_id[] objContents = utils.getContents(objInventory, true);
             if (objContents != null)
             {
-                for (obj_id objContent : objContents) {
+                for (obj_id objContent : objContents)
+                {
                     String strItemTemplate = getTemplateName(objContent);
-                    if (strItemTemplate.startsWith("object/tangible/container/quest/crafting_contract")) {
+                    if (strItemTemplate.startsWith("object/tangible/container/quest/crafting_contract"))
+                    {
                         return true;
                     }
                 }
@@ -165,6 +198,7 @@ public class crafting_contractor extends script.base_script
         }
         return false;
     }
+
     public boolean crafting_contractor_condition_has_full_box(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id objInventory = utils.getInventoryContainer(player);
@@ -173,10 +207,13 @@ public class crafting_contractor extends script.base_script
             obj_id[] objContents = utils.getContents(objInventory, true);
             if (objContents != null)
             {
-                for (obj_id objContent : objContents) {
+                for (obj_id objContent : objContents)
+                {
                     String strItemTemplate = getTemplateName(objContent);
-                    if (strItemTemplate.startsWith("object/tangible/container/quest/crafting_contract")) {
-                        if (hasObjVar(objContent, "contract.complete")) {
+                    if (strItemTemplate.startsWith("object/tangible/container/quest/crafting_contract"))
+                    {
+                        if (hasObjVar(objContent, "contract.complete"))
+                        {
                             return true;
                         }
                     }
@@ -185,6 +222,7 @@ public class crafting_contractor extends script.base_script
         }
         return false;
     }
+
     public boolean crafting_contractor_condition_not_time_yet(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!utils.hasScriptVar(player, "contract.decline"))
@@ -193,12 +231,9 @@ public class crafting_contractor extends script.base_script
         }
         int old_time = utils.getIntScriptVar(player, "contract.decline");
         int new_time = getGameTime();
-        if ((new_time - old_time) < 60)
-        {
-            return true;
-        }
-        return false;
+        return (new_time - old_time) < 60;
     }
+
     public boolean crafting_contractor_condition_can_find_job(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!utils.hasScriptVar(player, "contract.profession"))
@@ -221,7 +256,7 @@ public class crafting_contractor extends script.base_script
                     min = i;
                     max = i;
                 }
-                else 
+                else
                 {
                     max++;
                 }
@@ -242,7 +277,7 @@ public class crafting_contractor extends script.base_script
                     newMin = j;
                     newMax = j;
                 }
-                else 
+                else
                 {
                     newMax++;
                 }
@@ -294,34 +329,42 @@ public class crafting_contractor extends script.base_script
         utils.setScriptVar(player, "contract.item_name", itemName);
         return true;
     }
+
     public void crafting_contractor_action_set_architect_var(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "contract.profession", "architect");
     }
+
     public void crafting_contractor_action_set_armorsmith_var(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "contract.profession", "armorsmith");
     }
+
     public void crafting_contractor_action_set_artisan_var(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "contract.profession", "artisan");
     }
+
     public void crafting_contractor_action_set_chef_var(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "contract.profession", "chef");
     }
+
     public void crafting_contractor_action_set_droidengineer_var(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "contract.profession", "droidengineer");
     }
+
     public void crafting_contractor_action_set_tailor_var(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "contract.profession", "tailor");
     }
+
     public void crafting_contractor_action_set_weaponsmith_var(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "contract.profession", "weaponsmith");
     }
+
     public void crafting_contractor_action_cleanup_vars(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.removeScriptVar(player, "contract.profession");
@@ -330,18 +373,22 @@ public class crafting_contractor extends script.base_script
         utils.removeScriptVar(player, "contract.row");
         utils.removeScriptVar(player, "contract.decline");
     }
+
     public void crafting_contractor_action_set_easy_var(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "contract.difficulty", "easy");
     }
+
     public void crafting_contractor_action_set_med_var(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "contract.difficulty", "medium");
     }
+
     public void crafting_contractor_action_set_hard_var(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "contract.difficulty", "hard");
     }
+
     public void crafting_contractor_action_cleanup_decline(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.removeScriptVar(player, "contract.profession");
@@ -350,10 +397,12 @@ public class crafting_contractor extends script.base_script
         utils.removeScriptVar(player, "contract.row");
         utils.setScriptVar(player, "contract.decline", getGameTime());
     }
+
     public void crafting_contractor_action_set_decline(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "contract.decline", getGameTime());
     }
+
     public void crafting_contractor_action_give_crate(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!utils.hasScriptVar(player, "contract.profession") || !utils.hasScriptVar(player, "contract.row") || !utils.hasScriptVar(player, "contract.number"))
@@ -362,7 +411,8 @@ public class crafting_contractor extends script.base_script
         }
         String prof = utils.getStringScriptVar(player, "contract.profession");
         String crate_template = "";
-        switch (prof) {
+        switch (prof)
+        {
             case "artisan":
                 crate_template = "object/tangible/container/quest/crafting_contract/generic_crate.iff";
                 break;
@@ -398,7 +448,8 @@ public class crafting_contractor extends script.base_script
             return;
         }
         String xp_type = "";
-        switch (prof) {
+        switch (prof)
+        {
             case "artisan":
                 xp_type = "crafting_general";
                 break;
@@ -440,6 +491,7 @@ public class crafting_contractor extends script.base_script
         utils.removeScriptVar(player, "contract.number");
         utils.removeScriptVar(player, "contract.row");
     }
+
     public void crafting_contractor_action_take_box_quit(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id objInventory = utils.getInventoryContainer(player);
@@ -448,15 +500,18 @@ public class crafting_contractor extends script.base_script
             obj_id[] objContents = utils.getContents(objInventory, true);
             if (objContents != null)
             {
-                for (obj_id objContent : objContents) {
+                for (obj_id objContent : objContents)
+                {
                     String strItemTemplate = getTemplateName(objContent);
-                    if (strItemTemplate.startsWith("object/tangible/container/quest/crafting_contract")) {
+                    if (strItemTemplate.startsWith("object/tangible/container/quest/crafting_contract"))
+                    {
                         destroyObject(objContent);
                     }
                 }
             }
         }
     }
+
     public void crafting_contractor_action_job_done(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id objInventory = utils.getInventoryContainer(player);
@@ -465,9 +520,11 @@ public class crafting_contractor extends script.base_script
             obj_id[] objContents = utils.getContents(objInventory, true);
             if (objContents != null)
             {
-                for (obj_id objContent : objContents) {
+                for (obj_id objContent : objContents)
+                {
                     String strItemTemplate = getTemplateName(objContent);
-                    if (strItemTemplate.startsWith("object/tangible/container/quest/crafting_contract")) {
+                    if (strItemTemplate.startsWith("object/tangible/container/quest/crafting_contract"))
+                    {
                         obj_id item = objContent;
                         int exp = getIntObjVar(item, "contract.xp");
                         int num = getIntObjVar(item, "contract.max");
@@ -477,9 +534,12 @@ public class crafting_contractor extends script.base_script
                         exp *= num;
                         xp.grantCraftingStyleXp(player, xp_type, exp);
                         int pay = 15;
-                        if (diff.equals("medium")) {
+                        if (diff.equals("medium"))
+                        {
                             pay = 25;
-                        } else if (diff.equals("hard")) {
+                        }
+                        else if (diff.equals("hard"))
+                        {
                             pay = 35;
                         }
                         pay *= num;
@@ -498,18 +558,21 @@ public class crafting_contractor extends script.base_script
         utils.removeScriptVar(player, "contract.row");
         utils.removeScriptVar(player, "contract.decline");
     }
+
     public String crafting_contractor_tokenTO_to_item(obj_id player, obj_id npc) throws InterruptedException
     {
         String itemName = utils.getStringScriptVar(player, "contract.item_name");
         utils.removeScriptVar(player, "contract.item_name");
         return itemName;
     }
+
     public int crafting_contractor_tokenDI_di_number(obj_id player, obj_id npc) throws InterruptedException
     {
         int r = rand(5, 10);
         utils.setScriptVar(player, "contract.number", r);
         return r;
     }
+
     public int crafting_contractor_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9c7d6f79"))
@@ -537,6 +600,7 @@ public class crafting_contractor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int crafting_contractor_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_eb7fcc27"))
@@ -605,7 +669,7 @@ public class crafting_contractor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9545de7b");
@@ -642,7 +706,7 @@ public class crafting_contractor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.crafting_contractor.branchId");
                     chat.chat(npc, player, message);
@@ -664,6 +728,7 @@ public class crafting_contractor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int crafting_contractor_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9545de7b"))
@@ -705,7 +770,7 @@ public class crafting_contractor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37b62865");
@@ -726,7 +791,7 @@ public class crafting_contractor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.crafting_contractor.branchId");
                     chat.chat(npc, player, message);
@@ -774,7 +839,7 @@ public class crafting_contractor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37b62865");
@@ -795,7 +860,7 @@ public class crafting_contractor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.crafting_contractor.branchId");
                     chat.chat(npc, player, message);
@@ -843,7 +908,7 @@ public class crafting_contractor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37b62865");
@@ -864,7 +929,7 @@ public class crafting_contractor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.crafting_contractor.branchId");
                     chat.chat(npc, player, message);
@@ -912,7 +977,7 @@ public class crafting_contractor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37b62865");
@@ -933,7 +998,7 @@ public class crafting_contractor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.crafting_contractor.branchId");
                     chat.chat(npc, player, message);
@@ -981,7 +1046,7 @@ public class crafting_contractor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37b62865");
@@ -1002,7 +1067,7 @@ public class crafting_contractor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.crafting_contractor.branchId");
                     chat.chat(npc, player, message);
@@ -1050,7 +1115,7 @@ public class crafting_contractor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37b62865");
@@ -1071,7 +1136,7 @@ public class crafting_contractor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.crafting_contractor.branchId");
                     chat.chat(npc, player, message);
@@ -1119,7 +1184,7 @@ public class crafting_contractor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37b62865");
@@ -1140,7 +1205,7 @@ public class crafting_contractor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.crafting_contractor.branchId");
                     chat.chat(npc, player, message);
@@ -1162,6 +1227,7 @@ public class crafting_contractor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int crafting_contractor_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37b62865"))
@@ -1190,7 +1256,7 @@ public class crafting_contractor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d5278cc5");
@@ -1209,7 +1275,7 @@ public class crafting_contractor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.crafting_contractor.branchId");
                     prose_package pp = new prose_package();
@@ -1259,7 +1325,7 @@ public class crafting_contractor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d5278cc5");
@@ -1278,7 +1344,7 @@ public class crafting_contractor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.crafting_contractor.branchId");
                     prose_package pp = new prose_package();
@@ -1328,7 +1394,7 @@ public class crafting_contractor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d5278cc5");
@@ -1347,7 +1413,7 @@ public class crafting_contractor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.crafting_contractor.branchId");
                     prose_package pp = new prose_package();
@@ -1385,6 +1451,7 @@ public class crafting_contractor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int crafting_contractor_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d5278cc5"))
@@ -1422,6 +1489,7 @@ public class crafting_contractor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1431,11 +1499,13 @@ public class crafting_contractor extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1444,18 +1514,21 @@ public class crafting_contractor extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.crafting_contractor");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1498,7 +1571,7 @@ public class crafting_contractor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_9c7d6f79");
@@ -1510,7 +1583,7 @@ public class crafting_contractor extends script.base_script
                 utils.setScriptVar(player, "conversation.crafting_contractor.branchId", 3);
                 npcStartConversation(player, npc, "crafting_contractor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1545,7 +1618,7 @@ public class crafting_contractor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_eb7fcc27");
@@ -1557,7 +1630,7 @@ public class crafting_contractor extends script.base_script
                 utils.setScriptVar(player, "conversation.crafting_contractor.branchId", 7);
                 npcStartConversation(player, npc, "crafting_contractor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1566,6 +1639,7 @@ public class crafting_contractor extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("crafting_contractor"))

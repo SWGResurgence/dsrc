@@ -1,5 +1,11 @@
 package script.cureward;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class cureward extends script.base_script
     public cureward()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (getConfigSetting("GameServer", "combatUpgradeReward") == null)
@@ -20,6 +27,7 @@ public class cureward extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (getConfigSetting("GameServer", "combatUpgradeReward") == null)
@@ -28,6 +36,7 @@ public class cureward extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean createRewards(obj_id self) throws InterruptedException
     {
         int bornOnDate = getPlayerBirthDate(self);
@@ -44,13 +53,11 @@ public class cureward extends script.base_script
         if (cuRewardOption.equals("2"))
         {
             reward = createObjectInInventoryAllowOverload("object/tangible/event_perk/frn_loyalty_award_plaque_gold.iff", self);
-            if (!isIdValid(reward))
-            {
-                return false;
-            }
+            return isIdValid(reward);
         }
         return true;
     }
+
     public int handleRetryRewardNextLogin(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "cureward.cureward");

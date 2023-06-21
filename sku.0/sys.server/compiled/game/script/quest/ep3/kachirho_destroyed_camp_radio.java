@@ -1,5 +1,11 @@
 package script.quest.ep3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.attrib;
 import script.library.chat;
@@ -9,11 +15,12 @@ import script.string_id;
 
 public class kachirho_destroyed_camp_radio extends script.base_script
 {
+    public static final String STF = "ep3/sidequests";
+    public static final string_id CONTACT = new string_id(STF, "destroyed_camp_radio");
     public kachirho_destroyed_camp_radio()
     {
     }
-    public static final String STF = "ep3/sidequests";
-    public static final string_id CONTACT = new string_id(STF, "destroyed_camp_radio");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setRadioAttributes(self);
@@ -21,6 +28,7 @@ public class kachirho_destroyed_camp_radio extends script.base_script
         attachScript(self, "conversation.destroyed_camp_radio");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setRadioAttributes(self);
@@ -28,22 +36,24 @@ public class kachirho_destroyed_camp_radio extends script.base_script
         attachScript(self, "conversation.destroyed_camp_radio");
         return SCRIPT_CONTINUE;
     }
+
     public void setRadioAttributes(obj_id self) throws InterruptedException
     {
         createTriggerVolume("chat_range", 5, true);
         setAttributeInterested(self, attrib.ALL);
-        return;
     }
+
     public void beginChatting(obj_id radio, obj_id player) throws InterruptedException
     {
         chat.chat(radio, CONTACT);
-        return;
     }
+
     public int handleReset(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "already_chatting");
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id who) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "already_chatting"))

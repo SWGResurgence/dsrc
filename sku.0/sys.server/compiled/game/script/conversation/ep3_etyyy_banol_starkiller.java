@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.space_quest;
@@ -8,61 +14,75 @@ import script.*;
 
 public class ep3_etyyy_banol_starkiller extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_etyyy_banol_starkiller";
+
     public ep3_etyyy_banol_starkiller()
     {
     }
-    public static String c_stringFile = "conversation/ep3_etyyy_banol_starkiller";
+
     public boolean ep3_etyyy_banol_starkiller_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_etyyy_banol_starkiller_condition_completedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "recovery", "ep3_hunting_banol_capture_fordan");
     }
+
     public boolean ep3_etyyy_banol_starkiller_condition_completedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "assassinate", "ep3_hunting_banol_destroy_tripps_goods");
     }
+
     public boolean ep3_etyyy_banol_starkiller_condition_canDoBanolQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "ep3Etyyy.canDoBanolQuests");
     }
+
     public boolean ep3_etyyy_banol_starkiller_condition_isOnQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player, "assassinate", "ep3_hunting_banol_destroy_tripps_goods");
     }
+
     public boolean ep3_etyyy_banol_starkiller_condition_isOnQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player, "recovery", "ep3_hunting_banol_capture_fordan");
     }
+
     public boolean ep3_etyyy_banol_starkiller_condition_completedBothQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "assassinate", "ep3_hunting_banol_destroy_tripps_goods") && (space_quest.hasWonQuest(player, "recovery", "ep3_hunting_banol_capture_fordan") || space_quest.hasFailedQuest(player, "recovery", "ep3_hunting_banol_capture_fordan"));
     }
+
     public boolean ep3_etyyy_banol_starkiller_condition_failedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasFailedQuest(player, "assassinate", "ep3_hunting_banol_destroy_tripps_goods") || space_quest.hasAbortedQuest(player, "assassinate", "ep3_hunting_banol_destroy_tripps_goods");
     }
+
     public boolean ep3_etyyy_banol_starkiller_condition_failedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasFailedQuest(player, "recovery", "ep3_hunting_banol_capture_fordan") || space_quest.hasAbortedQuest(player, "recovery", "ep3_hunting_banol_capture_fordan");
     }
+
     public boolean ep3_etyyy_banol_starkiller_condition_alreadyHasSpaceQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player);
     }
+
     public void ep3_etyyy_banol_starkiller_action_grantQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "assassinate", "ep3_hunting_banol_destroy_tripps_goods");
         space_quest.grantQuest(player, "assassinate", "ep3_hunting_banol_destroy_tripps_goods");
     }
+
     public void ep3_etyyy_banol_starkiller_action_grantQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "assassinate", "ep3_hunting_banol_destroy_tripps_goods");
         space_quest.clearQuestFlags(player, "recovery", "ep3_hunting_banol_capture_fordan");
         space_quest.grantQuest(player, "recovery", "ep3_hunting_banol_capture_fordan");
     }
+
     public int ep3_etyyy_banol_starkiller_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_488"))
@@ -98,6 +118,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_banol_starkiller_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_498"))
@@ -133,6 +154,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_banol_starkiller_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_508"))
@@ -168,6 +190,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_banol_starkiller_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_518"))
@@ -203,6 +226,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_banol_starkiller_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_528"))
@@ -229,7 +253,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_532");
@@ -242,7 +266,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_etyyy_banol_starkiller.branchId");
                     chat.chat(npc, player, message);
@@ -275,7 +299,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_544");
@@ -288,7 +312,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_etyyy_banol_starkiller.branchId");
                     chat.chat(npc, player, message);
@@ -310,6 +334,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_banol_starkiller_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_532"))
@@ -345,6 +370,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_banol_starkiller_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_544"))
@@ -380,6 +406,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_banol_starkiller_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_558"))
@@ -406,7 +433,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_562");
@@ -419,7 +446,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_etyyy_banol_starkiller.branchId");
                     chat.chat(npc, player, message);
@@ -430,6 +457,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_banol_starkiller_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_562"))
@@ -465,6 +493,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -475,12 +504,14 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -490,18 +521,21 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_etyyy_banol_starkiller");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -531,7 +565,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_488");
@@ -543,7 +577,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_etyyy_banol_starkiller.branchId", 1);
                 npcStartConversation(player, npc, "ep3_etyyy_banol_starkiller", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -571,7 +605,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_498");
@@ -583,7 +617,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_etyyy_banol_starkiller.branchId", 3);
                 npcStartConversation(player, npc, "ep3_etyyy_banol_starkiller", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -611,7 +645,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_508");
@@ -623,7 +657,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_etyyy_banol_starkiller.branchId", 5);
                 npcStartConversation(player, npc, "ep3_etyyy_banol_starkiller", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -651,7 +685,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_518");
@@ -663,7 +697,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_etyyy_banol_starkiller.branchId", 7);
                 npcStartConversation(player, npc, "ep3_etyyy_banol_starkiller", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -698,7 +732,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_528");
@@ -714,7 +748,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_etyyy_banol_starkiller.branchId", 11);
                 npcStartConversation(player, npc, "ep3_etyyy_banol_starkiller", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -736,7 +770,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_558");
@@ -744,7 +778,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_etyyy_banol_starkiller.branchId", 21);
                 npcStartConversation(player, npc, "ep3_etyyy_banol_starkiller", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -759,6 +793,7 @@ public class ep3_etyyy_banol_starkiller extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_etyyy_banol_starkiller"))

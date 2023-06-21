@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.location;
@@ -11,12 +17,14 @@ public class jtl_newbie extends script.theme_park.newbie_tutorial.tutorial_base
     public jtl_newbie()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "jtlNewbie", 1);
         newbieTutorialRequest(self, "clientReady");
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (getIntObjVar(self, "jtlNewbie") != 4)
@@ -25,6 +33,7 @@ public class jtl_newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNewbieTutorialResponse(obj_id self, String action) throws InterruptedException
     {
         if (!action.equals("clientReady"))
@@ -42,13 +51,14 @@ public class jtl_newbie extends script.theme_park.newbie_tutorial.tutorial_base
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sendJtLemails(self);
             setObjVar(self, "jtlNewbie", 4);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void sendJtLemails(obj_id self) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
@@ -60,6 +70,7 @@ public class jtl_newbie extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "sendNewbieMails", dctParams, rand(180, 220), true);
         messageTo(self, "handleDetachJtlNewbie", null, 225, false);
     }
+
     public int sendNewbieMails(obj_id self, dictionary params) throws InterruptedException
     {
         int intMail = params.getInt("intMail");
@@ -70,26 +81,27 @@ public class jtl_newbie extends script.theme_park.newbie_tutorial.tutorial_base
         String strSenderName = utils.packStringId(strSender);
         LOG("space", "Received sendNewbieMail for " + self + " sending email " + intMail + " name is " + strSenderName);
         String body_oob = chatMakePersistentMessageOutOfBandBody(null, strBody);
-        String subject_str = "@" + strSubject.toString();
+        String subject_str = "@" + strSubject;
         String waypName = "none";
         switch (intMail)
         {
             case 1:
-            waypName = utils.packStringId(new string_id("npc_spawner_n", "cmdr_landau"));
-            body_oob = chatAppendPersistentMessageWaypointData(body_oob, "naboo", -5516.0f, 4403.0f, null, waypName);
-            break;
+                waypName = utils.packStringId(new string_id("npc_spawner_n", "cmdr_landau"));
+                body_oob = chatAppendPersistentMessageWaypointData(body_oob, "naboo", -5516.0f, 4403.0f, null, waypName);
+                break;
             case 2:
-            waypName = utils.packStringId(new string_id("npc_spawner_n", "gil_burtin"));
-            body_oob = chatAppendPersistentMessageWaypointData(body_oob, "tatooine", -1174.0f, -3647.0f, null, waypName);
-            break;
+                waypName = utils.packStringId(new string_id("npc_spawner_n", "gil_burtin"));
+                body_oob = chatAppendPersistentMessageWaypointData(body_oob, "tatooine", -1174.0f, -3647.0f, null, waypName);
+                break;
             case 3:
-            waypName = utils.packStringId(new string_id("npc_spawner_n", "j_pai_brek"));
-            body_oob = chatAppendPersistentMessageWaypointData(body_oob, "corellia", -5072.0f, -2343.0f, null, waypName);
-            break;
+                waypName = utils.packStringId(new string_id("npc_spawner_n", "j_pai_brek"));
+                body_oob = chatAppendPersistentMessageWaypointData(body_oob, "corellia", -5072.0f, -2343.0f, null, waypName);
+                break;
         }
         chatSendPersistentMessage(strSenderName, getChatName(self), subject_str, null, body_oob);
         return SCRIPT_CONTINUE;
     }
+
     public boolean isInTutorial(obj_id self) throws InterruptedException
     {
         boolean tutorialTest = false;
@@ -101,6 +113,7 @@ public class jtl_newbie extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return (tutorialTest);
     }
+
     public int handleDetachJtlNewbie(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "jtlNewbie", 4);

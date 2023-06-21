@@ -1,5 +1,11 @@
 package script.npc.celebrity;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -10,6 +16,7 @@ public class emp_day_spawner extends script.base_script
     public emp_day_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String setting = getConfigSetting("EventTeam", "empireDay");
@@ -51,12 +58,13 @@ public class emp_day_spawner extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             return SCRIPT_OVERRIDE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int postSpawnScriptDetach(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id celeb = getObjIdObjVar(self, "celeb");

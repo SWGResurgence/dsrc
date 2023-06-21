@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,15 +14,16 @@ import script.string_id;
 
 public class grav_unit_repair_kit extends script.base_script
 {
-    public grav_unit_repair_kit()
-    {
-    }
     public static final String REBEL_SHARED_STF = "theme_park/alderaan/act3/shared_rebel_missions";
     public static final string_id GRAV_UNIT_REPAIRED = new string_id(REBEL_SHARED_STF, "repair_grav_unit");
     public static final string_id REPAIR_FAILED = new string_id(REBEL_SHARED_STF, "repair_failed");
     public static final string_id SID_REPAIR = new string_id(REBEL_SHARED_STF, "repair");
     public static final String BROKEN_GRAV_UNIT = "object/tangible/theme_park/alderaan/act3/broken_grav_unit.iff";
     public static final String REPAIRED_GRAV_UNIT = "object/tangible/theme_park/alderaan/act3/repaired_grav_unit.iff";
+    public grav_unit_repair_kit()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.playerHasItemByTemplate(player, BROKEN_GRAV_UNIT))
@@ -25,6 +32,7 @@ public class grav_unit_repair_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -33,6 +41,7 @@ public class grav_unit_repair_kit extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public void repairGravUnit(obj_id self, obj_id player) throws InterruptedException
     {
         if (utils.playerHasItemByTemplate(player, BROKEN_GRAV_UNIT))
@@ -49,12 +58,12 @@ public class grav_unit_repair_kit extends script.base_script
                 }
                 destroyObject(self);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, REPAIR_FAILED);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, REPAIR_FAILED);
         }

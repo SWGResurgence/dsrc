@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -8,76 +14,93 @@ import script.library.utils;
 
 public class mtp_meatlump_king extends script.base_script
 {
+    public static String c_stringFile = "conversation/mtp_meatlump_king";
+
     public mtp_meatlump_king()
     {
     }
-    public static String c_stringFile = "conversation/mtp_meatlump_king";
+
     public boolean mtp_meatlump_king_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean mtp_meatlump_king_condition_readyforAct2Story(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "mtp_hideout_pointer") && !groundquests.isQuestActiveOrComplete(player, "mtp_meatlump_king_story");
     }
+
     public boolean mtp_meatlump_king_condition_blurb01(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "mtp_meatlumpKingBlurb") == 1;
     }
+
     public boolean mtp_meatlump_king_condition_blurb02(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "mtp_meatlumpKingBlurb") == 2;
     }
+
     public boolean mtp_meatlump_king_condition_blurb03(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "mtp_meatlumpKingBlurb") == 3;
     }
+
     public boolean mtp_meatlump_king_condition_blurb04(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "mtp_meatlumpKingBlurb") == 4;
     }
+
     public boolean mtp_meatlump_king_condition_blurb05(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "mtp_meatlumpKingBlurb") == 5;
     }
+
     public boolean mtp_meatlump_king_condition_blurb06(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "mtp_meatlumpKingBlurb") == 6;
     }
+
     public boolean mtp_meatlump_king_condition_blurb07(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "mtp_meatlumpKingBlurb") == 7;
     }
+
     public boolean mtp_meatlump_king_condition_blurb08(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "mtp_meatlumpKingBlurb") == 8;
     }
+
     public boolean mtp_meatlump_king_condition_blurb09(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "mtp_meatlumpKingBlurb") == 9;
     }
+
     public boolean mtp_meatlump_king_condition_blurb10(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "mtp_meatlumpKingBlurb") == 10;
     }
+
     public boolean mtp_meatlump_king_condition_blurb11(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "mtp_meatlumpKingBlurb") == 11;
     }
+
     public boolean mtp_meatlump_king_condition_blurb12(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "mtp_meatlumpKingBlurb") == 12;
     }
+
     public boolean mtp_meatlump_king_condition_blurb_rare(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "mtp_meatlumpKingBlurb") == 9999;
     }
+
     public void mtp_meatlump_king_action_grantAct2Story(obj_id player, obj_id npc) throws InterruptedException
     {
         chat.thinkTo(player, player, new string_id("theme_park/corellia/quest", "mtp_king_story_quest"));
         groundquests.grantQuest(player, "mtp_meatlump_king_story");
-        return;
     }
+
     public void mtp_meatlump_king_action_setEmperorAppearance(obj_id player, obj_id npc) throws InterruptedException
     {
         location here = getLocation(npc);
@@ -86,6 +109,7 @@ public class mtp_meatlump_king extends script.base_script
         messageTo(npc, "handlePointToSelf", null, 1, false);
         messageTo(npc, "handleResetMeatlumpKingAppearance", null, 5, false);
     }
+
     public int mtp_meatlump_king_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6"))
@@ -112,7 +136,7 @@ public class mtp_meatlump_king extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_11");
@@ -125,7 +149,7 @@ public class mtp_meatlump_king extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_meatlump_king.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -135,6 +159,7 @@ public class mtp_meatlump_king extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_meatlump_king_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_11"))
@@ -161,6 +186,7 @@ public class mtp_meatlump_king extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -170,16 +196,19 @@ public class mtp_meatlump_king extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePointToSelf(obj_id self, dictionary params) throws InterruptedException
     {
         doAnimationAction(self, "point_to_self");
         return SCRIPT_CONTINUE;
     }
+
     public int handleResetMeatlumpKingAppearance(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
@@ -187,6 +216,7 @@ public class mtp_meatlump_king extends script.base_script
         revertObjectAppearance(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -201,18 +231,21 @@ public class mtp_meatlump_king extends script.base_script
         utils.setScriptVar(player, "mtp_meatlumpKingBlurb", blurb);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.mtp_meatlump_king");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -235,7 +268,7 @@ public class mtp_meatlump_king extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6");
@@ -243,7 +276,7 @@ public class mtp_meatlump_king extends script.base_script
                 utils.setScriptVar(player, "conversation.mtp_meatlump_king.branchId", 1);
                 npcStartConversation(player, npc, "mtp_meatlump_king", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -338,6 +371,7 @@ public class mtp_meatlump_king extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("mtp_meatlump_king"))

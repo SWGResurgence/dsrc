@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,55 +14,67 @@ import script.*;
 
 public class jinkins extends script.base_script
 {
+    public static String c_stringFile = "conversation/jinkins";
+
     public jinkins()
     {
     }
-    public static String c_stringFile = "conversation/jinkins";
+
     public boolean jinkins_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean jinkins_condition_hasCompletedPirate(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_vana_to_jinkins") && !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_interview_moore");
     }
+
     public boolean jinkins_condition_hasReturnedFromMoore(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_interview_moore", "tellJinkinsMoore") || (groundquests.hasCompletedQuest(player, "u16_nym_themepark_interview_moore") && !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_mine"));
     }
+
     public boolean jinkins_condition_hasMineQuestIncomplete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "u16_nym_themepark_mine");
     }
+
     public boolean jinkins_condition_hasMineFilter(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_mine", "returnMineComplete");
     }
+
     public boolean jinkins_condition_isDoneMineQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "u16_nym_themepark_mine");
     }
+
     public boolean jinkins_condition_allQuestsComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "u16_nym_themepark_jinkins_kole");
     }
+
     public boolean jinkins_condition_hasCompletedThemePark(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "u16_nym_themepark_shuttle_ambush");
     }
+
     public boolean jinkins_condition_hasNotCompletedPirate(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.hasCompletedQuest(player, "u16_nym_themepark_pirate_hideout") || !groundquests.hasCompletedQuest(player, "u16_nym_themepark_vana_to_jinkins");
     }
+
     public void jinkins_action_giveMooreQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_interview_moore");
     }
+
     public void jinkins_action_grantMineQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_mine");
@@ -69,24 +87,29 @@ public class jinkins extends script.base_script
             modifyCollectionSlotValue(player, "kill_nyms_themepark_mine_droideka_activate", 1);
         }
     }
+
     public void jinkins_action_completeMooreQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.sendSignal(player, "hasToldJinkinsMoore");
     }
+
     public void jinkins_action_completeMineQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.sendSignal(player, "hasCompletedMine");
     }
+
     public void jinkins_action_hasFoundJinkins(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasFoundJinkins");
     }
+
     public void jinkins_action_gotoKole(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_jinkins_kole");
     }
+
     public int jinkins_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_39"))
@@ -106,6 +129,7 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jinkins_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_147"))
@@ -121,6 +145,7 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jinkins_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_136"))
@@ -140,7 +165,7 @@ public class jinkins extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_138");
@@ -149,7 +174,7 @@ public class jinkins extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jinkins.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -159,6 +184,7 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jinkins_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_138"))
@@ -178,7 +204,7 @@ public class jinkins extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_140");
@@ -187,7 +213,7 @@ public class jinkins extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jinkins.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -197,6 +223,7 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jinkins_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_140"))
@@ -216,7 +243,7 @@ public class jinkins extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_142");
@@ -225,7 +252,7 @@ public class jinkins extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jinkins.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -235,6 +262,7 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jinkins_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_142"))
@@ -254,7 +282,7 @@ public class jinkins extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -263,7 +291,7 @@ public class jinkins extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jinkins.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -273,6 +301,7 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jinkins_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_144"))
@@ -292,7 +321,7 @@ public class jinkins extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -301,7 +330,7 @@ public class jinkins extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jinkins.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -311,6 +340,7 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jinkins_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -326,6 +356,7 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jinkins_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_101"))
@@ -345,7 +376,7 @@ public class jinkins extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -354,7 +385,7 @@ public class jinkins extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jinkins.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -379,7 +410,7 @@ public class jinkins extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -388,7 +419,7 @@ public class jinkins extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jinkins.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -398,6 +429,7 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jinkins_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_104"))
@@ -417,7 +449,7 @@ public class jinkins extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -426,7 +458,7 @@ public class jinkins extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jinkins.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -436,6 +468,7 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jinkins_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_107"))
@@ -455,7 +488,7 @@ public class jinkins extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -464,7 +497,7 @@ public class jinkins extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jinkins.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -474,6 +507,7 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jinkins_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_109"))
@@ -493,7 +527,7 @@ public class jinkins extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_119");
@@ -502,7 +536,7 @@ public class jinkins extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jinkins.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -512,6 +546,7 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jinkins_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_119"))
@@ -531,7 +566,7 @@ public class jinkins extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_123");
@@ -540,7 +575,7 @@ public class jinkins extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jinkins.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -550,6 +585,7 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jinkins_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_123"))
@@ -576,7 +612,7 @@ public class jinkins extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_127");
@@ -589,7 +625,7 @@ public class jinkins extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jinkins.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -599,6 +635,7 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jinkins_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_127"))
@@ -618,7 +655,7 @@ public class jinkins extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_133");
@@ -627,7 +664,7 @@ public class jinkins extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.jinkins.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -648,6 +685,7 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int jinkins_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_133"))
@@ -663,6 +701,7 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -672,11 +711,13 @@ public class jinkins extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -685,18 +726,21 @@ public class jinkins extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.jinkins");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -751,7 +795,7 @@ public class jinkins extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_39");
@@ -759,7 +803,7 @@ public class jinkins extends script.base_script
                 utils.setScriptVar(player, "conversation.jinkins.branchId", 4);
                 npcStartConversation(player, npc, "jinkins", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -780,7 +824,7 @@ public class jinkins extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_147");
@@ -788,7 +832,7 @@ public class jinkins extends script.base_script
                 utils.setScriptVar(player, "conversation.jinkins.branchId", 6);
                 npcStartConversation(player, npc, "jinkins", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -811,7 +855,7 @@ public class jinkins extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -819,7 +863,7 @@ public class jinkins extends script.base_script
                 utils.setScriptVar(player, "conversation.jinkins.branchId", 8);
                 npcStartConversation(player, npc, "jinkins", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -849,7 +893,7 @@ public class jinkins extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -865,7 +909,7 @@ public class jinkins extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "jinkins", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -892,6 +936,7 @@ public class jinkins extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("jinkins"))

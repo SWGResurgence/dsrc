@@ -1,32 +1,44 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class station_rodian_tripp_base extends script.base_script
 {
+    public static String c_stringFile = "conversation/station_rodian_tripp_base";
+
     public station_rodian_tripp_base()
     {
     }
-    public static String c_stringFile = "conversation/station_rodian_tripp_base";
+
     public boolean station_rodian_tripp_base_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean station_rodian_tripp_base_condition_hasWon_assassinations(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasReceivedReward(player, "assassinate", "ep3_kash_station_assassinate_neutral") || space_quest.hasReceivedReward(player, "assassinate", "ep3_kash_station_assassinate_rebel") || space_quest.hasReceivedReward(player, "assassinate", "ep3_kash_station_assassinate_imperial"));
     }
+
     public boolean station_rodian_tripp_base_condition_isTooFar(obj_id player, obj_id npc) throws InterruptedException
     {
         space_combat.playCombatTauntSound(player);
         obj_id containingShip = space_transition.getContainingShip(player);
         return (getDistance(npc, containingShip) > space_transition.STATION_COMM_MAX_DISTANCE);
     }
+
     public void station_rodian_tripp_base_action_grantDuty_destroy(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "ep3_kash_station_destroy_duty_rodian_tripp");
     }
+
     public int station_rodian_tripp_base_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_180"))
@@ -46,7 +58,7 @@ public class station_rodian_tripp_base extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_186");
@@ -55,7 +67,7 @@ public class station_rodian_tripp_base extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rodian_tripp_base.branchId");
                     chat.chat(npc, player, message);
@@ -78,7 +90,7 @@ public class station_rodian_tripp_base extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_200");
@@ -87,7 +99,7 @@ public class station_rodian_tripp_base extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rodian_tripp_base.branchId");
                     chat.chat(npc, player, message);
@@ -98,6 +110,7 @@ public class station_rodian_tripp_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rodian_tripp_base_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_186"))
@@ -124,7 +137,7 @@ public class station_rodian_tripp_base extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_190");
@@ -137,7 +150,7 @@ public class station_rodian_tripp_base extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rodian_tripp_base.branchId");
                     chat.chat(npc, player, message);
@@ -148,6 +161,7 @@ public class station_rodian_tripp_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rodian_tripp_base_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_190"))
@@ -174,7 +188,7 @@ public class station_rodian_tripp_base extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_195");
@@ -187,7 +201,7 @@ public class station_rodian_tripp_base extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rodian_tripp_base.branchId");
                     chat.chat(npc, player, message);
@@ -209,6 +223,7 @@ public class station_rodian_tripp_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rodian_tripp_base_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_195"))
@@ -247,7 +262,7 @@ public class station_rodian_tripp_base extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_25");
@@ -260,7 +275,7 @@ public class station_rodian_tripp_base extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rodian_tripp_base.branchId");
                     chat.chat(npc, player, message);
@@ -271,6 +286,7 @@ public class station_rodian_tripp_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rodian_tripp_base_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25"))
@@ -298,6 +314,7 @@ public class station_rodian_tripp_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rodian_tripp_base_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_200"))
@@ -317,7 +334,7 @@ public class station_rodian_tripp_base extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_203");
@@ -326,7 +343,7 @@ public class station_rodian_tripp_base extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rodian_tripp_base.branchId");
                     chat.chat(npc, player, message);
@@ -337,6 +354,7 @@ public class station_rodian_tripp_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rodian_tripp_base_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_203"))
@@ -356,7 +374,7 @@ public class station_rodian_tripp_base extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -365,7 +383,7 @@ public class station_rodian_tripp_base extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rodian_tripp_base.branchId");
                     chat.chat(npc, player, message);
@@ -376,6 +394,7 @@ public class station_rodian_tripp_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rodian_tripp_base_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_209"))
@@ -391,16 +410,19 @@ public class station_rodian_tripp_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -409,18 +431,21 @@ public class station_rodian_tripp_base extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.station_rodian_tripp_base");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -449,7 +474,7 @@ public class station_rodian_tripp_base extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_180");
@@ -457,7 +482,7 @@ public class station_rodian_tripp_base extends script.base_script
                 utils.setScriptVar(player, "conversation.station_rodian_tripp_base.branchId", 2);
                 npcStartConversation(player, npc, "station_rodian_tripp_base", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -466,6 +491,7 @@ public class station_rodian_tripp_base extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("station_rodian_tripp_base"))

@@ -1,5 +1,11 @@
 package script.developer.soe.qa;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.loot;
@@ -12,11 +18,13 @@ public class orbtest extends script.base_script
     public orbtest()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         broadcast(self, "orbtest script attached. Say 'GO' to start the test");
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (text.equalsIgnoreCase("go"))
@@ -25,7 +33,7 @@ public class orbtest extends script.base_script
             {
                 broadcast(self, "testing is already in progress... say 'STOP' to abort");
             }
-            else 
+            else
             {
                 if (getConfigSetting("GameServer", "enableLevelUpLoot") != null)
                 {
@@ -34,7 +42,7 @@ public class orbtest extends script.base_script
                     utils.setScriptVar(self, "spawnAttempts", 0);
                     messageTo(self, "handleSpawnMob", null, 1, false);
                 }
-                else 
+                else
                 {
                     broadcast(self, "[GameServer] enableLevelUpLoot config not set! Testing aborted");
                 }
@@ -46,6 +54,7 @@ public class orbtest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnMob(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "testingOn"))
@@ -65,6 +74,7 @@ public class orbtest extends script.base_script
         messageTo(self, "handleKillCritter", params, 0.5f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleKillCritter(obj_id self, dictionary params) throws InterruptedException
     {
         broadcast(self, "killing mob");
@@ -73,6 +83,7 @@ public class orbtest extends script.base_script
         messageTo(self, "handleCreateLoot", params, 0.5f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCreateLoot(obj_id self, dictionary params) throws InterruptedException
     {
         broadcast(self, "creating loot 10 times");
@@ -93,7 +104,7 @@ public class orbtest extends script.base_script
             broadcast(self, "Total real kills to spawn: " + (spawnAttempts * 10));
             utils.removeScriptVar(self, "testingOn");
         }
-        else 
+        else
         {
             broadcast(self, "No orb found");
             destroyObject(critter);

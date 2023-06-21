@@ -1,43 +1,53 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class station_rori extends script.base_script
 {
+    public static String c_stringFile = "conversation/station_rori";
+
     public station_rori()
     {
     }
-    public static String c_stringFile = "conversation/station_rori";
+
     public boolean station_rori_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean station_rori_condition_canAfford50(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 0.50f);
     }
+
     public boolean station_rori_condition_canAfford25(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_crafting.canAffordShipRepairs(player, npc, 0.25f) && space_crafting.isDamaged(player));
     }
+
     public boolean station_rori_condition_canAfford75(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 0.75f);
     }
+
     public boolean station_rori_condition_canAfford100(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 1.0f);
     }
+
     public boolean station_rori_condition_needRepairs(obj_id player, obj_id npc) throws InterruptedException
     {
         float fltDamage = space_crafting.getDamageTotal(player, getPilotedShip(player));
-        if (fltDamage > 0)
-        {
-            return true;
-        }
-        return false;
+        return fltDamage > 0;
     }
+
     public boolean station_rori_condition_canLandAtRebelBase(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasWonQuest(player, "assassinate", "rori_station_reb_storyquest_01_f"))
@@ -50,30 +60,31 @@ public class station_rori extends script.base_script
         }
         return false;
     }
+
     public boolean station_rori_condition_isTooFar(obj_id player, obj_id npc) throws InterruptedException
     {
         space_combat.playCombatTauntSound(player);
         obj_id containingShip = space_transition.getContainingShip(player);
         return (getDistance(npc, containingShip) > space_transition.STATION_COMM_MAX_DISTANCE);
     }
+
     public boolean station_rori_condition_isMeanPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasObjVar(player, "roriStationMeanie"));
     }
+
     public boolean station_rori_condition_eligibleForImpQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_flags.isImperialPilot(player))
         {
             if (space_flags.hasCompletedTierTwo(player))
             {
-                if (!space_quest.hasQuest(player))
-                {
-                    return true;
-                }
+                return !space_quest.hasQuest(player);
             }
         }
         return false;
     }
+
     public boolean station_rori_condition_eligibleForRsfQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_flags.isNeutralPilot(player))
@@ -88,6 +99,7 @@ public class station_rori extends script.base_script
         }
         return false;
     }
+
     public boolean station_rori_condition_eligibleForRebQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_flags.isRebelPilot(player))
@@ -102,34 +114,42 @@ public class station_rori extends script.base_script
         }
         return false;
     }
+
     public boolean station_rori_condition_isOnRebStoryQuest_01(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "station_rori.isOnRebelStoryQuest_01");
     }
+
     public boolean station_rori_condition_alreadyHasAQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player);
     }
+
     public boolean station_rori_condition_wonRebStoryQuest_01_a(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "escort", "rori_station_reb_storyquest_01_a");
     }
+
     public boolean station_rori_condition_wonRebStoryQuest_01_b(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "recovery", "rori_station_reb_storyquest_01_b");
     }
+
     public boolean station_rori_condition_wonRebStoryQuest_01_c(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "assassinate", "rori_station_reb_storyquest_01_c");
     }
+
     public boolean station_rori_condition_wonRebStoryQuest_01_d(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "assassinate", "rori_station_reb_storyquest_01_d");
     }
+
     public boolean station_rori_condition_wonRebStoryQuest_01_e(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "assassinate", "rori_station_reb_storyquest_01_e");
     }
+
     public boolean station_rori_condition_canLandAtHouse(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "homingBeacon.planet"))
@@ -137,119 +157,120 @@ public class station_rori extends script.base_script
             String homePlanet = getStringObjVar(player, "homingBeacon.planet");
             return (homePlanet.endsWith("rori"));
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public boolean station_rori_condition_canTakeQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasQuest(player))
-        {
-            return false;
-        }
-        return true;
+        return !space_quest.hasQuest(player);
     }
+
     public boolean station_rori_condition_canAttackImperial(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player);
     }
+
     public boolean station_rori_condition_canAttackRebel(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player);
     }
+
     public boolean station_rori_condition_canTakeTier5RebelDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_skill.isMasterPilot(player))
         {
             return false;
         }
-        if (space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player);
     }
+
     public boolean station_rori_condition_canTakeTier5ImperialDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_skill.isMasterPilot(player))
         {
             return false;
         }
-        if (space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player);
     }
+
     public void station_rori_action_landAtRebelOutpos(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Rebel Outpost");
     }
+
     public void station_rori_action_fix25(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.25f);
     }
+
     public void station_rori_action_fix50(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.50f);
     }
+
     public void station_rori_action_fix75(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.75f);
     }
+
     public void station_rori_action_fix100(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 1.0f);
     }
+
     public void station_rori_action_landAtNarmle(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Narmle Starport");
     }
+
     public void station_rori_action_landAtRestuss(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Restuss Starport");
     }
+
     public void station_rori_action_flagMeanPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "roriStationMeanie", true);
     }
+
     public void station_rori_action_unflagMeanPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         removeObjVar(player, "roriStationMeanie");
     }
+
     public void station_rori_action_grantImpEscortDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort_duty", "rori_station_imp_escort_duty_tier3");
     }
+
     public void station_rori_action_grantImpDestroyDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "rori_station_imp_destroy_duty_tier3");
     }
+
     public void station_rori_action_grantRsfEscortDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort_duty", "rori_station_rsf_escort_duty_tier3");
     }
+
     public void station_rori_action_grantRsfDestroyDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "rori_station_rsf_destroy_duty_tier3");
     }
+
     public void station_rori_action_grantRebelEscortDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort_duty", "rori_station_reb_escort_duty_tier3");
     }
+
     public void station_rori_action_grantRebelDestroyDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "rori_station_reb_destroy_duty_tier3");
     }
+
     public void station_rori_action_startRebStoryQuest_01(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "escort", "rori_station_reb_storyquest_01_a");
@@ -258,102 +279,118 @@ public class station_rori extends script.base_script
         {
             setObjVar(player, "station_rori.isOnRebelStoryQuest_01", true);
         }
-        return;
     }
+
     public void station_rori_action_grantRebStoryQuest_01_b(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "recovery", "rori_station_reb_storyquest_01_b");
         space_quest.grantQuest(player, "recovery", "rori_station_reb_storyquest_01_b");
-        return;
     }
+
     public void station_rori_action_grantRebStoryQuest_01_c(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "assassinate", "rori_station_reb_storyquest_01_c");
         space_quest.grantQuest(player, "assassinate", "rori_station_reb_storyquest_01_c");
-        return;
     }
+
     public void station_rori_action_grantRebStoryQuest_01_d(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "assassinate", "rori_station_reb_storyquest_01_d");
         space_quest.grantQuest(player, "assassinate", "rori_station_reb_storyquest_01_d");
-        return;
     }
+
     public void station_rori_action_grantRebStoryQuest_01_e(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "assassinate", "rori_station_reb_storyquest_01_e");
         space_quest.grantQuest(player, "assassinate", "rori_station_reb_storyquest_01_e");
-        return;
     }
+
     public void station_rori_action_grantRebStoryQuest_01_f(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "assassinate", "rori_station_reb_storyquest_01_f");
         space_quest.grantQuest(player, "assassinate", "rori_station_reb_storyquest_01_f");
-        return;
     }
+
     public void station_rori_action_landHoming(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayerHoming(player, npc);
     }
+
     public void station_rori_action_grantImperialDuty1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "naboo_imperial_tier1");
     }
+
     public void station_rori_action_grantImperialDuty2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "naboo_imperial_tier2");
     }
+
     public void station_rori_action_grantRebelDuty1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "naboo_rebel_tier1");
     }
+
     public void station_rori_action_grantRebelDuty2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "naboo_rebel_tier2");
     }
+
     public void station_rori_action_grantDroidDuty1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "naboo_rogue_droid_tier1");
     }
+
     public void station_rori_action_grantDroidDuty2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "naboo_rogue_droid_tier2");
     }
+
     public void station_rori_action_grantVoidDuty1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "naboo_void_wing_tier1");
     }
+
     public void station_rori_action_grantVoidDuty2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "naboo_void_wing_tier2");
     }
+
     public void station_rori_action_grantImperialDuty5(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "naboo_imperial_tier5");
     }
+
     public void station_rori_action_grantRebelDuty5(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "naboo_rebel_tier5");
     }
+
     public String station_rori_tokenTO_tokenTO0001(obj_id player, obj_id npc) throws InterruptedException
     {
-        return new String();
+        return "";
     }
+
     public int station_rori_tokenDI_getStationRepairCost25(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.25f);
     }
+
     public int station_rori_tokenDI_getStationRepairCost50(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.50f);
     }
+
     public int station_rori_tokenDI_getStationRepairCost75(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.75f);
     }
+
     public int station_rori_tokenDI_getStationRepairCost100(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 1.0f);
     }
+
     public int station_rori_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_205"))
@@ -410,7 +447,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_221");
@@ -423,7 +460,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -433,6 +470,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_221"))
@@ -459,7 +497,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_225");
@@ -472,7 +510,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -492,6 +530,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_225"))
@@ -518,7 +557,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_229");
@@ -531,7 +570,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -551,6 +590,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_229"))
@@ -577,7 +617,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_233");
@@ -590,7 +630,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -610,6 +650,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_233"))
@@ -636,7 +677,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_237");
@@ -649,7 +690,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -669,6 +710,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_237"))
@@ -695,7 +737,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_241");
@@ -708,7 +750,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -728,6 +770,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_241"))
@@ -783,7 +826,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_333");
@@ -812,7 +855,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -832,6 +875,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_333"))
@@ -872,7 +916,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_337");
@@ -893,7 +937,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -946,7 +990,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_377");
@@ -971,7 +1015,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1010,7 +1054,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_445");
@@ -1027,7 +1071,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1066,7 +1110,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_461");
@@ -1083,7 +1127,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1122,7 +1166,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_477");
@@ -1139,7 +1183,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1168,7 +1212,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_491");
@@ -1181,7 +1225,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1276,7 +1320,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_174");
@@ -1325,7 +1369,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1335,6 +1379,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_333"))
@@ -1375,7 +1420,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_337");
@@ -1396,7 +1441,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1449,7 +1494,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_377");
@@ -1474,7 +1519,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1513,7 +1558,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_445");
@@ -1530,7 +1575,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1569,7 +1614,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_461");
@@ -1586,7 +1631,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1625,7 +1670,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_477");
@@ -1642,7 +1687,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1671,7 +1716,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_491");
@@ -1684,7 +1729,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1779,7 +1824,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_174");
@@ -1828,7 +1873,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1838,6 +1883,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_263"))
@@ -1871,7 +1917,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_269");
@@ -1884,7 +1930,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1913,7 +1959,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_279");
@@ -1926,7 +1972,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1955,7 +2001,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_289");
@@ -1968,7 +2014,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1997,7 +2043,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_299");
@@ -2010,7 +2056,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2039,7 +2085,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_309");
@@ -2052,7 +2098,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2081,7 +2127,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_319");
@@ -2094,7 +2140,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2140,7 +2186,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_337");
@@ -2161,7 +2207,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2214,7 +2260,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_377");
@@ -2239,7 +2285,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2249,6 +2295,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_269"))
@@ -2274,6 +2321,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_279"))
@@ -2299,6 +2347,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_289"))
@@ -2324,6 +2373,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_299"))
@@ -2349,6 +2399,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_309"))
@@ -2374,6 +2425,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_319"))
@@ -2399,6 +2451,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_333"))
@@ -2439,7 +2492,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_337");
@@ -2460,7 +2513,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2513,7 +2566,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_377");
@@ -2538,7 +2591,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2577,7 +2630,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_445");
@@ -2594,7 +2647,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2633,7 +2686,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_461");
@@ -2650,7 +2703,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2689,7 +2742,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_477");
@@ -2706,7 +2759,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2735,7 +2788,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_491");
@@ -2748,7 +2801,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2843,7 +2896,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_174");
@@ -2892,7 +2945,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2902,6 +2955,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_337"))
@@ -2928,7 +2982,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_341");
@@ -2941,7 +2995,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2973,7 +3027,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_353");
@@ -2986,7 +3040,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3018,7 +3072,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_365");
@@ -3031,7 +3085,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3063,7 +3117,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159");
@@ -3080,7 +3134,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     prose_package pp = new prose_package();
@@ -3094,6 +3148,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_341"))
@@ -3123,6 +3178,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_353"))
@@ -3152,6 +3208,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_365"))
@@ -3181,6 +3238,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_159"))
@@ -3210,6 +3268,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_377"))
@@ -3236,7 +3295,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_381");
@@ -3254,7 +3313,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     prose_package pp = new prose_package();
@@ -3291,7 +3350,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_393");
@@ -3309,7 +3368,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     prose_package pp = new prose_package();
@@ -3346,7 +3405,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_405");
@@ -3364,7 +3423,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     prose_package pp = new prose_package();
@@ -3408,7 +3467,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_417");
@@ -3430,7 +3489,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     prose_package pp = new prose_package();
@@ -3467,7 +3526,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_433");
@@ -3484,7 +3543,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     prose_package pp = new prose_package();
@@ -3498,6 +3557,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_381"))
@@ -3527,6 +3587,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_393"))
@@ -3556,6 +3617,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_405"))
@@ -3585,6 +3647,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_417"))
@@ -3625,6 +3688,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_433"))
@@ -3672,7 +3736,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_377");
@@ -3697,7 +3761,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3718,6 +3782,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_377"))
@@ -3744,7 +3809,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_381");
@@ -3762,7 +3827,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     prose_package pp = new prose_package();
@@ -3799,7 +3864,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_393");
@@ -3817,7 +3882,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     prose_package pp = new prose_package();
@@ -3854,7 +3919,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_405");
@@ -3872,7 +3937,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     prose_package pp = new prose_package();
@@ -3916,7 +3981,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_417");
@@ -3938,7 +4003,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     prose_package pp = new prose_package();
@@ -3975,7 +4040,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_433");
@@ -3992,7 +4057,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     prose_package pp = new prose_package();
@@ -4006,6 +4071,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_445"))
@@ -4042,6 +4108,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_461"))
@@ -4078,6 +4145,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_477"))
@@ -4114,6 +4182,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_491"))
@@ -4133,7 +4202,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_495");
@@ -4142,7 +4211,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4162,6 +4231,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch79(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_495"))
@@ -4188,7 +4258,7 @@ public class station_rori extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_499");
@@ -4201,7 +4271,7 @@ public class station_rori extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_rori.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4211,6 +4281,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_499"))
@@ -4236,6 +4307,7 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_rori_handleBranch84(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_174"))
@@ -4360,18 +4432,21 @@ public class station_rori extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_station_rori.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_station_rori.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -4380,18 +4455,21 @@ public class station_rori extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.station_rori");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -4445,7 +4523,7 @@ public class station_rori extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_205");
@@ -4465,7 +4543,7 @@ public class station_rori extends script.base_script
                 utils.setScriptVar(player, "conversation.station_rori.branchId", 2);
                 npcStartConversation(player, npc, "station_rori", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4521,7 +4599,7 @@ public class station_rori extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_333");
@@ -4549,7 +4627,7 @@ public class station_rori extends script.base_script
                 utils.setScriptVar(player, "conversation.station_rori.branchId", 35);
                 npcStartConversation(player, npc, "station_rori", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4584,7 +4662,7 @@ public class station_rori extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_263");
@@ -4600,7 +4678,7 @@ public class station_rori extends script.base_script
                 utils.setScriptVar(player, "conversation.station_rori.branchId", 15);
                 npcStartConversation(player, npc, "station_rori", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4656,7 +4734,7 @@ public class station_rori extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_333");
@@ -4684,7 +4762,7 @@ public class station_rori extends script.base_script
                 utils.setScriptVar(player, "conversation.station_rori.branchId", 35);
                 npcStartConversation(player, npc, "station_rori", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4693,6 +4771,7 @@ public class station_rori extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("station_rori"))

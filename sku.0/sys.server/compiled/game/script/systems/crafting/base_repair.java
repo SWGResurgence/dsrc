@@ -1,5 +1,11 @@
 package script.systems.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.prose;
 import script.library.sui;
@@ -20,6 +26,7 @@ public class base_repair extends script.base_script
     public static final string_id SID_PERFECT_REPAIR = new string_id("error_message", "sys_repair_perfect");
     public static final string_id PROSE_ITEM_UNREPAIRABLE = new string_id("error_message", "sys_repair_unrepairable");
     public static final float MAX_ROLL = 10000;
+
     public base_repair()
     {
     }
@@ -91,7 +98,7 @@ public class base_repair extends script.base_script
                 if (markerPos >= 0)
                 {
                     objectIds[i] = objects[0][i].substring(0, markerPos);
-                    objects[0][i] = "" + objects[0][i].substring(markerPos + 1);
+                    objects[0][i] = objects[0][i].substring(markerPos + 1);
                 }
                 else
                 {

@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.features;
 import script.library.utils;
@@ -10,6 +16,7 @@ public class han_solo_experience_player extends script.base_script
     public han_solo_experience_player()
     {
     }
+
     public int grenadedamage(obj_id self, dictionary params) throws InterruptedException
     {
         int maxHealth = getMaxHealth(self);
@@ -17,6 +24,7 @@ public class han_solo_experience_player extends script.base_script
         setHealth(self, newHealth);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         int currentHealth = getHealth(self);
@@ -27,6 +35,7 @@ public class han_solo_experience_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNewbieTutorialResponse(obj_id self, String strAction) throws InterruptedException
     {
         if (strAction.equals("clientReady"))
@@ -49,6 +58,7 @@ public class han_solo_experience_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void checkJtLStatus(obj_id self) throws InterruptedException
     {
         if (features.isSpaceEdition(self))

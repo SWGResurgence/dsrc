@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.quests;
 import script.location;
@@ -10,6 +16,7 @@ public class fs_reflex1_theater extends script.base_script
     public fs_reflex1_theater()
     {
     }
+
     public int OnTheaterCreated(obj_id self, obj_id[] objects, obj_id player, obj_id creator) throws InterruptedException
     {
         CustomerServiceLog("fs_quests", "DEBUG -- %TU has spawned the theater assigned to him/her.", player);
@@ -21,7 +28,7 @@ public class fs_reflex1_theater extends script.base_script
         {
             setWaypointName(wp, summary);
         }
-        else 
+        else
         {
             setWaypointName(wp, "missing task summary for " + questName);
         }
@@ -35,6 +42,7 @@ public class fs_reflex1_theater extends script.base_script
         messageTo(self, "handleSetupPrisoner", d, 35.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetupPrisoner(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -47,7 +55,7 @@ public class fs_reflex1_theater extends script.base_script
         {
             messageTo(prisoner, "handleSetupPrisoner", d, 1.0f, false);
         }
-        else 
+        else
         {
             if (retry < 5)
             {

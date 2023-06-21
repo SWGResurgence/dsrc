@@ -1,27 +1,36 @@
 package script.poi.factoryliberation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.modifiable_float;
 import script.obj_id;
 
 public class pirate extends script.base_script
 {
+    public static final String[] pirateEmotes =
+            {
+                    "scratch",
+                    "yawn",
+                    "fidget",
+                    "cough"
+            };
+
     public pirate()
     {
     }
-    public static final String pirateEmotes[] = 
-    {
-        "scratch",
-        "yawn",
-        "fidget",
-        "cough"
-    };
+
     public int OnLoiterWaiting(obj_id self, modifiable_float time) throws InterruptedException
     {
         stop(self);
         messageTo(self, "emotePirate", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int emotePirate(obj_id self, dictionary params) throws InterruptedException
     {
         int dosocial = rand(1, 4);

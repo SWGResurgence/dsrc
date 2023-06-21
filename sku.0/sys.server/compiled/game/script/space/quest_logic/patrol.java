@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.prose;
 import script.library.space_quest;
@@ -7,14 +13,15 @@ import script.library.space_transition;
 
 public class patrol extends script.base_script
 {
-    public patrol()
-    {
-    }
     public static final string_id SID_NEW_WAYPOINT = new string_id("space/quest", "patrol_new_waypoint");
     public static final string_id SID_WAYPOINT_ARRIVED = new string_id("space/quest", "patrol_waypoint_arrived");
     public static final string_id SID_CIRCUIT_COMPLETE = new string_id("space/quest", "patrol_circuit_complete");
     public static final string_id SID_TARGET_ELIMINATED = new string_id("space/quest", "patrol_target_eliminated");
     public static final string_id SID_ABANDONED_PATROL = new string_id("space/quest", "patrol_abandoned");
+    public patrol()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -59,6 +66,7 @@ public class patrol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int initializedQuestPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -117,6 +125,7 @@ public class patrol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void registerPatrolWaypoint(obj_id self, obj_id player, String destNav) throws InterruptedException
     {
         obj_id navPoint = space_quest.findQuestLocation(self, player, destNav, "nav");
@@ -147,12 +156,13 @@ public class patrol extends script.base_script
             {
                 addLocationTarget3d(player, destNav, loc, getIntObjVar(self, "navRadius"));
             }
-            else 
+            else
             {
                 addLocationTarget3d(player, destNav, loc, space_quest.PATROL_NAV_RADIUS);
             }
         }
     }
+
     public int arrivedAtLocation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -207,13 +217,13 @@ public class patrol extends script.base_script
                     {
                         questCompleted(self);
                     }
-                    else 
+                    else
                     {
                         messageTo(self, "handleDelayedQuestComplete", null, 10, false);
                     }
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     prose_package pp = prose.getPackage(SID_CIRCUIT_COMPLETE, (laps - curLap));
                     space_quest.sendQuestMessage(player, pp);
@@ -222,7 +232,7 @@ public class patrol extends script.base_script
                     setObjVar(self, "currentLap", (curLap + 1));
                 }
             }
-            else 
+            else
             {
                 st = new java.util.StringTokenizer(navPoints[currentNav], ":");
                 scene = st.nextToken();
@@ -236,6 +246,7 @@ public class patrol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasPendingSplit(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "pendingSplit"))
@@ -245,28 +256,32 @@ public class patrol extends script.base_script
         setObjVar(self, "pendingSplit", false);
         return false;
     }
+
     public void setPendingSplit(obj_id self, boolean state) throws InterruptedException
     {
         setObjVar(self, "pendingSplit", state);
     }
+
     public int handleDelayedQuestComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasPendingSplit(self))
         {
             messageTo(self, "handleDelayedQuestComplete", null, 10, false);
         }
-        else 
+        else
         {
             questCompleted(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void questCompleted(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         clearPatrolWaypoints(self);
         space_quest.setQuestWon(player, self);
     }
+
     public int handleShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -301,13 +316,14 @@ public class patrol extends script.base_script
             {
                 space_quest.showQuestUpdate(self, SID_TARGET_ELIMINATED);
             }
-            else 
+            else
             {
                 questCompleted(self);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "noAbort"))
@@ -319,6 +335,7 @@ public class patrol extends script.base_script
         space_quest.setQuestAborted(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int playerShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -333,6 +350,7 @@ public class patrol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeQuest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -347,6 +365,7 @@ public class patrol extends script.base_script
         space_quest._removeQuest(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public void clearPatrolWaypoints(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -362,6 +381,7 @@ public class patrol extends script.base_script
             removeLocationTarget(player, loc);
         }
     }
+
     public boolean checkSpecialEvent(obj_id self, obj_id player, int currentNav) throws InterruptedException
     {
         if (!hasObjVar(self, space_quest.QUEST_TRIGGER_EVENT))

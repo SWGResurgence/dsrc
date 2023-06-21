@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.decrepit_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.create;
 import script.library.trial;
@@ -8,22 +14,25 @@ import script.*;
 
 public class power_core extends script.base_script
 {
-    public power_core()
-    {
-    }
     public static final String DECREPIT_STF = "mustafar/decrepit_droid_factory";
     public static final string_id SID_ACTIVATE_CORE = new string_id(DECREPIT_STF, "activate_core");
     public static final string_id SID_CORE_ACTIVE = new string_id(DECREPIT_STF, "core_active");
     public static final string_id SID_GUARDIAN_SPAWNED = new string_id(DECREPIT_STF, "guardian_spawned");
+    public power_core()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setPowerCoreState(self, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         boolean isEnabled = trial.isPowerCoreOn(self);
@@ -31,13 +40,14 @@ public class power_core extends script.base_script
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SID_ACTIVATE_CORE);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SID_CORE_ACTIVE);
         }
         sendDirtyObjectMenuNotification(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -49,6 +59,7 @@ public class power_core extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void activateCore(obj_id core) throws InterruptedException
     {
         trial.setPowerCoreState(core, true);
@@ -56,6 +67,7 @@ public class power_core extends script.base_script
         utils.sendSystemMessage(players, SID_GUARDIAN_SPAWNED);
         spawnGuardian(trial.getTop(core));
     }
+
     public void spawnGuardian(obj_id dungeon) throws InterruptedException
     {
         obj_id[] spawnPoint = trial.getObjectsInDungeonWithObjVar(dungeon, "patrol_wp");
@@ -64,14 +76,16 @@ public class power_core extends script.base_script
             return;
         }
         location spawnLoc = getLocation(getSelf());
-        for (obj_id obj_id : spawnPoint) {
+        for (obj_id obj_id : spawnPoint)
+        {
             String wp = getStringObjVar(obj_id, "patrol_wp");
-            if (wp.equals("controlFour")) {
+            if (wp.equals("controlFour"))
+            {
                 spawnLoc = getLocation(obj_id);
             }
         }
-        spawnLoc.x = (float)(spawnLoc.x - 3.4);
-        spawnLoc.z = (float)(spawnLoc.z - 1.4);
+        spawnLoc.x = (float) (spawnLoc.x - 3.4);
+        spawnLoc.z = (float) (spawnLoc.z - 1.4);
         obj_id guardian = create.object("som_decrepit_guardian", spawnLoc);
         if (!isIdValid(guardian) || !exists(guardian))
         {

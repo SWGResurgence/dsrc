@@ -1,172 +1,219 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class station_kashyyyk extends script.base_script
 {
+    public static String c_stringFile = "conversation/station_kashyyyk";
+
     public station_kashyyyk()
     {
     }
-    public static String c_stringFile = "conversation/station_kashyyyk";
+
     public boolean station_kashyyyk_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean station_kashyyyk_condition_canAfford50(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 0.50f);
     }
+
     public boolean station_kashyyyk_condition_canAfford25(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_crafting.canAffordShipRepairs(player, npc, 0.25f) && space_crafting.isDamaged(player));
     }
+
     public boolean station_kashyyyk_condition_canAfford75(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 0.75f);
     }
+
     public boolean station_kashyyyk_condition_canAfford100(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 1.0f);
     }
+
     public boolean station_kashyyyk_condition_hasWonQuest_01(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "escort", "ep3_kash_station_escort_alpha"));
     }
+
     public boolean station_kashyyyk_condition_hasWonQuest_02(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "escort", "ep3_kash_station_escort_bravo"));
     }
+
     public boolean station_kashyyyk_condition_hasWonQuest_03(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "rescue", "ep3_kash_station_rescue_alpha"));
     }
+
     public boolean station_kashyyyk_condition_hasWonQuest_04(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "rescue", "ep3_kash_station_rescue_bravo"));
     }
+
     public boolean station_kashyyyk_condition_isOnQuest_escort_alpha(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player, "escort", "ep3_kash_station_escort_alpha"));
     }
+
     public boolean station_kashyyyk_condition_hasFailedQuest_01(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasFailedQuest(player, "escort", "ep3_kash_station_escort_alpha") || space_quest.hasAbortedQuest(player, "escort", "ep3_kash_station_escort_alpha"));
     }
+
     public boolean station_kashyyyk_condition_hasBeenRewarded_01(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasReceivedReward(player, "escort", "ep3_kash_station_escort_alpha");
     }
+
     public boolean station_kashyyyk_condition_hasFailedQuest_02(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasFailedQuest(player, "escort", "ep3_kash_station_escort_bravo") || space_quest.hasAbortedQuest(player, "escort", "ep3_kash_station_escort_bravo"));
     }
+
     public boolean station_kashyyyk_condition_hasBeenRewarded_02(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasReceivedReward(player, "escort", "ep3_kash_station_escort_bravo");
     }
+
     public boolean station_kashyyyk_condition_hasWon01_not02yet(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "escort", "ep3_kash_station_escort_alpha") && (!space_quest.hasWonQuest(player, "escort", "ep3_kash_station_escort_bravo")));
     }
+
     public boolean station_kashyyyk_condition_hasWon02_not03yet(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "escort", "ep3_kash_station_escort_bravo") && (!space_quest.hasWonQuest(player, "rescue", "ep3_kash_station_rescue_alpha")));
     }
+
     public boolean station_kashyyyk_condition_hasWon03_not04yet(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "rescue", "ep3_kash_station_rescue_alpha") && (!space_quest.hasWonQuest(player, "rescue", "ep3_kash_station_rescue_bravo")));
     }
+
     public boolean station_kashyyyk_condition_hasDoneGround_01(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_kash_station_contact_eyma_01"));
     }
+
     public boolean station_kashyyyk_condition_hasWon_assassinations(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasReceivedReward(player, "assassinate", "ep3_kash_station_assassinate_neutral") || space_quest.hasReceivedReward(player, "assassinate", "ep3_kash_station_assassinate_rebel") || space_quest.hasReceivedReward(player, "assassinate", "ep3_kash_station_assassinate_imperial"));
     }
+
     public boolean station_kashyyyk_condition_isOnQuest_ground_01(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_kash_station_contact_eyma_01"));
     }
+
     public boolean station_kashyyyk_condition_isOnQuest_AMBUSH(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player, "destroy_surpriseattack", "ep3_kash_station_ghrag_ambush") || space_quest.hasQuest(player, "destroy_surpriseattack", "ep3_kash_station_ghrag_ambush_strong"));
     }
+
     public boolean station_kashyyyk_condition_hasFailedQuest_03(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasFailedQuest(player, "rescue", "ep3_kash_station_rescue_alpha") || space_quest.hasAbortedQuest(player, "rescue", "ep3_kash_station_rescue_alpha"));
     }
+
     public boolean station_kashyyyk_condition_isOnQuest_ground_00(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_kash_station_contact_eyma_00"));
     }
+
     public boolean station_kashyyyk_condition_isOnQuest_rescue_alpha(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player, "rescue", "ep3_kash_station_rescue_alpha"));
     }
+
     public boolean station_kashyyyk_condition_isOnQuest_escort_bravo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player, "escort", "ep3_kash_station_escort_bravo"));
     }
+
     public boolean station_kashyyyk_condition_isTooFar(obj_id player, obj_id npc) throws InterruptedException
     {
         space_combat.playCombatTauntSound(player);
         obj_id containingShip = space_transition.getContainingShip(player);
         return (getDistance(npc, containingShip) > space_transition.STATION_COMM_MAX_DISTANCE);
     }
+
     public boolean station_kashyyyk_condition_hasBadge_visited_Kachirho(obj_id player, obj_id npc) throws InterruptedException
     {
         return badge.hasBadge(player, "exp_kash_kachirho_found");
     }
+
     public boolean station_kashyyyk_condition_hasBeenRewarded_blacksun_heavy(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasReceivedReward(player, "recovery", "ep3_blacksun_heavy_recovery");
     }
+
     public boolean station_kashyyyk_condition_hasWon_blacksun_heavy_recovery(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "recovery", "ep3_blacksun_heavy_recovery") && !space_quest.hasReceivedReward(player, "recovery", "ep3_blacksun_heavy_recovery"));
     }
+
     public boolean station_kashyyyk_condition_isNeutralPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_battlefield.isInNeutralShip(player) || pvpGetAlignedFaction(player) == (534523985));
     }
+
     public void station_kashyyyk_action_land_kashyyyk(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Kachirho Starport");
     }
+
     public void station_kashyyyk_action_fix25(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.25f);
     }
+
     public void station_kashyyyk_action_fix50(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.50f);
     }
+
     public void station_kashyyyk_action_fix75(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.75f);
     }
+
     public void station_kashyyyk_action_fix100(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 1.0f);
     }
+
     public void station_kashyyyk_action_grantQuest_01(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort", "ep3_kash_station_escort_alpha");
     }
+
     public void station_kashyyyk_action_grantQuest_02(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort", "ep3_kash_station_escort_bravo");
     }
+
     public void station_kashyyyk_action_grantQuest_03(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "rescue", "ep3_kash_station_rescue_alpha");
     }
+
     public void station_kashyyyk_action_grantQuest_04(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "rescue", "ep3_kash_station_rescue_bravo");
     }
+
     public void station_kashyyyk_action_rewardQuest_01(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "escort", "ep3_kash_station_escort_alpha"))
@@ -174,6 +221,7 @@ public class station_kashyyyk extends script.base_script
             space_quest.giveReward(player, "escort", "ep3_kash_station_escort_alpha", 400);
         }
     }
+
     public void station_kashyyyk_action_rewardQuest_02(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "escort", "ep3_kash_station_escort_bravo"))
@@ -181,52 +229,64 @@ public class station_kashyyyk extends script.base_script
             space_quest.giveReward(player, "escort", "ep3_kash_station_escort_bravo", 500);
         }
     }
+
     public void station_kashyyyk_action_grantDuty_escort(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort_duty", "ep3_kash_station_escort_duty");
     }
+
     public void station_kashyyyk_action_giveGroundQuest_01(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_kash_station_contact_eyma_01");
     }
+
     public void station_kashyyyk_action_grantDuty_destroy(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "ep3_kash_station_destroy_duty_neutral");
     }
+
     public void station_kashyyyk_action_giveGroundQuest_00(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_kash_station_contact_eyma_00");
     }
+
     public void station_kashyyyk_action_Land_and_GrantBadge_visited_Kachirho(obj_id player, obj_id npc) throws InterruptedException
     {
         badge.grantBadge(player, "exp_kash_kachirho_found");
         space_content.landPlayer(player, npc, "Kachirho Starport");
     }
+
     public void station_kashyyyk_action_grantQuest_blacksun_heavy_recovery(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "recovery", "ep3_blacksun_heavy_recovery");
     }
+
     public void station_kashyyyk_action_giveReward_blacksun_heavy(obj_id player, obj_id npc) throws InterruptedException
     {
         badge.grantBadge(player, "bdg_kash_neutral_blacksun_heavy");
         space_quest.giveReward(player, "recovery", "ep3_blacksun_heavy_recovery", 15000, "object/tangible/ship/crafted/chassis/blacksun_vaksai_reward_deed.iff");
     }
+
     public int station_kashyyyk_tokenDI_getStationRepairCost25(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.25f);
     }
+
     public int station_kashyyyk_tokenDI_getStationRepairCost50(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.50f);
     }
+
     public int station_kashyyyk_tokenDI_getStationRepairCost75(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.75f);
     }
+
     public int station_kashyyyk_tokenDI_getStationRepairCost100(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 1.0f);
     }
+
     public int station_kashyyyk_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_208"))
@@ -246,7 +306,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_214");
@@ -255,7 +315,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -287,7 +347,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_394");
@@ -300,7 +360,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -320,6 +380,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_214"))
@@ -335,6 +396,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_394"))
@@ -361,7 +423,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_398");
@@ -374,7 +436,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -395,6 +457,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_398"))
@@ -432,7 +495,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_406");
@@ -445,7 +508,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -455,6 +518,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_406"))
@@ -474,7 +538,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_410");
@@ -483,7 +547,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -503,6 +567,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_410"))
@@ -518,6 +583,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_432"))
@@ -532,6 +598,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_440"))
@@ -547,6 +614,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_446"))
@@ -580,7 +648,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_450");
@@ -597,7 +665,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -622,7 +690,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_277");
@@ -631,7 +699,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -660,7 +728,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_285");
@@ -673,7 +741,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -698,7 +766,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_557");
@@ -707,7 +775,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -736,7 +804,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_590");
@@ -749,7 +817,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -802,7 +870,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_606");
@@ -831,7 +899,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -845,6 +913,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_450"))
@@ -901,7 +970,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_182");
@@ -914,7 +983,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -924,6 +993,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_182"))
@@ -960,7 +1030,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_186");
@@ -973,7 +1043,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -983,6 +1053,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_186"))
@@ -1009,7 +1080,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_190");
@@ -1022,7 +1093,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1061,7 +1132,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_450");
@@ -1078,7 +1149,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1088,6 +1159,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_190"))
@@ -1131,7 +1203,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_450");
@@ -1148,7 +1220,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1158,6 +1230,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_450"))
@@ -1214,7 +1287,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_182");
@@ -1227,7 +1300,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1237,6 +1310,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_450"))
@@ -1293,7 +1367,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_182");
@@ -1306,7 +1380,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1316,6 +1390,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_277"))
@@ -1330,6 +1405,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_285"))
@@ -1370,7 +1446,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_288");
@@ -1391,7 +1467,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1415,6 +1491,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_288"))
@@ -1435,7 +1512,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_291");
@@ -1448,7 +1525,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -1498,7 +1575,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_288");
@@ -1519,7 +1596,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1565,7 +1642,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_288");
@@ -1586,7 +1663,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1632,7 +1709,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_288");
@@ -1653,7 +1730,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1663,6 +1740,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_291"))
@@ -1677,6 +1755,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_288"))
@@ -1697,7 +1776,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_291");
@@ -1710,7 +1789,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -1760,7 +1839,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_288");
@@ -1781,7 +1860,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1827,7 +1906,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_288");
@@ -1848,7 +1927,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1894,7 +1973,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_288");
@@ -1915,7 +1994,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1925,6 +2004,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_288"))
@@ -1945,7 +2025,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_291");
@@ -1958,7 +2038,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -2008,7 +2088,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_288");
@@ -2029,7 +2109,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2075,7 +2155,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_288");
@@ -2096,7 +2176,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2142,7 +2222,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_288");
@@ -2163,7 +2243,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2173,6 +2253,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_288"))
@@ -2193,7 +2274,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_291");
@@ -2206,7 +2287,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -2256,7 +2337,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_288");
@@ -2277,7 +2358,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2323,7 +2404,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_288");
@@ -2344,7 +2425,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2390,7 +2471,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_288");
@@ -2411,7 +2492,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2421,6 +2502,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_496"))
@@ -2440,7 +2522,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_557");
@@ -2449,7 +2531,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2478,7 +2560,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_590");
@@ -2491,7 +2573,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2544,7 +2626,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_606");
@@ -2573,7 +2655,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -2602,7 +2684,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_504");
@@ -2611,7 +2693,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2621,6 +2703,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_504"))
@@ -2640,6 +2723,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_510"))
@@ -2659,7 +2743,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_557");
@@ -2668,7 +2752,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2697,7 +2781,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_590");
@@ -2710,7 +2794,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2763,7 +2847,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_606");
@@ -2792,7 +2876,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -2817,6 +2901,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_520"))
@@ -2836,7 +2921,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_557");
@@ -2845,7 +2930,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2874,7 +2959,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_590");
@@ -2887,7 +2972,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2940,7 +3025,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_606");
@@ -2969,7 +3054,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -2994,6 +3079,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_530"))
@@ -3013,7 +3099,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_557");
@@ -3022,7 +3108,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3051,7 +3137,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_590");
@@ -3064,7 +3150,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3117,7 +3203,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_606");
@@ -3146,7 +3232,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -3182,7 +3268,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_538");
@@ -3195,7 +3281,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3205,6 +3291,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_538"))
@@ -3231,6 +3318,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_370"))
@@ -3250,7 +3338,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_557");
@@ -3259,7 +3347,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3288,7 +3376,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_590");
@@ -3301,7 +3389,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3354,7 +3442,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_606");
@@ -3383,7 +3471,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -3408,6 +3496,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_558"))
@@ -3427,7 +3516,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_557");
@@ -3436,7 +3525,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3465,7 +3554,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_590");
@@ -3478,7 +3567,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3531,7 +3620,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_606");
@@ -3560,7 +3649,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -3589,7 +3678,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_566");
@@ -3598,7 +3687,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3608,6 +3697,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_566"))
@@ -3641,7 +3731,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_570");
@@ -3658,7 +3748,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3668,6 +3758,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_570"))
@@ -3687,7 +3778,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_557");
@@ -3696,7 +3787,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3725,7 +3816,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_590");
@@ -3738,7 +3829,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3791,7 +3882,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_606");
@@ -3820,7 +3911,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -3845,6 +3936,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_551"))
@@ -3864,7 +3956,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_557");
@@ -3873,7 +3965,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3902,7 +3994,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_590");
@@ -3915,7 +4007,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3968,7 +4060,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_606");
@@ -3997,7 +4089,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -4047,7 +4139,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_672");
@@ -4068,7 +4160,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4100,7 +4192,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_714");
@@ -4117,7 +4209,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -4157,7 +4249,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_732");
@@ -4178,7 +4270,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -4192,6 +4284,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_557"))
@@ -4211,6 +4304,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_590"))
@@ -4259,6 +4353,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch67(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_606"))
@@ -4285,7 +4380,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_610");
@@ -4303,7 +4398,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -4340,7 +4435,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_622");
@@ -4358,7 +4453,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -4395,7 +4490,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_634");
@@ -4413,7 +4508,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -4450,7 +4545,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_649");
@@ -4468,7 +4563,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -4497,6 +4592,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_610"))
@@ -4526,6 +4622,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_622"))
@@ -4559,6 +4656,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_634"))
@@ -4588,6 +4686,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_649"))
@@ -4617,6 +4716,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch81(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_672"))
@@ -4636,7 +4736,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_557");
@@ -4645,7 +4745,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4674,7 +4774,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_590");
@@ -4687,7 +4787,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4740,7 +4840,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_606");
@@ -4769,7 +4869,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     prose_package pp = new prose_package();
@@ -4805,7 +4905,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_682");
@@ -4818,7 +4918,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4843,7 +4943,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_704");
@@ -4852,7 +4952,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4862,6 +4962,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_682"))
@@ -4881,7 +4982,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_688");
@@ -4890,7 +4991,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4910,6 +5011,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch83(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_688"))
@@ -4925,6 +5027,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_704"))
@@ -4940,6 +5043,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch88(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_714"))
@@ -4960,7 +5064,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_720");
@@ -4969,7 +5073,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4989,6 +5093,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch89(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_720"))
@@ -5004,6 +5109,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch92(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_732"))
@@ -5045,7 +5151,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_740");
@@ -5058,7 +5164,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5097,7 +5203,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_732");
@@ -5114,7 +5220,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5124,6 +5230,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch94(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_740"))
@@ -5172,7 +5279,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_732");
@@ -5189,7 +5296,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5199,6 +5306,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch96(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_732"))
@@ -5240,7 +5348,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_740");
@@ -5253,7 +5361,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5292,7 +5400,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_732");
@@ -5309,7 +5417,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5319,6 +5427,7 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_kashyyyk_handleBranch97(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_732"))
@@ -5360,7 +5469,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_740");
@@ -5373,7 +5482,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5412,7 +5521,7 @@ public class station_kashyyyk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_732");
@@ -5429,7 +5538,7 @@ public class station_kashyyyk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_kashyyyk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5439,18 +5548,21 @@ public class station_kashyyyk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_rian_ry.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_rian_ry.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -5459,18 +5571,21 @@ public class station_kashyyyk extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.station_kashyyyk");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -5513,7 +5628,7 @@ public class station_kashyyyk extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_208");
@@ -5529,7 +5644,7 @@ public class station_kashyyyk extends script.base_script
                 utils.setScriptVar(player, "conversation.station_kashyyyk.branchId", 2);
                 npcStartConversation(player, npc, "station_kashyyyk", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5566,7 +5681,7 @@ public class station_kashyyyk extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_432");
@@ -5574,7 +5689,7 @@ public class station_kashyyyk extends script.base_script
                 utils.setScriptVar(player, "conversation.station_kashyyyk.branchId", 16);
                 npcStartConversation(player, npc, "station_kashyyyk", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5605,7 +5720,7 @@ public class station_kashyyyk extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_440");
@@ -5617,7 +5732,7 @@ public class station_kashyyyk extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "station_kashyyyk", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5663,7 +5778,7 @@ public class station_kashyyyk extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_446");
@@ -5687,7 +5802,7 @@ public class station_kashyyyk extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "station_kashyyyk", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5726,7 +5841,7 @@ public class station_kashyyyk extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_496");
@@ -5742,7 +5857,7 @@ public class station_kashyyyk extends script.base_script
                 utils.setScriptVar(player, "conversation.station_kashyyyk.branchId", 42);
                 npcStartConversation(player, npc, "station_kashyyyk", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5777,7 +5892,7 @@ public class station_kashyyyk extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_510");
@@ -5793,7 +5908,7 @@ public class station_kashyyyk extends script.base_script
                 utils.setScriptVar(player, "conversation.station_kashyyyk.branchId", 45);
                 npcStartConversation(player, npc, "station_kashyyyk", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5828,7 +5943,7 @@ public class station_kashyyyk extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_520");
@@ -5844,7 +5959,7 @@ public class station_kashyyyk extends script.base_script
                 utils.setScriptVar(player, "conversation.station_kashyyyk.branchId", 47);
                 npcStartConversation(player, npc, "station_kashyyyk", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5879,7 +5994,7 @@ public class station_kashyyyk extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_530");
@@ -5899,7 +6014,7 @@ public class station_kashyyyk extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "station_kashyyyk", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5938,7 +6053,7 @@ public class station_kashyyyk extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_370");
@@ -5954,7 +6069,7 @@ public class station_kashyyyk extends script.base_script
                 utils.setScriptVar(player, "conversation.station_kashyyyk.branchId", 53);
                 npcStartConversation(player, npc, "station_kashyyyk", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5990,7 +6105,7 @@ public class station_kashyyyk extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_558");
@@ -6006,7 +6121,7 @@ public class station_kashyyyk extends script.base_script
                 utils.setScriptVar(player, "conversation.station_kashyyyk.branchId", 55);
                 npcStartConversation(player, npc, "station_kashyyyk", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6048,7 +6163,7 @@ public class station_kashyyyk extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_551");
@@ -6068,7 +6183,7 @@ public class station_kashyyyk extends script.base_script
                 utils.setScriptVar(player, "conversation.station_kashyyyk.branchId", 59);
                 npcStartConversation(player, npc, "station_kashyyyk", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6077,6 +6192,7 @@ public class station_kashyyyk extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("station_kashyyyk"))

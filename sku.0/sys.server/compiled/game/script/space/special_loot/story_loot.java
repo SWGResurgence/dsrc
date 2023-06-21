@@ -1,5 +1,11 @@
 package script.space.special_loot;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.sui;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,19 +14,21 @@ import script.string_id;
 
 public class story_loot extends script.base_script
 {
-    public story_loot()
-    {
-    }
     public static final string_id SID_READ = new string_id("space/quest", "read");
     public static final string_id SID_SYS_NOT_IN_INV = new string_id("space/quest", "not_in_inv");
     public static final String DATATABLE_NAME = "datatables/space_loot/story_loot.iff";
     public static final String STF_TITLE = "space/story_loot_n";
     public static final String STF_TEXT = "space/story_loot_d";
+    public story_loot()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_READ);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -29,6 +37,7 @@ public class story_loot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void displayDialog(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id inventory = getObjectInSlot(player, "inventory");

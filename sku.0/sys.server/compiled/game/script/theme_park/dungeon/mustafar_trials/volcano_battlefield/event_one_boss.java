@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.volcano_battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.buff;
@@ -9,27 +15,29 @@ import script.obj_id;
 
 public class event_one_boss extends script.base_script
 {
+    public static final String[] BUFF_LIST =
+            {
+                    "volc_boss_one_1",
+                    "volc_boss_one_2",
+                    "volc_boss_one_3",
+                    "volc_boss_one_4",
+                    "volc_boss_one_5",
+                    "volc_boss_one_6",
+                    "volc_boss_one_7",
+                    "volc_boss_one_8"
+            };
+    public static final boolean doLogging = false;
     public event_one_boss()
     {
     }
-    public static final String[] BUFF_LIST = 
-    {
-        "volc_boss_one_1",
-        "volc_boss_one_2",
-        "volc_boss_one_3",
-        "volc_boss_one_4",
-        "volc_boss_one_5",
-        "volc_boss_one_6",
-        "volc_boss_one_7",
-        "volc_boss_one_8"
-    };
-    public static final boolean doLogging = false;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_VOLCANO_ONE_BOSS);
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id parent = trial.getParent(self);
@@ -41,11 +49,13 @@ public class event_one_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         messageTo(trial.getParent(self), "beginGuardCycle", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (!isIncapacitated(self))
@@ -54,6 +64,7 @@ public class event_one_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void resetEncounter(obj_id self) throws InterruptedException
     {
         clearAllAdds(self);
@@ -61,14 +72,18 @@ public class event_one_boss extends script.base_script
         resetSelf(self);
         clearDamageBuff(self);
     }
+
     public void clearDamageBuff(obj_id self) throws InterruptedException
     {
-        for (String s : BUFF_LIST) {
-            if (buff.hasBuff(self, s)) {
+        for (String s : BUFF_LIST)
+        {
+            if (buff.hasBuff(self, s))
+            {
                 buff.removeBuff(self, s);
             }
         }
     }
+
     public void clearAllAdds(obj_id self) throws InterruptedException
     {
         obj_id[] objects = getAllObjectsWithObjVar(getLocation(self), 400.0f, "boss");
@@ -77,18 +92,22 @@ public class event_one_boss extends script.base_script
             doLogging("clearAllAdds", "There are no objects in range");
             return;
         }
-        for (obj_id object : objects) {
+        for (obj_id object : objects)
+        {
             obj_id parent = getObjIdObjVar(object, "boss");
-            if (parent == self) {
+            if (parent == self)
+            {
                 trial.cleanupNpc(object);
             }
         }
     }
+
     public void respawnAdds(obj_id self) throws InterruptedException
     {
         obj_id parent = trial.getParent(self);
         messageTo(parent, "spawnGuards", null, 2, false);
     }
+
     public void resetSelf(obj_id self) throws InterruptedException
     {
         int max = getMaxHealth(self);
@@ -98,6 +117,7 @@ public class event_one_boss extends script.base_script
         setInvulnerable(self, true);
         ai_lib.clearCombatData();
     }
+
     public int guardDied(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = getHateList(self);
@@ -122,6 +142,7 @@ public class event_one_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int performGuardHeal(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id healingGuard = params.getObjId("guard");
@@ -135,6 +156,7 @@ public class event_one_boss extends script.base_script
         addToHealth(self, 1000);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (doLogging)

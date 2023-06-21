@@ -1,5 +1,11 @@
 package script.item.publish_gift;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.utils;
 
@@ -8,6 +14,7 @@ public class snow_ball_throw extends script.base_script
     public static final string_id SID_SYS_NO_MOUNT = new string_id("spam", "snowball_not_while_mounted");
     public static final string_id SID_CANT_SEE_TARGET = new string_id("spam", "snowball_cant_see_target");
     public static final string_id SID_TARGET_SITTING = new string_id("spam", "snowball_target_sitting");
+
     public snow_ball_throw()
     {
     }
@@ -102,7 +109,6 @@ public class snow_ball_throw extends script.base_script
         if (!canSee(player, target))
         {
             sendSystemMessage(player, SID_CANT_SEE_TARGET);
-            return;
         }
         else
         {

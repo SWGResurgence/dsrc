@@ -1,18 +1,25 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.library.healing;
 import script.*;
 
 public class bactapack extends script.base_script
 {
-    public bactapack()
-    {
-    }
     public static final string_id SID_ITEM_YOU_MUST_TARGET = new string_id("healing", "item_must_target");
     public static final string_id SID_ITEM_ONLY_OTHERS = new string_id("healing", "item_only_on_others");
     public static final string_id SID_ITEM_NO_NEED = new string_id("healing", "item_no_need");
     public static final String ACTION_NAME = "bactaShot";
+    public bactapack()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, true, true, 15, true))
@@ -25,6 +32,7 @@ public class bactapack extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))

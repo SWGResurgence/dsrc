@@ -1,5 +1,11 @@
 package script.systems.veteran_reward;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.respec;
 import script.library.utils;
@@ -26,6 +32,7 @@ public class antidecay extends script.base_script
     public static final string_id SID_USE_KIT_CONFIRM_PROMPT_ONE = new string_id(VETERAN_STRING_TABLE, "use_kit_confirm_prompt_one");
     public static final string_id SID_USE_KIT_CONFIRM_PROMPT_TWO = new string_id(VETERAN_STRING_TABLE, "use_kit_confirm_prompt_two");
     public static final string_id SID_USE_KIT_CONFIRM_TITLE = new string_id(VETERAN_STRING_TABLE, "use_kit_confirm_title");
+
     public antidecay()
     {
     }
@@ -157,7 +164,7 @@ public class antidecay extends script.base_script
             return true;
         }
         obj_id[] kitContents = getContents(kit);
-        if (kitContents != null && kitContents.length > 0)
+        if (kitContents != null)
         {
             for (obj_id kitContent : kitContents)
             {

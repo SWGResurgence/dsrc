@@ -1,5 +1,11 @@
 package script.theme_park.heroic.exar_kun;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.buff;
 import script.library.trial;
@@ -10,21 +16,25 @@ public class exar_harmony extends script.base_script
     public exar_harmony()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, 525000);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMoveMoving(obj_id self) throws InterruptedException
     {
         setMovementPercent(self, 0.8f);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         trial.bumpSession(self, "zap");
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         buff.applyBuff(self, "kun_order_set");
@@ -33,6 +43,7 @@ public class exar_harmony extends script.base_script
         messageTo(self, "order_zap", trial.getSessionDict(self, "zap"), 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int order_zap(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "zap"))
@@ -48,7 +59,8 @@ public class exar_harmony extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             queueCommand(self, (1874028555), player, "", COMMAND_PRIORITY_DEFAULT);
         }
         messageTo(self, "order_zap", trial.getSessionDict(self, "zap"), 8.0f, false);

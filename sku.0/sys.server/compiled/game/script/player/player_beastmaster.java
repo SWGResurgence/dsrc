@@ -1,16 +1,23 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class player_beastmaster extends script.base_script
 {
-    public player_beastmaster()
-    {
-    }
     public static final String ABILITY_TO_EXECUTE = "abilityToExecute";
     public static final String TRAIN_DIALOGUE_PID = "petTraining.sui_pid";
     public static final boolean BEAST_DEBUG = false;
+    public player_beastmaster()
+    {
+    }
+
     public void blog(String text) throws InterruptedException
     {
         if (BEAST_DEBUG)
@@ -18,6 +25,7 @@ public class player_beastmaster extends script.base_script
             LOG("player_beastmaster.script", text);
         }
     }
+
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         if (!beast_lib.isValidBeast(beast_lib.getBeastOnPlayer(self)))
@@ -27,6 +35,7 @@ public class player_beastmaster extends script.base_script
         beast_lib.storeBeasts(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         if (!beast_lib.isValidBeast(beast_lib.getBeastOnPlayer(self)))
@@ -36,6 +45,7 @@ public class player_beastmaster extends script.base_script
         beast_lib.storeBeasts(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         if (!beast_lib.isValidBeast(beast_lib.getBeastOnPlayer(self)))
@@ -48,6 +58,7 @@ public class player_beastmaster extends script.base_script
         beast_lib.playerDeathStoreBeast(bcd);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         obj_id beast = beast_lib.getBeastOnPlayer(self);
@@ -55,12 +66,13 @@ public class player_beastmaster extends script.base_script
         {
             setBeastmasterPet(self, beast);
         }
-        else 
+        else
         {
             setBeastmasterPet(self, null);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSkillGranted(obj_id self, String skill) throws InterruptedException
     {
         if (skill.equals("expertise_bm_attack_1"))
@@ -85,6 +97,7 @@ public class player_beastmaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSkillRevoked(obj_id self, String skill) throws InterruptedException
     {
         if (skill.equals("expertise_bm_attack_1"))
@@ -109,6 +122,7 @@ public class player_beastmaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         if (!beast_lib.isBeastMaster(self))
@@ -133,8 +147,10 @@ public class player_beastmaster extends script.base_script
             obj_id[] masterAttackers = getWhoIsTargetingMe(self);
             if (masterAttackers != null)
             {
-                for (obj_id masterAttacker : masterAttackers) {
-                    if (pvpCanAttack(beast, target)) {
+                for (obj_id masterAttacker : masterAttackers)
+                {
+                    if (pvpCanAttack(beast, target))
+                    {
                         startCombat(beast, masterAttacker);
                         addHate(beast, masterAttacker, 0.0f);
                         utils.setScriptVar(beast, "ai.combat.target", masterAttacker);
@@ -145,6 +161,7 @@ public class player_beastmaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDefenderCombatAction(obj_id self, obj_id attacker, obj_id weapon, int combatResult) throws InterruptedException
     {
         if (!beast_lib.isBeastMaster(self))
@@ -160,6 +177,7 @@ public class player_beastmaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
     {
         String[] strCommands = split(strText, ' ');
@@ -313,6 +331,7 @@ public class player_beastmaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showBeastExperienceGain(obj_id self) throws InterruptedException
     {
         obj_id beast = beast_lib.getBeastOnPlayer(self);
@@ -324,6 +343,7 @@ public class player_beastmaster extends script.base_script
         beast_lib.incrementBeastExperience(beast, new dictionary());
         debugSpeakMsg(beast, "Incremented experience: " + beast_lib.getBeastExperience(beast));
     }
+
     public void showHappiness(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self) || !isGod(self))
@@ -345,6 +365,7 @@ public class player_beastmaster extends script.base_script
         debugSpeakMsg(beast, "Favorite Location: " + favoriteLocation[favorites[4] - 1] + " Hated Location: " + favoriteLocation[favorites[5] - 1]);
         debugSpeakMsg(beast, "Current Happiness: " + beast_lib.getBCDBeastHappiness(bcd));
     }
+
     public void setupHappinessMenu(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self) || !isGod(self))
@@ -361,6 +382,7 @@ public class player_beastmaster extends script.base_script
         beast_lib.setupHappinessLoyalty(bcd);
         qa.refreshMenu(self, "Select Food...", "-Favorite Food-", favoriteFood, "handleFavoriteFoodMenu", "happiness_menu", "happiness_menu", sui.OK_CANCEL_REFRESH);
     }
+
     public int handleFavoriteFoodMenu(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isGod(self))
@@ -389,7 +411,7 @@ public class player_beastmaster extends script.base_script
             {
                 debugSpeakMsg(self, "No favorites defined.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "Favorite food: " + favoriteFood[favorites[0] - 1] + " Changed to: " + favoriteFood[idx]);
             }
@@ -399,6 +421,7 @@ public class player_beastmaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleHatedFoodMenu(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isGod(self))
@@ -427,7 +450,7 @@ public class player_beastmaster extends script.base_script
             {
                 debugSpeakMsg(self, "No favorites defined.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "Hated food: " + favoriteFood[favorites[1] - 1] + " Changed to: " + favoriteFood[idx]);
             }
@@ -438,6 +461,7 @@ public class player_beastmaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleFavoriteActivityMenu(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isGod(self))
@@ -466,7 +490,7 @@ public class player_beastmaster extends script.base_script
             {
                 debugSpeakMsg(self, "No favorites defined.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "Favorite activity: " + favoriteActivity[favorites[2] - 1] + " Changed to: " + favoriteActivity[idx]);
             }
@@ -476,6 +500,7 @@ public class player_beastmaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleHatedActivityMenu(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isGod(self))
@@ -504,7 +529,7 @@ public class player_beastmaster extends script.base_script
             {
                 debugSpeakMsg(self, "No favorites defined.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "Hated activity: " + favoriteActivity[favorites[3] - 1] + " Changed to: " + favoriteActivity[idx]);
             }
@@ -515,6 +540,7 @@ public class player_beastmaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleFavoriteLocationMenu(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isGod(self))
@@ -543,7 +569,7 @@ public class player_beastmaster extends script.base_script
             {
                 debugSpeakMsg(self, "No favorites defined.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "Hated activity: " + favoriteLocation[favorites[4] - 1] + " Changed to: " + favoriteLocation[idx]);
             }
@@ -553,6 +579,7 @@ public class player_beastmaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleHatedLocationMenu(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isGod(self))
@@ -581,7 +608,7 @@ public class player_beastmaster extends script.base_script
             {
                 debugSpeakMsg(self, "No favorites defined.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "Hated activity: " + favoriteLocation[favorites[5] - 1] + " Changed to: " + favoriteLocation[idx]);
             }
@@ -591,6 +618,7 @@ public class player_beastmaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int channelRevivePet(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "bm_revive.suiPid"))
@@ -610,7 +638,8 @@ public class player_beastmaster extends script.base_script
         int duration = 20;
         int reviveTimeMod = getEnhancedSkillStatisticModifierUncapped(self, "expertise_bm_pet_revive_time");
         duration -= reviveTimeMod;
-        if (params.containsKey("extendedRange")) {
+        if (params.containsKey("extendedRange"))
+        {
             duration *= params.getFloat("extendedRange");
         }
         int flags = sui.CD_EVENT_INCAPACITATE;
@@ -622,6 +651,7 @@ public class player_beastmaster extends script.base_script
         messageTo(self, "checkChannelRevivePet", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int checkChannelRevivePet(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "bm_revive.suiPid"))
@@ -648,13 +678,14 @@ public class player_beastmaster extends script.base_script
             reviveBeast(self, beast);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "bm_revive.duration", duration);
             messageTo(self, "checkChannelRevivePet", null, 5, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void reviveBeast(obj_id self, obj_id beast) throws InterruptedException
     {
         obj_id bcd = beast_lib.getBeastBCD(beast);
@@ -671,15 +702,15 @@ public class player_beastmaster extends script.base_script
         float maxHealthFloat = getMaxAttrib(beast, HEALTH);
         revivePercent += getEnhancedSkillStatisticModifierUncapped(self, "expertise_bm_pet_recovery");
         maxHealthFloat = maxHealthFloat * (revivePercent / 100);
-        int maxHealth = (int)maxHealthFloat;
+        int maxHealth = (int) maxHealthFloat;
         beast_lib.checkForFavoriteLocation(bcd);
         utils.setScriptVar(self, "beast.no_store_message", 1);
         beast_lib.storeBeast(bcd);
         beast_lib.setBCDBeastIsDead(bcd, false);
-        beast_lib.setBCDBeastHealth(bcd, (int)(maxHealth * (float)(revivePercent / 100)));
+        beast_lib.setBCDBeastHealth(bcd, (int) (maxHealth * (revivePercent / 100)));
         beast_lib.createBeastFromBCD(self, bcd);
-        return;
     }
+
     public int bm_follow_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id beast = beast_lib.getBeastOnPlayer(self);
@@ -698,6 +729,7 @@ public class player_beastmaster extends script.base_script
         beast_lib.doFollowCommand(beast, self);
         return SCRIPT_CONTINUE;
     }
+
     public int bm_stay_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id beast = beast_lib.getBeastOnPlayer(self);
@@ -716,6 +748,7 @@ public class player_beastmaster extends script.base_script
         beast_lib.doStayCommand(beast, self);
         return SCRIPT_CONTINUE;
     }
+
     public int bm_pet_attack_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id beast = beast_lib.getBeastOnPlayer(self);
@@ -734,6 +767,7 @@ public class player_beastmaster extends script.base_script
         beast_lib.doAttackCommand(beast, self);
         return SCRIPT_CONTINUE;
     }
+
     public int bm_pet_trick_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id beast = beast_lib.getBeastOnPlayer(self);
@@ -752,6 +786,7 @@ public class player_beastmaster extends script.base_script
         beast_lib.doTrickCommand(beast, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int bm_pet_trick_2(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id beast = beast_lib.getBeastOnPlayer(self);
@@ -770,6 +805,7 @@ public class player_beastmaster extends script.base_script
         beast_lib.doTrickCommand(beast, 2);
         return SCRIPT_CONTINUE;
     }
+
     public int bm_pet_trick_3(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id beast = beast_lib.getBeastOnPlayer(self);
@@ -788,6 +824,7 @@ public class player_beastmaster extends script.base_script
         broadcast(self, "Beast Command: Trick 3 (not hooked up yet)");
         return SCRIPT_CONTINUE;
     }
+
     public int performCreatureAbility(obj_id self, dictionary params) throws InterruptedException
     {
         String ability = params.getString(ABILITY_TO_EXECUTE);
@@ -820,21 +857,24 @@ public class player_beastmaster extends script.base_script
         queueCommand(pet, getStringCrc(skillList[toExecute].toLowerCase()), target, "", COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int getPetTrainPid(obj_id player) throws InterruptedException
     {
         return utils.hasScriptVar(player, TRAIN_DIALOGUE_PID) ? utils.getIntScriptVar(player, TRAIN_DIALOGUE_PID) : 0;
     }
+
     public void setPetTrainPid(obj_id player, int pid) throws InterruptedException
     {
         if (pid == -1)
         {
             utils.removeScriptVar(player, TRAIN_DIALOGUE_PID);
         }
-        else 
+        else
         {
             utils.setScriptVar(player, TRAIN_DIALOGUE_PID, pid);
         }
     }
+
     public int cmdTrainPet(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id pet = beast_lib.getBeastOnPlayer(self);
@@ -850,6 +890,7 @@ public class player_beastmaster extends script.base_script
         createTrainingSui(self, pet);
         return SCRIPT_CONTINUE;
     }
+
     public void createTrainingSui(obj_id player, obj_id pet) throws InterruptedException
     {
         if (!beast_lib.isValidPlayer(player) || !beast_lib.isValidBeast(pet))
@@ -885,36 +926,36 @@ public class player_beastmaster extends script.base_script
             switch (returnCode)
             {
                 case beast_lib.TRAINING_INVALID_PETTYPE:
-                pp.stringId = new string_id("beast", "train_fail_bad_pet_type_for_ability");
-                pp.actor.set(new string_id("cmd_n", abilityName));
-                abilityName = " \0" + packOutOfBandProsePackage(null, pp);
-                break;
+                    pp.stringId = new string_id("beast", "train_fail_bad_pet_type_for_ability");
+                    pp.actor.set(new string_id("cmd_n", abilityName));
+                    abilityName = " \0" + packOutOfBandProsePackage(null, pp);
+                    break;
                 case beast_lib.TRAINING_SKILL_TOO_HIGH:
-                pp.stringId = new string_id("beast", "train_fail_single_skill_max");
-                pp.actor.set(new string_id("cmd_n", abilityName));
-                abilityName = " \0" + packOutOfBandProsePackage(null, pp);
-                break;
+                    pp.stringId = new string_id("beast", "train_fail_single_skill_max");
+                    pp.actor.set(new string_id("cmd_n", abilityName));
+                    abilityName = " \0" + packOutOfBandProsePackage(null, pp);
+                    break;
                 case beast_lib.TRAINING_INSUFFICIENT_POINTS:
-                pp.stringId = new string_id("beast", "train_fail_insufficient_points");
-                pp.actor.set(new string_id("cmd_n", abilityName));
-                abilityName = " \0" + packOutOfBandProsePackage(null, pp);
-                break;
+                    pp.stringId = new string_id("beast", "train_fail_insufficient_points");
+                    pp.actor.set(new string_id("cmd_n", abilityName));
+                    abilityName = " \0" + packOutOfBandProsePackage(null, pp);
+                    break;
                 case beast_lib.TRAINING_NON_IMPROVED_SKILL:
-                pp.stringId = new string_id("beast", "train_fail_already_known");
-                pp.actor.set(new string_id("cmd_n", abilityName));
-                abilityName = " \0" + packOutOfBandProsePackage(null, pp);
-                break;
+                    pp.stringId = new string_id("beast", "train_fail_already_known");
+                    pp.actor.set(new string_id("cmd_n", abilityName));
+                    abilityName = " \0" + packOutOfBandProsePackage(null, pp);
+                    break;
                 case beast_lib.TRAINING_NO_AVAILABLE_SLOTS:
-                pp.stringId = new string_id("beast", "train_fail_no_slots");
-                pp.actor.set(new string_id("cmd_n", abilityName));
-                abilityName = " \0" + packOutOfBandProsePackage(null, pp);
-                break;
+                    pp.stringId = new string_id("beast", "train_fail_no_slots");
+                    pp.actor.set(new string_id("cmd_n", abilityName));
+                    abilityName = " \0" + packOutOfBandProsePackage(null, pp);
+                    break;
                 case beast_lib.TRAINING_VALID:
-                pp.stringId = new string_id("cmd_n", abilityName);
-                abilityName = " \0" + packOutOfBandProsePackage(null, pp);
-                break;
+                    pp.stringId = new string_id("cmd_n", abilityName);
+                    abilityName = " \0" + packOutOfBandProsePackage(null, pp);
+                    break;
             }
-            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + i);
+            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(i));
             setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, abilityName);
         }
         subscribeToSUIEvent(pid, sui_event_type.SET_onGenericSelection, sui.LISTBOX_LIST, "handlePetTrainingUpdate");
@@ -925,6 +966,7 @@ public class player_beastmaster extends script.base_script
         flushSUIPage(pid);
         setPetTrainPid(player, pid);
     }
+
     public int handlePetTrainingDialog(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -941,19 +983,18 @@ public class player_beastmaster extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        switch (bp)
+        if (bp == sui.BP_OK)
         {
-            case sui.BP_OK:
             if (idx > -1)
             {
                 beast_lib.trainPetAbility(pet, abilityList[idx]);
                 queueCommand(player, (1828856022), player, "", COMMAND_PRIORITY_DEFAULT);
             }
-            break;
         }
         setPetTrainPid(player, -1);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePetTrainingUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -976,11 +1017,13 @@ public class player_beastmaster extends script.base_script
         flushSUIPage(pid);
         return SCRIPT_CONTINUE;
     }
+
     public String getPetAbilityDescription(String ability) throws InterruptedException
     {
         String desc = "";
         return desc;
     }
+
     public int bm_creature_knowledge(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id objTarget = getIntendedTarget(self);
@@ -1008,6 +1051,7 @@ public class player_beastmaster extends script.base_script
         utils.setScriptVar(self, "target", objTarget);
         return SCRIPT_CONTINUE;
     }
+
     public int completeTheZipTimer(obj_id self, dictionary params) throws InterruptedException
     {
         int pid = params.getInt("id");
@@ -1050,11 +1094,13 @@ public class player_beastmaster extends script.base_script
         utils.removeScriptVar(self, "target");
         buff.applyBuff(self, "bm_creature_knowledge");
         int[] buffs = buff.getAllBuffs(target);
-        if (buffs != null && buffs.length > 0)
+        if (buffs != null)
         {
-            for (int b : buffs) {
+            for (int b : buffs)
+            {
                 String name = buff.getBuffNameFromCrc(b);
-                if (beast_lib.makeAbilityLearnSkillCheck(self, name)) {
+                if (beast_lib.makeAbilityLearnSkillCheck(self, name))
+                {
                     beast_lib.playerLearnBeastMasterSkill(self, name);
                 }
             }
@@ -1063,6 +1109,7 @@ public class player_beastmaster extends script.base_script
         utils.setScriptVar(self, "creature_knowledge.species", species);
         return SCRIPT_CONTINUE;
     }
+
     public int bm_pig_forage(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id player = self;
@@ -1070,12 +1117,13 @@ public class player_beastmaster extends script.base_script
         {
             buff.applyBuff(player, "bm_truffle_pig");
         }
-        else 
+        else
         {
             return SCRIPT_OVERRIDE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int bm_helper_monkey_domestic(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id player = self;
@@ -1083,12 +1131,13 @@ public class player_beastmaster extends script.base_script
         {
             buff.applyBuff(player, "bm_helper_monkey_domestic");
         }
-        else 
+        else
         {
             return SCRIPT_OVERRIDE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int bm_helper_monkey_engineering(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id player = self;
@@ -1096,12 +1145,13 @@ public class player_beastmaster extends script.base_script
         {
             buff.applyBuff(player, "bm_helper_monkey_engineering");
         }
-        else 
+        else
         {
             return SCRIPT_OVERRIDE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int bm_helper_monkey_structure(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id player = self;
@@ -1109,12 +1159,13 @@ public class player_beastmaster extends script.base_script
         {
             buff.applyBuff(player, "bm_helper_monkey_structure");
         }
-        else 
+        else
         {
             return SCRIPT_OVERRIDE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int bm_helper_monkey_munitions(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id player = self;
@@ -1122,12 +1173,13 @@ public class player_beastmaster extends script.base_script
         {
             buff.applyBuff(player, "bm_helper_monkey_munitions");
         }
-        else 
+        else
         {
             return SCRIPT_OVERRIDE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int bm_helper_monkey_jedi(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id player = self;
@@ -1135,12 +1187,13 @@ public class player_beastmaster extends script.base_script
         {
             buff.applyBuff(player, "bm_helper_monkey_jedi");
         }
-        else 
+        else
         {
             return SCRIPT_OVERRIDE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int bm_helper_monkey_shipwright(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id player = self;
@@ -1148,12 +1201,13 @@ public class player_beastmaster extends script.base_script
         {
             buff.applyBuff(player, "bm_helper_monkey_shipwright");
         }
-        else 
+        else
         {
             return SCRIPT_OVERRIDE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int bm_dancing_cat(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id player = self;
@@ -1220,6 +1274,7 @@ public class player_beastmaster extends script.base_script
         messageTo(self, "destroyHoloPets", dict, 6, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroyHoloPets(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1232,6 +1287,7 @@ public class player_beastmaster extends script.base_script
         destroyObject(holo_02);
         return SCRIPT_CONTINUE;
     }
+
     public int bm_dancing_pet_entertainer(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (utils.isProfession(self, 9))
@@ -1240,29 +1296,31 @@ public class player_beastmaster extends script.base_script
             {
                 buff.applyBuff(self, "bm_dancing_pet_entertainer");
             }
-            else 
+            else
             {
                 return SCRIPT_OVERRIDE;
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             return SCRIPT_OVERRIDE;
         }
     }
+
     public int bm_survey_bonus(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!buff.hasBuff(self, "bm_survey_bonus"))
         {
             buff.applyBuff(self, "bm_survey_bonus");
         }
-        else 
+        else
         {
             return SCRIPT_OVERRIDE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCustomizeFinished(obj_id self, obj_id object, String params) throws InterruptedException
     {
         if (!isIdValid(object) || !exists(object))

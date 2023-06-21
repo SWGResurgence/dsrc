@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.Vector;
 
 public class wave_event_controller extends script.base_script
 {
-    public wave_event_controller()
-    {
-    }
     public static final String dataTableWaveEventPrimaryTargetPre = "PRIMARY_TARGET_WAVE_";
     public static final String dataTableWaveEventGuardPre = "GUARDS_SPAWNED_WAVE_";
     public static final String dataTableWaveEventNumGuardsPre = "NUM_GUARDS_WAVE_";
@@ -22,6 +25,10 @@ public class wave_event_controller extends script.base_script
     public static final String PLAYER_SCRIPT_VAR = "waveEventPlayer";
     public static final String CHILDRENLIST_SCRIPT_VAR = "waveEventChildrenList";
     public static final boolean LOGGING = false;
+    public wave_event_controller()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -43,7 +50,7 @@ public class wave_event_controller extends script.base_script
                 {
                     menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, menuStringId);
                 }
-                else 
+                else
                 {
                     menu = menuInfo.addRootMenu(menu_info_types.ITEM_USE, menuStringId);
                 }
@@ -56,6 +63,7 @@ public class wave_event_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -84,7 +92,7 @@ public class wave_event_controller extends script.base_script
                             stealth.testInvisNonCombatAction(player, self);
                             int countdownSui = sui.smartCountdownTimerSUI(self, player, "quest_countdown_timer", menuStringId, startTime, countdownTimer, handler, range, flags);
                         }
-                        else 
+                        else
                         {
                             if (utils.hasScriptVar(self, WAVE_SCRIPT_VAR))
                             {
@@ -98,7 +106,7 @@ public class wave_event_controller extends script.base_script
                             waveEventBegin(self, player);
                         }
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, new string_id("quest/groundquests", "retrieve_item_not_active_duty"));
                     }
@@ -118,6 +126,7 @@ public class wave_event_controller extends script.base_script
         sendSystemMessage(player, new string_id("quest/groundquests", "retrieve_item_no_interest"));
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestCountdownTimer(obj_id self, dictionary params) throws InterruptedException
     {
         int pid = params.getInt("id");
@@ -172,6 +181,7 @@ public class wave_event_controller extends script.base_script
         waveEventBegin(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public void waveEventBegin(obj_id self, obj_id player) throws InterruptedException
     {
         int wave = 1;
@@ -207,8 +217,8 @@ public class wave_event_controller extends script.base_script
                 messageTo(self, "handleQuestFlavorObject", null, 0, false);
             }
         }
-        return;
     }
+
     public dictionary getwaveEventQuestData(obj_id self, obj_id player) throws InterruptedException
     {
         dictionary webster = new dictionary();
@@ -222,13 +232,15 @@ public class wave_event_controller extends script.base_script
             java.util.Enumeration keys = tasks.keys();
             while (keys.hasMoreElements() || !taskFound)
             {
-                String questCrcString = (String)keys.nextElement();
+                String questCrcString = (String) keys.nextElement();
                 int tempQuestCrc = utils.stringToInt(questCrcString);
                 int[] tasksForCurrentQuest = tasks.getIntArray(questCrcString);
-                for (int tempTaskId : tasksForCurrentQuest) {
+                for (int tempTaskId : tasksForCurrentQuest)
+                {
                     String baseObjVar = groundquests.getBaseObjVar(player, TASK_TYPE, questGetQuestName(tempQuestCrc), tempTaskId);
                     String retrieveTemplateName = groundquests.getTaskStringDataEntry(tempQuestCrc, tempTaskId, "SERVER_TEMPLATE");
-                    if (retrieveTemplateName != null && itemTemplateName.equals(retrieveTemplateName)) {
+                    if (itemTemplateName.equals(retrieveTemplateName))
+                    {
                         questCrc = tempQuestCrc;
                         taskId = tempTaskId;
                         taskFound = true;
@@ -241,6 +253,7 @@ public class wave_event_controller extends script.base_script
         webster.put("waveEventTaskId", taskId);
         return webster;
     }
+
     public float waveEventGetWaveDelay(obj_id self, obj_id player, int wave) throws InterruptedException
     {
         int delay = -1;
@@ -258,6 +271,7 @@ public class wave_event_controller extends script.base_script
         }
         return delay;
     }
+
     public int waveEventSpawnNextWave(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -341,7 +355,7 @@ public class wave_event_controller extends script.base_script
                                         utils.setScriptVar(self, CHILDRENLIST_SCRIPT_VAR, waveEventChildrenList);
                                     }
                                 }
-                                else 
+                                else
                                 {
                                     messageTo(self, "cleanupEvent", null, 2, false);
                                     return SCRIPT_CONTINUE;
@@ -350,13 +364,13 @@ public class wave_event_controller extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     groundquests.questOutputDebugInfo(self, TASK_TYPE, "waveEventSpawnNextWave", "No more waves to spawn...the wave event has ended.");
                     messageTo(self, "cleanupEvent", null, 2, false);
                 }
             }
-            else 
+            else
             {
                 groundquests.questOutputDebugInfo(self, TASK_TYPE, "waveEventSpawnNextWave", "No active wave event task was found for this player(" + player + ") and this object(" + getTemplateName(self) + ").");
                 messageTo(self, "cleanupEvent", null, 2, false);
@@ -364,6 +378,7 @@ public class wave_event_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int waveEventChildDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null && !params.isEmpty())
@@ -375,7 +390,7 @@ public class wave_event_controller extends script.base_script
                 if (utils.hasScriptVar(self, CHILDRENLIST_SCRIPT_VAR))
                 {
                     Vector waveEventChildrenList = utils.getResizeableObjIdArrayScriptVar(self, CHILDRENLIST_SCRIPT_VAR);
-                    
+
                     if (waveEventChildrenList != null)
                     {
                         if (waveEventChildrenList.contains(child))
@@ -387,7 +402,7 @@ public class wave_event_controller extends script.base_script
                             utils.setScriptVar(self, CHILDRENLIST_SCRIPT_VAR, waveEventChildrenList);
                             return SCRIPT_CONTINUE;
                         }
-                        else 
+                        else
                         {
                             utils.removeScriptVar(self, CHILDRENLIST_SCRIPT_VAR);
                             int previousWave = utils.getIntScriptVar(self, WAVE_SCRIPT_VAR);
@@ -408,6 +423,7 @@ public class wave_event_controller extends script.base_script
         messageTo(self, "cleanupEvent", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public void spoutChildrenListScriptVar(obj_id self, obj_id player) throws InterruptedException
     {
         if (isGod(player))
@@ -418,11 +434,12 @@ public class wave_event_controller extends script.base_script
             {
                 for (int j = 0; j < testList.size(); j++)
                 {
-                    sendSystemMessage(player, "testList[" + j + "] = " + ((obj_id)testList.get(j)), "");
+                    sendSystemMessage(player, "testList[" + j + "] = " + testList.get(j), "");
                 }
             }
         }
     }
+
     public int defaultEventReset(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -432,6 +449,7 @@ public class wave_event_controller extends script.base_script
         clearEventArea(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupEvent(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, PLAYER_SCRIPT_VAR);
@@ -457,10 +475,12 @@ public class wave_event_controller extends script.base_script
         clearEventArea(self);
         return SCRIPT_CONTINUE;
     }
+
     public void clearEventArea(obj_id self) throws InterruptedException
     {
         clearEventArea(self, obj_id.NULL_ID, false);
     }
+
     public void clearEventArea(obj_id self, obj_id player, boolean taskCompleted) throws InterruptedException
     {
         utils.setScriptVar(self, WAVE_SCRIPT_VAR, 0);
@@ -472,9 +492,12 @@ public class wave_event_controller extends script.base_script
         {
             return;
         }
-        for (obj_id child : objects) {
-            if (isIdValid(child) && child != self && !isPlayer(child)) {
-                if (!hasScript(child, "corpse.ai_corpse")) {
+        for (obj_id child : objects)
+        {
+            if (isIdValid(child) && child != self && !isPlayer(child))
+            {
+                if (!hasScript(child, "corpse.ai_corpse"))
+                {
                     trial.cleanupObject(child);
                 }
             }
@@ -487,6 +510,7 @@ public class wave_event_controller extends script.base_script
             messageTo(self, "handleQuestFlavorObjectCleanup", webster, 0, false);
         }
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

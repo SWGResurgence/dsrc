@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -20,6 +26,7 @@ public class player_force_rank extends script.base_script
     public static final String SCRIPT_VAR_CHAL_TERMINAL = "force_rank.challenge_vote_terminal";
     public static final String JEDI_GUARDIAN_TITLE_SKILL = "force_title_jedi_rank_04";
     public static final String JEDI_MASTER_TITLE_SKILL = "force_title_jedi_master";
+
     public player_force_rank()
     {
     }
@@ -1075,7 +1082,7 @@ public class player_force_rank extends script.base_script
         {
             petitioners = new Vector();
         }
-        if (petitioners.indexOf(getFirstName(self)) != -1)
+        if (petitioners.contains(getFirstName(self)))
         {
             sendSystemMessage(self, new string_id(force_rank.STF_FILE, "already_petitioning"));
             return SCRIPT_CONTINUE;
@@ -1270,7 +1277,7 @@ public class player_force_rank extends script.base_script
 
     public int msgForceRankRenamePlayer(obj_id self, dictionary params) throws InterruptedException
     {
-        if (params.containsKey("success") && params.getBoolean("success") == true)
+        if (params.containsKey("success") && params.getBoolean("success"))
         {
             CustomerServiceLog("force_rank", "%TU has been successfully renamed in the Enclave data.", self, null);
         }

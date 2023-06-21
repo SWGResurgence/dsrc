@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,58 +14,70 @@ import script.*;
 
 public class trig_longo extends script.base_script
 {
+    public static String c_stringFile = "conversation/trig_longo";
+
     public trig_longo()
     {
     }
-    public static String c_stringFile = "conversation/trig_longo";
+
     public boolean trig_longo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean trig_longo_condition_isNotImmunized(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.isTaskActive(player, "outbreak_quest_01_imperial", "codyInnoculate") || groundquests.isTaskActive(player, "outbreak_quest_01_rebel", "codyInnoculate") || groundquests.isTaskActive(player, "outbreak_quest_01_neutral", "codyInnoculate"));
     }
+
     public boolean trig_longo_condition_hasTrigTask(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "outbreak_quest_01_b_imperial", "talkToTrig") || groundquests.isTaskActive(player, "outbreak_quest_01_b_rebel", "talkToTrig") || groundquests.isTaskActive(player, "outbreak_quest_01_b_neutral", "talkToTrig");
     }
+
     public boolean trig_longo_condition_hasDeletedQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.hasCompletedQuest(player, "outbreak_quest_01_b_imperial") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_02_imperial")) || (groundquests.hasCompletedQuest(player, "outbreak_quest_01_b_rebel") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_02_rebel")) || (groundquests.hasCompletedQuest(player, "outbreak_quest_01_b_neutral") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_02_neutral"));
     }
+
     public boolean trig_longo_condition_hasCompletedQuestLine(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "outbreak_quest_final_imperial") || groundquests.hasCompletedQuest(player, "outbreak_quest_final_neutral") || groundquests.hasCompletedQuest(player, "outbreak_quest_final_rebel");
     }
+
     public boolean trig_longo_condition_hasDeliveredRadioEpsilon(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "outbreak_radio_delivery_03");
     }
+
     public boolean trig_longo_condition_hasCompletedQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "outbreak_quest_02_imperial") || groundquests.hasCompletedQuest(player, "outbreak_quest_02_rebel") || groundquests.hasCompletedQuest(player, "outbreak_quest_02_neutral");
     }
+
     public boolean trig_longo_condition_isNeutral(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "outbreak_quest_01_neutral");
     }
+
     public boolean trig_longo_condition_isRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "outbreak_quest_01_rebel");
     }
+
     public void trig_longo_action_updatedQuestWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.sendSignal(player, "spokenToTrigQuest01");
     }
+
     public void trig_longo_action_giveQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.hasCompletedQuest(player, "outbreak_quest_01_imperial") && groundquests.hasCompletedQuest(player, "outbreak_quest_01_b_imperial") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_02_imperial"))
@@ -75,9 +93,9 @@ public class trig_longo extends script.base_script
         if (groundquests.hasCompletedQuest(player, "outbreak_quest_01_neutral") && groundquests.hasCompletedQuest(player, "outbreak_quest_01_b_neutral") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_02_neutral"))
         {
             groundquests.grantQuest(player, "outbreak_quest_02_neutral");
-            return;
         }
     }
+
     public int trig_longo_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_61"))
@@ -111,7 +129,7 @@ public class trig_longo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_63");
@@ -128,7 +146,7 @@ public class trig_longo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trig_longo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -138,6 +156,7 @@ public class trig_longo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trig_longo_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63"))
@@ -157,7 +176,7 @@ public class trig_longo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_65");
@@ -166,7 +185,7 @@ public class trig_longo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trig_longo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -191,7 +210,7 @@ public class trig_longo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_32");
@@ -200,7 +219,7 @@ public class trig_longo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trig_longo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -225,7 +244,7 @@ public class trig_longo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -234,7 +253,7 @@ public class trig_longo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trig_longo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -244,6 +263,7 @@ public class trig_longo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trig_longo_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_65"))
@@ -263,7 +283,7 @@ public class trig_longo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -272,7 +292,7 @@ public class trig_longo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trig_longo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -282,6 +302,7 @@ public class trig_longo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trig_longo_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_67"))
@@ -302,7 +323,7 @@ public class trig_longo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_75");
@@ -311,7 +332,7 @@ public class trig_longo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trig_longo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -321,6 +342,7 @@ public class trig_longo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trig_longo_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_75"))
@@ -347,7 +369,7 @@ public class trig_longo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -360,7 +382,7 @@ public class trig_longo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trig_longo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -370,6 +392,7 @@ public class trig_longo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trig_longo_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -396,7 +419,7 @@ public class trig_longo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -409,7 +432,7 @@ public class trig_longo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trig_longo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -430,6 +453,7 @@ public class trig_longo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trig_longo_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -456,7 +480,7 @@ public class trig_longo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -469,7 +493,7 @@ public class trig_longo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trig_longo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -490,6 +514,7 @@ public class trig_longo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trig_longo_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32"))
@@ -509,7 +534,7 @@ public class trig_longo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -518,7 +543,7 @@ public class trig_longo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trig_longo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -528,6 +553,7 @@ public class trig_longo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trig_longo_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -547,7 +573,7 @@ public class trig_longo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -556,7 +582,7 @@ public class trig_longo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.trig_longo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -566,6 +592,7 @@ public class trig_longo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -575,11 +602,13 @@ public class trig_longo extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -588,18 +617,21 @@ public class trig_longo extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.trig_longo");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -641,7 +673,7 @@ public class trig_longo extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -649,7 +681,7 @@ public class trig_longo extends script.base_script
                 utils.setScriptVar(player, "conversation.trig_longo.branchId", 4);
                 npcStartConversation(player, npc, "trig_longo", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -676,6 +708,7 @@ public class trig_longo extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("trig_longo"))

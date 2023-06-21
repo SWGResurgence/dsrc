@@ -1,5 +1,11 @@
 package script.object;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.money;
 import script.library.utils;
 import script.menu_info;
@@ -12,6 +18,7 @@ public class credit_chip extends script.base_script
     public credit_chip()
     {
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int intCredits = getIntObjVar(self, "loot.intCredits");
@@ -24,6 +31,7 @@ public class credit_chip extends script.base_script
         attribs[idx] = Integer.toString(intCredits);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id objTopmostContainer = utils.getContainingPlayer(self);
@@ -40,6 +48,7 @@ public class credit_chip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id objPlayer, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("space/space_loot", "use_credit_chip"));

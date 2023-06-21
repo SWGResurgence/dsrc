@@ -1,5 +1,11 @@
 package script.npc.skillteacher;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.city;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,11 +14,12 @@ import script.string_id;
 
 public class civic_skillteacher extends script.base_script
 {
+    public static final string_id SID_MT_REMOVE = new string_id("city/city", "mt_remove");
+    public static final string_id SID_MT_REMOVED = new string_id("city/city", "mt_removed");
     public civic_skillteacher()
     {
     }
-    public static final string_id SID_MT_REMOVE = new string_id("city/city", "mt_remove");
-    public static final string_id SID_MT_REMOVED = new string_id("city/city", "mt_removed");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int city_id = city.checkMayorCity(player, false);
@@ -23,6 +30,7 @@ public class civic_skillteacher extends script.base_script
         mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_MT_REMOVE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         int city_id = city.checkMayorCity(player, false);

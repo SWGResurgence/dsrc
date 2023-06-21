@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.io.*;
@@ -74,6 +80,7 @@ public class utils extends script.base_script
     public static final obj_id OBJ_ID_BIO_LINK_PENDING = obj_id.getObjId(1);
     public static final String VENDOR_SCRIPT = "terminal.vendor";
     public static final String BAZAAR_SCRIPT = "terminal.bazaar";
+
     public utils()
     {
     }
@@ -7654,7 +7661,7 @@ public class utils extends script.base_script
                 HashSet abilitiesCurrentNoDupes = new HashSet();
                 for (Object anAbilitiesCurrent : abilitiesCurrent)
                 {
-                    abilitiesCurrentNoDupes.add((Integer) anAbilitiesCurrent);
+                    abilitiesCurrentNoDupes.add(anAbilitiesCurrent);
                 }
                 Integer ability;
                 for (Object abilitiesCurrentNoDupe : abilitiesCurrentNoDupes)

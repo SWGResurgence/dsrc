@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.chat;
 
@@ -8,6 +14,7 @@ public class travel_npc extends script.theme_park.newbie_tutorial.tutorial_base
     public travel_npc()
     {
     }
+
     public int handleInitiateDialog(obj_id self, dictionary params) throws InterruptedException
     {
         faceToBehavior(self, getPlayer(self));
@@ -15,6 +22,7 @@ public class travel_npc extends script.theme_park.newbie_tutorial.tutorial_base
         doAnimationAction(self, "greet");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id bldg = getTopMostContainer(self);
@@ -25,6 +33,7 @@ public class travel_npc extends script.theme_park.newbie_tutorial.tutorial_base
         mdata.setServerNotify(false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         String quarter_1_go = "quarter_1_go";
@@ -47,7 +56,7 @@ public class travel_npc extends script.theme_park.newbie_tutorial.tutorial_base
         }
         faceToBehavior(self, speaker);
         string_id greeting = new string_id(NEWBIE_CONVO, "quarter_1_start");
-        string_id response[] = new string_id[2];
+        string_id[] response = new string_id[2];
         response[0] = new string_id(NEWBIE_CONVO, "quarter_1_reply_1");
         response[1] = new string_id(NEWBIE_CONVO, "quarter_1_reply_2");
         obj_id wayp = getObjIdObjVar(speaker, "newbie.hasReleaseDocuments");
@@ -57,6 +66,7 @@ public class travel_npc extends script.theme_park.newbie_tutorial.tutorial_base
         npcStartConversation(speaker, self, CONVO, greeting, response);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         String quarter_1_go = "quarter_1_go";

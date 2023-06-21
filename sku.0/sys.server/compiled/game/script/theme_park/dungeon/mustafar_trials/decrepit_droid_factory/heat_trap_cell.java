@@ -1,20 +1,28 @@
 package script.theme_park.dungeon.mustafar_trials.decrepit_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.trial;
 import script.obj_id;
 
 public class heat_trap_cell extends script.base_script
 {
+    public static final String DOT_SCRIPT = "theme_park.dungeon.mustafar_trials.decrepit_droid_factory.heat_trap_dot";
+    public static final boolean LOGGING = false;
     public heat_trap_cell()
     {
     }
-    public static final String DOT_SCRIPT = "theme_park.dungeon.mustafar_trials.decrepit_droid_factory.heat_trap_dot";
-    public static final boolean LOGGING = false;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setFireCellState(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         String or5_script = "theme_park.dungeon.mustafar_trials.decrepit_droid_factory.colonel_or5";
@@ -27,14 +35,15 @@ public class heat_trap_cell extends script.base_script
         triggerFireCell(item);
         return SCRIPT_CONTINUE;
     }
+
     public void triggerFireCell(obj_id player) throws InterruptedException
     {
         if (!hasScript(player, DOT_SCRIPT))
         {
             attachScript(player, DOT_SCRIPT);
         }
-        return;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

@@ -1,114 +1,147 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_clone_relics_jedi_starfighter_imp_commander";
+
     public ep3_clone_relics_jedi_starfighter_imp_commander()
     {
     }
-    public static String c_stringFile = "conversation/ep3_clone_relics_jedi_starfighter_imp_commander";
+
     public boolean ep3_clone_relics_jedi_starfighter_imp_commander_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_clone_relics_jedi_starfighter_imp_commander_condition_onTaskOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_clone_relics_jedi_starfighter_1", "talkToCommander"));
     }
+
     public boolean ep3_clone_relics_jedi_starfighter_imp_commander_condition_isWookie(obj_id player, obj_id npc) throws InterruptedException
     {
         return (getSpecies(player) == SPECIES_WOOKIEE);
     }
+
     public boolean ep3_clone_relics_jedi_starfighter_imp_commander_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_jedi_starfighter_1"));
     }
+
     public boolean ep3_clone_relics_jedi_starfighter_imp_commander_condition_onQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_clone_relics_jedi_starfighter_2"));
     }
+
     public boolean ep3_clone_relics_jedi_starfighter_imp_commander_condition_hasCompletedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_clone_relics_jedi_starfighter_2", "attackDefeated"));
     }
+
     public boolean ep3_clone_relics_jedi_starfighter_imp_commander_condition_onQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_clone_relics_jedi_starfighter_3"));
     }
+
     public boolean ep3_clone_relics_jedi_starfighter_imp_commander_condition_onQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_clone_relics_jedi_starfighter_1"));
     }
+
     public boolean ep3_clone_relics_jedi_starfighter_imp_commander_condition_hasCompletedQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_jedi_starfighter_3"));
     }
+
     public boolean ep3_clone_relics_jedi_starfighter_imp_commander_condition_onQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_clone_relics_jedi_starfighter_4"));
     }
+
     public boolean ep3_clone_relics_jedi_starfighter_imp_commander_condition_hasCompletedQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_jedi_starfighter_4"));
     }
+
     public boolean ep3_clone_relics_jedi_starfighter_imp_commander_condition_hasCompletedSpaceQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasReceivedReward(player, "space_battle", "ep3_clone_relics_jedi_starfighter_5"));
     }
+
     public boolean ep3_clone_relics_jedi_starfighter_imp_commander_condition_isGm(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasObjVar(player, "gm"));
     }
+
     public boolean ep3_clone_relics_jedi_starfighter_imp_commander_condition_failedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "ep3_clone_relics_jedi_starfighter_1_failed");
     }
+
     public boolean ep3_clone_relics_jedi_starfighter_imp_commander_condition_hasCompletedQuestTwoFinal(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_jedi_starfighter_2"));
     }
+
     public void ep3_clone_relics_jedi_starfighter_imp_commander_action_signalGetAtst(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "talkToOfficer");
     }
+
     public void ep3_clone_relics_jedi_starfighter_imp_commander_action_grantQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_jedi_starfighter_3");
     }
+
     public void ep3_clone_relics_jedi_starfighter_imp_commander_action_removeQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_jedi_starfighter_1");
     }
+
     public void ep3_clone_relics_jedi_starfighter_imp_commander_action_grantGroundQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_jedi_starfighter_4");
     }
+
     public void ep3_clone_relics_jedi_starfighter_imp_commander_action_signalAfterAttack(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "talkedToKrieg");
     }
+
     public void ep3_clone_relics_jedi_starfighter_imp_commander_action_clearQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_jedi_starfighter_3");
     }
+
     public void ep3_clone_relics_jedi_starfighter_imp_commander_action_grantQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_jedi_starfighter_2");
     }
+
     public void ep3_clone_relics_jedi_starfighter_imp_commander_action_removeQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_jedi_starfighter_2");
     }
+
     public void ep3_clone_relics_jedi_starfighter_imp_commander_action_removeQuest3(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_jedi_starfighter_3");
     }
+
     public void ep3_clone_relics_jedi_starfighter_imp_commander_action_removeQuest4(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_jedi_starfighter_4");
     }
+
     public void ep3_clone_relics_jedi_starfighter_imp_commander_action_removeQuestAll(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_jedi_starfighter_1");
@@ -118,17 +151,20 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         space_quest.clearQuestFlags(player, "space_battle", "ep3_clone_relics_jedi_starfighter_4");
         space_quest.clearQuestFlags(player, "space_battle", "ep3_clone_relics_jedi_starfighter_5");
     }
+
     public void ep3_clone_relics_jedi_starfighter_imp_commander_action_removeQuestSpace(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "space_battle", "ep3_clone_relics_jedi_starfighter_4");
         space_quest.clearQuestFlags(player, "space_battle", "ep3_clone_relics_jedi_starfighter_5");
     }
+
     public void ep3_clone_relics_jedi_starfighter_imp_commander_action_clearFailAndReGrantQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "cloneRelics_jedistarfighter_failedEscort");
         groundquests.grantQuest(player, "ep3_clone_relics_jedi_starfighter_1");
         groundquests.sendSignal(player, "talkToOfficer");
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1111"))
@@ -183,7 +219,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1113");
@@ -212,7 +248,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -222,6 +258,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_940"))
@@ -289,7 +326,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1113");
@@ -318,7 +355,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -328,6 +365,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1107"))
@@ -382,7 +420,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1113");
@@ -411,7 +449,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -421,6 +459,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_948"))
@@ -448,7 +487,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_952");
@@ -461,7 +500,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -521,7 +560,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1113");
@@ -550,7 +589,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -560,6 +599,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_952"))
@@ -589,6 +629,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_962"))
@@ -668,7 +709,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1113");
@@ -697,7 +738,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -707,6 +748,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_111"))
@@ -736,6 +778,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_972"))
@@ -764,7 +807,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_976");
@@ -777,7 +820,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -837,7 +880,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1113");
@@ -866,7 +909,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -876,6 +919,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_976"))
@@ -918,7 +962,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_984");
@@ -931,7 +975,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -941,6 +985,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_984"))
@@ -973,6 +1018,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1099"))
@@ -1027,7 +1073,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1113");
@@ -1056,7 +1102,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1066,6 +1112,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_996"))
@@ -1086,7 +1133,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1000");
@@ -1095,7 +1142,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1129,7 +1176,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1008");
@@ -1142,7 +1189,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1202,7 +1249,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1113");
@@ -1231,7 +1278,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1241,6 +1288,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1000"))
@@ -1258,6 +1306,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1008"))
@@ -1279,7 +1328,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1000");
@@ -1288,7 +1337,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1310,6 +1359,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_105"))
@@ -1325,6 +1375,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1016"))
@@ -1344,7 +1395,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1020");
@@ -1353,7 +1404,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1413,7 +1464,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1113");
@@ -1442,7 +1493,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1452,6 +1503,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1020"))
@@ -1472,7 +1524,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1024");
@@ -1481,7 +1533,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1491,6 +1543,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1024"))
@@ -1519,7 +1572,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1028");
@@ -1532,7 +1585,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1542,6 +1595,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1028"))
@@ -1569,7 +1623,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1032");
@@ -1582,7 +1636,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1609,7 +1663,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1076");
@@ -1618,7 +1672,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1628,6 +1682,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1032"))
@@ -1655,7 +1710,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1036");
@@ -1668,7 +1723,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1702,7 +1757,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1056");
@@ -1715,7 +1770,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1725,6 +1780,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1036"))
@@ -1752,7 +1808,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1040");
@@ -1765,7 +1821,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1788,6 +1844,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1040"))
@@ -1818,6 +1875,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1056"))
@@ -1846,7 +1904,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1036");
@@ -1859,7 +1917,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1893,7 +1951,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1062");
@@ -1906,7 +1964,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1916,6 +1974,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1062"))
@@ -1951,7 +2010,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1070");
@@ -1960,7 +2019,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1970,6 +2029,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1070"))
@@ -1997,7 +2057,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1036");
@@ -2010,7 +2070,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2020,6 +2080,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1076"))
@@ -2048,7 +2109,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1032");
@@ -2061,7 +2122,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2071,6 +2132,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1080"))
@@ -2150,7 +2212,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1113");
@@ -2179,7 +2241,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2189,6 +2251,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1113"))
@@ -2259,6 +2322,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1090"))
@@ -2276,6 +2340,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -2287,6 +2352,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         setName(self, new string_id("ep3/npc_names", "clone_relics_admiral_krieg"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -2294,6 +2360,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         setName(self, new string_id("ep3/npc_names", "clone_relics_admiral_krieg"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2303,18 +2370,21 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2339,7 +2409,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1111");
@@ -2351,7 +2421,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_jedi_starfighter_imp_commander", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -2385,7 +2455,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_940");
@@ -2397,7 +2467,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId", 2);
                 npcStartConversation(player, npc, "ep3_clone_relics_jedi_starfighter_imp_commander", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2420,7 +2490,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1107");
@@ -2428,7 +2498,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId", 4);
                 npcStartConversation(player, npc, "ep3_clone_relics_jedi_starfighter_imp_commander", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2458,7 +2528,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_948");
@@ -2470,7 +2540,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId", 5);
                 npcStartConversation(player, npc, "ep3_clone_relics_jedi_starfighter_imp_commander", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2507,7 +2577,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_962");
@@ -2523,7 +2593,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId", 9);
                 npcStartConversation(player, npc, "ep3_clone_relics_jedi_starfighter_imp_commander", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2553,7 +2623,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_111");
@@ -2565,7 +2635,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId", 12);
                 npcStartConversation(player, npc, "ep3_clone_relics_jedi_starfighter_imp_commander", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2594,7 +2664,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_972");
@@ -2606,7 +2676,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId", 15);
                 npcStartConversation(player, npc, "ep3_clone_relics_jedi_starfighter_imp_commander", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2628,7 +2698,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1099");
@@ -2636,7 +2706,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId", 21);
                 npcStartConversation(player, npc, "ep3_clone_relics_jedi_starfighter_imp_commander", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2673,7 +2743,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_996");
@@ -2689,7 +2759,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId", 22);
                 npcStartConversation(player, npc, "ep3_clone_relics_jedi_starfighter_imp_commander", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2710,7 +2780,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_105");
@@ -2718,7 +2788,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId", 27);
                 npcStartConversation(player, npc, "ep3_clone_relics_jedi_starfighter_imp_commander", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2748,7 +2818,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1016");
@@ -2760,7 +2830,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId", 29);
                 npcStartConversation(player, npc, "ep3_clone_relics_jedi_starfighter_imp_commander", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2797,7 +2867,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1080");
@@ -2813,7 +2883,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId", 44);
                 npcStartConversation(player, npc, "ep3_clone_relics_jedi_starfighter_imp_commander", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2836,7 +2906,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1090");
@@ -2844,7 +2914,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_jedi_starfighter_imp_commander.branchId", 54);
                 npcStartConversation(player, npc, "ep3_clone_relics_jedi_starfighter_imp_commander", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2853,6 +2923,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_clone_relics_jedi_starfighter_imp_commander"))

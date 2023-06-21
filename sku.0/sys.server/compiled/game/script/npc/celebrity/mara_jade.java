@@ -1,5 +1,11 @@
 package script.npc.celebrity;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.colors;
 import script.library.hue;
@@ -7,10 +13,12 @@ import script.obj_id;
 
 public class mara_jade extends script.base_script
 {
+    public static final String CONVO = "celebrity/mara_jade";
+
     public mara_jade()
     {
     }
-    public static final String CONVO = "celebrity/mara_jade";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String creatureName = getCreatureName(self);
@@ -18,7 +26,7 @@ public class mara_jade extends script.base_script
         {
             attachScript(self, "conversation.itp_vader_mara_jade");
         }
-        else 
+        else
         {
             attachScript(self, "npc.converse.npc_converse_menu");
         }

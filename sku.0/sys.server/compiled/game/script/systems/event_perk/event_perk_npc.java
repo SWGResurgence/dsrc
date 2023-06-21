@@ -1,5 +1,11 @@
 package script.systems.event_perk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.chat;
 import script.library.sui;
@@ -16,6 +22,7 @@ public class event_perk_npc extends script.base_script
     public static final String TBL_VENDOR_ANIMS = "datatables/event_perk/npc_actor_anims.iff";
     public static final String TBL_VENDOR_MOODS = "datatables/event_perk/npc_actor_moods.iff";
     public static final String ALERT_VOLUME_NAME = "npcActorTriggerVolume";
+
     public event_perk_npc()
     {
     }

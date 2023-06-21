@@ -1,5 +1,11 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.menu_info_types;
 import script.obj_id;
@@ -11,11 +17,13 @@ public class mtp_object_for_sale extends script.base_script
     public mtp_object_for_sale()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, township.OBJECT_FOR_SALE_ON_VENDOR, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_PUBLIC_CONTAINER_USE1)
@@ -24,13 +32,14 @@ public class mtp_object_for_sale extends script.base_script
             {
                 processItemPurchase(self, player);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("spam", "buildabuff_nsf_buffee"));
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (names == null || attribs == null || names.length != attribs.length)
@@ -45,6 +54,7 @@ public class mtp_object_for_sale extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String createPureConcatenatedJoy(obj_id self) throws InterruptedException
     {
         String pureConcatenatedJoy = getString(new string_id("set_bonus", "vendor_sale_object_justify_line"));
@@ -65,6 +75,7 @@ public class mtp_object_for_sale extends script.base_script
         }
         return pureConcatenatedJoy;
     }
+
     public boolean confirmFunds(obj_id self, obj_id player) throws InterruptedException
     {
         boolean canPay = false;
@@ -87,12 +98,16 @@ public class mtp_object_for_sale extends script.base_script
         int resourcesInInventory = 0;
         if (resourceCost > 0)
         {
-            for (obj_id inventoryObject : inventoryContents) {
+            for (obj_id inventoryObject : inventoryContents)
+            {
                 String itemName = getStaticItemName(inventoryObject);
-                if (itemName != null && !itemName.equals("")) {
-                    if (itemName.equals(township.MTP_LUMP)) {
+                if (itemName != null && !itemName.equals(""))
+                {
+                    if (itemName.equals(township.MTP_LUMP))
+                    {
                         int amountInResourceStack = getCount(inventoryObject);
-                        if (amountInResourceStack > 0) {
+                        if (amountInResourceStack > 0)
+                        {
                             resourcesInInventory = resourcesInInventory + amountInResourceStack;
                         }
                     }
@@ -105,6 +120,7 @@ public class mtp_object_for_sale extends script.base_script
         }
         return hasTheCredits && hasTheResources;
     }
+
     public void processItemPurchase(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(player);
@@ -132,18 +148,26 @@ public class mtp_object_for_sale extends script.base_script
         if (resourceCost > 0)
         {
             int remainingResourceCost = resourceCost;
-            for (obj_id inventoryContent : inventoryContents) {
-                if (remainingResourceCost > 0) {
+            for (obj_id inventoryContent : inventoryContents)
+            {
+                if (remainingResourceCost > 0)
+                {
                     obj_id inventoryObject = inventoryContent;
                     String itemName = getStaticItemName(inventoryObject);
-                    if (itemName != null && !itemName.equals("")) {
-                        if (itemName.equals(township.MTP_LUMP)) {
+                    if (itemName != null && !itemName.equals(""))
+                    {
+                        if (itemName.equals(township.MTP_LUMP))
+                        {
                             int numInStack = getCount(inventoryObject);
-                            if (numInStack > 0) {
-                                if (numInStack > remainingResourceCost) {
+                            if (numInStack > 0)
+                            {
+                                if (numInStack > remainingResourceCost)
+                                {
                                     setCount(inventoryObject, numInStack - remainingResourceCost);
                                     remainingResourceCost = 0;
-                                } else {
+                                }
+                                else
+                                {
                                     remainingResourceCost = remainingResourceCost - numInStack;
                                     destroyObject(inventoryObject);
                                 }
@@ -153,8 +177,8 @@ public class mtp_object_for_sale extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public string_id parseNameToStringId(String itemName) throws InterruptedException
     {
         String[] parsedString = split(itemName, ':');
@@ -165,7 +189,7 @@ public class mtp_object_for_sale extends script.base_script
             String reference = parsedString[1];
             itemNameSID = new string_id(stfFile, reference);
         }
-        else 
+        else
         {
             String stfFile = parsedString[0];
             itemNameSID = new string_id(stfFile, " ");

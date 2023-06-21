@@ -1,5 +1,11 @@
 package script.npc.celebrity;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class leia extends script.base_script
     public leia()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -16,6 +23,7 @@ public class leia extends script.base_script
         messageTo(self, "handleAttachConvoScript", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAttachConvoScript(obj_id self, dictionary params) throws InterruptedException
     {
         if ((getCreatureName(self)).equals("leia_organa"))

@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class remotedebug_test extends script.base_script
@@ -7,24 +13,29 @@ public class remotedebug_test extends script.base_script
     public remotedebug_test()
     {
     }
+
     public void end(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Testing of RemoteDebug messages has finished");
     }
+
     public void start(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Testing of RemoteDebug messages has begun");
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         start(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         end(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         String[] words = split(text, ' ');

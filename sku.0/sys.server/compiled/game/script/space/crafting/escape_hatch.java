@@ -1,5 +1,11 @@
 package script.space.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.space_transition;
 import script.library.utils;
@@ -9,10 +15,12 @@ public class escape_hatch extends script.base_script
     public escape_hatch()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data data = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -20,6 +28,7 @@ public class escape_hatch extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, strSpam);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id objPlayer, int item) throws InterruptedException
     {
         LOG("space", "ESCAPE POD");
@@ -39,7 +48,7 @@ public class escape_hatch extends script.base_script
                 messageTo(objShip, "megaDamage", dctParams, 2, false);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 string_id strSpam = new string_id("space/space_interaction", "ejecting");
                 sendSystemMessage(objPlayer, strSpam);

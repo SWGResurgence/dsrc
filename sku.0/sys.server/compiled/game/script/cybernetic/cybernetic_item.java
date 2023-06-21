@@ -1,5 +1,11 @@
 package script.cybernetic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -7,16 +13,18 @@ import script.string_id;
 
 public class cybernetic_item extends script.base_script
 {
+    public static final string_id SID_ERROR = new string_id("ep3/cybernetic", "cannot_equip");
+    public static final string_id SID_REQUIRE_EP3 = new string_id("ep3/cybernetic", "ep3_required");
     public cybernetic_item()
     {
     }
-    public static final string_id SID_ERROR = new string_id("ep3/cybernetic", "cannot_equip");
-    public static final string_id SID_REQUIRE_EP3 = new string_id("ep3/cybernetic", "ep3_required");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         cybernetic.setHueColor(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         cybernetic.setupArmorValues(self);
@@ -30,6 +38,7 @@ public class cybernetic_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id currentLoc = getContainedBy(self);
@@ -41,7 +50,7 @@ public class cybernetic_item extends script.base_script
                 {
                     return SCRIPT_OVERRIDE;
                 }
-                else 
+                else
                 {
                     cybernetic.removeCyberneticMods(currentLoc, self);
                     cybernetic.revokeCyberneticSkillMods(currentLoc, self);
@@ -53,7 +62,7 @@ public class cybernetic_item extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             String templateName = getTemplateName(self);
             if (!templateName.contains("s01"))
@@ -77,6 +86,7 @@ public class cybernetic_item extends script.base_script
         sendSystemMessage(destContainer, SID_ERROR);
         return SCRIPT_OVERRIDE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id player = destContainer;
@@ -95,6 +105,7 @@ public class cybernetic_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id currentLoc = getContainedBy(self);
@@ -105,6 +116,7 @@ public class cybernetic_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int free = getFirstFreeIndex(names);
@@ -136,7 +148,7 @@ public class cybernetic_item extends script.base_script
             {
                 attribs[free++] = "+" + cyberRow.getInt("throwRangeMod");
             }
-            else 
+            else
             {
                 attribs[free++] = Integer.toString(cyberRow.getInt("throwRangeMod"));
             }
@@ -148,7 +160,7 @@ public class cybernetic_item extends script.base_script
             {
                 attribs[free++] = "+" + cyberRow.getInt("rangedRangeMod");
             }
-            else 
+            else
             {
                 attribs[free++] = Integer.toString(cyberRow.getInt("rangedRangeMod"));
             }
@@ -160,7 +172,7 @@ public class cybernetic_item extends script.base_script
             {
                 attribs[free++] = "+" + cyberRow.getInt("healingMod");
             }
-            else 
+            else
             {
                 attribs[free++] = Integer.toString(cyberRow.getInt("healingMod"));
             }
@@ -172,7 +184,7 @@ public class cybernetic_item extends script.base_script
             {
                 attribs[free++] = "+" + cyberRow.getInt("rangedAccuracyMod");
             }
-            else 
+            else
             {
                 attribs[free++] = Integer.toString(cyberRow.getInt("rangedAccuracyMod"));
             }
@@ -184,7 +196,7 @@ public class cybernetic_item extends script.base_script
             {
                 attribs[free++] = "+" + cyberRow.getInt("meleeDefMod");
             }
-            else 
+            else
             {
                 attribs[free++] = Integer.toString(cyberRow.getInt("meleeDefMod"));
             }
@@ -196,7 +208,7 @@ public class cybernetic_item extends script.base_script
             {
                 attribs[free++] = "+" + cyberRow.getInt("meleeAccuracyMod");
             }
-            else 
+            else
             {
                 attribs[free++] = Integer.toString(cyberRow.getInt("meleeAccuracyMod"));
             }

@@ -1,5 +1,11 @@
 package script.systems.crafting.droid.modules;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.callable;
 import script.library.pet_lib;
@@ -14,6 +20,7 @@ public class dance_module extends script.base_script
     public static final String STF_FILE = "pet/droid_modules";
     public static final String PROMPT = "@pet/droid_modules:dance_prompt";
     public static final String TITLE = "@pet/droid_modules:dance_title";
+
     public dance_module()
     {
     }

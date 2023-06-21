@@ -1,98 +1,122 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class ep3_eyma extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_eyma";
+
     public ep3_eyma()
     {
     }
-    public static String c_stringFile = "conversation/ep3_eyma";
+
     public boolean ep3_eyma_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_eyma_condition_hasWon_assassinate_DEALER(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "assassinate", "ep3_kash_station_assassinate_neutral") || space_quest.hasWonQuest(player, "assassinate", "ep3_kash_station_assassinate_rebel") || space_quest.hasWonQuest(player, "assassinate", "ep3_kash_station_assassinate_imperial"));
     }
+
     public boolean ep3_eyma_condition_aboutToBe_ambushed(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasQuest(player, "destroy_surpriseattack", "ep3_kash_station_ghrag_ambush") || space_quest.hasQuest(player, "destroy_surpriseattack", "ep3_kash_station_ghrag_ambush_strong"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasQuest(player, "destroy_surpriseattack", "ep3_kash_station_ghrag_ambush") || space_quest.hasQuest(player, "destroy_surpriseattack", "ep3_kash_station_ghrag_ambush_strong");
     }
+
     public boolean ep3_eyma_condition_isOn_CONTACT_EYMA_00(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_kash_station_contact_eyma_00"));
     }
+
     public boolean ep3_eyma_condition_isOn_RESCUE_ALPHA(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player, "rescue", "ep3_kash_station_rescue_alpha"));
     }
+
     public boolean ep3_eyma_condition_hasWonQuest_01(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "escort", "ep3_kash_station_escort_alpha"));
     }
+
     public boolean ep3_eyma_condition_hasWonQuest_02(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "escort", "ep3_kash_station_escort_bravo"));
     }
+
     public boolean ep3_eyma_condition_hasWon_rescue_alpha(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "rescue", "ep3_kash_station_rescue_alpha"));
     }
+
     public boolean ep3_eyma_condition_isOn_escort_GHRAG(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player, "escort", "ep3_kash_station_escort_ghrag");
     }
+
     public boolean ep3_eyma_condition_hasBeeen_REWARDED_FINAL(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasReceivedReward(player, "assassinate", "ep3_kash_station_assassinate_neutral") || space_quest.hasReceivedReward(player, "assassinate", "ep3_kash_station_assassinate_rebel") || space_quest.hasReceivedReward(player, "assassinate", "ep3_kash_station_assassinate_imperial"));
     }
+
     public boolean ep3_eyma_condition_aboutToBe_rewarded_REB(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "assassinate", "ep3_kash_station_assassinate_rebel") && !space_quest.hasReceivedReward(player, "assassinate", "ep3_kash_station_assassinate_rebel"));
     }
+
     public boolean ep3_eyma_condition_aboutToBe_rewarded_IMP(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "assassinate", "ep3_kash_station_assassinate_imperial") && !space_quest.hasReceivedReward(player, "assassinate", "ep3_kash_station_assassinate_imperial"));
     }
+
     public boolean ep3_eyma_condition_aboutToBe_rewarded_NEU(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "assassinate", "ep3_kash_station_assassinate_neutral") && !space_quest.hasReceivedReward(player, "assassinate", "ep3_kash_station_assassinate_neutral"));
     }
+
     public boolean ep3_eyma_condition_aboutToBe_rewarded_escort_GHRAG(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "escort", "ep3_kash_station_escort_ghrag") && !space_quest.hasReceivedReward(player, "escort", "ep3_kash_station_escort_ghrag"));
     }
+
     public boolean ep3_eyma_condition_hasFailed_rescue_alpha(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasFailedQuest(player, "rescue", "ep3_kash_station_rescue_alpha") || space_quest.hasAbortedQuest(player, "rescue", "ep3_kash_station_rescue_alpha"));
     }
+
     public boolean ep3_eyma_condition_hasFailed_escort_ghrag(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasFailedQuest(player, "escort", "ep3_kash_station_escort_ghrag") || space_quest.hasAbortedQuest(player, "escort", "ep3_kash_station_escort_ghrag"));
     }
+
     public boolean ep3_eyma_condition_hasFailed_assassinate_DEALER(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasFailedQuest(player, "assassinate", "ep3_kash_station_assassinate_neutral") || space_quest.hasAbortedQuest(player, "assassinate", "ep3_kash_station_assassinate_neutral") || space_quest.hasFailedQuest(player, "assassinate", "ep3_kash_station_assassinate_rebel") || space_quest.hasAbortedQuest(player, "assassinate", "ep3_kash_station_assassinate_rebel") || space_quest.hasFailedQuest(player, "assassinate", "ep3_kash_station_assassinate_imperial") || space_quest.hasAbortedQuest(player, "assassinate", "ep3_kash_station_assassinate_imperial"));
     }
+
     public boolean ep3_eyma_condition_isOn_CONTACT_EYMA_01(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_kash_station_contact_eyma_01"));
     }
+
     public boolean ep3_eyma_condition_hasWon_groundquest_01(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_kash_station_contact_eyma_01"));
     }
+
     public boolean ep3_eyma_condition_hasWon_escort_GHRAG(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "escort", "ep3_kash_station_escort_ghrag");
     }
+
     public boolean ep3_eyma_condition_isRebelPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         int playerFactionID = pvpGetAlignedFaction(player);
@@ -100,11 +124,12 @@ public class ep3_eyma extends script.base_script
         {
             return true;
         }
-        else 
+        else
         {
             return (hasSkill(player, "pilot_rebel_navy_novice"));
         }
     }
+
     public boolean ep3_eyma_condition_isImperialPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         int playerFactionID = pvpGetAlignedFaction(player);
@@ -112,62 +137,75 @@ public class ep3_eyma extends script.base_script
         {
             return true;
         }
-        else 
+        else
         {
             return (hasSkill(player, "pilot_imperial_navy_novice"));
         }
     }
+
     public void ep3_eyma_action_giveQuest_assassinate_DEALER(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "assassinate", "ep3_kash_station_assassinate_neutral");
     }
+
     public void ep3_eyma_action_giveQuest_assassinate_DEALER_reb(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "assassinate", "ep3_kash_station_assassinate_rebel");
     }
+
     public void ep3_eyma_action_giveQuest_assassinate_DEALER_imp(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "assassinate", "ep3_kash_station_assassinate_imperial");
     }
+
     public void ep3_eyma_action_sendSignal_00(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "contact00");
         space_quest.grantQuest(player, "rescue", "ep3_kash_station_rescue_alpha");
     }
+
     public void ep3_eyma_action_giveReward_assassinate_REB(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "assassinate", "ep3_kash_station_assassinate_rebel", 25000, "object/tangible/ship/components/weapon/wpn_ionic_pulse_weapon.iff");
     }
+
     public void ep3_eyma_action_giveReward_assassinate_IMP(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "assassinate", "ep3_kash_station_assassinate_imperial", 25000, "object/tangible/ship/components/weapon/wpn_ionic_pulse_weapon.iff");
     }
+
     public void ep3_eyma_action_giveReward_assassinate_NEU(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "assassinate", "ep3_kash_station_assassinate_neutral", 25000, "object/tangible/ship/components/weapon/wpn_ionic_pulse_weapon.iff");
     }
+
     public void ep3_eyma_action_giveReward_escort_GHRAG(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "escort", "ep3_kash_station_escort_ghrag", 15000, "object/tangible/ship/components/booster/bst_nova_breaker.iff");
     }
+
     public void ep3_eyma_action_sendSignal_01_STRONG(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "contact01");
         space_quest.grantQuest(player, "destroy_surpriseattack", "ep3_kash_station_ghrag_ambush_strong");
     }
+
     public void ep3_eyma_action_sendSignal_01(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "contact01");
         space_quest.grantQuest(player, "destroy_surpriseattack", "ep3_kash_station_ghrag_ambush");
     }
+
     public void ep3_eyma_action_clearGroundQuest_01(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_kash_station_contact_eyma_01");
     }
+
     public void ep3_eyma_action_giveQuest_escort_Ghrag(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort", "ep3_kash_station_escort_ghrag");
     }
+
     public int ep3_eyma_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_211"))
@@ -188,7 +226,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_215");
@@ -197,7 +235,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -223,7 +261,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_223");
@@ -232,7 +270,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -258,7 +296,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_231");
@@ -267,7 +305,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -292,7 +330,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_315");
@@ -301,7 +339,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -323,7 +361,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_321");
@@ -332,7 +370,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -368,7 +406,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_327");
@@ -385,7 +423,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -395,6 +433,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_215"))
@@ -413,6 +452,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_223"))
@@ -431,6 +471,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_231"))
@@ -449,6 +490,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_315"))
@@ -464,6 +506,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_321"))
@@ -483,6 +526,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_327"))
@@ -523,7 +567,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_335");
@@ -536,7 +580,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -561,7 +605,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_256");
@@ -570,7 +614,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -580,6 +624,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_335"))
@@ -609,7 +654,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_343");
@@ -622,7 +667,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     prose_package pp = new prose_package();
@@ -636,6 +681,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_343"))
@@ -654,6 +700,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_256"))
@@ -673,7 +720,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_260");
@@ -682,7 +729,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -692,6 +739,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_260"))
@@ -706,6 +754,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_354"))
@@ -726,7 +775,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_360");
@@ -735,7 +784,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -745,6 +794,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_360"))
@@ -759,6 +809,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_422"))
@@ -778,7 +829,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_353");
@@ -787,7 +838,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -816,7 +867,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_371");
@@ -829,7 +880,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -851,7 +902,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_421");
@@ -860,7 +911,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -880,6 +931,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_278"))
@@ -899,7 +951,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_283");
@@ -908,7 +960,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -928,6 +980,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_283"))
@@ -947,6 +1000,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_349"))
@@ -966,7 +1020,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_353");
@@ -975,7 +1029,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1004,7 +1058,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_371");
@@ -1017,7 +1071,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1039,7 +1093,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_421");
@@ -1048,7 +1102,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1058,6 +1112,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_353"))
@@ -1077,7 +1132,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_357");
@@ -1086,7 +1141,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1096,6 +1151,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_357"))
@@ -1115,7 +1171,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_361");
@@ -1124,7 +1180,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1134,6 +1190,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_361"))
@@ -1153,7 +1210,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_365");
@@ -1162,7 +1219,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1172,6 +1229,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_365"))
@@ -1191,6 +1249,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_371"))
@@ -1210,7 +1269,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_375");
@@ -1219,7 +1278,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1251,7 +1310,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_391");
@@ -1268,7 +1327,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     prose_package pp = new prose_package();
@@ -1282,6 +1341,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_375"))
@@ -1301,7 +1361,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_379");
@@ -1310,7 +1370,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1320,6 +1380,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_379"))
@@ -1339,7 +1400,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_383");
@@ -1348,7 +1409,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1358,6 +1419,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_383"))
@@ -1377,6 +1439,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_391"))
@@ -1396,7 +1459,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_395");
@@ -1405,7 +1468,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1430,7 +1493,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_407");
@@ -1439,7 +1502,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1449,6 +1512,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_395"))
@@ -1468,7 +1532,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_399");
@@ -1477,7 +1541,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1487,6 +1551,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_399"))
@@ -1506,6 +1571,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_407"))
@@ -1525,7 +1591,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_411");
@@ -1534,7 +1600,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1544,6 +1610,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_411"))
@@ -1563,7 +1630,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_415");
@@ -1572,7 +1639,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1582,6 +1649,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_415"))
@@ -1601,6 +1669,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_421"))
@@ -1627,7 +1696,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_425");
@@ -1640,7 +1709,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1650,6 +1719,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_425"))
@@ -1669,7 +1739,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_429");
@@ -1678,7 +1748,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1704,7 +1774,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_439");
@@ -1713,7 +1783,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1723,6 +1793,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_429"))
@@ -1742,6 +1813,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_439"))
@@ -1761,7 +1833,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_447");
@@ -1770,7 +1842,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1780,6 +1852,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_447"))
@@ -1799,6 +1872,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_458"))
@@ -1825,6 +1899,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_474"))
@@ -1852,7 +1927,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_481");
@@ -1865,7 +1940,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1875,6 +1950,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_481"))
@@ -1895,7 +1971,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_489");
@@ -1904,7 +1980,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1925,6 +2001,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_489"))
@@ -1940,6 +2017,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_509"))
@@ -1967,7 +2045,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_517");
@@ -1980,7 +2058,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1990,6 +2068,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_517"))
@@ -2018,7 +2097,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_527");
@@ -2035,7 +2114,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     prose_package pp = new prose_package();
@@ -2073,7 +2152,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_549");
@@ -2090,7 +2169,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     prose_package pp = new prose_package();
@@ -2104,6 +2183,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch67(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_527"))
@@ -2134,6 +2214,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_549"))
@@ -2161,7 +2242,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_556");
@@ -2174,7 +2255,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2200,7 +2281,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_577");
@@ -2209,7 +2290,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2219,6 +2300,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_556"))
@@ -2245,6 +2327,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_577"))
@@ -2260,6 +2343,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_591"))
@@ -2285,6 +2369,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_608"))
@@ -2304,6 +2389,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_619"))
@@ -2338,7 +2424,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_625");
@@ -2355,7 +2441,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2365,6 +2451,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch83(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_625"))
@@ -2386,7 +2473,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_632");
@@ -2395,7 +2482,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2434,7 +2521,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_625");
@@ -2451,7 +2538,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2490,7 +2577,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_625");
@@ -2507,7 +2594,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2517,6 +2604,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch84(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_632"))
@@ -2532,6 +2620,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_625"))
@@ -2553,7 +2642,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_632");
@@ -2562,7 +2651,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2601,7 +2690,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_625");
@@ -2618,7 +2707,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2657,7 +2746,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_625");
@@ -2674,7 +2763,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2684,6 +2773,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch87(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_625"))
@@ -2705,7 +2795,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_632");
@@ -2714,7 +2804,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2753,7 +2843,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_625");
@@ -2770,7 +2860,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2809,7 +2899,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_625");
@@ -2826,7 +2916,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2836,6 +2926,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch88(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_654"))
@@ -2863,7 +2954,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_660");
@@ -2876,7 +2967,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2909,7 +3000,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_729");
@@ -2922,7 +3013,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2955,7 +3046,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_764");
@@ -2968,7 +3059,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2978,6 +3069,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch89(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_660"))
@@ -2997,7 +3089,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_667");
@@ -3006,7 +3098,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3039,7 +3131,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_676");
@@ -3052,7 +3144,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3062,6 +3154,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch90(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_667"))
@@ -3082,7 +3175,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_683");
@@ -3091,7 +3184,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3101,6 +3194,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch91(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_676"))
@@ -3121,7 +3215,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_683");
@@ -3130,7 +3224,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3163,7 +3257,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_695");
@@ -3176,7 +3270,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3186,6 +3280,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch92(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_683"))
@@ -3201,6 +3296,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch94(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_695"))
@@ -3221,7 +3317,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_702");
@@ -3230,7 +3326,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3256,7 +3352,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_715");
@@ -3265,7 +3361,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3275,6 +3371,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch95(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_702"))
@@ -3290,6 +3387,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch97(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_715"))
@@ -3305,6 +3403,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch99(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_729"))
@@ -3343,7 +3442,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_745");
@@ -3356,7 +3455,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3366,6 +3465,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch101(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_745"))
@@ -3397,7 +3497,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_756");
@@ -3406,7 +3506,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3416,6 +3516,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch103(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_756"))
@@ -3431,6 +3532,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_eyma_handleBranch105(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_764"))
@@ -3462,7 +3564,7 @@ public class ep3_eyma extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_683");
@@ -3471,7 +3573,7 @@ public class ep3_eyma extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_eyma.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3481,6 +3583,7 @@ public class ep3_eyma extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -3488,6 +3591,7 @@ public class ep3_eyma extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -3495,6 +3599,7 @@ public class ep3_eyma extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -3504,18 +3609,21 @@ public class ep3_eyma extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_eyma");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -3559,7 +3667,7 @@ public class ep3_eyma extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_211");
@@ -3583,7 +3691,7 @@ public class ep3_eyma extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_eyma", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3608,7 +3716,7 @@ public class ep3_eyma extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_354");
@@ -3620,7 +3728,7 @@ public class ep3_eyma extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_eyma", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3652,7 +3760,7 @@ public class ep3_eyma extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_422");
@@ -3668,7 +3776,7 @@ public class ep3_eyma extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_eyma", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3700,7 +3808,7 @@ public class ep3_eyma extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_278");
@@ -3712,7 +3820,7 @@ public class ep3_eyma extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_eyma.branchId", 26);
                 npcStartConversation(player, npc, "ep3_eyma", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3733,7 +3841,7 @@ public class ep3_eyma extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_349");
@@ -3745,7 +3853,7 @@ public class ep3_eyma extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_eyma", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3778,7 +3886,7 @@ public class ep3_eyma extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_458");
@@ -3794,7 +3902,7 @@ public class ep3_eyma extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_eyma", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3826,7 +3934,7 @@ public class ep3_eyma extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_474");
@@ -3838,7 +3946,7 @@ public class ep3_eyma extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_eyma", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3864,7 +3972,7 @@ public class ep3_eyma extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_509");
@@ -3876,7 +3984,7 @@ public class ep3_eyma extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_eyma", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3914,7 +4022,7 @@ public class ep3_eyma extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_591");
@@ -3926,7 +4034,7 @@ public class ep3_eyma extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_eyma.branchId", 77);
                 npcStartConversation(player, npc, "ep3_eyma", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3948,7 +4056,7 @@ public class ep3_eyma extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_608");
@@ -3960,7 +4068,7 @@ public class ep3_eyma extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_eyma", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3985,7 +4093,7 @@ public class ep3_eyma extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_619");
@@ -3997,7 +4105,7 @@ public class ep3_eyma extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_eyma", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -4037,7 +4145,7 @@ public class ep3_eyma extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_654");
@@ -4053,7 +4161,7 @@ public class ep3_eyma extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_eyma.branchId", 88);
                 npcStartConversation(player, npc, "ep3_eyma", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4062,6 +4170,7 @@ public class ep3_eyma extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_eyma"))

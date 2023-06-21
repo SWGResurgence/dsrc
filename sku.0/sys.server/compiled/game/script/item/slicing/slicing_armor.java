@@ -1,5 +1,11 @@
 package script.item.slicing;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.prose;
 import script.library.utils;
@@ -34,6 +40,7 @@ public class slicing_armor extends script.base_script
     public static final float ARMOR_MIN = 0.0f;
     public static final float ARMOR_MAX = 1.0f;
     public static final String SLICE_TABLE = "datatables/smuggler/slice_armor.iff";
+
     public slicing_armor()
     {
     }

@@ -1,5 +1,11 @@
 package script.space.ship;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.space_transition;
 import script.library.utils;
 import script.menu_info;
@@ -9,12 +15,13 @@ import script.string_id;
 
 public class npe_turret_falcon extends script.base_script
 {
-    public npe_turret_falcon()
-    {
-    }
     public static final string_id SID_PILOT = new string_id("space/space_interaction", "pilot_ship");
     public static final string_id SID_TURRET_UPPER = new string_id("space/space_interaction", "turret_upper");
     public static final string_id SID_TURRET_LOWER = new string_id("space/space_interaction", "turret_lower");
+    public npe_turret_falcon()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id objShip = space_transition.getContainingShip(player);
@@ -25,6 +32,7 @@ public class npe_turret_falcon extends script.base_script
         sendDirtyObjectMenuNotification(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -43,7 +51,7 @@ public class npe_turret_falcon extends script.base_script
                     string_id strSpam = new string_id("space/space_interaction", "turret_occupied");
                     sendSystemMessage(player, strSpam);
                 }
-                else 
+                else
                 {
                     if (!utils.hasScriptVar(player, "firstTurret"))
                     {
@@ -59,6 +67,7 @@ public class npe_turret_falcon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasTurretWeapon(obj_id objShip, int intSlot, obj_id objPlayer) throws InterruptedException
     {
         if (!isShipSlotInstalled(objShip, intSlot))

@@ -1,5 +1,11 @@
 package script.systems.skills;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.respec;
 import script.library.sui;
@@ -13,6 +19,7 @@ public class auto_level extends script.base_script
     public static final string_id SID_CONSUME_TITLE = new string_id("spam", "consume_auto_level_title");
     public static final string_id SID_CONSUME_ITEM = new string_id("spam", "consume_auto_level");
     public static final string_id SID_CONSUME_TOO_HIGH = new string_id("spam", "consume_auto_level_too_high");
+
     public auto_level()
     {
     }
@@ -65,7 +72,7 @@ public class auto_level extends script.base_script
         if (hasObjVar(self, OBJVAR_AUTO_LEVEL_TO))
         {
             names[idx] = "level";
-            attribs[idx] = "" + getIntObjVar(self, OBJVAR_AUTO_LEVEL_TO);
+            attribs[idx] = String.valueOf(getIntObjVar(self, OBJVAR_AUTO_LEVEL_TO));
             idx++;
         }
         return SCRIPT_CONTINUE;

@@ -1,5 +1,11 @@
 package script.systems.player_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -10,6 +16,7 @@ public class consume_relic extends script.base_script
     public static final int RELIC_DECONSTRUCT_ONE = menu_info_types.SERVER_MENU12;
     public static final int RELIC_DECONSTRUCT_ALL = menu_info_types.SERVER_MENU13;
     public static final int RELIC_CONSUME_ALL = menu_info_types.SERVER_MENU14;
+
     public consume_relic()
     {
     }
@@ -107,7 +114,7 @@ public class consume_relic extends script.base_script
             dictionary row = dataTableGetRow(storyteller.STORYTELLER_DATATABLE, staticItemName);
             int relic_tier = row.getInt("relic_tier");
             names[idx] = "pgc_relic_quality";
-            attribs[idx] = "" + relic_tier;
+            attribs[idx] = String.valueOf(relic_tier);
             idx++;
             if (idx >= names.length)
             {
@@ -277,6 +284,5 @@ public class consume_relic extends script.base_script
         {
             pgc_quests.sendPlacedInInventorySystemMessage(player, fragment, actualCount);
         }
-        return;
     }
 }

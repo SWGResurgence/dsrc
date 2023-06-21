@@ -1,5 +1,11 @@
 package script.systems.collections;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -28,6 +34,7 @@ public class consume_click extends script.base_script
     public static final string_id SID_CONTROL_ACCESS_DELAY = new string_id("collection", "access_delay");
     public static final string_id SID_GCW_SENSITIVE_DATA = new string_id("collection", "gcw_sensitive_data");
     public static final string_id SID_GCW_NO_DATA = new string_id("collection", "gcw_no_data");
+
     public consume_click()
     {
     }

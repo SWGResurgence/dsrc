@@ -1,5 +1,11 @@
 package script.city.bestine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -7,9 +13,6 @@ import script.library.planetary_map;
 
 public class politician_event_npc extends script.base_script
 {
-    public politician_event_npc()
-    {
-    }
     public static final String FACE_TO_VOLUME_NAME = "faceToTriggerVolume";
     public static final String EVIDENCE_ITEM_SEAN_1 = "object/tangible/loot/quest/sean_questp_ctestimony.iff";
     public static final String EVIDENCE_ITEM_SEAN_2 = "object/tangible/loot/quest/sean_questp_mdisk.iff";
@@ -21,6 +24,10 @@ public class politician_event_npc extends script.base_script
     public static final String VARNAME_ELECTION_WINNER = "strElectionWinner";
     public static final String VARNAME_ELECTION_NUM = "intElectionNum";
     public static final String OBJVAR_TATOOINE_CAPITOL = "bestine.tatooineCapitolObjId";
+    public politician_event_npc()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume(FACE_TO_VOLUME_NAME, 8.0f, true);
@@ -36,6 +43,7 @@ public class politician_event_npc extends script.base_script
         messageTo(self, "handlePoliticianEventNpcSetup", null, 18, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume(FACE_TO_VOLUME_NAME, 8.0f, true);
@@ -51,6 +59,7 @@ public class politician_event_npc extends script.base_script
         messageTo(self, "handlePoliticianEventNpcSetup", null, 150, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (isMob(self))
@@ -71,6 +80,7 @@ public class politician_event_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         if (isMob(self))
@@ -88,6 +98,7 @@ public class politician_event_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleGovernorSetup(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isMob(self))
@@ -104,6 +115,7 @@ public class politician_event_npc extends script.base_script
         messageTo(tatooineCapitol, "handleGovernorSetupRequest", msgData, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGovernorSetupResponse(obj_id self, dictionary params) throws InterruptedException
     {
         clearElectionObjvars(self);
@@ -121,6 +133,7 @@ public class politician_event_npc extends script.base_script
         messageTo(self, "handleGovernorDataStorage", null, 600, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGovernorDataStorage(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "bestine.electionStarted"))
@@ -145,6 +158,7 @@ public class politician_event_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleElectionStateChangeGovernorAlert(obj_id self, dictionary params) throws InterruptedException
     {
         clearElectionObjvars(self);
@@ -156,7 +170,7 @@ public class politician_event_npc extends script.base_script
         {
             setObjVar(self, "bestine.timeNextElectionStarts", timeNextElectionStarts);
         }
-        else 
+        else
         {
             if (hasObjVar(self, "bestine.timeNextElectionStarts"))
             {
@@ -183,7 +197,7 @@ public class politician_event_npc extends script.base_script
                 {
                     electionWinner = "Sean";
                 }
-                else 
+                else
                 {
                     electionWinner = "Victor";
                 }
@@ -203,6 +217,7 @@ public class politician_event_npc extends script.base_script
         messageTo(tatooineCapitol, "handleSetElectionWinner", msgData, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePoliticianEventNpcSetup(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, OBJVAR_TATOOINE_CAPITOL))
@@ -213,12 +228,13 @@ public class politician_event_npc extends script.base_script
             listenToMessage(tatooineCapitol, "handlePoliticianEventStatusResponse");
             messageTo(tatooineCapitol, "handlePoliticianEventStatusRequest", msgData, 2, false);
         }
-        else 
+        else
         {
             messageTo(self, "checkForCapitolBuilding", null, 1, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkForCapitolBuilding(obj_id self, dictionary params) throws InterruptedException
     {
         map_location tatooineCapitol = planetary_map.findClosestLocation(self, "capitol", "");
@@ -234,19 +250,20 @@ public class politician_event_npc extends script.base_script
                 messageTo(self, "checkForCapitolBuilding", null, 60, false);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 LOG("DESIGNER_FATAL", "BESTINE POLITICIAN EVENT: Could not find registered capitol building on Tatooine.");
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             setObjVar(self, OBJVAR_TATOOINE_CAPITOL, tatooineCapitolObjId);
             messageTo(self, "handlePoliticianEventNpcSetup", null, 1, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePoliticianEventStatusResponse(obj_id self, dictionary params) throws InterruptedException
     {
         clearElectionObjvars(self);
@@ -256,6 +273,7 @@ public class politician_event_npc extends script.base_script
         setObjVar(self, "bestine.electionWinner", params.getString(VARNAME_ELECTION_WINNER));
         return SCRIPT_CONTINUE;
     }
+
     public void clearElectionObjvars(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "bestine.electionStarted"))

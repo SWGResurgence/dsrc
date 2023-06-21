@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.utils;
@@ -10,9 +16,6 @@ import java.util.Vector;
 
 public class remote_encounter extends script.quest.task.ground.base_task
 {
-    public remote_encounter()
-    {
-    }
     public static final String taskType = "remote_encounter";
     public static final String dataTableColumnCreatureName = "CREATURE_NAME";
     public static final String dataTableColumnEncounterSceneName = "ENCOUNTER_SCENE_NAME";
@@ -41,6 +44,10 @@ public class remote_encounter extends script.quest.task.ground.base_task
     public static final String dataTableSceneDifficulty = "datatables/quest/ground/scene_difficulty.iff";
     public static final int FAILSAFE_TIMEOUT = 5 * 60;
     public static final String REMOTE_ENCOUNTER_CREATURE_SCRIPT = "quest.task.ground.util.remote_encounter_creature";
+    public remote_encounter()
+    {
+    }
+
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskActivated", taskType + " task activated.");
@@ -56,49 +63,57 @@ public class remote_encounter extends script.quest.task.ground.base_task
         int isVisible = groundquests.getTaskIntDataEntry(questCrc, taskId, dataTableColumnVisible);
         if (isVisible != 0)
         {
-            float playerPlayedTimeWhenTimerEnds = (float)getPlayerPlayedTime(self) + encounterDuration;
-            questSetQuestTaskTimer(self, questGetQuestName(questCrc), taskId, "quest/groundquests:timer_timertext", (int)playerPlayedTimeWhenTimerEnds);
+            float playerPlayedTimeWhenTimerEnds = (float) getPlayerPlayedTime(self) + encounterDuration;
+            questSetQuestTaskTimer(self, questGetQuestName(questCrc), taskId, "quest/groundquests:timer_timertext", (int) playerPlayedTimeWhenTimerEnds);
         }
         return super.OnTaskActivated(self, questCrc, taskId);
     }
+
     public int OnTaskCompleted(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCompleted", taskType + " task completed.");
         return super.OnTaskCompleted(self, questCrc, taskId);
     }
+
     public int OnTaskFailed(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskFailed", taskType + " task failed.");
         return super.OnTaskFailed(self, questCrc, taskId);
     }
+
     public int OnTaskCleared(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCleared", taskType + " task cleared.");
         return super.OnTaskCleared(self, questCrc, taskId);
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         groundquests.failAllActiveTasksOfType(self, taskType);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         groundquests.failAllActiveTasksOfType(self, taskType);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         removeObjVar(self, groundquests.getTaskTypeObjVar(self, taskType));
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         groundquests.failAllActiveTasksOfType(self, taskType);
         return SCRIPT_CONTINUE;
     }
+
     public int remoteEncounterFailsafeTimeout(obj_id self, dictionary params) throws InterruptedException
     {
         log("remoteEncounterFailsafeTimeout");
@@ -111,6 +126,7 @@ public class remote_encounter extends script.quest.task.ground.base_task
         }
         return SCRIPT_CONTINUE;
     }
+
     public int questItemUsed(obj_id self, dictionary params) throws InterruptedException
     {
         log("questItemUsed");
@@ -130,6 +146,7 @@ public class remote_encounter extends script.quest.task.ground.base_task
         }
         return SCRIPT_CONTINUE;
     }
+
     public int createRemoteObjectResponse(obj_id self, dictionary params) throws InterruptedException
     {
         int questCrc = params.getInt(QUEST_CRC);
@@ -148,13 +165,14 @@ public class remote_encounter extends script.quest.task.ground.base_task
                 groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "createRemoteObjectResponse", "Remote Object created in " + sceneName + " at [" + x + "," + y + "," + z + "]");
                 sendEncounterWhereMessageToGroup(self, questCrc, taskId, sceneName);
             }
-            else 
+            else
             {
                 questFailTask(questCrc, taskId, self);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int remoteEncounterCreatureDied(obj_id self, dictionary params) throws InterruptedException
     {
         int questCrc = params.getInt(QUEST_CRC);
@@ -165,6 +183,7 @@ public class remote_encounter extends script.quest.task.ground.base_task
         }
         return SCRIPT_CONTINUE;
     }
+
     public int remoteEncounterCreatureEscaped(obj_id self, dictionary params) throws InterruptedException
     {
         int questCrc = params.getInt(QUEST_CRC);
@@ -175,46 +194,57 @@ public class remote_encounter extends script.quest.task.ground.base_task
         }
         return SCRIPT_CONTINUE;
     }
+
     public String getQuestCrcVarName(int id) throws InterruptedException
     {
         return taskType + "." + QUEST_CRC + "." + id;
     }
+
     public String getTaskIdVarName(int id) throws InterruptedException
     {
         return taskType + "." + TASK_ID + "." + id;
     }
+
     public String getRemoteObjectVarName(int questCrc, int taskId) throws InterruptedException
     {
         return taskType + "." + REMOTE_OBJECT_ID + "." + questCrc + "." + taskId;
     }
+
     public int getQuestCrcScriptVar(obj_id self, int id) throws InterruptedException
     {
         return utils.getIntScriptVar(self, getQuestCrcVarName(id));
     }
+
     public int getTaskIdScriptVar(obj_id self, int id) throws InterruptedException
     {
         return utils.getIntScriptVar(self, getTaskIdVarName(id));
     }
+
     public obj_id getRemoteObjectScriptVar(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         return utils.getObjIdScriptVar(self, getRemoteObjectVarName(questCrc, taskId));
     }
+
     public void setQuestCrcScriptVar(obj_id self, int id, int questCrc) throws InterruptedException
     {
         utils.setScriptVar(self, getQuestCrcVarName(id), questCrc);
     }
+
     public void setTaskIdScriptVar(obj_id self, int id, int taskId) throws InterruptedException
     {
         utils.setScriptVar(self, getTaskIdVarName(id), taskId);
     }
+
     public void setRemoteObjectScriptVar(obj_id self, int questCrc, int taskId, obj_id objectId) throws InterruptedException
     {
         utils.setScriptVar(self, getRemoteObjectVarName(questCrc, taskId), objectId);
     }
+
     public boolean hasValidScriptVars(obj_id self, int id) throws InterruptedException
     {
         return utils.hasScriptVar(self, getQuestCrcVarName(id)) && utils.hasScriptVar(self, getTaskIdVarName(id));
     }
+
     public void cleanup(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         messageToRemote(self, questCrc, taskId, REMOTE_ENCOUNTER_CLEANUP);
@@ -226,6 +256,7 @@ public class remote_encounter extends script.quest.task.ground.base_task
         utils.removeScriptVar(self, getRemoteObjectVarName(questCrc, taskId));
         groundquests.clearBaseObjVar(self, taskType, questGetQuestName(questCrc), taskId);
     }
+
     public void messageToRemote(obj_id self, int questCrc, int taskId, String message) throws InterruptedException
     {
         obj_id remoteObject = getRemoteObjectScriptVar(self, questCrc, taskId);
@@ -234,6 +265,7 @@ public class remote_encounter extends script.quest.task.ground.base_task
             messageTo(remoteObject, message, null, 0, false);
         }
     }
+
     public dictionary getRemoteCreateParams(obj_id self, int requestId) throws InterruptedException
     {
         dictionary createParams = new dictionary();
@@ -248,12 +280,14 @@ public class remote_encounter extends script.quest.task.ground.base_task
         createParams.put(TASK_ID, taskId);
         return createParams;
     }
+
     public void removeRemoteCreateScriptVars(obj_id self, int requestId) throws InterruptedException
     {
         super.removeRemoteCreateScriptVars(self, requestId);
         utils.removeScriptVar(self, getQuestCrcVarName(requestId));
         utils.removeScriptVar(self, getTaskIdVarName(requestId));
     }
+
     public boolean hasValidCreateScriptVars(obj_id self, int requestId) throws InterruptedException
     {
         int questCrc = getQuestCrcScriptVar(self, requestId);
@@ -264,6 +298,7 @@ public class remote_encounter extends script.quest.task.ground.base_task
         }
         return hasValidScriptVars(self, requestId);
     }
+
     public obj_id getRemoteObjectCreator(obj_id self, int requestId, String[] elementNameList, dictionary[] dictionaryList) throws InterruptedException
     {
         int questCrc = getQuestCrcScriptVar(self, requestId);
@@ -305,17 +340,18 @@ public class remote_encounter extends script.quest.task.ground.base_task
         int size = remoteCreatorsSpaceDifficulty.size();
         if (size > 0)
         {
-            return ((obj_id)remoteCreatorsSpaceDifficulty.get(rand(0, size - 1)));
+            return ((obj_id) remoteCreatorsSpaceDifficulty.get(rand(0, size - 1)));
         }
         size = remoteCreatorsSpace.size();
         if (size > 0)
         {
-            return ((obj_id)remoteCreatorsSpace.get(rand(0, size - 1)));
+            return ((obj_id) remoteCreatorsSpace.get(rand(0, size - 1)));
         }
         logError("Failed to find remote creator!");
         questFailTask(questCrc, taskId, self);
         return null;
     }
+
     public void setRemoteObjectAsMissionCriticalToGroup(obj_id self, obj_id remoteObject) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -324,6 +360,7 @@ public class remote_encounter extends script.quest.task.ground.base_task
         params.put(MISSION_CRITICAL_ADD_OBJECTS, addObjects);
         sendMessageToGroup(self, params, MESSAGE_UPDATE_MISSION_CIRTICAL_OBJECTS);
     }
+
     public void removeRemoteObjectFromMissionCriticalToGroup(obj_id self, obj_id remoteObject) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -332,6 +369,7 @@ public class remote_encounter extends script.quest.task.ground.base_task
         params.put(MISSION_CRITICAL_REMOVE_OBJECTS, removeObjects);
         sendMessageToGroup(self, params, MESSAGE_UPDATE_MISSION_CIRTICAL_OBJECTS);
     }
+
     public void sendEncounterWhereMessageToGroup(obj_id self, int questCrc, int taskId, String sceneName) throws InterruptedException
     {
         String encounterWhereMessage = groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableColumnEncounterWhereMessage);
@@ -342,6 +380,7 @@ public class remote_encounter extends script.quest.task.ground.base_task
         params.put("to", planetId);
         sendMessageToGroup(self, params, MESSAGE_SEND_QUEST_SYSTEM_MESSAGE);
     }
+
     public void sendMessageToGroup(obj_id self, dictionary params, String message) throws InterruptedException
     {
         obj_id groupObj = getGroupObject(self);
@@ -349,17 +388,20 @@ public class remote_encounter extends script.quest.task.ground.base_task
         {
             obj_id[] groupMembers = getGroupMemberIds(groupObj);
             int numGroupMembers = groupMembers.length;
-            for (obj_id groupMember : groupMembers) {
-                if (isIdValid(groupMember)) {
+            for (obj_id groupMember : groupMembers)
+            {
+                if (isIdValid(groupMember))
+                {
                     messageTo(groupMember, message, params, 0, false);
                 }
             }
         }
-        else 
+        else
         {
             messageTo(self, message, params, 0, false);
         }
     }
+
     public boolean isRemoteEncounter(int questCrc, int taskId) throws InterruptedException
     {
         return (groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableColumnAttachScript)).equals(remoteEncounterScriptName);

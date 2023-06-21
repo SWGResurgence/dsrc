@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.establish_the_link;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -10,25 +16,27 @@ import script.obj_id;
 
 public class foreman_spawner extends script.base_script
 {
-    public foreman_spawner()
-    {
-    }
     public static final boolean LOGGING = false;
     public static final String FOREMAN = "som_link_lava_beetle_foreman";
     public static final String SOLDIER = "som_link_lava_beetle_defender";
-    public static final String[] offSet = 
+    public static final String[] offSet =
+            {
+                    "-10:-10",
+                    "-10:10",
+                    "10:-10",
+                    "10:10"
+            };
+    public foreman_spawner()
     {
-        "-10:-10",
-        "-10:10",
-        "10:-10",
-        "10:10"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         spawnEventMobs(self);
         utils.sendSystemMessagePob(trial.getTop(self), trial.UPLINK_FOREMAN_SPAWN);
         return SCRIPT_CONTINUE;
     }
+
     public int foremanDied(obj_id self, dictionary params) throws InterruptedException
     {
         utils.setScriptVar(self, "foremanDead", true);
@@ -36,6 +44,7 @@ public class foreman_spawner extends script.base_script
         messageTo(controller, "linkEventWon", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEventMobs(obj_id self) throws InterruptedException
     {
         obj_id[] eventMobs = new obj_id[5];
@@ -68,6 +77,7 @@ public class foreman_spawner extends script.base_script
         }
         ai_lib.establishAgroLink(foreman, eventMobs);
     }
+
     public int guardDied(obj_id self, dictionary params) throws InterruptedException
     {
         int deadGuards = 0;
@@ -79,6 +89,7 @@ public class foreman_spawner extends script.base_script
         validateEvent(self);
         return SCRIPT_CONTINUE;
     }
+
     public void validateEvent(obj_id self) throws InterruptedException
     {
         boolean foremanDead = false;
@@ -100,6 +111,7 @@ public class foreman_spawner extends script.base_script
             winEvent(self);
         }
     }
+
     public void winEvent(obj_id self) throws InterruptedException
     {
         obj_id dungeon = trial.getTop(self);
@@ -107,11 +119,12 @@ public class foreman_spawner extends script.base_script
         {
             messageTo(dungeon, "foremanEventWon", null, 5, false);
         }
-        else 
+        else
         {
             doLogging("winEvent", "Failed to get top");
         }
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.UPLINK_LOGGING)

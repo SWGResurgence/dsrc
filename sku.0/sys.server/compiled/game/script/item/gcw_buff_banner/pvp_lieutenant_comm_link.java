@@ -1,5 +1,11 @@
 package script.item.gcw_buff_banner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.factions;
 import script.*;
 
@@ -13,6 +19,7 @@ public class pvp_lieutenant_comm_link extends script.base_script
     public static final string_id SID_TOO_LOW_LEVEL = new string_id("gcw", "player_too_low");
     public static final string_id SID_INDOORS = new string_id("gcw", "player_is_indoors");
     public static final string_id SID_NOT_DECLARED = new string_id("gcw", "sf_restricted");
+
     public pvp_lieutenant_comm_link()
     {
     }

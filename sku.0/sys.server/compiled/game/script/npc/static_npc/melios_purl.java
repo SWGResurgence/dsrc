@@ -1,5 +1,11 @@
 package script.npc.static_npc;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.colors;
 import script.library.hue;
@@ -10,6 +16,7 @@ public class melios_purl extends script.base_script
     public melios_purl()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/shirt/shirt_s07.iff", self, "");

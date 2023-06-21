@@ -1,5 +1,11 @@
 package script.item.container;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.collection;
 import script.library.static_item;
@@ -18,6 +24,7 @@ public class loot_crate extends script.base_script
     public static string_id COUNTDOWN_HAS_BEGUN = new string_id("collection", "magseal_timer_warning");
     public static string_id NO_ACCESS_MAGSEAL = new string_id("collection", "magseal_no_access");
     public static string_id MAGSEAL_OCCUPIED = new string_id("collection", "magseal_occupied");
+
     public loot_crate()
     {
     }

@@ -1,5 +1,11 @@
 package script.systems.storyteller;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.player_structure;
 import script.library.storyteller;
@@ -221,7 +227,7 @@ public class npc_token extends script.base_script
                 dailyUsesLeft = dailyUsesLeft - getIntObjVar(self, storyteller.STORYTELLER_DAILY_COUNT_OBJVAR);
             }
             names[idx] = "storyteller_daily_uses";
-            attribs[idx] = "" + dailyUsesLeft;
+            attribs[idx] = String.valueOf(dailyUsesLeft);
             idx++;
             if (idx >= names.length)
             {
@@ -232,7 +238,7 @@ public class npc_token extends script.base_script
         {
             int storytellerNpcLevel = getIntObjVar(self, "storytellerNpcCombatLevel");
             names[idx] = "storyteller_combat_level";
-            attribs[idx] = "" + storytellerNpcLevel;
+            attribs[idx] = String.valueOf(storytellerNpcLevel);
             idx++;
             if (idx >= names.length)
             {

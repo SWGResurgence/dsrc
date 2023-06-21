@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,14 +14,17 @@ import script.*;
 
 public class wod_sm_rancor_handler_izaryx extends script.base_script
 {
+    public static String c_stringFile = "conversation/wod_sm_rancor_handler_izaryx";
+
     public wod_sm_rancor_handler_izaryx()
     {
     }
-    public static String c_stringFile = "conversation/wod_sm_rancor_handler_izaryx";
+
     public boolean wod_sm_rancor_handler_izaryx_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean wod_sm_rancor_handler_izaryx_condition_IsNS(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "wod_prologue_quests"))
@@ -23,12 +32,9 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
             return false;
         }
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if (status > -1)
-        {
-            return true;
-        }
-        return false;
+        return status > -1;
     }
+
     public boolean wod_sm_rancor_handler_izaryx_condition_IsIndifferent(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "wod_prologue_quests"))
@@ -36,69 +42,75 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
             return false;
         }
         int status = getIntObjVar(player, "wod_prologue_quests");
-        if ((status < 0) && (status > -8))
-        {
-            return true;
-        }
-        return false;
+        return (status < 0) && (status > -8);
     }
+
     public boolean wod_sm_rancor_handler_izaryx_condition_hasQuestActiveI(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "wod_themepark_sm_whole_truth_01");
     }
+
     public boolean wod_sm_rancor_handler_izaryx_condition_hasQuestActiveII(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "wod_themepark_sm_whole_truth_02");
     }
+
     public boolean wod_sm_rancor_handler_izaryx_condition_hasQuestActiveIII(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "wod_kyrisa_boss_fight");
     }
+
     public boolean wod_sm_rancor_handler_izaryx_condition_hasPreqComplete(obj_id player, obj_id npc) throws InterruptedException
     {
-        if ((hasObjVar(player, "wod_prologue_quests")) && (groundquests.hasCompletedQuest(player, "wod_rubina_goto_sm")) && (!groundquests.hasCompletedQuest(player, "wod_themepark_sm_whole_truth_01")))
-        {
-            return true;
-        }
-        return false;
+        return (hasObjVar(player, "wod_prologue_quests")) && (groundquests.hasCompletedQuest(player, "wod_rubina_goto_sm")) && (!groundquests.hasCompletedQuest(player, "wod_themepark_sm_whole_truth_01"));
     }
+
     public boolean wod_sm_rancor_handler_izaryx_condition_onReturnTruthISM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_themepark_sm_whole_truth_01", "returnTamer");
     }
+
     public boolean wod_sm_rancor_handler_izaryx_condition_onReturnTruthIISM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "wod_themepark_sm_whole_truth_02", "returnTamer2");
     }
+
     public boolean wod_sm_rancor_handler_izaryx_condition_completedQuestTruthISM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "wod_themepark_sm_whole_truth_01");
     }
+
     public boolean wod_sm_rancor_handler_izaryx_condition_completedQuestTruthIISM(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "wod_themepark_sm_whole_truth_02");
     }
+
     public void wod_sm_rancor_handler_izaryx_action_sendReturnedSignalTruthISM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasReturnedTamer");
     }
+
     public void wod_sm_rancor_handler_izaryx_action_sendReturnedSignalTruthIISM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasReturnedTamer2");
     }
+
     public void wod_sm_rancor_handler_izaryx_action_grantTPTruthISM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_themepark_sm_whole_truth_01");
     }
+
     public void wod_sm_rancor_handler_izaryx_action_grantTPTruthIISM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/wod_themepark_sm_whole_truth_02");
     }
+
     public void wod_sm_rancor_handler_izaryx_action_grantTPKyrisaBossFightSM(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "quest/wod_kyrisa_boss_fight");
         groundquests.grantQuest(player, "quest/wod_kyrisa_boss_fight");
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_24"))
@@ -119,7 +131,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -128,7 +140,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -138,6 +150,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -153,6 +166,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -173,7 +187,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -182,7 +196,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -192,6 +206,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -211,7 +226,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82");
@@ -220,7 +235,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -230,6 +245,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -244,6 +260,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_58"))
@@ -258,6 +275,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_72"))
@@ -272,6 +290,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -291,7 +310,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82");
@@ -300,7 +319,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -310,6 +329,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_82"))
@@ -325,6 +345,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -340,6 +361,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -359,7 +381,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -368,7 +390,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -378,6 +400,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -397,7 +420,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -406,7 +429,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -416,6 +439,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44"))
@@ -435,7 +459,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_51");
@@ -444,7 +468,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -454,6 +478,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_51"))
@@ -473,7 +498,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_55");
@@ -482,7 +507,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -492,6 +517,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_55"))
@@ -511,7 +537,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_63");
@@ -520,7 +546,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -530,6 +556,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63"))
@@ -549,7 +576,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73");
@@ -558,7 +585,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -568,6 +595,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_73"))
@@ -587,7 +615,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81");
@@ -596,7 +624,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -606,6 +634,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wod_sm_rancor_handler_izaryx_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_81"))
@@ -621,6 +650,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -630,11 +660,13 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -643,18 +675,21 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.wod_sm_rancor_handler_izaryx");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -689,7 +724,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_24");
@@ -697,7 +732,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId", 3);
                 npcStartConversation(player, npc, "wod_sm_rancor_handler_izaryx", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -718,7 +753,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -726,7 +761,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId", 5);
                 npcStartConversation(player, npc, "wod_sm_rancor_handler_izaryx", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -747,7 +782,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -755,7 +790,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId", 7);
                 npcStartConversation(player, npc, "wod_sm_rancor_handler_izaryx", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -776,7 +811,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -784,7 +819,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId", 9);
                 npcStartConversation(player, npc, "wod_sm_rancor_handler_izaryx", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -805,7 +840,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_72");
@@ -813,7 +848,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId", 11);
                 npcStartConversation(player, npc, "wod_sm_rancor_handler_izaryx", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -834,7 +869,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -842,7 +877,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId", 13);
                 npcStartConversation(player, npc, "wod_sm_rancor_handler_izaryx", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -863,7 +898,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -871,7 +906,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId", 16);
                 npcStartConversation(player, npc, "wod_sm_rancor_handler_izaryx", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -892,7 +927,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -900,7 +935,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
                 utils.setScriptVar(player, "conversation.wod_sm_rancor_handler_izaryx.branchId", 18);
                 npcStartConversation(player, npc, "wod_sm_rancor_handler_izaryx", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -915,6 +950,7 @@ public class wod_sm_rancor_handler_izaryx extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("wod_sm_rancor_handler_izaryx"))

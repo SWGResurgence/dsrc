@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_dungeon;
 import script.location;
@@ -7,10 +13,12 @@ import script.obj_id;
 
 public class player extends script.base_script
 {
+    public static final String MSGS = "dungeon/corvette";
+
     public player()
     {
     }
-    public static final String MSGS = "dungeon/corvette";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "setUpDungeon", null, 3, false);
@@ -20,6 +28,7 @@ public class player extends script.base_script
         CustomerServiceLog("DUNGEON_AvatarPlatform", "*Entered_AvatarPlatform - %TU", self);
         return SCRIPT_CONTINUE;
     }
+
     public int dungeonEnds(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id dungeon = space_dungeon.getDungeonIdForPlayer(self);
@@ -27,11 +36,12 @@ public class player extends script.base_script
         if (!hasObjVar(self, "podLanding"))
         {
         }
-        else 
+        else
         {
         }
         return SCRIPT_CONTINUE;
     }
+
     public int setUpDungeon(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id top = space_dungeon.getDungeonIdForPlayer(self);
@@ -39,19 +49,21 @@ public class player extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             messageTo(top, "beginSpawn", null, 1, false);
             attachScript(top, "theme_park.dungeon.corvette.spawned");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         String fname = getName(self);
         CustomerServiceLog("DUNGEON_AvatarPlatform", "*Corvette Died: %TU died on the Corellian Corvette.", self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         obj_id top = space_dungeon.getDungeonIdForPlayer(self);
@@ -67,6 +79,7 @@ public class player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         obj_id top = getObjIdObjVar(self, "corl_corvette.id");
@@ -74,6 +87,7 @@ public class player extends script.base_script
         removeObjVar(self, "corl_corvette");
         return SCRIPT_CONTINUE;
     }
+
     public int recheckDungeonType(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id top = space_dungeon.getDungeonIdForPlayer(self);
@@ -85,6 +99,7 @@ public class player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgDungeonEjectConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("space_dungeon", "theme_park.dungeon.avatar_platform.player.msgDungeonEjectConfirmed()");
@@ -96,6 +111,7 @@ public class player extends script.base_script
         space_dungeon.ejectPlayerFromDungeon(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgDungeonLaunchConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("space_dungeon", "theme_park.dungeon.avatar_platform.player.msgDungeonLaunchConfirmed()");
@@ -107,6 +123,7 @@ public class player extends script.base_script
         space_dungeon.launchPlayerFromDungeon(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnsticking(obj_id self) throws InterruptedException
     {
         if ((getLocation(self).area).equals("dungeon1"))

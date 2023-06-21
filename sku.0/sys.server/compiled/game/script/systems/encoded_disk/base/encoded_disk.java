@@ -1,5 +1,11 @@
 package script.systems.encoded_disk.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.menu_info;
 import script.menu_info_types;
 import script.obj_id;
@@ -15,6 +21,7 @@ public class encoded_disk extends script.base_script
     public static final int DISK_UNCRACKABLE = 3;
     public static final String TREASURE_MAP = "object/tangible/treasure_map/treasure_map_base.iff";
     public static final String MESSAGE_FRAGMENT = "object/tangible/encoded_disk/message_fragment_base.iff";
+
     public encoded_disk()
     {
     }

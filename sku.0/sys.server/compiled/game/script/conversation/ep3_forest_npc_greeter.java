@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,14 +13,17 @@ import script.*;
 
 public class ep3_forest_npc_greeter extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_forest_npc_greeter";
+
     public ep3_forest_npc_greeter()
     {
     }
-    public static String c_stringFile = "conversation/ep3_forest_npc_greeter";
+
     public boolean ep3_forest_npc_greeter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public int ep3_forest_npc_greeter_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6"))
@@ -34,7 +43,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_10");
@@ -43,7 +52,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -54,6 +63,7 @@ public class ep3_forest_npc_greeter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_npc_greeter_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_10"))
@@ -115,7 +125,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -148,7 +158,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -159,6 +169,7 @@ public class ep3_forest_npc_greeter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_npc_greeter_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -178,7 +189,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -187,7 +198,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -213,7 +224,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_110");
@@ -222,7 +233,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -248,7 +259,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -257,7 +268,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -283,7 +294,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_168");
@@ -292,7 +303,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -318,7 +329,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_171");
@@ -327,7 +338,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -395,7 +406,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -428,7 +439,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -450,6 +461,7 @@ public class ep3_forest_npc_greeter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_npc_greeter_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_107"))
@@ -511,7 +523,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -544,7 +556,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -555,6 +567,7 @@ public class ep3_forest_npc_greeter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_npc_greeter_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -574,7 +587,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -583,7 +596,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -609,7 +622,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_110");
@@ -618,7 +631,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -644,7 +657,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -653,7 +666,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -679,7 +692,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_168");
@@ -688,7 +701,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -714,7 +727,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_171");
@@ -723,7 +736,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -791,7 +804,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -824,7 +837,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -846,6 +859,7 @@ public class ep3_forest_npc_greeter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_npc_greeter_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_110"))
@@ -907,7 +921,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -940,7 +954,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -951,6 +965,7 @@ public class ep3_forest_npc_greeter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_npc_greeter_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -970,7 +985,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -979,7 +994,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1005,7 +1020,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_110");
@@ -1014,7 +1029,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1040,7 +1055,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -1049,7 +1064,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1075,7 +1090,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_168");
@@ -1084,7 +1099,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1110,7 +1125,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_171");
@@ -1119,7 +1134,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1187,7 +1202,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -1220,7 +1235,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1242,6 +1257,7 @@ public class ep3_forest_npc_greeter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_npc_greeter_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_104"))
@@ -1303,7 +1319,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -1336,7 +1352,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1347,6 +1363,7 @@ public class ep3_forest_npc_greeter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_npc_greeter_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -1366,7 +1383,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -1375,7 +1392,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1401,7 +1418,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_110");
@@ -1410,7 +1427,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1436,7 +1453,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -1445,7 +1462,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1471,7 +1488,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_168");
@@ -1480,7 +1497,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1506,7 +1523,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_171");
@@ -1515,7 +1532,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1583,7 +1600,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -1616,7 +1633,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1638,6 +1655,7 @@ public class ep3_forest_npc_greeter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_npc_greeter_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_168"))
@@ -1699,7 +1717,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -1732,7 +1750,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1743,6 +1761,7 @@ public class ep3_forest_npc_greeter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_npc_greeter_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -1762,7 +1781,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -1771,7 +1790,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1797,7 +1816,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_110");
@@ -1806,7 +1825,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1832,7 +1851,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -1841,7 +1860,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1867,7 +1886,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_168");
@@ -1876,7 +1895,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1902,7 +1921,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_171");
@@ -1911,7 +1930,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -1979,7 +1998,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -2012,7 +2031,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -2034,6 +2053,7 @@ public class ep3_forest_npc_greeter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_npc_greeter_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_171"))
@@ -2053,7 +2073,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_173");
@@ -2062,7 +2082,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -2073,6 +2093,7 @@ public class ep3_forest_npc_greeter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_npc_greeter_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_173"))
@@ -2134,7 +2155,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -2167,7 +2188,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -2178,6 +2199,7 @@ public class ep3_forest_npc_greeter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_npc_greeter_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -2197,7 +2219,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -2206,7 +2228,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -2232,7 +2254,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_110");
@@ -2241,7 +2263,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -2267,7 +2289,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -2276,7 +2298,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -2302,7 +2324,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_168");
@@ -2311,7 +2333,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -2337,7 +2359,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_171");
@@ -2346,7 +2368,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -2414,7 +2436,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -2447,7 +2469,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -2469,6 +2491,7 @@ public class ep3_forest_npc_greeter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_npc_greeter_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -2488,7 +2511,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -2497,7 +2520,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -2523,7 +2546,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_110");
@@ -2532,7 +2555,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -2558,7 +2581,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -2567,7 +2590,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -2593,7 +2616,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_168");
@@ -2602,7 +2625,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -2628,7 +2651,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_171");
@@ -2637,7 +2660,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -2705,7 +2728,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -2738,7 +2761,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId");
                     chat.chat(npc, player, message);
@@ -2760,6 +2783,7 @@ public class ep3_forest_npc_greeter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -2770,12 +2794,14 @@ public class ep3_forest_npc_greeter extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2785,18 +2811,21 @@ public class ep3_forest_npc_greeter extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_forest_npc_greeter");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2819,7 +2848,7 @@ public class ep3_forest_npc_greeter extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6");
@@ -2827,7 +2856,7 @@ public class ep3_forest_npc_greeter extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_npc_greeter.branchId", 1);
                 npcStartConversation(player, npc, "ep3_forest_npc_greeter", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2836,6 +2865,7 @@ public class ep3_forest_npc_greeter extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_forest_npc_greeter"))

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.string_id;
 
@@ -23,6 +29,7 @@ public class fs_quests_cc extends script.base_script
     public static final string_id SID_QUALITY_PROMPT_LIMITED = new string_id("crafting", "quality_prompt_limited");
     public static final string_id SID_QUANTITY_PROMPT = new string_id("crafting", "quantity_prompt");
     public static final string_id SID_QUANTITY_PROMPT_LIMITED = new string_id("crafting", "quantity_prompt_limited");
+
     public fs_quests_cc()
     {
     }

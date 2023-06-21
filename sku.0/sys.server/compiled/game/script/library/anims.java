@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -1873,6 +1879,7 @@ public class anims extends script.base_script
     public static final String PLAYER_WHISPER = "whisper";
     public static final String PLAYER_WIPE_SURFACE = "wipe_surface";
     public static final String PLAYER_YAWN = "yawn";
+
     public anims()
     {
     }

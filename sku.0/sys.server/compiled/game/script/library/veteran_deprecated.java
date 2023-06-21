@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.prose_package;
@@ -97,6 +103,7 @@ public class veteran_deprecated extends script.base_script
     private static final boolean VETERAN_REWARDS_ENABLED = utils.checkConfigFlag("GameServer", "enableVeteranRewards");
     private static final boolean ONE_YEAR_ANNIV_ENABLED = utils.checkConfigFlag("GameServer", "enableOneYearAnniversary");
     private static final boolean FLASH_SPEEDER_REWARD_ENABLED = utils.checkConfigFlag("GameServer", "flashSpeederReward");
+
     public veteran_deprecated()
     {
     }

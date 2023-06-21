@@ -1,5 +1,11 @@
 package script.developer.bubbajoe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.buff;
 import script.library.static_item;
@@ -7,11 +13,12 @@ import script.library.utils;
 
 public class dt_gift extends script.base_script
 {
+    public static int COOLDOWN_TIME = 7200; // 2 hours
+    public static int currentGameTime = getCalendarTime();
     public dt_gift()
     {
     }
-    public static int COOLDOWN_TIME = 7200; // 2 hours
-    public static int currentGameTime = getCalendarTime();
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -31,7 +38,7 @@ public class dt_gift extends script.base_script
             return SCRIPT_CONTINUE;
         }
         names[idx] = utils.packStringId(new string_id("Owner"));
-        attribs[idx] = "\\#00FF00" +  getPlayerName(getObjIdObjVar(self, "owner"));
+        attribs[idx] = "\\#00FF00" + getPlayerName(getObjIdObjVar(self, "owner"));
         idx++;
         if (idx >= names.length)
         {
@@ -62,6 +69,7 @@ public class dt_gift extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self)
     {
         setObjVar(self, "charges", 15);
@@ -78,11 +86,13 @@ public class dt_gift extends script.base_script
         setDescriptionStringId(self, new string_id(desc));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Request Enhancements"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int mi) throws InterruptedException
     {
         if (mi == menu_info_types.ITEM_USE)
@@ -130,7 +140,7 @@ public class dt_gift extends script.base_script
                 obj_id tempFood = static_item.createNewItemFunction("item_event_air_cake_01_02", crate, 5);
                 obj_id tempDrink = static_item.createNewItemFunction("item_event_energy_drink_01_02", crate, 5);
                 obj_id[] items = {
-                    tempStims, tempBuff, tempFood, tempDrink
+                        tempStims, tempBuff, tempFood, tempDrink
                 };
                 for (int i = 0; i < items.length; i++)
                 {
@@ -145,6 +155,7 @@ public class dt_gift extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int[] parseTimeRemaining(int seconds) throws InterruptedException
     {
         int[] time =
@@ -168,6 +179,7 @@ public class dt_gift extends script.base_script
         time[0] = hours;
         return time;
     }
+
     public String parseTimeMsg(int[] time, boolean verbose) throws InterruptedException
     {
         String h = "h";

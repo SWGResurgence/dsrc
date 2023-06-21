@@ -4,6 +4,12 @@ package script.systems.bookworm;/*
 @Purpose: Allows players to read/write books. Currently, the book is editable only by the owner.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.buff;
 import script.library.sui;
@@ -31,7 +37,7 @@ public class book extends script.base_script
         }
         if (isGod(player))
         {
-            mi.addRootMenu(menu_info_types.SERVER_MENU4,  unlocalized("[GodMode] Claim Book"));
+            mi.addRootMenu(menu_info_types.SERVER_MENU4, unlocalized("[GodMode] Claim Book"));
         }
         return SCRIPT_CONTINUE;
     }
@@ -132,6 +138,7 @@ public class book extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleName(obj_id self, dictionary paramsDict) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(paramsDict);
@@ -141,6 +148,7 @@ public class book extends script.base_script
         broadcast(player, "You have renamed this book to: " + bookTitle);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDescribe(obj_id self, dictionary paramsDict) throws InterruptedException
     {
         String descInput = sui.getInputBoxText(paramsDict);

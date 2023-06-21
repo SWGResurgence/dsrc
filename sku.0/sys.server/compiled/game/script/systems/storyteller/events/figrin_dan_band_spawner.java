@@ -1,5 +1,11 @@
 package script.systems.storyteller.events;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -9,6 +15,7 @@ public class figrin_dan_band_spawner extends script.base_script
 {
     public static final String DATATABLE_BASE = "datatables/spawning/holiday/";
     public static final String DATATABLE_OBJVAR = "figrinDatatable";
+
     public figrin_dan_band_spawner()
     {
     }
@@ -63,7 +70,6 @@ public class figrin_dan_band_spawner extends script.base_script
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         spawnBithBand(self);
-        return;
     }
 
     public void spawnBithBand(obj_id self) throws InterruptedException
@@ -183,7 +189,6 @@ public class figrin_dan_band_spawner extends script.base_script
             }
             setObjVar(self, varPrefix + varPostfix, bandMember);
         }
-        return;
     }
 
     public location rotateXZ(location locOrigin, location locPoint, float fltAngle) throws InterruptedException
@@ -246,7 +251,6 @@ public class figrin_dan_band_spawner extends script.base_script
                 }
             }
         }
-        return;
     }
 
     public int OnDestroy(obj_id self) throws InterruptedException

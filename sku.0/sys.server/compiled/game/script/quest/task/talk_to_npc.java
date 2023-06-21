@@ -1,5 +1,11 @@
 package script.quest.task;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.quests;
 import script.library.utils;
@@ -11,6 +17,7 @@ public class talk_to_npc extends script.base_script
     public talk_to_npc()
     {
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         LOG("newquests", "talk_to_npc - OnQuestActivated(" + questRow + ")");
@@ -23,14 +30,14 @@ public class talk_to_npc extends script.base_script
             {
                 target = getObjIdObjVar(self, objvarName);
             }
-            else 
+            else
             {
                 String targetName = quests.getDataEntry(questRow, "TARGET");
                 if (targetName != null && targetName.length() > 0)
                 {
                     target = quests.getTargetForQuest(self, targetName);
                 }
-                else 
+                else
                 {
                     target = quests.getQuestGiver(questRow, self);
                 }
@@ -41,7 +48,7 @@ public class talk_to_npc extends script.base_script
             {
                 parameter = getBooleanObjVar(self, objvarName);
             }
-            else 
+            else
             {
                 String parameterName = quests.getDataEntry(questRow, "PARAMETER");
                 if (parameterName != null && parameterName.length() > 0)
@@ -71,7 +78,7 @@ public class talk_to_npc extends script.base_script
                     LOG("newquests", "talk_to_npc - OnQuestActivated() - requesting npc(" + target + ") location to activate a waypoint");
                 }
             }
-            else 
+            else
             {
                 LOG("newquests", "talk_to_npc - OnQuestActivated() failed to setup quest because the target could not be determined, failing the quest");
                 quests.complete(questName, self, false);
@@ -79,6 +86,7 @@ public class talk_to_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int receiveLocationResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -97,7 +105,7 @@ public class talk_to_npc extends script.base_script
                         {
                             setWaypointName(waypoint, summary);
                         }
-                        else 
+                        else
                         {
                             setWaypointName(waypoint, "missing task summary for " + questName);
                         }
@@ -106,27 +114,28 @@ public class talk_to_npc extends script.base_script
                         String objvarName = "quest." + questName + ".waypoint";
                         setObjVar(self, objvarName, waypoint);
                     }
-                    else 
+                    else
                     {
                         LOG("newquests", "talk_to_npc - receiveLocationResponse() - the location sent by the NPC was null, waypoint not activated");
                     }
                 }
-                else 
+                else
                 {
                     LOG("newquests", "talk_to_npc - receiveLocationResponse() - " + questName + " is no longer active, a waypoint will not be created");
                 }
             }
-            else 
+            else
             {
                 LOG("newquests", "talk_to_npc - receiveLocationResponse() - could not extract quest_name from params, failing to activate a waypoint");
             }
         }
-        else 
+        else
         {
             LOG("newquests", "talk_to_npc - receiveLocationResponse() - params was null, cannot create a waypoint");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npcStartConversationNotification(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -148,17 +157,17 @@ public class talk_to_npc extends script.base_script
                     }
                     quests.complete(questName, self, true);
                 }
-                else 
+                else
                 {
                     LOG("newquests", "talk_to_npc - npcStartConversationNotification() - could not determine quest name, ignoring message");
                 }
             }
-            else 
+            else
             {
                 LOG("newquests", "talk_to_npc - npcStartConversationNotification() - source object id is null, ignoring message");
             }
         }
-        else 
+        else
         {
             LOG("newquests", "talk_to_npc - npcStartConversationNotification() - params is null, ignoring message");
         }

@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.locations;
 import script.library.utils;
@@ -9,13 +15,14 @@ import script.string_id;
 
 public class shared_lookout extends script.base_script
 {
-    public shared_lookout()
-    {
-    }
     public static final String GU_REPAIR_KIT = "object/tangible/theme_park/alderaan/act3/grav_unit_repair_kit.iff";
     public static final String IMPERIAL_SHARED_STF = "theme_park/alderaan/act3/shared_imperial_missions";
     public static final string_id REPAIR_KIT_RECEIVED = new string_id(IMPERIAL_SHARED_STF, "m2_repair_kit_received");
     public static final string_id REPAIR_KIT_DENIED = new string_id(IMPERIAL_SHARED_STF, "m2_repair_kit_denied");
+    public shared_lookout()
+    {
+    }
+
     public int handleStartCaravanMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -33,7 +40,7 @@ public class shared_lookout extends script.base_script
             setObjVar(player, "coa3.imperial.missionNpc", npcName);
             setObjVar(player, "coa3.imperial.missionLoc", deliveryLoc);
         }
-        else 
+        else
         {
             setObjVar(player, "coa3.rebel.missionNum", missionNum);
             setObjVar(player, "coa3.rebel.missionNpc", npcName);
@@ -42,18 +49,21 @@ public class shared_lookout extends script.base_script
         messageTo(player, "handleRestartMission", params, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAbortCaravanMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
         messageTo(player, "handleAbortMission", params, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAttackPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
         startCombat(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public location getDeliveryLoc(obj_id player, int minDistance, int maxDistance) throws InterruptedException
     {
         location center = getLocation(player);
@@ -73,6 +83,7 @@ public class shared_lookout extends script.base_script
         deliveryLoc.y = getHeightAtLocation(deliveryLoc.x, deliveryLoc.z);
         return deliveryLoc;
     }
+
     public void giveRepairKit(obj_id player) throws InterruptedException
     {
         obj_id inventory = getObjectInSlot(player, "inventory");
@@ -81,7 +92,7 @@ public class shared_lookout extends script.base_script
         {
             sendSystemMessage(player, REPAIR_KIT_DENIED);
         }
-        else 
+        else
         {
             sendSystemMessage(player, REPAIR_KIT_RECEIVED);
         }

@@ -1,5 +1,11 @@
 package script.theme_park.kashyyyk.rryatt_trail;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.dictionary;
 
@@ -10,38 +16,49 @@ import script.library.utils;
 
 import script.obj_id;
 
-public class loot_controller_katarn extends script.base_script {
-    public loot_controller_katarn() {
+public class loot_controller_katarn extends script.base_script
+{
+    public loot_controller_katarn()
+    {
     }
-    public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException {
+
+    public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
+    {
         obj_id corpseInventory = utils.getInventoryContainer(self);
-        if (corpseInventory == null) {
+        if (corpseInventory == null)
+        {
             return SCRIPT_CONTINUE;
         }
-        if (!isIdValid(self)) {
+        if (!isIdValid(self))
+        {
             return SCRIPT_CONTINUE;
         }
         createMyLoot(self);
         return SCRIPT_CONTINUE;
     }
-    public void createMyLoot(obj_id self) throws InterruptedException {
+
+    public void createMyLoot(obj_id self) throws InterruptedException
+    {
         obj_id corpseInventory = utils.getInventoryContainer(self);
-        if (corpseInventory == null) {
+        if (corpseInventory == null)
+        {
             return;
         }
         String mobType = ai_lib.getCreatureName(self);
-        if (mobType == null) {
+        if (mobType == null)
+        {
             return;
         }
         int x = rand(1, 100);
-        if (x < 26) { // 25% Drop Chance for Kashyyyk Embroidered Sash {
+        if (x < 26)
+        { // 25% Drop Chance for Kashyyyk Embroidered Sash {
             static_item.createNewItemFunction("item_tcg_loot_reward_series7_embroidered_sash", corpseInventory);
-            if (x < 11) { // 10% Drop Chance for Kashyyyk Beast Muzzle {
+            if (x < 11)
+            { // 10% Drop Chance for Kashyyyk Beast Muzzle {
                 static_item.createNewItemFunction("item_tcg_loot_reward_series6_beast_muzzle", corpseInventory);
             }
-        }  
+        }
         String myLoot1 = "object/tangible/loot/misc/kashyyyk_token.iff";
         createObject(myLoot1, corpseInventory, "");
-        return;
     }
 }

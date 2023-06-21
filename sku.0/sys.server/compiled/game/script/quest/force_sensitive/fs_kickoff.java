@@ -1,30 +1,39 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class fs_kickoff extends script.base_script
 {
-    public fs_kickoff()
-    {
-    }
     public static final String RANGED_SPEED_BRANCH = "force_sensitive_combat_prowess_ranged_speed";
     public static final String MELEE_DEFENSE_BRANCH = "force_sensitive_enhanced_reflexes_melee_defense";
     public static final String RANGED_SPEED_QUEST = "fs_defend_wait_01";
     public static final String MELEE_DEFENSE_QUEST = "fs_defend_wait_02";
+    public fs_kickoff()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, "quest.force_sensitive.fs_kickoff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        
+
         {
             detachScript(self, "quest.force_sensitive.fs_kickoff");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnPlayerTheaterFail(obj_id self, String datatable, String name) throws InterruptedException
     {
         int quest_id = 0;
@@ -80,6 +89,7 @@ public class fs_kickoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         obj_id waypoint = getObjIdObjVar(self, "quest.fs_theater_camp.waypoint");
@@ -99,6 +109,7 @@ public class fs_kickoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnImmediateLogout(obj_id self) throws InterruptedException
     {
         obj_id waypoint = getObjIdObjVar(self, "quest.fs_theater_camp.waypoint");
@@ -118,6 +129,7 @@ public class fs_kickoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "fs_kickoff_stage"))
@@ -127,6 +139,7 @@ public class fs_kickoff extends script.base_script
         detachScript(self, "quest.force_sensitive_fs_kickoff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnSkillAboutToBeRevoked(obj_id self, String strSkill) throws InterruptedException
     {
         if (strSkill.startsWith("force_title") && !hasObjVar(self, "clickRespec.granting"))
@@ -137,6 +150,7 @@ public class fs_kickoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int meetOldMan(obj_id self, dictionary params) throws InterruptedException
     {
         String config = getConfigSetting("GameServer", "forceSensitiveIntroActive");
@@ -161,12 +175,13 @@ public class fs_kickoff extends script.base_script
         {
             quests.activate("old_man_initial", self, null);
         }
-        else 
+        else
         {
             startMeetOldMan(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int meetOldManExit(obj_id self, dictionary params) throws InterruptedException
     {
         String planet = getCurrentSceneName();
@@ -185,12 +200,13 @@ public class fs_kickoff extends script.base_script
             clearCompletedQuest(self, quest_id);
             quests.activate("old_man_final", self, null);
         }
-        else 
+        else
         {
             startMeetOldManExit(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int twoMilitaryEncounter(obj_id self, dictionary params) throws InterruptedException
     {
         String planet = getCurrentSceneName();
@@ -202,12 +218,13 @@ public class fs_kickoff extends script.base_script
         {
             quests.activate("two_military", self, null);
         }
-        else 
+        else
         {
             startTwoMilitary(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void startMeetOldMan(obj_id player) throws InterruptedException
     {
         String planet = getCurrentSceneName();
@@ -217,8 +234,8 @@ public class fs_kickoff extends script.base_script
         }
         int randomDelay = rand(30, 300);
         messageTo(player, "meetOldMan", null, randomDelay, false);
-        return;
     }
+
     public void startTwoMilitary(obj_id player) throws InterruptedException
     {
         String planet = getCurrentSceneName();
@@ -228,8 +245,8 @@ public class fs_kickoff extends script.base_script
         }
         int randomDelay = rand(30, 300);
         messageTo(player, "twoMilitaryEncounter", null, randomDelay, false);
-        return;
     }
+
     public void startMeetOldManExit(obj_id player) throws InterruptedException
     {
         String planet = getCurrentSceneName();
@@ -239,13 +256,14 @@ public class fs_kickoff extends script.base_script
         }
         int randomDelay = rand(30, 300);
         messageTo(player, "meetOldManExit", null, randomDelay, false);
-        return;
     }
+
     public int tryAgain(obj_id self, dictionary params) throws InterruptedException
     {
         startMeetOldMan(self);
         return SCRIPT_CONTINUE;
     }
+
     public int finalCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id theater = getLastSpawnedTheater(self);
@@ -255,6 +273,7 @@ public class fs_kickoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgForceComplete(obj_id self, dictionary params) throws InterruptedException
     {
         fs_quests.advanceStage(self);
@@ -273,6 +292,7 @@ public class fs_kickoff extends script.base_script
         messageTo(self, "finalCleanup", null, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgForceFail(obj_id self, dictionary params) throws InterruptedException
     {
         fs_quests.setDelay(self, 13);
@@ -298,6 +318,7 @@ public class fs_kickoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int recreateTheaterOne(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id theater = getLastSpawnedTheater(self);
@@ -313,6 +334,7 @@ public class fs_kickoff extends script.base_script
         quests.activate("fs_theater_camp", self, null);
         return SCRIPT_CONTINUE;
     }
+
     public int recreateTheaterTwo(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id theater = getLastSpawnedTheater(self);
@@ -347,6 +369,7 @@ public class fs_kickoff extends script.base_script
         quests.activate("fs_theater_final", self, null);
         return SCRIPT_CONTINUE;
     }
+
     public int addQuestLootToCorpse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -368,17 +391,20 @@ public class fs_kickoff extends script.base_script
                     {
                         permitted = getGroupMemberIds(winner);
                     }
-                    else 
+                    else
                     {
                         permitted = new obj_id[1];
                         permitted[0] = winner;
                     }
                     if (permitted != null)
                     {
-                        for (obj_id obj_id : permitted) {
-                            if (obj_id == self) {
+                        for (obj_id obj_id : permitted)
+                        {
+                            if (obj_id == self)
+                            {
                                 obj_id inv = utils.getInventoryContainer(corpse);
-                                if (isIdValid(inv)) {
+                                if (isIdValid(inv))
+                                {
                                     obj_id loot = createObject("object/tangible/loot/quest/force_sensitive/waypoint_datapad.iff", inv, "");
                                     setObjVar(loot, "quest.loot_datapad_1.quest_item_target", self);
                                     setOwner(loot, self);
@@ -392,6 +418,7 @@ public class fs_kickoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if ((hasScript(killer, "quest.force_sensitive.fs_military_initial")) || (hasScript(killer, "quest.force_sensitive.fs_military_initial_silent")))
@@ -417,6 +444,7 @@ public class fs_kickoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         if (isJedi(self))
@@ -459,6 +487,7 @@ public class fs_kickoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void completeStuckWaitForTasks(obj_id self) throws InterruptedException
     {
         if (!quests.safeHasObjVar(self, "quest.wait_for_tasks"))
@@ -481,6 +510,7 @@ public class fs_kickoff extends script.base_script
             }
         }
     }
+
     public void grantStuckBranchUnlocks(obj_id self) throws InterruptedException
     {
         if (quests.isComplete("fs_defend_01", self) && quests.isComplete("fs_defend_02", self))
@@ -506,6 +536,7 @@ public class fs_kickoff extends script.base_script
             }
         }
     }
+
     public void resetStaleWaitForTasks(obj_id self) throws InterruptedException
     {
         if (!fs_quests.hasQuestAccepted(self))

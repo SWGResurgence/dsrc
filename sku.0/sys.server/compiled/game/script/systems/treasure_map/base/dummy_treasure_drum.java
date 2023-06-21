@@ -1,5 +1,11 @@
 package script.systems.treasure_map.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -25,6 +31,7 @@ public class dummy_treasure_drum extends script.base_script
     public static final int EIGHT_GROUP_PERCENT_CHANCE_FOR_SUPER_RARE = 2;
     public static final int EIGHT_GROUP_PERCENT_CHANCE_FOR_RARE = 20;
     public static final int FOUR_GROUP_PERCENT_CHANCE_FOR_RARE = 25;
+
     public dummy_treasure_drum()
     {
     }

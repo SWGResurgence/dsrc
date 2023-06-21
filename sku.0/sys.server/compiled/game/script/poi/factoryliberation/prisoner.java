@@ -1,5 +1,11 @@
 package script.poi.factoryliberation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.factions;
@@ -10,29 +16,30 @@ import script.obj_id;
 
 public class prisoner extends script.base_script
 {
+    public static final String[] frustrationEmotes =
+            {
+                    "scratch",
+                    "yawn",
+                    "tantrum",
+                    "cough",
+                    "curse",
+                    "fear",
+                    "steam"
+            };
+    public static final String[] joyEmotes =
+            {
+                    "thank",
+                    "cheer",
+                    "applaud",
+                    "laugh",
+                    "softclap",
+                    "yes",
+                    "glow"
+            };
     public prisoner()
     {
     }
-    public static final String frustrationEmotes[] = 
-    {
-        "scratch",
-        "yawn",
-        "tantrum",
-        "cough",
-        "curse",
-        "fear",
-        "steam"
-    };
-    public static final String joyEmotes[] = 
-    {
-        "thank",
-        "cheer",
-        "applaud",
-        "laugh",
-        "softclap",
-        "yes",
-        "glow"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setIgnoreCombat(self, true);
@@ -40,6 +47,7 @@ public class prisoner extends script.base_script
         factions.setFaction(self, "Unattackable");
         return SCRIPT_CONTINUE;
     }
+
     public int OnLoiterWaiting(obj_id self, modifiable_float time) throws InterruptedException
     {
         stop(self);
@@ -47,12 +55,13 @@ public class prisoner extends script.base_script
         {
             messageTo(self, "emoteJoy", null, 4, false);
         }
-        else 
+        else
         {
             messageTo(self, "emoteFrustration", null, 4, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emoteFrustration(obj_id self, dictionary params) throws InterruptedException
     {
         int dosocial = rand(1, 4);
@@ -64,6 +73,7 @@ public class prisoner extends script.base_script
         messageTo(self, "resumeDefaultCalmBehavior", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int emoteJoy(obj_id self, dictionary params) throws InterruptedException
     {
         int dosocial = rand(1, 4);
@@ -75,6 +85,7 @@ public class prisoner extends script.base_script
         messageTo(self, "resumeDefaultCalmBehavior", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int celebrateFreedom(obj_id self, dictionary params) throws InterruptedException
     {
         stop(self);

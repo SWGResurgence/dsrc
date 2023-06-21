@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
@@ -7,18 +13,22 @@ import java.util.Vector;
 
 public class loveday_romance_target extends script.base_script
 {
+    public static String c_stringFile = "conversation/loveday_romance_target";
+
     public loveday_romance_target()
     {
     }
-    public static String c_stringFile = "conversation/loveday_romance_target";
+
     public boolean loveday_romance_target_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean loveday_romance_target_condition_hasQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "loveday_playing_cupid", "loveday_playing_cupid_01");
     }
+
     public boolean loveday_romance_target_condition_companionNotOut(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "loveday_playing_cupid", "loveday_playing_cupid_01"))
@@ -27,39 +37,33 @@ public class loveday_romance_target extends script.base_script
             if (isIdValid(controlDevice))
             {
                 obj_id companion = callable.getCDCallable(controlDevice);
-                if (!isIdValid(companion))
-                {
-                    return true;
-                }
+                return !isIdValid(companion);
             }
         }
         return false;
     }
+
     public boolean loveday_romance_target_condition_wrongGender(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id controlDevice = holiday.getLovedayRomanceSeekerCompanionControlDevice(player);
         if (isIdValid(controlDevice))
         {
             obj_id companion = callable.getCDCallable(controlDevice);
-            if (isIdValid(companion) && getGender(npc) == getGender(companion))
-            {
-                return true;
-            }
+            return isIdValid(companion) && getGender(npc) == getGender(companion);
         }
         return false;
     }
+
     public boolean loveday_romance_target_condition_hasNoCompanion(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "loveday_playing_cupid", "loveday_playing_cupid_01"))
         {
             obj_id controlDevice = holiday.getLovedayRomanceSeekerCompanionControlDevice(player);
-            if (!isIdValid(controlDevice))
-            {
-                return true;
-            }
+            return !isIdValid(controlDevice);
         }
         return false;
     }
+
     public boolean loveday_romance_target_condition_goodMatch(obj_id player, obj_id npc) throws InterruptedException
     {
         int targetTraitsSet = getIntObjVar(npc, "playingCupid.traitSet");
@@ -71,14 +75,17 @@ public class loveday_romance_target extends script.base_script
         }
         return (targetTraitsSet == seekerTraitsSet);
     }
+
     public boolean loveday_romance_target_condition_alreadyMatched(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "loveday_playing_cupid", "loveday_playing_cupid_02") || groundquests.hasCompletedQuest(player, "loveday_playing_cupid");
     }
+
     public boolean loveday_romance_target_condition_wasRejected(obj_id player, obj_id npc) throws InterruptedException
     {
         return buff.hasBuff(player, "loveday_rejected");
     }
+
     public void loveday_romance_target_action_completeMatch(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "loveday_playing_cupid_01");
@@ -98,52 +105,58 @@ public class loveday_romance_target extends script.base_script
                 chat.publicChat(companion, player, null, null, pp);
             }
         }
-        return;
     }
+
     public void loveday_romance_target_action_rejected(obj_id player, obj_id npc) throws InterruptedException
     {
         buff.applyBuff(player, npc, "loveday_rejected");
     }
+
     public String loveday_romance_target_tokenTO_trait_00(obj_id player, obj_id npc) throws InterruptedException
     {
         String file = "event/love_day";
         Vector randomOrder = utils.getResizeableIntArrayScriptVar(player, "traits_randomOrder");
-        String traitObjVar = "playingCupid.trait_0" + (Integer) randomOrder.get(0);
+        String traitObjVar = "playingCupid.trait_0" + randomOrder.get(0);
         String message = getString(new string_id(file, "trait_" + getStringObjVar(npc, traitObjVar)));
         return message;
     }
+
     public String loveday_romance_target_tokenTO_trait_04(obj_id player, obj_id npc) throws InterruptedException
     {
         String file = "event/love_day";
         Vector randomOrder = utils.getResizeableIntArrayScriptVar(player, "traits_randomOrder");
-        String traitObjVar = "playingCupid.trait_0" + (Integer) randomOrder.get(4);
+        String traitObjVar = "playingCupid.trait_0" + randomOrder.get(4);
         String message = getString(new string_id(file, "trait_" + getStringObjVar(npc, traitObjVar)));
         return message;
     }
+
     public String loveday_romance_target_tokenTO_trait_03(obj_id player, obj_id npc) throws InterruptedException
     {
         String file = "event/love_day";
         Vector randomOrder = utils.getResizeableIntArrayScriptVar(player, "traits_randomOrder");
-        String traitObjVar = "playingCupid.trait_0" + (Integer) randomOrder.get(3);
+        String traitObjVar = "playingCupid.trait_0" + randomOrder.get(3);
         String message = getString(new string_id(file, "trait_" + getStringObjVar(npc, traitObjVar)));
         return message;
     }
+
     public String loveday_romance_target_tokenTO_trait_02(obj_id player, obj_id npc) throws InterruptedException
     {
         String file = "event/love_day";
         Vector randomOrder = utils.getResizeableIntArrayScriptVar(player, "traits_randomOrder");
-        String traitObjVar = "playingCupid.trait_0" + (Integer) randomOrder.get(2);
+        String traitObjVar = "playingCupid.trait_0" + randomOrder.get(2);
         String message = getString(new string_id(file, "trait_" + getStringObjVar(npc, traitObjVar)));
         return message;
     }
+
     public String loveday_romance_target_tokenTO_trait_01(obj_id player, obj_id npc) throws InterruptedException
     {
         String file = "event/love_day";
         Vector randomOrder = utils.getResizeableIntArrayScriptVar(player, "traits_randomOrder");
-        String traitObjVar = "playingCupid.trait_0" + (Integer) randomOrder.get(1);
+        String traitObjVar = "playingCupid.trait_0" + randomOrder.get(1);
         String message = getString(new string_id(file, "trait_" + getStringObjVar(npc, traitObjVar)));
         return message;
     }
+
     public String loveday_romance_target_tokenTO_companionName(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id controlDevice = holiday.getLovedayRomanceSeekerCompanionControlDevice(player);
@@ -157,8 +170,9 @@ public class loveday_romance_target extends script.base_script
                 return parse[0];
             }
         }
-        return new String();
+        return "";
     }
+
     public int loveday_romance_target_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -185,7 +199,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -203,7 +217,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     prose_package pp = new prose_package();
@@ -240,7 +254,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -253,7 +267,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -263,6 +277,7 @@ public class loveday_romance_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int loveday_romance_target_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34"))
@@ -289,7 +304,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -307,7 +322,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     prose_package pp = new prose_package();
@@ -344,7 +359,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -357,7 +372,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -367,6 +382,7 @@ public class loveday_romance_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int loveday_romance_target_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -393,7 +409,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_38");
@@ -411,7 +427,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     prose_package pp = new prose_package();
@@ -448,7 +464,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -461,7 +477,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -471,6 +487,7 @@ public class loveday_romance_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int loveday_romance_target_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38"))
@@ -497,7 +514,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -515,7 +532,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     prose_package pp = new prose_package();
@@ -552,7 +569,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -565,7 +582,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -575,6 +592,7 @@ public class loveday_romance_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int loveday_romance_target_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -594,7 +612,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_49");
@@ -608,7 +626,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     prose_package pp = new prose_package();
@@ -645,7 +663,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -658,7 +676,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -668,6 +686,7 @@ public class loveday_romance_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int loveday_romance_target_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_49"))
@@ -694,7 +713,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -707,7 +726,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -717,6 +736,7 @@ public class loveday_romance_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int loveday_romance_target_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -743,7 +763,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -761,7 +781,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     prose_package pp = new prose_package();
@@ -798,7 +818,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -811,7 +831,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -821,6 +841,7 @@ public class loveday_romance_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int loveday_romance_target_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -847,7 +868,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -865,7 +886,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     prose_package pp = new prose_package();
@@ -902,7 +923,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -915,7 +936,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -925,6 +946,7 @@ public class loveday_romance_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int loveday_romance_target_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -951,7 +973,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -969,7 +991,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     prose_package pp = new prose_package();
@@ -1006,7 +1028,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -1019,7 +1041,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1029,6 +1051,7 @@ public class loveday_romance_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int loveday_romance_target_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -1055,7 +1078,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -1073,7 +1096,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     prose_package pp = new prose_package();
@@ -1110,7 +1133,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -1123,7 +1146,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1133,6 +1156,7 @@ public class loveday_romance_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int loveday_romance_target_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -1159,7 +1183,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -1177,7 +1201,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     prose_package pp = new prose_package();
@@ -1214,7 +1238,7 @@ public class loveday_romance_target extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -1227,7 +1251,7 @@ public class loveday_romance_target extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_romance_target.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1237,6 +1261,7 @@ public class loveday_romance_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int loveday_romance_target_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -1277,6 +1302,7 @@ public class loveday_romance_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -1287,12 +1313,14 @@ public class loveday_romance_target extends script.base_script
         setCondition(self, CONDITION_HOLIDAY_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_HOLIDAY_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1311,24 +1339,27 @@ public class loveday_romance_target extends script.base_script
         for (int i = 0; i < 5; i++)
         {
             int index = rand(0, traitIndexes.size() - 1);
-            utils.addElement(randomOrder, ((Integer)traitIndexes.get(index)).intValue());
+            utils.addElement(randomOrder, ((Integer) traitIndexes.get(index)).intValue());
             utils.removeElementAt(traitIndexes, index);
         }
         utils.setScriptVar(player, "traits_randomOrder", randomOrder);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.loveday_romance_target");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1392,7 +1423,7 @@ public class loveday_romance_target extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -1404,7 +1435,7 @@ public class loveday_romance_target extends script.base_script
                 utils.setScriptVar(player, "conversation.loveday_romance_target.branchId", 6);
                 npcStartConversation(player, npc, "loveday_romance_target", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1420,6 +1451,7 @@ public class loveday_romance_target extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("loveday_romance_target"))

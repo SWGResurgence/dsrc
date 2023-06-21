@@ -1,5 +1,11 @@
 package script.theme_park.restuss_event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,13 +14,14 @@ public class comm_array_spawn_died extends script.base_script
     public comm_array_spawn_died()
     {
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (hasObjVar(self, "respawn_called"))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             setObjVar(self, "respawn_called", 1);
         }
@@ -27,9 +34,9 @@ public class comm_array_spawn_died extends script.base_script
         String momFac = getStringObjVar(mom, "faction");
         if (myFac.equals("Rebel") && momFac.equals("Rebel"))
         {
-            
+
         }
-        
+
         {
             String datatable = getStringObjVar(mom, "spawn_table_rebel");
             int spawnNum = getIntObjVar(self, "spawn_number");
@@ -45,9 +52,9 @@ public class comm_array_spawn_died extends script.base_script
         }
         if (myFac.equals("Imperial") && momFac.equals("Imperial"))
         {
-            
+
         }
-        
+
         {
             String datatable = getStringObjVar(mom, "spawn_table_imperial");
             int spawnNum = getIntObjVar(self, "spawn_number");

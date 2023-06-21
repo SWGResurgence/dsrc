@@ -1,17 +1,24 @@
 package script.theme_park.restuss_event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.factions;
 import script.library.groundquests;
 
 public class destructible_antennae extends script.base_script
 {
-    public destructible_antennae()
-    {
-    }
     public static final string_id SID_MNU_EXPLOSIVE = new string_id("restuss_event/object", "antenna_explosive");
     public static final string_id SID_MNU_ARM_EXPLOSIVE = new string_id("restuss_event/object", "antenna_arm_explosive");
     public static final string_id SID_MNU_WRONG_FCT = new string_id("restuss_event/object", "incorrect_faction");
+    public destructible_antennae()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setMaxHitpoints(self, 90000);
@@ -19,6 +26,7 @@ public class destructible_antennae extends script.base_script
         setInvulnerable(self, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setMaxHitpoints(self, 90000);
@@ -26,6 +34,7 @@ public class destructible_antennae extends script.base_script
         setInvulnerable(self, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         String myTemplate = getTemplateName(self);
@@ -48,6 +57,7 @@ public class destructible_antennae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         location loc = getLocation(self);
@@ -65,6 +75,7 @@ public class destructible_antennae extends script.base_script
         messageTo(self, "antennaDestroyed", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         String myTemplate = getTemplateName(self);
@@ -74,7 +85,7 @@ public class destructible_antennae extends script.base_script
             {
                 mi.addRootMenu(menu_info_types.ITEM_USE, SID_MNU_EXPLOSIVE);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_MNU_WRONG_FCT);
             }
@@ -86,7 +97,7 @@ public class destructible_antennae extends script.base_script
             {
                 mi.addRootMenu(menu_info_types.ITEM_USE, SID_MNU_EXPLOSIVE);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_MNU_WRONG_FCT);
             }
@@ -104,6 +115,7 @@ public class destructible_antennae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -136,11 +148,13 @@ public class destructible_antennae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int antennaDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int antennaDestroyedCommando(obj_id self, dictionary params) throws InterruptedException
     {
         location loc = getLocation(self);

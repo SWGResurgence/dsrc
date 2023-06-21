@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 import script.prose_package;
@@ -10,15 +16,18 @@ public class tford_test extends script.base_script
     public tford_test()
     {
     }
+
     public int OnLootLotterySelected(obj_id self, obj_id target_id, obj_id[] selection_ids) throws InterruptedException
     {
         debugConsoleMsg(self, "loot lottery by " + self + " for " + target_id);
         debugSpeakMsg(self, "selected items:");
-        for (obj_id item : selection_ids) {
+        for (obj_id item : selection_ids)
+        {
             debugSpeakMsg(self, "[" + item + "]");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (speaker == self)
@@ -38,6 +47,7 @@ public class tford_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -47,7 +57,8 @@ public class tford_test extends script.base_script
             {
                 String command = tok.nextToken();
                 debugConsoleMsg(self, "command is: " + command);
-                switch (command) {
+                switch (command)
+                {
                     case "tmf_showLotteryMyInventory":
                         break;
                     case "tmf_pvpPrepareToBeCovert":
@@ -69,21 +80,25 @@ public class tford_test extends script.base_script
                     obj_id target = getLookAtTarget(self);
                     hideFromClient(target, true);
                 }
-                switch (command) {
-                    case "tmf_noHideFromClient": {
+                switch (command)
+                {
+                    case "tmf_noHideFromClient":
+                    {
                         debugConsoleMsg(self, "hit tmf_noHideFromClient");
                         obj_id target = getLookAtTarget(self);
                         hideFromClient(target, false);
                         break;
                     }
-                    case "tmf_makePrivate": {
+                    case "tmf_makePrivate":
+                    {
                         debugConsoleMsg(self, "hit tmf_makePrivate");
                         location here = getLocation(self);
                         obj_id target = here.cell;
                         permissionsMakePrivate(target);
                         break;
                     }
-                    case "tmf_makePublic": {
+                    case "tmf_makePublic":
+                    {
                         debugConsoleMsg(self, "hit tmf_makePublic");
                         location here = getLocation(self);
                         obj_id target = here.cell;
@@ -95,20 +110,25 @@ public class tford_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {
+        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self))
+        {
             detachScript(self, "test.tford_test");
         }
-        else{
+        else
+        {
             debugSpeakMsg(self, "tford_test.script attached");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLocomotionChanged(obj_id self, int newLocomotion, int oldLocomotion) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnCombatLevelChanged(obj_id self, int oldCombatLevel, int newCombatLevel) throws InterruptedException
     {
         debugSpeakMsg(self, "oldCombatLevel = " + oldCombatLevel + " newCombatLevel = " + newCombatLevel);

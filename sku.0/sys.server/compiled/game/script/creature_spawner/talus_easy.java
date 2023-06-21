@@ -1,5 +1,11 @@
 package script.creature_spawner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,18 +14,22 @@ public class talus_easy extends script.creature_spawner.base_newbie_creature_spa
     public talus_easy()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int creatureDied(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public String pickCreature() throws InterruptedException
     {
         return null;
     }
+
     public int getMaxPop() throws InterruptedException
     {
         int maxPop = 0;

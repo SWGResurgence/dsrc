@@ -1,27 +1,36 @@
 package script.theme_park.dungeon.mustafar_trials.volcano_battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.trial;
 import script.obj_id;
 
 public class event_one_guard extends script.base_script
 {
+    public static final String SHIELD = "effect_shield";
+    public static final boolean doLogging = false;
     public event_one_guard()
     {
     }
-    public static final String SHIELD = "effect_shield";
-    public static final boolean doLogging = false;
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, "destroySelf", null, 5, false);
         stopClientEffectObjByLabel(self, SHIELD);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_VOLCANO_ONE_GUARD);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id parent = getObjIdObjVar(self, "parent");
@@ -38,11 +47,13 @@ public class event_one_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int beginAttack(obj_id self, dictionary params) throws InterruptedException
     {
         stopClientEffectObjByLabel(self, SHIELD);
@@ -62,6 +73,7 @@ public class event_one_guard extends script.base_script
         startCombat(self, toAttack);
         return SCRIPT_CONTINUE;
     }
+
     public int stopAttack(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, true);
@@ -70,11 +82,13 @@ public class event_one_guard extends script.base_script
         stopCombat(self);
         return SCRIPT_CONTINUE;
     }
+
     public int activateShield(obj_id self, dictionary params) throws InterruptedException
     {
         playClientEffectObj(self, trial.PRT_INVULN_SHIELD, self, "", null, SHIELD);
         return SCRIPT_CONTINUE;
     }
+
     public int healBoss(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "boss"))
@@ -93,6 +107,7 @@ public class event_one_guard extends script.base_script
         messageTo(self, "healBoss", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (doLogging || trial.VOLCANO_LOGGING)

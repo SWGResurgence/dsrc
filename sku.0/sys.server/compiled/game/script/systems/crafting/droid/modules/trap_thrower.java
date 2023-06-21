@@ -1,5 +1,11 @@
 package script.systems.crafting.droid.modules;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -35,6 +41,7 @@ public class trap_thrower extends script.base_script
     public static final string_id SID_TRAP_MAX_REACHED = new string_id(STF, "trap_max_reached");
     public static final string_id SID_INVALID_TARGET = new string_id(STF, "invalid_trap_target");
     public static final string_id SID_CANT_THROW_YET = new string_id(STF, "cant_throw_yet");
+
     public trap_thrower()
     {
     }
@@ -291,7 +298,6 @@ public class trap_thrower extends script.base_script
         cbtDefenderResult[0].endPosture = getPosture(target);
         cbtDefenderResult[0].result = COMBAT_RESULT_HIT;
         doCombatResults(strAttack, cbtAttackerResult, cbtDefenderResult);
-        return;
     }
 
     public int doDelayedFire(obj_id self, dictionary params) throws InterruptedException
@@ -344,7 +350,6 @@ public class trap_thrower extends script.base_script
         int numCharges = getIntObjVar(self, CHARGES);
         prose_package pp = prose.getPackage(SID_TRAP_MODULE_INITIALIZE, null, trapName, null, null, null, null, null, null, null, numCharges, 0.0f);
         sendSystemMessageProse(player, pp);
-        return;
     }
 
     public boolean isCurrentTrap(obj_id droid, obj_id item) throws InterruptedException

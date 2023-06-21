@@ -1,18 +1,25 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class delivery extends script.base_script
 {
-    public delivery()
-    {
-    }
     public static final string_id SID_ABANDONED_MISSION = new string_id("space/quest", "mission_abandoned");
     public static final string_id SID_TARGETS_REMAINING = new string_id("space/quest", "destroy_duty_targets_remaining");
     public static final String SOUND_SPAWN_ESCORT = "clienteffect/ui_quest_spawn_escort.cef";
     public static final String SOUND_SPAWN_WAVE = "clienteffect/ui_quest_spawn_wave.cef";
     public static final String SOUND_DESTROYED_WAVE = "clienteffect/ui_quest_destroyed_wave.cef";
+    public delivery()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -56,6 +63,7 @@ public class delivery extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int initializedQuestPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -91,7 +99,7 @@ public class delivery extends script.base_script
         {
             rightzone = (getCurrentSceneName()).startsWith(pp_scene) || (getCurrentSceneName()).startsWith(dp_scene);
         }
-        else 
+        else
         {
             rightzone = (getCurrentSceneName()).startsWith(dp_scene);
         }
@@ -111,7 +119,7 @@ public class delivery extends script.base_script
             scene = dp_scene;
             destPoint = dp_destPoint;
         }
-        else 
+        else
         {
             scene = pp_scene;
             destPoint = pp_destPoint;
@@ -132,6 +140,7 @@ public class delivery extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void registerQuestLocation(obj_id self, obj_id player, String destNav) throws InterruptedException
     {
         obj_id navPoint = space_quest.findQuestLocation(self, player, destNav, "nav");
@@ -153,7 +162,7 @@ public class delivery extends script.base_script
                     questActivateTask(questid, 1, player);
                 }
             }
-            else 
+            else
             {
                 waypoint_prefix = "Pickup";
                 wp = "p";
@@ -191,6 +200,7 @@ public class delivery extends script.base_script
         setObjVar(self, "initialized", 1);
         messageTo(self, "deliveryNoPickupAttack", null, 10.0f, false);
     }
+
     public int arrivedAtLocation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -216,7 +226,7 @@ public class delivery extends script.base_script
                         questCompleteTask(questid, 1, player);
                     }
                 }
-                else 
+                else
                 {
                     setObjVar(self, "taskId", 4);
                     questActivateTask(questid, 4, player);
@@ -251,15 +261,16 @@ public class delivery extends script.base_script
                 }
             }
             String destNav = getStringObjVar(self, "pickupPoint");
-            try {
+            try
+            {
                 java.util.StringTokenizer st = new java.util.StringTokenizer(destNav, ":");
                 String scene = st.nextToken();
                 destNav = st.nextToken();
                 destNav = questName + ":" + destNav;
-            }
-            catch(Exception e){
-                LOG("space_quest","Bad quest logic:  Quest (space/quest/" + questType + "/" + questName + ") contains invalid pickup point while trying to parse string (" +
-                getStringObjVar(self, "pickupPoint") + ") for player (" + player + ":" + getPlayerFullName(player) + "), name (" + name + "), going to location (" + loc + ").");
+            } catch (Exception e)
+            {
+                LOG("space_quest", "Bad quest logic:  Quest (space/quest/" + questType + "/" + questName + ") contains invalid pickup point while trying to parse string (" +
+                        getStringObjVar(self, "pickupPoint") + ") for player (" + player + ":" + getPlayerFullName(player) + "), name (" + name + "), going to location (" + loc + ").");
             }
             if (destNav.equals(name))
             {
@@ -270,6 +281,7 @@ public class delivery extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int warpPickupShipDelay(obj_id self, dictionary params) throws InterruptedException
     {
         String name = params.getString("name");
@@ -299,6 +311,7 @@ public class delivery extends script.base_script
         clearMissionWaypoint(self);
         return SCRIPT_CONTINUE;
     }
+
     public obj_id warpInShip(obj_id self, String var) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -307,6 +320,7 @@ public class delivery extends script.base_script
         transform spawnLoc = space_quest.getRandomPositionInSphere(trans, 100, 200);
         return space_create.createShipHyperspace(shipType, spawnLoc);
     }
+
     public int warpDeliveryShipDelay(obj_id self, dictionary params) throws InterruptedException
     {
         String name = params.getString("name");
@@ -335,6 +349,7 @@ public class delivery extends script.base_script
         clearMissionWaypoint(self);
         return SCRIPT_CONTINUE;
     }
+
     public int sayHello(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -350,7 +365,7 @@ public class delivery extends script.base_script
         {
             hello = new string_id("spacequest/" + questType + "/" + questName, "hello_d");
         }
-        else 
+        else
         {
             hello = new string_id("spacequest/" + questType + "/" + questName, "hello_p");
         }
@@ -358,6 +373,7 @@ public class delivery extends script.base_script
         space_quest.groupTaunt(ship, player, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int dockingStarted(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -389,6 +405,7 @@ public class delivery extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int dockingComplete(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -452,7 +469,7 @@ public class delivery extends script.base_script
                         questCompleteTask(questid, 2, player);
                     }
                 }
-                else 
+                else
                 {
                     if (questIsTaskActive(questid, 4, player))
                     {
@@ -468,6 +485,7 @@ public class delivery extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int findDeliveryPoint(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -476,6 +494,7 @@ public class delivery extends script.base_script
         messageTo(self, "initializedQuestPlayer", outparams, 1.0f, false);
         return SCRIPT_OVERRIDE;
     }
+
     public void clearMissionWaypoint(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -492,6 +511,7 @@ public class delivery extends script.base_script
             removeLocationTarget(player, loc);
         }
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "noAbort"))
@@ -501,6 +521,7 @@ public class delivery extends script.base_script
         questAborted(self);
         return SCRIPT_CONTINUE;
     }
+
     public void questAborted(obj_id self) throws InterruptedException
     {
         cleanUpTransports(self, false);
@@ -508,6 +529,7 @@ public class delivery extends script.base_script
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         space_quest.setQuestAborted(player, self);
     }
+
     public void questCompleted(obj_id self) throws InterruptedException
     {
         cleanUpTransports(self, true);
@@ -515,6 +537,7 @@ public class delivery extends script.base_script
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         space_quest.setQuestWon(player, self);
     }
+
     public int removeQuest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -528,11 +551,13 @@ public class delivery extends script.base_script
         space_quest._removeQuest(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int finishQuest(obj_id self, dictionary params) throws InterruptedException
     {
         questCompleted(self);
         return SCRIPT_CONTINUE;
     }
+
     public void cleanUpTransports(obj_id self, boolean keepDelivery) throws InterruptedException
     {
         obj_id ship = getObjIdObjVar(self, "pickup_ship");
@@ -546,6 +571,7 @@ public class delivery extends script.base_script
             destroyObjectHyperspace(ship);
         }
     }
+
     public void questUpdate(obj_id self, string_id update_id) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -555,6 +581,7 @@ public class delivery extends script.base_script
         prose_package pp = prose.getPackage(update_prefix, update_id);
         space_quest.sendQuestMessage(player, pp);
     }
+
     public int launchAttack(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "initialized"))
@@ -574,7 +601,7 @@ public class delivery extends script.base_script
         {
             wavenum = 2;
         }
-        else 
+        else
         {
             wavenum = 1;
         }
@@ -602,14 +629,11 @@ public class delivery extends script.base_script
         {
             targets = new obj_id[count];
         }
-        else 
+        else
         {
             targets = new obj_id[count + oldtargets.length];
             k = oldtargets.length;
-            for (int i = 0; i < oldtargets.length; i++)
-            {
-                targets[i] = oldtargets[i];
-            }
+            System.arraycopy(oldtargets, 0, targets, 0, oldtargets.length);
         }
         int squad = ship_ai.squadCreateSquadId();
         int j = 0;
@@ -661,6 +685,7 @@ public class delivery extends script.base_script
         messageTo(self, "launchAttack", null, attackPeriod, false);
         return SCRIPT_CONTINUE;
     }
+
     public int targetDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -672,24 +697,30 @@ public class delivery extends script.base_script
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
         String questType = getStringObjVar(self, space_quest.QUEST_TYPE);
         obj_id deadship = params.getObjId("ship");
-        obj_id targets[] = getObjIdArrayObjVar(self, "targets");
+        obj_id[] targets = getObjIdArrayObjVar(self, "targets");
         int deadships = getIntObjVar(self, "deadships");
         boolean launchWave = false;
-        for (obj_id target : targets) {
-            if (deadship == target) {
+        for (obj_id target : targets)
+        {
+            if (deadship == target)
+            {
                 deadships++;
                 setObjVar(self, "deadships", deadships);
                 space_quest._removeMissionCriticalShip(player, self, deadship);
                 int shipswave = getIntObjVar(deadship, "wave");
                 int wavecount = getIntObjVar(self, "wave" + shipswave);
                 wavecount--;
-                if (wavecount <= 0) {
+                if (wavecount <= 0)
+                {
                     removeObjVar(self, "wave" + shipswave);
                     launchWave = true;
-                } else {
+                }
+                else
+                {
                     setObjVar(self, "wave" + shipswave, wavecount);
                 }
-                if (deadships == targets.length) {
+                if (deadships == targets.length)
+                {
                     playClientEffectObj(player, SOUND_DESTROYED_WAVE, player, "");
                     int rewardships = getIntObjVar(self, "rewardships");
                     rewardships += deadships;
@@ -717,6 +748,7 @@ public class delivery extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public boolean checkSpecialEvent(obj_id self, obj_id player, int attackCount) throws InterruptedException
     {
         if (!hasObjVar(self, space_quest.QUEST_TRIGGER_EVENT))
@@ -744,6 +776,7 @@ public class delivery extends script.base_script
         messageTo(player, "doSpecialEvent", params, triggerDelay, false);
         return false;
     }
+
     public int deliveryTargetDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id ship = params.getObjId("ship");
@@ -759,6 +792,7 @@ public class delivery extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void questFailed(obj_id self) throws InterruptedException
     {
         cleanUpTransports(self, false);
@@ -766,6 +800,7 @@ public class delivery extends script.base_script
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         space_quest.setQuestFailed(player, self);
     }
+
     public int playerShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -778,6 +813,7 @@ public class delivery extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int attackPlayerShip(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id playerShip = params.getObjId("player");

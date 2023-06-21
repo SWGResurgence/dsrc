@@ -1,5 +1,11 @@
 package script.theme_park.utils;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class droid_name extends script.base_script
@@ -7,11 +13,13 @@ public class droid_name extends script.base_script
     public droid_name()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         getDroidName(self);
         return SCRIPT_CONTINUE;
     }
+
     public void getDroidName(obj_id self) throws InterruptedException
     {
         String type = getName(self);
@@ -105,8 +113,8 @@ public class droid_name extends script.base_script
         {
             setName(self, "MSE-" + rand(0, 9));
         }
-        return;
     }
+
     public String getLetter() throws InterruptedException
     {
         int which = rand(1, 26);
@@ -114,83 +122,83 @@ public class droid_name extends script.base_script
         switch (which)
         {
             case 1:
-            letter = "A";
-            break;
+                letter = "A";
+                break;
             case 2:
-            letter = "B";
-            break;
+                letter = "B";
+                break;
             case 3:
-            letter = "C";
-            break;
+                letter = "C";
+                break;
             case 4:
-            letter = "D";
-            break;
+                letter = "D";
+                break;
             case 5:
-            letter = "E";
-            break;
+                letter = "E";
+                break;
             case 6:
-            letter = "F";
-            break;
+                letter = "F";
+                break;
             case 7:
-            letter = "G";
-            break;
+                letter = "G";
+                break;
             case 8:
-            letter = "H";
-            break;
+                letter = "H";
+                break;
             case 9:
-            letter = "I";
-            break;
+                letter = "I";
+                break;
             case 10:
-            letter = "J";
-            break;
+                letter = "J";
+                break;
             case 11:
-            letter = "K";
-            break;
+                letter = "K";
+                break;
             case 12:
-            letter = "L";
-            break;
+                letter = "L";
+                break;
             case 13:
-            letter = "M";
-            break;
+                letter = "M";
+                break;
             case 14:
-            letter = "N";
-            break;
+                letter = "N";
+                break;
             case 15:
-            letter = "O";
-            break;
+                letter = "O";
+                break;
             case 16:
-            letter = "P";
-            break;
+                letter = "P";
+                break;
             case 17:
-            letter = "Q";
-            break;
+                letter = "Q";
+                break;
             case 18:
-            letter = "R";
-            break;
+                letter = "R";
+                break;
             case 19:
-            letter = "S";
-            break;
+                letter = "S";
+                break;
             case 20:
-            letter = "T";
-            break;
+                letter = "T";
+                break;
             case 21:
-            letter = "U";
-            break;
+                letter = "U";
+                break;
             case 22:
-            letter = "V";
-            break;
+                letter = "V";
+                break;
             case 23:
-            letter = "W";
-            break;
+                letter = "W";
+                break;
             case 24:
-            letter = "X";
-            break;
+                letter = "X";
+                break;
             case 25:
-            letter = "Y";
-            break;
+                letter = "Y";
+                break;
             case 26:
-            letter = "Z";
-            break;
+                letter = "Z";
+                break;
         }
         return letter;
     }

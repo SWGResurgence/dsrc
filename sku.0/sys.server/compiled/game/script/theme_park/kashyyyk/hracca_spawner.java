@@ -1,5 +1,11 @@
 package script.theme_park.kashyyyk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -15,6 +21,7 @@ public class hracca_spawner extends script.base_script
     public hracca_spawner()
     {
     }
+
     public int doHraccaSpawnEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -56,6 +63,7 @@ public class hracca_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void createMob(String whatToSpawn, location here, obj_id self) throws InterruptedException
     {
         obj_id npc = create.object(whatToSpawn, here);
@@ -75,7 +83,7 @@ public class hracca_spawner extends script.base_script
                 setObjVar(self, "myCreations", myCreations);
             }
         }
-        else 
+        else
         {
             Vector spawnedList = getResizeableObjIdArrayObjVar(self, "myCreations");
             spawnedList.add(npc);
@@ -110,8 +118,8 @@ public class hracca_spawner extends script.base_script
             obj_id fogParticleObj = createObject(fogTemplate, here);
             setObjVar(self, "fogParticleObj", fogParticleObj);
         }
-        return;
     }
+
     public String getSpawnType(String spawnType) throws InterruptedException
     {
         String whatToSpawn = "ep3_hracca_chiss_poacher_hunter";
@@ -121,6 +129,7 @@ public class hracca_spawner extends script.base_script
         }
         return whatToSpawn;
     }
+
     public int spawnDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params.containsKey("deadNpc"))
@@ -172,7 +181,7 @@ public class hracca_spawner extends script.base_script
                     {
                         setObjVar(self, "myCreations", spawnedList);
                     }
-                    else 
+                    else
                     {
                         removeObjVar(self, "myCreations");
                     }
@@ -181,6 +190,7 @@ public class hracca_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDeleteChissFog(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id fogParticleObj = getObjIdObjVar(self, "fogParticleObj");
@@ -191,6 +201,7 @@ public class hracca_spawner extends script.base_script
         removeObjVar(self, "fogParticleObj");
         return SCRIPT_CONTINUE;
     }
+
     public int doCleanupEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "myCreations"))
@@ -198,9 +209,11 @@ public class hracca_spawner extends script.base_script
             return SCRIPT_CONTINUE;
         }
         Vector spawnedList = getResizeableObjIdArrayObjVar(self, "myCreations");
-        for (Object o : spawnedList) {
+        for (Object o : spawnedList)
+        {
             obj_id spawnedNpc = ((obj_id) o);
-            if (isIdValid(spawnedNpc)) {
+            if (isIdValid(spawnedNpc))
+            {
                 setObjVar(spawnedNpc, "cleaningUp", true);
                 destroyObject(spawnedNpc);
             }
@@ -217,6 +230,7 @@ public class hracca_spawner extends script.base_script
         removeObjVar(self, "myCreations");
         return SCRIPT_CONTINUE;
     }
+
     public boolean canSpawnByConfigSetting() throws InterruptedException
     {
         String disableSpawners = getConfigSetting("GameServer", "disableAreaSpawners");
@@ -224,10 +238,6 @@ public class hracca_spawner extends script.base_script
         {
             return true;
         }
-        if (disableSpawners.equals("true") || disableSpawners.equals("1"))
-        {
-            return false;
-        }
-        return true;
+        return !disableSpawners.equals("true") && !disableSpawners.equals("1");
     }
 }

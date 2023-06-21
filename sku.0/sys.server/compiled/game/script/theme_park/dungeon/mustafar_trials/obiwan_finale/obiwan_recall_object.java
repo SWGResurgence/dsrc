@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.obiwan_finale;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.chat;
 import script.library.mustafar;
 import script.library.prose;
@@ -7,13 +13,14 @@ import script.*;
 
 public class obiwan_recall_object extends script.base_script
 {
-    public obiwan_recall_object()
-    {
-    }
     public static final String STF_OBI_CONVO = "conversation/som_kenobi_obi_wan";
     public static final string_id SID_CALL_OBI = new string_id(mustafar.STF_OBI_MSGS, "recall_obiwan");
     public static final string_id SID_CALLED_OBI = new string_id(mustafar.STF_OBI_MSGS, "recalling_obiwan");
     public static final string_id SID_RECALL_HELLO = new string_id(mustafar.STF_OBI_MSGS, "obi_recall_greeting_01");
+    public obiwan_recall_object()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (mustafar.canCallObiwan(player, self))
@@ -22,6 +29,7 @@ public class obiwan_recall_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         LOG("space_dungeon", "theme_park.dungeon.mustafar_trials.obiwan_finale.obiwan_recall_object.OnObjectMenuSelect()");
@@ -34,6 +42,7 @@ public class obiwan_recall_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void activateObiwanRecaller(obj_id player, obj_id landmark) throws InterruptedException
     {
         obj_id obiwan = mustafar.callObiwan(player, landmark, true);
@@ -42,6 +51,5 @@ public class obiwan_recall_object extends script.base_script
         prose_package pp = prose.getPackage(strSpam);
         prose.setTT(pp, player);
         chat.chat(obiwan, player, pp);
-        return;
     }
 }

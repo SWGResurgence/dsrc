@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.trando_slave_camp;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.space_dungeon;
@@ -10,9 +16,6 @@ import java.util.Objects;
 
 public class kachirho_slave_gate extends script.base_script
 {
-    public kachirho_slave_gate()
-    {
-    }
     public static final string_id SID_UNABLE_TO_FIND_DUNGEON = new string_id("dungeon/space_dungeon", "unable_to_find_dungeon");
     public static final string_id SID_NO_TICKET = new string_id("dungeon/space_dungeon", "no_ticket");
     public static final string_id SID_REQUEST_TRAVEL = new string_id("dungeon/space_dungeon", "request_travel");
@@ -20,6 +23,10 @@ public class kachirho_slave_gate extends script.base_script
     public static final string_id SID_SLAVER_CAMP = new string_id("travel/zone_transition", "kachirho_trando_slave_camp");
     public static final string_id SID_NO_PERMISSION = new string_id("travel/zone_transition", "default_no_access");
     public static final String QUEST = "ep3_slaver_gursan_entry_quest";
+    public kachirho_slave_gate()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         if (getDistance(player, self) > 6.0f)
@@ -38,6 +45,7 @@ public class kachirho_slave_gate extends script.base_script
         item.addRootMenu(menu_info_types.ITEM_USE, SID_SLAVER_CAMP);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -65,6 +73,7 @@ public class kachirho_slave_gate extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String dungeon_type, int request_id, String[] element_name_list, dictionary[] dungeon_data, int lock_key) throws InterruptedException
     {
         LOG("space_dungeon", "travel_space_dungeon.OnClusterWideDataResponse");
@@ -84,7 +93,7 @@ public class kachirho_slave_gate extends script.base_script
         {
             ticket = getObjIdObjVar(player, space_dungeon.VAR_TICKET_USED);
         }
-        else 
+        else
         {
             ticket = player;
         }
@@ -133,7 +142,7 @@ public class kachirho_slave_gate extends script.base_script
         String dungeon_name = dungeon_type.substring(0, dungeon_type.length() - 1);
         for (int i = 0; i < dungeon_data.length; i++)
         {
-            if (false == space_dungeon_data.isValidDungeon(dungeon_name))
+            if (!space_dungeon_data.isValidDungeon(dungeon_name))
             {
                 LOG("space_dungeon", "travel_space_dungeon.OnClusterWideDataResponse -- dungeon name of " + dungeon_name + " is not in the dungeon datatable.");
                 break;
@@ -174,6 +183,7 @@ public class kachirho_slave_gate extends script.base_script
         sendSystemMessage(player, Objects.requireNonNullElse(success, SID_UNABLE_TO_FIND_DUNGEON));
         return SCRIPT_CONTINUE;
     }
+
     public int msgStartDungeonTravel(obj_id self, dictionary params) throws InterruptedException
     {
         int session_id = params.getInt("session_id");

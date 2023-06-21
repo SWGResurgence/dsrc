@@ -1,5 +1,11 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.sui;
 import script.location;
 import script.menu_info;
@@ -8,10 +14,12 @@ import script.string_id;
 
 public class welcome_terminal extends script.base_script
 {
+    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
+
     public welcome_terminal()
     {
     }
-    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         location here = getLocation(player);

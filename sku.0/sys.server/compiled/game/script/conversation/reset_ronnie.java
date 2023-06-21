@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,45 +14,50 @@ import script.*;
 
 public class reset_ronnie extends script.base_script
 {
+    public static String c_stringFile = "conversation/reset_ronnie";
+
     public reset_ronnie()
     {
     }
-    public static String c_stringFile = "conversation/reset_ronnie";
+
     public boolean reset_ronnie_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public void reset_ronnie_action_clearQuests(obj_id player, obj_id npc) throws InterruptedException
     {
-        String[] questList = 
+        String[] questList =
+                {
+                        "rtp_c3po_01",
+                        "rtp_c3po_02",
+                        "rtp_qualdo_01",
+                        "rtp_wedge_01",
+                        "rtp_leia_01",
+                        "rtp_leia_02",
+                        "rtp_leia_03",
+                        "rtp_nien_nunb_01",
+                        "rtp_han_solo_01",
+                        "rtp_han_solo_02",
+                        "rtp_ackbar_01",
+                        "rtp_ackbar_02",
+                        "rtp_mon_mothma_01",
+                        "rtp_dodonna_01",
+                        "rtp_dodonna_02",
+                        "rtp_dodonna_03",
+                        "rtp_luke_01",
+                        "rtp_luke_02",
+                        "rtp_luke_03"
+                };
+        for (String quest : questList)
         {
-            "rtp_c3po_01",
-            "rtp_c3po_02",
-            "rtp_qualdo_01",
-            "rtp_wedge_01",
-            "rtp_leia_01",
-            "rtp_leia_02",
-            "rtp_leia_03",
-            "rtp_nien_nunb_01",
-            "rtp_han_solo_01",
-            "rtp_han_solo_02",
-            "rtp_ackbar_01",
-            "rtp_ackbar_02",
-            "rtp_mon_mothma_01",
-            "rtp_dodonna_01",
-            "rtp_dodonna_02",
-            "rtp_dodonna_03",
-            "rtp_luke_01",
-            "rtp_luke_02",
-            "rtp_luke_03"
-        };
-        for (String quest : questList) {
-            if (groundquests.isQuestActiveOrComplete(player, quest)) {
+            if (groundquests.isQuestActiveOrComplete(player, quest))
+            {
                 groundquests.clearQuest(player, quest);
             }
         }
-        return;
     }
+
     public int reset_ronnie_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6"))
@@ -72,6 +83,7 @@ public class reset_ronnie extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -83,6 +95,7 @@ public class reset_ronnie extends script.base_script
         setName(self, "Reset Ronnie");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -90,6 +103,7 @@ public class reset_ronnie extends script.base_script
         setName(self, "Reset Ronnie");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -98,18 +112,21 @@ public class reset_ronnie extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.reset_ronnie");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -139,7 +156,7 @@ public class reset_ronnie extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6");
@@ -151,7 +168,7 @@ public class reset_ronnie extends script.base_script
                 utils.setScriptVar(player, "conversation.reset_ronnie.branchId", 1);
                 npcStartConversation(player, npc, "reset_ronnie", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -160,6 +177,7 @@ public class reset_ronnie extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("reset_ronnie"))

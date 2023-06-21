@@ -1,5 +1,11 @@
 package script.theme_park.heroic.axkva_min;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.obj_id;
 import script.string_id;
@@ -9,11 +15,13 @@ public class suin_chalo extends script.base_script
     public suin_chalo()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_AXKVA_SUIN);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (ai_lib.isDead(self))
@@ -24,17 +32,18 @@ public class suin_chalo extends script.base_script
         int current = getHealth(self);
         int toHeal = max - current;
         addToHealth(self, toHeal);
-        String[] lists = 
-        {
-            "spawn90",
-            "spawn75",
-            "spawn50",
-            "spawn35",
-            "spawn20"
-        };
+        String[] lists =
+                {
+                        "spawn90",
+                        "spawn75",
+                        "spawn50",
+                        "spawn35",
+                        "spawn20"
+                };
         utils.removeObjVarList(self, lists);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         float max = getMaxHealth(self);
@@ -74,6 +83,7 @@ public class suin_chalo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void spawnAspect(obj_id self, int value) throws InterruptedException
     {
         if (hasObjVar(self, "spawn" + value))
@@ -81,13 +91,13 @@ public class suin_chalo extends script.base_script
             return;
         }
         setObjVar(self, "spawn" + value, 1);
-        String[] aspects = 
-        {
-            "heat_aspect",
-            "acid_aspect",
-            "elec_aspect",
-            "cold_aspect"
-        };
+        String[] aspects =
+                {
+                        "heat_aspect",
+                        "acid_aspect",
+                        "elec_aspect",
+                        "cold_aspect"
+                };
         int idx = rand(0, aspects.length - 1);
         obj_id creature = create.object("heroic_axkva_" + aspects[idx], getLocation(self));
         String name = "@" + new string_id("mob/creature_names", aspects[idx]);
@@ -99,10 +109,12 @@ public class suin_chalo extends script.base_script
         utils.setScriptVar(creature, "aspect", aspects[idx]);
         trial.setParent(trial.getTop(self), creature, false);
         obj_id[] hateList = getHateList(self);
-        for (obj_id obj_id : hateList) {
+        for (obj_id obj_id : hateList)
+        {
             setHate(creature, obj_id, 1.0f);
         }
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id[] children = trial.getChildrenInRange(self, self, 200.0f);
@@ -113,14 +125,16 @@ public class suin_chalo extends script.base_script
         utils.messageTo(children, "suin_died", null, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         obj_id[] players = trial.getPlayersInDungeon(trial.getTop(self));
-        if (players == null || players.length == 0)
+        if (players == null)
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             addHate(self, player, 1);
         }
         return SCRIPT_CONTINUE;

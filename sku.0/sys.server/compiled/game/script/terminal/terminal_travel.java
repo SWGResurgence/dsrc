@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.city;
 import script.library.player_structure;
 import script.library.travel;
@@ -10,6 +16,7 @@ public class terminal_travel extends script.base_script
 {
     public static final string_id SID_TRAVEL_OPTIONS = new string_id("travel", "purchase_ticket");
     public static final string_id SID_BANNED_TICKET = new string_id("city/city", "banned_services");
+
     public terminal_travel()
     {
     }

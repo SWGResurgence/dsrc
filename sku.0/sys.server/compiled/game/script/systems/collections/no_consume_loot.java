@@ -1,5 +1,11 @@
 package script.systems.collections;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.collection;
 import script.library.sui;
@@ -19,6 +25,7 @@ public class no_consume_loot extends script.base_script
     public static final string_id STR_COLLECTION_LIST_PROMPT = new string_id("collection", "collection_list_prompt");
     public static final string_id STR_COLLECTION_LIST_TITLE = new string_id("collection", "collection_list_title");
     public static final string_id SID_ALREADY_BEEN_USED = new string_id("collection", "already_been_used");
+
     public no_consume_loot()
     {
     }

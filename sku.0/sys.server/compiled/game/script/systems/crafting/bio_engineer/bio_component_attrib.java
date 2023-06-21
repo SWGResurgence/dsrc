@@ -1,5 +1,11 @@
 package script.systems.crafting.bio_engineer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.bio_engineer;
 import script.library.craftinglib;
 import script.library.utils;

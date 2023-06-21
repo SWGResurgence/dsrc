@@ -1,5 +1,11 @@
 package script.developer.soe.demo;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.location;
@@ -10,6 +16,7 @@ public class grievous_demoer extends script.base_script
     public grievous_demoer()
     {
     }
+
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
     {
         String[] strCommands = split(strText, ' ');
@@ -22,7 +29,7 @@ public class grievous_demoer extends script.base_script
             dctParams.put("objBuilding", palace1);
             String[] strScripts = getScriptList(palace1);
             detachScriptList(strScripts, palace1);
-            LOG("test", "Messaging self with " + dctParams.toString());
+            LOG("test", "Messaging self with " + dctParams);
             messageTo(self, "cleanoutBuilding", dctParams, 15, false);
         }
         if (strCommands[0].equalsIgnoreCase("setupDemo2"))
@@ -34,7 +41,7 @@ public class grievous_demoer extends script.base_script
             dctParams.put("objBuilding", palace2);
             String[] strScripts = getScriptList(palace2);
             detachScriptList(strScripts, palace2);
-            LOG("test", "Messaging self with " + dctParams.toString());
+            LOG("test", "Messaging self with " + dctParams);
             messageTo(self, "cleanoutBuilding", dctParams, 15, false);
         }
         if (strCommands[0].equalsIgnoreCase("demoLoc1"))
@@ -79,18 +86,21 @@ public class grievous_demoer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int resetDemo1(obj_id self, dictionary params) throws InterruptedException
     {
         warpPlayer(self, "tatooine", 2601, 0, 4598, null, 0, 0, 0, "", false);
         messageTo(self, "setUpDemo1", null, 1.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int resetDemo2(obj_id self, dictionary params) throws InterruptedException
     {
         warpPlayer(self, "tatooine", -2471, 0, -4929, null, 0, 0, 0, "", false);
         messageTo(self, "setUpDemo2", null, 1.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int setUpDemo1(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id palace1 = getObjIdObjVar(self, "palace1");
@@ -102,6 +112,7 @@ public class grievous_demoer extends script.base_script
         setObjVar(grievous, "demoNumber", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int setUpDemo2(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id palace2 = getObjIdObjVar(self, "palace2");
@@ -113,6 +124,7 @@ public class grievous_demoer extends script.base_script
         setObjVar(grievous, "demoNumber", 2);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanoutBuilding(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("test", "Cleaningout bulidng");
@@ -120,25 +132,31 @@ public class grievous_demoer extends script.base_script
         obj_id[] objContents = getContents(objBuilding);
         if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 String strTemplate = getTemplateName(objContent);
                 int intIndex = strTemplate.indexOf("cell.iff");
                 LOG("test", "intIndex is " + intIndex);
-                if (intIndex == -1) {
+                if (intIndex == -1)
+                {
                     destroyObject(objContent);
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void detachScriptList(String[] strScriptList, obj_id objObject) throws InterruptedException
     {
-        for (String s : strScriptList) {
+        for (String s : strScriptList)
+        {
             String script = s;
-            if (script.contains("script.")) {
+            if (script.contains("script."))
+            {
                 script = script.substring(7);
             }
-            if (!script.equals("")) {
+            if (!script.equals(""))
+            {
                 detachScript(objObject, script);
             }
         }

@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.money;
 import script.menu_info_types;
@@ -7,10 +13,12 @@ import script.obj_id;
 
 public class terminal_money extends script.terminal.base.terminal_add_use
 {
+    public static final int CASH_AMOUNT = 10000;
+
     public terminal_money()
     {
     }
-    public static final int CASH_AMOUNT = 10000;
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isGod(player) || hasObjVar(player, "beta.terminal_ok"))
@@ -23,19 +31,20 @@ public class terminal_money extends script.terminal.base.terminal_add_use
                     d.put("payoutTarget", player);
                     money.systemPayout(money.ACCT_BETA_TEST, self, CASH_AMOUNT, "handlePayoutToPlayer", d);
                 }
-                else 
+                else
                 {
                     broadcast(player, "You already have 1,000,000+ credits. Why do you need any more money?");
                 }
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             broadcast(player, "Only authorized users may access this terminal.");
             return SCRIPT_CONTINUE;
         }
     }
+
     public int handlePayoutToPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("payoutTarget");
@@ -48,12 +57,13 @@ public class terminal_money extends script.terminal.base.terminal_add_use
         {
             transferCashTo(self, player, CASH_AMOUNT, "handlePayoutSuccess", "handlePayoutFail", params);
         }
-        else 
+        else
         {
             broadcast(player, "The system is unable to complete the transaction. Please try again later.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePayoutSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("payoutTarget");
@@ -64,6 +74,7 @@ public class terminal_money extends script.terminal.base.terminal_add_use
         broadcast(player, "You recieve " + CASH_AMOUNT + " credits from " + getString(getNameStringId(self)));
         return SCRIPT_CONTINUE;
     }
+
     public int handlePayoutFail(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("payoutTarget");

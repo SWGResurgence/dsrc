@@ -1,5 +1,11 @@
 package script.event.aprilfools;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -13,19 +19,20 @@ public class cantina_controller extends script.base_script
 {
     public static final float THIRTY_SIX_HOURS = 60 * 60 * 36;
 
-    private String[] types = {"ewok1", "ewok2", "ewok3", "ewok4", "foil1"};
+    private final String[] types = {"ewok1", "ewok2", "ewok3", "ewok4", "foil1"};
 
-    private String[] robberyEventNpcOrder = {"foil1", "ewok1", "ewok2", "ewok3", "foil1", "ewok1", "foil1", "ewok1"};
-    private String[] robberyEventLineOrder = {"foil1_2", "ewok1_3", "ewok2_4", "ewok3_5", "foil1_6", "ewok1_7", "foil1_8", "ewok1_9"};
-    private String[] robberyEventMoodOrder = {chat.MOOD_CONDESCENDING, chat.MOOD_HUNGRY, chat.MOOD_GLOOMY, chat.MOOD_FRUSTRATED, chat.MOOD_ANGRY, chat.MOOD_HOPEFUL, chat.MOOD_PUZZLED, chat.MOOD_PUZZLED};
+    private final String[] robberyEventNpcOrder = {"foil1", "ewok1", "ewok2", "ewok3", "foil1", "ewok1", "foil1", "ewok1"};
+    private final String[] robberyEventLineOrder = {"foil1_2", "ewok1_3", "ewok2_4", "ewok3_5", "foil1_6", "ewok1_7", "foil1_8", "ewok1_9"};
+    private final String[] robberyEventMoodOrder = {chat.MOOD_CONDESCENDING, chat.MOOD_HUNGRY, chat.MOOD_GLOOMY, chat.MOOD_FRUSTRATED, chat.MOOD_ANGRY, chat.MOOD_HOPEFUL, chat.MOOD_PUZZLED, chat.MOOD_PUZZLED};
 
-    private String[] bartenderEventNpcOrder = {"foil1", "ewok1", "foil1", "ewok1", "foil1", "ewok1", "ewok1", "foil1"};
-    private String[] bartenderLineOrder = {"bar_line_2", "bar_line_3", "bar_line_4", "bar_line_5", "bar_line_6", "bar_line_7", "bar_line_8", "bar_line_9"};
-    private String[] bartenderMoodOrder = {chat.MOOD_CONFUSED, chat.MOOD_CONFUSED, chat.MOOD_ENCOURAGING, chat.MOOD_CONFIDENT, chat.MOOD_RESPECTFUL, chat.MOOD_THANKFUL, chat.MOOD_DISGUSTED, chat.MOOD_WORRIED};
+    private final String[] bartenderEventNpcOrder = {"foil1", "ewok1", "foil1", "ewok1", "foil1", "ewok1", "ewok1", "foil1"};
+    private final String[] bartenderLineOrder = {"bar_line_2", "bar_line_3", "bar_line_4", "bar_line_5", "bar_line_6", "bar_line_7", "bar_line_8", "bar_line_9"};
+    private final String[] bartenderMoodOrder = {chat.MOOD_CONFUSED, chat.MOOD_CONFUSED, chat.MOOD_ENCOURAGING, chat.MOOD_CONFIDENT, chat.MOOD_RESPECTFUL, chat.MOOD_THANKFUL, chat.MOOD_DISGUSTED, chat.MOOD_WORRIED};
 
     public cantina_controller()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String setting = getConfigSetting("GameServer", "foolsDay");
@@ -47,6 +54,7 @@ public class cantina_controller extends script.base_script
         messageTo(self, "invasionTimerPing", null, 30, false);
         return SCRIPT_CONTINUE;
     }
+
     public int invasionTimerPing(obj_id self, dictionary params) throws InterruptedException
     {
         float rightNow = getGameTime();
@@ -75,23 +83,27 @@ public class cantina_controller extends script.base_script
             announceStatusToPlayers(self, "cantina_zone_emote");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             messageTo(self, "invasionTimerPing", null, 900, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void announceStatusToPlayers(obj_id self, String messageId) throws InterruptedException
     {
         obj_id[] objPlayers = getPlayerCreaturesInRange(self, 64.0f);
-        if (objPlayers != null && objPlayers.length > 0)
+        if (objPlayers != null)
         {
-            for (obj_id objPlayer : objPlayers) {
+            for (obj_id objPlayer : objPlayers)
+            {
                 sendSystemMessage(objPlayer, new string_id("aprilfools", messageId));
             }
         }
     }
-    public obj_id spawnNpc(obj_id self, String type, location startLocation, String role, float pointX, float pointZ, obj_id cell, dictionary params, boolean moveTo) throws InterruptedException{
+
+    public obj_id spawnNpc(obj_id self, String type, location startLocation, String role, float pointX, float pointZ, obj_id cell, dictionary params, boolean moveTo) throws InterruptedException
+    {
         startLocation.x = pointX;
         startLocation.z = pointZ;
         startLocation.cell = cell;
@@ -103,9 +115,10 @@ public class cantina_controller extends script.base_script
         attachScript(npc, "event.aprilfools.cantina_actor");
         setObjVar(npc, "aprilfools.cantina", self);
         setObjVar(self, "aprilfools." + role, npc);
-        if(moveTo) messageTo(npc, "moveToMainActorPosition", params, 10, false);
+        if (moveTo) messageTo(npc, "moveToMainActorPosition", params, 10, false);
         return npc;
     }
+
     public int startRobberyEvent(obj_id self, dictionary params) throws InterruptedException
     {
         location loc = getLocation(self);
@@ -124,6 +137,7 @@ public class cantina_controller extends script.base_script
 
         return SCRIPT_CONTINUE;
     }
+
     public int robberyEventSegment1(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id ewok1 = getObjIdObjVar(self, "aprilfools.ewok1");
@@ -151,11 +165,13 @@ public class cantina_controller extends script.base_script
         obj_id npc = getObjIdObjVar(self, "aprilfools." + robberyEventNpcOrder[segment]);
         string_id myLine = new string_id("aprilfools", robberyEventLineOrder[segment]);
         chat.chat(npc, chat.CHAT_SAY, robberyEventMoodOrder[segment], myLine);
-        if(segment < 7) {
+        if (segment < 7)
+        {
             params.put("segment", segment + 1);
             messageTo(self, "robberyEventSegment", params, 6, false);
         }
-        else{
+        else
+        {
             obj_id ewok1 = getObjIdObjVar(self, "aprilfools.ewok1");
             obj_id ewok2 = getObjIdObjVar(self, "aprilfools.ewok2");
             obj_id ewok3 = getObjIdObjVar(self, "aprilfools.ewok3");
@@ -185,6 +201,7 @@ public class cantina_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int robberyEventCycle(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id ewok1 = getObjIdObjVar(self, "aprilfools.ewok1");
@@ -224,6 +241,7 @@ public class cantina_controller extends script.base_script
 
         return SCRIPT_CONTINUE;
     }
+
     public int concludeRobberyEvent(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "aprilfools.invasion_active", 0);
@@ -260,6 +278,7 @@ public class cantina_controller extends script.base_script
 
         return SCRIPT_CONTINUE;
     }
+
     public int startBartenderEvent(obj_id self, dictionary params) throws InterruptedException
     {
         location loc = getLocation(self);
@@ -284,6 +303,7 @@ public class cantina_controller extends script.base_script
 
         return SCRIPT_CONTINUE;
     }
+
     public int moveAllExtrasToRandomLocation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id ewok2 = getObjIdObjVar(self, "aprilfools.ewok2");
@@ -294,6 +314,7 @@ public class cantina_controller extends script.base_script
         messageTo(ewok4, "moveToRandomLocation", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startBartenderEventSegments(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id ewok1 = getObjIdObjVar(self, "aprilfools.ewok1");
@@ -311,13 +332,15 @@ public class cantina_controller extends script.base_script
         obj_id npc = getObjIdObjVar(self, "aprilfools." + bartenderEventNpcOrder[segment]);
         string_id myLine = new string_id("aprilfools", bartenderLineOrder[segment]);
         chat.chat(npc, chat.CHAT_SAY, bartenderMoodOrder[segment], myLine);
-        if(segment == 0 || segment == 2 || segment == 4 || segment == 7)
+        if (segment == 0 || segment == 2 || segment == 4 || segment == 7)
             messageTo(self, "moveAllExtrasToRandomLocation", null, 1, false);
-        if(segment < 7) {
+        if (segment < 7)
+        {
             params.put("segment", segment + 1);
             messageTo(self, "bartenderEventSegment", params, 6, false);
         }
-        else {
+        else
+        {
             obj_id ewok1 = getObjIdObjVar(self, "aprilfools.ewok1");
             obj_id foil1 = getObjIdObjVar(self, "aprilfools.foil1");
 
@@ -336,6 +359,7 @@ public class cantina_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int bartenderEventCycle(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id ewok1 = getObjIdObjVar(self, "aprilfools.ewok1");
@@ -369,6 +393,7 @@ public class cantina_controller extends script.base_script
         messageTo(self, "bartenderEventCycle", null, 16, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (isGod(objSpeaker))

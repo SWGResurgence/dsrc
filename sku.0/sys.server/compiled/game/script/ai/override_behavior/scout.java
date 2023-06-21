@@ -1,5 +1,11 @@
 package script.ai.override_behavior;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -11,15 +17,16 @@ import java.util.Vector;
 
 public class scout extends script.base_script
 {
-    public scout()
-    {
-    }
     public static final String SCRIPTVAR_SCOUT_TARGET = "behavior.scout.target";
     public static final String SCRIPTVAR_SCANNED = "behavior.scout.scanned";
     public static final String SCRIPTVAR_SCAN_STATUS = "behavior.scout.scan_status";
     public static final String SCRIPTVAR_ATTACKED = "behavior.scout.attacked";
     public static final String SCRIPTVAR_CALLED_SUPPORT = "behavior.scout.calledSupport";
     public static final String CONTRABAND_SEARCH_STF = "imperial_presence/contraband_search";
+    public scout()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume(ai_lib.AGGRO_VOLUME_NAME, 0, false);
@@ -27,6 +34,7 @@ public class scout extends script.base_script
         gcw.assignScanInterests(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "petBeingInitialized"))
@@ -58,6 +66,7 @@ public class scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTargetAssignment(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SCRIPTVAR_CALLED_SUPPORT))
@@ -86,6 +95,7 @@ public class scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void scoutTarget(obj_id npc, obj_id target) throws InterruptedException
     {
         if (!isIdValid(npc) || !isIdValid(target) || npc == target)
@@ -108,6 +118,7 @@ public class scout extends script.base_script
         }
         ai_lib.aiFollow(npc, target, 32.0f, 74.0f);
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SCRIPTVAR_ATTACKED))
@@ -125,6 +136,7 @@ public class scout extends script.base_script
         acquireNewTarget(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDefenderCombatAction(obj_id self, obj_id attacker, obj_id weapon, int combatResult) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SCRIPTVAR_ATTACKED))
@@ -143,11 +155,13 @@ public class scout extends script.base_script
         acquireNewTarget(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnFollowTargetLost(obj_id self, obj_id oldTarget) throws InterruptedException
     {
         acquireNewTarget(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnFollowWaiting(obj_id self, obj_id target) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, SCRIPTVAR_SCAN_STATUS))
@@ -171,6 +185,7 @@ public class scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleScanComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isAiDead(self))
@@ -233,13 +248,14 @@ public class scout extends script.base_script
             messageTo(self, "callLambdaSupport", d1, 10.0f, false);
             acquireNewTarget(self);
         }
-        else 
+        else
         {
             sendSystemMessage(target, new string_id(CONTRABAND_SEARCH_STF, "probe_scan_negative"));
             acquireNewTarget(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnFleeTargetLost(obj_id self, obj_id oldTarget) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -249,13 +265,14 @@ public class scout extends script.base_script
             {
                 acquireNewTarget(self);
             }
-            else 
+            else
             {
                 scoutTarget(self, target);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void acquireNewTarget(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -283,7 +300,7 @@ public class scout extends script.base_script
         Vector unscanned = utils.removeElements(new Vector(Arrays.asList(players)), scanned);
         if (unscanned != null && unscanned.size() > 0)
         {
-            obj_id target = ((obj_id)unscanned.get(rand(0, unscanned.size() - 1)));
+            obj_id target = ((obj_id) unscanned.get(rand(0, unscanned.size() - 1)));
             if (isIdValid(target) && (!utils.hasScriptVar(target, "scan_successful")))
             {
                 scoutTarget(self, target);
@@ -293,11 +310,13 @@ public class scout extends script.base_script
         ai_lib.wander(self);
         messageTo(self, "handleNeedTarget", null, 15.0f, false);
     }
+
     public int handleNeedTarget(obj_id self, dictionary params) throws InterruptedException
     {
         acquireNewTarget(self);
         return SCRIPT_CONTINUE;
     }
+
     public int callLambdaSupport(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isDead(self))
@@ -332,7 +351,7 @@ public class scout extends script.base_script
         location tmp = utils.getRandomLocationInRing(there, 5.0f, 10.0f);
         if (tmp != null)
         {
-            there = (location)tmp.clone();
+            there = (location) tmp.clone();
         }
         if (there != null)
         {
@@ -341,6 +360,7 @@ public class scout extends script.base_script
         messageTo(self, "handleClearSupportCall", null, 180.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleClearSupportCall(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isDead(self))
@@ -354,6 +374,7 @@ public class scout extends script.base_script
         utils.removeScriptVar(self, SCRIPTVAR_CALLED_SUPPORT);
         return SCRIPT_CONTINUE;
     }
+
     public int reportActivities(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isDead(self))
@@ -381,7 +402,7 @@ public class scout extends script.base_script
             pvpMakeDeclared(target);
             CustomerServiceLog("CONTRABAND_SCANNING: ", "%TU made Overt by Probot Scan", target, null);
         }
-        else 
+        else
         {
             jedi.doJediTEF(target);
         }

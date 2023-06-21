@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.diant_zuy;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.location;
@@ -10,6 +16,7 @@ public class mini_bloodrazor_bunker extends script.base_script
     public mini_bloodrazor_bunker()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int sekritCode = rand(1000, 9999);
@@ -27,14 +34,15 @@ public class mini_bloodrazor_bunker extends script.base_script
         permissionsMakePrivate(lockedRoom);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Spawning Everyone");
         if (!hasScript(self, "theme_park.dungeon.generic_spawner"))
         {
-            
+
         }
-        
+
         {
             attachScript(self, "theme_park.dungeon.generic_spawner");
         }
@@ -42,8 +50,8 @@ public class mini_bloodrazor_bunker extends script.base_script
         {
             setObjVar(self, "spawn_table", "datatables/spawning/dungeon/mini_bloodrazor_bunker.iff");
         }
-        return;
     }
+
     public int mainframeFailed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id spawnCell = getCellId(self, "computer");
@@ -61,19 +69,22 @@ public class mini_bloodrazor_bunker extends script.base_script
         obj_id droidTwo = create.object("blood_razor_pirate_elite", locTwo);
         return SCRIPT_CONTINUE;
     }
+
     public int openLocks(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id lockedRoom = getCellId(self, "pantry");
         permissionsMakePublic(lockedRoom);
         return SCRIPT_CONTINUE;
     }
+
     public int selfDestruct(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "intensifyExplosions", null, 1.0f, false);
         obj_id[] objPlayers = getPlayerCreaturesInRange(self, 64.0f);
-        if (objPlayers != null && objPlayers.length > 0)
+        if (objPlayers != null)
         {
-            for (obj_id objPlayer : objPlayers) {
+            for (obj_id objPlayer : objPlayers)
+            {
                 location myLoc = getLocation(self);
                 playClientEffectLoc(objPlayer, "clienteffect/combat_explosion_lair_large.cef", myLoc, 10.0f);
                 myLoc.x += 5.0f;
@@ -89,6 +100,7 @@ public class mini_bloodrazor_bunker extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int jackUpIntensity(obj_id self, dictionary params) throws InterruptedException
     {
         float intensity = getFloatObjVar(self, "diant.explosionIntensity");
@@ -100,6 +112,7 @@ public class mini_bloodrazor_bunker extends script.base_script
         setObjVar(self, "diant.explosionIntensity", intensity);
         return SCRIPT_CONTINUE;
     }
+
     public int intensifyExplosions(obj_id self, dictionary params) throws InterruptedException
     {
         int intensifying = getIntObjVar(self, "diant.intensifying");

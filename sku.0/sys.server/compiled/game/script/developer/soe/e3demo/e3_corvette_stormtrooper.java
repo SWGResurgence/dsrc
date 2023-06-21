@@ -1,5 +1,11 @@
 package script.developer.soe.e3demo;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.anims;
 import script.library.chat;
@@ -11,6 +17,7 @@ public class e3_corvette_stormtrooper extends script.base_script
     public e3_corvette_stormtrooper()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setAnimationMood(self, "npc_imperial");
@@ -18,6 +25,7 @@ public class e3_corvette_stormtrooper extends script.base_script
         factions.setFaction(self, "Imperial");
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (volumeName.equals("playerEnter"))
@@ -31,12 +39,14 @@ public class e3_corvette_stormtrooper extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doSalute(obj_id self, dictionary params) throws InterruptedException
     {
         doAnimationAction(self, anims.PLAYER_SALUTE2);
         messageTo(self, "sendMessage", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int sendMessage(obj_id self, dictionary params) throws InterruptedException
     {
         chat.chat(self, "Sir, This area is secured. The bridge access and command center are still unsecured.");

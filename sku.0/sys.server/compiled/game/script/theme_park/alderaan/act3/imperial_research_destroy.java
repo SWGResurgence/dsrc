@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -11,87 +17,88 @@ import java.util.Vector;
 
 public class imperial_research_destroy extends script.base_script
 {
+    public static final String[] TEMPLATE_LIST =
+            {
+                    "object/building/poi/generic_flatten_medium.iff",
+                    "coa3_imperial_research_captain",
+                    "coa3_imperial_research_captain",
+                    "coa3_imperial_research_guard",
+                    "coa3_imperial_research_guard",
+                    "coa3_imperial_research_guard",
+                    "coa3_imperial_research_guard",
+                    "coa3_imperial_research_guard",
+                    "coa3_imperial_research_guard"
+            };
+    public static final float[][] LOCATION_LIST =
+            {
+
+                    {
+                            0.00f,
+                            0.0f,
+                            0.0f,
+                            0.0f
+                    },
+
+                    {
+                            -10.00f,
+                            0.0f,
+                            3.00f,
+                            -90.0f
+                    },
+
+                    {
+                            -10.00f,
+                            0.0f,
+                            -3.00f,
+                            -90.0f
+                    },
+
+                    {
+                            -15.00f,
+                            0.0f,
+                            10.00f,
+                            -90.0f
+                    },
+
+                    {
+                            -15.00f,
+                            0.0f,
+                            -10.00f,
+                            -90.0f
+                    },
+
+                    {
+                            12.00f,
+                            0.0f,
+                            15.00f,
+                            45.0f
+                    },
+
+                    {
+                            12.50f,
+                            0.0f,
+                            -15.00f,
+                            135.0f
+                    },
+
+                    {
+                            -7.00f,
+                            0.0f,
+                            20.00f,
+                            -45.0f
+                    },
+
+                    {
+                            -7.00f,
+                            0.0f,
+                            -20.00f,
+                            -135.0f
+                    }
+            };
     public imperial_research_destroy()
     {
     }
-    public static final String[] TEMPLATE_LIST = 
-    {
-        "object/building/poi/generic_flatten_medium.iff",
-        "coa3_imperial_research_captain",
-        "coa3_imperial_research_captain",
-        "coa3_imperial_research_guard",
-        "coa3_imperial_research_guard",
-        "coa3_imperial_research_guard",
-        "coa3_imperial_research_guard",
-        "coa3_imperial_research_guard",
-        "coa3_imperial_research_guard"
-    };
-    public static final float[][] LOCATION_LIST = 
-    {
-        
-        {
-            0.00f,
-            0.0f,
-            0.0f,
-            0.0f
-        },
-        
-        {
-            -10.00f,
-            0.0f,
-            3.00f,
-            -90.0f
-        },
-        
-        {
-            -10.00f,
-            0.0f,
-            -3.00f,
-            -90.0f
-        },
-        
-        {
-            -15.00f,
-            0.0f,
-            10.00f,
-            -90.0f
-        },
-        
-        {
-            -15.00f,
-            0.0f,
-            -10.00f,
-            -90.0f
-        },
-        
-        {
-            12.00f,
-            0.0f,
-            15.00f,
-            45.0f
-        },
-        
-        {
-            12.50f,
-            0.0f,
-            -15.00f,
-            135.0f
-        },
-        
-        {
-            -7.00f,
-            0.0f,
-            20.00f,
-            -45.0f
-        },
-        
-        {
-            -7.00f,
-            0.0f,
-            -20.00f,
-            -135.0f
-        }
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -99,6 +106,7 @@ public class imperial_research_destroy extends script.base_script
         messageTo(self, "spawnNextObject", params, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnNextObject(obj_id self, dictionary params) throws InterruptedException
     {
         int objectNum = params.getInt("index");
@@ -140,12 +148,13 @@ public class imperial_research_destroy extends script.base_script
             params.put("index", objectNum);
             messageTo(self, "spawnNextObject", params, 0, false);
         }
-        else 
+        else
         {
             initFacility();
         }
         return SCRIPT_CONTINUE;
     }
+
     public void initFacility() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -161,6 +170,7 @@ public class imperial_research_destroy extends script.base_script
         setObjVar(terminal, "coa3.imperial.playerId", player);
         attachScript(terminal, "theme_park.alderaan.act3.imperial_research_terminal");
     }
+
     public int guardKilled(obj_id self, dictionary params) throws InterruptedException
     {
         int numGuards = getIntObjVar(self, "coa3.imperial.numGuards");
@@ -172,16 +182,20 @@ public class imperial_research_destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanup(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         Vector objectList = getResizeableObjIdArrayObjVar(self, "coa3.imperial.obj_list");
-        for (Object o : objectList) {
-            if (isIdValid(((obj_id) o))) {
+        for (Object o : objectList)
+        {
+            if (isIdValid(((obj_id) o)))
+            {
                 destroyObject(((obj_id) o));
             }
         }

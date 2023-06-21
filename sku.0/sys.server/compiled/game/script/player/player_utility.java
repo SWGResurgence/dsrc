@@ -1,5 +1,11 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -8,9 +14,6 @@ import java.util.Vector;
 
 public class player_utility extends script.base_script
 {
-    public player_utility()
-    {
-    }
     public static final String LOGGING_CATEGORY = "foraging";
     public static final boolean LOGGING_ON = false;
     public static final obj_id WORLD_ID = obj_id.NULL_ID;
@@ -57,6 +60,10 @@ public class player_utility extends script.base_script
     public static final String SCRIPTVAR_RENAME_CHARACTER_NEW_NAME = "renameCharacterNewName";
     public static final String SCRIPTVAR_RENAME_CHARACTER_UNVERIFIED_NEW_NAME = "renameCharacterUnverifiedNewName";
     public static final String GUARD_OCCUPIED = "occupied";
+    public player_utility()
+    {
+    }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (utils.checkConfigFlag("GameServer", "jediTestResources"))
@@ -83,6 +90,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         removeAttribOrSkillModModifier(self, "TC2 - BUFFS (Health)");
@@ -93,6 +101,7 @@ public class player_utility extends script.base_script
         removeAttribOrSkillModModifier(self, "TC2 - BUFFS (Will)");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id item = getObjectInSlot(self, "held_r");
@@ -125,6 +134,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnWaypointDestroyed(obj_id self, obj_id waypoint) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "hasClientPath"))
@@ -137,6 +147,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destination, obj_id transferer) throws InterruptedException
     {
         if ((destination == null) || (transferer == null))
@@ -187,7 +198,7 @@ public class player_utility extends script.base_script
                             turnstile.removePatron(building, self);
                             sendSystemMessage(self, new string_id(STF_FILE, "access_expired"));
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(self, new string_id(STF_FILE, "access_granted"));
                             return SCRIPT_CONTINUE;
@@ -204,7 +215,7 @@ public class player_utility extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 String creature_name = getName(mountId);
                 sendSystemMessage(self, SID_NO_ENTRY_WHILE_MOUNTED);
@@ -214,7 +225,7 @@ public class player_utility extends script.base_script
                     queueCommand(self, (1988230683), self, creature_name, COMMAND_PRIORITY_FRONT);
                     setYaw(mountId, getYaw(mountId) + 180.0f);
                 }
-                else 
+                else
                 {
                     queueCommand(self, (117012717), self, creature_name, COMMAND_PRIORITY_FRONT);
                 }
@@ -233,12 +244,13 @@ public class player_utility extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
         }
         LOG("space", "REturning Aok!@!");
         return SCRIPT_CONTINUE;
     }
+
     public void turnstileInform(obj_id self, obj_id building) throws InterruptedException
     {
         utils.setScriptVar(self, "turnstile.queryTurnstile", 1);
@@ -249,6 +261,7 @@ public class player_utility extends script.base_script
         String feePrompt = " \0" + packOutOfBandProsePackage(null, ppFeePrompt);
         sui.msgbox(self, self, feePrompt, sui.OK_CANCEL, utils.packStringId(SID_SUI_PAY_ACCESS_FEE_TITLE), sui.OK_CANCEL, "handleTurnstilePay");
     }
+
     public int handleTurnstilePay(obj_id self, dictionary params) throws InterruptedException
     {
         int btn = sui.getIntButtonPressed(params);
@@ -275,6 +288,7 @@ public class player_utility extends script.base_script
         money.requestPayment(self, bowner, fee, "attemptedPayment", d, true);
         return SCRIPT_CONTINUE;
     }
+
     public int attemptedPayment(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -303,6 +317,7 @@ public class player_utility extends script.base_script
         sendSystemMessage(self, str, null);
         return SCRIPT_CONTINUE;
     }
+
     public int handleVendorDestroy(obj_id self, dictionary params) throws InterruptedException
     {
         int usedSlots = getIntObjVar(self, "used_vendor_slots") - 1;
@@ -365,6 +380,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int handleHoloTimeout(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -384,6 +400,7 @@ public class player_utility extends script.base_script
         performance.holographicCleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePerformanceBreach(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "holoMessageTime"))
@@ -393,6 +410,7 @@ public class player_utility extends script.base_script
         performance.holographicCleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "holoMessageTime"))
@@ -400,18 +418,21 @@ public class player_utility extends script.base_script
             performance.holographicCleanup(self);
         }
         obj_id[] enemies = getWhoIsTargetingMe(self);
-        if (enemies == null || enemies.length == 0)
+        if (enemies == null)
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id enemy : enemies) {
-            if (isIdValid(enemy) && !isPlayer(enemy)) {
+        for (obj_id enemy : enemies)
+        {
+            if (isIdValid(enemy) && !isPlayer(enemy))
+            {
                 setMentalStateToward(enemy, self, FEAR, 0.0f);
                 setMentalStateToward(enemy, self, ANGER, 0.0f);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnRequestAuctionFee(obj_id self, obj_id who, obj_id bazaar, obj_id item, boolean premium, modifiable_int amount) throws InterruptedException
     {
         session.logActivity(who, session.ACTIVITY_ACCESS_BAZAAR);
@@ -439,6 +460,7 @@ public class player_utility extends script.base_script
         logBalance("auctionFee;" + who + ";" + bazaar + ";" + baseFee);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSUI(obj_id self, dictionary params) throws InterruptedException
     {
         boolean doMsg = true;
@@ -464,6 +486,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAttachScript(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -477,6 +500,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int handleDetachScript(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -490,6 +514,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int handleRemoveObjVar(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -500,6 +525,7 @@ public class player_utility extends script.base_script
         removeObjVar(self, objVarName);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGrantXp(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -511,6 +537,7 @@ public class player_utility extends script.base_script
         xp.grant(self, xpType, xpAmount, false);
         return SCRIPT_CONTINUE;
     }
+
     public int bm_collect_dna(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!beast_lib.isBeastMaster(self))
@@ -530,7 +557,7 @@ public class player_utility extends script.base_script
         {
             target = lookAtTarget;
         }
-        else 
+        else
         {
             target = intendedTarget;
         }
@@ -606,7 +633,7 @@ public class player_utility extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, incubator.SID_DNA_CANT_IN_COMBAT);
             return SCRIPT_OVERRIDE;
@@ -614,6 +641,7 @@ public class player_utility extends script.base_script
         sendSystemMessage(player, incubator.SID_DNA_INVALID_TARGET);
         return SCRIPT_OVERRIDE;
     }
+
     public int forage(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         location curLoc = getLocation(self);
@@ -641,7 +669,7 @@ public class player_utility extends script.base_script
             {
                 utils.removeScriptVarTree(self, "forage");
             }
-            else 
+            else
             {
                 float distance = getDistance(lastLoc, curLoc);
                 if (isIdValid(lastLoc.cell))
@@ -661,13 +689,18 @@ public class player_utility extends script.base_script
                     {
                         utils.removeScriptVar(self, "forage.listOfAlreadyForagedLocs");
                     }
-                    for (location oldListOfLoc : oldListOfLocs) {
-                        if (isIdValid(oldListOfLoc.cell)) {
+                    for (location oldListOfLoc : oldListOfLocs)
+                    {
+                        if (isIdValid(oldListOfLoc.cell))
+                        {
                             distance = 5.0f;
-                        } else {
+                        }
+                        else
+                        {
                             distance = getDistance(curLoc, oldListOfLoc);
                         }
-                        if (distance < 5.0f) {
+                        if (distance < 5.0f)
+                        {
                             string_id tooClose = new string_id("player/player_utility", "forage_already_done_here");
                             sendSystemMessage(self, tooClose);
                             return SCRIPT_OVERRIDE;
@@ -680,6 +713,7 @@ public class player_utility extends script.base_script
         messageTo(self, "handlerForPlayerForaging", null, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlerForPlayerForaging(obj_id self, dictionary params) throws InterruptedException
     {
         if (!loot.playerForaging(self))
@@ -688,15 +722,18 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeAppearanceItemEffect(obj_id self, dictionary params) throws InterruptedException
     {
-        obj_id allAppearanceItems[] = getAllItemsFromAppearanceInventory(self);
-        if (allAppearanceItems == null || allAppearanceItems.length <= 0)
+        obj_id[] allAppearanceItems = getAllItemsFromAppearanceInventory(self);
+        if (allAppearanceItems == null)
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id allAppearanceItem : allAppearanceItems) {
-            if (!hasObjVar(allAppearanceItem, NON_ENHANCEMENT_BUFF)) {
+        for (obj_id allAppearanceItem : allAppearanceItems)
+        {
+            if (!hasObjVar(allAppearanceItem, NON_ENHANCEMENT_BUFF))
+            {
                 continue;
             }
             static_item.removeWornBuffs(allAppearanceItem, self);
@@ -704,15 +741,18 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int addAppearanceItemEffect(obj_id self, dictionary params) throws InterruptedException
     {
-        obj_id allAppearanceItems[] = getAllItemsFromAppearanceInventory(self);
-        if (allAppearanceItems == null || allAppearanceItems.length <= 0)
+        obj_id[] allAppearanceItems = getAllItemsFromAppearanceInventory(self);
+        if (allAppearanceItems == null)
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id allAppearanceItem : allAppearanceItems) {
-            if (!hasObjVar(allAppearanceItem, NON_ENHANCEMENT_BUFF)) {
+        for (obj_id allAppearanceItem : allAppearanceItems)
+        {
+            if (!hasObjVar(allAppearanceItem, NON_ENHANCEMENT_BUFF))
+            {
                 continue;
             }
             static_item.applyWornBuffs(allAppearanceItem, self);
@@ -720,6 +760,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdPathToLocation(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if ((params == null) || (params.equals("")))
@@ -747,11 +788,13 @@ public class player_utility extends script.base_script
         createClientPathAdvanced(self, getLocation(self), destination, "default");
         return SCRIPT_CONTINUE;
     }
+
     public int cmdPathClear(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         destroyClientPath(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdFind(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("find", "******************* cmdFind: " + getGameTime() + " ******************");
@@ -802,20 +845,28 @@ public class player_utility extends script.base_script
         String[] catList = dataTableGetStringColumnNoDefaults("datatables/player/planet_map_cat.iff", "name");
         if ((catList != null) && (catList.length > 0))
         {
-            for (String s1 : catList) {
-                if (s1.equals(cat)) {
+            for (String s1 : catList)
+            {
+                if (s1.equals(cat))
+                {
                     break;
-                } else if (s1.startsWith(cat)) {
+                }
+                else if (s1.startsWith(cat))
+                {
                     cat = s1;
                     break;
                 }
             }
             if ((sub != null) && (!sub.equals("")))
             {
-                for (String s : catList) {
-                    if (s.equals(sub)) {
+                for (String s : catList)
+                {
+                    if (s.equals(sub))
+                    {
                         break;
-                    } else if (s.startsWith(sub)) {
+                    }
+                    else if (s.startsWith(sub))
+                    {
                         sub = s;
                         break;
                     }
@@ -841,9 +892,11 @@ public class player_utility extends script.base_script
                     }
                     Vector subLocs = new Vector();
                     subLocs.setSize(0);
-                    for (String subCat : subCats) {
+                    for (String subCat : subCats)
+                    {
                         map_location[] tmpLocs = getPlanetaryMapLocations(cat, subCat);
-                        if ((tmpLocs != null) || (tmpLocs.length > 0)) {
+                        if ((tmpLocs != null) || (tmpLocs.length > 0))
+                        {
                             subLocs.addAll(Arrays.asList(tmpLocs));
                         }
                     }
@@ -873,7 +926,7 @@ public class player_utility extends script.base_script
                 {
                     min = dist;
                     locIdx = n;
-                    there = (location)tmpLoc.clone();
+                    there = (location) tmpLoc.clone();
                 }
             }
             if (locIdx > -1)
@@ -925,7 +978,7 @@ public class player_utility extends script.base_script
                         {
                             parsedParams = new string_id("find_display", cat);
                         }
-                        else 
+                        else
                         {
                             parsedParams = new string_id("find_display", sub);
                         }
@@ -934,7 +987,7 @@ public class player_utility extends script.base_script
                             prose_package findSetParsed = prose.getPackage(PROSE_FIND_SET, parsedParams);
                             sendSystemMessageProse(self, findSetParsed);
                         }
-                        else 
+                        else
                         {
                             prose_package findSet = prose.getPackage(PROSE_FIND_SET, originalParams);
                             sendSystemMessageProse(self, findSet);
@@ -945,14 +998,18 @@ public class player_utility extends script.base_script
                         if (hereCity != null && hereCity.length > 0 && thereCity != null && thereCity.length > 0)
                         {
                             boolean areInSameCity = false;
-                            for (region region1 : hereCity) {
-                                for (region region : thereCity) {
-                                    if (((region1.getName())).equals(region.getName())) {
+                            for (region region1 : hereCity)
+                            {
+                                for (region region : thereCity)
+                                {
+                                    if (((region1.getName())).equals(region.getName()))
+                                    {
                                         areInSameCity = true;
                                         break;
                                     }
                                 }
-                                if (areInSameCity) {
+                                if (areInSameCity)
+                                {
                                     break;
                                 }
                             }
@@ -964,7 +1021,7 @@ public class player_utility extends script.base_script
                                 {
                                     start = getBuildingEjectLocation(getTopMostContainer(self));
                                 }
-                                location destination = (location)there.clone();
+                                location destination = (location) there.clone();
                                 obj_id tId = map_locs[locIdx].getLocationId();
                                 if (isIdValid(tId) && tId.isLoaded())
                                 {
@@ -980,13 +1037,13 @@ public class player_utility extends script.base_script
                                 }
                                 if (destination == null)
                                 {
-                                    destination = (location)there.clone();
+                                    destination = (location) there.clone();
                                 }
                                 if (!createClientPath(self, start, destination))
                                 {
                                     sendSystemMessage(self, SID_UNABLE_TO_CREATE_PATH);
                                 }
-                                else 
+                                else
                                 {
                                     if (here.cell != start.cell)
                                     {
@@ -999,17 +1056,17 @@ public class player_utility extends script.base_script
                         return SCRIPT_CONTINUE;
                     }
                 }
-                else 
+                else
                 {
                     LOG("find", "invalid target attached to planet map location??");
                 }
             }
-            else 
+            else
             {
                 LOG("find", "unable to determine valid PM index for request...");
             }
         }
-        else 
+        else
         {
             prose_package unfound = prose.getPackage(PROSE_FIND_UNKNOWN_ARG, originalParams);
             sendSystemMessageProse(self, unfound);
@@ -1018,6 +1075,7 @@ public class player_utility extends script.base_script
         sendSystemMessage(self, SID_FIND_GENERAL_ERROR);
         return SCRIPT_CONTINUE;
     }
+
     public void clearFindData(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, VAR_FIND_WAYPOINT))
@@ -1029,6 +1087,7 @@ public class player_utility extends script.base_script
         destroyClientPath(self);
         utils.removeScriptVar(self, "hasClientPath");
     }
+
     public int handleFindSui(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -1055,6 +1114,7 @@ public class player_utility extends script.base_script
         queueCommand(self, (806879158), null, arg, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDelayedSystemMessage(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1075,6 +1135,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDelayedProseMessage(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1097,6 +1158,7 @@ public class player_utility extends script.base_script
         sendSystemMessageProse(self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDivorce(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1112,6 +1174,7 @@ public class player_utility extends script.base_script
         marriage.endUnity(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleWaypointDestroyRequest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id wp = params.getObjId("wp");
@@ -1121,6 +1184,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleWaypointRenameRequest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id wp = params.getObjId("wp");
@@ -1140,6 +1204,7 @@ public class player_utility extends script.base_script
         setWaypointName(wp, name);
         return SCRIPT_CONTINUE;
     }
+
     public int handleVendorPayment(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -1158,6 +1223,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int displayCityUpdateTime(obj_id self, dictionary params) throws InterruptedException
     {
         String time_remaining = params.getString("time_remaining");
@@ -1165,6 +1231,7 @@ public class player_utility extends script.base_script
         sendSystemMessageProse(self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSurveyDroidReport(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] resourceIdList = params.getObjIdArray("resourceList");
@@ -1176,6 +1243,7 @@ public class player_utility extends script.base_script
         chatSendPersistentMessage("Interplanetary Survey Droid", getName(self), subject, report, null);
         return SCRIPT_CONTINUE;
     }
+
     public void createBuffs(obj_id player) throws InterruptedException
     {
         if (!hasAttribModifier(player, "TC2 - BUFFS (Health)"))
@@ -1185,8 +1253,8 @@ public class player_utility extends script.base_script
             addAttribModifier(player, "TC2 - BUFFS (Action)", ACTION, 2200, 10800, 0.0f, 10.0f, true, false, true);
             addAttribModifier(player, "TC2 - BUFFS (Stam)", STAMINA, 2200, 10800, 0.0f, 10.0f, true, false, true);
         }
-        return;
     }
+
     public void createNewBHResources(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -1250,7 +1318,7 @@ public class player_utility extends script.base_script
         createObject("object/tangible/mission/mission_bounty_droid_probot.iff", pInv, "");
         createObject("object/tangible/mission/mission_bounty_droid_probot.iff", pInv, "");
         obj_id hotpants = createObject("object/tangible/wearables/pants/pants_s26.iff", pInv, "");
-        
+
         {
             if (isIdValid(hotpants))
             {
@@ -1258,21 +1326,22 @@ public class player_utility extends script.base_script
                 custom_var myVar = getCustomVarByName(hotpants, "private/index_color_2");
                 if (myVar.isPalColor())
                 {
-                    palcolor_custom_var pcVar = (palcolor_custom_var)myVar;
+                    palcolor_custom_var pcVar = (palcolor_custom_var) myVar;
                     pcVar.setValue(color);
                 }
             }
         }
         gm.setBalance(self, money.MT_BANK, "500000");
         setObjVar(self, "jediTest.bounty_hunter_kit", 1);
-        return;
     }
+
     public int handleTurnstilePayFail(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "turnstile.queryTurnstile");
         sendSystemMessage(self, new string_id(STF_FILE, "not_enough_money"));
         return SCRIPT_CONTINUE;
     }
+
     public int handleGmGrantSkillOptions(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = utils.getObjIdScriptVar(self, "gmGrantSkill.target");
@@ -1297,37 +1366,38 @@ public class player_utility extends script.base_script
         switch (idx)
         {
             case 0:
-            gmGrantSkillRoadmapChoice(self, target);
-            break;
+                gmGrantSkillRoadmapChoice(self, target);
+                break;
             case 1:
-            String skillName = getWorkingSkill(target);
-            dictionary xpReqs = getSkillPrerequisiteExperience(skillName);
-            if (xpReqs == null || xpReqs.isEmpty())
-            {
-                broadcast(self, "Player does not have a valid working skill");
-                return SCRIPT_CONTINUE;
-            }
-            java.util.Enumeration e = xpReqs.keys();
-            String xpType = (String)(e.nextElement());
-            int xpCost = xpReqs.getInt(xpType);
-            int curXP = getExperiencePoints(target, xpType);
-            if (curXP < xpCost)
-            {
-                grantExperiencePoints(target, xpType, xpCost - curXP);
-            }
-            skill_template.earnWorkingSkill(target);
-            redisplayGrantSkillSui(self, target);
-            break;
+                String skillName = getWorkingSkill(target);
+                dictionary xpReqs = getSkillPrerequisiteExperience(skillName);
+                if (xpReqs == null || xpReqs.isEmpty())
+                {
+                    broadcast(self, "Player does not have a valid working skill");
+                    return SCRIPT_CONTINUE;
+                }
+                java.util.Enumeration e = xpReqs.keys();
+                String xpType = (String) (e.nextElement());
+                int xpCost = xpReqs.getInt(xpType);
+                int curXP = getExperiencePoints(target, xpType);
+                if (curXP < xpCost)
+                {
+                    grantExperiencePoints(target, xpType, xpCost - curXP);
+                }
+                skill_template.earnWorkingSkill(target);
+                redisplayGrantSkillSui(self, target);
+                break;
             case 2:
-            String template = getSkillTemplate(target);
-            gmGrantSkillRoadmapProgression(self, target, template);
-            break;
+                String template = getSkillTemplate(target);
+                gmGrantSkillRoadmapProgression(self, target, template);
+                break;
             default:
-            utils.removeScriptVarTree(self, "gmGrantSkill");
-            return SCRIPT_CONTINUE;
+                utils.removeScriptVarTree(self, "gmGrantSkill");
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void redisplayGrantSkillSui(obj_id self, obj_id target) throws InterruptedException
     {
         utils.setScriptVar(self, "gmGrantSkill.target", target);
@@ -1335,6 +1405,7 @@ public class player_utility extends script.base_script
         prompt += "Please choose an option:";
         int pid = sui.listbox(self, self, prompt, sui.OK_CANCEL, "GM GRANT SKILL", gm.ROADMAP_SKILL_OPTIONS, "handleGmGrantSkillOptions", true, false);
     }
+
     public void gmGrantSkillRoadmapChoice(obj_id self, obj_id target) throws InterruptedException
     {
         String[] roadmapList = gm.getRoadmapList();
@@ -1344,6 +1415,7 @@ public class player_utility extends script.base_script
         utils.setBatchScriptVar(self, "gmGrantSkill.roadmap_list", roadmapList);
         utils.setScriptVar(self, "gmGrantSkill.target", target);
     }
+
     public int handleGmGrantSkillRoadmapSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = utils.getObjIdScriptVar(self, "gmGrantSkill.target");
@@ -1374,6 +1446,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void gmGrantSkillRoadmapProgression(obj_id self, obj_id target, String template) throws InterruptedException
     {
         String templateSkills = dataTableGetString(skill_template.TEMPLATE_TABLE, template, "template");
@@ -1384,7 +1457,7 @@ public class player_utility extends script.base_script
             utils.removeScriptVarTree(self, "gmGrantSkill");
             return;
         }
-        else 
+        else
         {
             broadcast(self, "Revoking all skills and experience for " + getName(target));
             respec.revokeAllSkillsAndExperience(target);
@@ -1401,6 +1474,7 @@ public class player_utility extends script.base_script
         prompt += "Please enter the level for this player:";
         int pid = sui.inputbox(self, self, prompt, "handleGmGrantSkillLevelInput");
     }
+
     public int handleGmGrantSkillSkillSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = utils.getObjIdScriptVar(self, "gmGrantSkill.target");
@@ -1444,6 +1518,7 @@ public class player_utility extends script.base_script
         utils.removeScriptVarTree(self, "gmGrantSkill");
         return SCRIPT_CONTINUE;
     }
+
     public int handleGmGrantSkillLevelInput(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = utils.getObjIdScriptVar(self, "gmGrantSkill.target");
@@ -1460,7 +1535,7 @@ public class player_utility extends script.base_script
             broadcast(self, "Invalid level entered!");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             respec.autoLevelPlayer(target, level, true);
         }
@@ -1468,6 +1543,7 @@ public class player_utility extends script.base_script
         utils.removeScriptVarTree(self, "gmGrantSkill");
         return SCRIPT_CONTINUE;
     }
+
     public int cmdAutoDeclineDuel(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (hasObjVar(self, VAR_AUTODECLINE_DUEL))
@@ -1475,13 +1551,14 @@ public class player_utility extends script.base_script
             removeObjVar(self, VAR_AUTODECLINE_DUEL);
             sendSystemMessage(self, new string_id("spam", "autodecline_duel_off"));
         }
-        else 
+        else
         {
             setObjVar(self, VAR_AUTODECLINE_DUEL, 1);
             sendSystemMessage(self, new string_id("spam", "autodecline_duel_on"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSmugglerGetLocationInfo(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1499,6 +1576,7 @@ public class player_utility extends script.base_script
         messageTo(smuggler, "handleSmugglerDistanceCheck", params, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSmugglerDistanceCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1511,7 +1589,7 @@ public class player_utility extends script.base_script
         String targetLocArea = targetLoc.area;
         if (targetLoc != null && myLocArea.equals(targetLocArea))
         {
-            int distance = (int)getDistance(myLoc, targetLoc);
+            int distance = (int) getDistance(myLoc, targetLoc);
             if (distance > 1 && distance < 1000)
             {
                 prose_package pp = new prose_package();
@@ -1522,6 +1600,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int channelHeal(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1587,11 +1666,13 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int residentLinkFalse(obj_id self, dictionary params) throws InterruptedException
     {
         setHouseId(self, obj_id.NULL_ID);
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)
@@ -1600,6 +1681,7 @@ public class player_utility extends script.base_script
         }
         return true;
     }
+
     public int handleTargetDummyCombatReport(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -1612,7 +1694,7 @@ public class player_utility extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (revert != null && !revert.equals(""))
             {
@@ -1622,18 +1704,19 @@ public class player_utility extends script.base_script
                     sendSystemMessage(self, new string_id("target_dummy", "combat_data_all_clearing"));
                     sendSystemMessage(self, new string_id("target_dummy", "combat_data_all_cleared"));
                 }
-                else 
+                else
                 {
                     sendSystemMessage(self, new string_id("target_dummy", "placement_no_combat_data"));
                 }
             }
-            else 
+            else
             {
                 target_dummy.reportCombatData(self, self);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int reimburseTcgItem(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -1668,6 +1751,7 @@ public class player_utility extends script.base_script
         CustomerServiceLog("tcg", "TCG Reimbursement item: " + reimbursementItem + " was created: " + newItem + " and given to player: " + self + ".");
         return SCRIPT_CONTINUE;
     }
+
     public boolean applyCostume(obj_id self, String costumeCommand) throws InterruptedException
     {
         String ibuff = stealth.getInvisBuff(self);
@@ -1700,7 +1784,7 @@ public class player_utility extends script.base_script
                         sendSystemMessageProse(self, pp);
                         return false;
                     }
-                    else 
+                    else
                     {
                         decrementCount(costumeComponentId);
                     }
@@ -1711,6 +1795,7 @@ public class player_utility extends script.base_script
         }
         return false;
     }
+
     public int costume_loveday_ewok_cupid(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_loveday_ewok_cupid"))
@@ -1719,6 +1804,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_jawa(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_jawa"))
@@ -1727,6 +1813,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_gungan(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_gungan"))
@@ -1735,6 +1822,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_ewok(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_ewok"))
@@ -1743,6 +1831,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_gamorrean_guard(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_gamorrean_guard"))
@@ -1751,6 +1840,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_battle_droid(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_battle_droid"))
@@ -1759,6 +1849,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_droideka(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_droideka"))
@@ -1767,6 +1858,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_monkey_lizard(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_monkey_lizard"))
@@ -1775,6 +1867,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_toydarian(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_toydarian"))
@@ -1783,6 +1876,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_muftak(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_muftak"))
@@ -1791,6 +1885,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_dantari_m(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_dantari_m"))
@@ -1799,6 +1894,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_4lom(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_4lom"))
@@ -1807,6 +1903,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_dantari_f(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_dantari_f"))
@@ -1815,6 +1912,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_royal_guard(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_royal_guard"))
@@ -1823,6 +1921,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_droid_8t88(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_droid_8t88"))
@@ -1831,6 +1930,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_darktrooper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_darktrooper"))
@@ -1839,6 +1939,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_mustafarian_01(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_mustafarian_01"))
@@ -1847,6 +1948,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_chevin(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_chevin"))
@@ -1855,6 +1957,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_ig106(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_ig106"))
@@ -1863,6 +1966,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_super_battle_droid(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_super_battle_droid"))
@@ -1871,6 +1975,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_spider_droid(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_spider_droid"))
@@ -1879,6 +1984,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_undead_wookie(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_undead_wookie"))
@@ -1887,6 +1993,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_burning_ewok(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_burning_ewok"))
@@ -1895,6 +2002,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_chiss_01(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_chiss_01"))
@@ -1903,6 +2011,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_exar_kun_cultist(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_exar_kun_cultist"))
@@ -1911,6 +2020,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_lifeday_monkey_lizard(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_lifeday_monkey_lizard"))
@@ -1919,6 +2029,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_axkva_min(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_axkva_min"))
@@ -1927,6 +2038,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_blackwing_rancor(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_blackwing_rancor"))
@@ -1935,6 +2047,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_dug(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_dug"))
@@ -1943,6 +2056,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_esb_boba_fett(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_esb_boba_fett"))
@@ -1951,6 +2065,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_esb_darth_vader(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_esb_darth_vader"))
@@ -1959,6 +2074,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_esb_han_solo(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_esb_han_solo"))
@@ -1967,6 +2083,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_esb_lando(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_esb_lando"))
@@ -1975,6 +2092,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_esb_leia(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_esb_leia"))
@@ -1983,6 +2101,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_esb_luke(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_esb_luke"))
@@ -1991,6 +2110,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_esb_yoda(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_esb_yoda"))
@@ -1999,6 +2119,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_geonosian(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_geonosian"))
@@ -2007,6 +2128,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_hutt_female(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_hutt_female"))
@@ -2015,6 +2137,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_meatlump_king(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_meatlump_king"))
@@ -2023,6 +2146,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_mutant_rancor(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_mutant_rancor"))
@@ -2031,6 +2155,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_mynock(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_mynock"))
@@ -2039,6 +2164,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_rancor(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_rancor"))
@@ -2047,6 +2173,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_seven_obi_wan_ghost(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_seven_obi_wan_ghost"))
@@ -2055,6 +2182,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_skeleton(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_skeleton"))
@@ -2063,6 +2191,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_tauntaun(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_tauntaun"))
@@ -2071,6 +2200,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_tusken_king(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_tusken_king"))
@@ -2079,6 +2209,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_ugnaught(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_ugnaught"))
@@ -2087,6 +2218,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_wampa(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_wampa"))
@@ -2095,6 +2227,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int costume_zozpheratu(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!applyCostume(self, "costume_zozpheratu"))
@@ -2103,9 +2236,10 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdShowHousePackUpData(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        String housePackUpData = sui.colorGreen() + "";
+        String housePackUpData = sui.colorGreen();
         String timeMessage = "";
         String displayTime = "";
         int dailyCount = 0;
@@ -2158,7 +2292,7 @@ public class player_utility extends script.base_script
         }
         else if (player_structure.canPackMoreToday(self) && utils.hasScriptVar(self, player_structure.SCRIPTVAR_HOUSE_PACKUP_LOCKOUT_TIME))
         {
-            int timeNeeded = utils.getIntScriptVar(self, player_structure.SCRIPTVAR_HOUSE_PACKUP_LOCKOUT_TIME) + (int)player_structure.HOUSE_PACKUP_LOCKOUT_TIMER;
+            int timeNeeded = utils.getIntScriptVar(self, player_structure.SCRIPTVAR_HOUSE_PACKUP_LOCKOUT_TIME) + (int) player_structure.HOUSE_PACKUP_LOCKOUT_TIMER;
             int timeNow = getGameTime();
             int timeDiff = timeNeeded - timeNow;
             timeMessage = utils.formatTimeVerbose(timeDiff);
@@ -2172,6 +2306,7 @@ public class player_utility extends script.base_script
         sendConsoleMessage(self, housePackUpData);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdRename(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SCRIPTVAR_RENAME_CHARACTER_SUI_ID))
@@ -2197,7 +2332,7 @@ public class player_utility extends script.base_script
             {
                 sendSystemMessage(self, "GOD MODE bypass for 90 days character age requirement for character rename.", "");
             }
-            else 
+            else
             {
                 sendSystemMessage(self, "This character is only " + daysOld + " days old.  The character must be at least 90 days old before you can rename the character.", "");
                 return SCRIPT_CONTINUE;
@@ -2222,27 +2357,27 @@ public class player_utility extends script.base_script
                         {
                             sendSystemMessage(self, "There is already an outstanding rename request for this character.  If the request is not completed in " + convertedGameTime[1] + "h:" + convertedGameTime[2] + "m:" + convertedGameTime[3] + "s, you can try to rename this character again.", "");
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(self, "There is already an outstanding rename request for this character.", "");
                         }
                         return SCRIPT_CONTINUE;
                     }
                 }
-                else 
+                else
                 {
                     if (isGod(self))
                     {
                         sendSystemMessage(self, "GOD MODE bypass for 90 days wait between character rename.", "");
                     }
-                    else 
+                    else
                     {
                         int[] convertedGameTime = player_structure.convertSecondsTime(nextRenameTime - timeNow);
                         if ((convertedGameTime != null) && (convertedGameTime.length == 4))
                         {
                             sendSystemMessage(self, "You must wait " + convertedGameTime[0] + "d:" + convertedGameTime[1] + "h:" + convertedGameTime[2] + "m:" + convertedGameTime[3] + "s before you can rename this character again.", "");
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(self, "There is a 90 days wait after the character has been renamed before you can rename the character again.", "");
                         }
@@ -2254,6 +2389,7 @@ public class player_utility extends script.base_script
         renameCharacterDisplayNameInput(self, getName(self), "Enter a new name for the character.");
         return SCRIPT_CONTINUE;
     }
+
     public int trigger_city_house_packup(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id player = self;
@@ -2263,28 +2399,37 @@ public class player_utility extends script.base_script
         }
         location here = getLocation(player);
         obj_id[] potentialSigns = getObjectsInRange(here, 10.0f);
-        for (obj_id potentialSign : potentialSigns) {
-            if (!hasScript(potentialSign, "systems.sign.sign")) {
+        for (obj_id potentialSign : potentialSigns)
+        {
+            if (!hasScript(potentialSign, "systems.sign.sign"))
+            {
                 continue;
-            } else {
-                if (!utils.hasScriptVar(potentialSign, "player_structure.parent")) {
+            }
+            else
+            {
+                if (!utils.hasScriptVar(potentialSign, "player_structure.parent"))
+                {
                     sendSystemMessage(player, new string_id(STF_FILE, "unknown_city_packup_error"));
                     CustomerServiceLog("playerStructure", "Player(" + player + ") attempted to use the Remote City Packup Command but the House Sign(" + potentialSign + ") has invalid data.");
                     LOG("sissynoid", "Invalid Sign - No Parent ObjVar - fail");
                     return SCRIPT_CONTINUE;
                 }
                 obj_id structure = utils.getObjIdScriptVar(potentialSign, "player_structure.parent");
-                if (!isIdValid(structure)) {
+                if (!isIdValid(structure))
+                {
                     LOG("sissynoid", "Invalid Structure ID: " + structure);
                     CustomerServiceLog("playerStructure", "Player(" + player + ") attempted to use the Remote City Packup Command but the House Obj ID has invalid.");
                     return SCRIPT_CONTINUE;
                 }
-                if (!player_structure.isCityAbandoned(structure)) {
+                if (!player_structure.isCityAbandoned(structure))
+                {
                     sendSystemMessage(player, new string_id(STF_FILE, "structure_not_city_abandoned"));
                     CustomerServiceLog("playerStructure", "Player(" + player + ") attempted to use the Remote City Packup Command but the House(" + structure + ") was not City Abandoned.");
                     LOG("sissynoid", "This structure is not City Abandoned - fail");
                     return SCRIPT_CONTINUE;
-                } else {
+                }
+                else
+                {
                     LOG("sissynoid", "I found a sign: " + potentialSign);
                     dictionary dict = new dictionary();
                     dict.put("player", player);
@@ -2295,6 +2440,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRenameCharacterNameInput(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, SCRIPTVAR_RENAME_CHARACTER_SUI_ID))
@@ -2320,7 +2466,7 @@ public class player_utility extends script.base_script
                     {
                         newName = st.nextToken();
                     }
-                    else 
+                    else
                     {
                         newName += " ";
                         newName += st.nextToken();
@@ -2333,7 +2479,7 @@ public class player_utility extends script.base_script
                 utils.setScriptVar(self, SCRIPTVAR_RENAME_CHARACTER_UNVERIFIED_NEW_NAME, newName);
                 validateRenameCharacter(self, newName);
             }
-            else 
+            else
             {
                 if (currentName == null)
                 {
@@ -2344,6 +2490,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int renameCharacterNameValidationFail(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SCRIPTVAR_RENAME_CHARACTER_SUI_ID))
@@ -2362,6 +2509,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int renameCharacterNameValidationSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SCRIPTVAR_RENAME_CHARACTER_SUI_ID))
@@ -2400,7 +2548,7 @@ public class player_utility extends script.base_script
                 {
                     announcement += "Please note that this character's mail, friends list, and ignore list will be lost after the rename.\n\n";
                 }
-                else 
+                else
                 {
                     announcement += "Please note that even though this character's mail, friends list, and ignore list will be preserved with the rename, it is still recommended that you make a backup of this character's mail, friends list, and ignore list.\n\n";
                 }
@@ -2414,6 +2562,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRenameCharacterConfirmation(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, SCRIPTVAR_RENAME_CHARACTER_SUI_ID))
@@ -2440,12 +2589,13 @@ public class player_utility extends script.base_script
         {
             renameCharacter(self, newName);
         }
-        else 
+        else
         {
             renameCharacterReleaseNameReservation(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void renameCharacterDisplayNameInput(obj_id self, String newName, String reason) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -2463,6 +2613,7 @@ public class player_utility extends script.base_script
         utils.setScriptVar(self, SCRIPTVAR_RENAME_CHARACTER_SUI_ID, pid);
         showSUIPage(pid);
     }
+
     public int closeLeaderSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -2473,6 +2624,7 @@ public class player_utility extends script.base_script
         sui.removePid(player, holiday.LEADERSUI_PID_NAME);
         return SCRIPT_CONTINUE;
     }
+
     public int handlerCommunityBadgeGrant(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -2487,6 +2639,7 @@ public class player_utility extends script.base_script
         CustomerServiceLog("EventPerk", "[EventTool] 'handlerCommunityBadgeGrant' player " + getPlayerName(self) + ":" + self + " was awarded badge " + badgeName + " by " + getPlayerName(communityRep) + ":" + communityRep + " .", null);
         return SCRIPT_CONTINUE;
     }
+
     public int recalculateCampDefenseUndeadArray(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -2552,8 +2705,10 @@ public class player_utility extends script.base_script
             if (!groundquests.isQuestActive(self, questName))
             {
                 CustomerServiceLog("outbreak_themepark", "player_utility.recalculateCampDefenseUndeadArray() Player " + self + " did not have the appropriate quest active. Destroying all enemies.");
-                for (obj_id enemy : enemies) {
-                    if ((!isIdValid(enemy)) || !exists(enemy) || isDead(enemy)) {
+                for (obj_id enemy : enemies)
+                {
+                    if ((!isIdValid(enemy)) || !exists(enemy) || isDead(enemy))
+                    {
                         continue;
                     }
                     destroyObject(enemy);
@@ -2572,8 +2727,10 @@ public class player_utility extends script.base_script
             return SCRIPT_CONTINUE;
         }
         Vector latestGuardList = new Vector();
-        for (obj_id enemy : enemies) {
-            if ((isIdNull(enemy)) || !exists(enemy) || isDead(enemy)) {
+        for (obj_id enemy : enemies)
+        {
+            if ((isIdNull(enemy)) || !exists(enemy) || isDead(enemy))
+            {
                 continue;
             }
             utils.addElement(latestGuardList, enemy);
@@ -2602,6 +2759,7 @@ public class player_utility extends script.base_script
         utils.setScriptVar(self, "enemyList", newGuardArray);
         return SCRIPT_CONTINUE;
     }
+
     public boolean removeGuardPostFlag(obj_id player) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -2621,6 +2779,7 @@ public class player_utility extends script.base_script
         CustomerServiceLog("outbreak_themepark", "player_utility.removeGuardPostFlag() Player " + player + " did not have the guard post oid or the oid was invalid.");
         return false;
     }
+
     public int handleEntertainingGcwTroops(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -2739,7 +2898,7 @@ public class player_utility extends script.base_script
             LOG("gcw_entertainer", "handleEntertainingGcwTroops Imp task was signaled");
             groundquests.sendSignal(self, gcw.GCW_IMP_ENTERTAIN_PATROL_SIGNAL);
         }
-        else 
+        else
         {
             LOG("gcw_entertainer", "handleEntertainingGcwTroops NO FACTION");
         }
@@ -2758,6 +2917,7 @@ public class player_utility extends script.base_script
         cleanUpGuardPostNpc(npc);
         return SCRIPT_CONTINUE;
     }
+
     public boolean cleanUpGuardPostNpc(obj_id npc) throws InterruptedException
     {
         if (!isValidId(npc) || !exists(npc))
@@ -2768,12 +2928,13 @@ public class player_utility extends script.base_script
         {
             trial.cleanupObject(npc);
         }
-        else 
+        else
         {
             utils.removeScriptVarTree(npc, gcw.GCW_SCRIPTVAR_PARENT);
         }
         return true;
     }
+
     public int handleTraderRepairQuest(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -2877,6 +3038,7 @@ public class player_utility extends script.base_script
         messageTo(self, "gcwFatigueDecay", params, 120.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleOpposingFactionScoutQuest(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("gcw_patrol_point", "handleOpposingFactionScoutQuest init");
@@ -2953,7 +3115,7 @@ public class player_utility extends script.base_script
             LOG("gcw_patrol_point", "handleOpposingFactionScoutQuest Imp task was signaled");
             groundquests.sendSignal(self, gcw.GCW_IMP_FIND_PATROL_SIGNAL);
         }
-        else 
+        else
         {
             LOG("gcw_patrol_point", "handleOpposingFactionScoutQuest NO FACTION");
             utils.removeScriptVar(self, "spyPatrolPoint");
@@ -2965,6 +3127,7 @@ public class player_utility extends script.base_script
         sui.removePid(self, gcw.SPY_SCOUT_PID);
         return SCRIPT_CONTINUE;
     }
+
     public int handleOpposingFactionDestroyQuest(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -3055,11 +3218,11 @@ public class player_utility extends script.base_script
                 double dmg = maxHp * 0.2;
                 if (dmg < currentHp)
                 {
-                    setHitpoints(patrolPoint, (currentHp - (int)dmg));
+                    setHitpoints(patrolPoint, (currentHp - (int) dmg));
                     playClientEffectLoc(patrolPoint, "clienteffect/combat_explosion_lair_large.cef", getLocation(patrolPoint), 0);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     setHitpoints(patrolPoint, 0);
                 }
@@ -3075,7 +3238,7 @@ public class player_utility extends script.base_script
             LOG("gcw_constrction", "handleTraderRepairQuest Imp task was signaled");
             groundquests.sendSignal(self, gcw.GCW_IMP_DESTROY_PATROL_SIGNAL);
         }
-        else 
+        else
         {
             LOG("gcw_constrction", "handleTraderRepairQuest NO FACTION");
             utils.removeScriptVar(self, "spyPatrolPoint");
@@ -3089,6 +3252,7 @@ public class player_utility extends script.base_script
         sui.removePid(self, gcw.SPY_DESTROY_PID);
         return SCRIPT_CONTINUE;
     }
+
     public boolean removeTraderRepairScriptVars(obj_id player) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -3101,6 +3265,7 @@ public class player_utility extends script.base_script
         utils.removeScriptVar(player, gcw.GCW_REPAIR_QUEST);
         return true;
     }
+
     public int notifyPlayerOfGcwCityEventAnnouncement(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("gcw_announcement", "notifyPlayerOfGcwCityEventAnnouncement init");
@@ -3169,7 +3334,7 @@ public class player_utility extends script.base_script
             sound = "sound/sys_comm_rebel_male.snd";
             prose.setStringId(pp, new string_id(stringFile, rebelAnnouncement + planetName + "_" + cityName));
         }
-        else 
+        else
         {
             LOG("gcw_announcement", "notifyPlayerOfGcwCityEventAnnouncement player is NEUTRAL");
             npc = "object/mobile/dressed_noble_human_male_01.iff";
@@ -3180,6 +3345,7 @@ public class player_utility extends script.base_script
         gcw.gcwTutorialCheck(self);
         return SCRIPT_CONTINUE;
     }
+
     public int onGcwFactionalPresenceTableDictionaryResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "gcw.factionalPresenceTablePid"))
@@ -3188,6 +3354,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onGcwPersonalContributionTableDictionaryResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "gcw.gcwPersonalContributionTablePid"))
@@ -3196,6 +3363,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onGcwRegionDefenderTableDictionaryResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "gcw.gcwRegionDefenderTablePid"))
@@ -3239,20 +3407,20 @@ public class player_utility extends script.base_script
         final int[] citiesRebel = getGcwDefenderRegionCitiesRebel(selectedGcwDefenderRegion);
         final int[] guildsImperial = getGcwDefenderRegionGuildsImperial(selectedGcwDefenderRegion);
         final int[] guildsRebel = getGcwDefenderRegionGuildsRebel(selectedGcwDefenderRegion);
-        final String[] columnHeader = 
-        {
-            "City Name",
-            "Guild Name",
-            "Faction",
-            "Time Started Defending"
-        };
-        final String[] columnHeaderType = 
-        {
-            "text",
-            "text",
-            "image",
-            "text"
-        };
+        final String[] columnHeader =
+                {
+                        "City Name",
+                        "Guild Name",
+                        "Faction",
+                        "Time Started Defending"
+                };
+        final String[] columnHeaderType =
+                {
+                        "text",
+                        "text",
+                        "image",
+                        "text"
+                };
         int total = 0;
         if (citiesImperial != null)
         {
@@ -3276,9 +3444,10 @@ public class player_utility extends script.base_script
         }
         String[][] rowData = new String[total][5];
         total = 0;
-        if ((citiesRebel != null) && (citiesRebel.length > 0))
+        if (citiesRebel != null)
         {
-            for (int i1 : citiesRebel) {
+            for (int i1 : citiesRebel)
+            {
                 final String cityName = cityGetName(i1);
                 rowData[total][0] = ((cityName == null) ? "" : cityName);
                 rowData[total][1] = "";
@@ -3288,14 +3457,16 @@ public class player_utility extends script.base_script
                 ++total;
             }
         }
-        if ((guildsRebel != null) && (guildsRebel.length > 0))
+        if (guildsRebel != null)
         {
-            for (int i1 : guildsRebel) {
+            for (int i1 : guildsRebel)
+            {
                 rowData[total][0] = "";
                 final String guildName = guildGetName(i1);
                 rowData[total][1] = ((guildName == null) ? "" : guildName);
                 final String guildAbbrev = guildGetAbbrev(i1);
-                if ((guildAbbrev != null) && (guildAbbrev.length() > 0)) {
+                if ((guildAbbrev != null) && (guildAbbrev.length() > 0))
+                {
                     rowData[total][1] += (" (" + guildAbbrev + ")");
                 }
                 rowData[total][2] = "/Styles.Icon.Faction.rebel_logo";
@@ -3304,9 +3475,10 @@ public class player_utility extends script.base_script
                 ++total;
             }
         }
-        if ((citiesImperial != null) && (citiesImperial.length > 0))
+        if (citiesImperial != null)
         {
-            for (int i1 : citiesImperial) {
+            for (int i1 : citiesImperial)
+            {
                 final String cityName = cityGetName(i1);
                 rowData[total][0] = ((cityName == null) ? "" : cityName);
                 rowData[total][1] = "";
@@ -3316,14 +3488,16 @@ public class player_utility extends script.base_script
                 ++total;
             }
         }
-        if ((guildsImperial != null) && (guildsImperial.length > 0))
+        if (guildsImperial != null)
         {
-            for (int i1 : guildsImperial) {
+            for (int i1 : guildsImperial)
+            {
                 rowData[total][0] = "";
                 final String guildName = guildGetName(i1);
                 rowData[total][1] = ((guildName == null) ? "" : guildName);
                 final String guildAbbrev = guildGetAbbrev(i1);
-                if ((guildAbbrev != null) && (guildAbbrev.length() > 0)) {
+                if ((guildAbbrev != null) && (guildAbbrev.length() > 0))
+                {
                     rowData[total][1] += (" (" + guildAbbrev + ")");
                 }
                 rowData[total][2] = "/Styles.Icon.Faction.imperial_logo";
@@ -3368,29 +3542,29 @@ public class player_utility extends script.base_script
         }
         if (controlledDuration > 0)
         {
-            String durationStr = "" + controlledDuration + "s";
+            String durationStr = controlledDuration + "s";
             final int[] convertedTime = player_structure.convertSecondsTime(controlledDuration);
             if ((convertedTime != null) && (convertedTime.length == 4))
             {
                 if (convertedTime[0] > 0)
                 {
-                    durationStr = "" + convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                    durationStr = convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                 }
                 else if (convertedTime[1] > 0)
                 {
-                    durationStr = "" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                    durationStr = convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                 }
                 else if (convertedTime[2] > 0)
                 {
-                    durationStr = "" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                    durationStr = convertedTime[2] + "m:" + convertedTime[3] + "s";
                 }
                 else if (convertedTime[3] > 0)
                 {
-                    durationStr = "" + convertedTime[3] + "s";
+                    durationStr = convertedTime[3] + "s";
                 }
-                else 
+                else
                 {
-                    durationStr = "" + controlledDuration + "s";
+                    durationStr = controlledDuration + "s";
                 }
             }
             details += (" (at least 70%% continuously " + ((imperialPct >= 70) ? "Imperial" : "Rebel") + " controlled for " + durationStr + ")");
@@ -3405,6 +3579,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onGcwRegionDefenderDetailsTableDictionaryResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "gcw.gcwRegionDefenderDetailsTablePid"))
@@ -3413,6 +3588,7 @@ public class player_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleGcwCityHelpUi(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -3454,7 +3630,7 @@ public class player_utility extends script.base_script
         {
             playerFactionFlag = factions.FACTION_FLAG_IMPERIAL;
         }
-        else 
+        else
         {
             obj_id[] defenseAttacheObjList = trial.getObjectsInInstanceBySpawnId(sequencer, "defense_attache");
             if (defenseAttacheObjList == null || defenseAttacheObjList.length <= 0)
@@ -3497,11 +3673,7 @@ public class player_utility extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        boolean playerIsDefending = true;
-        if (factions.getFactionFlag(defendingGeneral) != playerFactionFlag)
-        {
-            playerIsDefending = false;
-        }
+        boolean playerIsDefending = factions.getFactionFlag(defendingGeneral) == playerFactionFlag;
         if (playerIsDefending)
         {
             obj_id[] defenseAttacheObjList = trial.getObjectsInInstanceBySpawnId(sequencer, "defense_attache");
@@ -3522,7 +3694,7 @@ public class player_utility extends script.base_script
                 setWaypointActive(wpt, true);
             }
         }
-        else 
+        else
         {
             location defGenLoc = getLocation(defendingGeneral);
             if (defGenLoc != null)
@@ -3550,6 +3722,7 @@ public class player_utility extends script.base_script
         sendSystemMessage(self, new string_id("gcw", "gcw_city_waypoints_issued"));
         return SCRIPT_CONTINUE;
     }
+
     public int playIconicGCWWrapUpMessage(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -3585,6 +3758,7 @@ public class player_utility extends script.base_script
         commPlayers(self, npc, sound, 12.0f, self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCityGcwRegionDefenderChoice(obj_id self, dictionary params) throws InterruptedException
     {
         final int bp = sui.getIntButtonPressed(params);
@@ -3664,29 +3838,29 @@ public class player_utility extends script.base_script
             final int cooldown = previousRegionTimeEndDefend + (isGod(self) ? 10 : 86400) - timeNow;
             if ((cooldown > 0) && !selectedGcwDefenderRegion.equals(previousRegion))
             {
-                String cooldownStr = "" + cooldown + "s";
+                String cooldownStr = cooldown + "s";
                 int[] convertedTime = player_structure.convertSecondsTime(cooldown);
                 if ((convertedTime != null) && (convertedTime.length == 4))
                 {
                     if (convertedTime[0] > 0)
                     {
-                        cooldownStr = "" + convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                        cooldownStr = convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                     }
                     else if (convertedTime[1] > 0)
                     {
-                        cooldownStr = "" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                        cooldownStr = convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                     }
                     else if (convertedTime[2] > 0)
                     {
-                        cooldownStr = "" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                        cooldownStr = convertedTime[2] + "m:" + convertedTime[3] + "s";
                     }
                     else if (convertedTime[3] > 0)
                     {
-                        cooldownStr = "" + convertedTime[3] + "s";
+                        cooldownStr = convertedTime[3] + "s";
                     }
-                    else 
+                    else
                     {
-                        cooldownStr = "" + cooldown + "s";
+                        cooldownStr = cooldown + "s";
                     }
                 }
                 sendSystemMessage(self, "You must wait " + cooldownStr + " before you can defend a different GCW region. You can immediately defend the GCW region you most recently defended (" + localize(new string_id("gcw_regions", previousRegion)) + ").", "");
@@ -3696,14 +3870,14 @@ public class player_utility extends script.base_script
             {
                 citySetGcwDefenderRegion(cityId, previousRegion, previousRegionTimeStartDefend, true);
             }
-            else 
+            else
             {
                 citySetGcwDefenderRegion(cityId, selectedGcwDefenderRegion, timeNow, true);
                 setObjVar(cityHall, "cityGcwRegionDefender.region", selectedGcwDefenderRegion);
                 setObjVar(cityHall, "cityGcwRegionDefender.timeBegin", timeNow);
             }
         }
-        else 
+        else
         {
             citySetGcwDefenderRegion(cityId, selectedGcwDefenderRegion, timeNow, true);
             setObjVar(cityHall, "cityGcwRegionDefender.region", selectedGcwDefenderRegion);

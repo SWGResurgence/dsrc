@@ -1,5 +1,11 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -9,9 +15,6 @@ import java.util.Vector;
 
 public class camp_defense_spawner extends script.base_script
 {
-    public camp_defense_spawner()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_trigger";
     public static final String CLIENT_EFFECT = "appearance/pt_smoke_puff.prt";
@@ -25,6 +28,10 @@ public class camp_defense_spawner extends script.base_script
     public static final String ENEMY_LIST = "enemyList";
     public static final float SEARCH_RADIUS = 300.0f;
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
+    public camp_defense_spawner()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "camp_defense_spawner.OnInitialize() initializing a spawner for camp defense.");
@@ -36,6 +43,7 @@ public class camp_defense_spawner extends script.base_script
         messageTo(self, "findPathNodes", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startSpawning(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "camp_defense_spawner.startSpawning() Initialized!");
@@ -104,7 +112,7 @@ public class camp_defense_spawner extends script.base_script
         {
             params.put("creatureLevel", maxLevelOfEnemies);
         }
-        else 
+        else
         {
             params.put("creatureLevel", combatLevel);
         }
@@ -127,6 +135,7 @@ public class camp_defense_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnDynamicEnemy(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -182,7 +191,7 @@ public class camp_defense_spawner extends script.base_script
             CustomerServiceLog("outbreak_themepark", "camp_defense_spawner.spawnDynamicEnemy() spawner, " + self + ", did not have the path node script var. Aborting.");
             return SCRIPT_CONTINUE;
         }
-        location patrolList[] = utils.getLocationArrayScriptVar(self, "patrolList");
+        location[] patrolList = utils.getLocationArrayScriptVar(self, "patrolList");
         if (patrolList == null || patrolList.length <= 0)
         {
             CustomerServiceLog("outbreak_themepark", "camp_defense_spawner.spawnDynamicEnemy() spawner, " + self + ", did not have valid path nodes. Aborting.");
@@ -227,7 +236,7 @@ public class camp_defense_spawner extends script.base_script
             enemies = utils.addElement(enemies, mob);
             utils.setScriptVar(player, ENEMY_LIST, enemies);
         }
-        else 
+        else
         {
             Vector enemyVector = null;
             obj_id[] enemyArray = utils.getObjIdArrayScriptVar(player, ENEMY_LIST);
@@ -242,6 +251,7 @@ public class camp_defense_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int findPathNodes(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "camp_defense_spawner.findPathNodes() handler init.");
@@ -265,8 +275,10 @@ public class camp_defense_spawner extends script.base_script
         CustomerServiceLog("outbreak_themepark", "camp_defense_spawner.findPathNodes() pathNodeList.length: " + pathNodeList.length);
         Vector nodePtLocs = new Vector();
         nodePtLocs.setSize(0);
-        for (obj_id obj_id : pathNodeList) {
-            if (!(getStringObjVar(obj_id, PATHNODE_OBJVAR)).equals(questName)) {
+        for (obj_id obj_id : pathNodeList)
+        {
+            if (!(getStringObjVar(obj_id, PATHNODE_OBJVAR)).equals(questName))
+            {
                 continue;
             }
             utils.addElement(nodePtLocs, getLocation(obj_id));
@@ -277,10 +289,11 @@ public class camp_defense_spawner extends script.base_script
             CustomerServiceLog("outbreak_themepark", "camp_defense_spawner.OnInitialize() the spawner, " + self + " failed to get a list of nodes for all spawns to follow.");
             return SCRIPT_CONTINUE;
         }
-        CustomerServiceLog("outbreak_themepark", "camp_defense_spawner.findPathNodes() nodePtLocs[0] " + ((location)nodePtLocs.get(0)));
+        CustomerServiceLog("outbreak_themepark", "camp_defense_spawner.findPathNodes() nodePtLocs[0] " + nodePtLocs.get(0));
         utils.setScriptVar(self, "patrolList", nodePtLocs);
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

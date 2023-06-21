@@ -1,5 +1,11 @@
 package script.systems.vehicle_system;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.callable;
 import script.library.pet_lib;
@@ -22,6 +28,7 @@ public class vehicle_ping extends script.base_script
     public static final int VCDPING_PING_INTERVAL_STANDARD = 300;
     public static final int VCDPING_PING_INTERVAL_RETRY = 30;
     public static final boolean debug = false;
+
     public vehicle_ping()
     {
     }

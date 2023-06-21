@@ -1,66 +1,78 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class generic_newbie_pilot_info_emperors_retreat extends script.base_script
 {
+    public static String c_stringFile = "conversation/generic_newbie_pilot_info_emperors_retreat";
+
     public generic_newbie_pilot_info_emperors_retreat()
     {
     }
-    public static String c_stringFile = "conversation/generic_newbie_pilot_info_emperors_retreat";
+
     public boolean generic_newbie_pilot_info_emperors_retreat_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean generic_newbie_pilot_info_emperors_retreat_condition_remembersPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         return (utils.hasScriptVar(player, "metNewbiePilot"));
     }
+
     public boolean generic_newbie_pilot_info_emperors_retreat_condition_hasWonAccessQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if ((space_flags.isSpaceTrack(player, space_flags.IMPERIAL_NABOO) || space_flags.isSpaceTrack(player, space_flags.PRIVATEER_NABOO)) && space_quest.hasWonQuest(player, "destroy_surpriseattack", "naboo_station_emperors_access_quest_6"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return (space_flags.isSpaceTrack(player, space_flags.IMPERIAL_NABOO) || space_flags.isSpaceTrack(player, space_flags.PRIVATEER_NABOO)) && space_quest.hasWonQuest(player, "destroy_surpriseattack", "naboo_station_emperors_access_quest_6");
     }
+
     public boolean generic_newbie_pilot_info_emperors_retreat_condition_hasSpaceAccess(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "space_access_imperial");
     }
+
     public boolean generic_newbie_pilot_info_emperors_retreat_condition_isImperialPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_imperial_navy_novice"));
     }
+
     public boolean generic_newbie_pilot_info_emperors_retreat_condition_isRebelPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_novice"));
     }
+
     public boolean generic_newbie_pilot_info_emperors_retreat_condition_isPrivateerPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "pilot_neutral_novice");
     }
+
     public boolean generic_newbie_pilot_info_emperors_retreat_condition_hasSpaceExpansion(obj_id player, obj_id npc) throws InterruptedException
     {
         return (features.isSpaceEdition(player));
     }
+
     public boolean generic_newbie_pilot_info_emperors_retreat_condition_hasSpaceShip(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasShip(player));
     }
+
     public void generic_newbie_pilot_info_emperors_retreat_action_rememberPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "metNewbiePilot", true);
     }
+
     public void generic_newbie_pilot_info_emperors_retreat_action_grantAccess(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "space_access_imperial", 34);
         space_quest.giveReward(player, "space_battle", "naboo_station_emperors_access_quest_1", 10000);
     }
+
     public int generic_newbie_pilot_info_emperors_retreat_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1ad77c93"))
@@ -89,7 +101,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f184aba");
@@ -102,7 +114,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_emperors_retreat.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -136,7 +148,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d0d78fed");
@@ -149,7 +161,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_emperors_retreat.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -175,7 +187,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6403a01d");
@@ -184,7 +196,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_emperors_retreat.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -194,6 +206,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_emperors_retreat_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f184aba"))
@@ -215,7 +228,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4ed6cafa");
@@ -224,7 +237,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_emperors_retreat.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -251,7 +264,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7d0bf8d");
@@ -260,7 +273,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_emperors_retreat.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -270,6 +283,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_emperors_retreat_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4ed6cafa"))
@@ -287,6 +301,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_emperors_retreat_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7d0bf8d"))
@@ -304,6 +319,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_emperors_retreat_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d0d78fed"))
@@ -325,7 +341,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_421dc0c2");
@@ -334,7 +350,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_emperors_retreat.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -360,7 +376,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -369,7 +385,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_emperors_retreat.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -379,6 +395,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_emperors_retreat_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_421dc0c2"))
@@ -400,7 +417,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_745f3194");
@@ -409,7 +426,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_emperors_retreat.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -419,6 +436,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_emperors_retreat_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_745f3194"))
@@ -440,7 +458,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aede40a6");
@@ -449,7 +467,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_emperors_retreat.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -459,6 +477,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_emperors_retreat_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_aede40a6"))
@@ -479,7 +498,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_de1e771");
@@ -488,7 +507,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_emperors_retreat.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -498,6 +517,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_emperors_retreat_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_de1e771"))
@@ -515,6 +535,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_emperors_retreat_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -535,7 +556,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_33");
@@ -544,7 +565,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_emperors_retreat.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -554,6 +575,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_emperors_retreat_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33"))
@@ -571,6 +593,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_emperors_retreat_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6403a01d"))
@@ -588,6 +611,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_emperors_retreat_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_742f54a5"))
@@ -608,7 +632,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6adec6b0");
@@ -617,7 +641,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.generic_newbie_pilot_info_emperors_retreat.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -638,6 +662,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         }
         return SCRIPT_CONTINUE;
     }
+
     public int generic_newbie_pilot_info_emperors_retreat_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6adec6b0"))
@@ -653,6 +678,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -665,6 +691,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         setName(self, "Imperial Pilot");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -673,6 +700,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         setName(self, "Imperial Pilot");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -681,18 +709,21 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.generic_newbie_pilot_info_emperors_retreat");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -738,7 +769,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1ad77c93");
@@ -754,7 +785,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                 utils.setScriptVar(player, "conversation.generic_newbie_pilot_info_emperors_retreat.branchId", 2);
                 npcStartConversation(player, npc, "generic_newbie_pilot_info_emperors_retreat", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -783,7 +814,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_742f54a5");
@@ -795,7 +826,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
                 utils.setScriptVar(player, "conversation.generic_newbie_pilot_info_emperors_retreat.branchId", 19);
                 npcStartConversation(player, npc, "generic_newbie_pilot_info_emperors_retreat", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -804,6 +835,7 @@ public class generic_newbie_pilot_info_emperors_retreat extends script.base_scri
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("generic_newbie_pilot_info_emperors_retreat"))

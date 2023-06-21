@@ -1,79 +1,67 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class illicit_broker_5 extends script.base_script
 {
+    public static String c_stringFile = "conversation/illicit_broker_5";
+
     public illicit_broker_5()
     {
     }
-    public static String c_stringFile = "conversation/illicit_broker_5";
+
     public boolean illicit_broker_5_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean illicit_broker_5_condition_isNonSmuggler(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (utils.getPlayerProfession(player) != utils.SMUGGLER)
-        {
-            return true;
-        }
-        return false;
+        return utils.getPlayerProfession(player) != utils.SMUGGLER;
     }
+
     public boolean illicit_broker_5_condition_isDoingMission(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isDoingSmugglerMission(player))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isDoingSmugglerMission(player);
     }
+
     public boolean illicit_broker_5_condition_smugglerAboveMissionTier(obj_id player, obj_id npc) throws InterruptedException
     {
         float underworldFaction = factions.getFactionStanding(player, "underworld");
         int brokerTier = 5;
-        if (smuggler.getSmuggleTier(underworldFaction) > brokerTier)
-        {
-            return true;
-        }
-        return false;
+        return smuggler.getSmuggleTier(underworldFaction) > brokerTier;
     }
+
     public boolean illicit_broker_5_condition_hasMissionContrabandBusiness(obj_id player, obj_id npc) throws InterruptedException
     {
         int brokerTier = 5;
-        if (smuggler.hasMissionContrabandForTransaction(player, brokerTier))
-        {
-            return true;
-        }
-        return false;
+        return smuggler.hasMissionContrabandForTransaction(player, brokerTier);
     }
+
     public boolean illicit_broker_5_condition_hasSomeContraband(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (smuggler.hasIllicitContraband(player))
-        {
-            return true;
-        }
-        return false;
+        return smuggler.hasIllicitContraband(player);
     }
+
     public boolean illicit_broker_5_condition_hasMissionContraband(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (smuggler.hasIllicitMissionContraband(player))
-        {
-            return true;
-        }
-        return false;
+        return smuggler.hasIllicitMissionContraband(player);
     }
+
     public boolean illicit_broker_5_condition_hasMissionContrabandToDeliver(obj_id player, obj_id npc) throws InterruptedException
     {
         float underworldFaction = factions.getFactionStanding(player, "underworld");
         int brokerTier = 5;
-        if (smuggler.getSmuggleTier(underworldFaction) == brokerTier)
-        {
-            return true;
-        }
-        return false;
+        return smuggler.getSmuggleTier(underworldFaction) == brokerTier;
     }
+
     public void illicit_broker_5_action_startGiveQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         String illicit_broker_5_tokenTO_contrabandName = utils.getStringScriptVar(player, "illicitContrabandTrade");
@@ -88,6 +76,7 @@ public class illicit_broker_5 extends script.base_script
             groundquests.requestGrantQuest(player, "quest/smuggle_illicit_5", true);
         }
     }
+
     public void illicit_broker_5_action_giveIllicitPointerQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         int missionTier = smuggler.getMissionCotrabandPointerTier(player);
@@ -95,28 +84,29 @@ public class illicit_broker_5 extends script.base_script
         switch (missionTier)
         {
             case 1:
-            pointerQuest = "quest/smuggle_pointer_illicit_1";
-            break;
+                pointerQuest = "quest/smuggle_pointer_illicit_1";
+                break;
             case 2:
-            pointerQuest = "quest/smuggle_pointer_illicit_2";
-            break;
+                pointerQuest = "quest/smuggle_pointer_illicit_2";
+                break;
             case 3:
-            pointerQuest = "quest/smuggle_pointer_illicit_3";
-            break;
+                pointerQuest = "quest/smuggle_pointer_illicit_3";
+                break;
             case 4:
-            pointerQuest = "quest/smuggle_pointer_illicit_4";
-            break;
+                pointerQuest = "quest/smuggle_pointer_illicit_4";
+                break;
             case 5:
-            pointerQuest = "quest/smuggle_pointer_illicit_5";
-            break;
+                pointerQuest = "quest/smuggle_pointer_illicit_5";
+                break;
             default:
-            break;
+                break;
         }
         if (!groundquests.isQuestActive(player, pointerQuest))
         {
             groundquests.requestGrantQuest(player, pointerQuest, true);
         }
     }
+
     public void illicit_broker_5_action_sellContraband(obj_id player, obj_id npc) throws InterruptedException
     {
         String illicit_broker_5_tokenTO_contrabandName = utils.getStringScriptVar(player, "illicitContrabandTrade");
@@ -131,6 +121,7 @@ public class illicit_broker_5 extends script.base_script
             utils.removeScriptVar(player, "illicitContrabandTrade");
         }
     }
+
     public String illicit_broker_5_tokenTO_contrabandName(obj_id player, obj_id npc) throws InterruptedException
     {
         int brokerTier = 5;
@@ -144,14 +135,17 @@ public class illicit_broker_5 extends script.base_script
         }
         return "";
     }
+
     public int illicit_broker_5_tokenDI_cashValue(obj_id player, obj_id npc) throws InterruptedException
     {
         return (smuggler.TIER_5_ILLICIT_SELL_VALUE);
     }
+
     public float illicit_broker_5_tokenDF_tokenDF0001(obj_id player, obj_id npc) throws InterruptedException
     {
         return 0.0f;
     }
+
     public int illicit_broker_5_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -178,7 +172,7 @@ public class illicit_broker_5 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -197,7 +191,7 @@ public class illicit_broker_5 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.illicit_broker_5.branchId");
                     prose_package pp = new prose_package();
@@ -235,7 +229,7 @@ public class illicit_broker_5 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_19");
@@ -248,7 +242,7 @@ public class illicit_broker_5 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.illicit_broker_5.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -287,7 +281,7 @@ public class illicit_broker_5 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -304,7 +298,7 @@ public class illicit_broker_5 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.illicit_broker_5.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -340,7 +334,7 @@ public class illicit_broker_5 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -357,7 +351,7 @@ public class illicit_broker_5 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.illicit_broker_5.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -367,6 +361,7 @@ public class illicit_broker_5 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int illicit_broker_5_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_58"))
@@ -397,6 +392,7 @@ public class illicit_broker_5 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int illicit_broker_5_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_19"))
@@ -422,6 +418,7 @@ public class illicit_broker_5 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int illicit_broker_5_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -448,7 +445,7 @@ public class illicit_broker_5 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -467,7 +464,7 @@ public class illicit_broker_5 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.illicit_broker_5.branchId");
                     prose_package pp = new prose_package();
@@ -505,7 +502,7 @@ public class illicit_broker_5 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_19");
@@ -518,7 +515,7 @@ public class illicit_broker_5 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.illicit_broker_5.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -557,7 +554,7 @@ public class illicit_broker_5 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -574,7 +571,7 @@ public class illicit_broker_5 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.illicit_broker_5.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -610,7 +607,7 @@ public class illicit_broker_5 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -627,7 +624,7 @@ public class illicit_broker_5 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.illicit_broker_5.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -637,6 +634,7 @@ public class illicit_broker_5 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int illicit_broker_5_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -663,7 +661,7 @@ public class illicit_broker_5 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -682,7 +680,7 @@ public class illicit_broker_5 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.illicit_broker_5.branchId");
                     prose_package pp = new prose_package();
@@ -720,7 +718,7 @@ public class illicit_broker_5 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_19");
@@ -733,7 +731,7 @@ public class illicit_broker_5 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.illicit_broker_5.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -772,7 +770,7 @@ public class illicit_broker_5 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -789,7 +787,7 @@ public class illicit_broker_5 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.illicit_broker_5.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -825,7 +823,7 @@ public class illicit_broker_5 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -842,7 +840,7 @@ public class illicit_broker_5 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.illicit_broker_5.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -852,6 +850,7 @@ public class illicit_broker_5 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int illicit_broker_5_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34"))
@@ -877,6 +876,7 @@ public class illicit_broker_5 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -886,11 +886,13 @@ public class illicit_broker_5 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -900,18 +902,21 @@ public class illicit_broker_5 extends script.base_script
         groundquests.sendSignal(player, "zelmaPointer");
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.illicit_broker_5");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -972,7 +977,7 @@ public class illicit_broker_5 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -993,7 +998,7 @@ public class illicit_broker_5 extends script.base_script
                 pp.other.set(illicit_broker_5_tokenTO_contrabandName(player, npc));
                 npcStartConversation(player, npc, "illicit_broker_5", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1026,7 +1031,7 @@ public class illicit_broker_5 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -1038,7 +1043,7 @@ public class illicit_broker_5 extends script.base_script
                 utils.setScriptVar(player, "conversation.illicit_broker_5.branchId", 14);
                 npcStartConversation(player, npc, "illicit_broker_5", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1047,6 +1052,7 @@ public class illicit_broker_5 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("illicit_broker_5"))

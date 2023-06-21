@@ -1,181 +1,146 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class tatooine_privateer_trainer_shamdon extends script.base_script
 {
+    public static String c_stringFile = "conversation/tatooine_privateer_trainer_shamdon";
+
     public tatooine_privateer_trainer_shamdon()
     {
     }
-    public static String c_stringFile = "conversation/tatooine_privateer_trainer_shamdon";
+
     public boolean tatooine_privateer_trainer_shamdon_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_gettingTransReward(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasWonQuest(player, "assassinate", "tat_priv_quest_trans"))
         {
             return false;
         }
-        else if (!space_quest.hasReceivedReward(player, "assassinate", "tat_priv_quest_trans"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        else return !space_quest.hasReceivedReward(player, "assassinate", "tat_priv_quest_trans");
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_hasWonTransQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuest(player, "assassinate", "tat_priv_quest_trans"));
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_isMale(obj_id player, obj_id npc) throws InterruptedException
     {
         return (getGender(player) == Gender.MALE);
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_isOnQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player);
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_isReadyForTraining(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.isPlayerQualifiedForSkill(player, "pilot_neutral_starships_02"));
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_hasDroidSkill2(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_neutral_droid_02"));
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_hasProceduresSkill2(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_neutral_procedures_02"));
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_hasStarshipSkill2(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_neutral_starships_02"));
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_hasWeaponSkill2(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_neutral_weapons_02"));
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_hasAllTier2Skills(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.hasCompletedTierTwo(player);
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_isGettingRewardTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "assassinate", "tatooine_privateer_tier2_2a") && !space_quest.hasReceivedReward(player, "assassinate", "tatooine_privateer_tier2_2a"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "assassinate", "tatooine_privateer_tier2_2a") && !space_quest.hasReceivedReward(player, "assassinate", "tatooine_privateer_tier2_2a");
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_isGettingRewardThree(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "assassinate", "tatooine_privateer_tier2_3a") && !space_quest.hasReceivedReward(player, "assassinate", "tatooine_privateer_tier2_3a"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "assassinate", "tatooine_privateer_tier2_3a") && !space_quest.hasReceivedReward(player, "assassinate", "tatooine_privateer_tier2_3a");
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_isGettingRewardFour(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "escort", "tatooine_privateer_tier2_4a") && !space_quest.hasReceivedReward(player, "escort", "tatooine_privateer_tier2_4a"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "escort", "tatooine_privateer_tier2_4a") && !space_quest.hasReceivedReward(player, "escort", "tatooine_privateer_tier2_4a");
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_hasFailedMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "assassinate", "tatooine_privateer_tier2_1a") || space_quest.hasAbortedQuest(player, "assassinate", "tatooine_privateer_tier2_1a"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "assassinate", "tatooine_privateer_tier2_1a") || space_quest.hasAbortedQuest(player, "assassinate", "tatooine_privateer_tier2_1a");
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_hasFailedMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "assassinate", "tatooine_privateer_tier2_2a") || space_quest.hasAbortedQuest(player, "assassinate", "tatooine_privateer_tier2_2a"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "assassinate", "tatooine_privateer_tier2_2a") || space_quest.hasAbortedQuest(player, "assassinate", "tatooine_privateer_tier2_2a");
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_hasFailedMissionThree(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "assassinate", "tatooine_privateer_tier2_3a") || space_quest.hasAbortedQuest(player, "assassinate", "tatooine_privateer_tier2_3a"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "assassinate", "tatooine_privateer_tier2_3a") || space_quest.hasAbortedQuest(player, "assassinate", "tatooine_privateer_tier2_3a");
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_hasFailedMissionFour(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "escort", "tatooine_privateer_tier2_4a") || space_quest.hasAbortedQuest(player, "escort", "tatooine_privateer_tier2_4a"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "escort", "tatooine_privateer_tier2_4a") || space_quest.hasAbortedQuest(player, "escort", "tatooine_privateer_tier2_4a");
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_isGettingRewardOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "assassinate", "tatooine_privateer_tier2_1a") && !space_quest.hasReceivedReward(player, "assassinate", "tatooine_privateer_tier2_1a"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "assassinate", "tatooine_privateer_tier2_1a") && !space_quest.hasReceivedReward(player, "assassinate", "tatooine_privateer_tier2_1a");
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_onMyTrack(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.isSpaceTrack(player, space_flags.PRIVATEER_TATOOINE);
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_canFlyNonTrackDuty(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.hasCompletedTierOne(player) && !space_quest.hasQuest(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.hasCompletedTierOne(player) && !space_quest.hasQuest(player);
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_isPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.hasAnyPilotSkill(player);
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_isRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.isRebelPilot(player);
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_isImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.isImperialPilot(player);
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_isReadyForMission1(obj_id player, obj_id npc) throws InterruptedException
     {
         int mission = 0;
@@ -183,12 +148,9 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         {
             mission = space_flags.getIntSpaceFlag(player, "readyForTier2Mission");
         }
-        if (mission == 1)
-        {
-            return true;
-        }
-        return false;
+        return mission == 1;
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_isReadyForMission2(obj_id player, obj_id npc) throws InterruptedException
     {
         int mission = 0;
@@ -196,12 +158,9 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         {
             mission = space_flags.getIntSpaceFlag(player, "readyForTier2Mission");
         }
-        if (mission == 2)
-        {
-            return true;
-        }
-        return false;
+        return mission == 2;
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_isReadyForMission3(obj_id player, obj_id npc) throws InterruptedException
     {
         int mission = 0;
@@ -209,12 +168,9 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         {
             mission = space_flags.getIntSpaceFlag(player, "readyForTier2Mission");
         }
-        if (mission == 3)
-        {
-            return true;
-        }
-        return false;
+        return mission == 3;
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_isReadyForMission4(obj_id player, obj_id npc) throws InterruptedException
     {
         int mission = 0;
@@ -222,72 +178,83 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         {
             mission = space_flags.getIntSpaceFlag(player, "readyForTier2Mission");
         }
-        if (mission == 4)
-        {
-            return true;
-        }
-        return false;
+        return mission == 4;
     }
+
     public boolean tatooine_privateer_trainer_shamdon_condition_isReadyForMission(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.hasSpaceFlag(player, "readyForTier2Mission");
     }
+
     public void tatooine_privateer_trainer_shamdon_action_giveTransReward(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "assassinate", "tat_priv_quest_trans", 5000);
     }
+
     public void tatooine_privateer_trainer_shamdon_action_grantEscortDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort_duty", "tatooine_privateer_tier2_1");
     }
+
     public void tatooine_privateer_trainer_shamdon_action_grantRecoveryDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "recovery_duty", "tatooine_privateer_tier2_1");
     }
+
     public void tatooine_privateer_trainer_shamdon_action_grantDestroyDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "tatooine_privateer_tier2_1");
     }
+
     public void tatooine_privateer_trainer_shamdon_action_grantMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "assassinate", "tatooine_privateer_tier2_1a");
         space_flags.removeSpaceFlag(player, "readyForTier2Mission");
     }
+
     public void tatooine_privateer_trainer_shamdon_action_buyWeaponSkill2(obj_id player, obj_id npc) throws InterruptedException
     {
         skill.purchaseSkill(player, "pilot_neutral_weapons_02");
     }
+
     public void tatooine_privateer_trainer_shamdon_action_buyStarshipSkill2(obj_id player, obj_id npc) throws InterruptedException
     {
         skill.purchaseSkill(player, "pilot_neutral_starships_02");
     }
+
     public void tatooine_privateer_trainer_shamdon_action_buyProcedureSkill2(obj_id player, obj_id npc) throws InterruptedException
     {
         skill.purchaseSkill(player, "pilot_neutral_procedures_02");
     }
+
     public void tatooine_privateer_trainer_shamdon_action_buyDroidSkill2(obj_id player, obj_id npc) throws InterruptedException
     {
         skill.purchaseSkill(player, "pilot_neutral_droid_02");
     }
+
     public void tatooine_privateer_trainer_shamdon_action_grantMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "assassinate", "tatooine_privateer_tier2_2a");
         space_flags.removeSpaceFlag(player, "readyForTier2Mission");
     }
+
     public void tatooine_privateer_trainer_shamdon_action_grantMisisonThree(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "assassinate", "tatooine_privateer_tier2_3a");
         space_flags.removeSpaceFlag(player, "readyForTier2Mission");
     }
+
     public void tatooine_privateer_trainer_shamdon_action_grantMissionFour(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort", "tatooine_privateer_tier2_4a");
         space_flags.removeSpaceFlag(player, "readyForTier2Mission");
     }
+
     public void tatooine_privateer_trainer_shamdon_action_flagSeriesComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.setQuestSeriesFlag(player, "tatooine_privateer_tier2", space_quest.QUEST_SERIES_COMPLETED);
     }
+
     public void tatooine_privateer_trainer_shamdon_action_rewardForMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "assassinate", "tatooine_privateer_tier2_1a"))
@@ -295,6 +262,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
             space_quest.giveReward(player, "assassinate", "tatooine_privateer_tier2_1a", 5000, "object/tangible/ship/components/booster/bst_mission_reward_neutral_mandal_m_series.iff");
         }
     }
+
     public void tatooine_privateer_trainer_shamdon_action_rewardForMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "assassinate", "tatooine_privateer_tier2_2a"))
@@ -302,6 +270,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
             space_quest.giveReward(player, "assassinate", "tatooine_privateer_tier2_2a", 5000, "object/tangible/ship/components/weapon/wpn_mission_reward_neutral_hk_military_blaster.iff");
         }
     }
+
     public void tatooine_privateer_trainer_shamdon_action_rewardForMissionThree(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "assassinate", "tatooine_privateer_tier2_3a"))
@@ -309,6 +278,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
             space_quest.giveReward(player, "assassinate", "tatooine_privateer_tier2_3a", 5000, "object/tangible/ship/components/shield_generator/shd_mission_reward_neutral_koensayr_ds23.iff");
         }
     }
+
     public void tatooine_privateer_trainer_shamdon_action_rewardForMissionFour(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "escort", "tatooine_privateer_tier2_4a"))
@@ -316,22 +286,27 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
             space_quest.giveReward(player, "escort", "tatooine_privateer_tier2_4a", 5000, "object/tangible/ship/components/droid_interface/ddi_mission_reward_neutral_sorosuub_w19.iff");
         }
     }
+
     public void tatooine_privateer_trainer_shamdon_action_setReadyForMission1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.setSpaceFlag(player, "readyForTier2Mission", 1);
     }
+
     public void tatooine_privateer_trainer_shamdon_action_setReadyForMission2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.setSpaceFlag(player, "readyForTier2Mission", 2);
     }
+
     public void tatooine_privateer_trainer_shamdon_action_setReadyForMission3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.setSpaceFlag(player, "readyForTier2Mission", 3);
     }
+
     public void tatooine_privateer_trainer_shamdon_action_setReadyForMission4(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.setSpaceFlag(player, "readyForTier2Mission", 4);
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c1ff5062"))
@@ -365,7 +340,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c631f8da");
@@ -382,7 +357,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -399,6 +374,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c631f8da"))
@@ -439,6 +415,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_aed52b48"))
@@ -466,7 +443,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_32965dab");
@@ -479,7 +456,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -500,6 +477,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32965dab"))
@@ -534,6 +512,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d14c381d"))
@@ -562,7 +541,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c4682ea6");
@@ -575,7 +554,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -606,7 +585,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c4682ea6");
@@ -619,7 +598,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -629,6 +608,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c4682ea6"))
@@ -655,6 +635,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c4682ea6"))
@@ -681,6 +662,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_bc000879"))
@@ -700,7 +682,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -713,7 +695,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -754,7 +736,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8be640b8");
@@ -771,7 +753,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -796,7 +778,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -809,7 +791,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -850,7 +832,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -867,7 +849,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -877,6 +859,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1c8bddbb"))
@@ -904,7 +887,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff5b4126");
@@ -917,7 +900,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -927,6 +910,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8be640b8"))
@@ -967,7 +951,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c1ff5062");
@@ -976,7 +960,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1006,7 +990,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aed52b48");
@@ -1019,7 +1003,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1042,7 +1026,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d14c381d");
@@ -1051,7 +1035,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1126,7 +1110,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bc000879");
@@ -1139,7 +1123,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1175,7 +1159,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4362ba26");
@@ -1192,7 +1176,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1214,7 +1198,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1fe46aff");
@@ -1223,7 +1207,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1252,7 +1236,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_eca7c053");
@@ -1265,7 +1249,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1294,7 +1278,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5c522568");
@@ -1311,7 +1295,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -1337,7 +1321,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -1350,7 +1334,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -1377,7 +1361,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_236");
@@ -1390,7 +1374,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -1424,7 +1408,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f4b9423e");
@@ -1437,7 +1421,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1476,7 +1460,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c631f8da");
@@ -1493,7 +1477,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1513,6 +1497,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c631f8da"))
@@ -1553,6 +1538,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1c8bddbb"))
@@ -1580,7 +1566,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff5b4126");
@@ -1593,7 +1579,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1603,6 +1589,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -1643,7 +1630,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c1ff5062");
@@ -1652,7 +1639,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1682,7 +1669,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aed52b48");
@@ -1695,7 +1682,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1718,7 +1705,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d14c381d");
@@ -1727,7 +1714,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1802,7 +1789,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bc000879");
@@ -1815,7 +1802,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1851,7 +1838,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4362ba26");
@@ -1868,7 +1855,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1890,7 +1877,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1fe46aff");
@@ -1899,7 +1886,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1928,7 +1915,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_eca7c053");
@@ -1941,7 +1928,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1970,7 +1957,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5c522568");
@@ -1987,7 +1974,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -2013,7 +2000,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -2026,7 +2013,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -2053,7 +2040,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_236");
@@ -2066,7 +2053,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -2100,7 +2087,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f4b9423e");
@@ -2113,7 +2100,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2152,7 +2139,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c631f8da");
@@ -2169,7 +2156,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2189,6 +2176,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c631f8da"))
@@ -2229,6 +2217,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4362ba26"))
@@ -2249,7 +2238,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -2262,7 +2251,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -2303,7 +2292,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -2324,7 +2313,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -2354,7 +2343,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -2367,7 +2356,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -2408,7 +2397,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -2429,7 +2418,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -2459,7 +2448,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -2472,7 +2461,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -2513,7 +2502,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92");
@@ -2534,7 +2523,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -2548,6 +2537,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1c8bddbb"))
@@ -2575,7 +2565,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff5b4126");
@@ -2588,7 +2578,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2598,6 +2588,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_62"))
@@ -2638,7 +2629,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c1ff5062");
@@ -2647,7 +2638,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2677,7 +2668,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aed52b48");
@@ -2690,7 +2681,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2713,7 +2704,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d14c381d");
@@ -2722,7 +2713,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2797,7 +2788,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bc000879");
@@ -2810,7 +2801,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2846,7 +2837,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4362ba26");
@@ -2863,7 +2854,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2885,7 +2876,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1fe46aff");
@@ -2894,7 +2885,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2923,7 +2914,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_eca7c053");
@@ -2936,7 +2927,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2965,7 +2956,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5c522568");
@@ -2982,7 +2973,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -3008,7 +2999,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -3021,7 +3012,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -3048,7 +3039,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_236");
@@ -3061,7 +3052,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -3095,7 +3086,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f4b9423e");
@@ -3108,7 +3099,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3158,7 +3149,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c631f8da");
@@ -3175,7 +3166,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3185,6 +3176,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c631f8da"))
@@ -3225,6 +3217,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1c8bddbb"))
@@ -3252,7 +3245,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff5b4126");
@@ -3265,7 +3258,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3275,6 +3268,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -3315,7 +3309,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c1ff5062");
@@ -3324,7 +3318,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3354,7 +3348,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aed52b48");
@@ -3367,7 +3361,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3390,7 +3384,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d14c381d");
@@ -3399,7 +3393,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3474,7 +3468,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bc000879");
@@ -3487,7 +3481,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3523,7 +3517,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4362ba26");
@@ -3540,7 +3534,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3562,7 +3556,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1fe46aff");
@@ -3571,7 +3565,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3600,7 +3594,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_eca7c053");
@@ -3613,7 +3607,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3642,7 +3636,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5c522568");
@@ -3659,7 +3653,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -3685,7 +3679,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -3698,7 +3692,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -3725,7 +3719,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_236");
@@ -3738,7 +3732,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -3772,7 +3766,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f4b9423e");
@@ -3785,7 +3779,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3835,7 +3829,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c631f8da");
@@ -3852,7 +3846,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3862,6 +3856,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c631f8da"))
@@ -3902,6 +3897,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1c8bddbb"))
@@ -3929,7 +3925,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff5b4126");
@@ -3942,7 +3938,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3952,6 +3948,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92"))
@@ -3992,7 +3989,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c1ff5062");
@@ -4001,7 +3998,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4031,7 +4028,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aed52b48");
@@ -4044,7 +4041,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4067,7 +4064,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d14c381d");
@@ -4076,7 +4073,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4151,7 +4148,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bc000879");
@@ -4164,7 +4161,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4200,7 +4197,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4362ba26");
@@ -4217,7 +4214,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4239,7 +4236,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1fe46aff");
@@ -4248,7 +4245,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4277,7 +4274,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_eca7c053");
@@ -4290,7 +4287,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4319,7 +4316,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5c522568");
@@ -4336,7 +4333,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -4362,7 +4359,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -4375,7 +4372,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -4402,7 +4399,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_236");
@@ -4415,7 +4412,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -4449,7 +4446,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f4b9423e");
@@ -4462,7 +4459,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4512,7 +4509,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c631f8da");
@@ -4529,7 +4526,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4539,6 +4536,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c631f8da"))
@@ -4579,6 +4577,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1fe46aff"))
@@ -4606,7 +4605,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8179979d");
@@ -4619,7 +4618,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4629,6 +4628,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8179979d"))
@@ -4649,7 +4649,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -4662,7 +4662,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -4703,7 +4703,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -4724,7 +4724,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -4754,7 +4754,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -4767,7 +4767,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -4808,7 +4808,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_122");
@@ -4829,7 +4829,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -4843,6 +4843,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1c8bddbb"))
@@ -4870,7 +4871,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff5b4126");
@@ -4883,7 +4884,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4893,6 +4894,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_109"))
@@ -4933,7 +4935,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c1ff5062");
@@ -4942,7 +4944,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4972,7 +4974,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aed52b48");
@@ -4985,7 +4987,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5008,7 +5010,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d14c381d");
@@ -5017,7 +5019,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5092,7 +5094,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bc000879");
@@ -5105,7 +5107,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5141,7 +5143,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4362ba26");
@@ -5158,7 +5160,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5180,7 +5182,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1fe46aff");
@@ -5189,7 +5191,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5218,7 +5220,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_eca7c053");
@@ -5231,7 +5233,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5260,7 +5262,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5c522568");
@@ -5277,7 +5279,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -5303,7 +5305,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -5316,7 +5318,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -5343,7 +5345,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_236");
@@ -5356,7 +5358,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -5390,7 +5392,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f4b9423e");
@@ -5403,7 +5405,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5453,7 +5455,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c631f8da");
@@ -5470,7 +5472,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5480,6 +5482,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c631f8da"))
@@ -5520,6 +5523,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1c8bddbb"))
@@ -5547,7 +5551,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff5b4126");
@@ -5560,7 +5564,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5570,6 +5574,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_122"))
@@ -5610,7 +5615,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c1ff5062");
@@ -5619,7 +5624,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5649,7 +5654,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aed52b48");
@@ -5662,7 +5667,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5685,7 +5690,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d14c381d");
@@ -5694,7 +5699,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5769,7 +5774,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bc000879");
@@ -5782,7 +5787,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5818,7 +5823,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4362ba26");
@@ -5835,7 +5840,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5857,7 +5862,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1fe46aff");
@@ -5866,7 +5871,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5895,7 +5900,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_eca7c053");
@@ -5908,7 +5913,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5937,7 +5942,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5c522568");
@@ -5954,7 +5959,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -5980,7 +5985,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -5993,7 +5998,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -6020,7 +6025,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_236");
@@ -6033,7 +6038,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -6067,7 +6072,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f4b9423e");
@@ -6080,7 +6085,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6130,7 +6135,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c631f8da");
@@ -6147,7 +6152,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6157,6 +6162,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c631f8da"))
@@ -6197,6 +6203,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_eca7c053"))
@@ -6217,7 +6224,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -6230,7 +6237,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -6271,7 +6278,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_137");
@@ -6288,7 +6295,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6314,7 +6321,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -6327,7 +6334,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -6368,7 +6375,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -6385,7 +6392,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6395,6 +6402,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1c8bddbb"))
@@ -6422,7 +6430,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff5b4126");
@@ -6435,7 +6443,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6445,6 +6453,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_137"))
@@ -6485,7 +6494,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c1ff5062");
@@ -6494,7 +6503,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6524,7 +6533,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aed52b48");
@@ -6537,7 +6546,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6560,7 +6569,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d14c381d");
@@ -6569,7 +6578,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6644,7 +6653,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bc000879");
@@ -6657,7 +6666,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6693,7 +6702,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4362ba26");
@@ -6710,7 +6719,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6732,7 +6741,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1fe46aff");
@@ -6741,7 +6750,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6770,7 +6779,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_eca7c053");
@@ -6783,7 +6792,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6812,7 +6821,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5c522568");
@@ -6829,7 +6838,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -6855,7 +6864,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -6868,7 +6877,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -6895,7 +6904,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_236");
@@ -6908,7 +6917,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -6942,7 +6951,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f4b9423e");
@@ -6955,7 +6964,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7005,7 +7014,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c631f8da");
@@ -7022,7 +7031,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7032,6 +7041,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c631f8da"))
@@ -7072,6 +7082,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1c8bddbb"))
@@ -7099,7 +7110,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff5b4126");
@@ -7112,7 +7123,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7122,6 +7133,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_151"))
@@ -7162,7 +7174,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c1ff5062");
@@ -7171,7 +7183,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7201,7 +7213,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aed52b48");
@@ -7214,7 +7226,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7237,7 +7249,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d14c381d");
@@ -7246,7 +7258,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7321,7 +7333,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bc000879");
@@ -7334,7 +7346,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7370,7 +7382,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4362ba26");
@@ -7387,7 +7399,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7409,7 +7421,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1fe46aff");
@@ -7418,7 +7430,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7447,7 +7459,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_eca7c053");
@@ -7460,7 +7472,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7489,7 +7501,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5c522568");
@@ -7506,7 +7518,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -7532,7 +7544,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -7545,7 +7557,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -7572,7 +7584,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_236");
@@ -7585,7 +7597,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -7619,7 +7631,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f4b9423e");
@@ -7632,7 +7644,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7682,7 +7694,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c631f8da");
@@ -7699,7 +7711,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7709,6 +7721,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c631f8da"))
@@ -7749,6 +7762,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5c522568"))
@@ -7802,6 +7816,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1c8bddbb"))
@@ -7829,7 +7844,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff5b4126");
@@ -7842,7 +7857,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7852,6 +7867,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ff5b4126"))
@@ -7872,7 +7888,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_114c29a9");
@@ -7881,7 +7897,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7906,7 +7922,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8a24761e");
@@ -7915,7 +7931,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7925,6 +7941,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_114c29a9"))
@@ -7952,7 +7969,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_725573da");
@@ -7965,7 +7982,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7975,6 +7992,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_725573da"))
@@ -8006,7 +8024,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_179");
@@ -8019,7 +8037,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     prose_package pp = new prose_package();
@@ -8033,6 +8051,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_179"))
@@ -8048,6 +8067,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8a24761e"))
@@ -8068,7 +8088,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_114c29a9");
@@ -8077,7 +8097,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8087,6 +8107,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_236"))
@@ -8106,7 +8127,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_241");
@@ -8115,7 +8136,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8137,7 +8158,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_243");
@@ -8146,7 +8167,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8168,7 +8189,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_245");
@@ -8177,7 +8198,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8199,7 +8220,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_247");
@@ -8208,7 +8229,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8218,6 +8239,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_241"))
@@ -8246,7 +8268,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_281");
@@ -8259,7 +8281,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8269,6 +8291,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch79(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_281"))
@@ -8295,6 +8318,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_243"))
@@ -8323,7 +8347,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_271");
@@ -8336,7 +8360,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8346,6 +8370,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch83(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_271"))
@@ -8372,6 +8397,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_245"))
@@ -8400,7 +8426,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_261");
@@ -8413,7 +8439,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8423,6 +8449,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch87(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_261"))
@@ -8449,6 +8476,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch90(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_247"))
@@ -8477,7 +8505,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_251");
@@ -8490,7 +8518,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8500,6 +8528,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch91(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_251"))
@@ -8526,6 +8555,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch94(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f4b9423e"))
@@ -8560,7 +8590,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c631f8da");
@@ -8577,7 +8607,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8598,6 +8628,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_privateer_trainer_shamdon_handleBranch95(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c631f8da"))
@@ -8638,6 +8669,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -8649,6 +8681,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         setCondition(self, CONDITION_SPACE_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -8656,6 +8689,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         setCondition(self, CONDITION_SPACE_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -8664,18 +8698,21 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.tatooine_privateer_trainer_shamdon");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -8716,7 +8753,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_c1ff5062");
@@ -8724,7 +8761,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId", 4);
                 npcStartConversation(player, npc, "tatooine_privateer_trainer_shamdon", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8753,7 +8790,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_aed52b48");
@@ -8765,7 +8802,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId", 7);
                 npcStartConversation(player, npc, "tatooine_privateer_trainer_shamdon", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8787,7 +8824,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_d14c381d");
@@ -8795,7 +8832,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId", 13);
                 npcStartConversation(player, npc, "tatooine_privateer_trainer_shamdon", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8864,7 +8901,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_bc000879");
@@ -8876,7 +8913,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId", 22);
                 npcStartConversation(player, npc, "tatooine_privateer_trainer_shamdon", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8911,7 +8948,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4362ba26");
@@ -8927,7 +8964,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId", 31);
                 npcStartConversation(player, npc, "tatooine_privateer_trainer_shamdon", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8948,7 +8985,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1fe46aff");
@@ -8956,7 +8993,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId", 44);
                 npcStartConversation(player, npc, "tatooine_privateer_trainer_shamdon", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8984,7 +9021,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_eca7c053");
@@ -8996,7 +9033,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId", 54);
                 npcStartConversation(player, npc, "tatooine_privateer_trainer_shamdon", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -9024,7 +9061,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_5c522568");
@@ -9040,7 +9077,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "tatooine_privateer_trainer_shamdon", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -9065,7 +9102,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -9077,7 +9114,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "tatooine_privateer_trainer_shamdon", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -9103,7 +9140,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_236");
@@ -9115,7 +9152,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "tatooine_privateer_trainer_shamdon", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -9148,7 +9185,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_f4b9423e");
@@ -9160,7 +9197,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_privateer_trainer_shamdon.branchId", 94);
                 npcStartConversation(player, npc, "tatooine_privateer_trainer_shamdon", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -9169,6 +9206,7 @@ public class tatooine_privateer_trainer_shamdon extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("tatooine_privateer_trainer_shamdon"))

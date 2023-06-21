@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.HashSet;
@@ -1261,6 +1267,7 @@ public class npe extends script.base_script
             questClearQuest(quest, player);
         }
     }
+
     public static obj_id[] giveProfessionWeapon(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);

@@ -1,5 +1,11 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -7,17 +13,19 @@ import script.string_id;
 
 public class turret_data_maker extends script.base_script
 {
+    public static final String TURRET_DATA_TEMPLATE = "object/tangible/mission/quest_item/warren_turret_sequence.iff";
+    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public turret_data_maker()
     {
     }
-    public static final String TURRET_DATA_TEMPLATE = "object/tangible/mission/quest_item/warren_turret_sequence.iff";
-    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         utils.setScriptVar(self, "messageSent", true);
         messageTo(self, "respawnTurretData", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnTurretData(obj_id container) throws InterruptedException
     {
         obj_id[] contents = getContents(container);
@@ -41,12 +49,14 @@ public class turret_data_maker extends script.base_script
         setName(turretData, "");
         setName(turretData, new string_id(SYSTEM_MESSAGES, "turret_data_name"));
     }
+
     public int respawnTurretData(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "messageSent");
         spawnTurretData(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnClosedContainer(obj_id self, obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "messageSent"))
@@ -56,8 +66,10 @@ public class turret_data_maker extends script.base_script
         obj_id[] contents = getContents(self);
         if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (hasObjVar(content, "warren.turretData")) {
+            for (obj_id content : contents)
+            {
+                if (hasObjVar(content, "warren.turretData"))
+                {
                     removeObjVar(content, "warren.turretCodeSequence");
                     return SCRIPT_CONTINUE;
                 }

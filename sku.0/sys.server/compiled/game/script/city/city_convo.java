@@ -1,17 +1,24 @@
 package script.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.obj_id;
 
 public class city_convo extends script.base_script
 {
-    private final float[][] offsets = new float[][]{{1.1f, 0},{1.1f, 1.1f},{0.0f,1.1f},{0.0f, 0.0f}};
+    public static final String npcTable = "datatables/poi/city/convo_npc.iff";
+    private final float[][] offsets = new float[][]{{1.1f, 0}, {1.1f, 1.1f}, {0.0f, 1.1f}, {0.0f, 0.0f}};
 
     public city_convo()
     {
     }
-    public static final String npcTable = "datatables/poi/city/convo_npc.iff";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         beginSpawning(self);
@@ -19,6 +26,7 @@ public class city_convo extends script.base_script
         messageTo(self, "checkForScripts", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleChatting(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id guy1 = getObjIdObjVar(self, "guy1");
@@ -39,15 +47,18 @@ public class city_convo extends script.base_script
         setAnimationMood(guy4, "conversation");
         return SCRIPT_CONTINUE;
     }
+
     public int handleGuyKilled(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGuy(self, getStringObjVar(self, "name"));
         return SCRIPT_CONTINUE;
     }
+
     public void spawnGuy(obj_id baseObject, String name) throws InterruptedException
     {
         obj_id guy = null;
-        switch(name){
+        switch (name)
+        {
             case "guy1":
                 guy = create.themeParkObject(getRandomGuy(), offsets[0][0], offsets[0][1], "handleGuyKilled", 0);
                 break;
@@ -61,33 +72,40 @@ public class city_convo extends script.base_script
                 guy = create.themeParkObject(getRandomGuy(), offsets[3][0], offsets[3][1], "handleGuyKilled", 0);
                 break;
         }
-        if(guy != null) {
+        if (guy != null)
+        {
             setObjVar(baseObject, name, guy);
             setCreatureStatic(guy, true);
         }
     }
+
     public String getRandomGuy() throws InterruptedException
     {
         String[] npcList = dataTableGetStringColumnNoDefaults(npcTable, getLocation(getSelf()).area);
         return npcList[rand(0, npcList.length - 1)];
     }
+
     public void beginSpawning(obj_id self) throws InterruptedException
     {
-        if(!getBooleanObjVar(self, "spawned") || !getBooleanObjVar(self, "spawnInProgress")) {
+        if (!getBooleanObjVar(self, "spawned") || !getBooleanObjVar(self, "spawnInProgress"))
+        {
             setObjVar(self, "spawnInProgress", true);
             int num = rand(1, 10);
             spawnGuy(self, "guy1");
             spawnGuy(self, "guy2");
-            if (num >= 5) {
+            if (num >= 5)
+            {
                 spawnGuy(self, "guy3");
             }
-            if (num >= 8) {
+            if (num >= 8)
+            {
                 spawnGuy(self, "guy4");
             }
             setObjVar(self, "spawnInProgress", false);
             setObjVar(self, "spawned", true);
         }
     }
+
     public int checkForScripts(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "theme_park.poi.launch");

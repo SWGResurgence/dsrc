@@ -1,11 +1,19 @@
 package script.theme_park.wod;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.base_class.*;
 import script.combat_engine.*;
+
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Vector;
+
 import script.base_script;
 
 import script.library.groundquests;
@@ -13,13 +21,14 @@ import script.library.utils;
 
 public class crafting_altars extends script.base_script
 {
-    public crafting_altars()
-    {
-    }
     public static final string_id schematicGranted = new string_id("theme_park/wod", "schematic_learned_altar");
     public static final string_id noAltarItem = new string_id("theme_park/wod", "no_altar_item");
     public static final string_id noRepair = new string_id("theme_park/wod", "no_repair");
     public static final string_id notValidItem = new string_id("theme_park/wod", "not_a_valid_key");
+    public crafting_altars()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -33,6 +42,7 @@ public class crafting_altars extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("", ""));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -64,7 +74,7 @@ public class crafting_altars extends script.base_script
                     {
                         checkItem(player, itemWeGot, altarNumber);
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, noAltarItem);
                     }
@@ -73,6 +83,7 @@ public class crafting_altars extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         int altarNumber = getIntObjVar(self, "altar_number");
@@ -82,13 +93,14 @@ public class crafting_altars extends script.base_script
             {
                 checkItem(transferer, item, altarNumber);
             }
-            else 
+            else
             {
                 sendSystemMessage(transferer, notValidItem);
             }
         }
         return SCRIPT_OVERRIDE;
     }
+
     public void checkItem(obj_id player, obj_id itemToCheck, int altarNumber) throws InterruptedException
     {
         int value1 = Math.round(getFloatObjVar(itemToCheck, "crafting_components.wod_crafting_1"));
@@ -131,7 +143,7 @@ public class crafting_altars extends script.base_script
             groundquests.sendSignal(player, "repairedAltar");
             destroyObject(itemToCheck);
         }
-        else 
+        else
         {
             sendSystemMessage(player, noRepair);
         }

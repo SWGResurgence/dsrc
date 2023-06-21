@@ -1,5 +1,11 @@
 package script.creature_spawner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 public class naboo_hard extends script.creature_spawner.base_newbie_creature_spawner
 {
     public static final boolean SPAWNER_DISABLED = false;
@@ -8,6 +14,7 @@ public class naboo_hard extends script.creature_spawner.base_newbie_creature_spa
     public naboo_hard()
     {
     }
+
     public String pickCreature() throws InterruptedException
     {
         switch (rand(1, 3))

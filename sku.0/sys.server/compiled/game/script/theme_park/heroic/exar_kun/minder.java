@@ -1,5 +1,11 @@
 package script.theme_park.heroic.exar_kun;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.buff;
@@ -14,17 +20,20 @@ public class minder extends script.base_script
     public minder()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "setupSquad", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         messageTo(self, "buff_me", null, 1.0f, false);
         messageTo(self, "summon_adds", null, 20.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int setupSquad(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] bat = trial.getObjectsInDungeonWithObjVar(trial.getTop(self), "bat_id");
@@ -41,6 +50,7 @@ public class minder extends script.base_script
         trial.setHp(monkey[0], trial.HP_EXAR_LURESH);
         return SCRIPT_CONTINUE;
     }
+
     public int buff_me(obj_id self, dictionary params) throws InterruptedException
     {
         if (isDead(self))
@@ -51,6 +61,7 @@ public class minder extends script.base_script
         messageTo(self, "buff_me", null, 20.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int summon_adds(obj_id self, dictionary params) throws InterruptedException
     {
         if (isDead(self))
@@ -96,15 +107,15 @@ public class minder extends script.base_script
         switch (result)
         {
             case GB_BOSS:
-            dict.put("triggerType", "triggerId");
-            dict.put("triggerName", "summon_bats");
-            messageTo(trial.getTop(self), "triggerFired", dict, 0.0f, false);
-            break;
+                dict.put("triggerType", "triggerId");
+                dict.put("triggerName", "summon_bats");
+                messageTo(trial.getTop(self), "triggerFired", dict, 0.0f, false);
+                break;
             case SK_BOSS:
-            dict.put("triggerType", "triggerId");
-            dict.put("triggerName", "summon_monkey");
-            messageTo(trial.getTop(self), "triggerFired", dict, 0.0f, false);
-            break;
+                dict.put("triggerType", "triggerId");
+                dict.put("triggerName", "summon_monkey");
+                messageTo(trial.getTop(self), "triggerFired", dict, 0.0f, false);
+                break;
         }
         messageTo(self, "summon_adds", null, 30.0f, false);
         return SCRIPT_CONTINUE;

@@ -1,5 +1,11 @@
 package script.theme_park.heroic.exar_kun;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.buff;
 import script.library.trial;
@@ -12,12 +18,14 @@ public class exar_wrath extends script.base_script
     public exar_wrath()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, 545020);
         setObjVar(self, "isImmobile", true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         setMovementPercent(self, 0.0f);
@@ -27,12 +35,14 @@ public class exar_wrath extends script.base_script
         buff.applyBuff(self, "mind_trick_immune");
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         trial.bumpSession(self, "blast");
         trial.bumpSession(self, "ward");
         return SCRIPT_CONTINUE;
     }
+
     public int executeBlast(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "blast"))
@@ -53,38 +63,39 @@ public class exar_wrath extends script.base_script
         switch (elementalType)
         {
             case DAMAGE_ELEMENTAL_HEAT:
-            clog("HEAT");
-            queueCommand(self, (1097819132), hateTarget, "", COMMAND_PRIORITY_DEFAULT);
-            break;
+                clog("HEAT");
+                queueCommand(self, (1097819132), hateTarget, "", COMMAND_PRIORITY_DEFAULT);
+                break;
             case DAMAGE_ELEMENTAL_COLD:
-            clog("COLD");
-            queueCommand(self, (-2065560327), hateTarget, "", COMMAND_PRIORITY_DEFAULT);
-            break;
+                clog("COLD");
+                queueCommand(self, (-2065560327), hateTarget, "", COMMAND_PRIORITY_DEFAULT);
+                break;
             case DAMAGE_ELEMENTAL_ACID:
-            clog("ACID");
-            queueCommand(self, (-1503522191), hateTarget, "", COMMAND_PRIORITY_DEFAULT);
-            break;
+                clog("ACID");
+                queueCommand(self, (-1503522191), hateTarget, "", COMMAND_PRIORITY_DEFAULT);
+                break;
             case DAMAGE_ELEMENTAL_ELECTRICAL:
-            clog("ELECTRICAL");
-            queueCommand(self, (-692498043), hateTarget, "", COMMAND_PRIORITY_DEFAULT);
-            break;
+                clog("ELECTRICAL");
+                queueCommand(self, (-692498043), hateTarget, "", COMMAND_PRIORITY_DEFAULT);
+                break;
             default:
-            clog("RANDOM");
-            String[] randomBlast = 
-            {
-                "heat",
-                "cold",
-                "acid",
-                "electrical"
-            };
-            String blastChoice = randomBlast[rand(0, 3)];
-            String blastCommand = "kun_wrath_" + blastChoice;
-            queueCommand(self, getStringCrc(blastCommand.toLowerCase()), hateTarget, "", COMMAND_PRIORITY_DEFAULT);
-            break;
+                clog("RANDOM");
+                String[] randomBlast =
+                        {
+                                "heat",
+                                "cold",
+                                "acid",
+                                "electrical"
+                        };
+                String blastChoice = randomBlast[rand(0, 3)];
+                String blastCommand = "kun_wrath_" + blastChoice;
+                queueCommand(self, getStringCrc(blastCommand.toLowerCase()), hateTarget, "", COMMAND_PRIORITY_DEFAULT);
+                break;
         }
         messageTo(self, "executeBlast", trial.getSessionDict(self, "blast"), 4.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int applyWard(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "ward"))
@@ -118,15 +129,18 @@ public class exar_wrath extends script.base_script
         {
             wards.remove("kun_wrath_ward_electrical");
         }
-        String newWard = ((String)wards.get(rand(0, wards.size() - 1)));
-        for (obj_id object : objects) {
-            if (isPlayer(object) || isMob(object)) {
+        String newWard = ((String) wards.get(rand(0, wards.size() - 1)));
+        for (obj_id object : objects)
+        {
+            if (isPlayer(object) || isMob(object))
+            {
                 buff.applyBuff(object, newWard);
             }
         }
         messageTo(self, "applyWard", trial.getSessionDict(self, "ward"), 8.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void clog(String message) throws InterruptedException
     {
     }

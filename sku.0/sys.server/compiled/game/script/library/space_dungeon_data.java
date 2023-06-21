@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.random;
@@ -11,6 +17,7 @@ public class space_dungeon_data extends script.base_script
     public static final String DUNGEON_DATATABLE = "datatables/dungeon/space_dungeon.iff";
     public static final String TRAVEL_DUNGEON = "item.travel_ticket.travel_space_dungeon";
     public static final String DUNGEON_CONTROLLER = "theme_park.dungeon.space_dungeon_controller";
+
     public space_dungeon_data()
     {
     }

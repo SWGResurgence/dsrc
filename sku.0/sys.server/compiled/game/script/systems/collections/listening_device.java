@@ -1,5 +1,11 @@
 package script.systems.collections;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.menu_info;
 import script.menu_info_types;
@@ -14,6 +20,7 @@ public class listening_device extends script.base_script
     public static final string_id MUST_DISMOUNT = new string_id("collection", "must_dismount");
     public static final string_id SID_NEED_TO_ACTIVATE_COLLECTION = new string_id("collection", "need_to_activate_collection");
     public static final String EAVESDROP_COLLECTION_NAME = "eavesdrop_location_";
+
     public listening_device()
     {
     }

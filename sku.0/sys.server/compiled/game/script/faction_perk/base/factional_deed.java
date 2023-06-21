@@ -1,5 +1,11 @@
 package script.faction_perk.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.faction_perk;
 import script.menu_info_types;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class factional_deed extends script.item.structure_deed.player_structure_
     public factional_deed()
     {
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -18,7 +25,7 @@ public class factional_deed extends script.item.structure_deed.player_structure_
                 LOG("LOG_CHANNEL", "factional_deed::OnObjectMenuSelect -> unable to deploy deed - OVERRIDING!");
                 return SCRIPT_OVERRIDE;
             }
-            else 
+            else
             {
                 LOG("LOG_CHANNEL", "factional_deed::OnObjectMenuSelect -> can deploy - continuing...");
             }

@@ -1,5 +1,11 @@
 package script.space.content_tools;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_quest;
 import script.library.utils;
@@ -10,11 +16,13 @@ public class missiontest extends script.base_script
     public missiontest()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         broadcast(self, "MISSION TEST SCRIPT ATTACHED");
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         String[] commands = split(text, ' ');
@@ -24,8 +32,10 @@ public class missiontest extends script.base_script
             if (isIdValid(datapad))
             {
                 obj_id[] dpobjs = getContents(datapad);
-                for (obj_id dpobj : dpobjs) {
-                    if (hasObjVar(dpobj, space_quest.QUEST_TYPE)) {
+                for (obj_id dpobj : dpobjs)
+                {
+                    if (hasObjVar(dpobj, space_quest.QUEST_TYPE))
+                    {
                         String tname = getStringObjVar(dpobj, space_quest.QUEST_TYPE);
                         String qname = getStringObjVar(dpobj, space_quest.QUEST_NAME);
                         broadcast(self, "Found: " + tname + ":" + qname);
@@ -59,7 +69,7 @@ public class missiontest extends script.base_script
             {
                 broadcast(self, "hasQuest:          TRUE");
             }
-            else 
+            else
             {
                 broadcast(self, "hasQuest:          FALSE");
             }
@@ -67,7 +77,7 @@ public class missiontest extends script.base_script
             {
                 broadcast(self, "hasCompletedQuest: TRUE");
             }
-            else 
+            else
             {
                 broadcast(self, "hasCompletedQuest: FALSE");
             }
@@ -75,7 +85,7 @@ public class missiontest extends script.base_script
             {
                 broadcast(self, "hasFailedQuest:    TRUE");
             }
-            else 
+            else
             {
                 broadcast(self, "hasFailedQuest:    FALSE");
             }
@@ -83,7 +93,7 @@ public class missiontest extends script.base_script
             {
                 broadcast(self, "hasWonQuest:       TRUE");
             }
-            else 
+            else
             {
                 broadcast(self, "hasWonQuest:       FALSE");
             }
@@ -130,7 +140,7 @@ public class missiontest extends script.base_script
                 space_quest.setQuestWon(self, missionObj, false);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 space_quest.setQuestWon(self, missionObj, false);
                 broadcast(self, "--- Forced Victory on Split Mission, Assigning Split ---");

@@ -1,5 +1,11 @@
 package script.systems.player_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -138,6 +144,5 @@ public class consume_fragment extends script.base_script
             destroyObject(self);
         }
         sui.removePid(player, PID_NAME);
-        return;
     }
 }

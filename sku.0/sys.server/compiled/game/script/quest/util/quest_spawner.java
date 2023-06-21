@@ -1,5 +1,11 @@
 package script.quest.util;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.theater;
@@ -11,9 +17,6 @@ import java.util.Vector;
 
 public class quest_spawner extends script.base_script
 {
-    public quest_spawner()
-    {
-    }
     public static final String SCRIPT_CREATURE = "quest.util.quest_creature";
     public static final String VAR_SPAWNER_MAX_POPULATION = "quest_spawner.max_pop";
     public static final String VAR_SPAWNER_MAX = "quest_spawner.max_spawn";
@@ -26,18 +29,23 @@ public class quest_spawner extends script.base_script
     public static final String VAR_THEATER = "quest_spawner.theater";
     public static final String VAR_PULSE = "quest_spawner.pulse";
     public static final String BATCH_VAR_SPAWNED_MOBS = "quest_spawner.spawned_mobs";
+    public quest_spawner()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "msgQuestSpawnerPulse", null, 5.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgQuestSpawnerPulse(obj_id self, dictionary params) throws InterruptedException
     {
         if (createSpawn(self))
         {
             LOG("quest", "quest_spawner.msgQuestSpawnerPulse -- createSpawn success.");
         }
-        else 
+        else
         {
             LOG("quest", "quest_spawner.msgQuestSpawnerPulse -- createSpawn failed.");
         }
@@ -64,6 +72,7 @@ public class quest_spawner extends script.base_script
         messageTo(self, "msgQuestSpawnerPulse", null, pulse, false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgQuestDestroySpawner(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "quest_spawner.parent"))
@@ -77,7 +86,7 @@ public class quest_spawner extends script.base_script
                 {
                     setObjVar(parent, "attack_spawners", spawners);
                 }
-                else 
+                else
                 {
                     removeObjVar(parent, "attack_spawners");
                 }
@@ -86,6 +95,7 @@ public class quest_spawner extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public dictionary getSpawnerData(String spawner_name, String datatable) throws InterruptedException
     {
         if (spawner_name == null)
@@ -117,7 +127,7 @@ public class quest_spawner extends script.base_script
             {
                 break;
             }
-            else 
+            else
             {
                 spawn_template = utils.addElement(spawn_template, row.getString("spawn_template"));
                 min_number = utils.addElement(min_number, row.getInt("min_number"));
@@ -127,7 +137,7 @@ public class quest_spawner extends script.base_script
                 {
                     script = utils.addElement(script, row.getString("script"));
                 }
-                else 
+                else
                 {
                     script = utils.addElement(script, "none");
                 }
@@ -141,6 +151,7 @@ public class quest_spawner extends script.base_script
         spawn_data.put("script", script);
         return spawn_data;
     }
+
     public boolean createSpawn(obj_id spawner) throws InterruptedException
     {
         LOG("quest", "quest_spawner.createSpawn -- spawner ->" + spawner);
@@ -195,7 +206,8 @@ public class quest_spawner extends script.base_script
             return false;
         }
         int total_weight = 0;
-        for (int i1 : weight) {
+        for (int i1 : weight)
+        {
             total_weight = total_weight + i1;
         }
         if (total_weight < 1)
@@ -250,7 +262,7 @@ public class quest_spawner extends script.base_script
                 current_population++;
                 num_spawn--;
             }
-            else 
+            else
             {
                 break;
             }

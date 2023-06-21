@@ -1,5 +1,11 @@
 package script.systems.fs_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -13,6 +19,7 @@ public class fs_camp_commander_ai extends script.base_script
     public static final int MAX_RESCUERS = 2;
     public static final float HELP_SPAWN_TIME_MIN = 180;
     public static final float HELP_SPAWN_TIME_MAX = 300;
+
     public fs_camp_commander_ai()
     {
     }
@@ -39,7 +46,6 @@ public class fs_camp_commander_ai extends script.base_script
         setPosture(self, POSTURE_KNOCKED_DOWN);
         utils.setScriptVar(self, "deathSequence", 1);
         messageTo(self, "msgDeathSequence", null, 5.0f, false);
-        return;
     }
 
     public int msgSpawnRescuers(obj_id self, dictionary params) throws InterruptedException
@@ -345,6 +351,5 @@ public class fs_camp_commander_ai extends script.base_script
         location target = utils.getRandomAwayLocation(getLocation(self), MIN_DISTANCE_TO_RUN, MAX_DISTANCE_TO_RUN);
         setMovementRun(self);
         ai_lib.aiPathTo(self, target);
-        return;
     }
 }

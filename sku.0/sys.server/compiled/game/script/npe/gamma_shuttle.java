@@ -1,21 +1,29 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.sui;
 import script.library.utils;
 import script.*;
 
 public class gamma_shuttle extends script.base_script
 {
+    public static final string_id LAUNCH = new string_id("npe", "launch");
+    public static final String NPE_STATION = "object/building/general/npe_space_station.iff";
     public gamma_shuttle()
     {
     }
-    public static final string_id LAUNCH = new string_id("npe", "launch");
-    public static final String NPE_STATION = "object/building/general/npe_space_station.iff";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, LAUNCH);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -41,13 +49,14 @@ public class gamma_shuttle extends script.base_script
             {
                 int pid = sui.msgbox(player, player, prompt, sui.OK_CANCEL, title, 0, "npeGammaTransfer");
             }
-            else 
+            else
             {
                 int pid = sui.msgbox(player, player, prompt, sui.OK_CANCEL, title, 0, "npeStationTransfer");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkGod(obj_id self) throws InterruptedException
     {
         if (isGod(self))

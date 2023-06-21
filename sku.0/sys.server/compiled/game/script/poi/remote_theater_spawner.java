@@ -1,5 +1,11 @@
 package script.poi;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class remote_theater_spawner extends script.base_script
     public remote_theater_spawner()
     {
     }
+
     public int handleCreateRemoteTheater(obj_id self, dictionary params) throws InterruptedException
     {
         String datatable = params.getString("datatable");
@@ -29,7 +36,7 @@ public class remote_theater_spawner extends script.base_script
             debugServerConsoleMsg(self, "handleCreateRemoteTheater creating theater at " + x + ", " + z + " with script " + script);
             theater = createTheater(datatable, new location(x, 0, z), script, caller, name, locationType);
         }
-        else 
+        else
         {
             theater = createTheater(datatable, caller, name, locationType);
         }

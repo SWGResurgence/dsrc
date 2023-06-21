@@ -4,24 +4,33 @@ package script.item;/*
 @Purpose:
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.utils;
 
 public class loot_roll_item extends base_script
 {
+    public static String LR_VAR = "loot_roll";
+    public static String LR_INCREASE_VAR = "loot_roll.charges";
     public loot_roll_item()
     {
     }
-    public static String LR_VAR = "loot_roll";
-    public static String LR_INCREASE_VAR = "loot_roll.charges";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!hasObjVar(self, LR_INCREASE_VAR))
@@ -30,6 +39,7 @@ public class loot_roll_item extends base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -43,6 +53,7 @@ public class loot_roll_item extends base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -53,7 +64,7 @@ public class loot_roll_item extends base_script
         if (hasObjVar(self, LR_INCREASE_VAR))
         {
             names[idx] = utils.packStringId(new string_id("Loot roll bonus"));
-            attribs[idx] = "" + getIntObjVar(self, LR_INCREASE_VAR);
+            attribs[idx] = String.valueOf(getIntObjVar(self, LR_INCREASE_VAR));
             idx++;
             if (idx >= names.length)
             {

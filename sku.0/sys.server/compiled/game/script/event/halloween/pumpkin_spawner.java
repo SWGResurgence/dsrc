@@ -1,4 +1,3 @@
-
 /*
 @Purpose: Pumpkin Spawner for Galactic Moon Festival
 
@@ -17,6 +16,12 @@ Does not do the following:
  */
 package script.event.halloween;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.*;
 
@@ -24,9 +29,9 @@ import java.lang.reflect.InvocationTargetException;
 
 public class pumpkin_spawner extends script.base_script
 {
-    public static int PUMPKIN_COUNT = 50;
     private static final String HALLOWEEN = "event/halloween";
     public static final string_id SID_USE = new string_id(HALLOWEEN, "spawn_pumpkins");
+    public static int PUMPKIN_COUNT = 50;
     public String[] NAME_VARIATIONS = {
             "a plump pumpkin",
             "a regular pumpkin",
@@ -87,6 +92,7 @@ public class pumpkin_spawner extends script.base_script
             setName(pumpkin, randomName);
         }
     }
+
     public String getRandFromArray(String[] array) throws InterruptedException
     {
         int randIndex = rand(0, array.length - 1);

@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.combat_engine.combat_data;
 import script.library.*;
@@ -8,20 +14,6 @@ import java.util.Vector;
 
 public class thicks_test extends script.base_script
 {
-    public thicks_test()
-    {
-    }
-    public static String[] OPTIONS = 
-    {
-        "listScripts",
-        "clearScript",
-        "clearAllScripts",
-        "listObjVars",
-        "clearObjVar",
-        "listAllObjVar",
-        "doClientEffect EFFECT",
-        "spawn SPAWN"
-    };
     public static final int listScripts = 0;
     public static final int clearScript = 1;
     public static final int clearAllScripts = 2;
@@ -30,25 +22,46 @@ public class thicks_test extends script.base_script
     public static final int clearAllObjVars = 5;
     public static final int doClientEffect = 6;
     public static final int spawnCreature = 7;
+    public static final dictionary dict = new dictionary();
+    public static String[] OPTIONS =
+            {
+                    "listScripts",
+                    "clearScript",
+                    "clearAllScripts",
+                    "listObjVars",
+                    "clearObjVar",
+                    "listAllObjVar",
+                    "doClientEffect EFFECT",
+                    "spawn SPAWN"
+            };
+
+    public thicks_test()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {
+        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self))
+        {
             detachScript(self, "test.thicks_test");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMoveMoving(obj_id self) throws InterruptedException
     {
         setState(self, STATE_STUNNED, false);
         setState(self, STATE_FROZEN, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         setState(self, STATE_STUNNED, false);
         setState(self, STATE_FROZEN, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (text.equals("set"))
@@ -353,14 +366,14 @@ public class thicks_test extends script.base_script
             {
                 String[] params = new String[2];
                 params[0] = "getCellList";
-                params[1] = "" + getTopMostContainer(self);
+                params[1] = String.valueOf(getTopMostContainer(self));
                 runGetCellList(self, params);
             }
             if (parse.length == 2)
             {
                 String[] params = new String[3];
                 params[0] = "enterNamedCell";
-                params[1] = "" + getTopMostContainer(self);
+                params[1] = String.valueOf(getTopMostContainer(self));
                 params[2] = parse[1];
                 runEnterCell(self, params);
             }
@@ -507,31 +520,38 @@ public class thicks_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showHelp() throws InterruptedException
     {
-        for (String option : OPTIONS) {
+        for (String option : OPTIONS)
+        {
             broadcast(getSelf(), option);
         }
     }
+
     public void listScripts(obj_id self) throws InterruptedException
     {
         obj_id target = getLookAtTarget(self);
         String[] scriptList = getScriptList(target);
-        for (String s : scriptList) {
+        for (String s : scriptList)
+        {
             debugSpeakMsg(self, s);
         }
     }
+
     public void clearScript(obj_id self) throws InterruptedException
     {
         obj_id target = getLookAtTarget(self);
         String[] scriptList = getScriptList(target);
     }
+
     public void clearAllScripts(obj_id self) throws InterruptedException
     {
         obj_id target = getLookAtTarget(self);
         detachAllScripts(target);
         broadcast(self, "ALL SCRIPTS REMOVED");
     }
+
     public int handleClearScript(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
@@ -540,6 +560,7 @@ public class thicks_test extends script.base_script
         broadcast(self, "Removing Script(" + script + ") From(" + getName(target) + "/" + target + ")");
         return SCRIPT_CONTINUE;
     }
+
     public void runDoClientEffect(obj_id self, String[] parse) throws InterruptedException
     {
         if (parse[1].equals("self"))
@@ -548,18 +569,20 @@ public class thicks_test extends script.base_script
             playClientEffectObj(self, effect, self, "", null, "tag");
             messageTo(self, "clearEffect", null, 10, false);
         }
-        else 
+        else
         {
             location playLoc = utils.findLocInFrontOfTarget(self, 10.0f);
             String effect = "clienteffect/" + parse[1] + ".cef";
             playClientEffectLoc(getIntendedTarget(self), effect, playLoc, 0.4f);
         }
     }
+
     public int clearEffect(obj_id self, dictionary params) throws InterruptedException
     {
         stopClientEffectObjByLabel(self, "tag");
         return SCRIPT_CONTINUE;
     }
+
     public void runSpawnCreature(obj_id self, String[] parse) throws InterruptedException
     {
         location spawnLoc = utils.findLocInFrontOfTarget(self, 30.0f);
@@ -569,7 +592,7 @@ public class thicks_test extends script.base_script
             {
                 create.object(parse[2], spawnLoc, utils.stringToInt(parse[3]));
             }
-            else 
+            else
             {
                 create.object(parse[2], spawnLoc);
             }
@@ -583,17 +606,19 @@ public class thicks_test extends script.base_script
                 {
                     create.object(parse[2], spawnLoc, utils.stringToInt(parse[3]));
                 }
-                else 
+                else
                 {
                     create.object(parse[2], spawnLoc);
                 }
             }
         }
     }
+
     public void showGodWindow(obj_id user) throws InterruptedException
     {
         int pid = sui.listbox(user, user, "Select GM Option", OPTIONS, "handleSelectGMCommand");
     }
+
     public int handleSelectGMCommand(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -626,12 +651,14 @@ public class thicks_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doScriptListSUI(obj_id player) throws InterruptedException
     {
         obj_id target = getLookAtTarget(player);
         String[] scriptList = getScriptList(target);
         int pid = sui.listbox(player, player, "SCRIPTS ON TARGET", scriptList, "handleRecievedScriptList");
     }
+
     public void runFind(obj_id self, String[] parse) throws InterruptedException
     {
         float distance = 32000.0f;
@@ -639,10 +666,13 @@ public class thicks_test extends script.base_script
         if (parse[1].equals("object"))
         {
             obj_id[] objects = getObjectsInRange(self, 32000);
-            for (obj_id object : objects) {
-                if ((getTemplateName(object)).equals(parse[2]) && object != self) {
+            for (obj_id object : objects)
+            {
+                if ((getTemplateName(object)).equals(parse[2]) && object != self)
+                {
                     float range = getDistance(self, object);
-                    if (range < distance) {
+                    if (range < distance)
+                    {
                         distance = range;
                         closest = object;
                     }
@@ -659,10 +689,13 @@ public class thicks_test extends script.base_script
             obj_id[] objects = getObjectsInRange(self, 32000);
             obj_id passedObject = utils.stringToObjId(parse[2]);
             debugSpeakMsg(self, "Passed obj_id was: " + passedObject);
-            for (obj_id object : objects) {
-                if (object == passedObject) {
+            for (obj_id object : objects)
+            {
+                if (object == passedObject)
+                {
                     float range = getDistance(self, object);
-                    if (range < distance) {
+                    if (range < distance)
+                    {
                         distance = range;
                         closest = object;
                     }
@@ -677,10 +710,13 @@ public class thicks_test extends script.base_script
         if (parse[1].equals("indexOf"))
         {
             obj_id[] objects = getObjectsInRange(self, 32000);
-            for (obj_id object : objects) {
-                if ((getTemplateName(object)).contains(parse[2]) && object != self) {
+            for (obj_id object : objects)
+            {
+                if ((getTemplateName(object)).contains(parse[2]) && object != self)
+                {
                     float range = getDistance(self, object);
-                    if (range < distance) {
+                    if (range < distance)
+                    {
                         distance = range;
                         closest = object;
                     }
@@ -696,12 +732,15 @@ public class thicks_test extends script.base_script
         {
             obj_id[] objects = getObjectsInRange(self, 32000);
             location foundLoc;
-            for (obj_id object : objects) {
-                if ((getTemplateName(object)).contains(parse[2]) && object != self) {
+            for (obj_id object : objects)
+            {
+                if ((getTemplateName(object)).contains(parse[2]) && object != self)
+                {
                     float range = getDistance(self, object);
                     foundLoc = getLocation(object);
                     broadcast(self, "Object(" + getTemplateName(object) + "/" + object + ") found at: " + foundLoc);
-                    if (range < distance) {
+                    if (range < distance)
+                    {
                         distance = range;
                         closest = object;
                     }
@@ -730,11 +769,13 @@ public class thicks_test extends script.base_script
             obj_id[] spawnIdObjects = trial.getObjectsInInstanceBySpawnId(instance_id, parse[2]);
             if (spawnIdObjects != null && spawnIdObjects.length > 0)
             {
-                for (obj_id spawnIdObject : spawnIdObjects) {
+                for (obj_id spawnIdObject : spawnIdObjects)
+                {
                     float range = getDistance(self, spawnIdObject);
                     foundLoc = getLocation(spawnIdObject);
                     sendSystemMessage(self, "Object( " + getTemplateName(spawnIdObject) + " / " + spawnIdObject + " ) found at: " + foundLoc, "");
-                    if (range < distance) {
+                    if (range < distance)
+                    {
                         distance = range;
                         closest = spawnIdObject;
                     }
@@ -747,8 +788,8 @@ public class thicks_test extends script.base_script
             }
         }
         broadcast(self, "No objects of that type found");
-        return;
     }
+
     public void runWarpToFind(obj_id self, String[] parse) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "objectLoc"))
@@ -758,18 +799,14 @@ public class thicks_test extends script.base_script
         }
         obj_id toEnter = trial.getTop(utils.getObjIdScriptVar(self, "objectId"));
         obj_id[] cells = getCellIds(toEnter);
-        boolean isPob = false;
-        if (cells != null && cells.length > 0)
-        {
-            isPob = true;
-        }
+        boolean isPob = cells != null && cells.length > 0;
         location objLoc = utils.getLocationScriptVar(self, "objectLoc");
         if (!isPob)
         {
             location warpTo = utils.getLocationScriptVar(self, "objectLoc");
             warpPlayer(self, warpTo.area, warpTo.x, warpTo.y, warpTo.z, null, warpTo.x, warpTo.y, warpTo.z);
         }
-        else 
+        else
         {
             obj_id cellId = objLoc.cell;
             String cellName = getCellName(cellId);
@@ -777,6 +814,7 @@ public class thicks_test extends script.base_script
             warpPlayer(self, cellLoc.area, cellLoc.x, cellLoc.y, cellLoc.z, toEnter, cellName, cellLoc.x, cellLoc.y, cellLoc.z, "nullCallback", false);
         }
     }
+
     public void runEnterFind(obj_id self, String[] parse) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "objectId"))
@@ -795,6 +833,7 @@ public class thicks_test extends script.base_script
         location cellLoc = getGoodLocation(toEnter, cellName);
         warpPlayer(self, cellLoc.area, cellLoc.x, cellLoc.y, cellLoc.z, toEnter, cellName, cellLoc.x, cellLoc.y, cellLoc.z, "nullCallback", false);
     }
+
     public void runInteriorWarp(obj_id self, String[] parse) throws InterruptedException
     {
         if (getTopMostContainer(self) == null)
@@ -809,22 +848,25 @@ public class thicks_test extends script.base_script
         }
         warpPlayer(self, cellLoc.area, cellLoc.x, cellLoc.y, cellLoc.z, getTopMostContainer(self), parse[1], cellLoc.x, cellLoc.y, cellLoc.z, "nullCallback", false);
     }
+
     public void runShowTime(obj_id self, String[] parse) throws InterruptedException
     {
         String time = utils.formatTime(getGameTime());
         broadcast(self, time);
     }
+
     public void runIsScentMasked(obj_id self, String[] parse) throws InterruptedException
     {
         if (getState(self, STATE_MASK_SCENT) == 1)
         {
             broadcast(self, "You are scent masked");
         }
-        else 
+        else
         {
             broadcast(self, "You are not scent masked");
         }
     }
+
     public void runValidateConceal(obj_id self, String[] parse) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "scentmask.count"))
@@ -844,6 +886,7 @@ public class thicks_test extends script.base_script
             broadcast(self, "Player: " + getName(utils.getObjIdScriptVar(self, "scentmask.camoapply")));
         }
     }
+
     public void runGetBuildingScripts(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -853,12 +896,14 @@ public class thicks_test extends script.base_script
             int pid = sui.listbox(self, self, "SCRIPTS ON BUILDING", scriptList, "handleRecievedScriptList");
         }
     }
+
     public void runGetBuildingObjVars(obj_id player, String[] parse) throws InterruptedException
     {
         obj_id target = getTopMostContainer(player);
         String[] scriptList = getScriptList(target);
         int pid = sui.listbox(player, player, "SCRIPTS ON TARGET", scriptList, "handleRecievedScriptList");
     }
+
     public void runTargetLocation(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = getIntendedTarget(self);
@@ -873,12 +918,13 @@ public class thicks_test extends script.base_script
         {
             broadcast(self, "Location(" + tarLoc.x + ", " + tarLoc.y + ", " + tarLoc.z + ") yaw(" + yaw + ") cell(" + tarLoc.cell + ") on scene (" + tarLoc.area + ")");
         }
-        else 
+        else
         {
             String cell = utils.getCellName(getTopMostContainer(self), tarLoc.cell);
             broadcast(self, "Location(" + tarLoc.x + ", " + tarLoc.y + ", " + tarLoc.z + ") yaw(" + yaw + ") cell(" + cell + ") on scene (" + tarLoc.area + ")");
         }
     }
+
     public void runBuildoutLoc(obj_id self, String[] parse) throws InterruptedException
     {
         if (!hasObjVar(self, "record_table"))
@@ -916,6 +962,7 @@ public class thicks_test extends script.base_script
         dctRow.put("yaw", yaw);
         datatable.serverDataTableAddRow(table, dctRow);
     }
+
     public void sendMessageTo(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = getTarget(self);
@@ -934,36 +981,44 @@ public class thicks_test extends script.base_script
             }
             messageTo(target, message, dict, 0, false);
         }
-        else 
+        else
         {
             messageTo(target, message, null, 0, false);
         }
     }
+
     public void broadcastMessageTo(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id[] objects = getObjectsInRange(self, 200.0f);
-        if (objects == null || objects.length == 0)
+        if (objects == null)
         {
             return;
         }
-        for (obj_id object : objects) {
-            if (!isIdValid(object)) {
+        for (obj_id object : objects)
+        {
+            if (!isIdValid(object))
+            {
                 continue;
             }
             obj_id target = object;
             String message = parse[1];
-            if (parse.length > 2) {
+            if (parse.length > 2)
+            {
                 dictionary dict = new dictionary();
-                for (int i = 2; i < parse.length; i += 2) {
+                for (int i = 2; i < parse.length; i += 2)
+                {
                     int k = i + 1;
                     dict.put(parse[i], parse[k]);
                 }
                 messageTo(target, message, dict, 0, false);
-            } else {
+            }
+            else
+            {
                 messageTo(target, message, null, 0, false);
             }
         }
     }
+
     public void runDestroyAndRecreate(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = obj_id.NULL_ID;
@@ -974,7 +1029,7 @@ public class thicks_test extends script.base_script
                 target = utils.getObjIdScriptVar(self, "messageTo.recordObject");
             }
         }
-        else 
+        else
         {
             target = getTopMostContainer(self);
         }
@@ -999,6 +1054,7 @@ public class thicks_test extends script.base_script
             }
         }
     }
+
     public void runMessageToBuilding(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -1013,11 +1069,12 @@ public class thicks_test extends script.base_script
             }
             messageTo(top, message, dict, 0, false);
         }
-        else 
+        else
         {
             messageTo(top, message, null, 0, false);
         }
     }
+
     public void runDeathTouch(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = getTarget(self);
@@ -1027,15 +1084,18 @@ public class thicks_test extends script.base_script
         }
         trial.cleanupObject(target);
     }
+
     public void runBuffMe(obj_id self, String[] parse) throws InterruptedException
     {
         buff.applyBuff(self, parse[1]);
     }
+
     public void runBuffYou(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = getIntendedTarget(self);
         buff.applyBuff(target, parse[1]);
     }
+
     public void runSetRecordObject(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = getTarget(self);
@@ -1044,13 +1104,14 @@ public class thicks_test extends script.base_script
             utils.setScriptVar(self, "messageTo.recordObject", target);
             broadcast(self, "Record object set to: " + target);
         }
-        else 
+        else
         {
             obj_id top = trial.getTop(self);
             utils.setScriptVar(self, "messageTo.recordObject", top);
             broadcast(self, "Record object set to: " + top);
         }
     }
+
     public void runSetRecordObjectFromFind(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id findObject = utils.getObjIdScriptVar(self, "objectId");
@@ -1060,6 +1121,7 @@ public class thicks_test extends script.base_script
             broadcast(self, "Record object set to: " + findObject);
         }
     }
+
     public void runRecordTo(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = utils.getObjIdScriptVar(self, "messageTo.recordObject");
@@ -1079,20 +1141,23 @@ public class thicks_test extends script.base_script
             }
             messageTo(target, message, dict, 0, false);
         }
-        else 
+        else
         {
             messageTo(target, message, null, 0, false);
         }
     }
+
     public void runGetCellId(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id container = getContainedBy(self);
         broadcast(self, "I am contained by (" + container + ")");
     }
+
     public void runClearAllLockoutTimers(obj_id self, String[] parse) throws InterruptedException
     {
         space_dungeon.clearAllDungeonLockoutTimers(self);
     }
+
     public void runApplyBuff(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = getTarget(self);
@@ -1102,6 +1167,7 @@ public class thicks_test extends script.base_script
         }
         buff.applyBuff(target, parse[1]);
     }
+
     public void runDoAnim(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = getLookAtTarget(self);
@@ -1111,6 +1177,7 @@ public class thicks_test extends script.base_script
         }
         doAnimationAction(target, parse[1]);
     }
+
     public void runDoRecordBuildoutLoc(obj_id self, String[] parse) throws InterruptedException
     {
         if (!hasObjVar(self, "record_table"))
@@ -1141,12 +1208,14 @@ public class thicks_test extends script.base_script
         dctRow.put("yaw", yaw);
         datatable.serverDataTableAddRow(table, dctRow);
     }
+
     public void runPlayMusic(obj_id self, String[] parse) throws InterruptedException
     {
         String sound = "sound/" + parse[1] + ".snd";
         playMusic(self, sound);
         broadcast(self, "Tried to play sound: " + sound);
     }
+
     public void runDoPrt(obj_id self, String[] parse) throws InterruptedException
     {
         String effect = "appearance/" + parse[1] + ".prt";
@@ -1154,17 +1223,20 @@ public class thicks_test extends script.base_script
         playClientEffectLoc(getIntendedTarget(self), effect, playLoc, 0.4f);
         broadcast(self, "Attempting to do prt " + effect);
     }
+
     public void runSpawnAkPrime(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id ak = create.object("som_volcano_two_ak_prime", getLocation(self));
         attachScript(ak, "theme_park.dungeon.mustafar_trials.volcano_battlefield.event_two_boss");
         setInvulnerable(ak, false);
     }
+
     public void runGetTopMostContainer(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
         broadcast(self, "Top most container is(" + top + ")");
     }
+
     public void runBadgeOperation(obj_id self, String[] parse) throws InterruptedException
     {
         if (parse.length < 3)
@@ -1180,6 +1252,7 @@ public class thicks_test extends script.base_script
             badge.revokeBadge(self, parse[2], true);
         }
     }
+
     public void runSetFollowInFormation(obj_id self, String[] parse) throws InterruptedException
     {
         if (parse.length < 2)
@@ -1214,52 +1287,57 @@ public class thicks_test extends script.base_script
         {
             ai_lib.followInFormation(target, self, ai_lib.FORMATION_BOX, position);
         }
-        return;
     }
+
     public void runDeleteObject(obj_id self, String[] parse) throws InterruptedException
     {
         int length = parse.length;
         switch (length)
         {
             case 0:
-            return;
-            case 1:
-            runDeathTouch(self, parse);
-            return;
-            case 2:
-            String deleteString = parse[1];
-            obj_id[] objects = getObjectsInRange(self, 200);
-            if (objects == null || objects.length == 0)
-            {
                 return;
-            }
-                for (obj_id object1 : objects) {
-                    if ((getTemplateName(object1)).equals(deleteString)) {
+            case 1:
+                runDeathTouch(self, parse);
+                return;
+            case 2:
+                String deleteString = parse[1];
+                obj_id[] objects = getObjectsInRange(self, 200);
+                if (objects == null)
+                {
+                    return;
+                }
+                for (obj_id object1 : objects)
+                {
+                    if ((getTemplateName(object1)).equals(deleteString))
+                    {
                         trial.cleanupObject(object1);
                     }
                 }
-            return;
+                return;
             case 3:
-            if (!parse[1].equals("indexOf"))
-            {
-                return;
-            }
-            objects = getObjectsInRange(self, 200);
-            if (objects == null || objects.length == 0)
-            {
-                return;
-            }
-                for (obj_id object : objects) {
-                    if (!isIdValid(object)) {
+                if (!parse[1].equals("indexOf"))
+                {
+                    return;
+                }
+                objects = getObjectsInRange(self, 200);
+                if (objects == null)
+                {
+                    return;
+                }
+                for (obj_id object : objects)
+                {
+                    if (!isIdValid(object))
+                    {
                         continue;
                     }
-                    if ((getTemplateName(object)).contains(parse[2])) {
+                    if ((getTemplateName(object)).contains(parse[2]))
+                    {
                         trial.cleanupObject(object);
                     }
                 }
-            return;
         }
     }
+
     public void runRoriConversion(obj_id self, String[] parse) throws InterruptedException
     {
         if (!hasObjVar(self, "record_table"))
@@ -1273,26 +1351,26 @@ public class thicks_test extends script.base_script
             return;
         }
         String table = getStringObjVar(self, "record_table");
-        String[] strHeaderTypes = 
-        {
-            "s",
-            "s",
-            "f",
-            "f",
-            "f",
-            "f",
-            "s"
-        };
-        String[] strHeaders = 
-        {
-            "object",
-            "phase",
-            "x_offset",
-            "y_offset",
-            "z_offset",
-            "yaw",
-            "cell"
-        };
+        String[] strHeaderTypes =
+                {
+                        "s",
+                        "s",
+                        "f",
+                        "f",
+                        "f",
+                        "f",
+                        "s"
+                };
+        String[] strHeaders =
+                {
+                        "object",
+                        "phase",
+                        "x_offset",
+                        "y_offset",
+                        "z_offset",
+                        "yaw",
+                        "cell"
+                };
         boolean boolTest = datatable.createDataTable(table, strHeaders, strHeaderTypes);
         if (!boolTest)
         {
@@ -1301,14 +1379,17 @@ public class thicks_test extends script.base_script
         }
         location recordLoc = getLocation(utils.getObjIdScriptVar(self, "messageTo.recordObject"));
         obj_id[] objects = getAllObjectsWithObjVar(recordLoc, 300.0f, "test");
-        if (objects == null || objects.length == 0)
+        if (objects == null)
         {
             return;
         }
-        for (obj_id object : objects) {
-            if ((getTemplateName(object)).indexOf("invis") < 1 && !isPlayer(object)) {
+        for (obj_id object : objects)
+        {
+            if ((getTemplateName(object)).indexOf("invis") < 1 && !isPlayer(object))
+            {
                 obj_id top = trial.getTop(object);
-                if (top == object) {
+                if (top == object)
+                {
                     location objLoc = getLocation(object);
                     float x = objLoc.x - recordLoc.x;
                     float y = objLoc.y - recordLoc.y;
@@ -1328,6 +1409,7 @@ public class thicks_test extends script.base_script
             }
         }
     }
+
     public void getModLoc(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "messageTo.recordObject"))
@@ -1350,6 +1432,7 @@ public class thicks_test extends script.base_script
         LOG("whereLog", "Where: z " + modLoc.z + "     ");
         LOG("whereLog", "Yaw====: " + yaw + "     ");
     }
+
     public void calculateWarp(obj_id self, String[] parse) throws InterruptedException
     {
         if (parse == null || parse.length < 3)
@@ -1363,17 +1446,20 @@ public class thicks_test extends script.base_script
         z += dist;
         warpPlayer(self, "rori", x, 0, z, null, x, 0, z);
     }
+
     public void calculateDistance(obj_id self, String[] parse) throws InterruptedException
     {
         float distance = getDistance(getLocation(self), getLocation(utils.getObjIdScriptVar(self, "messageTo.recordObject")));
         broadcast(self, "Distance to recordObject: " + distance);
     }
+
     public void deleteRegion(obj_id self, String[] parse) throws InterruptedException
     {
         region r = getRegion(getLocation(self).area, parse[1]);
         deleteRegion(r);
         broadcast(self, "Deleted Region: " + r);
     }
+
     public void get3dSpaceLoc(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = getTarget(self);
@@ -1383,6 +1469,7 @@ public class thicks_test extends script.base_script
         vector vctP = vctTest.getPosition_p();
         broadcast(self, "J = " + vctJ.x + ", " + vctJ.y + ", " + vctJ.z + ", K = " + vctK.x + ", " + vctK.y + ", " + vctK.z + ", Pos = " + vctP.x + ", " + vctP.y + ", " + vctP.z);
     }
+
     public void runQuery(obj_id self, String[] parse) throws InterruptedException
     {
         String subject = parse[1];
@@ -1399,13 +1486,15 @@ public class thicks_test extends script.base_script
                     String[] data = convertCreatureQueryToStringArray(creatureDict);
                     populateListbox(self, data, "none");
                 }
-                else 
+                else
                 {
                     String[] nameList = dataTableGetStringColumn(creatureTable, "creatureName");
                     Vector indexList = new Vector();
                     indexList.setSize(0);
-                    for (String s : nameList) {
-                        if (s.contains(parse[3])) {
+                    for (String s : nameList)
+                    {
+                        if (s.contains(parse[3]))
+                        {
                             utils.addElement(indexList, s);
                         }
                     }
@@ -1425,6 +1514,7 @@ public class thicks_test extends script.base_script
             }
         }
     }
+
     public void populateListbox(obj_id self, String[] data, String handler) throws InterruptedException
     {
         int pid = createSUIPage(sui.SUI_LISTBOX, self, self, handler);
@@ -1438,7 +1528,7 @@ public class thicks_test extends script.base_script
                 clearSUIDataSource(pid, sui.LISTBOX_DATASOURCE);
                 for (int i = 0; i < data.length; i++)
                 {
-                    sui.addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + i);
+                    sui.addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(i));
                     sui.setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, data[i]);
                 }
             }
@@ -1448,6 +1538,7 @@ public class thicks_test extends script.base_script
             sui.showSUIPage(pid);
         }
     }
+
     public String[] convertCreatureQueryToStringArray(dictionary creatureDict) throws InterruptedException
     {
         String[] data = new String[18];
@@ -1471,6 +1562,7 @@ public class thicks_test extends script.base_script
         data[17] = "Death Blow: " + creatureDict.getInt("death_blow");
         return data;
     }
+
     public int creatureLookup(obj_id self, dictionary params) throws InterruptedException
     {
         int btn = sui.getIntButtonPressed(params);
@@ -1494,6 +1586,7 @@ public class thicks_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void getBaseCount(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id planetId = getPlanetByName(getLocation(self).area);
@@ -1502,19 +1595,21 @@ public class thicks_test extends script.base_script
         int imperial = gcw.getImperialBaseCount(planetId);
         broadcast(self, "There are " + rebel + " Rebel Bases and " + imperial + " Imperial Bases in scene " + getLocation(self).area + " via manager " + planetRegister);
     }
+
     public void calculateGameTime(obj_id self, String[] parse) throws InterruptedException
     {
         if (parse.length == 1)
         {
-            broadcast(self, "" + getGameTime());
+            broadcast(self, String.valueOf(getGameTime()));
         }
-        else 
+        else
         {
             int passedTime = utils.stringToInt(parse[1]);
             String verboseTime = utils.formatTimeVerbose(getGameTime() - passedTime);
             broadcast(self, verboseTime);
         }
     }
+
     public void runTestBatch(obj_id self, String[] parse) throws InterruptedException
     {
         if (parse.length < 2)
@@ -1530,11 +1625,12 @@ public class thicks_test extends script.base_script
         {
             utils.removeBatchObjVar(self, parse[1]);
         }
-        else 
+        else
         {
             utils.setBatchObjVar(self, parse[1], toTheMax);
         }
     }
+
     public void runMakeSpaceOvert(obj_id self, String[] parse) throws InterruptedException
     {
         String faction = factions.getFaction(self);
@@ -1546,15 +1642,17 @@ public class thicks_test extends script.base_script
         {
             space_transition.setPlayerOvert(self, (370444368));
         }
-        else 
+        else
         {
             space_transition.setPlayerOvert(self, (-615855020));
         }
     }
+
     public void runGetPlanetObject(obj_id self, String[] parse) throws InterruptedException
     {
-        broadcast(self, "" + getPlanetByName(getLocation(self).area));
+        broadcast(self, String.valueOf(getPlanetByName(getLocation(self).area)));
     }
+
     public void runRespec(obj_id self, String[] parse) throws InterruptedException
     {
         if (parse.length < 3)
@@ -1569,15 +1667,18 @@ public class thicks_test extends script.base_script
         respec.setPercentageCompletion(self, newTemplate, pctDone, false);
         skill.recalcPlayerPools(self, true);
     }
+
     public void runGetSkillTemplate(obj_id self, String[] parse) throws InterruptedException
     {
         broadcast(self, getSkillTemplate(self));
     }
+
     public void runQueueCommand(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = getIntendedTarget(self);
         queueCommand(self, getStringCrc(parse[1].toLowerCase()), target, "", COMMAND_PRIORITY_DEFAULT);
     }
+
     public void runSetCooldown(obj_id self, String[] parse) throws InterruptedException
     {
         broadcast(self, "Gathering Data for : " + parse[1]);
@@ -1591,22 +1692,25 @@ public class thicks_test extends script.base_script
             broadcast(self, "Overriding base time with " + utils.stringToFloat(parse[2]));
             baseCooldownTime = utils.stringToFloat(parse[2]);
         }
-        else 
+        else
         {
             baseCooldownTime = cd.cooldownTime;
         }
         broadcast(self, "Attempting to Set cooldown time on " + getName(self) + " to group " + cd.cooldownGroup + " at time " + baseCooldownTime);
         sendCooldownGroupTimingOnly(self, groupCrc, baseCooldownTime);
     }
+
     public void runGetWeapon(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id weapon = getCurrentWeapon(self);
         broadcast(self, "Current weapon is: " + weapon);
     }
+
     public void runVerifySession(obj_id self, String[] parse) throws InterruptedException
     {
         space_dungeon.verifyPlayerSession(self);
     }
+
     public void runGetHateList(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id subject = getTarget(self);
@@ -1622,16 +1726,18 @@ public class thicks_test extends script.base_script
         String[] detailed_list = new String[hated.length];
         for (int i = 0; i < hated.length; i++)
         {
-            detailed_list[i] = "" + getName(hated[i]) + " - " + getHate(subject, hated[i]);
+            detailed_list[i] = getName(hated[i]) + " - " + getHate(subject, hated[i]);
             broadcast(self, detailed_list[i]);
         }
     }
+
     public void runGetRespect(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id subject = getTarget(self);
         float respectRadius = aiGetRespectRadius(subject, self);
         broadcast(self, "Respect Radius for " + getName(subject) + " to " + getName(self) + " is " + respectRadius);
     }
+
     public void runMakeDecoy(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id decoy = stealth.createDecoy(self);
@@ -1650,13 +1756,17 @@ public class thicks_test extends script.base_script
             buff.applyBuff(self, "invis_sp_diversion_stealth");
             return;
         }
-        for (obj_id hater : haters) {
+        for (obj_id hater : haters)
+        {
             obj_id[] hateList = getHateList(hater);
-            if (hateList == null || hateList.length == 0) {
+            if (hateList == null)
+            {
                 continue;
             }
-            for (obj_id obj_id : hateList) {
-                if (obj_id == self) {
+            for (obj_id obj_id : hateList)
+            {
+                if (obj_id == self)
+                {
                     setHate(hater, decoy, getHate(hater, self) * 2);
                 }
             }
@@ -1668,6 +1778,7 @@ public class thicks_test extends script.base_script
         }
         buff.applyBuff(self, "invis_sp_diversion_stealth");
     }
+
     public void runCommLink(obj_id self, String[] parse) throws InterruptedException
     {
         if (parse.length < 3)
@@ -1676,6 +1787,7 @@ public class thicks_test extends script.base_script
         }
         faction_perk.spawnTroopers(self, parse[1], utils.stringToInt(parse[2]));
     }
+
     public void runPrepCave(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id cave = trial.getTop(self);
@@ -1687,26 +1799,31 @@ public class thicks_test extends script.base_script
         removeAllObjVars(cave);
         attachScript(cave, "theme_park.heroic.axkva_min.axkva_controller");
     }
+
     public void runSwarmTarget(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = getIntendedTarget(self);
         obj_id[] creatures = getCreaturesInRange(getLocation(self), 64.0f);
-        if (creatures == null || creatures.length == 0)
+        if (creatures == null)
         {
             return;
         }
-        for (obj_id creature : creatures) {
-            if (creature != target) {
+        for (obj_id creature : creatures)
+        {
+            if (creature != target)
+            {
                 addHate(creature, target, 1);
             }
         }
     }
+
     public void runSetMaster(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = getIntendedTarget(self);
         setMaster(self, null);
         setMaster(target, self);
     }
+
     public void runConvert(obj_id self, String[] parse) throws InterruptedException
     {
         int numRows = dataTableGetNumRows("datatables/spawning/heroic/heroic_axkva_min.iff");
@@ -1716,6 +1833,7 @@ public class thicks_test extends script.base_script
             debugSpeakMsg(self, "Converted triggerId(" + triggerId + ") = " + utils.stringToInt(triggerId));
         }
     }
+
     public void dumpToTable(obj_id self, String[] parse) throws InterruptedException
     {
         if (!hasObjVar(self, "record_table"))
@@ -1729,22 +1847,22 @@ public class thicks_test extends script.base_script
             return;
         }
         String table = getStringObjVar(self, "record_table");
-        String[] strHeaderTypes = 
-        {
-            "s",
-            "f",
-            "f",
-            "f",
-            "f"
-        };
-        String[] strHeaders = 
-        {
-            "object",
-            "x_offset",
-            "y_offset",
-            "z_offset",
-            "yaw"
-        };
+        String[] strHeaderTypes =
+                {
+                        "s",
+                        "f",
+                        "f",
+                        "f",
+                        "f"
+                };
+        String[] strHeaders =
+                {
+                        "object",
+                        "x_offset",
+                        "y_offset",
+                        "z_offset",
+                        "yaw"
+                };
         boolean boolTest = datatable.createDataTable(table, strHeaders, strHeaderTypes);
         if (!boolTest)
         {
@@ -1753,14 +1871,17 @@ public class thicks_test extends script.base_script
         }
         location recordLoc = getLocation(utils.getObjIdScriptVar(self, "messageTo.recordObject"));
         obj_id[] objects = getObjectsInRange(recordLoc, 1000.0f);
-        if (objects == null || objects.length == 0)
+        if (objects == null)
         {
             return;
         }
-        for (obj_id object : objects) {
-            if ((getTemplateName(object)).contains("furniture")) {
+        for (obj_id object : objects)
+        {
+            if ((getTemplateName(object)).contains("furniture"))
+            {
                 obj_id top = trial.getTop(object);
-                if (top == object) {
+                if (top == object)
+                {
                     location objLoc = getLocation(object);
                     float x = objLoc.x - recordLoc.x;
                     float y = objLoc.y - recordLoc.y;
@@ -1779,6 +1900,7 @@ public class thicks_test extends script.base_script
             }
         }
     }
+
     public void recreateTable(obj_id self, String[] parse) throws InterruptedException
     {
         if (!hasObjVar(self, "record_table"))
@@ -1814,6 +1936,7 @@ public class thicks_test extends script.base_script
             }
         }
     }
+
     public void runGetCommmandList(obj_id self, String[] parse) throws InterruptedException
     {
         String[] commandList = getCommandListingForPlayer(self);
@@ -1822,24 +1945,29 @@ public class thicks_test extends script.base_script
             debugSpeakMsg(self, "Fail");
             return;
         }
-        for (String s : commandList) {
+        for (String s : commandList)
+        {
             debugSpeakMsg(self, "Command: " + s);
         }
     }
+
     public void runGetCellList(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id pob = utils.stringToObjId(parse[1]);
         String[] list = getCellNames(pob);
-        for (String s : list) {
-            debugSpeakMsg(self, "" + s);
+        for (String s : list)
+        {
+            debugSpeakMsg(self, s);
         }
     }
+
     public void runEnterCell(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id pob = utils.stringToObjId(parse[1]);
         location cellLoc = getGoodLocation(pob, parse[2]);
         warpPlayer(self, cellLoc.area, cellLoc.x, cellLoc.y, cellLoc.z, pob, parse[2], cellLoc.x, cellLoc.y, cellLoc.z, "nullCallback", false);
     }
+
     public void runIt(obj_id self, String[] parse) throws InterruptedException
     {
         attacker_results atkRslt = new attacker_results();
@@ -1850,6 +1978,7 @@ public class thicks_test extends script.base_script
         dfndRslt[0].id = self;
         doCombatResults(anim, atkRslt, dfndRslt);
     }
+
     public void runGetBell(obj_id self, String[] parse) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "bellpid"))
@@ -1880,8 +2009,8 @@ public class thicks_test extends script.base_script
         for (int i = 0; i < listSize; i++)
         {
             bigList[i] = distributedRand(min, max, level);
-            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + i);
-            setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, "" + bigList[i]);
+            addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, String.valueOf(i));
+            setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, String.valueOf(bigList[i]));
             average += bigList[i];
             if (bigList[i] < low)
             {
@@ -1931,6 +2060,7 @@ public class thicks_test extends script.base_script
         flushSUIPage(pid);
         utils.setScriptVar(self, "bellpid", pid);
     }
+
     public float distributedRand(float min, float max, int level) throws InterruptedException
     {
         final int levelMin = 0;
@@ -1944,7 +2074,7 @@ public class thicks_test extends script.base_script
             min = _max;
             max = _min;
         }
-        float rank = (float)(level - levelMin) / (levelMax - levelMin);
+        float rank = (float) (level - levelMin) / (levelMax - levelMin);
         float mid = min + ((max - min) * rank);
         if (mid < min)
         {
@@ -1965,16 +2095,19 @@ public class thicks_test extends script.base_script
         }
         return randNum;
     }
+
     public void runSetHover(obj_id self, String[] parse) throws InterruptedException
     {
         float height = utils.stringToFloat(parse[1]);
         vehicle.setHoverHeight(getIntendedTarget(self), height);
     }
+
     public void runTestSlope(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = getIntendedTarget(self);
         addSlowDownEffect(self, target, 10.0f, 180.0f, 85.0f, 10.0f);
     }
+
     public void runAlterHeight(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = getIntendedTarget(self);
@@ -1983,21 +2116,19 @@ public class thicks_test extends script.base_script
         loc.y += change;
         setLocation(target, loc);
     }
+
     public void runTestBool(obj_id self, String[] parse) throws InterruptedException
     {
         boolean overall = false;
         for (int i = 0; i < 6; i++)
         {
-            boolean current = false;
-            if (i == 4)
-            {
-                current = true;
-            }
+            boolean current = i == 4;
             overall |= current;
             debugSpeakMsg(self, "overall = " + overall + ", current = " + current);
         }
         debugSpeakMsg(self, "overall = " + overall);
     }
+
     public void runAddAttrib(obj_id self, String[] parse) throws InterruptedException
     {
         String attrib = parse[1];
@@ -2005,12 +2136,14 @@ public class thicks_test extends script.base_script
         int time = utils.stringToInt(parse[3]);
         addSkillModModifier(self, attrib + "_0", attrib, value, time, false, false);
     }
+
     public void runLit3(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id recordObject = utils.getObjIdScriptVar(self, "messageTo.recordObject");
         obj_id target = getIntendedTarget(self);
         chat.chat(self, "Can See: " + canSee(recordObject, target));
     }
+
     public void runShieldMe(obj_id self, String[] parse) throws InterruptedException
     {
         for (int i = 0; i < 9; i++)
@@ -2018,55 +2151,63 @@ public class thicks_test extends script.base_script
             debugSpeakMsg(self, "attrib" + i + " = " + getAttrib(self, i));
         }
     }
+
     public void clearStunEffects(obj_id self, String[] parse) throws InterruptedException
     {
         setState(self, STATE_STUNNED, false);
         setState(self, STATE_FROZEN, false);
     }
+
     public void makeMeAGod(obj_id self, String[] parse) throws InterruptedException
     {
         buff.applyBuff(self, "kun_eight_sacrifice", 2400);
         buff.applyBuff(self, "crystal_buff", 2400);
         buff.applyBuff(self, "kun_minder_heal_buff", 2400);
     }
+
     public void runSetSlope(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = getIntendedTarget(self);
         addSlowDownEffect(self, target, 50.0f, 0.01f, 75.0f, 10.0f);
     }
+
     public void runSetKillMeter(obj_id self, String[] parse) throws InterruptedException
     {
         int value = utils.stringToInt(parse[1]);
         combat.setKillMeter(self, value);
     }
+
     public void runSetMind(obj_id self, String[] parse) throws InterruptedException
     {
         setMind(self, utils.stringToInt(parse[1]));
     }
+
     public void runGetMind(obj_id self, String[] parse) throws InterruptedException
     {
         int current = getMind(self);
         int max = getMaxMind(self);
         debugSpeakMsg(self, "Mind = " + current + " of " + max);
     }
+
     public void runSetupSnowspeeder(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = getMountId(self);
         setBeastmasterPet(self, target);
-        String[] abilities = 
-        {
-            "hoth_speeder_shoot",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-        };
+        String[] abilities =
+                {
+                        "hoth_speeder_shoot",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                };
         setBeastmasterPetCommands(self, abilities);
     }
+
     public void runTestShoot(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = getIntendedTarget(self);
@@ -2077,6 +2218,7 @@ public class thicks_test extends script.base_script
         location tarLoc = getLocation(target);
         createClientProjectile(self, "object/weapon/ranged/pistol/shared_pistol_green_bolt.iff", selfLoc, getLocation(target), speed, 2.0f, false, 32, 178, 170, 255);
     }
+
     public void runSetLoc(obj_id self, String[] parse) throws InterruptedException
     {
         float locx = utils.stringToFloat(parse[1]);
@@ -2086,32 +2228,32 @@ public class thicks_test extends script.base_script
         location newLoc = new location(locx, locy, locz, tarLoc.area, tarLoc.cell);
         setLocation(getIntendedTarget(self), newLoc);
     }
-    public static final dictionary dict = new dictionary();
+
     public void runSetDda(obj_id self, String[] parse) throws InterruptedException
     {
         int fromRow = utils.stringToInt(parse[1]);
-        String[] testString = 
-        {
-            "one",
-            "two",
-            "three",
-            "four",
-            "five",
-            "six",
-            "seven",
-            "eight"
-        };
-        int[] testInt = 
-        {
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8
-        };
+        String[] testString =
+                {
+                        "one",
+                        "two",
+                        "three",
+                        "four",
+                        "five",
+                        "six",
+                        "seven",
+                        "eight"
+                };
+        int[] testInt =
+                {
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8
+                };
         String[] passString = new String[3];
         int[] passInt = new int[3];
         int q = 0;
@@ -2124,31 +2266,38 @@ public class thicks_test extends script.base_script
         dict.put("testString", passString);
         dict.put("testInt", passInt);
     }
+
     public void runGetDda(obj_id self, String[] parse) throws InterruptedException
     {
         String[] testString = dict.getStringArray("testString");
         int[] testInt = dict.getIntArray("testInt");
         for (int i = 0; i < testString.length; i++)
         {
-            debugSpeakMsg(self, "" + testString[i]);
-            debugSpeakMsg(self, "" + testInt[i]);
+            debugSpeakMsg(self, testString[i]);
+            debugSpeakMsg(self, String.valueOf(testInt[i]));
         }
     }
+
     public void runStaticItemParse(obj_id self, String[] parse) throws InterruptedException
     {
         int parseLength = parse.length;
         if (parseLength >= 2)
         {
-            switch ((toLower(parse[1]))) {
-                case "find": {
-                    if (parseLength < 3) {
+            switch ((toLower(parse[1])))
+            {
+                case "find":
+                {
+                    if (parseLength < 3)
+                    {
                         sendSystemMessage(self, "Syntax: staticItem find [keyword] [optional sub-keyword]", "");
                         return;
                     }
                     String[] data = new String[parse.length - 1];
                     int dataIndex = 0;
-                    for (int i = 0; i < parse.length; i++) {
-                        if (i != 1) {
+                    for (int i = 0; i < parse.length; i++)
+                    {
+                        if (i != 1)
+                        {
                             data[dataIndex] = parse[i];
                             ++dataIndex;
                         }
@@ -2156,15 +2305,19 @@ public class thicks_test extends script.base_script
                     runStaticItemFind(self, data);
                     break;
                 }
-                case "create": {
-                    if (parseLength < 3) {
+                case "create":
+                {
+                    if (parseLength < 3)
+                    {
                         sendSystemMessage(self, "Syntax: staticItem create [list index or static item name]", "");
                         return;
                     }
                     String[] data = new String[parse.length - 1];
                     int dataIndex = 0;
-                    for (int i = 0; i < parse.length; i++) {
-                        if (i != 1) {
+                    for (int i = 0; i < parse.length; i++)
+                    {
+                        if (i != 1)
+                        {
                             data[dataIndex] = parse[i];
                             ++dataIndex;
                         }
@@ -2180,13 +2333,13 @@ public class thicks_test extends script.base_script
                     break;
             }
         }
-        else 
+        else
         {
             String helpMessage = "staticItem Help: \n" + "--------------- \n" + "staticItem find [keyword] [optional sub-keyword] \n" + "staticItem create [list index or static item name] \n" + "staticItem list \n" + "staticItem clear";
             sendSystemMessage(self, helpMessage, "");
         }
-        return;
     }
+
     public void runStaticItemFind(obj_id self, String[] parse) throws InterruptedException
     {
         String staticItemWanted = "";
@@ -2207,20 +2360,27 @@ public class thicks_test extends script.base_script
         String output = "";
         int index = 0;
         String[] allStaticItems = dataTableGetStringColumn(static_item.MASTER_ITEM_TABLE, "name");
-        for (String allStaticItem : allStaticItems) {
+        for (String allStaticItem : allStaticItems)
+        {
             boolean matchFound = false;
             String staticItemName = allStaticItem;
             int stringCheck = staticItemName.indexOf(staticItemWanted);
-            if (stringCheck > -1) {
-                if (subString != null && subString.length() > 0) {
+            if (stringCheck > -1)
+            {
+                if (subString != null && subString.length() > 0)
+                {
                     int subStringCheck = staticItemName.indexOf(subString);
-                    if (subStringCheck > -1) {
+                    if (subStringCheck > -1)
+                    {
                         matchFound = true;
                     }
-                } else {
+                }
+                else
+                {
                     matchFound = true;
                 }
-                if (matchFound) {
+                if (matchFound)
+                {
                     utils.addElement(matchingStaticItems, staticItemName);
                     output += index + " - " + staticItemName + " \n";
                     ++index;
@@ -2231,13 +2391,13 @@ public class thicks_test extends script.base_script
         {
             output = "No matching static items found.";
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "idiot_matchingStaticItems", matchingStaticItems);
         }
         sendSystemMessage(self, output, "\n");
-        return;
     }
+
     public void runStaticItemCreate(obj_id self, String[] parse) throws InterruptedException
     {
         if (parse.length < 2)
@@ -2254,43 +2414,43 @@ public class thicks_test extends script.base_script
             {
                 if (staticItemIndex >= 0 && staticItemIndex < matchingStaticItems.size())
                 {
-                    String staticItem = ((String)matchingStaticItems.get(staticItemIndex));
+                    String staticItem = ((String) matchingStaticItems.get(staticItemIndex));
                     obj_id inv = getObjectInSlot(self, "inventory");
                     obj_id item = static_item.createNewItemFunction(staticItem, inv);
                     if (isIdValid(item))
                     {
                         sendSystemMessage(self, "Static Item " + staticItem + " created in your inventory.", "");
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(self, "Error creating static item with supplied NAME (" + staticItem + ").", "");
                     }
                 }
-                else 
+                else
                 {
                     sendSystemMessage(self, "Invalid static item index.", "");
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(self, "Empty or Null array returned from Scriptvar.", "");
             }
         }
-        else 
+        else
         {
             if (static_item.createNewItemFunction(staticItemString, self) == null)
             {
                 sendSystemMessage(self, "Error creating static item with supplied NAME (" + staticItemString + ").", "");
                 return;
             }
-            else 
+            else
             {
                 sendSystemMessage(self, "Static Item " + staticItemString + " created in your inventory.", "");
                 return;
             }
         }
-        return;
     }
+
     public void runStaticItemShowList(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "idiot_matchingStaticItems"))
@@ -2301,21 +2461,21 @@ public class thicks_test extends script.base_script
             {
                 for (int i = 0; i < matchingStaticItems.size(); i++)
                 {
-                    output = output + i + " - " + ((String)matchingStaticItems.get(i)) + " \n";
+                    output = output + i + " - " + matchingStaticItems.get(i) + " \n";
                 }
                 sendSystemMessage(self, output, "");
             }
-            else 
+            else
             {
                 sendSystemMessage(self, "Empty or Null array returned from Static Items List Scriptvar.", "");
             }
         }
-        else 
+        else
         {
             sendSystemMessage(self, "Static Items List not found.", "");
         }
-        return;
     }
+
     public void runStaticItemClearList(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "idiot_matchingStaticItems"))
@@ -2323,48 +2483,55 @@ public class thicks_test extends script.base_script
             utils.removeScriptVar(self, "idiot_matchingStaticItems");
             sendSystemMessage(self, "Static Items List removed.", "");
         }
-        else 
+        else
         {
             sendSystemMessage(self, "Static Items List not found.", "");
         }
-        return;
     }
+
     public void runPlaySound(obj_id self, String[] parse) throws InterruptedException
     {
         debugSpeakMsg(self, "attempting to play: " + parse[1]);
         play2dNonLoopingSound(self, "sound/" + parse[1] + ".snd");
     }
+
     public int instance_ping_response(obj_id self, dictionary params) throws InterruptedException
     {
         String message = params.getString("message");
         sendConsoleMessage(self, message);
         return SCRIPT_CONTINUE;
     }
+
     public void runFireTrigger(obj_id self, String[] parse) throws InterruptedException
     {
         trial.sendSequenceTrigger(parse[1]);
     }
+
     public void runSetCellLabel(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id top = trial.getTop(self);
         obj_id cellId = getCellId(top, parse[1]);
         setCellLabel(cellId, parse[2]);
     }
+
     public void runClearWaypoints(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id[] waypoints = getWaypointsInDatapad(self);
-        if (waypoints != null && waypoints.length > 0)
+        if (waypoints != null)
         {
-            for (obj_id waypoint : waypoints) {
+            for (obj_id waypoint : waypoints)
+            {
                 destroyWaypointInDatapad(waypoint, self);
             }
         }
     }
+
     public void runSetIdOnInstance(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id instance_id = instance.getAreaInstanceController(self);
         instance.addToPlayerIdList(instance_id, self);
     }
+
     public void runHideFromClient(obj_id self, String[] parse) throws InterruptedException
     {
         obj_id target = getIntendedTarget(self);

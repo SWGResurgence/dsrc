@@ -1,5 +1,11 @@
 package script.systems.crafting.droid;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.library.pet_lib;
 import script.library.utils;
@@ -336,7 +342,7 @@ public class droid_component_attribute extends script.base_script
         {
             names[idx] = "fire_potency";
             int firePotency = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".fire_potency");
-            attribs[idx] = "" + firePotency;
+            attribs[idx] = String.valueOf(firePotency);
             idx++;
             if (idx >= names.length)
             {
@@ -347,7 +353,7 @@ public class droid_component_attribute extends script.base_script
         {
             names[idx] = "arc_projector";
             int attribValue = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".arc_projector");
-            attribs[idx] = "" + attribValue;
+            attribs[idx] = String.valueOf(attribValue);
             idx++;
             if (idx >= names.length)
             {
@@ -358,7 +364,7 @@ public class droid_component_attribute extends script.base_script
         {
             names[idx] = "shield_heatsink";
             int attribValue = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".shield_heatsink");
-            attribs[idx] = "" + attribValue;
+            attribs[idx] = String.valueOf(attribValue);
             idx++;
             if (idx >= names.length)
             {
@@ -369,7 +375,7 @@ public class droid_component_attribute extends script.base_script
         {
             names[idx] = "pain_inducer";
             int attribValue = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".pain_inducer");
-            attribs[idx] = "" + attribValue;
+            attribs[idx] = String.valueOf(attribValue);
             idx++;
             if (idx >= names.length)
             {
@@ -380,7 +386,7 @@ public class droid_component_attribute extends script.base_script
         {
             names[idx] = "quickset_metal";
             int attribValue = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".quickset_metal");
-            attribs[idx] = "" + attribValue;
+            attribs[idx] = String.valueOf(attribValue);
             idx++;
             if (idx >= names.length)
             {
@@ -391,7 +397,7 @@ public class droid_component_attribute extends script.base_script
         {
             names[idx] = "dump_capacitors";
             int attribValue = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".dump_capacitors");
-            attribs[idx] = "" + attribValue;
+            attribs[idx] = String.valueOf(attribValue);
             idx++;
             if (idx >= names.length)
             {

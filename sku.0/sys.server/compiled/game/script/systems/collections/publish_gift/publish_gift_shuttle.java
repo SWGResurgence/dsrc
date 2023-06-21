@@ -1,5 +1,11 @@
 package script.systems.collections.publish_gift;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;

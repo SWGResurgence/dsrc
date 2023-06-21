@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Vector;
@@ -36,6 +42,7 @@ public class planetary_map extends script.base_script
     public static final string_id SID_NO_REGISTERED_LOCS = new string_id("find_display", "no_registered_locs");
     public static final string_id SID_FIND_TITLE = new string_id("base_player", "find_title");
     public static final string_id SID_FIND_PROMPT = new string_id("base_player", "find_prompt");
+
     public planetary_map()
     {
     }

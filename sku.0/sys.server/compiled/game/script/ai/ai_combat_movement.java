@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.deltadictionary;
 import script.library.utils;
 import script.location;
@@ -7,9 +13,6 @@ import script.obj_id;
 
 public class ai_combat_movement extends script.base_script
 {
-    public ai_combat_movement()
-    {
-    }
     public static final int MOVEMODE_INVALID = 0;
     public static final int MOVEMODE_FOLLOW = 1;
     public static final int MOVEMODE_RANDOM = 2;
@@ -24,12 +27,17 @@ public class ai_combat_movement extends script.base_script
     public static final int MOVEMODE_MOVING_TO_DEATHBLOW = 13;
     public static final int MOVEMODE_SWARM = 14;
     public static final int MOVEMOVE_EVADE = 15;
+    public ai_combat_movement()
+    {
+    }
+
     public static void aiClearMoveMode() throws InterruptedException
     {
         final obj_id self = getSelf();
         deltadictionary dict = self.getScriptVars();
         dict.put("ai.combat.moveMode", MOVEMODE_INVALID);
     }
+
     public static void aiIdle() throws InterruptedException
     {
         if (aiIsIdle())
@@ -45,12 +53,14 @@ public class ai_combat_movement extends script.base_script
         dict.put("ai.combat.moveMode", MOVEMODE_IDLE);
         stop(self);
     }
+
     public static boolean aiIsIdle() throws InterruptedException
     {
         final obj_id self = getSelf();
         final deltadictionary dict = self.getScriptVars();
         return (dict.getInt("ai.combat.moveMode") == MOVEMODE_IDLE);
     }
+
     public static void aiMoveToSee(obj_id target) throws InterruptedException
     {
         if (aiIsMovingToSee(target))
@@ -67,26 +77,26 @@ public class ai_combat_movement extends script.base_script
         dict.put("ai.combat.moveToSee.target", target);
         pathTo(self, getLocation(target));
     }
+
     public static boolean aiIsMovingToSee(obj_id target) throws InterruptedException
     {
-        if (aiIsMovingToSee() && aiGetMoveToSeeTarget() == target)
-        {
-            return true;
-        }
-        return false;
+        return aiIsMovingToSee() && aiGetMoveToSeeTarget() == target;
     }
+
     public static boolean aiIsMovingToSee() throws InterruptedException
     {
         final obj_id self = getSelf();
         final deltadictionary dict = self.getScriptVars();
         return (dict.getInt("ai.combat.moveMode") == MOVEMODE_MOVING_TO_SEE);
     }
+
     public static obj_id aiGetMoveToSeeTarget() throws InterruptedException
     {
         final obj_id self = getSelf();
         final deltadictionary dict = self.getScriptVars();
         return dict.getObjId("ai.combat.moveToSee.target");
     }
+
     public static void aiMoveToDeathBlow(obj_id target) throws InterruptedException
     {
         if (aiIsMovingToDeathBlow(target) || !isIncapacitated(target))
@@ -104,26 +114,26 @@ public class ai_combat_movement extends script.base_script
         dict.put("ai.combat.moveToDeathBlow.target", target);
         pathTo(self, getLocation(target));
     }
+
     public static boolean aiIsMovingToDeathBlow(obj_id target) throws InterruptedException
     {
-        if ((aiIsMovingToDeathBlow()) && (aiGetMoveToDeathBlowTarget() == target))
-        {
-            return true;
-        }
-        return false;
+        return (aiIsMovingToDeathBlow()) && (aiGetMoveToDeathBlowTarget() == target);
     }
+
     public static boolean aiIsMovingToDeathBlow() throws InterruptedException
     {
         final obj_id self = getSelf();
         final deltadictionary dict = self.getScriptVars();
         return (dict.getInt("ai.combat.moveMode") == MOVEMODE_MOVING_TO_DEATHBLOW);
     }
+
     public static obj_id aiGetMoveToDeathBlowTarget() throws InterruptedException
     {
         final obj_id self = getSelf();
         final deltadictionary dict = self.getScriptVars();
         return dict.getObjId("ai.combat.moveToDeathBlow.target");
     }
+
     public static void aiFollow(obj_id target, float minDistance, float maxDistance) throws InterruptedException
     {
         if (aiIsFollowing(target, minDistance, maxDistance))
@@ -142,6 +152,7 @@ public class ai_combat_movement extends script.base_script
         dict.put("ai.combat.follow.maxDistance", maxDistance);
         follow(self, target, minDistance, maxDistance);
     }
+
     public static void aiSwarm(obj_id target, float minDistance, float maxDistance) throws InterruptedException
     {
         if (aiIsSwarming(target, minDistance, maxDistance))
@@ -160,26 +171,21 @@ public class ai_combat_movement extends script.base_script
         dict.put("ai.combat.follow.maxDistance", maxDistance);
         swarm(self, target);
     }
+
     public static boolean aiIsFollowing(obj_id target, float minDistance, float maxDistance) throws InterruptedException
     {
         final obj_id self = getSelf();
         final deltadictionary dict = self.getScriptVars();
-        if ((dict.getInt("ai.combat.moveMode") == MOVEMODE_FOLLOW) && (dict.getObjId("ai.combat.follow.target") == target) && (dict.getFloat("ai.combat.follow.minDistance") == minDistance) && (dict.getFloat("ai.combat.follow.maxDistance") == maxDistance))
-        {
-            return true;
-        }
-        return false;
+        return (dict.getInt("ai.combat.moveMode") == MOVEMODE_FOLLOW) && (dict.getObjId("ai.combat.follow.target") == target) && (dict.getFloat("ai.combat.follow.minDistance") == minDistance) && (dict.getFloat("ai.combat.follow.maxDistance") == maxDistance);
     }
+
     public static boolean aiIsSwarming(obj_id target, float minDistance, float maxDistance) throws InterruptedException
     {
         final obj_id self = getSelf();
         final deltadictionary dict = self.getScriptVars();
-        if ((dict.getInt("ai.combat.moveMode") == MOVEMODE_SWARM) && (dict.getObjId("ai.combat.follow.target") == target) && (dict.getFloat("ai.combat.follow.minDistance") == minDistance) && (dict.getFloat("ai.combat.follow.maxDistance") == maxDistance))
-        {
-            return true;
-        }
-        return false;
+        return (dict.getInt("ai.combat.moveMode") == MOVEMODE_SWARM) && (dict.getObjId("ai.combat.follow.target") == target) && (dict.getFloat("ai.combat.follow.minDistance") == minDistance) && (dict.getFloat("ai.combat.follow.maxDistance") == maxDistance);
     }
+
     public static float getActualEvadeChance(obj_id ai, float min, float max) throws InterruptedException
     {
         float rslt = max;
@@ -189,6 +195,7 @@ public class ai_combat_movement extends script.base_script
         rslt -= (difference * (curHealth / maxHealth));
         return rslt;
     }
+
     public static boolean aiEvade(obj_id target, obj_id ai, range_info aiWeaponRanges, float minChance, float maxChance) throws InterruptedException
     {
         obj_id primaryWeapon = aiGetPrimaryWeapon(ai);
@@ -231,7 +238,7 @@ public class ai_combat_movement extends script.base_script
             minDistance = 15.0f;
             maxDistance = 20.0f;
         }
-        else 
+        else
         {
             minDistance = 4.0f;
             maxDistance = 10.0f;
@@ -246,7 +253,7 @@ public class ai_combat_movement extends script.base_script
                 {
                     mod = 0.985f;
                 }
-                else 
+                else
                 {
                     mod = 0.9f;
                 }
@@ -255,7 +262,7 @@ public class ai_combat_movement extends script.base_script
                 {
                     maxDistance = playerRange.maxRange + 5;
                 }
-                else 
+                else
                 {
                     maxDistance = playerRange.maxRange - 1;
                 }
@@ -289,6 +296,7 @@ public class ai_combat_movement extends script.base_script
         faceTo(ai, target);
         return true;
     }
+
     public static location getValidAwayLocation(obj_id mob, float minDistance, float maxDistance) throws InterruptedException
     {
         location from = getLocation(mob);
@@ -301,6 +309,7 @@ public class ai_combat_movement extends script.base_script
         evasionTarget.y -= 0.5f;
         return evasionTarget;
     }
+
     public static void aiFlee(obj_id target, float distance) throws InterruptedException
     {
         if (aiIsFleeing(target, distance))
@@ -319,23 +328,22 @@ public class ai_combat_movement extends script.base_script
         flee(self, target, distance, distance);
         messageTo(self, "redoYaw", null, 30, false);
     }
+
     public static boolean aiIsFleeing(obj_id ai) throws InterruptedException
     {
         final deltadictionary dict = ai.getScriptVars();
         return dict.getInt("ai.combat.moveMode") == MOVEMODE_FLEE;
     }
+
     public static boolean aiIsFleeing(obj_id target, float distance) throws InterruptedException
     {
         final obj_id self = getSelf();
         final deltadictionary dict = self.getScriptVars();
-        if ((dict.getInt("ai.combat.moveMode") == MOVEMODE_FLEE) && (dict.getObjId("ai.combat.flee.target") == target) && (dict.getFloat("ai.combat.flee.distance") == distance))
-        {
-            return true;
-        }
-        return false;
+        return (dict.getInt("ai.combat.moveMode") == MOVEMODE_FLEE) && (dict.getObjId("ai.combat.flee.target") == target) && (dict.getFloat("ai.combat.flee.distance") == distance);
     }
+
     public static boolean isAiImmobile(obj_id subject) throws InterruptedException
     {
-        return hasObjVar(subject, "isImmobile") ? getBooleanObjVar(subject, "isImmobile") : false;
+        return hasObjVar(subject, "isImmobile") && getBooleanObjVar(subject, "isImmobile");
     }
 }

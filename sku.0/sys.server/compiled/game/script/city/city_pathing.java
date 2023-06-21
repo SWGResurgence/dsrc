@@ -1,5 +1,11 @@
 package script.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.utils;
@@ -10,11 +16,13 @@ public class city_pathing extends script.base_script
     public city_pathing()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         respawnNpc(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleNpcRespawn(obj_id self, dictionary params) throws InterruptedException
     {
         if (params.getObjId("object") != getObjIdObjVar(self, "pathing.lastSpawned"))
@@ -24,6 +32,7 @@ public class city_pathing extends script.base_script
         respawnNpc(self);
         return SCRIPT_CONTINUE;
     }
+
     public void respawnNpc(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "npc"))

@@ -3,6 +3,12 @@ package script.item;/*
 @Author: BubbaJoeX
 @Purpose: Allows players to send items to other players online (or offline) if the mailboxes are on the same planet and setup.*/
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.city;
 import script.library.sui;
@@ -254,6 +260,7 @@ class parcel_mailbox extends script.base_script
         broadcast(player, "You have sent " + numItems + " items to " + getPlayerName(d.getObjId("recipientId")) + ".");
         return SCRIPT_CONTINUE;
     }
+
     public boolean isContentsAbleToFitInto(obj_id containerSelf, obj_id containerDestination)
     {
         return getVolumeFree(containerDestination) >= getFilledVolume(containerSelf);

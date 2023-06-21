@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.color;
 import script.dictionary;
 
@@ -145,6 +151,7 @@ public class colors extends script.base_script
     public static final color SILVER = new color(230, 232, 250, 255);
     public static final color DXUNGREEN = new color(23, 53, 11, 0);
     public static final String TBL_COLOR_RGB = "datatables/color/rgb.iff";
+
     public colors()
     {
     }

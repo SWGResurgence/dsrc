@@ -1,11 +1,16 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class destroy_duty extends script.base_script
 {
-    private static final float dutyTokenBonus = Float.parseFloat(getConfigSetting("GameServer", "dutyTokenBonus"));
     public static final string_id SID_TARGET_LOCATED = new string_id("space/quest", "destroy_duty_target_located");
     public static final string_id SID_TARGET_DETECTED = new string_id("space/quest", "destroy_duty_target_detected");
     public static final string_id SID_BOSS_DETECTED = new string_id("space/quest", "destroy_duty_boss_detected");
@@ -30,6 +35,8 @@ public class destroy_duty extends script.base_script
     public static final String MUSIC_ROUND_WON = "sound/music_int_complete_neutral.snd";
     public static final String MUSIC_LEVEL_WON = "sound/music_combat_bfield_vict.snd";
     public static final String MUSIC_DANGER = "sound/music_event_danger.snd";
+    private static final float dutyTokenBonus = Float.parseFloat(getConfigSetting("GameServer", "dutyTokenBonus"));
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -78,6 +85,7 @@ public class destroy_duty extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int initializedQuestPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -119,6 +127,7 @@ public class destroy_duty extends script.base_script
         findDutyLocation(self, null);
         return SCRIPT_CONTINUE;
     }
+
     public int findDutyLocation(obj_id self, dictionary params) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -134,7 +143,7 @@ public class destroy_duty extends script.base_script
             removeObjVar(self, "moredist");
             strans = space_quest.getRandomPositionInSphere(tloc, 2000, 2500);
         }
-        else 
+        else
         {
             strans = space_quest.getRandomPositionInSphere(tloc, 1000, 1400);
         }
@@ -173,6 +182,7 @@ public class destroy_duty extends script.base_script
         dutyUpdate(self, foundLocation);
         return SCRIPT_CONTINUE;
     }
+
     public int arrivedAtLocation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -187,6 +197,7 @@ public class destroy_duty extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnDutyShips(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -203,7 +214,7 @@ public class destroy_duty extends script.base_script
         int ship = getIntObjVar(self, "difficulty.ship");
         transform tloc = getTransformObjVar(self, "strans");
         int squad = ship_ai.squadCreateSquadId();
-        obj_id targets[] = null;
+        obj_id[] targets = null;
         if (hasObjVar(self, "currentBossLevel") && !dutyMission(getStringObjVar(self, "bossType")))
         {
             string_id bossInc = new string_id("spacequest/" + questType + "/" + questName, "boss_detected");
@@ -291,7 +302,7 @@ public class destroy_duty extends script.base_script
             }
             setObjVar(self, "targets", targets);
         }
-        else 
+        else
         {
             boolean behind = false;
             if (rand() < 0.2f)
@@ -300,7 +311,7 @@ public class destroy_duty extends script.base_script
                 string_id foundTargets = new string_id("spacequest/" + questType + "/" + questName, "targets_behind");
                 space_quest.sendQuestMessage(player, foundTargets);
             }
-            else 
+            else
             {
                 string_id foundTargets = new string_id("spacequest/" + questType + "/" + questName, "targets_detected");
                 space_quest.sendQuestMessage(player, foundTargets);
@@ -323,7 +334,7 @@ public class destroy_duty extends script.base_script
                     vector vd = vi.add(vj);
                     gloc = gloc.move_p(vd);
                 }
-                else 
+                else
                 {
                     float dist = rand(250.0f, 300.0f) * -1.0f;
                     vector n = ((gloc.getLocalFrameK_p()).normalize()).multiply(dist);
@@ -334,8 +345,9 @@ public class destroy_duty extends script.base_script
                     gloc = gloc.move_p(vd);
                 }
                 obj_id newship = space_create.createShipHyperspace(ships[j][ship], gloc);
-                if(!isValidId(newship) || !isGameObjectTypeOf(getGameObjectType(newship),GOT_ship)) {
-                    LOG("DESIGNER_FATAL","QUEST: spacequest/" + questType + "/" + questName + " New ship (" + ships[j][ship] + ":" + newship + ") which " + (isGameObjectTypeOf(getGameObjectType(newship),GOT_ship) ? "is" : "is not") + " a ship could not be created.");
+                if (!isValidId(newship) || !isGameObjectTypeOf(getGameObjectType(newship), GOT_ship))
+                {
+                    LOG("DESIGNER_FATAL", "QUEST: spacequest/" + questType + "/" + questName + " New ship (" + ships[j][ship] + ":" + newship + ") which " + (isGameObjectTypeOf(getGameObjectType(newship), GOT_ship) ? "is" : "is not") + " a ship could not be created.");
                     continue;
                 }
                 ship_ai.unitSetLeashDistance(newship, 16000);
@@ -369,14 +381,12 @@ public class destroy_duty extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean dutyMission(String bossType) throws InterruptedException
     {
-        if (bossType.endsWith("_duty_tier1") || bossType.endsWith("_duty_tier2") || bossType.endsWith("_duty_tier3") || bossType.endsWith("_duty_tier4") || bossType.endsWith("_duty_tier5"))
-        {
-            return true;
-        }
-        return false;
+        return bossType.endsWith("_duty_tier1") || bossType.endsWith("_duty_tier2") || bossType.endsWith("_duty_tier3") || bossType.endsWith("_duty_tier4") || bossType.endsWith("_duty_tier5");
     }
+
     public int targetDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -385,26 +395,32 @@ public class destroy_duty extends script.base_script
         }
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         obj_id deadship = params.getObjId("ship");
-        obj_id targets[] = getObjIdArrayObjVar(self, "targets");
+        obj_id[] targets = getObjIdArrayObjVar(self, "targets");
         int deadships = getIntObjVar(self, "deadships");
         if (targets == null)
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id target : targets) {
-            if (deadship == target) {
+        for (obj_id target : targets)
+        {
+            if (deadship == target)
+            {
                 deadships++;
                 setObjVar(self, "deadships", deadships);
                 space_quest._removeMissionCriticalShip(player, self, deadship);
-                if (deadships == targets.length) {
+                if (deadships == targets.length)
+                {
                     int wavescomplete = getIntObjVar(self, "wavescomplete");
                     wavescomplete++;
                     setObjVar(self, "wavescomplete", wavescomplete);
-                    if (hasObjVar(self, "currentBossLevel")) {
+                    if (hasObjVar(self, "currentBossLevel"))
+                    {
                         space_quest.sendQuestMessage(player, SID_BOSS_DEAD);
                         playClientEffectObj(player, SOUND_DESTROYED_ALL, player, "");
                         play2dNonLoopingMusic(player, MUSIC_LEVEL_WON);
-                    } else {
+                    }
+                    else
+                    {
                         space_quest.sendQuestMessage(player, SID_ALL_TARGETS_DEAD);
                         playClientEffectObj(player, SOUND_DESTROYED_WAVE, player, "");
                         play2dNonLoopingMusic(player, MUSIC_ROUND_WON);
@@ -420,6 +436,7 @@ public class destroy_duty extends script.base_script
         space_quest.sendQuestMessage(player, pp);
         return SCRIPT_OVERRIDE;
     }
+
     public int nextWave(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -453,7 +470,7 @@ public class destroy_duty extends script.base_script
                     outparams.put("type", 1);
                     messageTo(self, "notifyNextWave", outparams, 3.0f, false);
                 }
-                else 
+                else
                 {
                     int credits = 3 * reward;
                     outparams.put("type", 3);
@@ -487,7 +504,7 @@ public class destroy_duty extends script.base_script
                     messageTo(self, "notifyNextWave", outparams, 3.0f, false);
                 }
             }
-            else 
+            else
             {
                 int credits = rounddeadships * reward;
                 outparams.put("type", 1);
@@ -508,7 +525,7 @@ public class destroy_duty extends script.base_script
             }
             messageTo(self, "findDutyLocation", null, 6.0f, false);
         }
-        else 
+        else
         {
             int count = getIntObjVar(self, "difficulty.count");
             count++;
@@ -517,6 +534,7 @@ public class destroy_duty extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int grantReward(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -544,16 +562,17 @@ public class destroy_duty extends script.base_script
         if (hasObjVar(playerShip, "spaceFaction.overt"))
         {
             int pvpTokens = tokens / 2;
-			tokens = tokens + pvpTokens;
+            tokens = tokens + pvpTokens;
         }
         tokens *= dutyTokenBonus;
         prose_package pt = prose.getPackage(SID_TOKEN_REWARD, tokens);
         sendQuestSystemMessage(player, pt);
         obj_id test = static_item.createNewItemFunction("item_token_duty_space_01_01", pInv);
-        setCount (test, tokens);
+        setCount(test, tokens);
         CustomerServiceLog("space_piracy", "Player " + player + " have received " + tokens + " Space Duty Tokens (item_token_duty_space_01_01)");
         return SCRIPT_CONTINUE;
     }
+
     public int notifyNextWave(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -563,26 +582,27 @@ public class destroy_duty extends script.base_script
         switch (type)
         {
             case 1:
-            string_id level = new string_id("spacequest/" + questType + "/" + questName, "level_boss");
-            string_id bossTitle = new string_id("spacequest/" + questType + "/" + questName, "boss_title_" + getIntObjVar(self, "difficulty.basecount"));
-            prose_package pp = prose.getPackage(level, bossTitle);
-            space_quest.sendQuestMessage(player, pp);
-            play2dNonLoopingMusic(player, space_quest.MUSIC_QUEST_BOSS_COMING);
-            dutyUpdate(player, level);
-            break;
+                string_id level = new string_id("spacequest/" + questType + "/" + questName, "level_boss");
+                string_id bossTitle = new string_id("spacequest/" + questType + "/" + questName, "boss_title_" + getIntObjVar(self, "difficulty.basecount"));
+                prose_package pp = prose.getPackage(level, bossTitle);
+                space_quest.sendQuestMessage(player, pp);
+                play2dNonLoopingMusic(player, space_quest.MUSIC_QUEST_BOSS_COMING);
+                dutyUpdate(player, level);
+                break;
             case 2:
-            level = new string_id("spacequest/" + questType + "/" + questName, "level_boss_dead");
-            dutyUpdate(player, level);
-            break;
+                level = new string_id("spacequest/" + questType + "/" + questName, "level_boss_dead");
+                dutyUpdate(player, level);
+                break;
             case 3:
-            level = new string_id("spacequest/" + questType + "/" + questName, "level_increase");
-            dutyUpdate(player, level);
-            break;
+                level = new string_id("spacequest/" + questType + "/" + questName, "level_increase");
+                dutyUpdate(player, level);
+                break;
             default:
-            break;
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int completeDuty(obj_id self, dictionary params) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -600,6 +620,7 @@ public class destroy_duty extends script.base_script
         space_quest.setQuestWon(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int playerShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null && hasObjVar(self, "in_progress"))
@@ -611,6 +632,7 @@ public class destroy_duty extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int attackPlayerShip(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id playerShip = params.getObjId("player");
@@ -622,6 +644,7 @@ public class destroy_duty extends script.base_script
         ship_ai.spaceAttack(attackingShip, playerShip);
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         clearTargetWaypoint(self);
@@ -629,6 +652,7 @@ public class destroy_duty extends script.base_script
         space_quest.setQuestWon(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public void clearTargetWaypoint(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -645,6 +669,7 @@ public class destroy_duty extends script.base_script
             removeLocationTarget(player, loc);
         }
     }
+
     public void dutyUpdate(obj_id self, string_id update_id) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -654,18 +679,22 @@ public class destroy_duty extends script.base_script
         prose_package pp = prose.getPackage(update_prefix, update_id);
         space_quest.sendQuestMessage(player, pp);
     }
+
     public void cleanupShips(obj_id self) throws InterruptedException
     {
         obj_id[] targets = getObjIdArrayObjVar(self, "targets");
         if (targets != null)
         {
-            for (obj_id target : targets) {
-                if (isIdValid(target) && exists(target)) {
+            for (obj_id target : targets)
+            {
+                if (isIdValid(target) && exists(target))
+                {
                     destroyObjectHyperspace(target);
                 }
             }
         }
     }
+
     public int warpoutFailure(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "handling_warpout_failure"))

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,56 +13,67 @@ import script.*;
 
 public class ep3_rodian_guard_male extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_rodian_guard_male";
+
     public ep3_rodian_guard_male()
     {
     }
-    public static String c_stringFile = "conversation/ep3_rodian_guard_male";
+
     public boolean ep3_rodian_guard_male_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_rodian_guard_male_condition_hasFinishedQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_1");
         return questIsQuestComplete(questId, player);
     }
+
     public boolean ep3_rodian_guard_male_condition_hasFinishedQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_2");
         return questIsQuestComplete(questId, player);
     }
+
     public boolean ep3_rodian_guard_male_condition_hasFinishedQuest3(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_3");
         return questIsQuestComplete(questId, player);
     }
+
     public boolean ep3_rodian_guard_male_condition_isOnQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_1");
         return questIsQuestActive(questId, player);
     }
+
     public boolean ep3_rodian_guard_male_condition_isOnQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_2");
         return questIsQuestActive(questId, player);
     }
+
     public boolean ep3_rodian_guard_male_condition_hasFinished_WOOKIEE_quest2(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_wookiee_benefactor_2");
         return questIsQuestComplete(questId, player);
     }
+
     public void ep3_rodian_guard_male_action_giveQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_1");
         questActivateQuest(questId, player, npc);
         playClientEffectLoc(player, "clienteffect/voc_npc_cnv_rodian_short.cef", getLocation(npc), 0.0f);
     }
+
     public void ep3_rodian_guard_male_action_giveQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_2");
         questActivateQuest(questId, player, npc);
         playClientEffectLoc(player, "clienteffect/voc_npc_cnv_rodian_medium.cef", getLocation(npc), 0.0f);
     }
+
     public void ep3_rodian_guard_male_action_clearQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/ep3_rodian_hunter_1");
@@ -67,28 +84,34 @@ public class ep3_rodian_guard_male extends script.base_script
         questClearQuest(questId3, player);
         playClientEffectLoc(player, "clienteffect/voc_npc_cnv_rodian_short.cef", getLocation(npc), 0.0f);
     }
+
     public void ep3_rodian_guard_male_action_speak_SHORT(obj_id player, obj_id npc) throws InterruptedException
     {
         playClientEffectLoc(player, "clienteffect/voc_npc_cnv_rodian_short.cef", getLocation(npc), 0.0f);
     }
+
     public void ep3_rodian_guard_male_action_speak_MEDIUM(obj_id player, obj_id npc) throws InterruptedException
     {
         playClientEffectLoc(player, "clienteffect/voc_npc_cnv_rodian_medium.cef", getLocation(npc), 0.0f);
     }
+
     public void ep3_rodian_guard_male_action_speak_LONG(obj_id player, obj_id npc) throws InterruptedException
     {
         playClientEffectLoc(player, "clienteffect/voc_npc_cnv_rodian_long.cef", getLocation(npc), 0.0f);
     }
+
     public void ep3_rodian_guard_male_action_giveQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/ep3_rodian_hunter_3");
         questActivateQuest(questId, player, npc);
         playClientEffectLoc(player, "clienteffect/voc_npc_cnv_rodian_short.cef", getLocation(npc), 0.0f);
     }
+
     public void ep3_rodian_guard_male_action_speak_MALE(obj_id player, obj_id npc) throws InterruptedException
     {
         playClientEffectLoc(player, "clienteffect/voc_npc_cnv_rodian_guard_male.cef", getLocation(npc), 0.0f);
     }
+
     public int ep3_rodian_guard_male_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b9b27823"))
@@ -106,6 +129,7 @@ public class ep3_rodian_guard_male extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_guard_male_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d70dba34"))
@@ -122,6 +146,7 @@ public class ep3_rodian_guard_male extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_guard_male_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77e48d5b"))
@@ -139,6 +164,7 @@ public class ep3_rodian_guard_male extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_rodian_guard_male_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b84b366c"))
@@ -156,6 +182,7 @@ public class ep3_rodian_guard_male extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -167,6 +194,7 @@ public class ep3_rodian_guard_male extends script.base_script
         setName(self, "Zeede");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -174,6 +202,7 @@ public class ep3_rodian_guard_male extends script.base_script
         setName(self, "Zeede");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -183,18 +212,21 @@ public class ep3_rodian_guard_male extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_rodian_guard_male");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -219,7 +251,7 @@ public class ep3_rodian_guard_male extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b9b27823");
@@ -227,7 +259,7 @@ public class ep3_rodian_guard_male extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_rodian_guard_male.branchId", 1);
                 npcStartConversation(player, npc, "ep3_rodian_guard_male", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -250,7 +282,7 @@ public class ep3_rodian_guard_male extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_d70dba34");
@@ -258,7 +290,7 @@ public class ep3_rodian_guard_male extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_rodian_guard_male.branchId", 3);
                 npcStartConversation(player, npc, "ep3_rodian_guard_male", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -281,7 +313,7 @@ public class ep3_rodian_guard_male extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_77e48d5b");
@@ -289,7 +321,7 @@ public class ep3_rodian_guard_male extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_rodian_guard_male.branchId", 5);
                 npcStartConversation(player, npc, "ep3_rodian_guard_male", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -312,7 +344,7 @@ public class ep3_rodian_guard_male extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b84b366c");
@@ -320,7 +352,7 @@ public class ep3_rodian_guard_male extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_rodian_guard_male.branchId", 7);
                 npcStartConversation(player, npc, "ep3_rodian_guard_male", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -337,6 +369,7 @@ public class ep3_rodian_guard_male extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_rodian_guard_male"))

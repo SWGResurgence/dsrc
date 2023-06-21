@@ -1,55 +1,73 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class greeter_tyrena_pilot_friend extends script.base_script
 {
+    public static String c_stringFile = "conversation/greeter_tyrena_pilot_friend";
+
     public greeter_tyrena_pilot_friend()
     {
     }
-    public static String c_stringFile = "conversation/greeter_tyrena_pilot_friend";
+
     public boolean greeter_tyrena_pilot_friend_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean greeter_tyrena_pilot_friend_condition_remembersPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         return (utils.hasScriptVar(player, "metNewbiePilot"));
     }
+
     public boolean greeter_tyrena_pilot_friend_condition_spokeWithUlaire(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.hasScriptVar(player, "spokeWithUlaireRoye");
     }
+
     public boolean greeter_tyrena_pilot_friend_condition_isAnImperialPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.isImperialPilot(player);
     }
+
     public boolean greeter_tyrena_pilot_friend_condition_isARebelPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.isRebelPilot(player);
     }
+
     public boolean greeter_tyrena_pilot_friend_condition_isPrivateerPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.isNeutralPilot(player);
     }
+
     public boolean greeter_tyrena_pilot_friend_condition_hasSpaceExpansion(obj_id player, obj_id npc) throws InterruptedException
     {
         return (features.isSpaceEdition(player));
     }
+
     public boolean greeter_tyrena_pilot_friend_condition_hasSpaceShip(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasShip(player));
     }
+
     public void greeter_tyrena_pilot_friend_action_rememberPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "metNewbiePilot", true);
     }
+
     public void greeter_tyrena_pilot_friend_action_grantQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "delivery", "tatooine_newbie_1");
         space_quest.grantNewbieShip(player, "rebel");
     }
+
     public int greeter_tyrena_pilot_friend_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_17345b4d"))
@@ -69,7 +87,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_729d1b46");
@@ -78,7 +96,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.greeter_tyrena_pilot_friend.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -104,7 +122,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2b99f43");
@@ -113,7 +131,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.greeter_tyrena_pilot_friend.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -123,6 +141,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int greeter_tyrena_pilot_friend_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_729d1b46"))
@@ -143,7 +162,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8b392030");
@@ -152,7 +171,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.greeter_tyrena_pilot_friend.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -162,6 +181,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int greeter_tyrena_pilot_friend_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2b99f43"))
@@ -182,7 +202,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8b392030");
@@ -191,7 +211,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.greeter_tyrena_pilot_friend.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -201,6 +221,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int greeter_tyrena_pilot_friend_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8b392030"))
@@ -216,6 +237,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -227,6 +249,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
         setCondition(self, CONDITION_SPACE_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -234,6 +257,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
         setCondition(self, CONDITION_SPACE_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -244,6 +268,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
@@ -251,12 +276,14 @@ public class greeter_tyrena_pilot_friend extends script.base_script
         detachScript(self, "conversation.greeter_tyrena_pilot_friend");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -287,7 +314,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_17345b4d");
@@ -299,7 +326,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
                 utils.setScriptVar(player, "conversation.greeter_tyrena_pilot_friend.branchId", 1);
                 npcStartConversation(player, npc, "greeter_tyrena_pilot_friend", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -308,6 +335,7 @@ public class greeter_tyrena_pilot_friend extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("greeter_tyrena_pilot_friend"))

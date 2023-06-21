@@ -1,5 +1,11 @@
 package script.item.special;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -17,6 +23,7 @@ public class xp_purchase extends script.base_script
     public static final string_id SUI_PROMPT2 = new string_id("item/xp_purchase", "sui_prompt2");
     public static final String SUI_TITLE = "@item/xp_purchase:sui_title";
     public static final int MENU_TYPE = menu_info_types.SERVER_MENU10;
+
     public xp_purchase()
     {
     }

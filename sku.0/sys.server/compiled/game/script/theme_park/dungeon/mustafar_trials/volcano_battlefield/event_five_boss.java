@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.volcano_battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -10,15 +16,16 @@ import java.util.Vector;
 
 public class event_five_boss extends script.base_script
 {
-    public event_five_boss()
-    {
-    }
     public static final String GUARD = "som_volcano_five_septipod";
     public static final String MIDGUARD = "som_volcano_five_midguard";
     public static final int SWITCH_RECAST = 18;
     public static final int DISTRACTION_RECAST = 24;
     public static final int DEBUFF_RECAST = 30;
     public static final boolean LOGGING = false;
+    public event_five_boss()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.bumpSession(self);
@@ -26,6 +33,7 @@ public class event_five_boss extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         trial.bumpSession(self);
@@ -38,11 +46,13 @@ public class event_five_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         startEventActions(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (!isDead(self))
@@ -52,26 +62,31 @@ public class event_five_boss extends script.base_script
         endEventActions(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostTarget(obj_id self, obj_id oldTarget) throws InterruptedException
     {
         messageTo(self, "applyDistraction", trial.getSessionDict(self), 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int activate(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, false);
         return SCRIPT_CONTINUE;
     }
+
     public void startEventActions(obj_id self) throws InterruptedException
     {
         messageTo(self, "doAEBurst", trial.getSessionDict(self), 4, false);
         messageTo(self, "switchTarget", trial.getSessionDict(self), 24, false);
         messageTo(self, "applyDistraction", trial.getSessionDict(self), 3, false);
     }
+
     public void endEventActions(obj_id self) throws InterruptedException
     {
         trial.bumpSession(self);
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         float max = getMaxHealth(self);
@@ -104,35 +119,36 @@ public class event_five_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void verifyHealthReset(obj_id self) throws InterruptedException
     {
         if (isInvulnerable(self))
         {
             doLogging("verifyHealthReset", "Out of combat due to invulnerability, do not remove triggers");
-            return;
         }
-        else 
+        else
         {
             doLogging("verifyHealthReset", "I am out of combat and not invulnerable, heal and remove triggers");
             int max = getMaxHealth(self);
             int current = getHealth(self);
             int toHeal = max - current;
             addToHealth(self, toHeal);
-            String[] healthObjVar = 
-            {
-                "spawned80",
-                "spawned60",
-                "spawnedMidguard",
-                "spawned40",
-                "spawned20",
-                "deadMidguard"
-            };
+            String[] healthObjVar =
+                    {
+                            "spawned80",
+                            "spawned60",
+                            "spawnedMidguard",
+                            "spawned40",
+                            "spawned20",
+                            "deadMidguard"
+                    };
             utils.removeObjVarList(self, healthObjVar);
             clearAllAdds(self);
             ai_lib.clearCombatData();
             setInvulnerable(self, true);
         }
     }
+
     public int eventMobDied(obj_id self, dictionary params) throws InterruptedException
     {
         String type = params.getString("type");
@@ -158,6 +174,7 @@ public class event_five_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void resumeAttack(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, false);
@@ -170,6 +187,7 @@ public class event_five_boss extends script.base_script
         obj_id toAttack = trial.getClosest(self, players);
         startCombat(self, toAttack);
     }
+
     public void clearAllAdds(obj_id self) throws InterruptedException
     {
         obj_id[] objects = trial.getChildrenInRange(self, self, 200.0f);
@@ -178,20 +196,22 @@ public class event_five_boss extends script.base_script
             doLogging("clearAllAdds", "There are no objects in range");
             return;
         }
-        for (obj_id object : objects) {
+        for (obj_id object : objects)
+        {
             trial.cleanupNpc(object);
         }
     }
+
     public void spawnTrioAdd(obj_id self, int value) throws InterruptedException
     {
-        String spawned = "spawned" + Integer.toString(value);
+        String spawned = "spawned" + value;
         if (!hasObjVar(self, spawned))
         {
             messageTo(self, "spawnTrioAdd", null, 0, false);
             setObjVar(self, spawned, true);
-            return;
         }
     }
+
     public void spawnMidGuard(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "spawnedMidguard"))
@@ -201,9 +221,9 @@ public class event_five_boss extends script.base_script
             stopCombat(self);
             setObjVar(self, "spawnedMidguard", true);
             messageTo(self, "spawnMidGuard", null, 5, false);
-            return;
         }
     }
+
     public int applyDistraction(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -215,23 +235,22 @@ public class event_five_boss extends script.base_script
         messageTo(self, "applyDistraction", trial.getSessionDict(self), DISTRACTION_RECAST, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnTrioAdd(obj_id self, dictionary params) throws InterruptedException
     {
         location[] spawnLocs = getAddSpawnLocations(self, 400, "trioAddSpawn");
         obj_id[] players = trial.getValidTargetsInRadius(self, 150.0f);
-        boolean notify = true;
-        if (players == null || players.length == 0)
-        {
-            notify = false;
-        }
+        boolean notify = players != null && players.length != 0;
         if (spawnLocs == null || spawnLocs.length == 0)
         {
             doLogging("spawnTrioAdd", "Could not find a valid spawn location");
             return SCRIPT_CONTINUE;
         }
-        for (location spawnLoc : spawnLocs) {
+        for (location spawnLoc : spawnLocs)
+        {
             obj_id beetle = create.object(GUARD, spawnLoc);
-            if (!isIdValid(beetle)) {
+            if (!isIdValid(beetle))
+            {
                 doLogging("spawnTrioAdd", "Attemplted to create beetle but failed");
                 return SCRIPT_CONTINUE;
             }
@@ -242,29 +261,29 @@ public class event_five_boss extends script.base_script
         if (notify)
         {
             prose_package pp = prose.getPackage(trial.VOLCANO_OPP_ADD_NOTIFY, self);
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 sendSystemMessageProse(player, pp);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnMidGuard(obj_id self, dictionary params) throws InterruptedException
     {
         location[] spawnLocs = getAddSpawnLocations(self, 400, "midguardSpawn");
         obj_id[] players = trial.getValidTargetsInRadius(self, 150.0f);
-        boolean notify = true;
-        if (players == null || players.length == 0)
-        {
-            notify = false;
-        }
+        boolean notify = players != null && players.length != 0;
         if (spawnLocs == null || spawnLocs.length == 0)
         {
             doLogging("spawnTrioAdd", "Could not find a valid spawn location");
             return SCRIPT_CONTINUE;
         }
-        for (location spawnLoc : spawnLocs) {
+        for (location spawnLoc : spawnLocs)
+        {
             obj_id beetle = create.object(MIDGUARD, spawnLoc);
-            if (!isIdValid(beetle)) {
+            if (!isIdValid(beetle))
+            {
                 doLogging("spawnTrioAdd", "Attemplted to create beetle but failed");
                 return SCRIPT_CONTINUE;
             }
@@ -275,12 +294,14 @@ public class event_five_boss extends script.base_script
         if (notify)
         {
             prose_package pp = prose.getPackage(trial.VOLCANO_OPP_MIDGUARD, self);
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 sendSystemMessageProse(player, pp);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public location[] getAddSpawnLocations(obj_id self, float range, String type) throws InterruptedException
     {
         obj_id[] objects = getObjectsInRange(self, range);
@@ -291,8 +312,10 @@ public class event_five_boss extends script.base_script
         }
         Vector validLoc = new Vector();
         validLoc.setSize(0);
-        for (obj_id object : objects) {
-            if (hasObjVar(object, type)) {
+        for (obj_id object : objects)
+        {
+            if (hasObjVar(object, type))
+            {
                 utils.addElement(validLoc, getLocation(object));
             }
         }
@@ -309,37 +332,39 @@ public class event_five_boss extends script.base_script
         }
         return goodLoc;
     }
+
     public String[] getDebuffEffects(obj_id self) throws InterruptedException
     {
-        String[] hamTypes = 
-        {
-            "bio_etheric_shock",
-            "torpor",
-            "vacuity"
-        };
-        String[] debuffTypes = 
-        {
-            "lethargy",
-            "wavering",
-            "toxic_dissolution"
-        };
-        String[] skillTypes = 
-        {
-            "obfuscation",
-            "confusion",
-            "corrosion"
-        };
+        String[] hamTypes =
+                {
+                        "bio_etheric_shock",
+                        "torpor",
+                        "vacuity"
+                };
+        String[] debuffTypes =
+                {
+                        "lethargy",
+                        "wavering",
+                        "toxic_dissolution"
+                };
+        String[] skillTypes =
+                {
+                        "obfuscation",
+                        "confusion",
+                        "corrosion"
+                };
         String hamType = getAEType(self, "debuff.ham", hamTypes);
         String debuffType = getAEType(self, "debuff.debuff", debuffTypes);
         String skillType = getAEType(self, "debuff.skill", skillTypes);
-        String[] returnTypes = 
-        {
-            hamType,
-            debuffType,
-            skillType
-        };
+        String[] returnTypes =
+                {
+                        hamType,
+                        debuffType,
+                        skillType
+                };
         return returnTypes;
     }
+
     public String getAEType(obj_id self, String tracking, String[] choices) throws InterruptedException
     {
         int idx = 0;
@@ -356,6 +381,7 @@ public class event_five_boss extends script.base_script
         utils.setScriptVar(self, tracking, idx);
         return nextDebuff;
     }
+
     public int doAEBurst(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -367,6 +393,7 @@ public class event_five_boss extends script.base_script
         messageTo(self, "doAEBurst", trial.getSessionDict(self), DEBUFF_RECAST, false);
         return SCRIPT_CONTINUE;
     }
+
     public void applyAEDebuffs(obj_id self, String[] effects) throws InterruptedException
     {
         obj_id[] players = trial.getValidTargetsInRadius(self, 400.0f);
@@ -375,12 +402,15 @@ public class event_five_boss extends script.base_script
             doLogging("applyAEDebuffs", "Could find no valid players to afflict");
             return;
         }
-        for (obj_id player : players) {
-            for (String effect : effects) {
+        for (obj_id player : players)
+        {
+            for (String effect : effects)
+            {
                 buff.applyBuff(player, effect);
             }
         }
     }
+
     public int switchTarget(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -404,6 +434,7 @@ public class event_five_boss extends script.base_script
         messageTo(self, "switchTarget", trial.getSessionDict(self), SWITCH_RECAST, false);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VOLCANO_LOGGING)

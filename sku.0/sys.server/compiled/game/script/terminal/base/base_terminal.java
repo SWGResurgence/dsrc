@@ -1,5 +1,11 @@
 package script.terminal.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.structure;
 import script.menu_info;
 import script.menu_info_data;
@@ -11,6 +17,7 @@ public class base_terminal extends script.base_script
     public base_terminal()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, structure.VAR_TERMINAL_HEADING))
@@ -19,6 +26,7 @@ public class base_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isMob(self))
@@ -32,6 +40,7 @@ public class base_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean playerMounted(obj_id player) throws InterruptedException
     {
         debugServerConsoleMsg(null, "+++ terminal.base.base_terminal playerMounted +++ entered playerMounted function");

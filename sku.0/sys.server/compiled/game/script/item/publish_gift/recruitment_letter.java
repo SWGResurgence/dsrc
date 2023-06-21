@@ -1,5 +1,11 @@
 package script.item.publish_gift;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.factions;
 import script.library.gcw;
 import script.menu_info;
@@ -12,6 +18,7 @@ public class recruitment_letter extends script.base_script
     public static final string_id USE_LETTER = new string_id("gcw", "use_pub_gift_recruitment_letter");
     public static final string_id SID_NOT_ALLIGNED = new string_id("gcw", "must_be_factionally_alligned");
     public static final int LETTER_POINT_VALUE = 10000;
+
     public recruitment_letter()
     {
     }

@@ -1,5 +1,11 @@
 package script.quest.crowd_pleaser;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.library.prose;
@@ -12,43 +18,40 @@ import java.util.Vector;
 
 public class audience_member extends script.base_script
 {
-    public audience_member()
-    {
-    }
-    public static final String[] MUSIC_NAMES = 
-    {
-        "starwars1",
-        "rock",
-        "starwars2",
-        "folk",
-        "starwars3",
-        "ceremonial",
-        "ballad",
-        "waltz",
-        "jazz",
-        "virtuoso"
-    };
-    public static final String[] DANCE_NAMES = 
-    {
-        "basic",
-        "rhythmic",
-        "basic2",
-        "rhythmic2",
-        "footloose",
-        "formal",
-        "footloose2",
-        "formal2",
-        "popular",
-        "poplock",
-        "popular2",
-        "poplock2",
-        "lyrical",
-        "exotic",
-        "exotic2",
-        "lyrical2",
-        "exotic3",
-        "exotic4"
-    };
+    public static final String[] MUSIC_NAMES =
+            {
+                    "starwars1",
+                    "rock",
+                    "starwars2",
+                    "folk",
+                    "starwars3",
+                    "ceremonial",
+                    "ballad",
+                    "waltz",
+                    "jazz",
+                    "virtuoso"
+            };
+    public static final String[] DANCE_NAMES =
+            {
+                    "basic",
+                    "rhythmic",
+                    "basic2",
+                    "rhythmic2",
+                    "footloose",
+                    "formal",
+                    "footloose2",
+                    "formal2",
+                    "popular",
+                    "poplock",
+                    "popular2",
+                    "poplock2",
+                    "lyrical",
+                    "exotic",
+                    "exotic2",
+                    "lyrical2",
+                    "exotic3",
+                    "exotic4"
+            };
     public static final String PERFORMANCE_OBJVAR = "quest.crowd_pleaser.performance";
     public static final String PLAYER_OBJVAR = PERFORMANCE_OBJVAR + ".player";
     public static final String CONTROL_OBJVAR = PERFORMANCE_OBJVAR + ".control";
@@ -57,11 +60,16 @@ public class audience_member extends script.base_script
     public static final String STYLE_OBJVAR = PERFORMANCE_OBJVAR + ".style";
     public static final String AUDITION_OBJVAR = "quest.crowd_pleaser.audition";
     public static final String TYPE_OBJVAR = AUDITION_OBJVAR + ".type";
+    public audience_member()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         String phrase = utils.getStringScriptVar(self, CHAT_OBJVAR);
@@ -76,12 +84,13 @@ public class audience_member extends script.base_script
             prose_package pp = prose.getPackage(msg, style);
             chat.chat(self, speaker, null, null, chat.ChatFlag_targetOnly, pp);
         }
-        else 
+        else
         {
             chat.chat(self, speaker, msg, chat.ChatFlag_targetOnly);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetup(obj_id self, dictionary params) throws InterruptedException
     {
         int chance = rand(1, 100);
@@ -111,10 +120,13 @@ public class audience_member extends script.base_script
                 {
                     int m = rand(0, 5);
                     utils.setScriptVar(self, CHAT_OBJVAR, "positive_" + m + "_m");
-                    for (String musicName : MUSIC_NAMES) {
-                        if (utils.hasScriptVar(control, RATING_OBJVAR + "." + musicName)) {
+                    for (String musicName : MUSIC_NAMES)
+                    {
+                        if (utils.hasScriptVar(control, RATING_OBJVAR + "." + musicName))
+                        {
                             int rating = utils.getIntScriptVar(control, RATING_OBJVAR + "." + musicName);
-                            if (rating > 0) {
+                            if (rating > 0)
+                            {
                                 choices = utils.addElement(choices, musicName);
                             }
                         }
@@ -126,9 +138,9 @@ public class audience_member extends script.base_script
                         return SCRIPT_CONTINUE;
                     }
                     int r = rand(0, (choices.size() - 1));
-                    utils.setScriptVar(self, STYLE_OBJVAR, ((String)choices.get(r)));
+                    utils.setScriptVar(self, STYLE_OBJVAR, ((String) choices.get(r)));
                 }
-                else 
+                else
                 {
                     int d = rand(0, 5);
                     utils.setScriptVar(self, CHAT_OBJVAR, "positive_" + d + "_d");
@@ -150,10 +162,10 @@ public class audience_member extends script.base_script
                         return SCRIPT_CONTINUE;
                     }
                     int r = rand(0, (choices.size() - 1));
-                    utils.setScriptVar(self, STYLE_OBJVAR, ((String)choices.get(r)));
+                    utils.setScriptVar(self, STYLE_OBJVAR, ((String) choices.get(r)));
                 }
             }
-            else 
+            else
             {
                 int f = rand(0, 5);
                 utils.setScriptVar(self, CHAT_OBJVAR, "positive_" + f + "_f");
@@ -175,10 +187,10 @@ public class audience_member extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
                 int r = rand(0, (choices.size() - 1));
-                utils.setScriptVar(self, STYLE_OBJVAR, ((String)choices.get(r)));
+                utils.setScriptVar(self, STYLE_OBJVAR, ((String) choices.get(r)));
             }
         }
-        else 
+        else
         {
             if (chance > 5)
             {
@@ -186,10 +198,13 @@ public class audience_member extends script.base_script
                 {
                     int m = rand(0, 5);
                     utils.setScriptVar(self, CHAT_OBJVAR, "negative_" + m + "_m");
-                    for (String musicName : MUSIC_NAMES) {
-                        if (utils.hasScriptVar(control, RATING_OBJVAR + "." + musicName)) {
+                    for (String musicName : MUSIC_NAMES)
+                    {
+                        if (utils.hasScriptVar(control, RATING_OBJVAR + "." + musicName))
+                        {
                             int rating = utils.getIntScriptVar(control, RATING_OBJVAR + "." + musicName);
-                            if (rating < 0) {
+                            if (rating < 0)
+                            {
                                 choices = utils.addElement(choices, musicName);
                             }
                         }
@@ -201,9 +216,9 @@ public class audience_member extends script.base_script
                         return SCRIPT_CONTINUE;
                     }
                     int r = rand(0, (choices.size() - 1));
-                    utils.setScriptVar(self, STYLE_OBJVAR, ((String)choices.get(r)));
+                    utils.setScriptVar(self, STYLE_OBJVAR, ((String) choices.get(r)));
                 }
-                else 
+                else
                 {
                     int d = rand(0, 5);
                     utils.setScriptVar(self, CHAT_OBJVAR, "negative_" + d + "_d");
@@ -225,10 +240,10 @@ public class audience_member extends script.base_script
                         return SCRIPT_CONTINUE;
                     }
                     int r = rand(0, (choices.size() - 1));
-                    utils.setScriptVar(self, STYLE_OBJVAR, ((String)choices.get(r)));
+                    utils.setScriptVar(self, STYLE_OBJVAR, ((String) choices.get(r)));
                 }
             }
-            else 
+            else
             {
                 int f = rand(0, 5);
                 utils.setScriptVar(self, CHAT_OBJVAR, "negative_" + f + "_f");
@@ -250,11 +265,12 @@ public class audience_member extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
                 int r = rand(0, (choices.size() - 1));
-                utils.setScriptVar(self, STYLE_OBJVAR, ((String)choices.get(r)));
+                utils.setScriptVar(self, STYLE_OBJVAR, ((String) choices.get(r)));
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public String parseName(String name) throws InterruptedException
     {
         if (Character.isDigit(name.charAt(name.length() - 1)))

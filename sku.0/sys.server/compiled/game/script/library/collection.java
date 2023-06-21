@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.HashSet;
@@ -83,6 +89,7 @@ public class collection extends script.base_script
     public static final int ICE_CREAM_ALL_PLAYERS = 0;
     public static final int ICE_CREAM_DOMESTICS_ONLY = 1;
     public static final int MAX_RANGE_TO_COLLECT = 5;
+
     public collection()
     {
     }

@@ -1,8 +1,16 @@
 package script.item.ice_cream_fryer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.buff;
 import script.library.utils;
+
+import java.util.Objects;
 
 public class ice_cream_nobuff extends script.base_script
 {
@@ -12,6 +20,7 @@ public class ice_cream_nobuff extends script.base_script
     public static final String ITEM_FOOD_SCRIPT = "item.food";
     public static final String BUFF_NAME = "loot_buff";
     public static final String OWNER_OID = "owner";
+
     public ice_cream_nobuff()
     {
     }
@@ -145,13 +154,13 @@ public class ice_cream_nobuff extends script.base_script
                 default:
                     snd += "human_";
             }
-            switch (getGender(player))
+            if (Objects.requireNonNull(getGender(player)) == Gender.FEMALE)
             {
-                case FEMALE:
-                    snd += "female_eat.cef";
-                    break;
-                default:
-                    snd += "male_eat.cef";
+                snd += "female_eat.cef";
+            }
+            else
+            {
+                snd += "male_eat.cef";
             }
             playClientEffectLoc(player, snd, getLocation(player), getScale(player));
             int count = getCount(self);

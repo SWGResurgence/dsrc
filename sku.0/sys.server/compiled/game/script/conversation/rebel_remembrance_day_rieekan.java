@@ -1,33 +1,45 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class rebel_remembrance_day_rieekan extends script.base_script
 {
+    public static String c_stringFile = "conversation/rebel_remembrance_day_rieekan";
+
     public rebel_remembrance_day_rieekan()
     {
     }
-    public static String c_stringFile = "conversation/rebel_remembrance_day_rieekan";
+
     public boolean rebel_remembrance_day_rieekan_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isEntertainerOrTrader(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (rebel_remembrance_day_rieekan_condition_isEntertainer(player, npc) || rebel_remembrance_day_rieekan_condition_isTrader(player, npc));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isNotFirstSupplyDropMission(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return rebel_remembrance_day_rieekan_condition_hasSupplyDropMissionWithTask(player, npc) && !rebel_remembrance_day_rieekan_condition_isReadyForFirstSupplyDrop(player, npc);
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isEntertainerOrTraderAndNeverMetNotChampion(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (rebel_remembrance_day_rieekan_condition_isEntertainerOrTrader(player, npc) && !rebel_remembrance_day_rieekan_condition_alreadyKnowsRieekan(player, npc) && !rebel_remembrance_day_rieekan_condition_isChampion(player, npc));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_hasNotCraftedSupplies(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -40,6 +52,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return false;
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_hasAMisionActive(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -52,21 +65,25 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return false;
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_alreadyKnowsRieekan(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (rebel_remembrance_day_rieekan_condition_isEntertainer(player, npc) && groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_ENTERTAINER_01)) || (rebel_remembrance_day_rieekan_condition_isTrader(player, npc) && (groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_01_DOMESTICS) || groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_01_ENG) || groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_01_MUNITIONS) || groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_01_STRUC)));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isEntertainerAndIsWaitingForSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (rebel_remembrance_day_rieekan_condition_isEntertainer(player, npc) && rebel_remembrance_day_rieekan_condition_alreadyKnowsRieekan(player, npc) && rebel_remembrance_day_rieekan_condition_hasEntertainerMissionWithTask(player, npc));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isChampion(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasCompletedCollectionSlot(player, holiday.REMEMBRANCE_DAY_CHAMPION_BADGE);
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_hasEntertainerMissionWithTask(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -79,86 +96,103 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return false;
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_hasCompletedEntertainerOneNotTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_ENTERTAINER_01) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_ENTERTAINER_02));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isImperialPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (factions.isImperial(player));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isNeutralPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (!factions.isImperial(player) && !factions.isRebel(player));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_hasCompletedEntertainerTwoNotThree(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_ENTERTAINER_02) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_ENTERTAINER_03));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_hasCompletedEntertainerThreeNotFour(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_ENTERTAINER_03) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_ENTERTAINER_04));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_hasCompletedEntertainerFourNotFive(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_ENTERTAINER_04) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_ENTERTAINER_05));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_hasCompeletedEntertainerFiveNotSix(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_ENTERTAINER_05) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_ENTERTAINER_06));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isLockedOutOfRecoveryEvent(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return false;
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_hasCompleted1stMissionNot2nd(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_01_DOMESTICS) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_02_DOMESTICS)) || (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_01_ENG) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_02_ENG)) || (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_01_MUNITIONS) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_02_MUNITIONS)) || (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_01_STRUC) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_02_STRUC));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_hasCompleted2ndMissionNot3rd(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_02_DOMESTICS) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_03_DOMESTICS)) || (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_02_ENG) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_03_ENG)) || (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_02_MUNITIONS) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_03_MUNITIONS)) || (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_02_STRUC) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_03_STRUC));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isEnterainerOrTraderAndNeverMetRiekanIsChampion(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (rebel_remembrance_day_rieekan_condition_isEntertainerOrTrader(player, npc) && rebel_remembrance_day_rieekan_condition_isChampion(player, npc) && !rebel_remembrance_day_rieekan_condition_alreadyKnowsRieekan(player, npc));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isChampionKnowsKaythree(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (rebel_remembrance_day_rieekan_condition_isChampion(player, npc) && rebel_remembrance_day_rieekan_condition_alreadyKnowsRieekan(player, npc));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isImperialOnLeave(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (factions.isImperial(player) && factions.isOnLeave(player));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_hasCompleted3rdMissionNot4th(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_03_DOMESTICS) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_04_DOMESTICS)) || (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_03_ENG) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_04_ENG)) || (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_03_MUNITIONS) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_04_MUNITIONS)) || (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_03_STRUC) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_04_STRUC));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_hasCompleted4thMissionNot5th(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_04_DOMESTICS) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_05_DOMESTICS)) || (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_04_ENG) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_05_ENG)) || (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_04_MUNITIONS) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_05_MUNITIONS)) || (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_04_STRUC) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_05_STRUC));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_hasCompleted5thMissionNot6th(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_05_DOMESTICS) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_06_DOMESTICS)) || (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_05_ENG) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_06_ENG)) || (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_05_MUNITIONS) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_06_MUNITIONS)) || (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_05_STRUC) && !groundquests.isQuestActiveOrComplete(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_06_STRUC));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_hasCompleted6thMission(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -166,52 +200,57 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         {
             return true;
         }
-        else if (rebel_remembrance_day_rieekan_condition_isTrader(player, npc) && (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_06_ENG) || groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_06_MUNITIONS) || groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_06_STRUC) || groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_06_DOMESTICS)))
-        {
-            return true;
-        }
-        return false;
+        else return rebel_remembrance_day_rieekan_condition_isTrader(player, npc) && (groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_06_ENG) || groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_06_MUNITIONS) || groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_06_STRUC) || groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_06_DOMESTICS));
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isReadyForFirstSupplyDrop(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return rebel_remembrance_day_rieekan_condition_hasCompletedFirstMission(player, npc) && rebel_remembrance_day_rieekan_condition_hasSupplyDropMissionWithTask(player, npc);
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isEntertainer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return utils.isProfession(player, utils.ENTERTAINER);
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isTrader(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return utils.isProfession(player, utils.TRADER);
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isStructuresTrader(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasSkill(player, "class_structures_phase1_novice");
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isEngineeringTrader(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasSkill(player, "class_engineering_phase1_novice");
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isMunitionsTrader(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasSkill(player, "class_munitions_phase1_novice");
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isDomesticsTrader(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasSkill(player, "class_domestics_phase1_novice");
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_hasCompletedFirstMission(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_01_DOMESTICS) || groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_01_ENG) || groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_01_MUNITIONS) || groundquests.hasCompletedQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_01_STRUC);
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_hasSupplyDropMissionWithTask(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -224,6 +263,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return false;
     }
+
     public boolean rebel_remembrance_day_rieekan_condition_isNeutralWorkingForImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         if (rebel_remembrance_day_rieekan_condition_isNeutralPlayer(player, npc))
@@ -232,6 +272,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return false;
     }
+
     public void rebel_remembrance_day_rieekan_action_grantDomesticsMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_01_DOMESTICS);
@@ -240,38 +281,47 @@ public class rebel_remembrance_day_rieekan extends script.base_script
             rebel_remembrance_day_rieekan_action_grantEngineeringCollectionStart(player, npc);
         }
     }
+
     public void rebel_remembrance_day_rieekan_action_grantDomesticsMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_02_DOMESTICS);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantDomesticsMissionThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_03_DOMESTICS);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantDomesticsMissionFour(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_04_DOMESTICS);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantDomesticsMissionFive(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_05_DOMESTICS);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantDomesticsMissionSix(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_06_DOMESTICS);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantEntertainerMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_ENTERTAINER_01);
         modifyCollectionSlotValue(player, holiday.REBEL_ENTERTAINER_START_SLOT, 1);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantEntertainerMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_ENTERTAINER_02);
     }
+
     public void rebel_remembrance_day_rieekan_action_checkHolidayTimeStampOnPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void rebel_remembrance_day_rieekan_action_grantEngineeringCollectionStart(obj_id player, obj_id npc) throws InterruptedException
     {
         if (getCollectionSlotValue(player, holiday.REBEL_ENGINEERING_START_SLOT) <= 0)
@@ -279,6 +329,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
             modifyCollectionSlotValue(player, holiday.REBEL_ENGINEERING_START_SLOT, 1);
         }
     }
+
     public void rebel_remembrance_day_rieekan_action_grantEngineeringMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_01_ENG);
@@ -287,26 +338,32 @@ public class rebel_remembrance_day_rieekan extends script.base_script
             rebel_remembrance_day_rieekan_action_grantEngineeringCollectionStart(player, npc);
         }
     }
+
     public void rebel_remembrance_day_rieekan_action_grantEngineeringMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_02_ENG);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantEngineeringMissionThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_03_ENG);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantEngineeringMissionFour(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_04_ENG);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantEngineeringMissionFive(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_05_ENG);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantEnigineeringMissionSix(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_06_ENG);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantMunitionsMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_01_MUNITIONS);
@@ -315,26 +372,32 @@ public class rebel_remembrance_day_rieekan extends script.base_script
             rebel_remembrance_day_rieekan_action_grantEngineeringCollectionStart(player, npc);
         }
     }
+
     public void rebel_remembrance_day_rieekan_action_grantMunitionsMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_02_MUNITIONS);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantMunitionsMissionThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_03_MUNITIONS);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantMunitionsMissionFour(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_04_MUNITIONS);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantMunitionsMissionFive(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_05_MUNITIONS);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantMunitionsMissionSix(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_06_MUNITIONS);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantStructuresMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_01_STRUC);
@@ -343,46 +406,57 @@ public class rebel_remembrance_day_rieekan extends script.base_script
             rebel_remembrance_day_rieekan_action_grantEngineeringCollectionStart(player, npc);
         }
     }
+
     public void rebel_remembrance_day_rieekan_action_grantStructuresMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_02_STRUC);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantStructuresMissionThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_03_STRUC);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantStructuresMissionFour(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_04_STRUC);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantStructuresMissionFive(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_05_STRUC);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantStructuresMissionSix(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_CRASHSITE_06_STRUC);
     }
+
     public void rebel_remembrance_day_rieekan_action_activateDeliverySignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "spokeToSupplyOfficer");
     }
+
     public void rebel_remembrance_day_rieekan_action_grantEntertainerMissionThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_ENTERTAINER_03);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantEntertainerMissionFour(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_ENTERTAINER_04);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantEntertainerMissionFive(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_ENTERTAINER_05);
     }
+
     public void rebel_remembrance_day_rieekan_action_grantEntertainerMissionSix(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, holiday.EMPIREDAYQUEST_REB_ENTERTAINER_06);
     }
+
     public void rebel_remembrance_day_rieekan_action_entertainerSignalIncrementCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "creditReceived");
@@ -391,6 +465,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
             modifyCollectionSlotValue(player, holiday.REBEL_ENTERTAINER_COUNTER_SLOT, 1);
         }
     }
+
     public String rebel_remembrance_day_rieekan_tokenTO_timeLeftRecruitment(obj_id player, obj_id npc) throws InterruptedException
     {
         String returnString = holiday.getTimeRemainingBeforeLockoutRemoved(player, holiday.EMPIRE_DAY_RECRUITMENT_TIMESTAMP);
@@ -400,6 +475,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return returnString;
     }
+
     public String rebel_remembrance_day_rieekan_tokenTO_timeLeftPropaganda(obj_id player, obj_id npc) throws InterruptedException
     {
         String returnString = holiday.getTimeRemainingBeforeLockoutRemoved(player, holiday.EMPIRE_DAY_PROPAGANDA_TIMESTAMP);
@@ -409,10 +485,12 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return returnString;
     }
+
     public int rebel_remembrance_day_rieekan_tokenDI_notUsed(obj_id player, obj_id npc) throws InterruptedException
     {
         return 0;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_132"))
@@ -427,6 +505,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_90"))
@@ -446,7 +525,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -455,7 +534,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -477,7 +556,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -490,7 +569,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     prose_package pp = new prose_package();
@@ -516,7 +595,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -525,7 +604,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -547,7 +626,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_102");
@@ -556,7 +635,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -578,7 +657,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -591,7 +670,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     prose_package pp = new prose_package();
@@ -627,6 +706,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_91"))
@@ -646,7 +726,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -655,7 +735,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -677,7 +757,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -690,7 +770,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     prose_package pp = new prose_package();
@@ -716,7 +796,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -725,7 +805,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -747,7 +827,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_102");
@@ -756,7 +836,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -778,7 +858,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -791,7 +871,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     prose_package pp = new prose_package();
@@ -842,7 +922,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_198");
@@ -851,7 +931,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -873,7 +953,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_233");
@@ -882,7 +962,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -904,7 +984,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_215");
@@ -913,7 +993,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -935,7 +1015,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_237");
@@ -948,7 +1028,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     prose_package pp = new prose_package();
@@ -974,7 +1054,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_243");
@@ -987,7 +1067,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     prose_package pp = new prose_package();
@@ -1012,6 +1092,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_91"))
@@ -1031,7 +1112,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -1040,7 +1121,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1062,7 +1143,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -1075,7 +1156,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     prose_package pp = new prose_package();
@@ -1101,7 +1182,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -1110,7 +1191,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1132,7 +1213,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_102");
@@ -1141,7 +1222,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1163,7 +1244,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -1176,7 +1257,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     prose_package pp = new prose_package();
@@ -1227,7 +1308,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_198");
@@ -1236,7 +1317,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1258,7 +1339,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_233");
@@ -1267,7 +1348,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1289,7 +1370,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_215");
@@ -1298,7 +1379,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1320,7 +1401,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_237");
@@ -1333,7 +1414,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     prose_package pp = new prose_package();
@@ -1359,7 +1440,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_243");
@@ -1372,7 +1453,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     prose_package pp = new prose_package();
@@ -1397,6 +1478,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_93"))
@@ -1412,6 +1494,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_100"))
@@ -1431,6 +1514,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_101"))
@@ -1446,6 +1530,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_102"))
@@ -1465,6 +1550,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_103"))
@@ -1480,6 +1566,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_198"))
@@ -1499,7 +1586,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_200");
@@ -1512,7 +1599,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     prose_package pp = new prose_package();
@@ -1526,6 +1613,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_200"))
@@ -1545,7 +1633,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_205");
@@ -1558,7 +1646,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     prose_package pp = new prose_package();
@@ -1572,6 +1660,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_205"))
@@ -1611,6 +1700,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_233"))
@@ -1650,6 +1740,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_215"))
@@ -1669,7 +1760,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_217");
@@ -1678,7 +1769,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1688,6 +1779,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_217"))
@@ -1707,7 +1799,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_291");
@@ -1716,7 +1808,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1726,6 +1818,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_291"))
@@ -1765,6 +1858,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_237"))
@@ -1820,6 +1914,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_243"))
@@ -1839,7 +1934,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_245");
@@ -1852,7 +1947,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     prose_package pp = new prose_package();
@@ -1866,6 +1961,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_245"))
@@ -1921,6 +2017,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_193"))
@@ -1954,7 +2051,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_149");
@@ -1975,7 +2072,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     prose_package pp = new prose_package();
@@ -2018,7 +2115,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_149");
@@ -2035,7 +2132,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2045,6 +2142,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_149"))
@@ -2071,7 +2169,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_154");
@@ -2084,7 +2182,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2113,7 +2211,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_256");
@@ -2126,7 +2224,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2156,6 +2254,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_149"))
@@ -2182,7 +2281,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_154");
@@ -2195,7 +2294,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2224,7 +2323,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_256");
@@ -2237,7 +2336,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2267,6 +2366,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_137"))
@@ -2300,7 +2400,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_149");
@@ -2317,7 +2417,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2356,7 +2456,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_149");
@@ -2373,7 +2473,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2383,6 +2483,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_149"))
@@ -2409,7 +2510,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_154");
@@ -2422,7 +2523,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2451,7 +2552,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_256");
@@ -2464,7 +2565,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2494,6 +2595,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_149"))
@@ -2520,7 +2622,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_154");
@@ -2533,7 +2635,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2562,7 +2664,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_256");
@@ -2575,7 +2677,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2605,6 +2707,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_154"))
@@ -2635,7 +2738,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_177");
@@ -2644,7 +2747,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2654,6 +2757,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_177"))
@@ -2669,6 +2773,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_256"))
@@ -2688,7 +2793,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_260");
@@ -2697,7 +2802,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_rieekan.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2742,6 +2847,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_rieekan_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_260"))
@@ -2781,6 +2887,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -2791,12 +2898,14 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2805,23 +2914,27 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.rebel_remembrance_day_rieekan");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2850,7 +2963,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_132");
@@ -2862,7 +2975,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rebel_remembrance_day_rieekan", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -2926,7 +3039,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_90");
@@ -2938,7 +3051,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rebel_remembrance_day_rieekan", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -2971,7 +3084,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -2987,7 +3100,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rebel_remembrance_day_rieekan", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3021,7 +3134,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -3037,7 +3150,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rebel_remembrance_day_rieekan", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3071,7 +3184,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_193");
@@ -3087,7 +3200,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rebel_remembrance_day_rieekan", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3121,7 +3234,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_137");
@@ -3137,7 +3250,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rebel_remembrance_day_rieekan", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3170,6 +3283,7 @@ public class rebel_remembrance_day_rieekan extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("rebel_remembrance_day_rieekan"))

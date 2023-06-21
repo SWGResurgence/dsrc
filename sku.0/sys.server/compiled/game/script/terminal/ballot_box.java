@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.player_structure;
 import script.library.sui;
@@ -10,9 +16,6 @@ import java.util.Vector;
 
 public class ballot_box extends script.base_script
 {
-    public ballot_box()
-    {
-    }
     public static final int BALLOT_TEXT_MAX_LENGTH = 120;
     public static final int BALLOT_TITLE_MAX_LENGTH = 32;
     public static final int BALLOT_ITEM_MAX_LENGTH = 64;
@@ -54,24 +57,24 @@ public class ballot_box extends script.base_script
     public static final string_id SID_DEFAULT_BALLOT_RESULTS = new string_id("sui", "ballot_box_default_results");
     public static final string_id SID_OPEN_STATE_TEXT = new string_id("sui", "ballot_box_open_text");
     public static final string_id SID_CLOSED_STATE_TEXT = new string_id("sui", "ballot_box_closed_text");
-    public static final String[] DEFAULT_BALLOT_OPTIONS = 
-    {
-        "Sample Option One",
-        "Sample Option Two"
-    };
+    public static final String[] DEFAULT_BALLOT_OPTIONS =
+            {
+                    "Sample Option One",
+                    "Sample Option Two"
+            };
     public static final obj_id[] DEFAULT_PARTICIPANTS = new obj_id[0];
     public static final int[] DEFAULT_VOTE_TALLY = new int[0];
     public static final string_id SID_CHAT_BAND_TEXT = new string_id("sui", "ballot_box_band");
     public static final string_id SID_CHAT_TITLE = new string_id("sui", "ballot_box_chat_title");
-    public static final String[] EDIT_OPTIONS = 
-    {
-        "@sui:ballot_box_edit_title",
-        "@sui:ballot_box_edit_text",
-        "@sui:ballot_box_add_option",
-        "@sui:ballot_box_remove_option",
-        "@sui:ballot_box_start_vote",
-        "@sui:ballot_box_secret"
-    };
+    public static final String[] EDIT_OPTIONS =
+            {
+                    "@sui:ballot_box_edit_title",
+                    "@sui:ballot_box_edit_text",
+                    "@sui:ballot_box_add_option",
+                    "@sui:ballot_box_remove_option",
+                    "@sui:ballot_box_start_vote",
+                    "@sui:ballot_box_secret"
+            };
     public static final String VAR_BALLOT_TEXT = "var_ballot_text";
     public static final String VAR_BALLOT_TITLE = "var_ballot_title";
     public static final String VAR_BALLOT_STATE_TEXT = "var_ballot_state";
@@ -84,6 +87,10 @@ public class ballot_box extends script.base_script
     public static final String VAR_LOG_COUNT = "var_ballot_log_count";
     public static final String VAR_BALLOT_BOX_OWNER = "var_ballot_box_owner";
     public static final String VAR_IS_SECRET_MSG = "var_secret_msg";
+    public ballot_box()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "ballot_box_id", getCurrentSceneName());
@@ -97,6 +104,7 @@ public class ballot_box extends script.base_script
         setObjVar(self, VAR_IS_SECRET_MSG, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         String stateStr = getStringObjVar(self, VAR_BALLOT_STATE_TEXT);
@@ -108,7 +116,7 @@ public class ballot_box extends script.base_script
             {
                 mi.addSubMenu(menu, menu_info_types.DICE_COUNT_FOUR, SID_STOP_VOTE);
             }
-            else 
+            else
             {
                 setObjVar(self, VAR_BALLOT_BOX_OWNER, player);
                 mi.addSubMenu(menu, menu_info_types.DICE_EIGHT_FACE, SID_CLEAR_LOG);
@@ -127,12 +135,13 @@ public class ballot_box extends script.base_script
         {
             mi.addRootMenu(menu_info_types.DICE_THREE_FACE, SID_VIEW_BALLOT);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.DICE_TWO_FACE, SID_VIEW_RESULTS);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.DICE_THREE_FACE)
@@ -169,6 +178,7 @@ public class ballot_box extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void editBallot(obj_id player, obj_id terminal) throws InterruptedException
     {
         if ((getStringObjVar(terminal, VAR_BALLOT_STATE_TEXT)).equals(getString(SID_OPEN_STATE_TEXT)))
@@ -180,6 +190,7 @@ public class ballot_box extends script.base_script
         String[] options = getStringArrayObjVar(terminal, VAR_EDIT_OPTIONS);
         sui.listbox(terminal, player, ballot_text, sui.OK_CANCEL, getString(SID_EDIT_BALLOT), options, "configureBallot", true, true);
     }
+
     public void makeResultsSecret(obj_id owner, obj_id terminal) throws InterruptedException
     {
         setObjVar(terminal, VAR_IS_SECRET_MSG, true);
@@ -192,6 +203,7 @@ public class ballot_box extends script.base_script
         }
         editBallot(owner, terminal);
     }
+
     public void makeResultsPublic(obj_id owner, obj_id terminal) throws InterruptedException
     {
         setObjVar(terminal, VAR_IS_SECRET_MSG, false);
@@ -204,6 +216,7 @@ public class ballot_box extends script.base_script
         }
         editBallot(owner, terminal);
     }
+
     public void removeSelectionItem(obj_id owner, obj_id terminal) throws InterruptedException
     {
         String title = getStringObjVar(terminal, VAR_BALLOT_TITLE);
@@ -211,6 +224,7 @@ public class ballot_box extends script.base_script
         String[] options = getStringArrayObjVar(terminal, VAR_BALLOT_OPTIONS);
         sui.listbox(terminal, owner, text, sui.OK_CANCEL, title, options, "removeItem");
     }
+
     public void addSelectionItem(obj_id owner, obj_id terminal) throws InterruptedException
     {
         if ((getStringObjVar(terminal, VAR_BALLOT_STATE_TEXT)).equals(getString(SID_OPEN_STATE_TEXT)))
@@ -227,26 +241,27 @@ public class ballot_box extends script.base_script
         String ballot_text = getString(SID_CONFIG_ADD_ITEM);
         int pid = sui.inputbox(terminal, owner, ballot_text, sui.OK_CANCEL, getString(SID_ADD_OPTION), sui.INPUT_NORMAL, null, "addItem");
     }
+
     public void ownerViewBallot(obj_id owner, obj_id terminal) throws InterruptedException
     {
         String title = getStringObjVar(terminal, VAR_BALLOT_TITLE);
         String text = getStringObjVar(terminal, VAR_BALLOT_TEXT);
         String[] options = getStringArrayObjVar(terminal, VAR_BALLOT_OPTIONS);
         sui.listbox(terminal, owner, text, sui.OK_ONLY, title, options, "no_handler");
-        return;
     }
+
     public void viewBallot(obj_id owner, obj_id terminal) throws InterruptedException
     {
         String ballotData = getBallotViewData(terminal);
         sui.msgbox(terminal, owner, ballotData, sui.OK_ONLY, getString(SID_VIEW_BALLOT), "noHandlerNeeded");
-        return;
     }
+
     public String getBallotViewData(obj_id terminal) throws InterruptedException
     {
         String title = getStringObjVar(terminal, VAR_BALLOT_TITLE);
         String issue = getStringObjVar(terminal, VAR_BALLOT_TEXT);
         String[] items = getStringArrayObjVar(terminal, VAR_BALLOT_OPTIONS);
-        String resultSet = new String();
+        String resultSet = "";
         resultSet += "Title: " + getStringObjVar(terminal, VAR_BALLOT_TITLE) + "\n";
         resultSet += "Issue: " + issue + "\n\n";
         resultSet += "Options: " + "\n";
@@ -260,6 +275,7 @@ public class ballot_box extends script.base_script
         }
         return resultSet;
     }
+
     public void editBallotTitle(obj_id owner, obj_id terminal) throws InterruptedException
     {
         if ((getStringObjVar(terminal, VAR_BALLOT_STATE_TEXT)).equals(getString(SID_OPEN_STATE_TEXT)))
@@ -270,6 +286,7 @@ public class ballot_box extends script.base_script
         String ballot_text = getString(SID_CONFIG_BALLOT_TITLE);
         int pid = sui.inputbox(terminal, owner, ballot_text, sui.OK_CANCEL, getString(SID_EDIT_BALLOT_TITLE), sui.INPUT_NORMAL, null, "editTitle");
     }
+
     public void editBallotText(obj_id owner, obj_id terminal) throws InterruptedException
     {
         if ((getStringObjVar(terminal, VAR_BALLOT_STATE_TEXT)).equals(getString(SID_OPEN_STATE_TEXT)))
@@ -280,6 +297,7 @@ public class ballot_box extends script.base_script
         String ballot_text = getString(SID_CONFIG_BALLOT_TEXT);
         int pid = sui.inputbox(terminal, owner, ballot_text, sui.OK_CANCEL, getString(SID_EDIT_BALLOT_TEXT), sui.INPUT_NORMAL, null, "editText");
     }
+
     public void startVote(obj_id player, obj_id terminal) throws InterruptedException
     {
         setObjVar(terminal, VAR_BALLOT_STATE_TEXT, getString(SID_OPEN_STATE_TEXT));
@@ -296,12 +314,14 @@ public class ballot_box extends script.base_script
             setObjVar(terminal, VAR_VOTE_TALLY, voteCounts);
         }
     }
+
     public void stopVote(obj_id player, obj_id terminal) throws InterruptedException
     {
         setObjVar(terminal, VAR_BALLOT_STATE_TEXT, getString(SID_CLOSED_STATE_TEXT));
         sendSystemMessage(player, SID_STOP_VOTE_MSG);
         logResults(player, terminal);
     }
+
     public void logResults(obj_id player, obj_id terminal) throws InterruptedException
     {
         removeLogResults(player, terminal, false);
@@ -311,7 +331,7 @@ public class ballot_box extends script.base_script
         String resultSet = getStringObjVar(terminal, VAR_BALLOT_RESULTS);
         if (resultSet.equals(getString(SID_DEFAULT_BALLOT_RESULTS)))
         {
-            resultSet = new String();
+            resultSet = "";
         }
         resultSet += "Title: " + getStringObjVar(terminal, VAR_BALLOT_TITLE) + "\n";
         resultSet += "Issue: " + issue + "\n\n";
@@ -326,9 +346,9 @@ public class ballot_box extends script.base_script
                 {
                     percentValue = 100;
                 }
-                else 
+                else
                 {
-                    percentValue = 100 * ((float)votes[i] / totalVotes);
+                    percentValue = 100 * ((float) votes[i] / totalVotes);
                 }
             }
             int count = i + 1;
@@ -336,7 +356,7 @@ public class ballot_box extends script.base_script
             {
                 resultSet += count + ". " + items[i] + "\n" + votes[i] + " vote = " + percentValue + "%\n\n";
             }
-            else 
+            else
             {
                 resultSet += count + ". " + items[i] + "\n" + votes[i] + " votes = " + percentValue + "%\n\n";
             }
@@ -352,6 +372,7 @@ public class ballot_box extends script.base_script
         setObjVar(terminal, VAR_PARTICIPANTS, DEFAULT_PARTICIPANTS);
         setObjVar(terminal, VAR_IS_SECRET_MSG, false);
     }
+
     public void removeLogResults(obj_id owner, obj_id terminal, boolean displayMessage) throws InterruptedException
     {
         setObjVar(terminal, VAR_BALLOT_RESULTS, getString(SID_DEFAULT_BALLOT_RESULTS));
@@ -360,6 +381,7 @@ public class ballot_box extends script.base_script
             sendSystemMessage(owner, SID_CLEAR_MSG);
         }
     }
+
     public void vote(obj_id player, obj_id terminal) throws InterruptedException
     {
         xp.grantCraftingXpChance(terminal, player, 40);
@@ -368,19 +390,21 @@ public class ballot_box extends script.base_script
         String[] options = getStringArrayObjVar(terminal, VAR_BALLOT_OPTIONS);
         sui.listbox(terminal, player, text, sui.OK_CANCEL, title, options, "voteTracker");
     }
+
     public void viewResults(obj_id player, obj_id terminal) throws InterruptedException
     {
-        String resultData = new String("error with data");
+        String resultData = "error with data";
         if (!getBooleanObjVar(terminal, VAR_IS_SECRET_MSG))
         {
             resultData = getStringObjVar(terminal, VAR_BALLOT_RESULTS);
         }
-        else 
+        else
         {
             resultData = getString(SID_DEFAULT_BALLOT_RESULTS);
         }
         sui.msgbox(terminal, player, resultData, sui.OK_ONLY, getString(SID_RESULTS_TITLE), "noHandlerNeeded");
     }
+
     public int configureBallot(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -427,6 +451,7 @@ public class ballot_box extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int editText(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -449,6 +474,7 @@ public class ballot_box extends script.base_script
         editBallot(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int editTitle(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -471,6 +497,7 @@ public class ballot_box extends script.base_script
         editBallot(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int voteTracker(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -506,6 +533,7 @@ public class ballot_box extends script.base_script
         sendSystemMessage(player, SID_VOTE_LOGGED_MSG);
         return SCRIPT_CONTINUE;
     }
+
     public int addItem(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -523,7 +551,7 @@ public class ballot_box extends script.base_script
         if (itemToAdd != null && itemToAdd.length() != 0 && buttonPressed.equals(sui.OK))
         {
             Vector options = getResizeableStringArrayObjVar(self, VAR_BALLOT_OPTIONS);
-            if (((String)options.get(0)).equals(getString(SID_SAMPLE_ONE)))
+            if (options.get(0).equals(getString(SID_SAMPLE_ONE)))
             {
                 options.clear();
             }
@@ -540,7 +568,7 @@ public class ballot_box extends script.base_script
             {
                 setObjVar(self, VAR_BALLOT_OPTIONS, options);
             }
-            else 
+            else
             {
                 setObjVar(self, VAR_BALLOT_OPTIONS, DEFAULT_BALLOT_OPTIONS);
             }
@@ -549,23 +577,26 @@ public class ballot_box extends script.base_script
         editBallot(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int sendPersistantResultsMessage(obj_id self, dictionary params) throws InterruptedException
     {
         String resultSet = getStringObjVar(self, VAR_BALLOT_RESULTS);
         if (!getBooleanObjVar(self, VAR_IS_SECRET_MSG))
         {
             obj_id[] participants = getObjIdArrayObjVar(self, VAR_PARTICIPANTS);
-            for (obj_id participant : participants) {
-                chatSendPersistentMessage(participant, "@" + SID_CHAT_TITLE.toString(), resultSet, null);
+            for (obj_id participant : participants)
+            {
+                chatSendPersistentMessage(participant, "@" + SID_CHAT_TITLE, resultSet, null);
             }
         }
-        else 
+        else
         {
             obj_id owner = params.getObjId("owner");
-            chatSendPersistentMessage(owner, "@" + SID_CHAT_TITLE.toString(), resultSet, null);
+            chatSendPersistentMessage(owner, "@" + SID_CHAT_TITLE, resultSet, null);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeItem(obj_id self, dictionary params) throws InterruptedException
     {
         int listItem = sui.getListboxSelectedRow(params);
@@ -581,7 +612,7 @@ public class ballot_box extends script.base_script
         {
             setObjVar(self, VAR_BALLOT_OPTIONS, DEFAULT_BALLOT_OPTIONS);
         }
-        else 
+        else
         {
             setObjVar(self, VAR_BALLOT_OPTIONS, items);
         }

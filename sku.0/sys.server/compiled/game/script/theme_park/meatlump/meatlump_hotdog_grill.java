@@ -1,5 +1,11 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.buff;
 import script.library.static_item;
 import script.library.utils;
@@ -10,19 +16,21 @@ import script.string_id;
 
 public class meatlump_hotdog_grill extends script.base_script
 {
-    public meatlump_hotdog_grill()
-    {
-    }
     public static final string_id SID_GET_FOOD_ITEM = new string_id("collection", "get_food_item");
     public static final string_id SID_MTP_ALREADY_ATE = new string_id("collection", "already_ate");
     public static final string_id NOT_WHILE_INCAPPED = new string_id("quest/ground/util/quest_giver_object", "not_while_incapped");
     public static final string_id SID_NOT_WHILE_IN_COMBAT = new string_id("base_player", "not_while_in_combat");
     public static final string_id MUST_DISMOUNT = new string_id("collection", "must_dismount");
+    public meatlump_hotdog_grill()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_GET_FOOD_ITEM);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         String itemToGrant = "";
@@ -57,13 +65,14 @@ public class meatlump_hotdog_grill extends script.base_script
             itemToGrant = "item_mtp_meatlump_lump_schematic_02_01";
             grantMeatlumpItem(player, itemToGrant);
         }
-        else 
+        else
         {
             itemToGrant = "item_mtp_meatlump_lump_02_01";
             grantMeatlumpItem(player, itemToGrant);
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean grantMeatlumpItem(obj_id player, String itemToGrant) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))

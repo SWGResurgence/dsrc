@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.player_structure;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class e3_housing extends script.base_script
     public e3_housing()
     {
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         obj_id deed = obj_id.NULL_ID;
@@ -18,7 +25,8 @@ public class e3_housing extends script.base_script
             broadcast(self, "Player inventory is null.");
             return SCRIPT_CONTINUE;
         }
-        switch (text) {
+        switch (text)
+        {
             case "tatooine small":
                 deed = createObjectOverloaded("object/tangible/deed/player_house_deed/tatooine_house_small_deed.iff", inv);
                 break;
@@ -43,9 +51,12 @@ public class e3_housing extends script.base_script
         {
             location loc = getLocation(self);
             obj_id[] objects = getObjectsInRange(loc, 30.0f);
-            for (obj_id object : objects) {
-                if (player_structure.isBuilding(object) || player_structure.isInstallation(object)) {
-                    if (player_structure.getStructureOwnerObjId(object) == self) {
+            for (obj_id object : objects)
+            {
+                if (player_structure.isBuilding(object) || player_structure.isInstallation(object))
+                {
+                    if (player_structure.getStructureOwnerObjId(object) == self)
+                    {
                         player_structure.destroyStructure(object);
                         broadcast(self, object + " destroyed.");
                     }

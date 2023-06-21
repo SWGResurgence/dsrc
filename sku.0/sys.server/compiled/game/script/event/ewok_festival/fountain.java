@@ -1,5 +1,11 @@
 package script.event.ewok_festival;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.static_item;
 import script.library.utils;
 import script.menu_info;
@@ -9,14 +15,15 @@ import script.string_id;
 
 public class fountain extends script.base_script
 {
-    public fountain()
-    {
-    }
     public static final string_id FOUNTAIN_USE = new string_id("spam", "fountain_use");
     public static final string_id ALREADY_HAVE = new string_id("spam", "already_have");
     public static final string_id BERRY_GRANTED = new string_id("spam", "berry_granted");
     public static final String OBJ_BERRY_ONE = "item_event_ewok_berry_01_01";
     public static final String OBJ_BERRY_TWO = "item_event_ewok_berry_01_02";
+    public fountain()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.playerHasStaticItemInBankOrInventory(player, OBJ_BERRY_ONE))
@@ -25,6 +32,7 @@ public class fountain extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE && utils.playerHasStaticItemInBankOrInventory(player, OBJ_BERRY_ONE))
@@ -33,7 +41,7 @@ public class fountain extends script.base_script
             {
                 convertBerry(player);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, ALREADY_HAVE);
             }
@@ -41,6 +49,7 @@ public class fountain extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean convertBerry(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))

@@ -1,5 +1,11 @@
 package script.theme_park.poi.general.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.library.money;
@@ -8,20 +14,24 @@ import script.string_id;
 
 public class duelist_convo extends script.base_script
 {
+    public static final String CONVO = "npc_reaction/duelist";
+
     public duelist_convo()
     {
     }
-    public static final String CONVO = "npc_reaction/duelist";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (hasObjVar(killer, "isDueling"))
@@ -30,11 +40,12 @@ public class duelist_convo extends script.base_script
             removeObjVar(killer, "isDueling");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (hasObjVar(speaker, "duelwon"))
@@ -45,16 +56,17 @@ public class duelist_convo extends script.base_script
             removeObjVar(speaker, "duelwon");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             string_id greeting = new string_id(CONVO, "duel_1");
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, "player_1");
             response[1] = new string_id(CONVO, "player_2");
             npcStartConversation(speaker, self, CONVO, greeting, response);
             return SCRIPT_CONTINUE;
         }
     }
+
     public int OnNpcConversationResponse(obj_id self, String convoName, obj_id player, string_id response) throws InterruptedException
     {
         if (!convoName.equals(CONVO))
@@ -65,7 +77,7 @@ public class duelist_convo extends script.base_script
         {
             string_id message = new string_id(CONVO, "duel_2");
             npcSpeak(player, message);
-            string_id responses[] = new string_id[2];
+            string_id[] responses = new string_id[2];
             responses[0] = new string_id(CONVO, "player_3");
             responses[1] = new string_id(CONVO, "player_4");
             npcSetConversationResponses(player, responses);
@@ -83,7 +95,7 @@ public class duelist_convo extends script.base_script
         {
             string_id message = new string_id(CONVO, "duel_4");
             npcSpeak(player, message);
-            string_id responses[] = new string_id[2];
+            string_id[] responses = new string_id[2];
             responses[0] = new string_id(CONVO, "player_5");
             responses[1] = new string_id(CONVO, "player_6");
             npcSetConversationResponses(player, responses);
@@ -117,6 +129,7 @@ public class duelist_convo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startDuel(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id opponent = getObjIdObjVar(self, "opponent");
@@ -124,6 +137,7 @@ public class duelist_convo extends script.base_script
         startCombat(opponent, self);
         return SCRIPT_CONTINUE;
     }
+
     public int duelPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id opponent = getObjIdObjVar(self, "opponent");

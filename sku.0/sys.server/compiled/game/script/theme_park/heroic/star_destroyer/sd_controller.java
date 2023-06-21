@@ -1,5 +1,11 @@
 package script.theme_park.heroic.star_destroyer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.skill;
 import script.library.trial;
@@ -11,6 +17,7 @@ public class sd_controller extends script.base_script
     public sd_controller()
     {
     }
+
     public int saitDied(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = trial.getPlayersInDungeon(self);

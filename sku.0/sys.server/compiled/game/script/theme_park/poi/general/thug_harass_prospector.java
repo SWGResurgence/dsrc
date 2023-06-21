@@ -1,5 +1,11 @@
 package script.theme_park.poi.general;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class thug_harass_prospector extends script.theme_park.poi.base
@@ -7,11 +13,13 @@ public class thug_harass_prospector extends script.theme_park.poi.base
     public thug_harass_prospector()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "First POI Test Attached");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String objective = poiGetObjective(self);

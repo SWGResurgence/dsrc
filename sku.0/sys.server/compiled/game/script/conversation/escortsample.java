@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.money;
@@ -8,90 +14,85 @@ import script.*;
 
 public class escortsample extends script.base_script
 {
+    public static String c_stringFile = "conversation/escortsample";
+
     public escortsample()
     {
     }
-    public static String c_stringFile = "conversation/escortsample";
+
     public boolean escortsample_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean escortsample_condition_completedQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasCompletedQuest(player, "escort", "rebel_escort_01") && space_quest.hasWonQuest(player, "escort", "rebel_escort_01"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasCompletedQuest(player, "escort", "rebel_escort_01") && space_quest.hasWonQuest(player, "escort", "rebel_escort_01");
     }
+
     public boolean escortsample_condition_onQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasQuest(player, "escort", "rebel_escort_01") || space_quest.hasCompletedQuest(player, "escort", "rebel_escort_01"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasQuest(player, "escort", "rebel_escort_01") || space_quest.hasCompletedQuest(player, "escort", "rebel_escort_01");
     }
+
     public boolean escortsample_condition_alreadyRewarded(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasReceivedReward(player, "escort", "rebel_escort_01");
     }
+
     public boolean escortsample_condition_abortedQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "escort", "rebel_escort_01") || space_quest.hasAbortedQuest(player, "escort", "rebel_escort_01"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "escort", "rebel_escort_01") || space_quest.hasAbortedQuest(player, "escort", "rebel_escort_01");
     }
+
     public void escortsample_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void escortsample_action_anim_greet(obj_id player, obj_id npc) throws InterruptedException
     {
         faceToBehavior(npc, player);
         doAnimationAction(npc, "greet");
     }
+
     public void escortsample_action_anim_converse(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "conversation_1");
     }
+
     public void escortsample_action_anim_checkwatch(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "check_wrist_device");
     }
+
     public void escortsample_action_giveQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort", "rebel_escort_01");
         doAnimationAction(npc, "standing_raise_fist");
     }
+
     public void escortsample_action_rewardPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "celebrate");
         money.bankTo(money.ACCT_REBEL, player, 3000);
         space_quest.setQuestRewarded(player, "escort", "rebel_escort_01");
     }
+
     public void escortsample_action_anim_shakeheaddisgust(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "shake_head_disgust");
     }
+
     public void escortsample_action_anim_wave(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "wave1");
     }
+
     public void escortsample_action_anim_rubchin(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "rub_chin_thoughtful");
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -101,11 +102,13 @@ public class escortsample extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -114,12 +117,14 @@ public class escortsample extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.escortsample");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -142,7 +147,7 @@ public class escortsample extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3b6feb84");
@@ -150,7 +155,7 @@ public class escortsample extends script.base_script
                 setObjVar(player, "conversation.escortsample.branchId", 1);
                 npcStartConversation(player, self, "escortsample", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -179,7 +184,7 @@ public class escortsample extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_d6b24fb1");
@@ -191,7 +196,7 @@ public class escortsample extends script.base_script
                 setObjVar(player, "conversation.escortsample.branchId", 3);
                 npcStartConversation(player, self, "escortsample", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -220,7 +225,7 @@ public class escortsample extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_8acc2fd5");
@@ -232,7 +237,7 @@ public class escortsample extends script.base_script
                 setObjVar(player, "conversation.escortsample.branchId", 8);
                 npcStartConversation(player, self, "escortsample", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -254,7 +259,7 @@ public class escortsample extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_30b5d96");
@@ -262,7 +267,7 @@ public class escortsample extends script.base_script
                 setObjVar(player, "conversation.escortsample.branchId", 12);
                 npcStartConversation(player, self, "escortsample", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -271,6 +276,7 @@ public class escortsample extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("escortsample"))
@@ -316,7 +322,7 @@ public class escortsample extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c8f5aa73");
@@ -329,7 +335,7 @@ public class escortsample extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.escortsample.branchId");
                     npcSpeak(player, message);
@@ -443,7 +449,7 @@ public class escortsample extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c8f5aa73");
@@ -456,7 +462,7 @@ public class escortsample extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.escortsample.branchId");
                     npcSpeak(player, message);

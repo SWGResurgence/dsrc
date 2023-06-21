@@ -1,5 +1,11 @@
 package script.space.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.space_crafting;
 import script.library.space_pilot_command;
 import script.obj_id;
@@ -10,6 +16,7 @@ public class droid_datapad_handler extends script.base_script
     public droid_datapad_handler()
     {
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id objStartContainer, obj_id objPlayer, obj_id objItem) throws InterruptedException
     {
         if (!isIdValid(objItem) || !isIdValid(objPlayer) || !isIdValid(objStartContainer))
@@ -33,7 +40,7 @@ public class droid_datapad_handler extends script.base_script
         {
             droidProgram = getStringObjVar(objItem, "strDroidCommand");
         }
-        else 
+        else
         {
             return SCRIPT_OVERRIDE;
         }
@@ -48,7 +55,7 @@ public class droid_datapad_handler extends script.base_script
             }
             currentUsedProgramMemory = space_pilot_command.getCurrentlyUsedProgramMemory(objCommands);
         }
-        else 
+        else
         {
             debugServerConsoleMsg(null, "DROID_DATAPAD_HANDLER.OnAboutToReceiveItem  ***   getDatapadDroidCommands returned NULL");
         }
@@ -61,6 +68,7 @@ public class droid_datapad_handler extends script.base_script
         sendSystemMessage(objPlayer, strSpam);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id objDestination, obj_id objPlayer, obj_id objItem) throws InterruptedException
     {
         if (hasObjVar(objItem, "strDroidCommand"))

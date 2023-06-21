@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.volcano_battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -7,36 +13,40 @@ import script.obj_id;
 
 public class volcano_event_manager extends script.base_script
 {
+    public static final String dataTable = "datatables/dungeon/mustafar_trials/volcano_battlefield/volcano_event_data.iff";
+    public static final int[] events =
+            {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+            };
+    public static final boolean doLogging = false;
     public volcano_event_manager()
     {
     }
-    public static final String dataTable = "datatables/dungeon/mustafar_trials/volcano_battlefield/volcano_event_data.iff";
-    public static final int[] events = 
-    {
-        0,
-        1,
-        2,
-        3,
-        4,
-        5
-    };
-    public static final boolean doLogging = false;
+
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         clearEventArea(self);
         spawnActors(self, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int dungeonCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         clearEventArea(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         clearEventArea(self);
         return SCRIPT_CONTINUE;
     }
+
     public void clearEventArea(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "idx"))
@@ -48,26 +58,36 @@ public class volcano_event_manager extends script.base_script
             utils.removeScriptVar(self, "observer");
         }
         obj_id[] objects = getObjectsInRange(self, 500);
-        if (objects == null || objects.length == 0)
+        if (objects == null)
         {
             return;
         }
-        for (obj_id object : objects) {
-            if (object != self) {
-                if (!isPlayer(object)) {
-                    if (!isMob(object)) {
-                        if (trial.isTempObject(object)) {
+        for (obj_id object : objects)
+        {
+            if (object != self)
+            {
+                if (!isPlayer(object))
+                {
+                    if (!isMob(object))
+                    {
+                        if (trial.isTempObject(object))
+                        {
                             destroyObject(object);
                         }
-                    } else {
+                    }
+                    else
+                    {
                         kill(object);
                         destroyObject(object);
                     }
-                } else {
+                }
+                else
+                {
                 }
             }
         }
     }
+
     public void spawnActors(obj_id dungeon, int stage) throws InterruptedException
     {
         int rows = dataTableGetNumRows(dataTable);
@@ -124,7 +144,7 @@ public class volcano_event_manager extends script.base_script
                             setObjVar(item, "objvar", objvar);
                         }
                     }
-                    else 
+                    else
                     {
                         obj_id creature = create.object(object, spawnLoc);
                         if (!isIdValid(creature))
@@ -153,6 +173,7 @@ public class volcano_event_manager extends script.base_script
             utils.setScriptVar(dungeon, "event_manager", event_manager);
         }
     }
+
     public obj_id getWaypointId(obj_id dungeon, String wpName) throws InterruptedException
     {
         obj_id[] objects = getObjectsInRange(getLocation(dungeon), 500);
@@ -161,9 +182,12 @@ public class volcano_event_manager extends script.base_script
             doLogging("getWaypointId", "Object list was null or empty, return null");
             return null;
         }
-        for (obj_id object : objects) {
-            if (hasObjVar(object, "battlePoint")) {
-                if ((getStringObjVar(object, "battlePoint")).equals(wpName)) {
+        for (obj_id object : objects)
+        {
+            if (hasObjVar(object, "battlePoint"))
+            {
+                if ((getStringObjVar(object, "battlePoint")).equals(wpName))
+                {
                     return object;
                 }
             }
@@ -171,6 +195,7 @@ public class volcano_event_manager extends script.base_script
         doLogging("getWaypointId", "No objects had the matching string objvar");
         return null;
     }
+
     public int eventDefeated(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = 1;
@@ -196,6 +221,7 @@ public class volcano_event_manager extends script.base_script
         utils.setScriptVar(self, "idx", idx);
         return SCRIPT_CONTINUE;
     }
+
     public int doHkTaunt(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = instance.getPlayersInInstanceArea(self);
@@ -208,6 +234,7 @@ public class volcano_event_manager extends script.base_script
         instance.playMusicInInstance(self, trial.MUS_VOLCANO_HK_INTRO);
         return SCRIPT_CONTINUE;
     }
+
     public int landYt(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "yt"))
@@ -245,6 +272,7 @@ public class volcano_event_manager extends script.base_script
         messageTo(self, "playSmoke", dict, 34, false);
         return SCRIPT_CONTINUE;
     }
+
     public int playSmoke(obj_id self, dictionary params) throws InterruptedException
     {
         location landLoc = params.getLocation("landLoc");
@@ -255,6 +283,7 @@ public class volcano_event_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int replacePlaceholder(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id oldYt = utils.getObjIdScriptVar(self, "yt");
@@ -274,12 +303,14 @@ public class volcano_event_manager extends script.base_script
         attachScript(pilot, "conversation.trial_volcano_autopilot");
         return SCRIPT_CONTINUE;
     }
+
     public int destroyOld(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id yt = params.getObjId("yt");
         destroyObject(yt);
         return SCRIPT_CONTINUE;
     }
+
     public int destroyYt(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id yt = utils.getObjIdScriptVar(self, "yt");
@@ -294,7 +325,7 @@ public class volcano_event_manager extends script.base_script
             messageTo(yt, "performTakeoff", null, 0, false);
             messageTo(yt, "selfDestruct", null, 20, false);
         }
-        else 
+        else
         {
             if (!isIdValid(yt))
             {
@@ -305,15 +336,17 @@ public class volcano_event_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public int hkDefeated(obj_id self, dictionary params) throws InterruptedException {
-		trial.setDungeonCleanOutTimer(self);
+
+    public int hkDefeated(obj_id self, dictionary params) throws InterruptedException
+    {
+        trial.setDungeonCleanOutTimer(self);
         trial.sendCompletionSignal(self, trial.VOLCANO_WIN_SIGNAL);
         messageTo(self, "replacePlaceholder", null, 0, false);
         obj_id[] players = instance.getPlayersInInstanceArea(self);
         badge.grantBadge(players, "bdg_must_victory_volcano");
-        
+
         // HEROIC SYSTEM BEGIN \\
-        
+
         dictionary dict = new dictionary();
         dict.put("tokenIndex", 7);
         dict.put("tokenCount", 8);
@@ -328,11 +361,12 @@ public class volcano_event_manager extends script.base_script
             String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
             CustomerServiceLog("instance-mustafar_trials_volcano_battlefield", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
         }
-        
+
         // HEROIC SYSTEM END \\
-        
+
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (doLogging)

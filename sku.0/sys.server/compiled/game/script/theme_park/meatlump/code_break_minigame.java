@@ -1,13 +1,16 @@
 package script.theme_park.meatlump;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class code_break_minigame extends script.base_script
 {
-    public code_break_minigame()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String VAR_PREFIX = "meatlump_code";
     public static final String NONIMPERATIVE_VAR_PREFIX = "meatlump_safe_nonimperative";
@@ -42,11 +45,16 @@ public class code_break_minigame extends script.base_script
     public static final int MAX_INT_COMBO_4 = 1000;
     public static final int MAX_INT_COMBO_5 = 500;
     public static final int MAX_INT_COMBO_6 = 100;
+    public code_break_minigame()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_OPEN_SAFE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isValidId(player))
@@ -77,6 +85,7 @@ public class code_break_minigame extends script.base_script
         createSui(collectionItem, player);
         return SCRIPT_CONTINUE;
     }
+
     public boolean createSui(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         if (!isValidId(collectionItem) || !isValidId(player))
@@ -97,7 +106,7 @@ public class code_break_minigame extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             closeOldWindow(player);
         }
@@ -117,7 +126,7 @@ public class code_break_minigame extends script.base_script
         {
             guessPostion = utils.getIntScriptVar(player, GUESS_POSITION + "_" + collectionItem);
         }
-        else 
+        else
         {
             utils.setScriptVar(player, GUESS_POSITION + "_" + collectionItem, guessPostion);
         }
@@ -136,12 +145,12 @@ public class code_break_minigame extends script.base_script
                     questionnaireText += sui.newLine() + sui.colorBlue() + utils.getStringScriptVar(player, NUMBER_VALUES + "_" + collectionItem + ".number_combo_guess_" + i + "_" + collectionItem);
                     questionnaireText += sui.colorWhite();
                 }
-                else 
+                else
                 {
                     questionnaireText += sui.newLine();
                 }
             }
-            else 
+            else
             {
                 questionnaireText += sui.colorGreen() + utils.getIntScriptVar(player, VAR_PREFIX + ".number_combo_" + i + "_" + collectionItem) + sui.newLine();
             }
@@ -168,6 +177,7 @@ public class code_break_minigame extends script.base_script
         flushSUIPage(pid);
         return true;
     }
+
     public int handleDialogInput(obj_id self, dictionary params) throws InterruptedException
     {
         blog("handleDialogInput");
@@ -231,7 +241,7 @@ public class code_break_minigame extends script.base_script
             utils.setScriptVar(player, NUMBER_VALUES + "_" + self + ".number_combo_guess_" + guessPostion + "_" + self, " (" + playerGuessInt + " too high)");
             utils.setScriptVar(player, TOTAL_GUESSES + "_" + self, totalGuesses++);
         }
-        else 
+        else
         {
             blog("handleDialogInput Too Low");
             utils.setScriptVar(player, NUMBER_VALUES + "_" + self + ".number_combo_guess_" + guessPostion + "_" + self, " (" + playerGuessInt + " too low)");
@@ -240,6 +250,7 @@ public class code_break_minigame extends script.base_script
         createSui(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public boolean getRandomNumberCombinations(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         if (!isValidId(collectionItem) || !isValidId(player))
@@ -284,7 +295,7 @@ public class code_break_minigame extends script.base_script
             }
             int tempRandVariable = rand(0, randMax);
             utils.setScriptVar(player, VAR_PREFIX + ".number_combo_" + i + "_" + collectionItem, tempRandVariable);
-            int lengthOfVar = (("" + tempRandVariable)).length();
+            int lengthOfVar = ((String.valueOf(tempRandVariable))).length();
             String asterisks = "";
             for (int j = 0; j < lengthOfVar; j++)
             {
@@ -316,6 +327,7 @@ public class code_break_minigame extends script.base_script
         }
         return true;
     }
+
     public boolean rerollPuzzleNeeded(obj_id collectionItem, obj_id player) throws InterruptedException
     {
         if (!isValidId(collectionItem) || !exists(collectionItem))
@@ -378,6 +390,7 @@ public class code_break_minigame extends script.base_script
         blog("rerollPuzzleNeeded - No special conditions found. NOT DISTURBING.");
         return false;
     }
+
     public boolean calculateThreshold(obj_id collectionItem, obj_id player, int guessPosition) throws InterruptedException
     {
         if (!isValidId(collectionItem) || !isValidId(player))
@@ -395,7 +408,7 @@ public class code_break_minigame extends script.base_script
             blog("setting threshold to TRUE");
             utils.setScriptVar(player, VAR_PREFIX + ".under_threshold_" + guessPosition + "_" + collectionItem, true);
         }
-        else 
+        else
         {
             blog("setting threshold to FALSE");
             utils.setScriptVar(player, VAR_PREFIX + ".under_threshold_" + guessPosition + "_" + collectionItem, false);
@@ -403,6 +416,7 @@ public class code_break_minigame extends script.base_script
         utils.setScriptVar(player, TOTAL_GUESSES + "_" + collectionItem, TOTAL_GUESS_DEFAULT);
         return true;
     }
+
     public boolean completeNumberGuess(obj_id collectionItem, obj_id player, int guessPosition) throws InterruptedException
     {
         if (!isValidId(collectionItem) || !isValidId(player))
@@ -456,6 +470,7 @@ public class code_break_minigame extends script.base_script
         removePlayerImperativeVars(player);
         return true;
     }
+
     public int closeSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -466,9 +481,9 @@ public class code_break_minigame extends script.base_script
         blog("closeSui");
         if (buff.applyBuff(player, "locked_container_puzzle_downer"))
         {
-            
+
         }
-        
+
         {
             blog("closeSui - downer given to player");
             sendSystemMessage(player, YOU_CANCELED_EARLY);
@@ -478,6 +493,7 @@ public class code_break_minigame extends script.base_script
         removePlayerNonImperativeVars(player);
         return SCRIPT_CONTINUE;
     }
+
     public void closeOldWindow(obj_id player) throws InterruptedException
     {
         int pid = sui.getPid(player, PID_NAME);
@@ -487,16 +503,19 @@ public class code_break_minigame extends script.base_script
             sui.removePid(player, PID_NAME);
         }
     }
+
     public void removePlayerNonImperativeVars(obj_id player) throws InterruptedException
     {
         utils.removeScriptVarTree(player, NONIMPERATIVE_VAR_PREFIX);
         utils.removeObjVar(player, NONIMPERATIVE_VAR_PREFIX);
     }
+
     public void removePlayerImperativeVars(obj_id player) throws InterruptedException
     {
         utils.removeScriptVarTree(player, VAR_PREFIX);
         utils.removeObjVar(player, VAR_PREFIX);
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

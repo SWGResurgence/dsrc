@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.obj_var_list;
 import script.prose_package;
@@ -16,6 +22,7 @@ public class doctor_bag extends script.base_script
     public static final int HEALING_DOT_DURATION = 5;
     public static final string_id SID_MEDICINE_STORED = new string_id("doctor_bag", "medicine_stored");
     public static final string_id SID_MEDICINE_REMOVED = new string_id("doctor_bag", "medicine_removed");
+
     public doctor_bag()
     {
     }

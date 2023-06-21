@@ -4,6 +4,12 @@ package script.event.wheres_watto;/*
 @Purpose: Spawns a watto on attach randomly on the planet. If he gets talked to, he will be respawned via this script.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.*;
 
@@ -14,6 +20,7 @@ public class controller extends script.base_script
             "toydarian_m_greeter_1",
             "toydarian_m_greeter_2",
     };
+
     public int OnAttach(obj_id self)
     {
         setObjVar(self, "watto_controller_master", 1);
@@ -24,6 +31,7 @@ public class controller extends script.base_script
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi)
     {
         if (isGod(player))
@@ -39,13 +47,14 @@ public class controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isGod(player))
         {
             if (item == menu_info_types.ITEM_USE)
             {
-                location watto_loc = new location(0, 0,0,getCurrentSceneName(), null);
+                location watto_loc = new location(0, 0, 0, getCurrentSceneName(), null);
                 watto_loc.x = watto_loc.x + (rand(-7250.0f, 7250.0f));
                 watto_loc.z = watto_loc.z + (rand(-7250.0f, 7250.0f));
                 watto_loc.y = getHeightAtLocation(watto_loc.x, watto_loc.z);

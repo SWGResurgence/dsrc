@@ -4,18 +4,24 @@ package script.library;/*
 @Purpose:
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 
 public class guild_station extends script.base_script
 {
-    public guild_station()
-    {
-    }
     public static final String ROOT_STATION_VAR = "guild_station.";
     public static final String STATION_OWNER_VAR = ".buildingId";
     public static final String STATION_OWNER_VARLIST = ".accessList";
     public static final int STATION_MAINT = 2400000;
+    public guild_station()
+    {
+    }
 
     public obj_id getGuildStation(obj_id guildMember)
     {
@@ -26,7 +32,7 @@ public class guild_station extends script.base_script
     public int purchaseGuildStation(obj_id player)
     {
         int guildId = guild.getGuildId(player);
-        if (guild.getGroupLeaderId(obj_id.getObjId((long) guildId)) != player)
+        if (guild.getGroupLeaderId(obj_id.getObjId(guildId)) != player)
         {
             broadcast(player, "You must be the leader of your guild to purchase a guild station.");
             return SCRIPT_CONTINUE;
@@ -52,6 +58,7 @@ public class guild_station extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getEmptyGuildStation(obj_id player)
     {
         location origin = new location();

@@ -1,5 +1,11 @@
 package script.theme_park.rebel;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -11,17 +17,19 @@ public class exar_kun_temple_spawner extends script.base_script
     public exar_kun_temple_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         spawnCelebs(self);
         messageTo(self, "doGating", null, 20, true);
-        return;
     }
+
     public void spawnCelebs(obj_id self) throws InterruptedException
     {
         spawnLuke(self);
@@ -35,6 +43,7 @@ public class exar_kun_temple_spawner extends script.base_script
         spawnSpirit6(self);
         spawnSpirit7(self);
     }
+
     public void spawnLuke(obj_id self) throws InterruptedException
     {
         location lukeLocation = new location(5079.3f, 73.7f, 5550.0f, "yavin4", null);
@@ -42,8 +51,8 @@ public class exar_kun_temple_spawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.luke", luke);
         setObjVar(luke, "Hideout", self);
         setYaw(luke, 83);
-        return;
     }
+
     public void spawnDodonna(obj_id self) throws InterruptedException
     {
         location dodonnaLocation = new location(5072.5f, 73.5f, 5502.7f, "yavin4", null);
@@ -51,8 +60,8 @@ public class exar_kun_temple_spawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.dodonna", dodonna);
         setObjVar(dodonna, "Hideout", self);
         setYaw(dodonna, 147);
-        return;
     }
+
     public void spawnCrystal(obj_id self) throws InterruptedException
     {
         String crystalTemplate = "object/tangible/quest/rebel/rtp_luke_wave_force_crystal.iff";
@@ -62,8 +71,8 @@ public class exar_kun_temple_spawner extends script.base_script
         setYaw(crystal, 174);
         setObjVar(self, "HideoutInhabitants.spirit6", crystal);
         setObjVar(crystal, "Hideout", self);
-        return;
     }
+
     public void spawnSpirit1(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "r4");
@@ -72,8 +81,8 @@ public class exar_kun_temple_spawner extends script.base_script
         setYaw(spirit, -1);
         setObjVar(self, "HideoutInhabitants.spirit1", spirit);
         setObjVar(spirit, "Hideout", self);
-        return;
     }
+
     public void spawnSpirit2(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "r5");
@@ -82,8 +91,8 @@ public class exar_kun_temple_spawner extends script.base_script
         setYaw(spirit, -83);
         setObjVar(self, "HideoutInhabitants.spirit2", spirit);
         setObjVar(spirit, "Hideout", self);
-        return;
     }
+
     public void spawnSpirit3(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "r5");
@@ -92,8 +101,8 @@ public class exar_kun_temple_spawner extends script.base_script
         setYaw(spirit, -92);
         setObjVar(self, "HideoutInhabitants.spirit3", spirit);
         setObjVar(spirit, "Hideout", self);
-        return;
     }
+
     public void spawnSpirit4(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "r7");
@@ -102,8 +111,8 @@ public class exar_kun_temple_spawner extends script.base_script
         setYaw(spirit, 4);
         setObjVar(self, "HideoutInhabitants.spirit4", spirit);
         setObjVar(spirit, "Hideout", self);
-        return;
     }
+
     public void spawnSpirit5(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "r9");
@@ -112,8 +121,8 @@ public class exar_kun_temple_spawner extends script.base_script
         setYaw(spirit, 13);
         setObjVar(self, "HideoutInhabitants.spirit5", spirit);
         setObjVar(spirit, "Hideout", self);
-        return;
     }
+
     public void spawnSpirit6(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "r9");
@@ -122,8 +131,8 @@ public class exar_kun_temple_spawner extends script.base_script
         setYaw(spirit, -90);
         setObjVar(self, "HideoutInhabitants.spirit6", spirit);
         setObjVar(spirit, "Hideout", self);
-        return;
     }
+
     public void spawnSpirit7(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "r11");
@@ -132,8 +141,8 @@ public class exar_kun_temple_spawner extends script.base_script
         setYaw(spirit, 172);
         setObjVar(self, "HideoutInhabitants.spirit6", spirit);
         setObjVar(spirit, "Hideout", self);
-        return;
     }
+
     public obj_id createSpawnerObject(String whatToSpawn, location where, int intDefaultBehavior, float maxSpawnTime, float minSpawnTime) throws InterruptedException
     {
         obj_id objSpawner = createObject("object/tangible/ground_spawning/area_spawner.iff", where);
@@ -151,6 +160,7 @@ public class exar_kun_temple_spawner extends script.base_script
         attachScript(objSpawner, "systems.spawning.spawner_area");
         return objSpawner;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!hasObjVar(speaker, "gmAllowed"))
@@ -171,6 +181,7 @@ public class exar_kun_temple_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void killCelebs(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "HideoutInhabitants.luke"));
@@ -187,6 +198,5 @@ public class exar_kun_temple_spawner extends script.base_script
         removeObjVar(self, "HideoutInhabitants.trooper4");
         destroyObject(getObjIdObjVar(self, "HideoutInhabitants.trooper5"));
         removeObjVar(self, "HideoutInhabitants.trooper5");
-        return;
     }
 }

@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.volcano_battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -10,15 +16,16 @@ import java.util.Vector;
 
 public class event_four_boss extends script.base_script
 {
-    public event_four_boss()
-    {
-    }
     public static final String GUARD = "som_volcano_four_lava_beetle";
     public static final int BEETLE_RESPAWN = 31;
     public static final int POISON_RECAST = 35;
     public static final int DISEASE_RECAST = 60;
     public static final int FORCE_DRAIN_RECAST = 22;
     public static final boolean LOGGING = false;
+    public event_four_boss()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.bumpSession(self);
@@ -26,6 +33,7 @@ public class event_four_boss extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id parent = trial.getParent(self);
@@ -37,17 +45,20 @@ public class event_four_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int activate(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         startAECycle(self);
         startAddCycle(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         trial.bumpSession(self);
@@ -58,11 +69,13 @@ public class event_four_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void resetEncounter(obj_id self) throws InterruptedException
     {
         clearAllAdds(self);
         resetSelf(self);
     }
+
     public void clearAllAdds(obj_id self) throws InterruptedException
     {
         obj_id[] objects = trial.getObjectsInRangeWithScriptVar(self, trial.VOLCANO_FOUR_IS_BEETLE, 400.0f);
@@ -71,10 +84,12 @@ public class event_four_boss extends script.base_script
             doLogging("clearAllAdds", "There are no objects in range");
             return;
         }
-        for (obj_id object : objects) {
+        for (obj_id object : objects)
+        {
             trial.cleanupNpc(object);
         }
     }
+
     public void resetSelf(obj_id self) throws InterruptedException
     {
         int max = getMaxHealth(self);
@@ -85,18 +100,22 @@ public class event_four_boss extends script.base_script
         ai_lib.clearCombatData();
         setObjVar(self, "eventActive", false);
     }
+
     public void startAECycle(obj_id self) throws InterruptedException
     {
         messageTo(self, "doAEBurst", trial.getSessionDict(self), 4, false);
     }
+
     public void startAddCycle(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnAdd", trial.getSessionDict(self), 6, false);
     }
+
     public boolean isEventActive(obj_id self) throws InterruptedException
     {
         return getBooleanObjVar(self, "eventActive");
     }
+
     public int spawnAdd(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -105,19 +124,17 @@ public class event_four_boss extends script.base_script
         }
         location[] spawnLocs = getValidSpawnLocations(self);
         obj_id[] players = getPlayerCreaturesInRange(self, 150);
-        boolean notify = true;
-        if (players == null || players.length == 0)
-        {
-            notify = false;
-        }
+        boolean notify = players != null && players.length != 0;
         if (spawnLocs == null || spawnLocs.length == 0)
         {
             doLogging("spawnAdd", "Could not find a valid spawn location");
             return SCRIPT_CONTINUE;
         }
-        for (location spawnLoc : spawnLocs) {
+        for (location spawnLoc : spawnLocs)
+        {
             obj_id beetle = create.object(GUARD, spawnLoc);
-            if (!isIdValid(beetle)) {
+            if (!isIdValid(beetle))
+            {
                 doLogging("spawnAdd", "Attemplted to create beetle but failed");
                 return SCRIPT_CONTINUE;
             }
@@ -128,13 +145,15 @@ public class event_four_boss extends script.base_script
         if (notify)
         {
             prose_package pp = prose.getPackage(trial.VOLCANO_CYM_BEETLE_NOTIFY, self);
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 sendSystemMessageProse(player, pp);
             }
         }
         messageTo(self, "spawnAdd", trial.getSessionDict(self), BEETLE_RESPAWN, false);
         return SCRIPT_CONTINUE;
     }
+
     public location[] getValidSpawnLocations(obj_id self) throws InterruptedException
     {
         obj_id[] objects = getObjectsInRange(self, 400);
@@ -145,8 +164,10 @@ public class event_four_boss extends script.base_script
         }
         Vector validLoc = new Vector();
         validLoc.setSize(0);
-        for (obj_id object : objects) {
-            if (hasObjVar(object, "event_5_spawn_point")) {
+        for (obj_id object : objects)
+        {
+            if (hasObjVar(object, "event_5_spawn_point"))
+            {
                 utils.addElement(validLoc, getLocation(object));
             }
         }
@@ -163,6 +184,7 @@ public class event_four_boss extends script.base_script
         }
         return goodLoc;
     }
+
     public int doAEBurst(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -173,6 +195,7 @@ public class event_four_boss extends script.base_script
         messageTo(self, "doForceDrainAE", trial.getSessionDict(self), 8, false);
         return SCRIPT_CONTINUE;
     }
+
     public int doPoisonAE(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -187,13 +210,15 @@ public class event_four_boss extends script.base_script
             return SCRIPT_CONTINUE;
         }
         playClientEffectObj(self, trial.PRT_CYM_POISON, self, "");
-        for (obj_id target : targets) {
+        for (obj_id target : targets)
+        {
             dot.applyDotEffect(target, self, dot.DOT_POISON, "volcano_boss_poison_cloud", HEALTH, 125, 455, 30, true, null);
             playClientEffectObj(target, trial.PRT_CYM_POISON, target, "");
         }
         messageTo(self, "doPoisonAE", trial.getSessionDict(self), POISON_RECAST, false);
         return SCRIPT_CONTINUE;
     }
+
     public int doDiseaseAE(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -208,13 +233,15 @@ public class event_four_boss extends script.base_script
             return SCRIPT_CONTINUE;
         }
         playClientEffectObj(self, trial.PRT_CYM_DISEASE, self, "");
-        for (obj_id target : targets) {
+        for (obj_id target : targets)
+        {
             dot.applyDotEffect(target, self, dot.DOT_DISEASE, "volcano_boss_disease_cloud", HEALTH, 125, 600, 54, true, null);
             playClientEffectObj(target, trial.PRT_CYM_DISEASE, target, "");
         }
         messageTo(self, "doDiseaseAE", trial.getSessionDict(self), DISEASE_RECAST, false);
         return SCRIPT_CONTINUE;
     }
+
     public int doForceDrainAE(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -228,8 +255,10 @@ public class event_four_boss extends script.base_script
             messageTo(self, "doForceDrainAE", trial.getSessionDict(self), FORCE_DRAIN_RECAST, false);
             return SCRIPT_CONTINUE;
         }
-        for (obj_id target : targets) {
-            if (true) {
+        for (obj_id target : targets)
+        {
+            if (true)
+            {
                 drainAttributes(target, 1000, 0);
                 String effect = "clienteffect/pl_force_channel_self.cef";
                 playClientEffectObj(self, effect, target, "");
@@ -238,6 +267,7 @@ public class event_four_boss extends script.base_script
         messageTo(self, "doForceDrainAE", trial.getSessionDict(self), FORCE_DRAIN_RECAST, false);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VOLCANO_LOGGING)

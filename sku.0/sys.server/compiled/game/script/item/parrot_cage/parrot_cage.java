@@ -1,5 +1,11 @@
 package script.item.parrot_cage;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.library.craftinglib;
@@ -37,6 +43,7 @@ public class parrot_cage extends script.base_script
     public static final int LOOT_RADIUS_MAX = 50;
     public static final int MATCH_COUNT = 50;
     public static final String PARROT_TREASURE_SCRIPT = "item.parrot_cage.parrot_treasure";
+
     public parrot_cage()
     {
     }

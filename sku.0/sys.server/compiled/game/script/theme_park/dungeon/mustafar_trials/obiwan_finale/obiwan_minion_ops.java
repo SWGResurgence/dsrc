@@ -1,15 +1,23 @@
 package script.theme_park.dungeon.mustafar_trials.obiwan_finale;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
 
 public class obiwan_minion_ops extends script.base_script
 {
+    public static final boolean CONST_FLAG_DO_LOGGING = true;
+
     public obiwan_minion_ops()
     {
     }
-    public static final boolean CONST_FLAG_DO_LOGGING = true;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         findTarget(self);
@@ -18,7 +26,7 @@ public class obiwan_minion_ops extends script.base_script
         {
             debugLogging("OnAttach", "////>>>> dungeon obj_id is invalid. BROKEN");
         }
-        else 
+        else
         {
             if (utils.hasScriptVar(dungeon, "minions"))
             {
@@ -26,7 +34,7 @@ public class obiwan_minion_ops extends script.base_script
                 utils.setScriptVar(dungeon, "minions", ++minionCount);
                 debugLogging("OnAttach", "////>>>> added a minion to the dungeon. Current total count is " + minionCount);
             }
-            else 
+            else
             {
                 utils.setScriptVar(dungeon, "minions", 1);
             }
@@ -37,6 +45,7 @@ public class obiwan_minion_ops extends script.base_script
         messageTo(dungeon, "moveMinionIntoRoom", params, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         debugLogging("OnIncapacitated", "Minion destroyed");
@@ -45,7 +54,7 @@ public class obiwan_minion_ops extends script.base_script
         {
             debugLogging("//***// OnAttach: ", "////>>>> dungeon obj_id is invalid. BROKEN");
         }
-        else 
+        else
         {
             if (utils.hasScriptVar(dungeon, "minions"))
             {
@@ -55,7 +64,7 @@ public class obiwan_minion_ops extends script.base_script
                     utils.removeScriptVar(dungeon, "minions");
                     messageTo(dungeon, "minionDied", null, 2, false);
                 }
-                else 
+                else
                 {
                     utils.setScriptVar(dungeon, "minions", --minionCount);
                 }
@@ -68,6 +77,7 @@ public class obiwan_minion_ops extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void debugLogging(String section, String message) throws InterruptedException
     {
         if (CONST_FLAG_DO_LOGGING)
@@ -75,6 +85,7 @@ public class obiwan_minion_ops extends script.base_script
             LOG("debug/obiwan_minion_ops/" + section, message);
         }
     }
+
     public void findTarget(obj_id self) throws InterruptedException
     {
         obj_id dungeon = getTopMostContainer(self);
@@ -83,7 +94,7 @@ public class obiwan_minion_ops extends script.base_script
             debugLogging("//***// findTarget: ", "////>>>> dungeon obj_id is STILL invalid.");
             return;
         }
-        obj_id contents[] = getContents(dungeon);
+        obj_id[] contents = getContents(dungeon);
         if (contents == null || contents.length == 0)
         {
             debugLogging("findTargets", "Contents list was empty, exiting");
@@ -94,6 +105,7 @@ public class obiwan_minion_ops extends script.base_script
         params.put("target", target);
         messageTo(self, "engageTarget", params, 20, false);
     }
+
     public int engageTarget(obj_id self, dictionary params) throws InterruptedException
     {
         debugLogging("engageTarget", "entered");

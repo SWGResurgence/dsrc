@@ -1,5 +1,11 @@
 package script.item.slicing;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -20,6 +26,7 @@ public class slicing_weapon extends script.base_script
     public static final string_id SID_FAILED_NO_EQUIP = new string_id("slicing/slicing", "failed_no_equip");
     public static final string_id SID_SLICE_APPLIED = new string_id("slicing/slicing", "slice_applied");
     public static final String SLICE_TABLE = "datatables/smuggler/slice_weapon.iff";
+
     public slicing_weapon()
     {
     }

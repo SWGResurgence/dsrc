@@ -1,34 +1,37 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class mtp_complaint_department extends script.base_script
 {
+    public static String c_stringFile = "conversation/mtp_complaint_department";
+
     public mtp_complaint_department()
     {
     }
-    public static String c_stringFile = "conversation/mtp_complaint_department";
+
     public boolean mtp_complaint_department_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean mtp_complaint_department_condition_hasMeatlumpMono(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (buff.hasBuff(player, "mtp_meatlump_kiss_debuff"))
-        {
-            return true;
-        }
-        return false;
+        return buff.hasBuff(player, "mtp_meatlump_kiss_debuff");
     }
+
     public boolean mtp_complaint_department_condition_noMeatlumpMono(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!buff.hasBuff(player, "mtp_meatlump_kiss_debuff"))
-        {
-            return true;
-        }
-        return false;
+        return !buff.hasBuff(player, "mtp_meatlump_kiss_debuff");
     }
+
     public void mtp_complaint_department_action_LumpAndMonoRebate(obj_id player, obj_id npc) throws InterruptedException
     {
         String mtp_complaint_particle = "appearance/pt_mtp_lightning.prt";
@@ -36,12 +39,13 @@ public class mtp_complaint_department extends script.base_script
         int playerHealth = getHealth(player);
         float fltPlayerHealth = playerHealth;
         fltPlayerHealth *= 0.8;
-        playerHealth = (int)fltPlayerHealth;
+        playerHealth = (int) fltPlayerHealth;
         setHealth(player, playerHealth);
         obj_id pInv = utils.getInventoryContainer(player);
         obj_id rebateLump = static_item.createNewItemFunction("item_meatlump_lump_01_01", pInv);
         buff.removeBuff(player, "mtp_meatlump_kiss_debuff");
     }
+
     public int mtp_complaint_department_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6"))
@@ -68,7 +72,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24");
@@ -81,7 +85,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -113,7 +117,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_21");
@@ -126,7 +130,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -151,7 +155,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -160,7 +164,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -192,7 +196,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_129");
@@ -205,7 +209,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -237,7 +241,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_69");
@@ -250,7 +254,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -270,6 +274,7 @@ public class mtp_complaint_department extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_complaint_department_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_24"))
@@ -294,6 +299,7 @@ public class mtp_complaint_department extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_complaint_department_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_21"))
@@ -358,7 +364,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_32");
@@ -387,7 +393,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -397,6 +403,7 @@ public class mtp_complaint_department extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_complaint_department_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32"))
@@ -461,6 +468,7 @@ public class mtp_complaint_department extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_complaint_department_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_56"))
@@ -475,6 +483,7 @@ public class mtp_complaint_department extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_complaint_department_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_129"))
@@ -494,7 +503,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_133");
@@ -503,7 +512,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -523,6 +532,7 @@ public class mtp_complaint_department extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_complaint_department_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_133"))
@@ -577,7 +587,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6");
@@ -606,7 +616,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -616,6 +626,7 @@ public class mtp_complaint_department extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_complaint_department_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6"))
@@ -642,7 +653,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24");
@@ -655,7 +666,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -687,7 +698,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_21");
@@ -700,7 +711,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -725,7 +736,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -734,7 +745,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -766,7 +777,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_129");
@@ -779,7 +790,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -811,7 +822,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_69");
@@ -824,7 +835,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -844,6 +855,7 @@ public class mtp_complaint_department extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_complaint_department_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_69"))
@@ -898,7 +910,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6");
@@ -927,7 +939,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -959,7 +971,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -972,7 +984,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -982,6 +994,7 @@ public class mtp_complaint_department extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_complaint_department_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6"))
@@ -1008,7 +1021,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24");
@@ -1021,7 +1034,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1053,7 +1066,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_21");
@@ -1066,7 +1079,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1091,7 +1104,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -1100,7 +1113,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1132,7 +1145,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_129");
@@ -1145,7 +1158,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1177,7 +1190,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_69");
@@ -1190,7 +1203,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1210,6 +1223,7 @@ public class mtp_complaint_department extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_complaint_department_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -1236,7 +1250,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81");
@@ -1249,7 +1263,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1281,7 +1295,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_122");
@@ -1294,7 +1308,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1304,6 +1318,7 @@ public class mtp_complaint_department extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_complaint_department_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_81"))
@@ -1340,7 +1355,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -1353,7 +1368,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1363,6 +1378,7 @@ public class mtp_complaint_department extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_complaint_department_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -1399,7 +1415,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_102");
@@ -1412,7 +1428,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1469,7 +1485,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6");
@@ -1498,7 +1514,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1508,6 +1524,7 @@ public class mtp_complaint_department extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_complaint_department_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_102"))
@@ -1534,7 +1551,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -1547,7 +1564,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1567,6 +1584,7 @@ public class mtp_complaint_department extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_complaint_department_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_120"))
@@ -1592,6 +1610,7 @@ public class mtp_complaint_department extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_complaint_department_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6"))
@@ -1618,7 +1637,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24");
@@ -1631,7 +1650,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1663,7 +1682,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_21");
@@ -1676,7 +1695,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1701,7 +1720,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -1710,7 +1729,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1742,7 +1761,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_129");
@@ -1755,7 +1774,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1787,7 +1806,7 @@ public class mtp_complaint_department extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_69");
@@ -1800,7 +1819,7 @@ public class mtp_complaint_department extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_complaint_department.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1820,6 +1839,7 @@ public class mtp_complaint_department extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_complaint_department_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_122"))
@@ -1844,6 +1864,7 @@ public class mtp_complaint_department extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -1853,11 +1874,13 @@ public class mtp_complaint_department extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1866,18 +1889,21 @@ public class mtp_complaint_department extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.mtp_complaint_department");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1936,7 +1962,7 @@ public class mtp_complaint_department extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6");
@@ -1964,7 +1990,7 @@ public class mtp_complaint_department extends script.base_script
                 utils.setScriptVar(player, "conversation.mtp_complaint_department.branchId", 1);
                 npcStartConversation(player, npc, "mtp_complaint_department", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1973,6 +1999,7 @@ public class mtp_complaint_department extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("mtp_complaint_department"))

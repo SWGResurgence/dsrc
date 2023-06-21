@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,30 +14,37 @@ import script.*;
 
 public class loveday_disillusion_herald extends script.base_script
 {
+    public static String c_stringFile = "conversation/loveday_disillusion_herald";
+
     public loveday_disillusion_herald()
     {
     }
-    public static String c_stringFile = "conversation/loveday_disillusion_herald";
+
     public boolean loveday_disillusion_herald_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean loveday_disillusion_herald_condition_quest_pet_lover_Active(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "loveday_disillusion_pet_lover_v2");
     }
+
     public boolean loveday_disillusion_herald_condition_questComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollectionSlot(player, "loveday_2010_disillusion_quest");
     }
+
     public boolean loveday_disillusion_herald_condition_quest_love_note_Active(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "loveday_disillusion_love_note_v2");
     }
+
     public boolean loveday_disillusion_herald_condition_quest_mr_hate_Active(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "loveday_disillusion_mr_hate_v2") || groundquests.isQuestActive(player, "loveday_disillusion_mr_hate_v2_noloot");
     }
+
     public void loveday_disillusion_herald_action_grantquest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, "loveday_disillusion_pet_lover"))
@@ -56,6 +69,7 @@ public class loveday_disillusion_herald extends script.base_script
         }
         groundquests.requestGrantQuest(player, "loveday_disillusion_pet_lover_v2");
     }
+
     public int loveday_disillusion_herald_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_12"))
@@ -75,7 +89,7 @@ public class loveday_disillusion_herald extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_16");
@@ -84,7 +98,7 @@ public class loveday_disillusion_herald extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.loveday_disillusion_herald.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -104,6 +118,7 @@ public class loveday_disillusion_herald extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int loveday_disillusion_herald_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_16"))
@@ -119,6 +134,7 @@ public class loveday_disillusion_herald extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -130,6 +146,7 @@ public class loveday_disillusion_herald extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -137,6 +154,7 @@ public class loveday_disillusion_herald extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -146,18 +164,21 @@ public class loveday_disillusion_herald extends script.base_script
         setCondition(self, CONDITION_HOLIDAY_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.loveday_disillusion_herald");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -211,7 +232,7 @@ public class loveday_disillusion_herald extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_12");
@@ -223,7 +244,7 @@ public class loveday_disillusion_herald extends script.base_script
                 utils.setScriptVar(player, "conversation.loveday_disillusion_herald.branchId", 5);
                 npcStartConversation(player, npc, "loveday_disillusion_herald", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -232,6 +253,7 @@ public class loveday_disillusion_herald extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("loveday_disillusion_herald"))

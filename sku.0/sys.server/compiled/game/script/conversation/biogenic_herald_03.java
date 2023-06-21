@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.factions;
@@ -7,14 +13,17 @@ import script.*;
 
 public class biogenic_herald_03 extends script.base_script
 {
+    public static String c_stringFile = "conversation/biogenic_herald_03";
+
     public biogenic_herald_03()
     {
     }
-    public static String c_stringFile = "conversation/biogenic_herald_03";
+
     public boolean biogenic_herald_03_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean biogenic_herald_03_condition_not_rebel(obj_id player, obj_id npc) throws InterruptedException
     {
         String playerFaction = factions.getFaction(player);
@@ -22,19 +31,18 @@ public class biogenic_herald_03 extends script.base_script
         {
             playerFaction = "neutral";
         }
-        if (!playerFaction.equals(factions.FACTION_REBEL))
-        {
-            return true;
-        }
-        return false;
+        return !playerFaction.equals(factions.FACTION_REBEL);
     }
+
     public void biogenic_herald_03_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void biogenic_herald_03_action_face_to(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -45,12 +53,14 @@ public class biogenic_herald_03 extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -59,12 +69,14 @@ public class biogenic_herald_03 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.biogenic_herald_03");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -101,7 +113,7 @@ public class biogenic_herald_03 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_c2f063ae");
@@ -113,7 +125,7 @@ public class biogenic_herald_03 extends script.base_script
                 setObjVar(player, "conversation.biogenic_herald_03.branchId", 2);
                 npcStartConversation(player, self, "biogenic_herald_03", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -122,6 +134,7 @@ public class biogenic_herald_03 extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("biogenic_herald_03"))
@@ -153,7 +166,7 @@ public class biogenic_herald_03 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9e41444d");
@@ -166,7 +179,7 @@ public class biogenic_herald_03 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_herald_03.branchId");
                     npcSpeak(player, message);
@@ -221,7 +234,7 @@ public class biogenic_herald_03 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2b10b66c");
@@ -238,7 +251,7 @@ public class biogenic_herald_03 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_herald_03.branchId");
                     npcSpeak(player, message);
@@ -286,7 +299,7 @@ public class biogenic_herald_03 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f8365ece");
@@ -299,7 +312,7 @@ public class biogenic_herald_03 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_herald_03.branchId");
                     npcSpeak(player, message);
@@ -334,7 +347,7 @@ public class biogenic_herald_03 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2b10b66c");
@@ -347,7 +360,7 @@ public class biogenic_herald_03 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_herald_03.branchId");
                     npcSpeak(player, message);
@@ -388,7 +401,7 @@ public class biogenic_herald_03 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1b751405");
@@ -397,7 +410,7 @@ public class biogenic_herald_03 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_herald_03.branchId");
                     npcSpeak(player, message);
@@ -451,7 +464,7 @@ public class biogenic_herald_03 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1b751405");
@@ -460,7 +473,7 @@ public class biogenic_herald_03 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.biogenic_herald_03.branchId");
                     npcSpeak(player, message);

@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -13,6 +19,7 @@ public class gcw_defensive_general_boss extends script.base_script
     public static final boolean LOGGING_ON = false;
     public static final int MAX_HIT_POINTS = 1000000;
     public static final int MAX_GENERAL_BUFF_STACK = 100;
+
     public gcw_defensive_general_boss()
     {
     }
@@ -63,7 +70,7 @@ public class gcw_defensive_general_boss extends script.base_script
                 }
             }
         }
-        if (attackerList != null && attackerList.length > 0)
+        if (attackerList != null)
         {
             for (obj_id obj_id : attackerList)
             {

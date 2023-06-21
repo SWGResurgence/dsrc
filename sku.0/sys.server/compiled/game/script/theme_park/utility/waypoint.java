@@ -1,5 +1,11 @@
 package script.theme_park.utility;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.string_id;
@@ -9,13 +15,14 @@ public class waypoint extends script.base_script
     public waypoint()
     {
     }
+
     public int OnWaypointGetAttributes(obj_id self, obj_id waypoint, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         String questId = getStringObjVar(player, "questID");
         String file = getStringObjVar(player, questId + ".file");
         String entry = getStringObjVar(player, questId + ".entry");
         string_id detail = new string_id(file, entry);
-        String questDetails = "@" + detail.toString();
+        String questDetails = "@" + detail;
         int idx = 0;
         while (idx >= 0)
         {
@@ -26,13 +33,14 @@ public class waypoint extends script.base_script
                 attribs[idx] = questDetails;
                 idx = -1;
             }
-            else 
+            else
             {
                 idx = idx + 1;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnWaypointDestroyed(obj_id self, obj_id waypoint) throws InterruptedException
     {
         String questID = getStringObjVar(self, "questID");

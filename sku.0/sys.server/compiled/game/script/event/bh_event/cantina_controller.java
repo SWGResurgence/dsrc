@@ -1,5 +1,11 @@
 package script.event.bh_event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.utils;
@@ -9,16 +15,18 @@ import script.string_id;
 
 public class cantina_controller extends script.base_script
 {
+    public static final float TWENTY_FOUR_HOURS = 60 * 60 * 24;
+    public static final String STF_FILE = "event/bhcelebs";
     public cantina_controller()
     {
     }
-    public static final float TWENTY_FOUR_HOURS = 60 * 60 * 24;
-    public static final String STF_FILE = "event/bhcelebs";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleBosskEventInitiation", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBosskEventInitiation(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "bhcelebs.bosskEventInitialized"))
@@ -37,6 +45,7 @@ public class cantina_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int invasionTimerPing(obj_id self, dictionary params) throws InterruptedException
     {
         int invasionActive = getIntObjVar(self, "bhcelebs.invasion_active");
@@ -53,22 +62,25 @@ public class cantina_controller extends script.base_script
             announceStatusToPlayers(self, "bossk_zone_emote");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             messageTo(self, "invasionTimerPing", null, 3600, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void announceStatusToPlayers(obj_id self, String messageId) throws InterruptedException
     {
         obj_id[] objPlayers = getPlayerCreaturesInRange(self, 64.0f);
-        if (objPlayers != null && objPlayers.length > 0)
+        if (objPlayers != null)
         {
-            for (obj_id objPlayer : objPlayers) {
+            for (obj_id objPlayer : objPlayers)
+            {
                 sendSystemMessage(objPlayer, new string_id(STF_FILE, messageId));
             }
         }
     }
+
     public int startBosskEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "bhcelebs.bossk"))
@@ -99,6 +111,7 @@ public class cantina_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int bosskEventEnd(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "bhcelebs.beingDestroyed"))
@@ -118,6 +131,7 @@ public class cantina_controller extends script.base_script
         messageTo(self, "invasionTimerPing", null, TWENTY_FOUR_HOURS, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (isGod(objSpeaker))
@@ -131,7 +145,7 @@ public class cantina_controller extends script.base_script
                     setObjVar(self, "bhcelebs.invasion_active", 1);
                     announceStatusToPlayers(self, "bossk_zone_emote");
                 }
-                else 
+                else
                 {
                     sendSystemMessage(objSpeaker, "The Bossk cantina event is already active. If you need to restart it, try cleanupbosskevent first.", "");
                 }
@@ -151,7 +165,7 @@ public class cantina_controller extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     sendSystemMessage(objSpeaker, "The Bossk cantina event is already inactive.", "");
                 }

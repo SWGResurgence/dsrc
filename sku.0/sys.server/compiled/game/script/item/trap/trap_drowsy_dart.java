@@ -1,5 +1,11 @@
 package script.item.trap;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.prose;
@@ -12,6 +18,7 @@ public class trap_drowsy_dart extends script.item.trap.trap_base
     public static final int TRAP_DIFF = 5;
     public static final string_id SID_SYS_EFFECT = new string_id("trap/trap", "trap_drowsy_effect");
     public static final string_id SID_NO_EFFECT = new string_id("trap/trap", "trap_drowsy_effect_no");
+
     public trap_drowsy_dart()
     {
     }

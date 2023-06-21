@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.chat;
 import script.library.colors;
@@ -9,6 +15,7 @@ public class greeter extends script.theme_park.newbie_tutorial.tutorial_base
     public greeter()
     {
     }
+
     public int initiateConvo(obj_id self, dictionary params) throws InterruptedException
     {
         makeStaticWaypoint(self);
@@ -18,6 +25,7 @@ public class greeter extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleLookAtExplanation", null, SHORT_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleLookAtExplanation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getPlayer(self);
@@ -34,6 +42,7 @@ public class greeter extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleConvoExplain", null, SHORT_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleConvoExplain(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getPlayer(self);
@@ -48,6 +57,7 @@ public class greeter extends script.theme_park.newbie_tutorial.tutorial_base
         doAnimationAction(self, "yes");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         removeStaticWaypoint(self);
@@ -57,36 +67,42 @@ public class greeter extends script.theme_park.newbie_tutorial.tutorial_base
         mdata.setServerNotify(false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         faceToBehavior(self, speaker);
         string_id greeting = new string_id(NEWBIE_CONVO, "convo_1_start");
-        string_id response[] = new string_id[2];
+        string_id[] response = new string_id[2];
         response[0] = new string_id(NEWBIE_CONVO, "convo_1_reply_1");
         response[1] = new string_id(NEWBIE_CONVO, "convo_1_reply_2");
         setObjVar(self, "newbie.inConvo", true);
         npcStartConversation(speaker, self, CONVO, greeting, response);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         npcRemoveConversationResponse(player, response);
-        switch ((response.getAsciiId())) {
-            case "convo_1_reply_1": {
+        switch ((response.getAsciiId()))
+        {
+            case "convo_1_reply_1":
+            {
                 string_id message = new string_id(NEWBIE_CONVO, "convo_1_more");
                 npcSpeak(player, message);
                 npcAddConversationResponse(player, new string_id(NEWBIE_CONVO, "convo_1_reply_3"));
                 doAnimationAction(self, "tap_head");
                 break;
             }
-            case "convo_1_reply_2": {
+            case "convo_1_reply_2":
+            {
                 doAnimationAction(self, "point_left");
                 setObjVar(player, "newbie.getBoxOfStuff", true);
                 string_id message = new string_id(NEWBIE_CONVO, "convo_1_stuff");
                 npcSpeak(player, message);
                 break;
             }
-            case "convo_1_reply_3": {
+            case "convo_1_reply_3":
+            {
                 doAnimationAction(self, "pound_fist_palm");
                 string_id message = new string_id(NEWBIE_CONVO, "convo_1_explain");
                 npcSpeak(player, message);
@@ -95,12 +111,14 @@ public class greeter extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEndNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         removeObjVar(self, "newbie.inConvo");
         messageTo(self, "handleOfferSupplies", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleOfferSupplies(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getPlayer(self);

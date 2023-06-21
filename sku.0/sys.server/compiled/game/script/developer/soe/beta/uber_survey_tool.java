@@ -1,22 +1,30 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.resource;
 import script.library.sui;
 
 public class uber_survey_tool extends script.base_script
 {
-    public uber_survey_tool()
-    {
-    }
     public static final String HANDLER_SET_TOOL_CLASS = "handleSetToolClass";
     public static final string_id SID_TOOL_OPTIONS = new string_id("sui", "tool_options");
     public static final string_id SID_TOOL_CLASS = new string_id("sui", "survey_class");
+    public uber_survey_tool()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setName(self, "Uber Survey Tool");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnuOptions = -1;
@@ -25,7 +33,7 @@ public class uber_survey_tool extends script.base_script
         {
             mnuOptions = mi.addRootMenu(menu_info_types.SERVER_ITEM_OPTIONS, SID_TOOL_OPTIONS);
         }
-        else 
+        else
         {
             mnuOptions = mid.getId();
         }
@@ -35,6 +43,7 @@ public class uber_survey_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_SURVEY_TOOL_CLASS)
@@ -43,32 +52,34 @@ public class uber_survey_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnRequestCoreSample(obj_id self, obj_id player, String resource_type) throws InterruptedException
     {
         removeObjVar(player, resource.VAR_SAMPLE_STAMP);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetToolClass(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
         int selRow = sui.getListboxSelectedRow(params);
-        switch (selRow)
+        if (selRow == -1)
         {
-            case -1:
             return SCRIPT_CONTINUE;
-            default:
+        }
+        else
+        {
             if ((player != null) && (player != obj_id.NULL_ID))
             {
                 if (!resource.setToolClass(self, selRow))
                 {
                     broadcast(player, "Uber Survey Tool: class set FAILED");
                 }
-                else 
+                else
                 {
                     broadcast(player, "Uber Survey Tool: class set -> " + resource.CLASS_NAME[selRow]);
                 }
             }
-            break;
         }
         return SCRIPT_CONTINUE;
     }

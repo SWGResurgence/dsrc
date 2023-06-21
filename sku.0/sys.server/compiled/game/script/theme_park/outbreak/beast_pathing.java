@@ -1,5 +1,11 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -10,9 +16,6 @@ import java.util.Vector;
 
 public class beast_pathing extends script.base_script
 {
-    public beast_pathing()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_pathing";
     public static final String PATHING_NODE = "pathing_node";
@@ -28,11 +31,16 @@ public class beast_pathing extends script.base_script
     public static final int MAXDIST = 30;
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final string_id SID_YOU_WENT_TOO_FAR = new string_id("theme_park/outbreak/outbreak", "delivery_you_went_too_far");
+    public beast_pathing()
+    {
+    }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, "blowUp", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         if (!hasObjVar(self, "invln"))
@@ -42,6 +50,7 @@ public class beast_pathing extends script.base_script
         setAttrib(self, HEALTH, getMaxAttrib(self, HEALTH));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         if (!hasObjVar(self, "invln"))
@@ -51,23 +60,27 @@ public class beast_pathing extends script.base_script
         setHitpoints(self, getMaxHitpoints(self));
         return SCRIPT_CONTINUE;
     }
+
     public int blowUp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] playerTargets = trial.getValidPlayersInRadius(self, 7);
         obj_id[] npcTargets = getNPCsInRange(getLocation(self), 10);
         playClientEffectLoc(self, "clienteffect/combat_explosion_lair_large.cef", getLocation(self), 0.4f);
-        if (playerTargets != null && playerTargets.length > 0)
+        if (playerTargets != null)
         {
-            for (obj_id playerTarget : playerTargets) {
+            for (obj_id playerTarget : playerTargets)
+            {
                 setPosture(playerTarget, POSTURE_INCAPACITATED);
                 int damageAmount = getAttrib(playerTarget, HEALTH) + 1000;
                 damage(playerTarget, DAMAGE_KINETIC, HIT_LOCATION_BODY, damageAmount);
             }
         }
-        if (npcTargets != null && npcTargets.length > 0)
+        if (npcTargets != null)
         {
-            for (obj_id npcTarget : npcTargets) {
-                if ((factions.getFaction(npcTarget)).equals("afflicted")) {
+            for (obj_id npcTarget : npcTargets)
+            {
+                if ((factions.getFaction(npcTarget)).equals("afflicted"))
+                {
                     setPosture(npcTarget, POSTURE_INCAPACITATED);
                 }
             }
@@ -76,12 +89,14 @@ public class beast_pathing extends script.base_script
         messageTo(self, "cleanUpDeliveryBeast", null, 5, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         setMovementRun(self);
         setBaseRunSpeed(self, (getBaseRunSpeed(self) - 10));
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "objParent"))
@@ -95,6 +110,7 @@ public class beast_pathing extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startBeastDeliveryPathing(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self))
@@ -150,18 +166,21 @@ public class beast_pathing extends script.base_script
         messageTo(self, "checkOwnerValidity", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpDeliveryBeast(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] enemyArray = utils.getObjIdArrayScriptVar(self, ENEMY_LIST);
-        if (enemyArray != null && enemyArray.length > 0)
+        if (enemyArray != null)
         {
-            for (obj_id obj_id : enemyArray) {
+            for (obj_id obj_id : enemyArray)
+            {
                 messageTo(obj_id, "destroySelf", null, 1, false);
             }
         }
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int checkOwnerValidity(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "owner"))
@@ -198,7 +217,7 @@ public class beast_pathing extends script.base_script
                 CustomerServiceLog("outbreak_themepark", "beast_pathing.checkOwnerValidity() Mob: " + self + " is checking its very first location. Will check again later to see if stuck.");
                 setObjVar(self, "lastLocation", getLocation(self));
             }
-            else 
+            else
             {
                 CustomerServiceLog("outbreak_themepark", "beast_pathing.checkOwnerValidity() Mob: " + self + " has a location objvar.");
                 location currentLocation = getLocation(self);
@@ -211,7 +230,7 @@ public class beast_pathing extends script.base_script
                         CustomerServiceLog("outbreak_themepark", "beast_pathing.checkOwnerValidity() Mob: " + self + " is STUCK and doesnt have waypoint location list. Blowing up this NPC!");
                         messageTo(self, "blowUp", null, 2, false);
                     }
-                    location waypointLocList[] = getLocationArrayObjVar(self, WAYPOINT_LOCS);
+                    location[] waypointLocList = getLocationArrayObjVar(self, WAYPOINT_LOCS);
                     if (waypointLocList == null || waypointLocList.length <= 0)
                     {
                         CustomerServiceLog("outbreak_themepark", "beast_pathing.checkOwnerValidity() Mob: " + self + " is STUCK and doesnt have a valid waypoint location list. Blowing up this NPC!");
@@ -220,11 +239,15 @@ public class beast_pathing extends script.base_script
                     float smallestDist = 300;
                     location closestLoc = null;
                     boolean modified = false;
-                    for (location location : waypointLocList) {
+                    for (location location : waypointLocList)
+                    {
                         float npcAndWaypointDist = getDistance(getLocation(self), location);
-                        if (npcAndWaypointDist > smallestDist) {
+                        if (npcAndWaypointDist > smallestDist)
+                        {
                             continue;
-                        } else {
+                        }
+                        else
+                        {
                             CustomerServiceLog("outbreak_themepark", "beast_pathing.checkOwnerValidity() Mob: " + self + " is STUCK and has found a node that is closer than any previously found node.");
                             smallestDist = npcAndWaypointDist;
                             closestLoc = location;
@@ -255,7 +278,7 @@ public class beast_pathing extends script.base_script
                         CustomerServiceLog("outbreak_themepark", "beast_pathing.checkOwnerValidity() Mob: " + self + " is STUCK and pathing to the LAST NODE in the list");
                         pathTo(self, waypointLocList[waypointLocList.length - 1]);
                     }
-                    else 
+                    else
                     {
                         CustomerServiceLog("outbreak_themepark", "beast_pathing.checkOwnerValidity() successfully found a new path list. The list will be of length: " + newArrayLength);
                         location[] newPathLocs = new location[newArrayLength];
@@ -266,20 +289,21 @@ public class beast_pathing extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("outbreak_themepark", "beast_pathing.checkOwnerValidity() Mob: " + self + " location has changed. Check again later.");
                     setObjVar(self, "lastLocation", getLocation(self));
                 }
             }
         }
-        else 
+        else
         {
             CustomerServiceLog("outbreak_themepark", "beast_pathing.checkOwnerValidity() Mob: " + self + " is in combat. Will check for being stuck later.");
         }
         messageTo(self, "checkOwnerValidity", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpCampNpcAndParent(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "owner"))
@@ -345,6 +369,7 @@ public class beast_pathing extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean failBeastDeliveryQuest(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "owner"))
@@ -398,6 +423,7 @@ public class beast_pathing extends script.base_script
         messageTo(self, "cleanUpDeliveryBeast", null, 1, false);
         return true;
     }
+
     public boolean spawnUndead(obj_id self, location wayptLoc) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "beast_pathing.spawnUndead() Init.");
@@ -466,7 +492,7 @@ public class beast_pathing extends script.base_script
                 enemies = utils.addElement(enemies, mob);
                 utils.setScriptVar(self, ENEMY_LIST, enemies);
             }
-            else 
+            else
             {
                 Vector enemyVector = null;
                 obj_id[] enemyArray = utils.getObjIdArrayScriptVar(self, ENEMY_LIST);
@@ -477,6 +503,7 @@ public class beast_pathing extends script.base_script
         }
         return true;
     }
+
     public int getLocationPosition(location[] list, location key) throws InterruptedException
     {
         if (list == null || list.length <= 0)

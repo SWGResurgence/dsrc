@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,46 +14,57 @@ import script.*;
 
 public class som_glyph_hunt extends script.base_script
 {
+    public static String c_stringFile = "conversation/som_glyph_hunt";
+
     public som_glyph_hunt()
     {
     }
-    public static String c_stringFile = "conversation/som_glyph_hunt";
+
     public boolean som_glyph_hunt_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean som_glyph_hunt_condition_onFirstTask(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_glyph_hunt", "glyph_hunt_four");
     }
+
     public boolean som_glyph_hunt_condition_completedFirstTask(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_glyph_hunt", "glyph_hunt_five");
     }
+
     public boolean som_glyph_hunt_condition_onSecondTask(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_glyph_hunt", "glyph_hunt_eight");
     }
+
     public boolean som_glyph_hunt_condition_completedSecondTask(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "som_glyph_hunt", "glyph_hunt_nine");
     }
+
     public boolean som_glyph_hunt_condition_completedMission(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "som_glyph_hunt");
     }
+
     public void som_glyph_hunt_action_grantMission(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "som_glyph_hunt");
     }
+
     public void som_glyph_hunt_action_sendFirstSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "glyph_hunt_found");
     }
+
     public void som_glyph_hunt_action_sendLastSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "glyph_hunt_finish");
     }
+
     public int som_glyph_hunt_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_39"))
@@ -69,7 +86,7 @@ public class som_glyph_hunt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -78,7 +95,7 @@ public class som_glyph_hunt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_glyph_hunt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -88,6 +105,7 @@ public class som_glyph_hunt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_glyph_hunt_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -108,7 +126,7 @@ public class som_glyph_hunt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_43");
@@ -117,7 +135,7 @@ public class som_glyph_hunt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_glyph_hunt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -127,6 +145,7 @@ public class som_glyph_hunt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_glyph_hunt_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_43"))
@@ -143,6 +162,7 @@ public class som_glyph_hunt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_glyph_hunt_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -157,6 +177,7 @@ public class som_glyph_hunt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_glyph_hunt_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25"))
@@ -178,7 +199,7 @@ public class som_glyph_hunt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -187,7 +208,7 @@ public class som_glyph_hunt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_glyph_hunt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -197,6 +218,7 @@ public class som_glyph_hunt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_glyph_hunt_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -224,7 +246,7 @@ public class som_glyph_hunt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -237,7 +259,7 @@ public class som_glyph_hunt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_glyph_hunt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -247,6 +269,7 @@ public class som_glyph_hunt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_glyph_hunt_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -267,7 +290,7 @@ public class som_glyph_hunt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_33");
@@ -276,7 +299,7 @@ public class som_glyph_hunt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_glyph_hunt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -296,6 +319,7 @@ public class som_glyph_hunt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_glyph_hunt_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33"))
@@ -312,6 +336,7 @@ public class som_glyph_hunt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_glyph_hunt_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50"))
@@ -326,6 +351,7 @@ public class som_glyph_hunt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_glyph_hunt_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_56"))
@@ -346,7 +372,7 @@ public class som_glyph_hunt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60");
@@ -355,7 +381,7 @@ public class som_glyph_hunt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_glyph_hunt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -365,6 +391,7 @@ public class som_glyph_hunt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_glyph_hunt_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
@@ -393,7 +420,7 @@ public class som_glyph_hunt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -406,7 +433,7 @@ public class som_glyph_hunt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_glyph_hunt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -416,6 +443,7 @@ public class som_glyph_hunt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_glyph_hunt_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -436,7 +464,7 @@ public class som_glyph_hunt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -445,7 +473,7 @@ public class som_glyph_hunt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_glyph_hunt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -471,7 +499,7 @@ public class som_glyph_hunt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -480,7 +508,7 @@ public class som_glyph_hunt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_glyph_hunt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -490,6 +518,7 @@ public class som_glyph_hunt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_glyph_hunt_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -510,7 +539,7 @@ public class som_glyph_hunt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -519,7 +548,7 @@ public class som_glyph_hunt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_glyph_hunt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -529,6 +558,7 @@ public class som_glyph_hunt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_glyph_hunt_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_74"))
@@ -556,7 +586,7 @@ public class som_glyph_hunt extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -569,7 +599,7 @@ public class som_glyph_hunt extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.som_glyph_hunt.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -579,6 +609,7 @@ public class som_glyph_hunt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int som_glyph_hunt_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -607,6 +638,7 @@ public class som_glyph_hunt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -619,6 +651,7 @@ public class som_glyph_hunt extends script.base_script
         setName(self, "Pletus Croix");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -627,6 +660,7 @@ public class som_glyph_hunt extends script.base_script
         setName(self, "Pletus Croix");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -635,18 +669,21 @@ public class som_glyph_hunt extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.som_glyph_hunt");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -676,7 +713,7 @@ public class som_glyph_hunt extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_39");
@@ -684,7 +721,7 @@ public class som_glyph_hunt extends script.base_script
                 utils.setScriptVar(player, "conversation.som_glyph_hunt.branchId", 2);
                 npcStartConversation(player, npc, "som_glyph_hunt", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -705,7 +742,7 @@ public class som_glyph_hunt extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -713,7 +750,7 @@ public class som_glyph_hunt extends script.base_script
                 utils.setScriptVar(player, "conversation.som_glyph_hunt.branchId", 6);
                 npcStartConversation(player, npc, "som_glyph_hunt", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -734,7 +771,7 @@ public class som_glyph_hunt extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_25");
@@ -746,7 +783,7 @@ public class som_glyph_hunt extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "som_glyph_hunt", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -771,7 +808,7 @@ public class som_glyph_hunt extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -783,7 +820,7 @@ public class som_glyph_hunt extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "som_glyph_hunt", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -809,7 +846,7 @@ public class som_glyph_hunt extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -817,7 +854,7 @@ public class som_glyph_hunt extends script.base_script
                 utils.setScriptVar(player, "conversation.som_glyph_hunt.branchId", 16);
                 npcStartConversation(player, npc, "som_glyph_hunt", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -826,6 +863,7 @@ public class som_glyph_hunt extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("som_glyph_hunt"))

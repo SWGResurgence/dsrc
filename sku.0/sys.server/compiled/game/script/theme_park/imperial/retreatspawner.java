@@ -1,5 +1,11 @@
 package script.theme_park.imperial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.location;
@@ -10,20 +16,22 @@ public class retreatspawner extends script.base_script
     public retreatspawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);
         messageTo(self, "doGating", null, 20, true);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         spawnCelebs(self);
         spawnDroids(self);
         spawnExtras(self);
         messageTo(self, "spawnTheGuards", null, 10, true);
-        return;
     }
+
     public void spawnCelebs(obj_id self) throws InterruptedException
     {
         spawnKaja(self);
@@ -33,8 +41,8 @@ public class retreatspawner extends script.base_script
         spawnHethrir(self);
         spawnEmperor(self);
         spawnDarth(self);
-        return;
     }
+
     public void spawnGuards(obj_id self) throws InterruptedException
     {
         spawnCrimson1(self);
@@ -43,16 +51,16 @@ public class retreatspawner extends script.base_script
         spawnCrimson4(self);
         obj_id st1 = spawnStormtrooper1(self);
         spawnStormtrooper2(self, st1);
-        return;
     }
+
     public void spawnDroids(obj_id self) throws InterruptedException
     {
         spawnMouse1(self);
         spawnMouse2(self);
         spawnMouse3(self);
         spawnRa7(self);
-        return;
     }
+
     public void spawnExtras(obj_id self) throws InterruptedException
     {
         spawnThrawn(self);
@@ -61,8 +69,8 @@ public class retreatspawner extends script.base_script
         spawnShuttlePilot2(self);
         spawnVelso(self);
         spawnRecordKeeper(self);
-        return;
     }
+
     public void spawnKaja(obj_id self) throws InterruptedException
     {
         obj_id foyer = getCellId(self, "foyer");
@@ -72,8 +80,8 @@ public class retreatspawner extends script.base_script
         setYaw(kaja, kaja_yaw);
         setObjVar(self, "RetreatInhabitants.kaja", kaja);
         setObjVar(kaja, "Retreat", self);
-        return;
     }
+
     public void spawnRecordKeeper(obj_id self) throws InterruptedException
     {
         obj_id hall1 = getCellId(self, "hall1");
@@ -85,8 +93,8 @@ public class retreatspawner extends script.base_script
         setObjVar(recordKeeper, "Retreat", self);
         attachScript(recordKeeper, "conversation.theme_park_record_keeper_imperial");
         setName(recordKeeper, "Wurson Harro");
-        return;
     }
+
     public void spawnRequisitionTerminal(obj_id self) throws InterruptedException
     {
         String requisitionTerminalTemplate = "object/tangible/quest/imperial/itp_kaja_requisition_terminal.iff";
@@ -97,8 +105,8 @@ public class retreatspawner extends script.base_script
         setYaw(requisitionTerminal, myYaw);
         setObjVar(self, "RetreatInhabitants.requisitionTerminal", requisitionTerminal);
         setObjVar(requisitionTerminal, "Retreat", self);
-        return;
     }
+
     public void spawnSpysTerminal(obj_id self) throws InterruptedException
     {
         String spyTerminalTemplate = "object/tangible/quest/imperial/itp_kaja_spy_data_terminal.iff";
@@ -109,8 +117,8 @@ public class retreatspawner extends script.base_script
         setYaw(spyTerminal, myYaw);
         setObjVar(self, "RetreatInhabitants.spyTerminal", spyTerminal);
         setObjVar(spyTerminal, "Retreat", self);
-        return;
     }
+
     public void spawnLoam(obj_id self) throws InterruptedException
     {
         obj_id meetingroom = getCellId(self, "meetingroom");
@@ -120,8 +128,8 @@ public class retreatspawner extends script.base_script
         setYaw(loam, loam_yaw);
         setObjVar(self, "RetreatInhabitants.loam", loam);
         setObjVar(loam, "Retreat", self);
-        return;
     }
+
     public void spawnHethrir(obj_id self) throws InterruptedException
     {
         obj_id library = getCellId(self, "library");
@@ -131,8 +139,8 @@ public class retreatspawner extends script.base_script
         setYaw(hethrir, hethrir_yaw);
         setObjVar(self, "RetreatInhabitants.hethrir", hethrir);
         setObjVar(hethrir, "Retreat", self);
-        return;
     }
+
     public void spawnDarth(obj_id self) throws InterruptedException
     {
         obj_id vader = getCellId(self, "vader");
@@ -142,8 +150,8 @@ public class retreatspawner extends script.base_script
         setYaw(darth, darth_yaw);
         setObjVar(self, "RetreatInhabitants.darth", darth);
         setObjVar(darth, "palace", self);
-        return;
     }
+
     public void spawnEmperor(obj_id self) throws InterruptedException
     {
         obj_id emperor = getCellId(self, "emperor");
@@ -153,8 +161,8 @@ public class retreatspawner extends script.base_script
         setYaw(palpatine, palpatine_yaw);
         setObjVar(self, "RetreatInhabitants.emperor", palpatine);
         setObjVar(palpatine, "palace", self);
-        return;
     }
+
     public void spawnCrimson1(obj_id self) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -164,8 +172,8 @@ public class retreatspawner extends script.base_script
         setYaw(c1, c1_yaw);
         setObjVar(self, "RetreatInhabitants.c1", c1);
         setObjVar(c1, "Retreat", self);
-        return;
     }
+
     public void spawnCrimson2(obj_id self) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -175,8 +183,8 @@ public class retreatspawner extends script.base_script
         setYaw(c2, c2_yaw);
         setObjVar(self, "RetreatInhabitants.c2", c2);
         setObjVar(c2, "Retreat", self);
-        return;
     }
+
     public void spawnCrimson3(obj_id self) throws InterruptedException
     {
         obj_id emperor = getCellId(self, "emperor");
@@ -186,8 +194,8 @@ public class retreatspawner extends script.base_script
         setYaw(c3, c3_yaw);
         setObjVar(self, "RetreatInhabitants.c3", c3);
         setObjVar(c3, "Retreat", self);
-        return;
     }
+
     public void spawnCrimson4(obj_id self) throws InterruptedException
     {
         obj_id emperor = getCellId(self, "emperor");
@@ -197,8 +205,8 @@ public class retreatspawner extends script.base_script
         setYaw(c4, c4_yaw);
         setObjVar(self, "RetreatInhabitants.c4", c4);
         setObjVar(c4, "Retreat", self);
-        return;
     }
+
     public obj_id spawnStormtrooper1(obj_id self) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -208,6 +216,7 @@ public class retreatspawner extends script.base_script
         setObjVar(st1, "Retreat", self);
         return st1;
     }
+
     public void spawnStormtrooper2(obj_id self, obj_id st1) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -221,8 +230,8 @@ public class retreatspawner extends script.base_script
         troops1.put("whoami", st2);
         troops1.put("faceWho", st1);
         messageTo(self, "doFacing", troops1, 5, true);
-        return;
     }
+
     public void spawnVelso(obj_id self) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -233,8 +242,8 @@ public class retreatspawner extends script.base_script
         setObjVar(self, "RetreatInhabitants.ltv", ltv);
         setObjVar(ltv, "Retreat", self);
         attachScript(ltv, "conversation.corvette_velso_imperial_destroy");
-        return;
     }
+
     public void spawnStormtrooper3(obj_id self) throws InterruptedException
     {
         obj_id vader = getCellId(self, "vader");
@@ -244,8 +253,8 @@ public class retreatspawner extends script.base_script
         setYaw(st3, st3_yaw);
         setObjVar(self, "RetreatInhabitants.st3", st3);
         setObjVar(st3, "Retreat", self);
-        return;
     }
+
     public void spawnStormtrooper4(obj_id self) throws InterruptedException
     {
         obj_id vader = getCellId(self, "vader");
@@ -255,8 +264,8 @@ public class retreatspawner extends script.base_script
         setYaw(st4, st4_yaw);
         setObjVar(self, "RetreatInhabitants.st4", st4);
         setObjVar(st4, "Retreat", self);
-        return;
     }
+
     public void spawnMouse1(obj_id self) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -267,8 +276,8 @@ public class retreatspawner extends script.base_script
         setObjVar(mouse1, "mouse1", 1);
         aiSetHomeLocation(mouse1, getLocation(mouse1));
         attachScript(mouse1, "theme_park.imperial.retreat_path");
-        return;
     }
+
     public void spawnMouse2(obj_id self) throws InterruptedException
     {
         obj_id hall3 = getCellId(self, "hall3");
@@ -279,8 +288,8 @@ public class retreatspawner extends script.base_script
         setObjVar(mouse2, "mouse2", 1);
         aiSetHomeLocation(mouse2, getLocation(mouse2));
         attachScript(mouse2, "theme_park.imperial.retreat_path");
-        return;
     }
+
     public void spawnMouse3(obj_id self) throws InterruptedException
     {
         obj_id library = getCellId(self, "library");
@@ -291,8 +300,8 @@ public class retreatspawner extends script.base_script
         setObjVar(mouse3, "mouse3", 1);
         aiSetHomeLocation(mouse3, getLocation(mouse3));
         attachScript(mouse3, "theme_park.imperial.retreat_path");
-        return;
     }
+
     public void spawnRa7(obj_id self) throws InterruptedException
     {
         obj_id library = getCellId(self, "library");
@@ -302,8 +311,8 @@ public class retreatspawner extends script.base_script
         setYaw(ra7, ra7_yaw);
         setObjVar(self, "RetreatInhabitants.ra7", ra7);
         setObjVar(ra7, "Retreat", self);
-        return;
     }
+
     public void spawnThrawn(obj_id self) throws InterruptedException
     {
         location thrawnLocation = new location(2378.0f, 291.91f, -3922.0f, "naboo", obj_id.NULL_ID);
@@ -313,8 +322,8 @@ public class retreatspawner extends script.base_script
         setObjVar(thrawn, "Retreat", self);
         setObjVar(thrawn, "thrawn", 1);
         attachScript(thrawn, "theme_park.imperial.thrawn_veers_path");
-        return;
     }
+
     public void spawnVeers(obj_id self) throws InterruptedException
     {
         location veersLocation = new location(2378.0f, 291.91f, -3920.0f, "naboo", obj_id.NULL_ID);
@@ -324,8 +333,8 @@ public class retreatspawner extends script.base_script
         setObjVar(veers, "Retreat", self);
         setObjVar(veers, "veers", 1);
         attachScript(veers, "theme_park.imperial.thrawn_veers_path");
-        return;
     }
+
     public void spawnShuttlePilot(obj_id self) throws InterruptedException
     {
         location pilotLocation = new location(2447.5f, 0.0f, -3898.0f, "naboo", obj_id.NULL_ID);
@@ -341,8 +350,8 @@ public class retreatspawner extends script.base_script
         attachScript(pilot, "item.travel_ticket.travel_space_dungeon");
         setObjVar(self, "RetreatInhabitants.pilot", pilot);
         setObjVar(pilot, "Retreat", self);
-        return;
     }
+
     public void spawnShuttlePilot2(obj_id self) throws InterruptedException
     {
         location pilot2Location = new location(2431.98f, 0.0f, -3887.32f, "naboo", obj_id.NULL_ID);
@@ -354,14 +363,15 @@ public class retreatspawner extends script.base_script
         setAnimationMood(pilot2, "npc_use_terminal_high");
         setObjVar(self, "RetreatInhabitants.pilot2", pilot2);
         setObjVar(pilot2, "Retreat", self);
-        return;
     }
+
     public int spawnTheGuards(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGuards(self);
         setObjVar(self, "people", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int doFacing(obj_id self, dictionary params) throws InterruptedException
     {
         String name = params.getString("whichWay");
@@ -374,6 +384,7 @@ public class retreatspawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doGating(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "foyer");
@@ -393,6 +404,7 @@ public class retreatspawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!hasObjVar(speaker, "gm"))
@@ -433,6 +445,7 @@ public class retreatspawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void killCelebs(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "RetreatInhabitants.kaja"));
@@ -445,8 +458,8 @@ public class retreatspawner extends script.base_script
         removeObjVar(self, "RetreatInhabitants.darth");
         destroyObject(getObjIdObjVar(self, "RetreatInhabitants.emperor"));
         removeObjVar(self, "RetreatInhabitants.emperor");
-        return;
     }
+
     public void killGuards(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "RetreatInhabitants.c1"));
@@ -465,8 +478,8 @@ public class retreatspawner extends script.base_script
         removeObjVar(self, "RetreatInhabitants.st3");
         destroyObject(getObjIdObjVar(self, "RetreatInhabitants.st4"));
         removeObjVar(self, "RetreatInhabitants.st4");
-        return;
     }
+
     public void killDroids(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "RetreatInhabitants.mouse1"));
@@ -477,8 +490,8 @@ public class retreatspawner extends script.base_script
         removeObjVar(self, "RetreatInhabitants.mouse3");
         destroyObject(getObjIdObjVar(self, "RetreatInhabitants.ra7"));
         removeObjVar(self, "RetreatInhabitants.ra7");
-        return;
     }
+
     public void killExtras(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "RetreatInhabitants.thrawn"));
@@ -495,6 +508,5 @@ public class retreatspawner extends script.base_script
         removeObjVar(self, "RetreatInhabitants.rk");
         destroyObject(getObjIdObjVar(self, "RetreatInhabitants.allard"));
         removeObjVar(self, "RetreatInhabitants.allard");
-        return;
     }
 }

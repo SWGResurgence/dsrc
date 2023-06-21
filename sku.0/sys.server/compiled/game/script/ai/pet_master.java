@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -9,9 +15,6 @@ import java.util.Vector;
 
 public class pet_master extends script.base_script
 {
-    public pet_master()
-    {
-    }
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String STF_FILE = "pet/droid_modules";
     public static final string_id SID_SYS_EMBOLDEN = new string_id("pet/pet_menu", "sys_embolden");
@@ -19,6 +22,10 @@ public class pet_master extends script.base_script
     public static final string_id SID_SYS_ENRAGE = new string_id("pet/pet_menu", "sys_enrage");
     public static final string_id SID_SYS_FAIL_ENRAGE = new string_id("pet/pet_menu", "sys_fail_enrage");
     public static final string_id SID_SYS_CANT_BUFF = new string_id("pet/pet_menu", "sys_cant_buff");
+    public pet_master()
+    {
+    }
+
     public int OnRemovedFromGroup(obj_id self, obj_id group) throws InterruptedException
     {
         if (!callable.hasAnyCallable(self))
@@ -30,13 +37,16 @@ public class pet_master extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id obj_id : memberList) {
-            if (isIdValid(obj_id) && pet_lib.isMyPet(obj_id, self)) {
+        for (obj_id obj_id : memberList)
+        {
+            if (isIdValid(obj_id) && pet_lib.isMyPet(obj_id, self))
+            {
                 queueCommand(obj_id, (1348589140), group, "", COMMAND_PRIORITY_DEFAULT);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDefenderCombatAction(obj_id self, obj_id attacker, obj_id weapon, int combatResult) throws InterruptedException
     {
         obj_id pet = callable.getCallable(self, callable.CALLABLE_TYPE_COMBAT_PET);
@@ -46,11 +56,13 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int failPetBuff(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         sendSystemMessage(self, SID_SYS_CANT_BUFF);
         return SCRIPT_CONTINUE;
     }
+
     public int OnSkillGranted(obj_id self, String skillName) throws InterruptedException
     {
         if (hasObjVar(self, "familiar"))
@@ -67,6 +79,7 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         if (!callable.hasAnyCallable(self))
@@ -76,6 +89,7 @@ public class pet_master extends script.base_script
         callable.storeCallables(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         if (!callable.hasAnyCallable(self))
@@ -89,6 +103,7 @@ public class pet_master extends script.base_script
         callable.killCallables(self, killer);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdDetonateDroid(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("droid_module", "ai.pet_master.cmdDetonateDroid");
@@ -151,6 +166,7 @@ public class pet_master extends script.base_script
         utils.setScriptVar(self, "droid.bomb_droid_active", (getGameTime() + 10));
         return SCRIPT_CONTINUE;
     }
+
     public int clearBombDroidTimer(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "droid.bomb_droid_active"))
@@ -159,6 +175,7 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasPrereq(obj_id pet, int ability) throws InterruptedException
     {
         if (!isIdValid(pet) || !exists(pet))
@@ -173,6 +190,7 @@ public class pet_master extends script.base_script
         }
         return (hasPrereq(abilityList, ability));
     }
+
     public boolean hasPrereq(int[] abilityList, int ability) throws InterruptedException
     {
         int row = dataTableSearchColumnForInt(ability, "abilityCrc", pet_lib.PET_ABILITY_TABLE);
@@ -187,12 +205,9 @@ public class pet_master extends script.base_script
             return true;
         }
         int prereqCrc = getStringCrc(prereq.toLowerCase());
-        if (utils.getElementPositionInArray(abilityList, prereqCrc) != -1)
-        {
-            return true;
-        }
-        return false;
+        return utils.getElementPositionInArray(abilityList, prereqCrc) != -1;
     }
+
     public int[] buildPrereqList(int ability) throws InterruptedException
     {
         Vector prereqList = new Vector();
@@ -236,6 +251,7 @@ public class pet_master extends script.base_script
         }
         return _prereqList;
     }
+
     public int droid_follow(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!pet_lib.doCommandNum(self, pet_lib.COMMAND_FOLLOW))
@@ -244,6 +260,7 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_follow_other(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!pet_lib.doCommandNum(self, pet_lib.COMMAND_FOLLOW_OTHER))
@@ -252,6 +269,7 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_stay(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!pet_lib.doCommandNum(self, pet_lib.COMMAND_STAY))
@@ -260,6 +278,7 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_guard(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!pet_lib.doCommandNum(self, pet_lib.COMMAND_GUARD))
@@ -268,6 +287,7 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_friend(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!pet_lib.doCommandNum(self, pet_lib.COMMAND_FRIEND))
@@ -276,6 +296,7 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_attack(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!pet_lib.doCommandNum(self, pet_lib.COMMAND_ATTACK))
@@ -284,6 +305,7 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_patrol(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!pet_lib.doCommandNum(self, pet_lib.COMMAND_PATROL))
@@ -292,6 +314,7 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_patrol_point(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!pet_lib.doCommandNum(self, pet_lib.COMMAND_SET_PATROL_POINT))
@@ -300,6 +323,7 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_patrol_clear(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!pet_lib.doCommandNum(self, pet_lib.COMMAND_CLEAR_PATROL_POINTS))
@@ -308,6 +332,7 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_store(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!pet_lib.doCommandNum(self, pet_lib.COMMAND_RELEASE))
@@ -316,6 +341,7 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_transfer(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!pet_lib.doCommandNum(self, pet_lib.COMMAND_TRANSFER))
@@ -324,6 +350,7 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_group(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!pet_lib.doCommandNum(self, pet_lib.COMMAND_GROUP))
@@ -332,6 +359,7 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_trick_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!pet_lib.doCommandNum(self, pet_lib.COMMAND_TRICK_1))
@@ -340,6 +368,7 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_trick_2(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!pet_lib.doCommandNum(self, pet_lib.COMMAND_TRICK_2))
@@ -348,6 +377,7 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_trick_3(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!pet_lib.doCommandNum(self, pet_lib.COMMAND_TRICK_3))
@@ -356,6 +386,7 @@ public class pet_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_trick_4(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!pet_lib.doCommandNum(self, pet_lib.COMMAND_TRICK_4))

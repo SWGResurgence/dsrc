@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.menu_info;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class box_item extends script.theme_park.newbie_tutorial.tutorial_base
     public box_item()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         setOwner(self, player);
@@ -24,7 +31,7 @@ public class box_item extends script.theme_park.newbie_tutorial.tutorial_base
             }
             setObjVar(player, "newbie.gotItem", true);
         }
-        else 
+        else
         {
             if (hasObjVar(player, "newbie.usedItem"))
             {
@@ -34,6 +41,7 @@ public class box_item extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id player) throws InterruptedException
     {
         if (!hasObjVar(player, "newbie"))
@@ -52,6 +60,7 @@ public class box_item extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id player) throws InterruptedException
     {
         if (!hasObjVar(player, "newbie"))
@@ -60,6 +69,7 @@ public class box_item extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id player = getPlayer(self);

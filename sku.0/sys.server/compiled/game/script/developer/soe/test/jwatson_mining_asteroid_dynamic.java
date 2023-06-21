@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class jwatson_mining_asteroid_dynamic extends script.base_script
@@ -7,6 +13,7 @@ public class jwatson_mining_asteroid_dynamic extends script.base_script
     public jwatson_mining_asteroid_dynamic()
     {
     }
+
     public int OnShipInternalDamageOverTimeRemoved(obj_id self, int chassisSlot, float damageRate, float damageThreshold) throws InterruptedException
     {
         obj_id pilot = getPilotId(self);
@@ -16,6 +23,7 @@ public class jwatson_mining_asteroid_dynamic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnShipWasHit(obj_id self, obj_id attacker, int weaponIndex, boolean isMissile, int missileType, int chassisSlot, boolean isPlayerAutoTurret, float hitLocationX_o, float hitLocationY_o, float hitLocationZ_o) throws InterruptedException
     {
         obj_id attackingPilot = getPilotId(attacker);
@@ -53,7 +61,7 @@ public class jwatson_mining_asteroid_dynamic extends script.base_script
             broadcast(attackingPilot, "*** asteroid dynamic DESTROYED");
             handleShipDestruction(self, 1.0f);
         }
-        else 
+        else
         {
             vector hitLocation_o = new vector(hitLocationX_o, hitLocationY_o, hitLocationZ_o);
             notifyShipHit(self, attackingLocation_o, hitLocation_o, ship_hit_type.HT_chassis, 0.5f, 1.0f);

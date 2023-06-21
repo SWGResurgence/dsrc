@@ -1,5 +1,11 @@
 package script.systems.jedi;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.jedi;
 import script.obj_id;
 import script.string_id;
@@ -11,6 +17,7 @@ public class saber_inventory extends script.base_script
     public static final string_id SID_SABER_CRYSTAL_NOT_TUNED = new string_id("jedi_spam", "saber_crystal_not_tuned");
     public static final string_id SID_SABER_CRYSTAL_NOT_OWNER = new string_id("jedi_spam", "saber_crystal_not_owner");
     public static final string_id SID_SABER_ALREADY_HAS_COLOR = new string_id("jedi_spam", "saber_already_has_color");
+
     public saber_inventory()
     {
     }

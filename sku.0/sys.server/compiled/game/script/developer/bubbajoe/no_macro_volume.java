@@ -5,6 +5,12 @@ package script.developer.bubbajoe;/*
 @Note: The range var needs to be set on the object you want to use (i.e. an egg) and the volume will be created around it.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 

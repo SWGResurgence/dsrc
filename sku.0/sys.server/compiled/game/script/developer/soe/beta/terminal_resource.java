@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.prose;
 import script.library.resource;
@@ -10,39 +16,40 @@ import java.util.Vector;
 
 public class terminal_resource extends script.terminal.base.terminal_add_use
 {
+    public static final int AMT = 100000;
+    public static final String[] RESOURCE_BASE_TYPES =
+            {
+                    "creature_resources",
+                    "flora_resources",
+                    "chemical",
+                    "water",
+                    "mineral",
+                    "gas",
+                    "energy",
+                    "space_metal",
+                    "space_gas",
+                    "space_chemical",
+                    "space_gem"
+            };
+    public static final String[] RESOURCE_PLANETS =
+            {
+                    "current",
+                    "tatooine",
+                    "naboo",
+                    "corellia",
+                    "rori",
+                    "talus",
+                    "endor",
+                    "dantooine",
+                    "dathomir",
+                    "dxun",
+                    "lok",
+                    "yavin4"
+            };
     public terminal_resource()
     {
     }
-    public static final int AMT = 100000;
-    public static final String[] RESOURCE_BASE_TYPES = 
-    {
-        "creature_resources",
-        "flora_resources",
-        "chemical",
-        "water",
-        "mineral",
-        "gas",
-        "energy",
-        "space_metal",
-        "space_gas",
-        "space_chemical",
-        "space_gem"
-    };
-    public static final String[] RESOURCE_PLANETS = 
-    {
-        "current",
-        "tatooine",
-        "naboo",
-        "corellia",
-        "rori",
-        "talus",
-        "endor",
-        "dantooine",
-        "dathomir",
-        "dxun",
-        "lok",
-        "yavin4"
-    };
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isGod(player) && !hasObjVar(player, "beta.terminal_ok"))
@@ -51,8 +58,10 @@ public class terminal_resource extends script.terminal.base.terminal_add_use
         }
         int use = -1;
         menu_info_data[] root = mi.getRootMenuItems();
-        for (menu_info_data menu_info_data : root) {
-            if (menu_info_data.getType() == menu_info_types.ITEM_USE) {
+        for (menu_info_data menu_info_data : root)
+        {
+            if (menu_info_data.getType() == menu_info_types.ITEM_USE)
+            {
                 use = menu_info_data.getId();
             }
         }
@@ -64,6 +73,7 @@ public class terminal_resource extends script.terminal.base.terminal_add_use
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isGod(player) || hasObjVar(player, "beta.terminal_ok"))
@@ -88,12 +98,13 @@ public class terminal_resource extends script.terminal.base.terminal_add_use
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             broadcast(player, "Only authorized users may access this terminal.");
             return SCRIPT_CONTINUE;
         }
     }
+
     public int handleCategorySelection(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -139,7 +150,7 @@ public class terminal_resource extends script.terminal.base.terminal_add_use
         {
             resourceList = buildAllAvailableResourceTree(RESOURCE_BASE_TYPES[idx]);
         }
-        else 
+        else
         {
             resourceList = buildAvailableResourceTree(loc, RESOURCE_BASE_TYPES[idx]);
         }
@@ -149,6 +160,7 @@ public class terminal_resource extends script.terminal.base.terminal_add_use
         utils.setScriptVar(self, "resourceList", resourceList);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlanetSelection(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -176,6 +188,7 @@ public class terminal_resource extends script.terminal.base.terminal_add_use
         sui.listbox(self, player, prompt, sui.OK_CANCEL, title, RESOURCE_BASE_TYPES, "handleCategorySelection", true, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetPlanet(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -201,6 +214,7 @@ public class terminal_resource extends script.terminal.base.terminal_add_use
         broadcast(player, "Planet set to " + planet);
         return SCRIPT_CONTINUE;
     }
+
     public int handleResourceSelection(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -238,7 +252,7 @@ public class terminal_resource extends script.terminal.base.terminal_add_use
         {
             broadcast(player, "Resource grant failed. It is likely your inventory is full.");
         }
-        else 
+        else
         {
             resourceName = " \\#pcontrast1 " + getResourceName(resourceId) + "\\#. a type of " + getClassString(getResourceClass(resourceId));
             prose_package proseSuccess = prose.getPackage(resource.SID_SAMPLE_LOCATED, resourceName, AMT);
@@ -246,12 +260,14 @@ public class terminal_resource extends script.terminal.base.terminal_add_use
         }
         return SCRIPT_CONTINUE;
     }
+
     public String[] buildAvailableResourceTree(location loc, String topParent) throws InterruptedException
     {
         resource_density[] resources = requestResourceList(loc, 0.0f, 1.0f, topParent);
         String[] resourceTree = buildSortedResourceTree(resources, topParent, 0);
         return resourceTree;
     }
+
     public String[] buildAllAvailableResourceTree(String topParent) throws InterruptedException
     {
         Vector allResources = new Vector();
@@ -266,41 +282,50 @@ public class terminal_resource extends script.terminal.base.terminal_add_use
         String[] resourceTree = buildSortedResourceTree(resources, topParent, 0);
         return resourceTree;
     }
+
     public String[] buildSortedResourceTree(resource_density[] resources, String topParent, int branchLevel) throws InterruptedException
     {
         Vector resourceTree = new Vector();
         resourceTree.setSize(0);
         if (resources != null)
         {
-            for (resource_density resource : resources) {
-                if (!isResourceDerivedFrom(resource.getResourceType(), topParent)) {
+            for (resource_density resource : resources)
+            {
+                if (!isResourceDerivedFrom(resource.getResourceType(), topParent))
+                {
                     continue;
                 }
                 String parent = getResourceClass(resource.getResourceType());
                 String child = null;
-                if (parent == null) {
+                if (parent == null)
+                {
                     continue;
                 }
-                while (!parent.equals(topParent)) {
+                while (!parent.equals(topParent))
+                {
                     child = parent;
                     parent = getResourceParentClass(child);
                 }
-                if (child == null) {
+                if (child == null)
+                {
                     child = "\\#pcontrast1 " + getResourceName(resource.getResourceType()) + "\\#.";
                 }
-                for (int j = 0; j < branchLevel; j++) {
+                for (int j = 0; j < branchLevel; j++)
+                {
                     child = "    " + child;
                 }
-                if (resourceTree.indexOf(child) == -1) {
+                if (!resourceTree.contains(child))
+                {
                     resourceTree.add(child);
                 }
             }
         }
         for (int i = 0; i < resourceTree.size(); i++)
         {
-            String parent = ((String)resourceTree.get(i)).trim();
+            String parent = ((String) resourceTree.get(i)).trim();
             String[] childBranch = buildSortedResourceTree(resources, parent, branchLevel + 1);
-            for (String childBranch1 : childBranch) {
+            for (String childBranch1 : childBranch)
+            {
                 resourceTree.add(++i, childBranch1);
             }
         }
@@ -312,12 +337,14 @@ public class terminal_resource extends script.terminal.base.terminal_add_use
         }
         return _resourceTree;
     }
+
     public void cleanScriptVars() throws InterruptedException
     {
         obj_id self = getSelf();
         utils.removeScriptVar(self, "resourceList");
         utils.removeScriptVar(self, "planet");
     }
+
     public String getClassString(String className) throws InterruptedException
     {
         final String resourceTable = "datatables/resource/resource_tree.iff";

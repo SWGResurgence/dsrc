@@ -1,5 +1,11 @@
 package script.quest.util;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.player_structure;
 import script.library.utils;
 import script.*;
@@ -9,6 +15,7 @@ public class reward_item_egg_splurt extends script.base_script
     public reward_item_egg_splurt()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -27,6 +34,7 @@ public class reward_item_egg_splurt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))

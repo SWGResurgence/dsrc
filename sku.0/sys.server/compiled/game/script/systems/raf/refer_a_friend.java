@@ -1,5 +1,11 @@
 package script.systems.raf;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.static_item;
 import script.library.sui;
 import script.obj_id;

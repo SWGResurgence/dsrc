@@ -1,5 +1,11 @@
 package script.systems.collections.publish_gift;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -19,6 +25,7 @@ public class publish_gift_quest_giver_object extends script.base_script
     public static final string_id SID_NOT_WHILE_IN_COMBAT = new string_id("base_player", "not_while_in_combat");
     public static final String PID_NAME = "getCollectionGiftsHasCompletedQuests";
     public static final String QUEST_NAME = "chapter7_publish_gift_activation";
+
     public publish_gift_quest_giver_object()
     {
     }

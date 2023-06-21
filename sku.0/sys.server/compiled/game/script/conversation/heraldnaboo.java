@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,14 +13,17 @@ import script.*;
 
 public class heraldnaboo extends script.base_script
 {
+    public static String c_stringFile = "conversation/heraldnaboo";
+
     public heraldnaboo()
     {
     }
-    public static String c_stringFile = "conversation/heraldnaboo";
+
     public boolean heraldnaboo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public void heraldnaboo_action_waypoint1(obj_id player, obj_id npc) throws InterruptedException
     {
         location weapon = new location(-6396, 0, -3196);
@@ -24,6 +33,7 @@ public class heraldnaboo extends script.base_script
         setWaypointVisible(waypoint, true);
         setWaypointActive(waypoint, true);
     }
+
     public void heraldnaboo_action_waypoint2(obj_id player, obj_id npc) throws InterruptedException
     {
         location mauler = new location(2982, 0, 1113);
@@ -34,6 +44,7 @@ public class heraldnaboo extends script.base_script
         setWaypointActive(waypoint, true);
         doAnimationAction(npc, "cover_mouth");
     }
+
     public void heraldnaboo_action_waypoint3(obj_id player, obj_id npc) throws InterruptedException
     {
         location gungan = new location(4759, 0, -3896);
@@ -44,34 +55,42 @@ public class heraldnaboo extends script.base_script
         setWaypointActive(waypoint, true);
         doAnimationAction(npc, "slump_head");
     }
+
     public void heraldnaboo_action_no(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "shake_head_no");
     }
+
     public void heraldnaboo_action_nod(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "nod_head_once");
     }
+
     public void heraldnaboo_action_implore(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "implore");
     }
+
     public void heraldnaboo_action_wave(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "wave1");
     }
+
     public void heraldnaboo_action_curtsey(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "curtsey1");
     }
+
     public void heraldnaboo_action_dismiss(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "wave_on_dismissing");
     }
+
     public void heraldnaboo_action_shush(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "shush");
     }
+
     public int heraldnaboo_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3243aa0a"))
@@ -109,7 +128,7 @@ public class heraldnaboo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fd9053a8");
@@ -122,7 +141,7 @@ public class heraldnaboo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldnaboo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -132,6 +151,7 @@ public class heraldnaboo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldnaboo_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fd9053a8"))
@@ -159,7 +179,7 @@ public class heraldnaboo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_385b2f92");
@@ -172,7 +192,7 @@ public class heraldnaboo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldnaboo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -211,7 +231,7 @@ public class heraldnaboo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_63");
@@ -228,7 +248,7 @@ public class heraldnaboo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldnaboo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -238,6 +258,7 @@ public class heraldnaboo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldnaboo_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_385b2f92"))
@@ -264,7 +285,7 @@ public class heraldnaboo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c213fa93");
@@ -277,7 +298,7 @@ public class heraldnaboo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldnaboo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -310,7 +331,7 @@ public class heraldnaboo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_83237923");
@@ -323,7 +344,7 @@ public class heraldnaboo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldnaboo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -333,6 +354,7 @@ public class heraldnaboo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldnaboo_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c213fa93"))
@@ -376,7 +398,7 @@ public class heraldnaboo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7431a8fb");
@@ -393,7 +415,7 @@ public class heraldnaboo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldnaboo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -403,6 +425,7 @@ public class heraldnaboo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldnaboo_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7431a8fb"))
@@ -440,6 +463,7 @@ public class heraldnaboo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldnaboo_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_83237923"))
@@ -467,7 +491,7 @@ public class heraldnaboo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d241258b");
@@ -480,7 +504,7 @@ public class heraldnaboo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldnaboo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -513,7 +537,7 @@ public class heraldnaboo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9575185c");
@@ -526,7 +550,7 @@ public class heraldnaboo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldnaboo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -536,6 +560,7 @@ public class heraldnaboo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldnaboo_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d241258b"))
@@ -580,7 +605,7 @@ public class heraldnaboo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_31");
@@ -597,7 +622,7 @@ public class heraldnaboo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldnaboo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -607,6 +632,7 @@ public class heraldnaboo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldnaboo_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_31"))
@@ -644,6 +670,7 @@ public class heraldnaboo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldnaboo_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9575185c"))
@@ -687,7 +714,7 @@ public class heraldnaboo extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_49");
@@ -704,7 +731,7 @@ public class heraldnaboo extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldnaboo.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -714,6 +741,7 @@ public class heraldnaboo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldnaboo_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_49"))
@@ -751,6 +779,7 @@ public class heraldnaboo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldnaboo_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63"))
@@ -788,6 +817,7 @@ public class heraldnaboo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -797,11 +827,13 @@ public class heraldnaboo extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -810,18 +842,21 @@ public class heraldnaboo extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.heraldnaboo");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -851,7 +886,7 @@ public class heraldnaboo extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_3243aa0a");
@@ -863,7 +898,7 @@ public class heraldnaboo extends script.base_script
                 utils.setScriptVar(player, "conversation.heraldnaboo.branchId", 1);
                 npcStartConversation(player, npc, "heraldnaboo", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -872,6 +907,7 @@ public class heraldnaboo extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("heraldnaboo"))

@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -9,6 +15,7 @@ public class gcw_vehicle_boss_patrol extends script.base_script
 {
     public static final String bossImperials = "gcw_city_atat";
     public static final String bossRebels = "gcw_city_hailfire_droid";
+
     public gcw_vehicle_boss_patrol()
     {
     }
@@ -167,6 +174,5 @@ public class gcw_vehicle_boss_patrol extends script.base_script
         playClientEffectLoc(killer, "clienteffect/combat_explosion_lair_large.cef", death, 0);
         setInvulnerable(self, true);
         messageTo(self, "destroyGCWPatrol", null, 1.0f, false);
-        return;
     }
 }

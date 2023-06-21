@@ -1,5 +1,11 @@
 package script.systems.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.create;
 import script.library.static_item;
@@ -13,19 +19,6 @@ public class city_decor_converter extends script.base_script
     {
     }
 
-    public int OnAttach(obj_id self) throws InterruptedException
-    {
-        setName(self, "City Decor Converter");
-        attachScript(self, "item.special.nomove");
-        return SCRIPT_CONTINUE;
-    }
-
-    public int OnInitalize(obj_id self) throws InterruptedException
-    {
-        setName(self, "City Decor Converter");
-        attachScript(self, "item.special.nomove");
-        return SCRIPT_CONTINUE;
-    }
     //@Converts a story teller object to a city decor object
     public static void createPropObject(obj_id self, obj_id token) throws InterruptedException
     {
@@ -42,6 +35,20 @@ public class city_decor_converter extends script.base_script
             putIn(prop, mainInv);
             destroyObject(token);
         }
+    }
+
+    public int OnAttach(obj_id self) throws InterruptedException
+    {
+        setName(self, "City Decor Converter");
+        attachScript(self, "item.special.nomove");
+        return SCRIPT_CONTINUE;
+    }
+
+    public int OnInitalize(obj_id self) throws InterruptedException
+    {
+        setName(self, "City Decor Converter");
+        attachScript(self, "item.special.nomove");
+        return SCRIPT_CONTINUE;
     }
 
     public int OnAboutToReceiveItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException

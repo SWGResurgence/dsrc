@@ -1,5 +1,11 @@
 package script.creature_spawner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -11,6 +17,7 @@ public class naboo_npc_easy extends base_newbie_npc_spawner
     public naboo_npc_easy()
     {
     }
+
     public String pickCreature() throws InterruptedException
     {
         switch (rand(1, 4))
@@ -26,6 +33,7 @@ public class naboo_npc_easy extends base_newbie_npc_spawner
         }
         return "mummer_bully";
     }
+
     public int creatureDied(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())

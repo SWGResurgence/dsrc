@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.old_republic_facility;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.prose;
 import script.library.sui;
 import script.*;
@@ -9,6 +15,7 @@ public class quest_object_08 extends script.base_script
     public quest_object_08()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);
@@ -27,6 +34,7 @@ public class quest_object_08 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -40,6 +48,7 @@ public class quest_object_08 extends script.base_script
         sendDirtyObjectMenuNotification(self);
         return SCRIPT_CONTINUE;
     }
+
     public void installParts(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);
@@ -62,8 +71,10 @@ public class quest_object_08 extends script.base_script
             {
                 return;
             }
-            for (obj_id member : members) {
-                if (member != player) {
+            for (obj_id member : members)
+            {
+                if (member != player)
+                {
                     prose_package pp = new prose_package();
                     pp = prose.setStringId(pp, new string_id("mustafar/old_republic_facility", "quest_object_08_msg_other_a"));
                     pp = prose.setTU(pp, player);
@@ -72,6 +83,7 @@ public class quest_object_08 extends script.base_script
             }
         }
     }
+
     public void activateObject(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);
@@ -90,7 +102,7 @@ public class quest_object_08 extends script.base_script
             String prompt = "@mustafar/old_republic_facility:quest_object_08_sui_prompt_a";
             int pid = sui.msgbox(player, player, prompt, sui.OK_ONLY, title, "noHandler");
         }
-        else 
+        else
         {
             setObjVar(building, "status", 11);
             String title = "@mustafar/old_republic_facility:quest_object_08_sui_title_b";
@@ -101,12 +113,14 @@ public class quest_object_08 extends script.base_script
             if (isIdValid(group))
             {
                 obj_id[] members = getGroupMemberIds(group);
-                if (members == null || members.length == 0)
+                if (members == null)
                 {
                     return;
                 }
-                for (obj_id member : members) {
-                    if (member != player) {
+                for (obj_id member : members)
+                {
+                    if (member != player)
+                    {
                         prose_package pp = new prose_package();
                         pp = prose.setStringId(pp, new string_id("mustafar/old_republic_facility", "quest_object_08_msg_other_b"));
                         pp = prose.setTU(pp, player);
@@ -115,6 +129,5 @@ public class quest_object_08 extends script.base_script
                 }
             }
         }
-        return;
     }
 }

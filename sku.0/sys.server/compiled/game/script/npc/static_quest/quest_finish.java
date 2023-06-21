@@ -1,5 +1,11 @@
 package script.npc.static_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -11,11 +17,13 @@ public class quest_finish extends script.base_script
     public quest_finish()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "setupSelf", null, 4, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -41,41 +49,45 @@ public class quest_finish extends script.base_script
             else if (type.equals("smuggle") || type.equals("deliver"))
             {
                 obj_id playerInv = utils.getInventoryContainer(speaker);
-                if (checkForItem(playerInv, speaker, questNum) == true || hasObjVar(speaker, questID + ".done"))
+                if (checkForItem(playerInv, speaker, questNum) || hasObjVar(speaker, questID + ".done"))
                 {
                     if (!hasObjVar(speaker, questID + ".done"))
                     {
                         messageTo(speaker, "finishStaticQuest", null, 0, true);
                         giveReward(self, speaker, questNum);
                     }
-                    switch (convoType) {
-                        case "normal": {
+                    switch (convoType)
+                    {
+                        case "normal":
+                        {
                             String npcGreet = "npc_smuggle_" + questNum;
                             String response1 = "player_more_1_" + questNum;
                             string_id greeting = new string_id(CONVO, npcGreet);
-                            string_id response[] = new string_id[1];
+                            string_id[] response = new string_id[1];
                             response[0] = new string_id(CONVO, response1);
                             npcStartConversation(speaker, self, "questConvo", greeting, response);
                             break;
                         }
-                        case "extended": {
+                        case "extended":
+                        {
                             String npcGreet = "npc_smuggle_" + questNum;
                             String response1 = "player_more_1_" + questNum;
                             String response2 = "player_more_2_" + questNum;
                             string_id greeting = new string_id(CONVO, npcGreet);
-                            string_id response[] = new string_id[2];
+                            string_id[] response = new string_id[2];
                             response[0] = new string_id(CONVO, response1);
                             response[1] = new string_id(CONVO, response2);
                             npcStartConversation(speaker, self, "questConvo", greeting, response);
                             break;
                         }
-                        case "verbose": {
+                        case "verbose":
+                        {
                             String npcGreet = "npc_smuggle_" + questNum;
                             String response1 = "player_more_1_" + questNum;
                             String response2 = "player_more_2_" + questNum;
                             String response3 = "player_more_3_" + questNum;
                             string_id greeting = new string_id(CONVO, npcGreet);
-                            string_id response[] = new string_id[3];
+                            string_id[] response = new string_id[3];
                             response[0] = new string_id(CONVO, response1);
                             response[1] = new string_id(CONVO, response2);
                             response[2] = new string_id(CONVO, response3);
@@ -84,7 +96,7 @@ public class quest_finish extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     string_id work = new string_id(CONVO, "gotowork");
                     chat.chat(self, speaker, work);
@@ -93,13 +105,14 @@ public class quest_finish extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             string_id work = new string_id(CONVO, "otherescort");
             chat.chat(self, speaker, work);
             return SCRIPT_CONTINUE;
         }
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -142,6 +155,7 @@ public class quest_finish extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -165,12 +179,14 @@ public class quest_finish extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int followPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
         ai_lib.aiFollow(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int stopFollowing(obj_id self, dictionary params) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -186,7 +202,7 @@ public class quest_finish extends script.base_script
         {
             setObjVar(player, questID + ".done", 1);
         }
-        else 
+        else
         {
             debugSpeakMsg(player, "This mission didn't get completed...");
             return SCRIPT_OVERRIDE;
@@ -194,6 +210,7 @@ public class quest_finish extends script.base_script
         messageTo(self, "cleanUp", null, 30, true);
         return SCRIPT_CONTINUE;
     }
+
     public int setupSelf(obj_id self, dictionary params) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -212,6 +229,7 @@ public class quest_finish extends script.base_script
         messageTo(self, "spawnExtras", null, 0, true);
         return SCRIPT_CONTINUE;
     }
+
     public int saySomething(obj_id self, dictionary params) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -228,6 +246,7 @@ public class quest_finish extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int giveReward(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -240,7 +259,7 @@ public class quest_finish extends script.base_script
         {
             money.bankTo(money.ACCT_JABBA, player, 100);
         }
-        else 
+        else
         {
             obj_id playerInv = utils.getInventoryContainer(player);
             createObject(reward, playerInv, "");
@@ -253,21 +272,25 @@ public class quest_finish extends script.base_script
         detachScript(player, playerScript);
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkForItem(obj_id inv, obj_id player, int questNum) throws InterruptedException
     {
         String datatable = getStringObjVar(player, "quest_table");
         String giveMe = dataTableGetString(datatable, questNum, "deliver_object");
         boolean hadIt = false;
         obj_id[] contents = getContents(inv);
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             String itemInInventory = getTemplateName(content);
-            if (itemInInventory.equals(giveMe)) {
+            if (itemInInventory.equals(giveMe))
+            {
                 destroyObject(content);
                 hadIt = true;
             }
         }
         return hadIt;
     }
+
     public int spawnExtras(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "player");
@@ -324,11 +347,13 @@ public class quest_finish extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void giveReward(obj_id self, obj_id player, int questNum) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -443,6 +468,5 @@ public class quest_finish extends script.base_script
         {
             detachScript(player, playerScript);
         }
-        return;
     }
 }

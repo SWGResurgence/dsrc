@@ -1,5 +1,11 @@
 package script.theme_park;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.trial;
@@ -11,6 +17,7 @@ public class npc_base_builder_respawn extends script.base_script
     public npc_base_builder_respawn()
     {
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (ai_lib.isMob(self))
@@ -20,11 +27,13 @@ public class npc_base_builder_respawn extends script.base_script
         handleRespawn(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         handleRespawn(self);
         return SCRIPT_CONTINUE;
     }
+
     public void handleRespawn(obj_id self) throws InterruptedException
     {
         obj_id parent = trial.getParent(self);
@@ -38,7 +47,7 @@ public class npc_base_builder_respawn extends script.base_script
             int max = utils.stringToInt(timeHack[1]);
             iRespawn = rand(min, max);
         }
-        else 
+        else
         {
             iRespawn = utils.stringToInt(sRespawn);
         }

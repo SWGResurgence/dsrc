@@ -1,5 +1,11 @@
 package script.cybernetic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -10,11 +16,13 @@ public class cybernetic_player extends script.systems.combat.combat_base
     public cybernetic_player()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         cybernetic.validateSkillMods(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cyborgLightning(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!cybernetic.hasUndamagedCybernetic(self, "cyborgLightning"))
@@ -30,6 +38,7 @@ public class cybernetic_player extends script.systems.combat.combat_base
         executePowerSounds(self, "cyborgLightning");
         return SCRIPT_CONTINUE;
     }
+
     public int cyborgStrengthBuff(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!cybernetic.hasUndamagedCybernetic(self, "cyborgStrengthBuff"))
@@ -43,6 +52,7 @@ public class cybernetic_player extends script.systems.combat.combat_base
         playClientEffectObj(self, "appearance/pt_heal_resist_states.prt", self, "");
         return SCRIPT_CONTINUE;
     }
+
     public int cyborgBurstRun(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!cybernetic.hasUndamagedCybernetic(self, "cyborgBurstRun"))
@@ -54,6 +64,7 @@ public class cybernetic_player extends script.systems.combat.combat_base
         executePowerSounds(self, "cyborgBurstRun");
         return SCRIPT_CONTINUE;
     }
+
     public int cyborgRevive(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!cybernetic.hasUndamagedCybernetic(self, "cyborgRevive"))
@@ -71,12 +82,13 @@ public class cybernetic_player extends script.systems.combat.combat_base
             executePowerSounds(self, "cyborgRevive");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             handleFailureSound(self);
             return SCRIPT_OVERRIDE;
         }
     }
+
     public int cyborgSureShot(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!cybernetic.hasUndamagedCybernetic(self, "cyborgSureShot"))
@@ -92,6 +104,7 @@ public class cybernetic_player extends script.systems.combat.combat_base
         executePowerSounds(self, "cyborgSureShot");
         return SCRIPT_CONTINUE;
     }
+
     public int cyborgCriticalSnipe(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!cybernetic.hasUndamagedCybernetic(self, "cyborgCriticalSnipe"))
@@ -107,6 +120,7 @@ public class cybernetic_player extends script.systems.combat.combat_base
         executePowerSounds(self, "cyborgCriticalSnipe");
         return SCRIPT_CONTINUE;
     }
+
     public int cyborgKickDown(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!cybernetic.hasUndamagedCybernetic(self, "cyborgKickDown"))
@@ -122,16 +136,19 @@ public class cybernetic_player extends script.systems.combat.combat_base
         executePowerSounds(self, "cyborgKickDown");
         return SCRIPT_CONTINUE;
     }
+
     public void handleFailureSound(obj_id self) throws InterruptedException
     {
         playClientEffectObj(self, "clienteffect/cyborg_ui_cannot_use.cef", self, "");
     }
+
     public void executePowerSounds(obj_id self, String commandName) throws InterruptedException
     {
         dictionary parms = new dictionary();
         parms.put("commandName", commandName);
         messageTo(self, "handlePowerDownSound", parms, 2, false);
     }
+
     public int handlePowerDownSound(obj_id self, dictionary params) throws InterruptedException
     {
         playClientEffectObj(self, "clienteffect/cyborg_itm_powerdown.cef", self, "");
@@ -147,11 +164,13 @@ public class cybernetic_player extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePowerUpSound(obj_id self, dictionary params) throws InterruptedException
     {
         playClientEffectObj(self, "clienteffect/cyborg_itm_powerup.cef", self, "");
         return SCRIPT_CONTINUE;
     }
+
     public int handleInstallPaymentConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("sissynoid", "handleInstallPaymentConfirmed:::: ENTERED");
@@ -204,6 +223,7 @@ public class cybernetic_player extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleInstallPaid(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -271,7 +291,7 @@ public class cybernetic_player extends script.systems.combat.combat_base
                 CustomerServiceLog("cyborg", "Cybernetic Item(" + item + ") was successfully A-Tab installed on Player(" + self + ")");
                 playClientEffectObj(self, "clienteffect/cyborg_itm_installed.cef", self, "");
             }
-            else 
+            else
             {
                 sendSystemMessage(self, new string_id("ep3/cybernetic", "cannot_install"));
                 CustomerServiceLog("cyborg", "Cybernetic Item(" + item + ") could not be installed - player(" + self + ") had his/her credits(" + amt + ") returned to him/her");
@@ -279,7 +299,7 @@ public class cybernetic_player extends script.systems.combat.combat_base
                 transferBankCreditsFromNamedAccount("cyborg", self, amt, "handleCyborgRefunded", "handleCyborgNotRefunded", params);
             }
         }
-        else 
+        else
         {
             if (hasObjVar(item, "biolink.id"))
             {
@@ -301,7 +321,7 @@ public class cybernetic_player extends script.systems.combat.combat_base
                     setBioLink(item, self);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(self, new string_id("ep3/cybernetic", "cannot_install"));
                 CustomerServiceLog("cyborg", "Cybernetic Item(" + item + ") could not be installed - player(" + self + ") had his/her credits(" + amt + ") returned to him/her");
@@ -311,6 +331,7 @@ public class cybernetic_player extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public void removeCyberneticInstallScriptVars(obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "cyborg.install.amount") && utils.hasScriptVar(player, "cyborg.install.item"))
@@ -319,16 +340,19 @@ public class cybernetic_player extends script.systems.combat.combat_base
             utils.removeScriptVar(player, "cyborg.install.item");
         }
     }
+
     public int handleCyborgRefunded(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handleCyborgNotRefunded(obj_id self, dictionary params) throws InterruptedException
     {
         int amt = params.getInt("refundAmount");
         CustomerServiceLog("cyborg", "Player %TU failed to be refunded " + amt + " credits for aborted cybernetic refund", self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleUnInstallPaymentConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -365,6 +389,7 @@ public class cybernetic_player extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleUnInstallPaid(obj_id self, dictionary params) throws InterruptedException
     {
         if (params.getInt(money.DICT_CODE) == money.RET_FAIL)
@@ -393,7 +418,7 @@ public class cybernetic_player extends script.systems.combat.combat_base
         {
             playClientEffectObj(self, "clienteffect/cyborg_itm_uninstalled.cef", self, "");
         }
-        else 
+        else
         {
             sendSystemMessage(self, new string_id("ep3/cybernetic", "cannot_remove"));
             params.put("refundAmount", amt);
@@ -401,6 +426,7 @@ public class cybernetic_player extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRepairPaymentConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -437,6 +463,7 @@ public class cybernetic_player extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRepairPaid(obj_id self, dictionary params) throws InterruptedException
     {
         if (params.getInt(money.DICT_CODE) == money.RET_FAIL)

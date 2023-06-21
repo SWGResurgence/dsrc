@@ -1,5 +1,11 @@
 package script.quest.crafting_contract;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.prose;
 import script.library.utils;
 import script.obj_id;
@@ -8,9 +14,6 @@ import script.string_id;
 
 public class crate extends script.base_script
 {
-    public crate()
-    {
-    }
     public static final String ITEM_OBJVAR = "contract.item";
     public static final String MAX_NUM_OBJVAR = "contract.max";
     public static final String CURRENT_NUM_OBJVAR = "contract.current";
@@ -26,6 +29,10 @@ public class crate extends script.base_script
     public static final string_id ATTR_OF = new string_id("quest/crafting_contract/system_messages", "of");
     public static final string_id ATTR_COMPLETE = new string_id("quest/crafting_contract/system_messages", "complete");
     public static final string_id ATTR_REQUIRED = new string_id("quest/crafting_contract/system_messages", "required");
+    public crate()
+    {
+    }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -52,7 +59,7 @@ public class crate extends script.base_script
             {
                 attribs[idx] = " " + localize(ATTR_COMPLETE);
             }
-            else 
+            else
             {
                 int max = getIntObjVar(self, MAX_NUM_OBJVAR);
                 int current = 0;
@@ -70,6 +77,7 @@ public class crate extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         String template = getStringObjVar(self, ITEM_OBJVAR);
@@ -106,6 +114,7 @@ public class crate extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         int max_number = getIntObjVar(self, MAX_NUM_OBJVAR);
@@ -127,13 +136,14 @@ public class crate extends script.base_script
             sendSystemMessage(transferer, JOB_COMPLETE);
             setObjVar(self, COMPLETE_OBJVAR, 1);
         }
-        else 
+        else
         {
             prose_package pp = prose.getPackage(ITEMS_REMAINING, remaining);
             sendSystemMessageProse(transferer, pp);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isGod(transferer))
@@ -143,6 +153,7 @@ public class crate extends script.base_script
         sendSystemMessage(transferer, CANNOT_REMOVE);
         return SCRIPT_OVERRIDE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         int max_number = getIntObjVar(self, MAX_NUM_OBJVAR);

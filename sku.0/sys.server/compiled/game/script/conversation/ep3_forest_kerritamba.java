@@ -1,78 +1,102 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class ep3_forest_kerritamba extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_forest_kerritamba";
+
     public ep3_forest_kerritamba()
     {
     }
-    public static String c_stringFile = "conversation/ep3_forest_kerritamba";
+
     public boolean ep3_forest_kerritamba_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_forest_kerritamba_condition_isEpicTaskActiveOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_forest_kerritamba_epic_1", "cure");
     }
+
     public boolean ep3_forest_kerritamba_condition_EpicTaskCompletedOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_forest_kerritamba_epic_1", "return");
     }
+
     public boolean ep3_forest_kerritamba_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_forest_kerritamba_epic_1");
     }
+
     public boolean ep3_forest_kerritamba_condition_isEpicTaskActiveTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_forest_kerritamba_epic_2", "waiting");
     }
+
     public boolean ep3_forest_kerritamba_condition_EpicTaskCompletedTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_forest_kerritamba_epic_2", "return");
     }
+
     public boolean ep3_forest_kerritamba_condition_hasCompletedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_forest_kerritamba_epic_2");
     }
+
     public boolean ep3_forest_kerritamba_condition_isEpicTaskActiveThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_forest_kerritamba_epic_3", 0);
     }
+
     public boolean ep3_forest_kerritamba_condition_EpicTaskCompletedThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_forest_kerritamba_epic_3", "return");
     }
+
     public boolean ep3_forest_kerritamba_condition_hasCompletedQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_forest_kerritamba_epic_3");
     }
+
     public boolean ep3_forest_kerritamba_condition_isEpicTaskActiveFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_forest_kerritamba_epic_4", 0);
     }
+
     public boolean ep3_forest_kerritamba_condition_EpicTaskCompletedFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_forest_kerritamba_epic_4", 0) && !groundquests.hasCompletedQuest(player, "ep3_forest_kerritamba_epic_4"));
     }
+
     public boolean ep3_forest_kerritamba_condition_hasCompletedQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_forest_kerritamba_epic_4");
     }
+
     public boolean ep3_forest_kerritamba_condition_isEpicTaskActiveFive(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_forest_kerritamba_epic_5", "squeen");
     }
+
     public boolean ep3_forest_kerritamba_condition_EpicTaskCompletedFive(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_forest_kerritamba_epic_5", "squeen") && !groundquests.hasCompletedQuest(player, "ep3_forest_kerritamba_epic_5"));
     }
+
     public boolean ep3_forest_kerritamba_condition_hasCompletedQuestFive(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_forest_kerritamba_epic_5");
     }
+
     public boolean ep3_forest_kerritamba_condition_isEpicTaskActiveSix(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean isEpicActive = groundquests.isTaskActive(player, "ep3_forest_kerritamba_epic_6", 0);
@@ -82,71 +106,88 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return isEpicActive;
     }
+
     public boolean ep3_forest_kerritamba_condition_isEpicTaskActiveGood(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_forest_wirartu_epic_3", 0);
     }
+
     public boolean ep3_forest_kerritamba_condition_isEpicTaskActiveBad(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_forest_wirartu_epic_2", 0) || groundquests.hasCompletedTask(player, "ep3_forest_wirartu_epic_2", 0));
     }
+
     public boolean ep3_forest_kerritamba_condition_isEpicTaskActiveSeven(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_forest_kerritamba_epic_7", 1) && groundquests.isTaskActive(player, "ep3_forest_kerritamba_epic_7", 2));
     }
+
     public boolean ep3_forest_kerritamba_condition_EpicTaskCompletedSeven(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_forest_kerritamba_epic_7", 1) && groundquests.hasCompletedTask(player, "ep3_forest_kerritamba_epic_7", 2) && !groundquests.hasCompletedQuest(player, "ep3_forest_kerritamba_epic_7"));
     }
+
     public boolean ep3_forest_kerritamba_condition_AllComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_forest_kerritamba_epic_7") || groundquests.hasCompletedQuest(player, "ep3_forest_wirartu_epic_3"));
     }
+
     public boolean ep3_forest_kerritamba_condition_isOnHold(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_forest_on_hold", 0);
     }
+
     public boolean ep3_forest_kerritamba_condition_AAlwaysTrue(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_forest_kerritamba_condition_hasLanguage(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.canSpeakWookiee(player, npc);
     }
+
     public boolean ep3_forest_kerritamba_condition_hasCure(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(player);
         obj_id[] invAndEquip = getInventoryAndEquipment(player);
         boolean ep3_forest_kerritamba_condition_hasCure = false;
-        for (obj_id obj_id : invAndEquip) {
+        for (obj_id obj_id : invAndEquip)
+        {
             String templateName = getTemplateName(obj_id);
-            if (templateName.equals("object/tangible/loot/quest/ep3_forest_cure.iff")) {
+            if (templateName.equals("object/tangible/loot/quest/ep3_forest_cure.iff"))
+            {
                 ep3_forest_kerritamba_condition_hasCure = true;
             }
         }
         return ep3_forest_kerritamba_condition_hasCure;
     }
+
     public boolean ep3_forest_kerritamba_condition_badQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "ep3_forest_kerritamba_assassin");
     }
+
     public void ep3_forest_kerritamba_action_giveQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_kerritamba_epic_1");
     }
+
     public void ep3_forest_kerritamba_action_giveQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_kerritamba_epic_2");
     }
+
     public void ep3_forest_kerritamba_action_giveSignalOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "steps");
     }
+
     public void ep3_forest_kerritamba_action_giveSignalTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "curestuff");
     }
+
     public void ep3_forest_kerritamba_action_giveQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_kerritamba_epic_3");
@@ -155,53 +196,65 @@ public class ep3_forest_kerritamba extends script.base_script
             ep3_forest_kerritamba_action_giveCure(player, npc);
         }
     }
+
     public void ep3_forest_kerritamba_action_giveSignalThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "curereward");
     }
+
     public void ep3_forest_kerritamba_action_giveQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_kerritamba_epic_4");
     }
+
     public void ep3_forest_kerritamba_action_giveSignalFour(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "sayormi");
     }
+
     public void ep3_forest_kerritamba_action_giveQuestFive(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_kerritamba_epic_5");
     }
+
     public void ep3_forest_kerritamba_action_giveSignalFive(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "epic5");
     }
+
     public void ep3_forest_kerritamba_action_giveQuestSix(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_forest_kerritamba_epic_6");
         groundquests.grantQuest(player, "ep3_forest_kerritamba_epic_6");
         groundquests.grantQuest(player, "ep3_arena_challenge");
     }
+
     public void ep3_forest_kerritamba_action_giveSignalGood(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "goodguys");
         badge.grantBadge(player, "bdg_kash_arena_champ");
     }
+
     public void ep3_forest_kerritamba_action_giveSignalBad(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "badguys");
     }
+
     public void ep3_forest_kerritamba_action_giveQuestAssassin(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_kerritamba_assassin", false);
     }
+
     public void ep3_forest_kerritamba_action_giveQuestSeven(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_forest_kerritamba_epic_7");
     }
+
     public void ep3_forest_kerritamba_action_giveSignalSeven(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "alldone");
     }
+
     public void ep3_forest_kerritamba_action_giveCure(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id cureItem = createObjectInInventoryAllowOverload("object/tangible/loot/quest/ep3_forest_cure.iff", player);
@@ -209,10 +262,12 @@ public class ep3_forest_kerritamba extends script.base_script
         cure[0] = cureItem;
         showLootBox(player, cure);
     }
+
     public void ep3_forest_kerritamba_action_Language(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.emoteWookieeConfusion(player, npc);
     }
+
     public void ep3_forest_kerritamba_action_fixBrokenPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "ep3_forest_wirartu_epic_2", 0) && groundquests.isQuestActiveOrComplete(player, "ep3_forest_kerritamba_epic_7"))
@@ -220,6 +275,7 @@ public class ep3_forest_kerritamba extends script.base_script
             groundquests.sendSignal(player, "badguys");
         }
     }
+
     public int ep3_forest_kerritamba_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_607"))
@@ -240,7 +296,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_611");
@@ -249,7 +305,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -259,6 +315,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_611"))
@@ -273,6 +330,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_619"))
@@ -292,7 +350,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_623");
@@ -301,7 +359,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -326,7 +384,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_631");
@@ -335,7 +393,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -345,6 +403,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_623"))
@@ -361,6 +420,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_631"))
@@ -380,7 +440,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_635");
@@ -389,7 +449,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -399,6 +459,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_635"))
@@ -415,6 +476,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_641"))
@@ -430,6 +492,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_649"))
@@ -449,7 +512,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_653");
@@ -458,7 +521,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -468,6 +531,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_653"))
@@ -487,7 +551,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_657");
@@ -496,7 +560,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -506,6 +570,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_657"))
@@ -532,7 +597,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_661");
@@ -545,7 +610,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -555,6 +620,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_661"))
@@ -575,7 +641,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_665");
@@ -584,7 +650,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -604,6 +670,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_665"))
@@ -618,6 +685,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_675"))
@@ -638,7 +706,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_679");
@@ -647,7 +715,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -657,6 +725,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_679"))
@@ -671,6 +740,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_685"))
@@ -685,6 +755,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_691"))
@@ -704,7 +775,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_695");
@@ -713,7 +784,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -723,6 +794,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_695"))
@@ -742,7 +814,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_699");
@@ -751,7 +823,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -761,6 +833,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_699"))
@@ -780,7 +853,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_703");
@@ -789,7 +862,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -799,6 +872,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_703"))
@@ -825,7 +899,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_707");
@@ -838,7 +912,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -848,6 +922,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_707"))
@@ -873,6 +948,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_717"))
@@ -893,7 +969,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_721");
@@ -902,7 +978,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -912,6 +988,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_721"))
@@ -926,6 +1003,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_727"))
@@ -940,6 +1018,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_733"))
@@ -959,7 +1038,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_737");
@@ -968,7 +1047,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -978,6 +1057,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_737"))
@@ -1004,7 +1084,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_741");
@@ -1017,7 +1097,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1027,6 +1107,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_741"))
@@ -1052,6 +1133,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_751"))
@@ -1067,6 +1149,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_757"))
@@ -1092,6 +1175,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_767"))
@@ -1122,7 +1206,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_775");
@@ -1131,7 +1215,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1141,6 +1225,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_775"))
@@ -1160,7 +1245,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_779");
@@ -1169,7 +1254,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1179,6 +1264,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_779"))
@@ -1198,7 +1284,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_783");
@@ -1207,7 +1293,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1217,6 +1303,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_783"))
@@ -1232,6 +1319,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_789"))
@@ -1252,7 +1340,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_793");
@@ -1261,7 +1349,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1271,6 +1359,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_793"))
@@ -1285,6 +1374,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_799"))
@@ -1299,6 +1389,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_805"))
@@ -1318,7 +1409,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_809");
@@ -1327,7 +1418,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1337,6 +1428,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_809"))
@@ -1363,7 +1455,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_813");
@@ -1376,7 +1468,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1386,6 +1478,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_813"))
@@ -1411,6 +1504,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch67(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_823"))
@@ -1430,7 +1524,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_827");
@@ -1439,7 +1533,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1449,6 +1543,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_827"))
@@ -1464,6 +1559,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_833"))
@@ -1478,6 +1574,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_839"))
@@ -1497,7 +1594,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_843");
@@ -1506,7 +1603,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1516,6 +1613,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch73(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_843"))
@@ -1535,7 +1633,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_847");
@@ -1544,7 +1642,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1554,6 +1652,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_847"))
@@ -1580,7 +1679,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_851");
@@ -1593,7 +1692,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1603,6 +1702,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_851"))
@@ -1622,7 +1722,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_855");
@@ -1631,7 +1731,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1656,7 +1756,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_871");
@@ -1665,7 +1765,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1675,6 +1775,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_855"))
@@ -1701,7 +1802,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_859");
@@ -1714,7 +1815,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1724,6 +1825,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_859"))
@@ -1749,6 +1851,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_871"))
@@ -1768,7 +1871,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_875");
@@ -1777,7 +1880,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1787,6 +1890,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch81(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_875"))
@@ -1806,7 +1910,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_879");
@@ -1815,7 +1919,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1825,6 +1929,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_879"))
@@ -1844,7 +1949,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_883");
@@ -1853,7 +1958,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1863,6 +1968,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch83(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_883"))
@@ -1889,7 +1995,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_887");
@@ -1902,7 +2008,7 @@ public class ep3_forest_kerritamba extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_forest_kerritamba.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1912,6 +2018,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_forest_kerritamba_handleBranch84(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_887"))
@@ -1937,6 +2044,7 @@ public class ep3_forest_kerritamba extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1948,6 +2056,7 @@ public class ep3_forest_kerritamba extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1955,6 +2064,7 @@ public class ep3_forest_kerritamba extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1964,18 +2074,21 @@ public class ep3_forest_kerritamba extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_forest_kerritamba");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2018,7 +2131,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_607");
@@ -2026,7 +2139,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 4);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2060,7 +2173,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_619");
@@ -2072,7 +2185,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 8);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2093,7 +2206,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_641");
@@ -2101,7 +2214,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 14);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2128,7 +2241,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_649");
@@ -2136,7 +2249,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 17);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2157,7 +2270,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_675");
@@ -2165,7 +2278,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 24);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2186,7 +2299,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_685");
@@ -2194,7 +2307,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 27);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2215,7 +2328,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_691");
@@ -2223,7 +2336,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 29);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2244,7 +2357,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_717");
@@ -2252,7 +2365,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 36);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2273,7 +2386,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_727");
@@ -2281,7 +2394,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 39);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2302,7 +2415,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_733");
@@ -2310,7 +2423,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 41);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2331,7 +2444,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_751");
@@ -2339,7 +2452,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 46);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2367,7 +2480,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_757");
@@ -2379,7 +2492,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 48);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2407,7 +2520,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_767");
@@ -2419,7 +2532,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 51);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2440,7 +2553,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_789");
@@ -2448,7 +2561,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 57);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2469,7 +2582,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_799");
@@ -2477,7 +2590,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 60);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2498,7 +2611,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_805");
@@ -2506,7 +2619,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 62);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2527,7 +2640,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_823");
@@ -2535,7 +2648,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 67);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2556,7 +2669,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_833");
@@ -2564,7 +2677,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 70);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2585,7 +2698,7 @@ public class ep3_forest_kerritamba extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_839");
@@ -2593,7 +2706,7 @@ public class ep3_forest_kerritamba extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_forest_kerritamba.branchId", 72);
                 npcStartConversation(player, npc, "ep3_forest_kerritamba", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2602,6 +2715,7 @@ public class ep3_forest_kerritamba extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_forest_kerritamba"))

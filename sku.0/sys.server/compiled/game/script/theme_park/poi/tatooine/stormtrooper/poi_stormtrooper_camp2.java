@@ -1,5 +1,11 @@
 package script.theme_park.poi.tatooine.stormtrooper;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class poi_stormtrooper_camp2 extends script.theme_park.poi.base
     public poi_stormtrooper_camp2()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String objective = poiGetObjective(self);
@@ -29,6 +36,7 @@ public class poi_stormtrooper_camp2 extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trooperKilled(obj_id self, dictionary params) throws InterruptedException
     {
         int numKilled = getIntObjVar(self, "numTroopersKilled");

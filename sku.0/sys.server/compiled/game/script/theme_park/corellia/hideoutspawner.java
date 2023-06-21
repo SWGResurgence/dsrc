@@ -1,5 +1,11 @@
 package script.theme_park.corellia;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.advanced_turret;
 import script.library.ai_lib;
@@ -13,19 +19,21 @@ public class hideoutspawner extends script.base_script
     public hideoutspawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Spawning Everyone");
         messageTo(self, "doGating", null, 20, false);
         spawnCelebs(self);
         setObjVar(self, "people", 1);
-        return;
     }
+
     public void spawnCelebs(obj_id self) throws InterruptedException
     {
         spawnPatient1(self);
@@ -73,6 +81,7 @@ public class hideoutspawner extends script.base_script
         spawnTurret12(self);
         spawnTurret13(self);
     }
+
     public void spawnPatient1(obj_id self) throws InterruptedException
     {
         obj_id meeting3 = getCellId(self, "meeting3");
@@ -83,8 +92,8 @@ public class hideoutspawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.patient1", patient1);
         setObjVar(patient1, "hideout", self);
         setAnimationMood(patient1, "npc_sitting_chair");
-        return;
     }
+
     public void spawnPatient2(obj_id self) throws InterruptedException
     {
         obj_id meeting3 = getCellId(self, "meeting3");
@@ -95,8 +104,8 @@ public class hideoutspawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.patient2", patient2);
         setObjVar(patient2, "hideout", self);
         setAnimationMood(patient2, "npc_sitting_chair");
-        return;
     }
+
     public void spawnCommtech(obj_id self) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -107,8 +116,8 @@ public class hideoutspawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.commtech", commtech);
         setObjVar(commtech, "hideout", self);
         ai_lib.setDefaultCalmMood(commtech, "ui");
-        return;
     }
+
     public void spawnThreepio(obj_id self) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -118,8 +127,8 @@ public class hideoutspawner extends script.base_script
         setYaw(c3po, c3po_yaw);
         setObjVar(self, "HideoutInhabitants.c3po", c3po);
         setObjVar(c3po, "hideout", self);
-        return;
     }
+
     public void spawnMedicalSupplySource(obj_id self) throws InterruptedException
     {
         String medSupplySource = "object/tangible/quest/rebel/rtp_c3po_medical_supply_source.iff";
@@ -130,8 +139,8 @@ public class hideoutspawner extends script.base_script
         setYaw(medSupplies, tech_yaw);
         setObjVar(self, "HideoutInhabitants.medsupplies", medSupplies);
         setObjVar(medSupplies, "hideout", self);
-        return;
     }
+
     public void spawnArtoo(obj_id self) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -141,8 +150,8 @@ public class hideoutspawner extends script.base_script
         setYaw(artoo, r2d2_yaw);
         setObjVar(self, "HideoutInhabitants.r2d2", artoo);
         setObjVar(artoo, "hideout", self);
-        return;
     }
+
     public void spawnQualdo(obj_id self) throws InterruptedException
     {
         obj_id meeting3 = getCellId(self, "meeting3");
@@ -153,8 +162,8 @@ public class hideoutspawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.qualdo", qualdo);
         setObjVar(qualdo, "hideout", self);
         ai_lib.setDefaultCalmMood(qualdo, "npc_consoling");
-        return;
     }
+
     public void spawnLtLance(obj_id self) throws InterruptedException
     {
         location lanceLocation = new location(-6519.03f, 398.0f, 6044.26f, "corellia", null);
@@ -167,8 +176,8 @@ public class hideoutspawner extends script.base_script
         attachScript(lance, "item.travel_ticket.travel_space_dungeon");
         setObjVar(self, "HideoutInhabitants.lt_lance", lance);
         setObjVar(lance, "hideout", self);
-        return;
     }
+
     public void spawnWedge(obj_id self) throws InterruptedException
     {
         obj_id storage1 = getCellId(self, "storage1");
@@ -179,8 +188,8 @@ public class hideoutspawner extends script.base_script
         int wedge_yaw = 0;
         setYaw(wedge, wedge_yaw);
         ai_lib.setDefaultCalmMood(wedge, "npc_sitting_table");
-        return;
     }
+
     public void spawnWedgetech(obj_id self) throws InterruptedException
     {
         obj_id storage1 = getCellId(self, "storage1");
@@ -191,8 +200,8 @@ public class hideoutspawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.wedgetech", tech);
         setObjVar(tech, "hideout", self);
         ai_lib.setDefaultCalmMood(tech, "ui");
-        return;
     }
+
     public void spawnLeia(obj_id self) throws InterruptedException
     {
         obj_id storage2 = getCellId(self, "storage2");
@@ -202,8 +211,8 @@ public class hideoutspawner extends script.base_script
         setYaw(leia, leia_yaw);
         setObjVar(self, "HideoutInhabitants.leia", leia);
         setObjVar(leia, "hideout", self);
-        return;
     }
+
     public void spawnLeiatech(obj_id self) throws InterruptedException
     {
         obj_id storage2 = getCellId(self, "storage2");
@@ -214,8 +223,8 @@ public class hideoutspawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.leiatech", tech);
         setObjVar(tech, "hideout", self);
         ai_lib.setDefaultCalmMood(tech, "ui");
-        return;
     }
+
     public void spawnLeiaguard1(obj_id self) throws InterruptedException
     {
         obj_id storage2 = getCellId(self, "storage2");
@@ -226,8 +235,8 @@ public class hideoutspawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.leiaguard1", guard1);
         setObjVar(guard1, "hideout", self);
         ai_lib.setDefaultCalmMood(guard1, "ui");
-        return;
     }
+
     public void spawnLeiaguard2(obj_id self) throws InterruptedException
     {
         obj_id storage2 = getCellId(self, "storage2");
@@ -238,8 +247,8 @@ public class hideoutspawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.leiaguard2", guard2);
         setObjVar(guard2, "hideout", self);
         ai_lib.setDefaultCalmMood(guard2, "ui");
-        return;
     }
+
     public void spawnTrooper1(obj_id self) throws InterruptedException
     {
         obj_id hall2 = getCellId(self, "hall2");
@@ -252,8 +261,8 @@ public class hideoutspawner extends script.base_script
         attachScript(trooper1, "theme_park.corellia.rebel_hideout_path");
         int T1_yaw = 3;
         setYaw(trooper1, T1_yaw);
-        return;
     }
+
     public void spawnTrooper2(obj_id self) throws InterruptedException
     {
         obj_id hall2 = getCellId(self, "hall2");
@@ -266,8 +275,8 @@ public class hideoutspawner extends script.base_script
         attachScript(trooper2, "theme_park.corellia.rebel_hideout_path");
         int T2_yaw = 88;
         setYaw(trooper2, T2_yaw);
-        return;
     }
+
     public void spawnTrooper3(obj_id self) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -279,8 +288,8 @@ public class hideoutspawner extends script.base_script
         attachScript(trooper3, "theme_park.corellia.rebel_hideout_path");
         int T3_yaw = -53;
         setYaw(trooper3, T3_yaw);
-        return;
     }
+
     public void spawnTrooper4(obj_id self) throws InterruptedException
     {
         obj_id jailcell2 = getCellId(self, "jailcell2");
@@ -292,8 +301,8 @@ public class hideoutspawner extends script.base_script
         attachScript(trooper4, "theme_park.corellia.rebel_hideout_path");
         int T4_yaw = 111;
         setYaw(trooper4, T4_yaw);
-        return;
     }
+
     public void spawnNewtech1(obj_id self) throws InterruptedException
     {
         obj_id mainhall = getCellId(self, "mainhall");
@@ -305,8 +314,8 @@ public class hideoutspawner extends script.base_script
         setYaw(newtech1, newtech1_yaw);
         attachScript(newtech1, "theme_park.corellia.patrol.newtech1");
         attachScript(newtech1, "theme_park.corellia.rebel_hideout_path");
-        return;
     }
+
     public void spawnNewtech2(obj_id self) throws InterruptedException
     {
         obj_id storage1 = getCellId(self, "storage1");
@@ -318,8 +327,8 @@ public class hideoutspawner extends script.base_script
         setYaw(newtech2, newtech2_yaw);
         attachScript(newtech2, "theme_park.corellia.patrol.newtech2");
         attachScript(newtech2, "theme_park.corellia.rebel_hideout_path");
-        return;
     }
+
     public void spawnMousedroid(obj_id self) throws InterruptedException
     {
         obj_id droid6 = getCellId(self, "mainhall");
@@ -332,8 +341,8 @@ public class hideoutspawner extends script.base_script
         attachScript(mdroid, "theme_park.corellia.patrol.mdroid");
         attachScript(mdroid, "theme_park.corellia.rebel_hideout_path");
         factions.setFaction(mdroid, "Rebel");
-        return;
     }
+
     public void spawnProtocoldroid(obj_id self) throws InterruptedException
     {
         obj_id droid2 = getCellId(self, "meeting3");
@@ -346,8 +355,8 @@ public class hideoutspawner extends script.base_script
         attachScript(pdroid, "theme_park.corellia.patrol.pdroid");
         attachScript(pdroid, "theme_park.corellia.rebel_hideout_path");
         factions.setFaction(pdroid, "Rebel");
-        return;
     }
+
     public void spawnSittingGuy1(obj_id self) throws InterruptedException
     {
         obj_id meeting2 = getCellId(self, "meeting2");
@@ -358,8 +367,8 @@ public class hideoutspawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.sitter1", sitter1);
         setObjVar(sitter1, "hideout", self);
         setAnimationMood(sitter1, "npc_sitting_chair");
-        return;
     }
+
     public void spawnSittingGuy2(obj_id self) throws InterruptedException
     {
         obj_id meeting2 = getCellId(self, "meeting2");
@@ -370,8 +379,8 @@ public class hideoutspawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.sitter2", sitter2);
         setObjVar(sitter2, "hideout", self);
         setAnimationMood(sitter2, "npc_sitting_chair");
-        return;
     }
+
     public void spawnSittingGuy3(obj_id self) throws InterruptedException
     {
         obj_id meeting2 = getCellId(self, "meeting2");
@@ -382,8 +391,8 @@ public class hideoutspawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.sitter3", sitter3);
         setObjVar(sitter3, "hideout", self);
         setAnimationMood(sitter3, "npc_sitting_table");
-        return;
     }
+
     public void spawnSittingGuy4(obj_id self) throws InterruptedException
     {
         obj_id meeting1 = getCellId(self, "meeting1");
@@ -394,8 +403,8 @@ public class hideoutspawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.sitter4", sitter4);
         setObjVar(sitter4, "hideout", self);
         setAnimationMood(sitter4, "npc_sitting_table");
-        return;
     }
+
     public void spawnSittingGuy5(obj_id self) throws InterruptedException
     {
         obj_id meeting1 = getCellId(self, "meeting1");
@@ -406,8 +415,8 @@ public class hideoutspawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.sitter5", sitter5);
         setObjVar(sitter5, "hideout", self);
         setAnimationMood(sitter5, "npc_sitting_table");
-        return;
     }
+
     public void spawnSittingGuy6(obj_id self) throws InterruptedException
     {
         obj_id meeting1 = getCellId(self, "meeting1");
@@ -418,8 +427,8 @@ public class hideoutspawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.sitter6", sitter6);
         setObjVar(sitter6, "hideout", self);
         setAnimationMood(sitter6, "npc_sitting_chair");
-        return;
     }
+
     public void spawnSittingGuy7(obj_id self) throws InterruptedException
     {
         obj_id storage2 = getCellId(self, "storage2");
@@ -430,8 +439,8 @@ public class hideoutspawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.sitter7", sitter7);
         setObjVar(sitter7, "hideout", self);
         setAnimationMood(sitter7, "npc_sitting_chair");
-        return;
     }
+
     public void spawnSittingGuy8(obj_id self) throws InterruptedException
     {
         obj_id storage2 = getCellId(self, "storage2");
@@ -442,8 +451,8 @@ public class hideoutspawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.sitter8", sitter8);
         setObjVar(sitter8, "hideout", self);
         setAnimationMood(sitter8, "npc_sitting_chair");
-        return;
     }
+
     public void spawnSittingGuy9(obj_id self) throws InterruptedException
     {
         obj_id foyer2 = getCellId(self, "foyer2");
@@ -454,8 +463,8 @@ public class hideoutspawner extends script.base_script
         setObjVar(self, "HideoutInhabitants.sitter9", sitter9);
         setObjVar(sitter9, "hideout", self);
         setAnimationMood(sitter9, "npc_sitting_table");
-        return;
     }
+
     public void spawnTurret01(obj_id self) throws InterruptedException
     {
         location loc = new location(-6545.16f, 405.0f, 5916.49f, "corellia", null);
@@ -464,8 +473,8 @@ public class hideoutspawner extends script.base_script
         attachScript(turret01, "theme_park.corellia.patrol.turret");
         setObjVar(self, "HideoutInhabitants.turret01", turret01);
         setObjVar(turret01, "hideout", self);
-        return;
     }
+
     public void spawnTurret2(obj_id self) throws InterruptedException
     {
         location loc = new location(-6530.26f, 405.0f, 5913.65f, "corellia", null);
@@ -474,8 +483,8 @@ public class hideoutspawner extends script.base_script
         attachScript(turret2, "theme_park.corellia.patrol.turret");
         setObjVar(self, "HideoutInhabitants.turret2", turret2);
         setObjVar(turret2, "hideout", self);
-        return;
     }
+
     public void spawnTurret3(obj_id self) throws InterruptedException
     {
         location loc = new location(-6515.82f, 405.0f, 5904.84f, "corellia", null);
@@ -484,8 +493,8 @@ public class hideoutspawner extends script.base_script
         attachScript(turret3, "theme_park.corellia.patrol.turret");
         setObjVar(self, "HideoutInhabitants.turret3", turret3);
         setObjVar(turret3, "hideout", self);
-        return;
     }
+
     public void spawnTurret4(obj_id self) throws InterruptedException
     {
         location loc = new location(-6572.0f, 405.0f, 5939.71f, "corellia", null);
@@ -494,8 +503,8 @@ public class hideoutspawner extends script.base_script
         attachScript(turret4, "theme_park.corellia.patrol.turret");
         setObjVar(self, "HideoutInhabitants.turret4", turret4);
         setObjVar(turret4, "hideout", self);
-        return;
     }
+
     public void spawnTurret5(obj_id self) throws InterruptedException
     {
         location loc = new location(-6481.84f, 405.0f, 5912.74f, "corellia", null);
@@ -504,8 +513,8 @@ public class hideoutspawner extends script.base_script
         attachScript(turret5, "theme_park.corellia.patrol.turret");
         setObjVar(self, "HideoutInhabitants.turret5", turret5);
         setObjVar(turret5, "hideout", self);
-        return;
     }
+
     public void spawnTurret6(obj_id self) throws InterruptedException
     {
         location loc = new location(-6560.04f, 404.0f, 5965.22f, "corellia", null);
@@ -514,8 +523,8 @@ public class hideoutspawner extends script.base_script
         attachScript(turret6, "theme_park.corellia.patrol.turret");
         setObjVar(self, "HideoutInhabitants.turret6", turret6);
         setObjVar(turret6, "hideout", self);
-        return;
     }
+
     public void spawnTurret7(obj_id self) throws InterruptedException
     {
         location loc = new location(-6536.1f, 404.0f, 5941.59f, "corellia", null);
@@ -524,8 +533,8 @@ public class hideoutspawner extends script.base_script
         attachScript(turret7, "theme_park.corellia.patrol.turret");
         setObjVar(self, "HideoutInhabitants.turret7", turret7);
         setObjVar(turret7, "hideout", self);
-        return;
     }
+
     public void spawnTurret8(obj_id self) throws InterruptedException
     {
         location loc = new location(-6510.06f, 404.0f, 5931.47f, "corellia", null);
@@ -534,8 +543,8 @@ public class hideoutspawner extends script.base_script
         attachScript(turret8, "theme_park.corellia.patrol.turret");
         setObjVar(self, "HideoutInhabitants.turret8", turret8);
         setObjVar(turret8, "hideout", self);
-        return;
     }
+
     public void spawnTurret9(obj_id self) throws InterruptedException
     {
         location loc = new location(-6474.96f, 404.0f, 5937.97f, "corellia", null);
@@ -544,8 +553,8 @@ public class hideoutspawner extends script.base_script
         attachScript(turret9, "theme_park.corellia.patrol.turret");
         setObjVar(self, "HideoutInhabitants.turret9", turret9);
         setObjVar(turret9, "hideout", self);
-        return;
     }
+
     public void spawnTurret10(obj_id self) throws InterruptedException
     {
         location loc = new location(-6443.04f, 404.0f, 6000.2f, "corellia", null);
@@ -554,8 +563,8 @@ public class hideoutspawner extends script.base_script
         attachScript(turret10, "theme_park.corellia.patrol.turret");
         setObjVar(self, "HideoutInhabitants.turret10", turret10);
         setObjVar(turret10, "hideout", self);
-        return;
     }
+
     public void spawnTurret11(obj_id self) throws InterruptedException
     {
         location loc = new location(-6457.0f, 404.0f, 6032.01f, "corellia", null);
@@ -564,8 +573,8 @@ public class hideoutspawner extends script.base_script
         attachScript(turret11, "theme_park.corellia.patrol.turret");
         setObjVar(self, "HideoutInhabitants.turret11", turret11);
         setObjVar(turret11, "hideout", self);
-        return;
     }
+
     public void spawnTurret12(obj_id self) throws InterruptedException
     {
         location loc = new location(-6434.14f, 405.0f, 6032.2f, "corellia", null);
@@ -574,8 +583,8 @@ public class hideoutspawner extends script.base_script
         attachScript(turret12, "theme_park.corellia.patrol.turret");
         setObjVar(self, "HideoutInhabitants.turret12", turret12);
         setObjVar(turret12, "hideout", self);
-        return;
     }
+
     public void spawnTurret13(obj_id self) throws InterruptedException
     {
         location loc = new location(-6424.52f, 405.0f, 6019.65f, "corellia", null);
@@ -584,8 +593,8 @@ public class hideoutspawner extends script.base_script
         attachScript(turret13, "theme_park.corellia.patrol.turret");
         setObjVar(self, "HideoutInhabitants.turret13", turret13);
         setObjVar(turret13, "hideout", self);
-        return;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!hasObjVar(speaker, "gm"))
@@ -606,6 +615,7 @@ public class hideoutspawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doGating(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id foyer1 = getCellId(self, "foyer1");
@@ -614,6 +624,7 @@ public class hideoutspawner extends script.base_script
         attachScript(hall2, "theme_park.gating.rebel.foyer1_gate");
         return SCRIPT_CONTINUE;
     }
+
     public int turretDied(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id existing = getObjIdObjVar(self, "HideoutInhabitants.turret01");
@@ -696,6 +707,7 @@ public class hideoutspawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void killCelebs(obj_id self) throws InterruptedException
     {
         obj_id goldenrod = getObjIdObjVar(self, "HideoutInhabitants.c3po");
@@ -783,8 +795,8 @@ public class hideoutspawner extends script.base_script
         removeObjVar(self, "HideoutInhabitants.turret12");
         destroyObject(getObjIdObjVar(self, "HideoutInhabitants.turret13"));
         removeObjVar(self, "HideoutInhabitants.turret13");
-        return;
     }
+
     public void killDroids(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "HideoutInhabitants.mouse1"));
@@ -795,6 +807,5 @@ public class hideoutspawner extends script.base_script
         removeObjVar(self, "HideoutInhabitants.mouse3");
         destroyObject(getObjIdObjVar(self, "HideoutInhabitants.ra1"));
         removeObjVar(self, "HideoutInhabitants.ra1");
-        return;
     }
 }

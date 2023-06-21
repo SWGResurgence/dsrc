@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.create;
 import script.library.group;
@@ -10,20 +16,22 @@ import java.util.Vector;
 
 public class mine_door_terminal extends script.base_script
 {
-    public mine_door_terminal()
-    {
-    }
     public static final String TBL_MINE_WAVE = "datatables/dungeon/death_watch/mine_wave.iff";
     public static final string_id MNU_OPEN_DOOR = new string_id("dungeon/death_watch", "mnu_open_door");
     public static final string_id ACCESS_GRANTED = new string_id("dungeon/death_watch", "access_granted");
     public static final string_id ACCESS_DENIED = new string_id("dungeon/death_watch", "denied_access");
     public static final string_id TERMINAL_LOCKED = new string_id("dungeon/death_watch", "terminal_locked");
+    public mine_door_terminal()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);
         setObjVar(structure, "death_watch.mineTerminal", self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -38,6 +46,7 @@ public class mine_door_terminal extends script.base_script
         int mnuControl = mi.addRootMenu(menu_info_types.ITEM_USE, MNU_OPEN_DOOR);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -60,6 +69,7 @@ public class mine_door_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void checkAuthorization(obj_id structure, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(structure))
@@ -70,9 +80,11 @@ public class mine_door_terminal extends script.base_script
         obj_id[] objContents = utils.getContents(player, true);
         if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 String strItemTemplate = getTemplateName(objContent);
-                if (strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/passkey_mine.iff")) {
+                if (strItemTemplate.equals("object/tangible/dungeon/death_watch_bunker/passkey_mine.iff"))
+                {
                     obj_id passkey = objContent;
                     sendSystemMessage(player, ACCESS_GRANTED);
                     unlockDoors(structure, player);
@@ -94,8 +106,8 @@ public class mine_door_terminal extends script.base_script
             sendSystemMessage(player, TERMINAL_LOCKED);
             return;
         }
-        return;
     }
+
     public void spawnWave(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -118,8 +130,8 @@ public class mine_door_terminal extends script.base_script
             attachScript(spawnedCreature, "theme_park.dungeon.death_watch_bunker.mine_wave_01");
             x = x + 1;
         }
-        return;
     }
+
     public void unlockDoors(obj_id structure, obj_id player) throws InterruptedException
     {
         if (!group.isGrouped(player))
@@ -142,7 +154,8 @@ public class mine_door_terminal extends script.base_script
                 {
                     return;
                 }
-                for (Object member : members) {
+                for (Object member : members)
+                {
                     obj_id thisMember = ((obj_id) member);
                     setObjVar(thisMember, "death_watch.minePass", 1);
                     obj_id openRoom = getCellId(structure, "medroom38");
@@ -153,13 +166,14 @@ public class mine_door_terminal extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public int handleLockDown(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "terminal_lock_out");
         return SCRIPT_CONTINUE;
     }
+
     public int handleCallSupport1(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -187,6 +201,7 @@ public class mine_door_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCallSupport2(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);

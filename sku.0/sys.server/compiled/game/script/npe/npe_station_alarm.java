@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -11,16 +17,19 @@ public class npe_station_alarm extends script.base_script
     public npe_station_alarm()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "doPreloadRequest", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "doPreloadRequest", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnPreloadComplete(obj_id self) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);
@@ -35,6 +44,7 @@ public class npe_station_alarm extends script.base_script
         utils.setScriptVar(building, "objAlarms", objAlarms);
         return SCRIPT_CONTINUE;
     }
+
     public int doPreloadRequest(obj_id self, dictionary params) throws InterruptedException
     {
         requestPreloadCompleteTrigger(self);

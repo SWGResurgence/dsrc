@@ -1,5 +1,11 @@
 package script.space.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.space_crafting;
 import script.library.static_item;
 import script.library.utils;
@@ -10,20 +16,23 @@ import script.string_id;
 
 public class interface_scanning_tool extends script.base_script
 {
-    public interface_scanning_tool()
-    {
-    }
     public static final string_id SCAN_CONTENT = new string_id("spam", "scan_di");
     public static final string_id START_SCAN = new string_id("sui", "start_scan");
     public static final string_id SCAN_NOTHING = new string_id("sui", "scan_nothing");
+    public interface_scanning_tool()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (utils.hasLocalVar(self, "ctsBeingUnpacked"))
@@ -36,7 +45,7 @@ public class interface_scanning_tool extends script.base_script
             sendSystemMessage(transferer, errormessage2);
             return SCRIPT_OVERRIDE;
         }
-        if (space_crafting.isValidShipComponent(item) == false)
+        if (!space_crafting.isValidShipComponent(item))
         {
             string_id errormessage2 = new string_id(space_crafting.STF_COMPONENT_TOOL, "wrong_component_type");
             sendSystemMessage(transferer, errormessage2);
@@ -46,7 +55,7 @@ public class interface_scanning_tool extends script.base_script
         {
             int flags = getIntObjVar(item, "ship_comp.flags");
             boolean isBitSet = (flags & ship_component_flags.SCF_reverse_engineered) != 0;
-            if (isBitSet == true)
+            if (isBitSet)
             {
                 string_id errormessage = new string_id(space_crafting.STF_COMPONENT_TOOL, "already_engineered");
                 sendSystemMessage(transferer, errormessage);
@@ -66,6 +75,7 @@ public class interface_scanning_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -82,6 +92,7 @@ public class interface_scanning_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -103,6 +114,7 @@ public class interface_scanning_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -130,10 +142,12 @@ public class interface_scanning_tool extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            for (obj_id toolContent : toolContents) {
+            for (obj_id toolContent : toolContents)
+            {
                 int level = space_crafting.getReverseEngineeringLevel(toolContent);
                 String componentType = space_crafting.getShipComponentStringType(toolContent);
-                if (!componentType.equals("droid_interface")) {
+                if (!componentType.equals("droid_interface"))
+                {
                     return SCRIPT_CONTINUE;
                 }
                 string_id compName = getNameStringId(toolContent);
@@ -141,44 +155,55 @@ public class interface_scanning_tool extends script.base_script
                 int lootChance = 5 + (level / 2);
                 int lootRoll = rand(1, 100);
                 destroyObject(toolContent);
-                if (lootChance >= lootRoll) {
+                if (lootChance >= lootRoll)
+                {
                     int roll = rand(1, 6);
-                    if (roll < 6) {
+                    if (roll < 6)
+                    {
                         sendSystemMessage(player, "You find a detailed flight plan for a transport convoy, stored in the droid interface memory.", null);
                     }
-                    if (roll == 1) {
+                    if (roll == 1)
+                    {
                         static_item.createNewItemFunction("item_interdiction_data_disk_01", playerInv);
                     }
-                    if (roll == 2) {
+                    if (roll == 2)
+                    {
                         static_item.createNewItemFunction("item_interdiction_data_disk_02", playerInv);
                     }
-                    if (roll == 3) {
+                    if (roll == 3)
+                    {
                         static_item.createNewItemFunction("item_interdiction_data_disk_03", playerInv);
                     }
-                    if (roll == 4) {
+                    if (roll == 4)
+                    {
                         static_item.createNewItemFunction("item_interdiction_data_disk_04", playerInv);
                     }
-                    if (roll == 5) {
+                    if (roll == 5)
+                    {
                         static_item.createNewItemFunction("item_interdiction_data_disk_05", playerInv);
                     }
-                    if (roll == 6) {
+                    if (roll == 6)
+                    {
                         sendSystemMessage(player, "You find a rare droid command stored in the memory of the droid interface.", null);
                         int rollChip = rand(1, 3);
-                        if (rollChip == 1) {
+                        if (rollChip == 1)
+                        {
                             obj_id moduleImpDS = createObject("object/tangible/droid/droid_space_memory_module_1.iff", playerInv, "");
                             setObjVar(moduleImpDS, "programSize", 1);
                             setObjVar(moduleImpDS, "strDroidCommand", "droidcommand_zonetoimperialdeepspace");
                             setName(moduleImpDS, "");
                             setName(moduleImpDS, new string_id("space/droid_commands", "droidcommand_zonetoimperialdeepspace_chipname"));
                         }
-                        if (rollChip == 2) {
+                        if (rollChip == 2)
+                        {
                             obj_id moduleRebDS = createObject("object/tangible/droid/droid_space_memory_module_1.iff", playerInv, "");
                             setObjVar(moduleRebDS, "programSize", 1);
                             setObjVar(moduleRebDS, "strDroidCommand", "droidcommand_zonetorebeldeepspace");
                             setName(moduleRebDS, "");
                             setName(moduleRebDS, new string_id("space/droid_commands", "droidcommand_zonetorebeldeepspace_chipname"));
                         }
-                        if (rollChip == 3) {
+                        if (rollChip == 3)
+                        {
                             obj_id moduleKessel = createObject("object/tangible/droid/droid_space_memory_module_1.iff", playerInv, "");
                             setObjVar(moduleKessel, "programSize", 1);
                             setObjVar(moduleKessel, "strDroidCommand", "droidcommand_zonetokessel");
@@ -186,7 +211,9 @@ public class interface_scanning_tool extends script.base_script
                             setName(moduleKessel, new string_id("space/droid_commands", "droidcommand_zonetokessel_chipname"));
                         }
                     }
-                } else {
+                }
+                else
+                {
                     sendSystemMessage(player, "You find no useable data traces in the memory of the droid interface.", null);
                 }
             }

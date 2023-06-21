@@ -1,13 +1,21 @@
 package script.theme_park.dungeon.geonosian_madbio_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class chemical_poison_shutoff extends script.base_script
 {
+    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public chemical_poison_shutoff()
     {
     }
-    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         setOwner(self, player);
@@ -19,6 +27,7 @@ public class chemical_poison_shutoff extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -29,6 +38,7 @@ public class chemical_poison_shutoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void shutoffTrap(obj_id trap, obj_id player) throws InterruptedException
     {
         if (!hasObjVar(trap, "trap_off"))
@@ -39,13 +49,13 @@ public class chemical_poison_shutoff extends script.base_script
             string_id stabilizer = new string_id(MSGS, "stabilizer");
             sendSystemMessage(player, stabilizer);
         }
-        else 
+        else
         {
             string_id clean = new string_id(MSGS, "clean");
             sendSystemMessage(player, clean);
         }
-        return;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id giver, obj_id item) throws InterruptedException
     {
         obj_id trap = getObjIdObjVar(self, "trap");
@@ -56,7 +66,7 @@ public class chemical_poison_shutoff extends script.base_script
             sendSystemMessage(giver, tooBig);
             return SCRIPT_OVERRIDE;
         }
-        else 
+        else
         {
             shutoffTrap(trap, giver);
             dictionary webster = new dictionary();
@@ -65,6 +75,7 @@ public class chemical_poison_shutoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroyPoisonStabilizer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id chemical = params.getObjId("chemical");

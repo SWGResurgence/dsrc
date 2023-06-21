@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class qa_stealth extends script.base_script
@@ -7,6 +13,7 @@ public class qa_stealth extends script.base_script
     public qa_stealth()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -23,6 +30,7 @@ public class qa_stealth extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -40,12 +48,14 @@ public class qa_stealth extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         hideFromClient(self, false);
         detachScript(self, "test.qa_stealth");
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (hasScript(self, "test.qa_stealth"))

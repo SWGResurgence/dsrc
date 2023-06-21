@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.string_id;
 
@@ -39,6 +45,7 @@ public class reverse_engineering extends script.base_script
     public static final string_id POWERUP_PID_TITLE = new string_id("spam", "powerup_override_title");
     public static final string_id POWERUP_PID_PROMPT = new string_id("spam", "powerup_override");
     public static final float EXPIRATION_TIME = 3600.0f;
+
     public reverse_engineering()
     {
     }

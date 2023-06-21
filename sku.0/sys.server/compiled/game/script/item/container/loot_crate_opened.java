@@ -1,5 +1,11 @@
 package script.item.container;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.chat;
 import script.library.pet_lib;
 import script.obj_id;
@@ -7,13 +13,14 @@ import script.obj_id;
 public class loot_crate_opened extends script.base_script
 {
 
+    public String TRIGGER_NEARBY = "lootCrateTriggerNearby";
+    public String TRIGGER_NEARBY_VISUAL = "clienteffect/level_granted.cef";
+    public String TRIGGER_NEARBY_SOUND = "sound/item_ding.snd";
+    public float TRIGGER_RADIUS = 5.2f;
     public loot_crate_opened()
     {
     }
-    public String TRIGGER_NEARBY = "lootCrateTriggerNearby";
-    public String TRIGGER_NEARBY_VISUAL = "clienteffect/level_granted.cef";
-    public String TRIGGER_NEARBY_SOUND= "sound/item_ding.snd";
-    public float TRIGGER_RADIUS = 5.2f;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume(TRIGGER_NEARBY, TRIGGER_RADIUS, true);
@@ -34,6 +41,7 @@ public class loot_crate_opened extends script.base_script
         play2dNonLoopingSound(transferer, TRIGGER_NEARBY_SOUND);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id objDestinationContainer, obj_id objTransferer, obj_id objItem) throws InterruptedException
     {
         if (getVolumeFree(self) == getTotalVolume(self))
@@ -42,6 +50,7 @@ public class loot_crate_opened extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String strVolumeName, obj_id objPlayer) throws InterruptedException
     {
         if (strVolumeName.equals(TRIGGER_NEARBY))

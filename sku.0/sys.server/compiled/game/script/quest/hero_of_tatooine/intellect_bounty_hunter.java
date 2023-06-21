@@ -1,5 +1,11 @@
 package script.quest.hero_of_tatooine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -7,9 +13,6 @@ import script.string_id;
 
 public class intellect_bounty_hunter extends script.base_script
 {
-    public intellect_bounty_hunter()
-    {
-    }
     public static final String MARK_OF_INTELLECT = "object/tangible/loot/quest/hero_of_tatooine/mark_intellect.iff";
     public static final String SPAWNER_OBJVAR = "quest.hero_of_tatooine.intellect.spawner";
     public static final String SPAWNER_CONTROLLER = SPAWNER_OBJVAR + ".controller";
@@ -21,12 +24,17 @@ public class intellect_bounty_hunter extends script.base_script
     public static final string_id BH_LOSE = new string_id("quest/hero_of_tatooine/intellect_liar", "bh_lose");
     public static final string_id INTELLECT_INV_FULL = new string_id("quest/hero_of_tatooine/system_messages", "intellect_inv_full");
     public static final string_id NPC_NAME = new string_id("quest/hero_of_tatooine/npc_names", "tearfin");
+    public intellect_bounty_hunter()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "");
         setName(self, NPC_NAME);
         return SCRIPT_CONTINUE;
     }
+
     public int handleImplicationSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -60,13 +68,14 @@ public class intellect_bounty_hunter extends script.base_script
             chat.publicChat(self, player, BH_WIN);
             puzzleSuccess(self, player);
         }
-        else 
+        else
         {
             chat.chat(self, player, BH_LOSE, chat.ChatFlag_targetOnly);
             puzzleFailure(self, player);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void puzzleSuccess(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id mark_intellect = createObjectInInventoryAllowOverload(MARK_OF_INTELLECT, player);
@@ -91,6 +100,7 @@ public class intellect_bounty_hunter extends script.base_script
         setObjVar(self, SPAWNER_COMPLETE, 1);
         messageTo(control, "handleComplete", null, 0.0f, false);
     }
+
     public void puzzleFailure(obj_id self, obj_id player) throws InterruptedException
     {
         removeObjVar(player, INTELLECT_OBJVAR);

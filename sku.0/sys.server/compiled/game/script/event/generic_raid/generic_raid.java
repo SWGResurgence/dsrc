@@ -1,5 +1,11 @@
 package script.event.generic_raid;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.badge;
 import script.library.create;
@@ -10,10 +16,12 @@ import script.string_id;
 
 public class generic_raid extends script.base_script
 {
+    public static final String DATATABLE = "datatables/event/generic_raid/city_data.iff";
+
     public generic_raid()
     {
     }
-    public static final String DATATABLE = "datatables/event/generic_raid/city_data.iff";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String setting = getConfigSetting("EventTeam", "genericRaids");
@@ -56,6 +64,7 @@ public class generic_raid extends script.base_script
         messageTo(self, "endInvasion", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int invasionTimerPing(obj_id self, dictionary params) throws InterruptedException
     {
         int invasionActive = getIntObjVar(self, "auto_invasion.invasion_active");
@@ -70,19 +79,20 @@ public class generic_raid extends script.base_script
             {
                 messageTo(self, "startCheerleaderEvent", null, 1, false);
             }
-            else 
+            else
             {
                 messageTo(self, "startInvasion", null, 1, false);
             }
             setObjVar(self, "auto_invasion.invasion_active", 1);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             messageTo(self, "invasionTimerPing", null, 3600, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startInvasion(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "auto_invasion.reference_number"))
@@ -133,6 +143,7 @@ public class generic_raid extends script.base_script
         messageTo(self, "launchWave", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int launchWave(obj_id self, dictionary params) throws InterruptedException
     {
         int currentWave = getIntObjVar(self, "auto_invasion.current_wave");
@@ -160,6 +171,7 @@ public class generic_raid extends script.base_script
         messageTo(self, "startSpawning", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startSpawning(obj_id self, dictionary params) throws InterruptedException
     {
         String invasionTable = getStringObjVar(self, "auto_invasion.invasion_table");
@@ -222,6 +234,7 @@ public class generic_raid extends script.base_script
         messageTo(self, "startSpawning", null, spawnDelay, false);
         return SCRIPT_CONTINUE;
     }
+
     public int invaderDied(obj_id self, dictionary params) throws InterruptedException
     {
         int myNumber = params.getInt("myNumber");
@@ -249,6 +262,7 @@ public class generic_raid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int waveTimeLimitCheck(obj_id self, dictionary params) throws InterruptedException
     {
         int lastWave = params.getInt("currentWave");
@@ -274,6 +288,7 @@ public class generic_raid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int endInvasion(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "auto_invasion.invasion_active", 0);
@@ -292,9 +307,10 @@ public class generic_raid extends script.base_script
         if ((badgeAwarded > 0) && (badgeName != null) && (badgeName.length() > 0))
         {
             obj_id[] objPlayers = getPlayerCreaturesInRange(self, 255);
-            if (objPlayers != null && objPlayers.length > 0)
+            if (objPlayers != null)
             {
-                for (obj_id objPlayer : objPlayers) {
+                for (obj_id objPlayer : objPlayers)
+                {
                     badge.grantBadge(objPlayer, badgeName);
                 }
             }
@@ -319,16 +335,19 @@ public class generic_raid extends script.base_script
         messageTo(self, "invasionTimerPing", null, 2700, false);
         return SCRIPT_CONTINUE;
     }
+
     private void announceStatusToPlayers(obj_id self, String messageId) throws InterruptedException
     {
         obj_id[] objPlayers = getPlayerCreaturesInRange(self, 256.0f);
-        if (objPlayers != null && objPlayers.length > 0)
+        if (objPlayers != null)
         {
-            for (obj_id objPlayer : objPlayers) {
+            for (obj_id objPlayer : objPlayers)
+            {
                 sendSystemMessage(objPlayer, new string_id("auto_invasion", messageId));
             }
         }
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (isGod(objSpeaker))

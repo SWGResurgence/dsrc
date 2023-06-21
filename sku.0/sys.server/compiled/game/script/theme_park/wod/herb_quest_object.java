@@ -1,11 +1,19 @@
 package script.theme_park.wod;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.base_class.*;
 import script.combat_engine.*;
+
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Vector;
+
 import script.base_script;
 
 import script.library.buff;
@@ -27,9 +35,6 @@ import script.library.utils;
 
 public class herb_quest_object extends script.base_script
 {
-    public herb_quest_object()
-    {
-    }
     public static final String QUEST_NAME = "wod_prologue_herb_gathering";
     public static final String QUEST_NAME_TWO = "wod_themepark_ns_herb_gathering";
     public static final String QUEST_NAME_THREE = "wod_themepark_herb_gathering";
@@ -48,6 +53,10 @@ public class herb_quest_object extends script.base_script
     public static final string_id SID_ALRDY_COMPLETED_QUEST = new string_id(THEMEPARK, "herb_already_completed_quest");
     public static final int COUNTDOWN_TIMER = 3;
     public static final int CASH_AMOUNT = 25;
+    public herb_quest_object()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -65,6 +74,7 @@ public class herb_quest_object extends script.base_script
         int mnu2 = mi.addRootMenu(menu_info_types.ITEM_USE, SID_MNU_USE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -104,22 +114,22 @@ public class herb_quest_object extends script.base_script
         switch (herbType)
         {
             case 1:
-            zipBar = SID_ZIP_BAR_1;
-            break;
+                zipBar = SID_ZIP_BAR_1;
+                break;
             case 2:
-            zipBar = SID_ZIP_BAR_2;
-            break;
+                zipBar = SID_ZIP_BAR_2;
+                break;
             case 3:
-            zipBar = SID_ZIP_BAR_3;
-            break;
+                zipBar = SID_ZIP_BAR_3;
+                break;
             case 4:
-            zipBar = SID_ZIP_BAR_4;
-            break;
+                zipBar = SID_ZIP_BAR_4;
+                break;
             case 5:
-            zipBar = SID_ZIP_BAR_5;
-            break;
+                zipBar = SID_ZIP_BAR_5;
+                break;
             default:
-            break;
+                break;
         }
         int startTime = 0;
         int range = 3;
@@ -131,6 +141,7 @@ public class herb_quest_object extends script.base_script
         CustomerServiceLog("wod_themepark", "herb_quest_object.OnObjectMenuSelect() Player: " + player + " is destroying WoD Herb: " + self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleObjectSwapTimer(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -212,7 +223,7 @@ public class herb_quest_object extends script.base_script
         {
             groundquests.sendSignal(player, questSignal);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_DONT_NEED_HERB);
             if (!utils.hasScriptVar(player, "commPlayerherbs"))
@@ -238,6 +249,7 @@ public class herb_quest_object extends script.base_script
         messageTo(self, "destroySelf", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "mySpawner"))

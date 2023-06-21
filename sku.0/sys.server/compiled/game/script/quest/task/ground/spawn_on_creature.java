@@ -1,16 +1,23 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.obj_id;
 
 public class spawn_on_creature extends script.base_script
 {
+    public static final int maxRetries = 5;
+    public static final String retryCountName = "retryCount";
     public spawn_on_creature()
     {
     }
-    public static final int maxRetries = 5;
-    public static final String retryCountName = "retryCount";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -18,6 +25,7 @@ public class spawn_on_creature extends script.base_script
         messageTo(self, "messageSpawnCreatureCleanup", params, spawn.cleanupTime, false);
         return SCRIPT_CONTINUE;
     }
+
     public int messageSpawnCreatureCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         if (isDead(self))
@@ -34,7 +42,7 @@ public class spawn_on_creature extends script.base_script
                 params.put(retryCountName, retryCount);
                 messageTo(self, "messageSpawnCreatureCleanup", params, spawn.cleanupRetryTime, false);
             }
-            else 
+            else
             {
                 LOG("QUEST_SPAWN_LOG", "Creature in combat - no more retries left.");
             }

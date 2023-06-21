@@ -1,5 +1,11 @@
 package script.theme_park.kashyyyk.rryatt_trail;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_dungeon;
 import script.location;
@@ -7,10 +13,12 @@ import script.obj_id;
 
 public class rryatt_player extends script.base_script
 {
+    public static final String lastTrailGuideTransition = "lastRryattTransition";
+
     public rryatt_player()
     {
     }
-    public static final String lastTrailGuideTransition = "lastRryattTransition";
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         String scene = getCurrentSceneName();
@@ -20,6 +28,7 @@ public class rryatt_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, lastTrailGuideTransition))
@@ -28,6 +37,7 @@ public class rryatt_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnsticking(obj_id self) throws InterruptedException
     {
         obj_id movementBase = obj_id.NULL_ID;

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -8,53 +14,47 @@ import script.library.utils;
 
 public class lifeday_vendor extends script.base_script
 {
+    public static String c_stringFile = "conversation/lifeday_vendor";
+
     public lifeday_vendor()
     {
     }
-    public static String c_stringFile = "conversation/lifeday_vendor";
+
     public boolean lifeday_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean lifeday_vendor_condition_questNotCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.hasCompletedQuest(player, "lifeday_stap_1"))
         {
             return false;
         }
-        if (groundquests.isQuestActive(player, "lifeday_stap_1"))
-        {
-            return false;
-        }
-        return true;
+        return !groundquests.isQuestActive(player, "lifeday_stap_1");
     }
+
     public boolean lifeday_vendor_condition_questReturned(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "lifeday_stap_1", "talkSaun_needsStap"))
         {
             return true;
         }
-        if (groundquests.isTaskActive(player, "lifeday_stap_1", "talkSaun_hasStap"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "lifeday_stap_1", "talkSaun_hasStap");
     }
+
     public boolean lifeday_vendor_condition_questCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedQuest(player, "lifeday_stap_1"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedQuest(player, "lifeday_stap_1");
     }
+
     public void lifeday_vendor_action_showTokenVendorUI(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary d = new dictionary();
         d.put("player", player);
         messageTo(npc, "showInventorySUI", d, 0, false);
-        return;
     }
+
     public void lifeday_vendor_action_giveQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.hasCompletedQuest(player, "lifeday_stap_1"))
@@ -63,10 +63,12 @@ public class lifeday_vendor extends script.base_script
         }
         groundquests.grantQuest(player, "lifeday_stap_1");
     }
+
     public void lifeday_vendor_action_finishQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "talkedSaun");
     }
+
     public int lifeday_vendor_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_15"))
@@ -95,7 +97,7 @@ public class lifeday_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_18");
@@ -108,7 +110,7 @@ public class lifeday_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lifeday_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -118,6 +120,7 @@ public class lifeday_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday_vendor_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_18"))
@@ -154,7 +157,7 @@ public class lifeday_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_22");
@@ -163,7 +166,7 @@ public class lifeday_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lifeday_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -173,6 +176,7 @@ public class lifeday_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday_vendor_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_22"))
@@ -193,6 +197,7 @@ public class lifeday_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday_vendor_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -212,7 +217,7 @@ public class lifeday_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -221,7 +226,7 @@ public class lifeday_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lifeday_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -242,6 +247,7 @@ public class lifeday_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday_vendor_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -270,7 +276,7 @@ public class lifeday_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -283,7 +289,7 @@ public class lifeday_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lifeday_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -293,6 +299,7 @@ public class lifeday_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday_vendor_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -319,7 +326,7 @@ public class lifeday_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -332,7 +339,7 @@ public class lifeday_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lifeday_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -358,6 +365,7 @@ public class lifeday_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday_vendor_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -392,6 +400,7 @@ public class lifeday_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday_vendor_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -418,7 +427,7 @@ public class lifeday_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_51");
@@ -431,7 +440,7 @@ public class lifeday_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lifeday_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -453,6 +462,7 @@ public class lifeday_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday_vendor_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_51"))
@@ -489,6 +499,7 @@ public class lifeday_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -499,12 +510,14 @@ public class lifeday_vendor extends script.base_script
         setCondition(self, CONDITION_SPACE_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_SPACE_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -513,18 +526,21 @@ public class lifeday_vendor extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.lifeday_vendor");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -549,7 +565,7 @@ public class lifeday_vendor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_15");
@@ -561,7 +577,7 @@ public class lifeday_vendor extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "lifeday_vendor", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -595,7 +611,7 @@ public class lifeday_vendor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -611,7 +627,7 @@ public class lifeday_vendor extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "lifeday_vendor", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -645,7 +661,7 @@ public class lifeday_vendor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -661,7 +677,7 @@ public class lifeday_vendor extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "lifeday_vendor", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -682,6 +698,7 @@ public class lifeday_vendor extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("lifeday_vendor"))

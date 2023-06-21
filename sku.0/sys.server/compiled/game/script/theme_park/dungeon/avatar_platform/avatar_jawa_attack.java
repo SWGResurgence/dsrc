@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.location;
@@ -10,6 +16,7 @@ public class avatar_jawa_attack extends script.base_script
     public avatar_jawa_attack()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
@@ -17,6 +24,7 @@ public class avatar_jawa_attack extends script.base_script
         setObjVar(structure, "avatar_platform.jawa_attacker", self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         if (name.equals("attackPoint"))
@@ -39,6 +47,7 @@ public class avatar_jawa_attack extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSummonJawa(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -53,6 +62,7 @@ public class avatar_jawa_attack extends script.base_script
         addLocationTarget("chatterPoint", chatterPoint, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int handleJawaDeath(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, false);
@@ -65,6 +75,7 @@ public class avatar_jawa_attack extends script.base_script
         addLocationTarget("attackPoint", attackPoint, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int handleReturnHome(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, true);

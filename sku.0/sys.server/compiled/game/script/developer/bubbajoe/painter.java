@@ -6,6 +6,12 @@ package script.developer.bubbajoe;/*
 @WIP: This script is a work in progress and is not yet functional.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 
@@ -20,6 +26,8 @@ public class painter extends script.base_script
 {
     public float PLANET_WIDE = 8192f;
     public location origin = new location(0, 0, 0, getCurrentSceneName(), null);
+    public String header = "\n";
+
     public int OnAttach(obj_id self)
     {
         return SCRIPT_CONTINUE;
@@ -29,7 +37,7 @@ public class painter extends script.base_script
     {
         return SCRIPT_CONTINUE;
     }
-    public String header = "\n";
+
     public void paint(obj_id self, obj_id[] targets) throws IOException
     {
         final BufferedImage image = new BufferedImage(8000, 8000, BufferedImage.TYPE_INT_ARGB);

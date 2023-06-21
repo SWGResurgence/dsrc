@@ -1,5 +1,11 @@
 package script.event.bh_event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -10,10 +16,12 @@ import script.string_id;
 
 public class cantina_actor2 extends script.base_script
 {
+    public static final String STF_FILE = "event/bhcelebs";
+
     public cantina_actor2()
     {
     }
-    public static final String STF_FILE = "event/bhcelebs";
+
     public int moveToMainActorPosition(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);
@@ -30,16 +38,19 @@ public class cantina_actor2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void debugMessage(obj_id self, String dataStuff, location here) throws InterruptedException
     {
         obj_id[] objPlayers = getPlayerCreaturesInRange(self, 64.0f);
-        if (objPlayers != null && objPlayers.length > 0)
+        if (objPlayers != null)
         {
-            for (obj_id objPlayer : objPlayers) {
+            for (obj_id objPlayer : objPlayers)
+            {
                 sendSystemMessage(objPlayer, "Data: " + dataStuff + " and " + here, "");
             }
         }
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         if (name.equals("startBosskLine1"))
@@ -57,11 +68,13 @@ public class cantina_actor2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int goDie(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int runAwayAndPoof(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "bhcelebs.forcedCleanup"))
@@ -82,6 +95,7 @@ public class cantina_actor2 extends script.base_script
         messageTo(self, "goDie", null, 15, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (!hasObjVar(self, "bhcelebs.run_away"))
@@ -101,6 +115,7 @@ public class cantina_actor2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         utils.setScriptVar(getTopMostContainer(self), "bhcelebs.beingDestroyed", true);

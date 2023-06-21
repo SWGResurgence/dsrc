@@ -1,5 +1,11 @@
 package script.item.trap;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.buff;
@@ -12,6 +18,7 @@ public class trap_tranq_dart extends script.item.trap.trap_base
     public static final int REUSE_TIMER = 10;
     public static final string_id SID_SYS_EFFECT = new string_id("trap/trap", "trap_tranq_dart_effect");
     public static final string_id SID_NO_EFFECT = new string_id("trap/trap", "trap_tranq_dart_effect_no");
+
     public trap_tranq_dart()
     {
     }

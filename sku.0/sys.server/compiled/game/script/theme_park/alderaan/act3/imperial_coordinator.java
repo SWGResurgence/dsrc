@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.factions;
@@ -8,16 +14,19 @@ import script.obj_id;
 
 public class imperial_coordinator extends script.base_script
 {
+    public static final String COMMANDER_TABLE = "datatables/convo/alderaan/act2/commander_locs.iff";
+
     public imperial_coordinator()
     {
     }
-    public static final String COMMANDER_TABLE = "datatables/convo/alderaan/act2/commander_locs.iff";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int messageStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -28,27 +37,27 @@ public class imperial_coordinator extends script.base_script
         switch (missionNum)
         {
             case 1:
-            deliveryLoc = getDeliveryLoc(player, 1500, 2000);
-            npcName = "coa3_lookout";
-            break;
+                deliveryLoc = getDeliveryLoc(player, 1500, 2000);
+                npcName = "coa3_lookout";
+                break;
             case 3:
-            deliveryLoc = getDeliveryLoc(player, 1500, 2500);
-            npcName = "object/building/theme_park/alderaan/act3/flora_warehouse.iff";
-            break;
+                deliveryLoc = getDeliveryLoc(player, 1500, 2500);
+                npcName = "object/building/theme_park/alderaan/act3/flora_warehouse.iff";
+                break;
             case 4:
-            if (!hasObjVar(player, "coa3.imperial.missionPlanet"))
-            {
-                deliveryLoc = getCommanderLoc(player);
-            }
-            else 
-            {
-                deliveryLoc = getLocationObjVar(player, "coa3.imperial.missionLoc");
-            }
-            npcName = "";
-            break;
+                if (!hasObjVar(player, "coa3.imperial.missionPlanet"))
+                {
+                    deliveryLoc = getCommanderLoc(player);
+                }
+                else
+                {
+                    deliveryLoc = getLocationObjVar(player, "coa3.imperial.missionLoc");
+                }
+                npcName = "";
+                break;
             default:
-            LOG("CoA3_Imperial", "WARNING!!!  Imperial_Coordinator - Recieved messageStartMission for unknown mission number. (" + missionNum + ")");
-            return SCRIPT_OVERRIDE;
+                LOG("CoA3_Imperial", "WARNING!!!  Imperial_Coordinator - Recieved messageStartMission for unknown mission number. (" + missionNum + ")");
+                return SCRIPT_OVERRIDE;
         }
         location returnLoc = new location();
         obj_id building = getTopMostContainer(npc);
@@ -56,7 +65,7 @@ public class imperial_coordinator extends script.base_script
         {
             returnLoc = getLocation(npc);
         }
-        else 
+        else
         {
             returnLoc = getLocation(building);
         }
@@ -68,12 +77,13 @@ public class imperial_coordinator extends script.base_script
         {
             messageTo(player, "handleRestartMission", params, 0, false);
         }
-        else 
+        else
         {
             attachScript(player, "theme_park.alderaan.act3.imperial_mission");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int messageAbortMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -85,21 +95,22 @@ public class imperial_coordinator extends script.base_script
             case 2:
             case 3:
             case 4:
-            messageTo(player, "handleAbortMission", params, 0, false);
-            break;
+                messageTo(player, "handleAbortMission", params, 0, false);
+                break;
             default:
-            LOG("CoA3_Imperial", "WARNING!!!  Imperial_Coordinator - Recieved messageAbortMission for unknown mission number. (" + missionNum + ")");
+                LOG("CoA3_Imperial", "WARNING!!!  Imperial_Coordinator - Recieved messageAbortMission for unknown mission number. (" + missionNum + ")");
         }
         return SCRIPT_CONTINUE;
     }
+
     public location getDeliveryLoc(obj_id player, int minDistance, int maxDistance) throws InterruptedException
     {
-        final String planetList[] = 
-        {
-            "dathomir",
-            "endor",
-            "yavin4"
-        };
+        final String[] planetList =
+                {
+                        "dathomir",
+                        "endor",
+                        "yavin4"
+                };
         int idx = rand(0, planetList.length - 1);
         location planetLoc = new location(8190, 500, 8190, planetList[idx]);
         setObjVar(player, "coa3.imperial.redirect.planet", planetList[idx]);
@@ -107,6 +118,7 @@ public class imperial_coordinator extends script.base_script
         setObjVar(player, "coa3.imperial.redirect.maxDistance", maxDistance);
         return planetLoc;
     }
+
     public location getCommanderLoc(obj_id player) throws InterruptedException
     {
         String[] commanderFaction = dataTableGetStringColumn(COMMANDER_TABLE, 0);
@@ -123,6 +135,7 @@ public class imperial_coordinator extends script.base_script
         setObjVar(player, "coa3.imperial.missionPlanet", planet);
         return commanderLoc;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         if ((getTemplateName(item)).equals("object/tangible/theme_park/alderaan/act3/alderaan_flora.iff"))

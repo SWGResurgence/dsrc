@@ -1,15 +1,23 @@
 package script.theme_park.dungeon.diant_zuy;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.colors;
 import script.library.sui;
 
 public class mainframe extends script.base_script
 {
+    public static final String DIANT_BUNKER = "dungeon/diant_bunker";
+
     public mainframe()
     {
     }
-    public static final String DIANT_BUNKER = "dungeon/diant_bunker";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         string_id mainframeUse = new string_id(DIANT_BUNKER, "mainframe_use");
@@ -18,12 +26,13 @@ public class mainframe extends script.base_script
         {
             mid.setServerNotify(true);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, mainframeUse);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -58,6 +67,7 @@ public class mainframe extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int showMainframe(obj_id pcd, obj_id player) throws InterruptedException
     {
         string_id textMsg = new string_id(DIANT_BUNKER, "computer_mainframe_text");
@@ -77,6 +87,7 @@ public class mainframe extends script.base_script
         sui.showSUIPage(pid);
         return pid;
     }
+
     public int handleMainframe(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -90,26 +101,27 @@ public class mainframe extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            if (revert != null && !revert.equals(""))
-            {
-                string_id computerMainframeInfo = new string_id(DIANT_BUNKER, "computer_mainframe_info");
-                sendSystemMessage(player, computerMainframeInfo);
-                return SCRIPT_CONTINUE;
-            }
-            else 
-            {
-                string_id computerMainframeYes = new string_id(DIANT_BUNKER, "computer_mainframe_yes");
-                sendSystemMessage(player, computerMainframeYes);
-                messageTo(self, "tamperWithMainframe", params, 0, false);
-                return SCRIPT_CONTINUE;
-            }
+                if (revert != null && !revert.equals(""))
+                {
+                    string_id computerMainframeInfo = new string_id(DIANT_BUNKER, "computer_mainframe_info");
+                    sendSystemMessage(player, computerMainframeInfo);
+                    return SCRIPT_CONTINUE;
+                }
+                else
+                {
+                    string_id computerMainframeYes = new string_id(DIANT_BUNKER, "computer_mainframe_yes");
+                    sendSystemMessage(player, computerMainframeYes);
+                    messageTo(self, "tamperWithMainframe", params, 0, false);
+                    return SCRIPT_CONTINUE;
+                }
             case sui.BP_CANCEL:
-            string_id computerMainframeNo = new string_id(DIANT_BUNKER, "computer_mainframe_no");
-            sendSystemMessage(player, computerMainframeNo);
-            return SCRIPT_CONTINUE;
+                string_id computerMainframeNo = new string_id(DIANT_BUNKER, "computer_mainframe_no");
+                sendSystemMessage(player, computerMainframeNo);
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tamperWithMainframe(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

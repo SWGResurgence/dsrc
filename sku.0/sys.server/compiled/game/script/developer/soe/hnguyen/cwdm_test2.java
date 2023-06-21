@@ -1,5 +1,11 @@
 package script.developer.soe.hnguyen;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class cwdm_test2 extends script.base_script
     public cwdm_test2()
     {
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (strText.equals("cwdm_doit"))
@@ -18,6 +25,7 @@ public class cwdm_test2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnClusterWideDataResponse(obj_id self, String strManagerName, String strElementNameRegex, int requestID, String[] elementNameList, dictionary[] dictionaryList, int lockKey) throws InterruptedException
     {
         LOG("***HUY***", "OnClusterWideDataResponse() manager name (" + strManagerName + ") element name regex (" + strElementNameRegex + ") request id (" + requestID + ") match count (" + elementNameList.length + ") lock key (" + lockKey + ")");

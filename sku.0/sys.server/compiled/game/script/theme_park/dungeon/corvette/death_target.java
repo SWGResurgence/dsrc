@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.corvette;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 
@@ -10,6 +16,7 @@ public class death_target extends script.base_script
     public death_target()
     {
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpse) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -29,16 +36,20 @@ public class death_target extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
                 boolean prizeAwarded = false;
-                for (Object player1 : players) {
+                for (Object player1 : players)
+                {
                     obj_id player = (obj_id) player1;
                     messageTo(player, "youWin", null, 1, false);
-                    if (!prizeAwarded) {
+                    if (!prizeAwarded)
+                    {
                         // the ITV should be a 12.5% chance to be awarded.
                         int prize = rand(0, 7);
-                        if (prize == 4) {
+                        if (prize == 4)
+                        {
                             obj_id inv = utils.getInventoryContainer(player);
                             obj_id itv = createObject("object/tangible/veteran_reward/instant_travel_terminal.iff", inv, "");
-                            if (isIdValid(itv)) {
+                            if (isIdValid(itv))
+                            {
                                 CustomerServiceLog("Loot", "User: (" + player + ") " + getName(player) + " has won the factional Instant Travel Vehicle.");
                                 sendSystemMessage(player, "Congratulations! You've looted the factional Instant Travel Vehicle!", null);
                                 playMusic(player, "sound/music_mission_complete.snd");
@@ -51,6 +62,7 @@ public class death_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean groupHasObjVar(obj_id player, String objvarName) throws InterruptedException
     {
         if (hasObjVar(player, objvarName))
@@ -67,8 +79,10 @@ public class death_target extends script.base_script
         {
             return false;
         }
-        for (obj_id thisMember : members) {
-            if (hasObjVar(thisMember, objvarName)) {
+        for (obj_id thisMember : members)
+        {
+            if (hasObjVar(thisMember, objvarName))
+            {
                 return true;
             }
         }

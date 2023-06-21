@@ -1,5 +1,11 @@
 package script.poi.rabidbeast;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.group;
@@ -10,21 +16,22 @@ import script.obj_id;
 
 public class master extends script.theme_park.poi.base
 {
-    public master()
-    {
-    }
     public static final String SCENARIO_NAME = "rabidbeast";
     public static final String LOG_NAME = "poiRabidBeast Master";
     public static final String BASE_PATH = "poi." + SCENARIO_NAME;
-    public static final String MEDIATOR_TYPE = "MEDIATOR_TYPE";
     public static final String SCRIPT_ANTAGONIST = BASE_PATH + ".antagonist";
     public static final String SCRIPT_MEDIATOR = BASE_PATH + ".mediator";
+    public static final String MEDIATOR_TYPE = "MEDIATOR_TYPE";
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final int MAX_ITERATIONS = 30;
     public static final String CREATURE_WHERE = "where";
     public static final String CREATURE_LEVEL = "level";
     public static final String CREATURE_NAME = "creatureName";
     public static final String CREATURE_TAME = "canTame";
+    public master()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String planet = getCurrentSceneName();
@@ -34,26 +41,31 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupScenario(obj_id self, dictionary params) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int initScenario(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -67,10 +79,10 @@ public class master extends script.theme_park.poi.base
         String mtype = params.getString("MEDIATOR_TEMPLATE");
         setObjVar(self, MEDIATOR_TYPE, mtype);
         dataTableOpen(CREATURE_TABLE);
-        String creature_where[] = dataTableGetStringColumn(CREATURE_TABLE, CREATURE_WHERE);
-        String creature_name[] = dataTableGetStringColumn(CREATURE_TABLE, CREATURE_NAME);
-        int creature_level[] = dataTableGetIntColumn(CREATURE_TABLE, CREATURE_LEVEL);
-        float creature_tamable[] = dataTableGetFloatColumn(CREATURE_TABLE, CREATURE_TAME);
+        String[] creature_where = dataTableGetStringColumn(CREATURE_TABLE, CREATURE_WHERE);
+        String[] creature_name = dataTableGetStringColumn(CREATURE_TABLE, CREATURE_NAME);
+        int[] creature_level = dataTableGetIntColumn(CREATURE_TABLE, CREATURE_LEVEL);
+        float[] creature_tamable = dataTableGetFloatColumn(CREATURE_TABLE, CREATURE_TAME);
         int planet_entries = 0;
         for (int i = 0; i < creature_name.length; i++)
         {
@@ -120,7 +132,7 @@ public class master extends script.theme_park.poi.base
             return SCRIPT_CONTINUE;
         }
         scenario.createTeam(self, "antagonist", self.toString() + "_antagonist");
-        scenario.createTeam(self, "mediator", self.toString() + "_mediator");
+        scenario.createTeam(self, "mediator", self + "_mediator");
         if (!createTheaters(self))
         {
             scenario.cleanup(self);
@@ -128,12 +140,14 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean createTheaters(obj_id self) throws InterruptedException
     {
         obj_id theater = poi.createObject(getStringObjVar(self, "theaterTemplate"), 0, 0);
         setObjVar(self, "theater", theater);
         return true;
     }
+
     public int handleTheaterComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (!createMediator(self))
@@ -143,6 +157,7 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public void spawnNpcMobiles(obj_id self) throws InterruptedException
     {
         int difficultyLevel = getIntObjVar(self, "spawning.intDifficultyLevel");
@@ -168,6 +183,7 @@ public class master extends script.theme_park.poi.base
             }
         }
     }
+
     public obj_id spawnMobile(obj_id self, int index, String name) throws InterruptedException
     {
         location loiterloc = new location(getLocation(self));
@@ -182,6 +198,7 @@ public class master extends script.theme_park.poi.base
         }
         return null;
     }
+
     public boolean createMediator(obj_id self) throws InterruptedException
     {
         String type = getStringObjVar(self, MEDIATOR_TYPE);
@@ -197,6 +214,7 @@ public class master extends script.theme_park.poi.base
         ai_lib.setDefaultCalmBehavior(mediator, ai_lib.BEHAVIOR_SENTINEL);
         return true;
     }
+
     public int startAttack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id mediator = poi.findObject("mediator_0");
@@ -228,13 +246,13 @@ public class master extends script.theme_park.poi.base
                 if ((members == null) || (members.length == 0))
                 {
                 }
-                else 
+                else
                 {
                     int j = rand(0, members.length - 1);
                     startCombat(a, members[j]);
                 }
             }
-            else 
+            else
             {
                 startCombat(a, target);
             }
@@ -245,6 +263,7 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleActorDeath(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id mediator = poi.findObject("mediator_0");

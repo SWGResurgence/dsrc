@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.utils;
@@ -10,6 +16,7 @@ public class npe_band_sequence extends script.base_script
     public npe_band_sequence()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
@@ -17,11 +24,13 @@ public class npe_band_sequence extends script.base_script
         messageTo(self, "npeSetName", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnPreloadComplete(obj_id self) throws InterruptedException
     {
         boolean setting = utils.checkConfigFlag("ScriptFlags", "npeSequencersActive");
         return SCRIPT_CONTINUE;
     }
+
     public int npeSetName(obj_id self, dictionary params) throws InterruptedException
     {
         String myName = utils.getStringObjVar(self, "strSequenceIdentifier");

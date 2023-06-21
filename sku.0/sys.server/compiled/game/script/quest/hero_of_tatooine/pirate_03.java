@@ -1,5 +1,11 @@
 package script.quest.hero_of_tatooine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -9,10 +15,12 @@ import script.string_id;
 
 public class pirate_03 extends script.base_script
 {
+    public static final string_id NPC_NAME = new string_id("quest/hero_of_tatooine/npc_names", "pirate_trapped_02");
+
     public pirate_03()
     {
     }
-    public static final string_id NPC_NAME = new string_id("quest/hero_of_tatooine/npc_names", "pirate_trapped_02");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.ai_combat");
@@ -22,6 +30,7 @@ public class pirate_03 extends script.base_script
         messageTo(self, "action01", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         if (name.equals("statueLoc") && !hasObjVar(self, "statueReached"))
@@ -40,6 +49,7 @@ public class pirate_03 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int action01(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -56,6 +66,7 @@ public class pirate_03 extends script.base_script
         addLocationTarget("statueLoc", statueTarget, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int action02(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);

@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.sher_kar;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -8,9 +14,6 @@ import script.string_id;
 
 public class sher_kar extends script.base_script
 {
-    public sher_kar()
-    {
-    }
     public static final int AE_RECAST = 32;
     public static final int AE_DAMAGE = 600;
     public static final float HEALTH_TRIGGER_1 = 0.95f;
@@ -20,24 +23,31 @@ public class sher_kar extends script.base_script
     public static final float HEALTH_TRIGGER_5 = 0.35f;
     public static final float HEALTH_TRIGGER_6 = 0.20f;
     public static final float HEALTH_TRIGGER_7 = 0.05f;
+    public sher_kar()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_SHER_KAR);
         trial.bumpSession(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         trial.bumpSession(self);
         messageTo(trial.getTop(self), "sherKarDied", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         messageTo(self, "performAe", trial.getSessionDict(self), 0, false);
         messageTo(self, "doEnrage", trial.getSessionDict(self), 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         trial.bumpSession(self);
@@ -47,11 +57,13 @@ public class sher_kar extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         verifyHealth(self);
         return SCRIPT_CONTINUE;
     }
+
     public int doEnrage(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -62,6 +74,7 @@ public class sher_kar extends script.base_script
         messageTo(self, "enrageBuff", trial.getSessionDict(self), 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int enrageWarning(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = trial.getPlayersInDungeon(trial.getTop(self));
@@ -72,6 +85,7 @@ public class sher_kar extends script.base_script
         utils.sendSystemMessage(players, trial.MONSTER_ENRAGE_WARNING);
         return SCRIPT_CONTINUE;
     }
+
     public int enrageBuff(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -82,6 +96,7 @@ public class sher_kar extends script.base_script
         messageTo(self, "doEnrage", trial.getSessionDict(self), 75, false);
         return SCRIPT_CONTINUE;
     }
+
     public int performAe(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -93,7 +108,7 @@ public class sher_kar extends script.base_script
         {
             targets = trial.getValidTargetsInRadius(self, 96.0f);
         }
-        else 
+        else
         {
             targets = trial.getPlayersInDungeon(trial.getTop(self));
         }
@@ -102,7 +117,8 @@ public class sher_kar extends script.base_script
             trial.bumpSession(self);
             return SCRIPT_CONTINUE;
         }
-        for (obj_id target : targets) {
+        for (obj_id target : targets)
+        {
             int damage = AE_DAMAGE;
             prose_package pp = new prose_package();
             pp.stringId = new string_id("cbt_spam", "sk_cave_in");
@@ -116,6 +132,7 @@ public class sher_kar extends script.base_script
         messageTo(self, "performAe", trial.getSessionDict(self), AE_RECAST, false);
         return SCRIPT_CONTINUE;
     }
+
     public void resetSelf(obj_id self) throws InterruptedException
     {
         int max = getMaxHealth(self);
@@ -124,18 +141,19 @@ public class sher_kar extends script.base_script
         addToHealth(self, toHeal);
         ai_lib.clearCombatData();
         trial.healAssemblyUnit(self);
-        String[] healthObjVar = 
-        {
-            "stage1",
-            "stage2",
-            "stage3",
-            "stage4",
-            "stage5",
-            "stage6",
-            "stage7"
-        };
+        String[] healthObjVar =
+                {
+                        "stage1",
+                        "stage2",
+                        "stage3",
+                        "stage4",
+                        "stage5",
+                        "stage6",
+                        "stage7"
+                };
         utils.removeObjVarList(self, healthObjVar);
     }
+
     public void verifyHealth(obj_id self) throws InterruptedException
     {
         float max = getMaxHealth(self);
@@ -174,37 +192,37 @@ public class sher_kar extends script.base_script
                 return;
             }
             doHealthEvent(self, 1);
-            return;
         }
     }
+
     public void doHealthEvent(obj_id self, int value) throws InterruptedException
     {
-        String stage = "stage" + Integer.toString(value);
+        String stage = "stage" + value;
         if (!hasObjVar(self, stage))
         {
             setObjVar(self, stage, true);
             switch (value)
             {
                 case 1:
-                messageTo(trial.getTop(self), "spawnAdd", null, 0, false);
-                return;
+                    messageTo(trial.getTop(self), "spawnAdd", null, 0, false);
+                    return;
                 case 2:
-                messageTo(trial.getTop(self), "spawnAdd", null, 0, false);
-                return;
+                    messageTo(trial.getTop(self), "spawnAdd", null, 0, false);
+                    return;
                 case 3:
-                messageTo(trial.getTop(self), "spawnAdd", null, 0, false);
-                return;
+                    messageTo(trial.getTop(self), "spawnAdd", null, 0, false);
+                    return;
                 case 4:
-                messageTo(trial.getTop(self), "doMidEvent", null, 0, false);
-                return;
+                    messageTo(trial.getTop(self), "doMidEvent", null, 0, false);
+                    return;
                 case 5:
-                messageTo(trial.getTop(self), "spawnAdd", null, 0, false);
-                return;
+                    messageTo(trial.getTop(self), "spawnAdd", null, 0, false);
+                    return;
                 case 6:
-                messageTo(trial.getTop(self), "spawnAdd", null, 0, false);
-                return;
+                    messageTo(trial.getTop(self), "spawnAdd", null, 0, false);
+                    return;
                 case 7:
-                messageTo(trial.getTop(self), "doEndEvent", null, 0, false);
+                    messageTo(trial.getTop(self), "doEndEvent", null, 0, false);
             }
         }
     }

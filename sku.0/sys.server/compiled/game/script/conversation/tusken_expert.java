@@ -1,46 +1,62 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class tusken_expert extends script.base_script
 {
+    public static String c_stringFile = "conversation/tusken_expert";
+
     public tusken_expert()
     {
     }
-    public static String c_stringFile = "conversation/tusken_expert";
+
     public boolean tusken_expert_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean tusken_expert_condition_starportNeedsCrew(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "heroic_tusken_tracking_02", "heroic_tusken_starport_crew");
     }
+
     public boolean tusken_expert_condition_wattoNeedsCrew(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "heroic_tusken_tracking_02", "heroic_tusken_watto_crew");
     }
+
     public boolean tusken_expert_condition_medcenterNeedsCrew(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "heroic_tusken_tracking_02", "heroic_tusken_medcenter_crew");
     }
+
     public boolean tusken_expert_condition_universityNeedsCrew(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "heroic_tusken_tracking_02", "heroic_tusken_university_crew");
     }
+
     public boolean tusken_expert_condition_clonecenterNeedsCrew(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "heroic_tusken_tracking_02", "heroic_tusken_cloning_crew");
     }
+
     public boolean tusken_expert_condition_combathallNeedsCrew(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "heroic_tusken_tracking_02", "heroic_tusken_combat_crew");
     }
+
     public boolean tusken_expert_condition_allBuildingsHaveCrews(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "heroic_tusken_tracking_02", "heroic_tusken_starport_crew") && groundquests.hasCompletedTask(player, "heroic_tusken_tracking_02", "heroic_tusken_watto_crew") && groundquests.hasCompletedTask(player, "heroic_tusken_tracking_02", "heroic_tusken_medcenter_crew") && groundquests.hasCompletedTask(player, "heroic_tusken_tracking_02", "heroic_tusken_university_crew") && groundquests.hasCompletedTask(player, "heroic_tusken_tracking_02", "heroic_tusken_cloning_crew") && groundquests.hasCompletedTask(player, "heroic_tusken_tracking_02", "heroic_tusken_combat_crew"));
     }
+
     public void tusken_expert_action_goToStarport(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary dict = new dictionary();
@@ -48,6 +64,7 @@ public class tusken_expert extends script.base_script
         dict.put("pathName", "toStarport");
         messageTo(npc, "doPathAction", dict, 0.0f, false);
     }
+
     public void tusken_expert_action_goToUniversity(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary dict = new dictionary();
@@ -55,6 +72,7 @@ public class tusken_expert extends script.base_script
         dict.put("pathName", "toUniversity");
         messageTo(npc, "doPathAction", dict, 0.0f, false);
     }
+
     public void tusken_expert_action_goToMedicalCenter(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary dict = new dictionary();
@@ -62,6 +80,7 @@ public class tusken_expert extends script.base_script
         dict.put("pathName", "toMedical");
         messageTo(npc, "doPathAction", dict, 0.0f, false);
     }
+
     public void tusken_expert_action_goToCommerce(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary dict = new dictionary();
@@ -69,6 +88,7 @@ public class tusken_expert extends script.base_script
         dict.put("pathName", "toCommerce");
         messageTo(npc, "doPathAction", dict, 0.0f, false);
     }
+
     public void tusken_expert_action_goToCloning(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary dict = new dictionary();
@@ -76,6 +96,7 @@ public class tusken_expert extends script.base_script
         dict.put("pathName", "toCloning");
         messageTo(npc, "doPathAction", dict, 0.0f, false);
     }
+
     public void tusken_expert_action_goToCombat(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary dict = new dictionary();
@@ -83,6 +104,7 @@ public class tusken_expert extends script.base_script
         dict.put("pathName", "toCombat");
         messageTo(npc, "doPathAction", dict, 0.0f, false);
     }
+
     public void tusken_expert_action_goToWatto(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary dict = new dictionary();
@@ -90,6 +112,7 @@ public class tusken_expert extends script.base_script
         dict.put("pathName", "toWatto");
         messageTo(npc, "doPathAction", dict, 0.0f, false);
     }
+
     public int tusken_expert_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_22"))
@@ -160,6 +183,7 @@ public class tusken_expert extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -169,13 +193,15 @@ public class tusken_expert extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setTriggerVolume(self);
-		setMovementPercent(self, 3.0f);
+        setMovementPercent(self, 3.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (volumeName.equals("tusken_citizen"))
@@ -187,10 +213,12 @@ public class tusken_expert extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setTriggerVolume(obj_id self) throws InterruptedException
     {
         createTriggerVolume("tusken_citizen", 6.0f, true);
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -199,18 +227,21 @@ public class tusken_expert extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.tusken_expert");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -274,7 +305,7 @@ public class tusken_expert extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_22");
@@ -302,7 +333,7 @@ public class tusken_expert extends script.base_script
                 utils.setScriptVar(player, "conversation.tusken_expert.branchId", 2);
                 npcStartConversation(player, npc, "tusken_expert", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -311,6 +342,7 @@ public class tusken_expert extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("tusken_expert"))

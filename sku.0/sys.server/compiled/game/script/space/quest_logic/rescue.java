@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -8,10 +14,12 @@ import script.string_id;
 
 public class rescue extends script.space.quest_logic.recovery
 {
+    public static final string_id SID_ABANDONED_RESCUE = new string_id("space/quest", "rescue_abandoned");
+
     public rescue()
     {
     }
-    public static final string_id SID_ABANDONED_RESCUE = new string_id("space/quest", "rescue_abandoned");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -66,6 +74,7 @@ public class rescue extends script.space.quest_logic.recovery
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int initializedQuestPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -124,6 +133,7 @@ public class rescue extends script.space.quest_logic.recovery
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int warpInTarget(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -175,12 +185,14 @@ public class rescue extends script.space.quest_logic.recovery
         questUpdate(self, status_update);
         return SCRIPT_OVERRIDE;
     }
+
     public int recoverShipDisabled(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id ship = getObjIdObjVar(self, "target");
         utils.setScriptVar(ship, "dockable", 1);
         return SCRIPT_OVERRIDE;
     }
+
     public int dockingStarted(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
@@ -199,10 +211,12 @@ public class rescue extends script.space.quest_logic.recovery
         space_quest.groupTaunt(ship, player, pp);
         return SCRIPT_OVERRIDE;
     }
+
     public String getCapturePhrase1(obj_id self) throws InterruptedException
     {
         return "rescue_phase_1";
     }
+
     public int dockingComplete(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
@@ -233,10 +247,12 @@ public class rescue extends script.space.quest_logic.recovery
         messageTo(self, "startCapturedShipPathing", null, 10.0f, false);
         return SCRIPT_OVERRIDE;
     }
+
     public String getCapturePhrase2(obj_id self) throws InterruptedException
     {
         return "rescue_phase_2";
     }
+
     public int recoveryComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)

@@ -1,5 +1,11 @@
 package script.npc.pet_deed;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.beast_lib;
 import script.library.incubator;
@@ -8,14 +14,15 @@ import script.library.utils;
 
 public class pet_deed extends script.base_script
 {
-    public pet_deed()
-    {
-    }
     public static final String MENU_FILE = "pet/pet_menu";
     public static final string_id SID_CONVERT_PET_ITEM_TO_DNA = new string_id("incubator", "convert_pet_item_to_dna");
     public static final string_id SID_CONVERT_PROMPT = new string_id("incubator", "convert_pet_item_prompt");
     public static final string_id SID_CONVERT_TITLE = new string_id("incubator", "convert_pet_item_title");
     public static final string_id SID_REPORT_PET_CONVERSION_FAIL = new string_id("incubator", "report_pet_conversion_fail");
+    public pet_deed()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         float scaleAdjust = 1;
@@ -28,6 +35,7 @@ public class pet_deed extends script.base_script
         setScale(self, realScale);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.isNestedWithinAPlayer(self))
@@ -39,6 +47,7 @@ public class pet_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1 && utils.isNestedWithinAPlayer(self))
@@ -51,6 +60,7 @@ public class pet_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlerSuiConvertPetItemToDna(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -74,7 +84,7 @@ public class pet_deed extends script.base_script
                     destroyObject(petItem);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("BeastPetConversion: ", "petItem (" + petItem + ")" + " was NOT converted into a dna object, for player " + getFirstName(player) + "(" + player + "). PetItem(" + petItem + ") will NOT be destroyed.");
                     sendSystemMessage(player, SID_REPORT_PET_CONVERSION_FAIL);

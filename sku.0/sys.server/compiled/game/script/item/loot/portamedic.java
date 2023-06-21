@@ -1,11 +1,18 @@
 package script.item.loot;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.buff;
 import script.library.utils;
 import script.menu_info;
 import script.menu_info_types;
 import script.obj_id;
 import script.string_id;
+
 @SuppressWarnings("unused")
 public class portamedic extends script.base_script
 {

@@ -1,5 +1,11 @@
 package script.item.camp;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -36,6 +42,7 @@ public class camp_advanced_deed extends script.base_script
     public static final string_id SID_CAMP_EXIT = new string_id("camp", "camp_exit");
     public static final string_id PROSE_CAMP_ENTER = new string_id("camp", "prose_camp_enter");
     public static final string_id PROSE_CAMP_EXIT = new string_id("camp", "prose_camp_exit");
+
     public camp_advanced_deed()
     {
     }
@@ -376,6 +383,5 @@ public class camp_advanced_deed extends script.base_script
             }
             destroyObject(self);
         }
-        return;
     }
 }

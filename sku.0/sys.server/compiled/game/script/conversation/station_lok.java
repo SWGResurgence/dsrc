@@ -1,49 +1,60 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class station_lok extends script.base_script
 {
+    public static String c_stringFile = "conversation/station_lok";
+
     public station_lok()
     {
     }
-    public static String c_stringFile = "conversation/station_lok";
+
     public boolean station_lok_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean station_lok_condition_canAfford50(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 0.50f);
     }
+
     public boolean station_lok_condition_canAfford25(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_crafting.canAffordShipRepairs(player, npc, 0.25f) && space_crafting.isDamaged(player));
     }
+
     public boolean station_lok_condition_canAfford75(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 0.75f);
     }
+
     public boolean station_lok_condition_canAfford100(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 1.0f);
     }
+
     public boolean station_lok_condition_needRepairs(obj_id player, obj_id npc) throws InterruptedException
     {
         float fltDamage = space_crafting.getDamageTotal(player, getPilotedShip(player));
-        if (fltDamage > 0)
-        {
-            return true;
-        }
-        return false;
+        return fltDamage > 0;
     }
+
     public boolean station_lok_condition_isTooFar(obj_id player, obj_id npc) throws InterruptedException
     {
         space_combat.playCombatTauntSound(player);
         obj_id containingShip = space_transition.getContainingShip(player);
         return (getDistance(npc, containingShip) > space_transition.STATION_COMM_MAX_DISTANCE);
     }
+
     public boolean station_lok_condition_canDoWorkForNym(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasQuest(player))
@@ -58,32 +69,28 @@ public class station_lok extends script.base_script
         {
             return false;
         }
-        if (!space_flags.hasCompletedTierOne(player))
-        {
-            return false;
-        }
-        return true;
+        return space_flags.hasCompletedTierOne(player);
     }
+
     public boolean station_lok_condition_isReadyForMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!station_lok_condition_canDoWorkForNym(player, npc))
         {
             return false;
         }
-        if (station_lok_condition_hasCompletedMissionOne(player, npc))
-        {
-            return false;
-        }
-        return true;
+        return !station_lok_condition_hasCompletedMissionOne(player, npc);
     }
+
     public boolean station_lok_condition_hasCompletedMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "recovery", "stn_lok_nym_reb_tier2_1a"));
     }
+
     public boolean station_lok_condition_hasCompletedMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "escort", "stn_lok_nym_reb_tier2_2a"));
     }
+
     public boolean station_lok_condition_isReadyForMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!station_lok_condition_canDoWorkForNym(player, npc))
@@ -94,12 +101,9 @@ public class station_lok extends script.base_script
         {
             return false;
         }
-        if (station_lok_condition_hasCompletedMissionTwo(player, npc))
-        {
-            return false;
-        }
-        return true;
+        return !station_lok_condition_hasCompletedMissionTwo(player, npc);
     }
+
     public boolean station_lok_condition_isReadyForMissionThree(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!station_lok_condition_canDoWorkForNym(player, npc))
@@ -114,16 +118,14 @@ public class station_lok extends script.base_script
         {
             return false;
         }
-        if (station_lok_condition_hasCompletedMissionThree(player, npc))
-        {
-            return false;
-        }
-        return true;
+        return !station_lok_condition_hasCompletedMissionThree(player, npc);
     }
+
     public boolean station_lok_condition_hasCompletedMissionThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "assassinate", "stn_lok_nym_reb_tier2_3a"));
     }
+
     public boolean station_lok_condition_canLandAtHouse(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "homingBeacon.planet"))
@@ -131,159 +133,170 @@ public class station_lok extends script.base_script
             String homePlanet = getStringObjVar(player, "homingBeacon.planet");
             return (homePlanet.endsWith("lok"));
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public boolean station_lok_condition_canTakeQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasQuest(player))
-        {
-            return false;
-        }
-        return true;
+        return !space_quest.hasQuest(player);
     }
+
     public boolean station_lok_condition_canHandleTier3(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.hasCompletedTierTwo(player);
     }
+
     public boolean station_lok_condition_canAttackImperial(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player);
     }
+
     public boolean station_lok_condition_canAttackRebel(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player);
     }
+
     public boolean station_lok_condition_canTakeRebel5Duty(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_skill.isMasterPilot(player))
         {
             return false;
         }
-        if (space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player);
     }
+
     public boolean station_lok_condition_canTakeImperial5Duty(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_skill.isMasterPilot(player))
         {
             return false;
         }
-        if (space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player);
     }
+
     public void station_lok_action_landStation3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Mos Espa Starport");
     }
+
     public void station_lok_action_fix25(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.25f);
     }
+
     public void station_lok_action_fix50(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.50f);
     }
+
     public void station_lok_action_fix75(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.75f);
     }
+
     public void station_lok_action_fix100(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 1.0f);
     }
+
     public void station_lok_action_landStation1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Nym's Stronghold");
     }
+
     public void station_lok_action_landStation2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Mos Eisley Starport");
     }
+
     public void station_lok_action_grantDestroyDutyMission(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "stn_lok_nym_reb_tier2_1");
     }
+
     public void station_lok_action_grantEscortDutyMission(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort_duty", "stn_lok_nym_reb_tier2_1");
     }
+
     public void station_lok_action_grantMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "recovery", "stn_lok_nym_reb_tier2_1a");
     }
+
     public void station_lok_action_grantMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort", "stn_lok_nym_reb_tier2_2a");
     }
+
     public void station_lok_action_grantMissionThree(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "assassinate", "stn_lok_nym_reb_tier2_3a");
     }
+
     public void station_lok_action_landHoming(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayerHoming(player, npc);
     }
+
     public void station_lok_action_grantImperialDuty3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "lok_imperial_tier3");
     }
+
     public void station_lok_action_grantRebelDuty3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "lok_rebel_tier3");
     }
+
     public void station_lok_action_grantHiddenDaggerDuty3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "lok_hidden_dagger_tier3");
     }
+
     public void station_lok_action_grantDroidDuty3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "lok_rogue_droid_tier3");
     }
+
     public void station_lok_action_grantImperialDuty5(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "lok_imperial_tier5");
     }
+
     public void station_lok_action_grantRebelDuty5(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "lok_rebel_tier5");
     }
+
     public String station_lok_tokenTO_tokenTO0001(obj_id player, obj_id npc) throws InterruptedException
     {
-        return new String();
+        return "";
     }
+
     public int station_lok_tokenDI_getStationRepairCost25(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.25f);
     }
+
     public int station_lok_tokenDI_getStationRepairCost50(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.50f);
     }
+
     public int station_lok_tokenDI_getStationRepairCost75(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.75f);
     }
+
     public int station_lok_tokenDI_getStationRepairCost100(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 1.0f);
     }
+
     public int station_lok_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_305434ff"))
@@ -317,7 +330,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d70dba34");
@@ -334,7 +347,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -387,7 +400,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bf151ca2");
@@ -412,7 +425,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -444,7 +457,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77685adb");
@@ -457,7 +470,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -486,7 +499,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_474141fe");
@@ -499,7 +512,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -528,7 +541,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b1729740");
@@ -541,7 +554,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -570,7 +583,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ad7b177d");
@@ -587,7 +600,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     prose_package pp = new prose_package();
@@ -658,7 +671,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_112");
@@ -691,7 +704,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -708,6 +721,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d70dba34"))
@@ -756,7 +770,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -773,7 +787,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     prose_package pp = new prose_package();
@@ -787,6 +801,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -812,6 +827,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_bf151ca2"))
@@ -838,7 +854,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ebe2e111");
@@ -856,7 +872,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     prose_package pp = new prose_package();
@@ -893,7 +909,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -911,7 +927,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     prose_package pp = new prose_package();
@@ -948,7 +964,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_35");
@@ -966,7 +982,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     prose_package pp = new prose_package();
@@ -1003,7 +1019,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fef28268");
@@ -1021,7 +1037,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     prose_package pp = new prose_package();
@@ -1046,6 +1062,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ebe2e111"))
@@ -1071,6 +1088,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -1096,6 +1114,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_35"))
@@ -1121,6 +1140,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fef28268"))
@@ -1146,6 +1166,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77685adb"))
@@ -1165,7 +1186,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e998576d");
@@ -1174,7 +1195,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1198,6 +1219,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e998576d"))
@@ -1224,7 +1246,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_eb2cfdac");
@@ -1237,7 +1259,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1247,6 +1269,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_eb2cfdac"))
@@ -1276,6 +1299,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_474141fe"))
@@ -1295,7 +1319,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8d68ee17");
@@ -1304,7 +1328,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1324,6 +1348,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8d68ee17"))
@@ -1343,7 +1368,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a7ea491f");
@@ -1352,7 +1377,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1362,6 +1387,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a7ea491f"))
@@ -1381,7 +1407,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14a79f3e");
@@ -1390,7 +1416,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1400,6 +1426,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_14a79f3e"))
@@ -1426,7 +1453,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bbfa316b");
@@ -1439,7 +1466,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1449,6 +1476,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_bbfa316b"))
@@ -1474,6 +1502,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b1729740"))
@@ -1493,7 +1522,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fc6171f1");
@@ -1502,7 +1531,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1526,6 +1555,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fc6171f1"))
@@ -1545,7 +1575,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5adb5e96");
@@ -1554,7 +1584,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1564,6 +1594,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5adb5e96"))
@@ -1590,7 +1621,7 @@ public class station_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59b2e836");
@@ -1603,7 +1634,7 @@ public class station_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1613,6 +1644,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_59b2e836"))
@@ -1642,6 +1674,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ad7b177d"))
@@ -1676,6 +1709,7 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_lok_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_112"))
@@ -1756,18 +1790,21 @@ public class station_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_station_lok.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_station_lok.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1776,18 +1813,21 @@ public class station_lok extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.station_lok");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1837,7 +1877,7 @@ public class station_lok extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_305434ff");
@@ -1857,7 +1897,7 @@ public class station_lok extends script.base_script
                 utils.setScriptVar(player, "conversation.station_lok.branchId", 2);
                 npcStartConversation(player, npc, "station_lok", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1866,6 +1906,7 @@ public class station_lok extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("station_lok"))

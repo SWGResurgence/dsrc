@@ -1,17 +1,20 @@
 package script.faction_perk.hq;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class objective_terminal_security extends script.faction_perk.hq.objective_object
 {
-    public objective_terminal_security()
-    {
-    }
+    public static final string_id SID_NOT_AGAIN = new string_id("slicing/slicing", "not_again");
     private static final string_id SID_SLICE = new string_id("slicing/slicing", "slice");
     private static final string_id SID_FAIL_SLICE = new string_id("slicing/slicing", "hq_security_fail");
     private static final string_id SID_SUCCESS_SLICE = new string_id("slicing/slicing", "hq_security_success");
-    public static final string_id SID_NOT_AGAIN = new string_id("slicing/slicing", "not_again");
     private static final string_id NO_TAMPER = new string_id("faction/faction_hq/faction_hq_response", "no_tamper");
     private static final string_id ALREADY_SLICED = new string_id("faction/faction_hq/faction_hq_response", "already_sliced");
     private static final string_id OTHER_OBJECTIVES = new string_id("faction/faction_hq/faction_hq_response", "other_objectives");
@@ -23,6 +26,10 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
     private static final string_id TERM_REPAIRED = new string_id("faction/faction_hq/faction_hq_response", "term_repaired");
     private static final string_id TERM_REPAIR_CONT = new string_id("faction/faction_hq/faction_hq_response", "term_repair_cont");
     private static final string_id SID_NO_STEALTH = new string_id("hq", "no_stealth");
+    public objective_terminal_security()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int intState = getState(player, STATE_FEIGN_DEATH);
@@ -38,6 +45,7 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_SLICE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (stealth.hasInvisibleBuff(player))
@@ -75,7 +83,7 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
                 prose_package ppDisableOther = prose.getPackage(hq.PROSE_DISABLE_OTHER, priorObjective, self);
                 sendSystemMessageProse(player, ppDisableOther);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, OTHER_OBJECTIVES);
             }
@@ -114,10 +122,12 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleObjectiveDisabled(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int finishSlicing(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -136,13 +146,14 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
             String playerName = getName(player);
             CustomerServiceLog("faction_hq", playerName + "(" + player + "), " + "sliced Security Terminal at " + getGameTime() + ".");
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_FAIL_SLICE);
             setObjVar(self, "slicing.failed", player);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSlicingRepair(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -191,7 +202,7 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
             removeObjVar(self, "slicing.failed");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sendSystemMessage(player, TERM_REPAIR_CONT);
             params.put("cnt", cnt);

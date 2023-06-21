@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.corvette;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.player_structure;
 import script.library.utils;
@@ -12,6 +18,7 @@ public class setup extends script.base_script
     public setup()
     {
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -32,6 +39,7 @@ public class setup extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int addToList(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -52,6 +60,7 @@ public class setup extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id[] players = player_structure.getPlayersInBuilding(self);
@@ -62,8 +71,10 @@ public class setup extends script.base_script
         int numPlayers = players.length;
         if (numPlayers > 0)
         {
-            for (obj_id player : players) {
-                if (!hasScript(player, "theme_park.dungeon.corvette.timer")) {
+            for (obj_id player : players)
+            {
+                if (!hasScript(player, "theme_park.dungeon.corvette.timer"))
+                {
                     attachScript(player, "theme_park.dungeon.corvette.timer");
                 }
             }

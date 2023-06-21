@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.chat;
 import script.library.create;
@@ -10,14 +16,15 @@ import java.util.Vector;
 
 public class npe_spy_terminal extends script.base_script
 {
-    public npe_spy_terminal()
-    {
-    }
     public static final string_id SID_MNU_HAX = new string_id("npe", "hax");
     public static final string_id SID_MNU_PART = new string_id("npe", "part");
     public static final string_id SID_MNU_SPLICE = new string_id("npe", "splice");
     public static final string_id SID_MNU_DUMP = new string_id("npe", "dump");
     public static final string_id SID_MNU_DROID = new string_id("npe", "droid");
+    public npe_spy_terminal()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isMob(self))
@@ -52,6 +59,7 @@ public class npe_spy_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -95,6 +103,7 @@ public class npe_spy_terminal extends script.base_script
         sendSystemMessage(player, new string_id("quest/groundquests", "retrieve_item_no_interest"));
         return SCRIPT_CONTINUE;
     }
+
     public void playWarningAndSpawn(obj_id player, obj_id self, String toSpawn) throws InterruptedException
     {
         location me = getLocation(player);
@@ -103,25 +112,30 @@ public class npe_spy_terminal extends script.base_script
         create.object(toSpawn, me);
         me.y = me.y + 1;
         create.object(toSpawn, me);
-        return;
     }
+
     public void doWarning(obj_id self) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);
         Vector alarms = utils.getResizeableObjIdArrayScriptVar(building, "objAlarms");
-        for (Object alarm : alarms) {
-            if (isIdValid(((obj_id) alarm))) {
+        for (Object alarm : alarms)
+        {
+            if (isIdValid(((obj_id) alarm)))
+            {
                 setCondition(((obj_id) alarm), CONDITION_ON);
                 messageTo(self, "turnAlarmsOff", null, 10, false);
             }
         }
     }
+
     public int turnAlarmsOff(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);
         Vector alarms = utils.getResizeableObjIdArrayScriptVar(building, "objAlarms");
-        for (Object alarm : alarms) {
-            if (isIdValid(((obj_id) alarm))) {
+        for (Object alarm : alarms)
+        {
+            if (isIdValid(((obj_id) alarm)))
+            {
                 clearCondition(((obj_id) alarm), CONDITION_ON);
             }
         }

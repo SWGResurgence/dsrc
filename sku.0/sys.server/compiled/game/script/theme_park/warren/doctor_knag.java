@@ -1,5 +1,11 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.obj_id;
@@ -7,13 +13,14 @@ import script.string_id;
 
 public class doctor_knag extends script.base_script
 {
-    public doctor_knag()
-    {
-    }
     public static final String CONVO_FILE = "theme_park/warren/warren";
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public static final String ACTION_ALERT = "alert";
     public static final String ACTION_THREATEN = "threaten";
+    public doctor_knag()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (getConfigSetting("GameServer", "disableAITriggerVolumes") == null)
@@ -28,6 +35,7 @@ public class doctor_knag extends script.base_script
         setName(self, new string_id("theme_park/warren/warren_system_messages", "name_knag"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (hasObjVar(breacher, "gm"))
@@ -61,6 +69,7 @@ public class doctor_knag extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitateTarget(obj_id self, obj_id target) throws InterruptedException
     {
         if (rand(1, 10) == 1)
@@ -69,6 +78,7 @@ public class doctor_knag extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         if (rand(1, 10) == 1)
@@ -77,6 +87,7 @@ public class doctor_knag extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id warren = getObjIdObjVar(self, "warren.bldg");

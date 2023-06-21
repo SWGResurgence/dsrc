@@ -1,5 +1,11 @@
 package script.theme_park.imperial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.location;
@@ -10,11 +16,13 @@ public class thrawn_veers_path extends script.base_script
     public thrawn_veers_path()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "thrawn_veers_MoveToBalcony", null, 10, true);
         return SCRIPT_CONTINUE;
     }
+
     public int thrawn_veers_MoveToBalcony(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "thrawn"))
@@ -31,11 +39,13 @@ public class thrawn_veers_path extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         messageTo(self, "thrawn_veers_DoFacing", null, 5, true);
         return SCRIPT_CONTINUE;
     }
+
     public int thrawn_veers_DoFacing(obj_id self, dictionary params) throws InterruptedException
     {
         int myYaw = -119;

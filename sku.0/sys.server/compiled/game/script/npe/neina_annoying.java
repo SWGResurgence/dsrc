@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class neina_annoying extends script.base_script
     public neina_annoying()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "annoying1", null, 1, false);
@@ -17,6 +24,7 @@ public class neina_annoying extends script.base_script
         messageTo(self, "annoying4", null, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "annoying1", null, 1, false);
@@ -25,21 +33,25 @@ public class neina_annoying extends script.base_script
         messageTo(self, "annoying4", null, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int annoying1(obj_id self, dictionary params) throws InterruptedException
     {
         chat.chat(self, "It's about time you showed up! What took you so long!");
         return SCRIPT_CONTINUE;
     }
+
     public int annoying2(obj_id self, dictionary params) throws InterruptedException
     {
         chat.chat(self, "When are we getting out of here! You're too slow.");
         return SCRIPT_CONTINUE;
     }
+
     public int annoying3(obj_id self, dictionary params) throws InterruptedException
     {
         chat.chat(self, "Ow! I just stepped on a rock. I need to be carried. Hey! Carry me!");
         return SCRIPT_CONTINUE;
     }
+
     public int annoying4(obj_id self, dictionary params) throws InterruptedException
     {
         chat.chat(self, "Where's my room service? Ugh! I can't wait to get home.");

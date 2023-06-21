@@ -1,5 +1,11 @@
 package script.item.conversion;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 public class armor_bracer_l_wookie_conversion extends script.item.conversion.armor_base_conversion
 {
     public static final String[] ARMOR_SET_ASSAULT =
@@ -26,6 +32,7 @@ public class armor_bracer_l_wookie_conversion extends script.item.conversion.arm
             {
                     "Kashyykian Ceremonial"
             };
+
     public armor_bracer_l_wookie_conversion()
     {
     }

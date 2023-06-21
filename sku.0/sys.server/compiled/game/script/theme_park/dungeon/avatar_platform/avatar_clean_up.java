@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class avatar_clean_up extends script.base_script
     public avatar_clean_up()
     {
     }
+
     public int msgSpaceDungeonCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "avatar_platform"))

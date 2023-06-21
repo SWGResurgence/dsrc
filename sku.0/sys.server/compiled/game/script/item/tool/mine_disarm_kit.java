@@ -1,5 +1,11 @@
 package script.item.tool;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.hq;
 import script.library.utils;
@@ -18,6 +24,7 @@ public class mine_disarm_kit extends script.base_script
                     "appearance/pt_disarm_mine_fail.prt",
                     "appearance/pt_disarm_mine_success.prt"
             };
+
     public mine_disarm_kit()
     {
     }

@@ -1,5 +1,11 @@
 package script.item.conversion;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 public class armor_bicep_l_ith_conversion extends script.item.conversion.armor_base_conversion
 {
     public static final String[] ARMOR_SET_ASSAULT =
@@ -26,6 +32,7 @@ public class armor_bicep_l_ith_conversion extends script.item.conversion.armor_b
             {
                     "Ithorian Guardian"
             };
+
     public armor_bicep_l_ith_conversion()
     {
     }

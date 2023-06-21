@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,50 +14,62 @@ import script.*;
 
 public class tatooine_entha_ankwee extends script.base_script
 {
+    public static String c_stringFile = "conversation/tatooine_entha_ankwee";
+
     public tatooine_entha_ankwee()
     {
     }
-    public static String c_stringFile = "conversation/tatooine_entha_ankwee";
+
     public boolean tatooine_entha_ankwee_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean tatooine_entha_ankwee_condition_onMeetAnkwee(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "tatooine_espa_pod_retrieval_v2", "tat_espa_pod_retrieval_e1");
     }
+
     public boolean tatooine_entha_ankwee_condition_completedQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "tatooine_espa_pod_retrieval_v2");
     }
+
     public boolean tatooine_entha_ankwee_condition_onGotoDraknus(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedTask(player, "tatooine_espa_pod_retrieval_v2", "tat_espa_pod_retrieval_e1");
     }
+
     public boolean tatooine_entha_ankwee_condition_onRacing(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "tatooine_espa_pod_retrieval_v2", "tat_espa_pod_retrieval_e2");
     }
+
     public boolean tatooine_entha_ankwee_condition_onReturnAnKwee(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "tatooine_espa_pod_retrieval_v2", "tat_espa_pod_retrieval_e3");
     }
+
     public boolean tatooine_entha_ankwee_condition_onTalkAnKwee(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "tatooine_espa_pod_retrieval_v2", "tat_espa_pod_retrieval_e3");
     }
+
     public void tatooine_entha_ankwee_action_grantGotoDraknus(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "tatooine_entha_goto_draknus");
     }
+
     public void tatooine_entha_ankwee_action_signalPod(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tat_espa_pod_retrieval_e3");
     }
+
     public void tatooine_entha_ankwee_action_signalTalkAnKwee(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tat_espa_pod_retrieval_e1");
     }
+
     public int tatooine_entha_ankwee_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_95"))
@@ -73,7 +91,7 @@ public class tatooine_entha_ankwee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -82,7 +100,7 @@ public class tatooine_entha_ankwee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_entha_ankwee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -92,6 +110,7 @@ public class tatooine_entha_ankwee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_ankwee_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -108,6 +127,7 @@ public class tatooine_entha_ankwee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_ankwee_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_91"))
@@ -130,7 +150,7 @@ public class tatooine_entha_ankwee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -139,7 +159,7 @@ public class tatooine_entha_ankwee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_entha_ankwee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -149,6 +169,7 @@ public class tatooine_entha_ankwee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_ankwee_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_93"))
@@ -165,6 +186,7 @@ public class tatooine_entha_ankwee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_ankwee_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_89"))
@@ -182,6 +204,7 @@ public class tatooine_entha_ankwee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_ankwee_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_87"))
@@ -198,6 +221,7 @@ public class tatooine_entha_ankwee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_ankwee_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -219,7 +243,7 @@ public class tatooine_entha_ankwee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81");
@@ -228,7 +252,7 @@ public class tatooine_entha_ankwee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_entha_ankwee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -238,6 +262,7 @@ public class tatooine_entha_ankwee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_ankwee_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_81"))
@@ -258,7 +283,7 @@ public class tatooine_entha_ankwee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_83");
@@ -267,7 +292,7 @@ public class tatooine_entha_ankwee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_entha_ankwee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -277,6 +302,7 @@ public class tatooine_entha_ankwee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_ankwee_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_83"))
@@ -298,7 +324,7 @@ public class tatooine_entha_ankwee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_85");
@@ -307,7 +333,7 @@ public class tatooine_entha_ankwee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_entha_ankwee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -317,6 +343,7 @@ public class tatooine_entha_ankwee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_ankwee_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
@@ -334,6 +361,7 @@ public class tatooine_entha_ankwee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_entha_ankwee_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -350,6 +378,7 @@ public class tatooine_entha_ankwee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -359,11 +388,13 @@ public class tatooine_entha_ankwee extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -372,18 +403,21 @@ public class tatooine_entha_ankwee extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.tatooine_entha_ankwee");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -407,7 +441,7 @@ public class tatooine_entha_ankwee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -415,7 +449,7 @@ public class tatooine_entha_ankwee extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_entha_ankwee.branchId", 1);
                 npcStartConversation(player, npc, "tatooine_entha_ankwee", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -437,7 +471,7 @@ public class tatooine_entha_ankwee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -445,7 +479,7 @@ public class tatooine_entha_ankwee extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_entha_ankwee.branchId", 4);
                 npcStartConversation(player, npc, "tatooine_entha_ankwee", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -467,7 +501,7 @@ public class tatooine_entha_ankwee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_89");
@@ -475,7 +509,7 @@ public class tatooine_entha_ankwee extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_entha_ankwee.branchId", 7);
                 npcStartConversation(player, npc, "tatooine_entha_ankwee", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -497,7 +531,7 @@ public class tatooine_entha_ankwee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_87");
@@ -505,7 +539,7 @@ public class tatooine_entha_ankwee extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_entha_ankwee.branchId", 9);
                 npcStartConversation(player, npc, "tatooine_entha_ankwee", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -527,7 +561,7 @@ public class tatooine_entha_ankwee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -535,7 +569,7 @@ public class tatooine_entha_ankwee extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_entha_ankwee.branchId", 11);
                 npcStartConversation(player, npc, "tatooine_entha_ankwee", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -557,7 +591,7 @@ public class tatooine_entha_ankwee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -565,7 +599,7 @@ public class tatooine_entha_ankwee extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_entha_ankwee.branchId", 16);
                 npcStartConversation(player, npc, "tatooine_entha_ankwee", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -574,6 +608,7 @@ public class tatooine_entha_ankwee extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("tatooine_entha_ankwee"))

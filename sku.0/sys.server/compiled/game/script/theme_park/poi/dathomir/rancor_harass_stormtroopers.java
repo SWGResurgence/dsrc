@@ -1,5 +1,11 @@
 package script.theme_park.poi.dathomir;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,11 +14,13 @@ public class rancor_harass_stormtroopers extends script.theme_park.poi.base
     public rancor_harass_stormtroopers()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "First POI Test Attached");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String objective = poiGetObjective(self);
@@ -31,6 +39,7 @@ public class rancor_harass_stormtroopers extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int attackRancor(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id rancor = params.getObjId("rancor");

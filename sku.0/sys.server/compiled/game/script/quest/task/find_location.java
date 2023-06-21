@@ -1,5 +1,11 @@
 package script.quest.task;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.quests;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class find_location extends script.base_script
     public find_location()
     {
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         int rows = dataTableGetNumRows("datatables/player/quests.iff");
@@ -30,6 +37,7 @@ public class find_location extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         LOG("newquests", "find_location - OnQuestActivated(" + questRow + ")");
@@ -40,6 +48,7 @@ public class find_location extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String locationName) throws InterruptedException
     {
         int questId = quests.getQuestId(locationName);

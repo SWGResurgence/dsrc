@@ -1,5 +1,11 @@
 package script.quest.crowd_pleaser;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.prose;
 import script.library.utils;
@@ -11,9 +17,6 @@ import java.util.Vector;
 
 public class player_popularity extends script.base_script
 {
-    public player_popularity()
-    {
-    }
     public static final String SCRIPT_NAME = "quest.crowd_pleaser.player_popularity";
     public static final String QUEST_COMPLETE_OBJVAR = "quest.crowd_pleaser.complete";
     public static final String STATUS_OBJVAR = "quest.crowd_pleaser.status";
@@ -29,6 +32,10 @@ public class player_popularity extends script.base_script
     public static final string_id POPULARITY_1_REMAINING = new string_id("quest/crowd_pleaser/system_messages", "popularity_1_remaining");
     public static final string_id POPULARITY_2_REMAINING = new string_id("quest/crowd_pleaser/system_messages", "popularity_2_remaining");
     public static final string_id POPULARITY_3_REMAINING = new string_id("quest/crowd_pleaser/system_messages", "popularity_3_remaining");
+    public player_popularity()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int number = getIntObjVar(self, NUMBER_OBJVAR);
@@ -36,6 +43,7 @@ public class player_popularity extends script.base_script
         sendSystemMessageProse(self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int handleEntertainedPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, POPULARITY_OBJVAR))
@@ -69,22 +77,22 @@ public class player_popularity extends script.base_script
             switch (level)
             {
                 case 1:
-                sendSystemMessage(self, POPULARITY_1_COMPLETE);
-                status = 6;
-                break;
+                    sendSystemMessage(self, POPULARITY_1_COMPLETE);
+                    status = 6;
+                    break;
                 case 2:
-                sendSystemMessage(self, POPULARITY_2_COMPLETE);
-                status = 12;
-                break;
+                    sendSystemMessage(self, POPULARITY_2_COMPLETE);
+                    status = 12;
+                    break;
                 case 3:
-                sendSystemMessage(self, POPULARITY_3_COMPLETE);
-                status = 18;
-                break;
+                    sendSystemMessage(self, POPULARITY_3_COMPLETE);
+                    status = 18;
+                    break;
             }
             setObjVar(self, STATUS_OBJVAR, status);
             detachScript(self, SCRIPT_NAME);
         }
-        else 
+        else
         {
             if (entertained == null || entertained.size() == 0)
             {
@@ -96,14 +104,14 @@ public class player_popularity extends script.base_script
             switch (level)
             {
                 case 1:
-                pp = prose.getPackage(POPULARITY_1_REMAINING, getFirstName(player), remaining);
-                break;
+                    pp = prose.getPackage(POPULARITY_1_REMAINING, getFirstName(player), remaining);
+                    break;
                 case 2:
-                pp = prose.getPackage(POPULARITY_2_REMAINING, getFirstName(player), remaining);
-                break;
+                    pp = prose.getPackage(POPULARITY_2_REMAINING, getFirstName(player), remaining);
+                    break;
                 case 3:
-                pp = prose.getPackage(POPULARITY_3_REMAINING, getFirstName(player), remaining);
-                break;
+                    pp = prose.getPackage(POPULARITY_3_REMAINING, getFirstName(player), remaining);
+                    break;
             }
             sendSystemMessageProse(self, pp);
         }

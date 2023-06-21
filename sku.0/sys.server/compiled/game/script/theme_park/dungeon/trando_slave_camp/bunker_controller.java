@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.trando_slave_camp;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.utils;
@@ -10,27 +16,29 @@ import java.util.Vector;
 
 public class bunker_controller extends script.base_script
 {
+    public static final String DATATABLE = "datatables/dungeon/trando_slave_camp/camp_command_bunker.iff";
+    public static final String[] CELL_NAMES =
+            {
+                    "entry",
+                    "hall1",
+                    "hall2",
+                    "anteroom",
+                    "powerroom",
+                    "computerroom",
+                    "office",
+                    "barracks"
+            };
+    public static final boolean doLogging = false;
     public bunker_controller()
     {
     }
-    public static final String DATATABLE = "datatables/dungeon/trando_slave_camp/camp_command_bunker.iff";
-    public static final String[] CELL_NAMES = 
-    {
-        "entry",
-        "hall1",
-        "hall2",
-        "anteroom",
-        "powerroom",
-        "computerroom",
-        "office",
-        "barracks"
-    };
-    public static final boolean doLogging = false;
+
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         resetBunker(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (isGod(speaker))
@@ -50,16 +58,19 @@ public class bunker_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         validateScripts(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         validateScripts(self);
         return SCRIPT_CONTINUE;
     }
+
     public void resetBunker(obj_id bunker) throws InterruptedException
     {
         obj_id[] cellIds = getCellObjIds(bunker);
@@ -71,6 +82,7 @@ public class bunker_controller extends script.base_script
         spawnMobs(bunker);
         setEventLocks(bunker);
     }
+
     public void setEventLocks(obj_id bunker) throws InterruptedException
     {
         doLogging("setEventLocks", "In lock loop");
@@ -81,6 +93,7 @@ public class bunker_controller extends script.base_script
         permissionsMakePrivate(powerRoom);
         permissionsMakePrivate(sequencer);
     }
+
     public void validateScripts(obj_id bunker) throws InterruptedException
     {
         if (!hasScript(getCellId(bunker, "entry"), "theme_park.dungeon.trando_slave_camp.door_signal"))
@@ -88,6 +101,7 @@ public class bunker_controller extends script.base_script
             attachScript(getCellId(bunker, "entry"), "theme_park.dungeon.trando_slave_camp.door_signal");
         }
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (doLogging)
@@ -95,11 +109,13 @@ public class bunker_controller extends script.base_script
             LOG("debug_bunker_controller_" + section, message);
         }
     }
+
     public obj_id[] getCellObjIds(obj_id bunker) throws InterruptedException
     {
         Vector resizeableCellId = new Vector();
         resizeableCellId.setSize(0);
-        for (String cellName : CELL_NAMES) {
+        for (String cellName : CELL_NAMES)
+        {
             utils.addElement(resizeableCellId, getCellId(bunker, cellName));
         }
         obj_id[] _resizeableCellId = new obj_id[0];
@@ -110,31 +126,34 @@ public class bunker_controller extends script.base_script
         }
         return _resizeableCellId;
     }
+
     public void clearDungeon(obj_id bunker, obj_id[] cellIds) throws InterruptedException
     {
-        for (obj_id cellId : cellIds) {
+        for (obj_id cellId : cellIds)
+        {
             obj_id[] cellContents = getContents(cellId);
-            if (cellContents.length > 0) {
-                for (obj_id cellContent : cellContents) {
-                    if (isPlayer(cellContent)) {
-                        expelFromBuilding(cellContent);
-                    } else if (isMob(cellContent)) {
-                        destroyObject(cellContent);
-                    }
+            for (obj_id cellContent : cellContents)
+            {
+                if (isPlayer(cellContent))
+                {
+                    expelFromBuilding(cellContent);
+                }
+                else if (isMob(cellContent))
+                {
+                    destroyObject(cellContent);
                 }
             }
         }
         if (hasObjVar(bunker, "terminalObjIdList"))
         {
             obj_id[] terminalList = getObjIdArrayObjVar(bunker, "terminalObjIdList");
-            if (terminalList.length > 0)
+            for (obj_id obj_id : terminalList)
             {
-                for (obj_id obj_id : terminalList) {
-                    destroyObject(obj_id);
-                }
+                destroyObject(obj_id);
             }
         }
     }
+
     public void spawnMobs(obj_id bunker) throws InterruptedException
     {
         int spawnCount = dataTableGetNumRows(DATATABLE);
@@ -164,7 +183,7 @@ public class bunker_controller extends script.base_script
                     utils.addElement(resizeableTerminalId, spawnObject);
                 }
             }
-            else 
+            else
             {
                 spawnObject = create.object(object, spawnLoc);
             }

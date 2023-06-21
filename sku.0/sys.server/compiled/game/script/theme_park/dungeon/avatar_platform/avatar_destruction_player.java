@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.pclib;
 import script.library.space_dungeon;
@@ -11,6 +17,7 @@ public class avatar_destruction_player extends script.base_script
     public avatar_destruction_player()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -27,6 +34,7 @@ public class avatar_destruction_player extends script.base_script
         playClientEffectObj(self, "clienteffect/avatar_overload_alarm.cef", self, "");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -42,6 +50,7 @@ public class avatar_destruction_player extends script.base_script
         playClientEffectObj(self, "clienteffect/avatar_overload_alarm.cef", self, "");
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -58,6 +67,7 @@ public class avatar_destruction_player extends script.base_script
         playClientEffectObj(self, "clienteffect/avatar_overload_alarm.cef", self, "");
         return SCRIPT_CONTINUE;
     }
+
     public int handleExplosionEffect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -80,10 +90,13 @@ public class avatar_destruction_player extends script.base_script
         int numItems = items.length;
         if (numItems > 0)
         {
-            for (obj_id item : items) {
-                if (isNpcCreature(item)) {
+            for (obj_id item : items)
+            {
+                if (isNpcCreature(item))
+                {
                     int deathRoll = rand(1, 10);
-                    if (deathRoll < 6) {
+                    if (deathRoll < 6)
+                    {
                         kill(item);
                     }
                 }
@@ -91,6 +104,7 @@ public class avatar_destruction_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAvatarDestructionPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -105,25 +119,25 @@ public class avatar_destruction_player extends script.base_script
         killPlayer(self, structure);
         return SCRIPT_CONTINUE;
     }
+
     public void killPlayer(obj_id player, obj_id killer) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(killer) || (!isPlayer(player)))
         {
             return;
         }
-        
+
         {
             int dam = -(getAttrib(player, HEALTH) + 50);
             addAttribModifier(player, HEALTH, dam, 0.0f, 0.0f, MOD_POOL);
         }
         pclib.coupDeGrace(player, killer, false);
         ejectPlayerFromAvatar(player);
-        return;
     }
+
     public void ejectPlayerFromAvatar(obj_id player) throws InterruptedException
     {
         pclib.resurrectPlayer(player, false);
         space_dungeon.ejectPlayerFromDungeon(player);
-        return;
     }
 }

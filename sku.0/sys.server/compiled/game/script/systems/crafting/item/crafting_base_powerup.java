@@ -1,5 +1,11 @@
 package script.systems.crafting.item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.draft_schematic;
 import script.library.craftinglib;
@@ -21,6 +27,7 @@ public class crafting_base_powerup extends script.systems.crafting.crafting_base
     public static final float MAX_SCOPE_SPEED_PENALTY = 0.3f;
     public static final float MAX_STOCK_ACTION_BONUS = 0.3f;
     public static final float MAX_STOCK_ACCURACY_PENALTY = 30.0f;
+
     public crafting_base_powerup()
     {
     }

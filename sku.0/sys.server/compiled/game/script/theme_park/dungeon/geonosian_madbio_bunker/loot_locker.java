@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.geonosian_madbio_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.permissions;
 import script.library.utils;
@@ -11,6 +17,7 @@ public class loot_locker extends script.base_script
     public loot_locker()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "item.container.loot_crate");
@@ -23,6 +30,7 @@ public class loot_locker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int makeMoreLoot(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "gaveLoot");
@@ -30,6 +38,7 @@ public class loot_locker extends script.base_script
         obj_id cargo = createObject(newLoot, self, "");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_OPEN)
@@ -39,24 +48,26 @@ public class loot_locker extends script.base_script
                 switch (getContainerType(self))
                 {
                     case 0:
-                    detachScript(self, "item.container.base.base_container");
-                    break;
+                        detachScript(self, "item.container.base.base_container");
+                        break;
                     case 1:
-                    utils.requestContainerOpen(player, self);
-                    break;
+                        utils.requestContainerOpen(player, self);
+                        break;
                     default:
-                    break;
+                        break;
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         setObjVar(self, "gaveLoot", 1);
         messageTo(self, "makeMoreLoot", null, 600, true);
         return SCRIPT_CONTINUE;
     }
+
     public String pickNewLoot() throws InterruptedException
     {
         String newLoot = "object/tangible/loot/dungeon/geonosian_mad_bunker/passkey.iff";
@@ -69,22 +80,22 @@ public class loot_locker extends script.base_script
         switch (pickNewLoot)
         {
             case 1:
-            newLoot = "object/tangible/loot/dungeon/geonosian_mad_bunker/passkey.iff";
-            break;
+                newLoot = "object/tangible/loot/dungeon/geonosian_mad_bunker/passkey.iff";
+                break;
             case 2:
-            newLoot = "object/tangible/wearables/goggles/rebreather.iff";
-            break;
+                newLoot = "object/tangible/wearables/goggles/rebreather.iff";
+                break;
             case 3:
-            newLoot = "object/tangible/loot/dungeon/geonosian_mad_bunker/relic_gbb_honey_carafe.iff";
-            break;
+                newLoot = "object/tangible/loot/dungeon/geonosian_mad_bunker/relic_gbb_honey_carafe.iff";
+                break;
             case 4:
-            newLoot = "object/tangible/loot/dungeon/geonosian_mad_bunker/relic_gbb_honey_carafe.iff";
-            break;
+                newLoot = "object/tangible/loot/dungeon/geonosian_mad_bunker/relic_gbb_honey_carafe.iff";
+                break;
             case 5:
-            newLoot = "object/tangible/loot/dungeon/geonosian_mad_bunker/relic_gbb_small_ball.iff";
-            break;
+                newLoot = "object/tangible/loot/dungeon/geonosian_mad_bunker/relic_gbb_small_ball.iff";
+                break;
             default:
-            break;
+                break;
         }
         return newLoot;
     }

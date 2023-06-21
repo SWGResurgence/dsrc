@@ -1,16 +1,23 @@
 package script.event.housepackup;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.cts;
 import script.library.utils;
 import script.obj_id;
 
 public class cts_refugee extends script.base_script
 {
+    public static final boolean BLOGGING_ON = true;
+    public static final String BLOG_CATEGORY = "CharacterTransfer";
     public cts_refugee()
     {
     }
-    public static final boolean BLOGGING_ON = true;
-    public static final String BLOG_CATEGORY = "CharacterTransfer";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!utils.isNestedWithinAPlayer(self))
@@ -24,6 +31,7 @@ public class cts_refugee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (!utils.isNestedWithinAPlayer(self))
@@ -37,6 +45,7 @@ public class cts_refugee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -57,6 +66,7 @@ public class cts_refugee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (BLOGGING_ON)

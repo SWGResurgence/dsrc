@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -11,20 +17,24 @@ public class aurilia_nightsister_prisoner extends script.conversation.base.conve
 {
     public String conversation = "conversation.aurilia_nightsister_prisoner";
     public String c_stringFile = "conversation/aurilia_nightsister_prisoner";
+
     public aurilia_nightsister_prisoner()
     {
         super.scriptName = "aurilia_nightsister_prisoner";
         super.conversation = conversation;
         super.c_stringFile = c_stringFile;
     }
+
     private boolean aurilia_nightsister_prisoner_condition_onAxkvaMinQuest(obj_id player) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "axkva_min_intro", "axkva_min_intro_01");
     }
+
     private void aurilia_nightsister_prisoner_action_axkvaMinSignal(obj_id player) throws InterruptedException
     {
         groundquests.sendSignal(player, "axkva_min_intro_01");
     }
+
     private int aurilia_nightsister_prisoner_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7"))
@@ -37,6 +47,7 @@ public class aurilia_nightsister_prisoner extends script.conversation.base.conve
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -46,18 +57,19 @@ public class aurilia_nightsister_prisoner extends script.conversation.base.conve
         doAnimationAction(self, "scare");
         string_id message = new string_id(c_stringFile, "s_6");
         if (aurilia_nightsister_prisoner_condition_onAxkvaMinQuest(player))
-		{
-			string_id responses[] = new string_id[1];
-			responses[0] = new string_id(c_stringFile, "s_7");
-			utils.setScriptVar(player, conversation + ".branchId", 1);
-			npcStartConversation(player, self, scriptName, message, responses);
-		}
-		else
-		{
-			chat.chat(self, player, message);
-		}
+        {
+            string_id[] responses = new string_id[1];
+            responses[0] = new string_id(c_stringFile, "s_7");
+            utils.setScriptVar(player, conversation + ".branchId", 1);
+            npcStartConversation(player, self, scriptName, message, responses);
+        }
+        else
+        {
+            chat.chat(self, player, message);
+        }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("aurilia_nightsister_prisoner"))

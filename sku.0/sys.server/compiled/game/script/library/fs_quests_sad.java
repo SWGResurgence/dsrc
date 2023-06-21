@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class fs_quests_sad extends script.base_script
@@ -11,6 +17,7 @@ public class fs_quests_sad extends script.base_script
     public static final String SAD_OBJVAR_WAYPOINT = "fs_quest_sad.waypoint";
     public static final String SAD_OBJVAR_MASTER_THEATER = "fs_quest_sad.theater";
     public static final String SAD_OBJVAR_KILLABLE = "fs_quest_sad.quantity_killable";
+
     public fs_quests_sad()
     {
     }

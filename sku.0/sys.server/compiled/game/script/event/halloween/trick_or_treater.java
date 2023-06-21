@@ -1,5 +1,11 @@
 package script.event.halloween;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.deltadictionary;
 import script.library.*;
 import script.location;
@@ -13,6 +19,7 @@ public class trick_or_treater extends script.base_script
     public trick_or_treater()
     {
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (!costumeBuffExists(self))
@@ -35,6 +42,7 @@ public class trick_or_treater extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (buff.hasBuff(self, "event_halloween_coin_limit"))
@@ -52,6 +60,7 @@ public class trick_or_treater extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (!costumeBuffExists(self))
@@ -187,7 +196,7 @@ public class trick_or_treater extends script.base_script
                         Enumeration keys = vars.keys();
                         while (keys.hasMoreElements())
                         {
-                            String key = (String)(keys.nextElement());
+                            String key = (String) (keys.nextElement());
                             if (key.startsWith(event_perk.LIST_VAR + "."))
                             {
                                 int data = vars.getInt(key);
@@ -203,24 +212,29 @@ public class trick_or_treater extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isInCity(location here) throws InterruptedException
     {
         region[] regionsHere = getRegionsAtPoint(here);
         if (regionsHere != null && regionsHere.length > 0)
         {
             String regionName;
-            for (region testRegion : regionsHere) {
+            for (region testRegion : regionsHere)
+            {
                 regionName = testRegion.getName();
-                if (regionName.endsWith("mos_eisley")) {
+                if (regionName.endsWith("mos_eisley"))
+                {
                     return true;
                 }
-                if (regionName.endsWith("moenia")) {
+                if (regionName.endsWith("moenia"))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     private boolean costumeBuffExists(obj_id player) throws InterruptedException
     {
         return buff.getBuffOnTargetFromGroup(player, "shapechange") != 0;

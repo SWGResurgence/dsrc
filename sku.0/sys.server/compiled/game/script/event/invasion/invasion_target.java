@@ -1,5 +1,11 @@
 package script.event.invasion;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.badge;
 import script.library.create;
@@ -13,6 +19,7 @@ public class invasion_target extends script.base_script
     public invasion_target()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         float timeStamp = getGameTime();
@@ -24,6 +31,7 @@ public class invasion_target extends script.base_script
         messageTo(self, "cleanUp", null, 36000, false);
         return SCRIPT_CONTINUE;
     }
+
     public int launchEvent(obj_id self, dictionary params) throws InterruptedException
     {
         int numWaves = getIntObjVar(self, "event.invasion.waves.numWaves");
@@ -46,6 +54,7 @@ public class invasion_target extends script.base_script
         messageTo(self, "playAreaBroadcast", params, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startNextWave(obj_id self, dictionary params) throws InterruptedException
     {
         int wave = params.getInt("wave");
@@ -65,9 +74,10 @@ public class invasion_target extends script.base_script
             if (awardBadge == 1)
             {
                 obj_id[] objPlayers = getPlayerCreaturesInRange(self, 255);
-                if (objPlayers != null && objPlayers.length > 0)
+                if (objPlayers != null)
                 {
-                    for (obj_id objPlayer : objPlayers) {
+                    for (obj_id objPlayer : objPlayers)
+                    {
                         badge.grantBadge(objPlayer, "bdg_accolade_live_event");
                     }
                 }
@@ -100,6 +110,7 @@ public class invasion_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnNextCreature(obj_id self, dictionary params) throws InterruptedException
     {
         String spawnName = params.getString("spawnName");
@@ -145,23 +156,27 @@ public class invasion_target extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int playAreaBroadcast(obj_id self, dictionary params) throws InterruptedException
     {
         String areaBroadcast = params.getString("broadcast");
         obj_id[] objPlayers = getPlayerCreaturesInRange(self, 255);
-        if (objPlayers != null && objPlayers.length > 0)
+        if (objPlayers != null)
         {
-            for (obj_id objPlayer : objPlayers) {
+            for (obj_id objPlayer : objPlayers)
+            {
                 sendSystemMessage(objPlayer, areaBroadcast, null);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void checkTimeLimit(obj_id self) throws InterruptedException
     {
         float myCreationTime = getFloatObjVar(self, "event.invasion.timeStamp");
@@ -171,13 +186,14 @@ public class invasion_target extends script.base_script
         {
             destroyObject(self);
         }
-        return;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         checkTimeLimit(self);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnKeyObject(obj_id self, dictionary params) throws InterruptedException
     {
         String name = getStringObjVar(self, "event.invasion.keyObject.name");

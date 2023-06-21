@@ -1,5 +1,11 @@
 package script.theme_park.rebel;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.quests;
@@ -12,6 +18,7 @@ public class quest_player extends script.base_script
     public quest_player()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -39,6 +46,7 @@ public class quest_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -101,6 +109,7 @@ public class quest_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int finishRebelQuest(obj_id self, dictionary params) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -134,6 +143,7 @@ public class quest_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void spawnExtras(obj_id self, location spawn, String questID) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");
@@ -206,8 +216,8 @@ public class quest_player extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public int removeRebelQuestInfo(obj_id self, dictionary params) throws InterruptedException
     {
         String questID = params.getString("questID");
@@ -229,7 +239,7 @@ public class quest_player extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (type.equals("rescue") || type.equals("escort") || type.equals("arrest"))
             {
@@ -247,6 +257,7 @@ public class quest_player extends script.base_script
             return SCRIPT_CONTINUE;
         }
     }
+
     public int makeEnemyAttack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id npc = params.getObjId("npc");
@@ -254,6 +265,7 @@ public class quest_player extends script.base_script
         startCombat(npc, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnWaypointGetAttributes(obj_id self, obj_id waypoint, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         String questId = getStringObjVar(player, "questID");
@@ -266,7 +278,7 @@ public class quest_player extends script.base_script
             return SCRIPT_OVERRIDE;
         }
         string_id detail = new string_id(file, entry);
-        String questDetails = "@" + detail.toString();
+        String questDetails = "@" + detail;
         int idx = 0;
         while (idx >= 0)
         {
@@ -277,13 +289,14 @@ public class quest_player extends script.base_script
                 attribs[idx] = questDetails;
                 idx = -1;
             }
-            else 
+            else
             {
                 idx = idx + 1;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnWaypointDestroyed(obj_id self, obj_id waypoint) throws InterruptedException
     {
         String questID = getStringObjVar(self, "questID");
@@ -291,7 +304,7 @@ public class quest_player extends script.base_script
         {
             return SCRIPT_OVERRIDE;
         }
-        else 
+        else
         {
             int stringCheck = questID.indexOf("rebel_hideout");
             if (stringCheck > -1)
@@ -301,7 +314,7 @@ public class quest_player extends script.base_script
                 messageTo(self, "removeRebelQuestInfo", questBook, 2, true);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 return SCRIPT_OVERRIDE;
             }

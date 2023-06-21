@@ -1,5 +1,11 @@
 package script.item.dice;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.craftinglib;
 import script.library.debug;
@@ -14,6 +20,7 @@ public class chance_cube extends script.item.dice.base.base_dice
     public static final int DICE_FACE_COUNT = 2;
     public static final int NUMBER_OF_DICE = 1;
     public static final String TYPE_NAME = "chance_cube";
+
     public chance_cube()
     {
     }

@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,18 +14,20 @@ import script.string_id;
 
 public class terminal_safety_override extends script.base_script
 {
-    public terminal_safety_override()
-    {
-    }
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id SAFETY_STATUS = new string_id(STF, "safety_status");
     public static final string_id SHIELD_OFF = new string_id(STF, "shield_off");
     public static final string_id NOT_NEEDED = new string_id(STF, "not_needed");
+    public terminal_safety_override()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, SAFETY_STATUS);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -29,7 +37,7 @@ public class terminal_safety_override extends script.base_script
                 groundquests.sendSignal(player, "magneticShieldOff");
                 sendSystemMessage(player, SHIELD_OFF);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, NOT_NEEDED);
             }

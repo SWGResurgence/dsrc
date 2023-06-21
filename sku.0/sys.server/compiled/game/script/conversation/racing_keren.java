@@ -1,31 +1,43 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
 
 public class racing_keren extends script.base_script
 {
+    public static String c_stringFile = "conversation/racing_keren";
+
     public racing_keren()
     {
     }
-    public static String c_stringFile = "conversation/racing_keren";
+
     public boolean racing_keren_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean racing_keren_condition_hasRaced(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasObjVar(player, "racing.bestTime.keren"));
     }
+
     public boolean racing_keren_condition_isRacing(obj_id player, obj_id npc) throws InterruptedException
     {
         return (getIntObjVar(player, "racing.keren.isRacing") == 1);
     }
+
     public boolean racing_keren_condition_hasLastTime(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasObjVar(player, "racing.lastTime.keren"));
     }
+
     public void racing_keren_action_registerPersonalBest(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -33,6 +45,7 @@ public class racing_keren extends script.base_script
         params.put("npc", npc);
         messageTo(npc, "messageRegisterBest", params, 0, false);
     }
+
     public void racing_keren_action_startRace(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -41,6 +54,7 @@ public class racing_keren extends script.base_script
         params.put("value", 1);
         messageTo(npc, "messageStartMission", params, 0, false);
     }
+
     public void racing_keren_action_displayCurrentLeader(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -48,6 +62,7 @@ public class racing_keren extends script.base_script
         params.put("npc", npc);
         messageTo(npc, "messageDisplayLeader", params, 0, false);
     }
+
     public void racing_keren_action_whatsMyBestTime(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -55,6 +70,7 @@ public class racing_keren extends script.base_script
         params.put("npc", npc);
         messageTo(npc, "messageWhatsMyTime", params, 0, false);
     }
+
     public void racing_keren_action_showBestTime(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -62,6 +78,7 @@ public class racing_keren extends script.base_script
         params.put("npc", npc);
         messageTo(npc, "messageShowBestTime", params, 0, false);
     }
+
     public void racing_keren_action_erasePersonalBest(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -69,6 +86,7 @@ public class racing_keren extends script.base_script
         params.put("npc", npc);
         messageTo(npc, "messageErasePersonalBest", params, 0, false);
     }
+
     public void racing_keren_action_abortRace(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -77,6 +95,7 @@ public class racing_keren extends script.base_script
         messageTo(player, "handleCleanUp", params, 0, false);
         playMusic(player, "sound/music_combat_bfield_death.snd");
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -86,11 +105,13 @@ public class racing_keren extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -99,18 +120,21 @@ public class racing_keren extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.racing_keren");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -132,7 +156,7 @@ public class racing_keren extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_d900d1be");
@@ -140,7 +164,7 @@ public class racing_keren extends script.base_script
                 setObjVar(player, "conversation.racing_keren.branchId", 1);
                 npcStartConversation(player, self, "racing_keren", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -203,7 +227,7 @@ public class racing_keren extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ed644123");
@@ -231,7 +255,7 @@ public class racing_keren extends script.base_script
                 setObjVar(player, "conversation.racing_keren.branchId", 4);
                 npcStartConversation(player, self, "racing_keren", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -273,7 +297,7 @@ public class racing_keren extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_e460e3d3");
@@ -293,7 +317,7 @@ public class racing_keren extends script.base_script
                 setObjVar(player, "conversation.racing_keren.branchId", 15);
                 npcStartConversation(player, self, "racing_keren", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -302,6 +326,7 @@ public class racing_keren extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("racing_keren"))
@@ -347,7 +372,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2528fad7");
@@ -360,7 +385,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -423,7 +448,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_31168968");
@@ -436,7 +461,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -512,7 +537,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ed644123");
@@ -541,7 +566,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -618,7 +643,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ed644123");
@@ -647,7 +672,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -682,7 +707,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2528fad7");
@@ -695,7 +720,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -758,7 +783,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_31168968");
@@ -771,7 +796,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -847,7 +872,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ed644123");
@@ -876,7 +901,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -953,7 +978,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ed644123");
@@ -982,7 +1007,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -1017,7 +1042,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2528fad7");
@@ -1030,7 +1055,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -1093,7 +1118,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_31168968");
@@ -1106,7 +1131,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -1182,7 +1207,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ed644123");
@@ -1211,7 +1236,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -1246,7 +1271,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2528fad7");
@@ -1259,7 +1284,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -1322,7 +1347,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_31168968");
@@ -1335,7 +1360,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -1411,7 +1436,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ed644123");
@@ -1440,7 +1465,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -1489,7 +1514,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e460e3d3");
@@ -1510,7 +1535,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -1559,7 +1584,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2528fad7");
@@ -1572,7 +1597,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -1621,7 +1646,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e460e3d3");
@@ -1642,7 +1667,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -1691,7 +1716,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e460e3d3");
@@ -1712,7 +1737,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -1761,7 +1786,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2528fad7");
@@ -1774,7 +1799,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -1823,7 +1848,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e460e3d3");
@@ -1844,7 +1869,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -1907,7 +1932,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e460e3d3");
@@ -1928,7 +1953,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -1977,7 +2002,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e460e3d3");
@@ -1998,7 +2023,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -2047,7 +2072,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2528fad7");
@@ -2060,7 +2085,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -2109,7 +2134,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e460e3d3");
@@ -2130,7 +2155,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -2179,7 +2204,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e460e3d3");
@@ -2200,7 +2225,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -2249,7 +2274,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2528fad7");
@@ -2262,7 +2287,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);
@@ -2311,7 +2336,7 @@ public class racing_keren extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e460e3d3");
@@ -2332,7 +2357,7 @@ public class racing_keren extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.racing_keren.branchId");
                     npcSpeak(player, message);

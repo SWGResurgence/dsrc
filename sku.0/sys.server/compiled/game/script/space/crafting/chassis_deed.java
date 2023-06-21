@@ -1,5 +1,11 @@
 package script.space.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.space_crafting;
 import script.library.space_transition;
 import script.library.space_utils;
@@ -11,15 +17,17 @@ import script.string_id;
 
 public class chassis_deed extends script.base_script
 {
+    public static final string_id MNU_CREATE_VEHICLE = new string_id("sui", "create_vehicle");
+    public static final String STF = "chassis_npc";
     public chassis_deed()
     {
     }
-    public static final string_id MNU_CREATE_VEHICLE = new string_id("sui", "create_vehicle");
-    public static final String STF = "chassis_npc";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -66,19 +74,20 @@ public class chassis_deed extends script.base_script
                 idx++;
             }
         }
-        else 
+        else
         {
             names[idx] = "pilotSkillRequired";
             attribs[idx] = space_utils.getSkillRequiredForShip(type);
             idx++;
         }
         names[idx] = "chassisHitpoints";
-        attribs[idx] = Float.toString(currentHp) + "/" + Float.toString(hp);
+        attribs[idx] = currentHp + "/" + hp;
         idx++;
         names[idx] = "chassisMass";
         attribs[idx] = Float.toString(mass);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -88,6 +97,7 @@ public class chassis_deed extends script.base_script
         int mnuColor = mi.addRootMenu(menu_info_types.SERVER_MENU1, MNU_CREATE_VEHICLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -123,7 +133,7 @@ public class chassis_deed extends script.base_script
                 CustomerServiceLog("ship_deed", "PLAYER: " + player + "(" + getPlayerName(player) + ") created SHIP: " + newShip + " from DEED:" + self + " which provided the Ship Type: " + type + " MASS: " + mass + " MAX CHASSIS HP: " + hp + " and CURRENT CHASSIS HP: " + currentHp);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 utils.removeScriptVar(self, "chassis_deed.inUse");
             }

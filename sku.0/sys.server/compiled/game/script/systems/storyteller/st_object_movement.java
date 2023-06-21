@@ -1,5 +1,11 @@
 package script.systems.storyteller;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.storyteller;
 import script.library.utils;
@@ -14,6 +20,7 @@ public class st_object_movement extends script.base_script
     public static final String THEATER_MODE = "theater_mode";
     public static final String STF = "player_structure";
     public static final float MAX_HEIGHT = 8.0f;
+
     public st_object_movement()
     {
     }

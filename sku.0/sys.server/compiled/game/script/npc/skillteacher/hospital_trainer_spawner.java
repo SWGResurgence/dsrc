@@ -1,5 +1,11 @@
 package script.npc.skillteacher;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.utils;
@@ -11,6 +17,7 @@ public class hospital_trainer_spawner extends script.base_script
     public hospital_trainer_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -18,10 +25,12 @@ public class hospital_trainer_spawner extends script.base_script
         messageTo(self, "spawnThings", params, 20, true);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         spawnDoctor(self);
     }
+
     public void spawnCombatMedic(obj_id self) throws InterruptedException
     {
         if (utils.checkConfigFlag("ScriptFlags", "noEliteTrainers"))
@@ -34,8 +43,8 @@ public class hospital_trainer_spawner extends script.base_script
         create.addDestroyMessage(combatmedic, "combatmedicDied", 10.0f, self);
         setCreatureStatic(combatmedic, true);
         setInvulnerable(combatmedic, true);
-        return;
     }
+
     public void spawnMedic(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "rooma");
@@ -44,8 +53,8 @@ public class hospital_trainer_spawner extends script.base_script
         create.addDestroyMessage(medic, "medicDied", 10.0f, self);
         setCreatureStatic(medic, true);
         setInvulnerable(medic, true);
-        return;
     }
+
     public void spawnDoctor(obj_id self) throws InterruptedException
     {
         if (utils.checkConfigFlag("ScriptFlags", "noEliteTrainers"))
@@ -59,8 +68,8 @@ public class hospital_trainer_spawner extends script.base_script
         attachScript(doctor, "conversation.doctor");
         setCreatureStatic(doctor, true);
         setInvulnerable(doctor, true);
-        return;
     }
+
     public void spawnCombatMedic2(obj_id self) throws InterruptedException
     {
         if (utils.checkConfigFlag("ScriptFlags", "noEliteTrainers"))
@@ -73,8 +82,8 @@ public class hospital_trainer_spawner extends script.base_script
         create.addDestroyMessage(combatmedic, "combatmedic2Died", 10.0f, self);
         setCreatureStatic(combatmedic, true);
         setInvulnerable(combatmedic, true);
-        return;
     }
+
     public void spawnMedic2(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "roomb");
@@ -83,8 +92,8 @@ public class hospital_trainer_spawner extends script.base_script
         create.addDestroyMessage(medic2, "medic2Died", 10.0f, self);
         setCreatureStatic(medic2, true);
         setInvulnerable(medic2, true);
-        return;
     }
+
     public void spawnDoctor2(obj_id self) throws InterruptedException
     {
         if (utils.checkConfigFlag("ScriptFlags", "noEliteTrainers"))
@@ -97,39 +106,45 @@ public class hospital_trainer_spawner extends script.base_script
         create.addDestroyMessage(doctor2, "doctor2Died", 10.0f, self);
         setCreatureStatic(doctor2, true);
         setInvulnerable(doctor2, true);
-        return;
     }
+
     public int spawnThings(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id stuffs = params.getObjId("stuff");
         spawnEveryone(stuffs);
         return SCRIPT_CONTINUE;
     }
+
     public int combatmedicDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnCombatMedic(self);
         return SCRIPT_CONTINUE;
     }
+
     public int medicDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnMedic(self);
         return SCRIPT_CONTINUE;
     }
+
     public int doctorDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnDoctor(self);
         return SCRIPT_CONTINUE;
     }
+
     public int combatmedic2Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnCombatMedic2(self);
         return SCRIPT_CONTINUE;
     }
+
     public int medic2Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnMedic2(self);
         return SCRIPT_CONTINUE;
     }
+
     public int doctor2Died(obj_id self, dictionary params) throws InterruptedException
     {
         spawnDoctor2(self);

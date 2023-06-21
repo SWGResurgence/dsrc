@@ -1,5 +1,11 @@
 package script.poi.deliverance;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -9,9 +15,6 @@ import java.util.Vector;
 
 public class master extends script.theme_park.poi.base
 {
-    public master()
-    {
-    }
     public static final String SCENARIO_NAME = "deliverance";
     public static final String BASE_PATH = "poi." + SCENARIO_NAME;
     public static final String SCRIPT_MASTER = BASE_PATH + ".master";
@@ -27,6 +30,10 @@ public class master extends script.theme_park.poi.base
     public static final float CORRAL_RADIUS = 16.0f;
     public static final float OBJ_RADIUS = 2.0f;
     public static final float LOC_TARGET_RADIUS = 7.5f;
+    public master()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("poiDeliverance", "************ POI LAUNCH: " + getGameTime() + " ************");
@@ -50,16 +57,19 @@ public class master extends script.theme_park.poi.base
         messageTo(self, scenario.HANDLER_INIT_SCENARIO, params, 3, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int initScenario(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("poiDeliverance", "initScenario: entered...");
@@ -69,7 +79,7 @@ public class master extends script.theme_park.poi.base
             return SCRIPT_CONTINUE;
         }
         scenario.createTeam(self, "antagonist", self.toString() + "_antagonist");
-        scenario.createTeam(self, "mediator", self.toString() + "_mediator");
+        scenario.createTeam(self, "mediator", self + "_mediator");
         String type = params.getString(scenario.COL_MEDIATOR);
         String myName = "mediator_0";
         location loc = getLocation(self);
@@ -84,6 +94,7 @@ public class master extends script.theme_park.poi.base
         ai_lib.setDefaultCalmBehavior(mediator, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int runScenario(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("poiDeliverance", "runScenario: entered...");
@@ -95,7 +106,7 @@ public class master extends script.theme_park.poi.base
                 LOG("poiDeliverance", "runScenario: retrieving scenario parameters...");
                 params = dataTableGetRow(TBL, idx);
             }
-            else 
+            else
             {
                 LOG("poiDeliverance", "runScenario: unable to open datatable!");
             }
@@ -111,22 +122,22 @@ public class master extends script.theme_park.poi.base
         switch (diff)
         {
             case poi.DIFF_EASY:
-            aCount += 2;
-            break;
+                aCount += 2;
+                break;
             case poi.DIFF_MEDIUM:
-            aCount += 3;
-            break;
+                aCount += 3;
+                break;
             case poi.DIFF_HARD:
-            aCount += 5;
-            break;
+                aCount += 5;
+                break;
             case poi.DIFF_VHARD:
-            aCount += 6;
-            break;
+                aCount += 6;
+                break;
         }
         location myLoc = getLocation(self);
         location tmpLoc = myLoc;
         location c = utils.getRandomLocationInRing(tmpLoc, LOAD_RANGE_MIN, LOAD_RANGE_MAX);
-        LOG("poiDeliverance", "antagonist center loc = " + c.toString());
+        LOG("poiDeliverance", "antagonist center loc = " + c);
         location loc = locations.getGoodLocationAroundLocation(c, 3.0f, 3.0f, 16.0f, 16.0f);
         if (loc == null)
         {
@@ -134,9 +145,9 @@ public class master extends script.theme_park.poi.base
             messageTo(self, scenario.HANDLER_CLEANUP_SCENARIO, null, 10, true);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
-            LOG("poiDeliverance", "good loc = " + loc.toString());
+            LOG("poiDeliverance", "good loc = " + loc);
         }
         String type = params.getString(scenario.COL_ANTAGONIST);
         Vector antagonists = new Vector();
@@ -147,26 +158,26 @@ public class master extends script.theme_park.poi.base
             switch (i / 3)
             {
                 case 0:
-                spawnLoc.z = loc.z + 3.0f;
-                break;
+                    spawnLoc.z = loc.z + 3.0f;
+                    break;
                 case 1:
-                spawnLoc.z = loc.z;
-                break;
+                    spawnLoc.z = loc.z;
+                    break;
                 case 2:
-                spawnLoc.z = loc.z - 3.0f;
-                break;
+                    spawnLoc.z = loc.z - 3.0f;
+                    break;
             }
             switch (i % 3)
             {
                 case 0:
-                spawnLoc.x = loc.x + 3.0f;
-                break;
+                    spawnLoc.x = loc.x + 3.0f;
+                    break;
                 case 1:
-                spawnLoc.x = loc.x;
-                break;
+                    spawnLoc.x = loc.x;
+                    break;
                 case 2:
-                spawnLoc.x = loc.x - 3.0f;
-                break;
+                    spawnLoc.x = loc.x - 3.0f;
+                    break;
             }
             spawnLoc.y = getHeightAtLocation(spawnLoc.x, spawnLoc.y);
             LOG("poiDeliverance", "[" + i + "] antagonist spawn loc = " + spawnLoc.x + ", " + spawnLoc.z);
@@ -188,13 +199,14 @@ public class master extends script.theme_park.poi.base
             messageTo(self, scenario.HANDLER_CLEANUP_SCENARIO, null, 10, true);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             params.put("antagonists", antagonists);
             messageTo(self, "startPathing", params, 2, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startPathing(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("poiDeliverance", "********* handler = startPathing *************");
@@ -215,7 +227,7 @@ public class master extends script.theme_park.poi.base
         if ((mediator == null) || (mediator == obj_id.NULL_ID))
         {
         }
-        else 
+        else
         {
             faceTo(mediator, leader);
         }
@@ -228,8 +240,8 @@ public class master extends script.theme_park.poi.base
         String locName = self.toString() + "_" + scenario.ANTAGONIST;
         scenario.requestAddTargetLocation(leader, locName, mLoc, LOC_TARGET_RADIUS);
         setObjVar(leader, scenario.VAR_TARGET_LOCATION_NAME, locName);
-        LOG("poiDeliverance", "(" + mediator + ") mediator loc = " + mLoc.toString());
-        LOG("poiDeliverance", "(" + antagonists[0] + ") leader pathing to: " + pathLoc.toString());
+        LOG("poiDeliverance", "(" + mediator + ") mediator loc = " + mLoc);
+        LOG("poiDeliverance", "(" + antagonists[0] + ") leader pathing to: " + pathLoc);
         ai_lib.aiPathTo(leader, pathLoc);
         LOG("poiDeliverance", "setting minion follow...");
         int formation = rand(0, 1);
@@ -240,16 +252,19 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupScenario(obj_id self, dictionary params) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleActorDeath(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("poiDeliverance", "handleActorDeath: entered...");

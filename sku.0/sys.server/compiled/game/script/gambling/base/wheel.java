@@ -1,5 +1,11 @@
 package script.gambling.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,16 +13,19 @@ import java.util.Vector;
 
 public class wheel extends script.gambling.base.default_interface
 {
+    private static final int TIMER_BETTING = 120;
+
     public wheel()
     {
     }
-    private static final int TIMER_BETTING = 120;
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         removeObjVar(self, gambling.VAR_TABLE_PLAYERS);
         removeObjVar(self, gambling.VAR_GAME_BASE);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerAdded(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -36,8 +45,10 @@ public class wheel extends script.gambling.base.default_interface
         if (players != null && players.length > 0)
         {
             prose_package ppJoinOther = prose.getPackage(gambling.PROSE_PLAYER_JOIN_OTHER, player);
-            for (obj_id player1 : players) {
-                if (player1 != player) {
+            for (obj_id player1 : players)
+            {
+                if (player1 != player)
+                {
                     sendSystemMessageProse(player1, ppJoinOther);
                 }
             }
@@ -62,12 +73,13 @@ public class wheel extends script.gambling.base.default_interface
             prose_package ppBetTime = prose.getPackage(gambling.PROSE_STARTING_IN, timeLeft);
             sendSystemMessageProse(player, ppBetTime);
         }
-        else 
+        else
         {
             broadcast(player, "Please wait a moment for next game to begin.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerRemoved(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -90,19 +102,21 @@ public class wheel extends script.gambling.base.default_interface
         {
             stopWheelGame(self);
         }
-        else 
+        else
         {
             obj_id[] players = getObjIdArrayObjVar(self, gambling.VAR_TABLE_PLAYERS);
             if (players != null && players.length > 0)
             {
                 prose_package ppLeftOther = prose.getPackage(gambling.PROSE_PLAYER_LEAVE_OTHER, player);
-                for (obj_id player1 : players) {
+                for (obj_id player1 : players)
+                {
                     sendSystemMessageProse(player1, ppLeftOther);
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBetFailed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -117,6 +131,7 @@ public class wheel extends script.gambling.base.default_interface
         sendSystemMessage(player, gambling.SID_BET_FAILED);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRequestUpdatedUI(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -137,6 +152,7 @@ public class wheel extends script.gambling.base.default_interface
         showBetUi(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBetUi(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -157,6 +173,7 @@ public class wheel extends script.gambling.base.default_interface
         showBetUi(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBetTimer(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, gambling.VAR_TABLE_BET_ACCEPT))
@@ -179,7 +196,8 @@ public class wheel extends script.gambling.base.default_interface
         if (diff > 0)
         {
             prose_package ppTimeLeft = prose.getPackage(gambling.PROSE_STARTING_IN, diff);
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 sendSystemMessageProse(player, ppTimeLeft);
             }
         }
@@ -191,12 +209,13 @@ public class wheel extends script.gambling.base.default_interface
         {
             messageTo(self, "handleBetTimer", params, 5, false);
         }
-        else 
+        else
         {
             spinWheel(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleGamblingPayout(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -214,11 +233,13 @@ public class wheel extends script.gambling.base.default_interface
         showFlyText(player, gambling.FLY_WINNER, 1.0f, colors.RED);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDelayedRestart(obj_id self, dictionary params) throws InterruptedException
     {
         startWheelGame(self);
         return SCRIPT_CONTINUE;
     }
+
     public void showBetUi(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(player))
@@ -282,6 +303,7 @@ public class wheel extends script.gambling.base.default_interface
         }
         utils.setScriptVar(self, gambling.VAR_GAME_PLAYERS + "." + player + ".pid", pid);
     }
+
     public void startWheelGame(obj_id self) throws InterruptedException
     {
         obj_id[] players = getObjIdArrayObjVar(self, gambling.VAR_TABLE_PLAYERS);
@@ -292,7 +314,8 @@ public class wheel extends script.gambling.base.default_interface
         setObjVar(self, gambling.VAR_GAME_PLAYERS_IDS, players);
         int stampTime = getGameTime() + TIMER_BETTING;
         utils.setScriptVar(self, gambling.VAR_TABLE_BET_ACCEPT, stampTime);
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             sendSystemMessage(player, gambling.SID_PLACE_BETS);
             showBetUi(self, player);
         }
@@ -300,11 +323,13 @@ public class wheel extends script.gambling.base.default_interface
         d.put("stamp", stampTime);
         messageTo(self, "handleBetTimer", d, 30.0f, false);
     }
+
     public void stopWheelGame(obj_id self) throws InterruptedException
     {
         utils.removeScriptVar(self, gambling.VAR_TABLE_BET_ACCEPT);
         removeObjVar(self, gambling.VAR_GAME_BASE);
     }
+
     private void spinWheel(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -317,7 +342,8 @@ public class wheel extends script.gambling.base.default_interface
             return;
         }
         utils.removeScriptVar(self, gambling.VAR_TABLE_BET_ACCEPT);
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             sendSystemMessage(player, new string_id(gambling.STF_INTERFACE, "wheel_spin"));
         }
         dictionary d = new dictionary();

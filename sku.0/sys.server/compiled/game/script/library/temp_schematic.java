@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.prose_package;
 import script.string_id;
@@ -18,6 +24,7 @@ public class temp_schematic extends script.base_script
     public static final String LIMITED_USE_DATA_TABLE = "datatables/crafting/limited_use_schematics.iff";
     public static final String COL_SCHEMATIC_NAME = "schematic_name";
     public static final String COL_SCHEMATIC_USES = "schematic_uses";
+
     public temp_schematic()
     {
     }

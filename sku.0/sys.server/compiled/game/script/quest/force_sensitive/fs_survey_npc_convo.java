@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -9,11 +15,12 @@ import java.util.Vector;
 
 public class fs_survey_npc_convo extends script.base_script
 {
+    public static final String CONVO = "quest/force_sensitive/fs_survey";
+    public static final String table = "datatables/quest/force_sensitive/fs_survey_quest_types.iff";
     public fs_survey_npc_convo()
     {
     }
-    public static final String CONVO = "quest/force_sensitive/fs_survey";
-    public static final String table = "datatables/quest/force_sensitive/fs_survey_quest_types.iff";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
@@ -24,7 +31,7 @@ public class fs_survey_npc_convo extends script.base_script
         {
             setObjVar(self, "village.phase", phase);
         }
-        else 
+        else
         {
             int lastPhase = getIntObjVar(self, "village.phase");
             if (lastPhase != phase)
@@ -34,12 +41,14 @@ public class fs_survey_npc_convo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(speaker))
@@ -94,7 +103,7 @@ public class fs_survey_npc_convo extends script.base_script
         if (hasObjVar(self, "gave." + speaker))
         {
             string_id greeting = new string_id(CONVO, "want_task");
-            string_id response[] = new string_id[3];
+            string_id[] response = new string_id[3];
             response[0] = new string_id(CONVO, "yes_task");
             response[1] = new string_id(CONVO, "no_task");
             response[2] = new string_id(CONVO, "how_much");
@@ -110,18 +119,18 @@ public class fs_survey_npc_convo extends script.base_script
             chat.chat(self, goSample);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (!fs_quests.hasQuestAccepted(speaker) && fs_quests.isVillageEligible(speaker))
             {
                 string_id greeting = new string_id(CONVO, "want_task");
-                string_id response[] = new string_id[2];
+                string_id[] response = new string_id[2];
                 response[0] = new string_id(CONVO, "explain");
                 response[1] = new string_id(CONVO, "no_task");
                 npcStartConversation(speaker, self, "celebConvo", greeting, response);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 string_id youreBusy = new string_id(CONVO, "youre_busy");
                 chat.chat(self, youreBusy);
@@ -129,6 +138,7 @@ public class fs_survey_npc_convo extends script.base_script
             }
         }
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(self, "fs_quest.myMaster");
@@ -155,7 +165,7 @@ public class fs_survey_npc_convo extends script.base_script
                     fs_quests.setQuestAccepted(player);
                 }
             }
-            else 
+            else
             {
                 return SCRIPT_CONTINUE;
             }
@@ -213,6 +223,7 @@ public class fs_survey_npc_convo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String getQuestNumber() throws InterruptedException
     {
         String resource = "type_one";
@@ -220,26 +231,27 @@ public class fs_survey_npc_convo extends script.base_script
         switch (stochastic)
         {
             case 1:
-            resource = "type_one";
-            break;
+                resource = "type_one";
+                break;
             case 2:
-            resource = "type_two";
-            break;
+                resource = "type_two";
+                break;
             case 3:
-            resource = "type_three";
-            break;
+                resource = "type_three";
+                break;
             case 4:
-            resource = "type_four";
-            break;
+                resource = "type_four";
+                break;
             case 5:
-            resource = "type_five";
-            break;
+                resource = "type_five";
+                break;
             case 6:
-            resource = "type_six";
-            break;
+                resource = "type_six";
+                break;
         }
         return resource;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         String name = getTemplateName(item);
@@ -276,6 +288,7 @@ public class fs_survey_npc_convo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isRequiredResource(String name) throws InterruptedException
     {
         if (name.equals("object/tangible/loot/quest/wind_crystal.iff"))
@@ -294,12 +307,9 @@ public class fs_survey_npc_convo extends script.base_script
         {
             return true;
         }
-        if (name.equals("object/tangible/loot/quest/endrine.iff"))
-        {
-            return true;
-        }
-        return false;
+        return name.equals("object/tangible/loot/quest/endrine.iff");
     }
+
     public int doWinnerCircleForSurveyQuests(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(self, "fs_dyn_village.OBJVAR_MY_MASTER_OBJECT");
@@ -313,86 +323,87 @@ public class fs_survey_npc_convo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String hasOneOfMyQuests(obj_id player) throws InterruptedException
     {
         String what = "none";
         boolean phase2_1 = quests.isActive("survey_phase2_01", player);
-        if (phase2_1 == true)
+        if (phase2_1)
         {
             what = "survey_phase2_01";
         }
         boolean phase2_2 = quests.isActive("survey_phase2_02", player);
-        if (phase2_2 == true)
+        if (phase2_2)
         {
             what = "survey_phase2_02";
         }
         boolean phase2_3 = quests.isActive("survey_phase2_03", player);
-        if (phase2_3 == true)
+        if (phase2_3)
         {
             what = "survey_phase2_03";
         }
         boolean phase2_4 = quests.isActive("survey_phase2_04", player);
-        if (phase2_4 == true)
+        if (phase2_4)
         {
             what = "survey_phase2_04";
         }
         boolean phase2_5 = quests.isActive("survey_phase2_05", player);
-        if (phase2_5 == true)
+        if (phase2_5)
         {
             what = "survey_phase2_05";
         }
         boolean phase2_6 = quests.isActive("survey_phase2_06", player);
-        if (phase2_6 == true)
+        if (phase2_6)
         {
             what = "survey_phase2_06";
         }
         boolean phase2_7 = quests.isActive("survey_phase2_07", player);
-        if (phase2_7 == true)
+        if (phase2_7)
         {
             what = "survey_phase2_07";
         }
         boolean phase2_8 = quests.isActive("survey_phase2_08", player);
-        if (phase2_8 == true)
+        if (phase2_8)
         {
             what = "survey_phase2_08";
         }
         boolean phase3_1 = quests.isActive("survey_phase3_01", player);
-        if (phase3_1 == true)
+        if (phase3_1)
         {
             what = "survey_phase3_01";
         }
         boolean phase3_2 = quests.isActive("survey_phase3_02", player);
-        if (phase3_2 == true)
+        if (phase3_2)
         {
             what = "survey_phase3_02";
         }
         boolean phase3_3 = quests.isActive("survey_phase3_03", player);
-        if (phase3_3 == true)
+        if (phase3_3)
         {
             what = "survey_phase3_03";
         }
         boolean phase3_4 = quests.isActive("survey_phase3_04", player);
-        if (phase3_4 == true)
+        if (phase3_4)
         {
             what = "survey_phase3_04";
         }
         boolean phase3_5 = quests.isActive("survey_phase3_05", player);
-        if (phase3_5 == true)
+        if (phase3_5)
         {
             what = "survey_phase3_05";
         }
         boolean phase3_6 = quests.isActive("survey_phase3_06", player);
-        if (phase3_6 == true)
+        if (phase3_6)
         {
             what = "survey_phase3_06";
         }
         boolean phase3_7 = quests.isActive("survey_phase3_07", player);
-        if (phase3_7 == true)
+        if (phase3_7)
         {
             what = "survey_phase3_07";
         }
         boolean phase3_8 = quests.isActive("survey_phase3_08", player);
-        if (phase3_8 == true)
+        if (phase3_8)
         {
             what = "survey_phase3_08";
         }

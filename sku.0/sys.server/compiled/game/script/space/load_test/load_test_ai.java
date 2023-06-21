@@ -1,5 +1,11 @@
 package script.space.load_test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ship_ai;
 import script.library.utils;
@@ -7,10 +13,12 @@ import script.obj_id;
 
 public class load_test_ai extends script.base_script
 {
+    public static final float PING_TIME = 120.0f;
+
     public load_test_ai()
     {
     }
-    public static final float PING_TIME = 120.0f;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id followTarget = utils.getObjIdScriptVar(self, "followTarget");
@@ -21,6 +29,7 @@ public class load_test_ai extends script.base_script
         messageTo(self, "ping", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int ping(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id followTarget = utils.getObjIdScriptVar(self, "followTarget");
@@ -28,7 +37,7 @@ public class load_test_ai extends script.base_script
         {
             destroyObject(self);
         }
-        else 
+        else
         {
             messageTo(self, "ping", null, PING_TIME, false);
         }

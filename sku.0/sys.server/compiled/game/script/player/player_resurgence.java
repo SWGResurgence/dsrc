@@ -4,12 +4,14 @@ package script.player;/*
 @Purpose: This script is used for Resurgence specific functions.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
+import script.*;
 import script.library.*;
-import script.obj_id;
-import script.location;
-import script.menu_info_types;
-import script.menu_info_data;
-import script.dictionary;
 
 import java.util.Arrays;
 import java.util.StringTokenizer;
@@ -22,6 +24,7 @@ public class player_resurgence extends script.base_script
 {
     public boolean requireEntBuffRecycle = false;
     public boolean restoredContent = false;
+
     public int OnAttach(obj_id self)
     {
         return SCRIPT_CONTINUE;
@@ -42,12 +45,38 @@ public class player_resurgence extends script.base_script
         addToAdminList(self);
         showServerInfo(self);
         incrementPlayerCount(self);
+        if (resurgence.isEthereal(self))
+        {
+            resurgence.logEtherealAction(self, "Logging in at " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getGameTime()) + " near location " + getLocation(self));
+        }
+        nukeFrog(self);
         return SCRIPT_CONTINUE;
     }
-    public int OnLogout(obj_id self)
+
+    public void nukeFrog(obj_id self) throws InterruptedException
+    {
+        //Nukes frogs from inventory regardless of how they got there and who they are in.
+        obj_id[] inventory = utils.getContents(self, true);
+        for (obj_id frog : inventory)
+        {
+            if (getTemplateName(frog).contains("terminal_character_builder"))
+            {
+                destroyObject(frog);
+                resurgence.logEtherealAction(self, "Player (" + getFirstName(self) + ") has illegal item inside their inventory. Nuking item with prejudice. | Location: " + getLocation(self) + ", Time: " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getGameTime()));
+                setObjVar(getPlanetByName("tatooine"), "skynet.nuked_frog." + self, true);
+                broadcast(self, "You had an illegal item in your inventory. The item has been removed and this incident has been logged.");
+            }
+        }
+    }
+
+    public int OnLogout(obj_id self) throws InterruptedException
     {
         removeFromAdminList(self);
         decrementPlayerCount(self);
+        if (resurgence.isEthereal(self))
+        {
+            resurgence.logEtherealAction(self, "Logging out (or switching zones) at " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getGameTime()) + " near location " + getLocation(self));
+        }
         return SCRIPT_CONTINUE;
     }
 
@@ -91,7 +120,6 @@ public class player_resurgence extends script.base_script
         String planetName = getCurrentSceneName();
         if (planetName.equals("tutorial"))
         {
-            return;
         }
         else if (planetName.equals("corellia"))
         {
@@ -176,7 +204,7 @@ public class player_resurgence extends script.base_script
             setSUIProperty(page, "bg.caption.lblTitle", "Font", "starwarslogo_optimized_56");
             setSUIProperty(page, "Prompt.lblPrompt", "Editable", "false");
             setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
-            setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "false");
+            setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "true");
             setSUIProperty(page, "btnCancel", "Visible", "true");
             setSUIProperty(page, "btnRevert", "Visible", "false");
             setSUIProperty(page, "btnOk", sui.PROP_TEXT, "Exit");
@@ -221,6 +249,7 @@ public class player_resurgence extends script.base_script
             setObjVar(tatooine, "avatarCount", playerCount);
         }
     }
+
     public void decrementPlayerCount(obj_id self)
     {
         int count = 1;
@@ -236,6 +265,7 @@ public class player_resurgence extends script.base_script
             setObjVar(tatooine, "avatarCount", playerCount);
         }
     }
+
     public int cmdContentFinder(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         listAllContentStatuses(self);
@@ -260,9 +290,9 @@ public class player_resurgence extends script.base_script
         {
             prompt += "Current Game Masters Online\n";
             prompt += "\n";
-            for (int i = 0; i < admin_list.length; i++)
+            for (String s : admin_list)
             {
-                obj_id admin = utils.stringToObjId(admin_list[i]);
+                obj_id admin = utils.stringToObjId(s);
                 if (isIdValid(admin))
                 {
                     prompt += "\t" + getPlayerFullName(admin) + "\n";
@@ -337,6 +367,17 @@ public class player_resurgence extends script.base_script
         }
         return dungeonStatus;
     }
+
+    public int OnCraftedPrototype(obj_id self, obj_id prototypeObject, draft_schematic manufacturingSchematic) throws InterruptedException
+    {
+        if (!isGod(self))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") crafted a prototype of " + getTemplateName(prototypeObject) + " while in godmode using the schematic " + (manufacturingSchematic));
+        return SCRIPT_CONTINUE;
+    }
+
     public int cmdTapeMeasure(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id objectOne = getIntendedTarget(self);
@@ -352,6 +393,7 @@ public class player_resurgence extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdAiManipulate(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
@@ -387,7 +429,7 @@ public class player_resurgence extends script.base_script
             }
             if (command.equals("flee"))
             {
-                float  minDistance = utils.stringToFloat(st.nextToken());
+                float minDistance = utils.stringToFloat(st.nextToken());
                 float maxDistance = utils.stringToFloat(st.nextToken());
                 if (st.countTokens() != 2)
                 {
@@ -420,7 +462,8 @@ public class player_resurgence extends script.base_script
                     ai_lib.setDefaultCalmBehavior(target, ai_lib.BEHAVIOR_STOP);
                     broadcast(self, "Setting " + target + " to stop");
                 }
-                else {
+                else
+                {
                     broadcast(self, "Invalid movement type specified. Valid types are: wander, sentinel, loiter, stop");
                 }
             }
@@ -451,7 +494,7 @@ public class player_resurgence extends script.base_script
                     broadcast(self, "Invalid flag specified. Valid flags are: -name, -self, -stop");
                 }
             }
-            if(command.equals("level"))
+            if (command.equals("level"))
             {
                 int level = utils.stringToInt(st.nextToken());
                 if (level < 1 || level > 90)
@@ -461,7 +504,7 @@ public class player_resurgence extends script.base_script
                 }
                 setLevel(target, level);
             }
-            if(command.equals("health"))
+            if (command.equals("health"))
             {
                 int health = utils.stringToInt(st.nextToken());
                 if (health < 1)
@@ -472,7 +515,7 @@ public class player_resurgence extends script.base_script
                 setMaxAttrib(target, HEALTH, health);
                 setAttrib(target, HEALTH, health);
             }
-            if(command.equals("action"))
+            if (command.equals("action"))
             {
                 int action = utils.stringToInt(st.nextToken());
                 if (action < 1)

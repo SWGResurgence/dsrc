@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class session extends script.base_script
@@ -20,6 +26,7 @@ public class session extends script.base_script
     public static final int ACTIVITY_ACCESS_FACTORY = 4096;
     public static final int ACTIVITY_ACCESS_STRUCTURE = 8192;
     public static final int ACTIVITY_FISHING = 16384;
+
     public session()
     {
     }

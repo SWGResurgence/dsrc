@@ -1,5 +1,11 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.prose;
 import script.library.sui;
@@ -9,12 +15,13 @@ import script.string_id;
 
 public class alarm_clock extends script.base_script
 {
-    public alarm_clock()
-    {
-    }
     public static final string_id SID_ALARM_CLOCK_FORMAT = new string_id("player/player_utility.stf", "alarm_clock_format");
     public static final string_id SID_ALARM_CLOCK_1_1000 = new string_id("player/player_utility.stf", "alarm_clock_1_1000");
     public static final string_id SID_ALARM_CLOCK_SET = new string_id("player/player_utility.stf", "alarm_clock_set");
+    public alarm_clock()
+    {
+    }
+
     public int msgAlarmClock(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -26,6 +33,7 @@ public class alarm_clock extends script.base_script
         LOG("LOG_CHANNEL", "Received Alarm Clock message: " + sentAlarmMsg);
         return SCRIPT_OVERRIDE;
     }
+
     public int alarmClock(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
@@ -35,7 +43,7 @@ public class alarm_clock extends script.base_script
         {
             parsedText = new String[totalWords];
         }
-        else 
+        else
         {
             return SCRIPT_OVERRIDE;
         }
@@ -51,15 +59,14 @@ public class alarm_clock extends script.base_script
             LOG("LOG_CHANNEL", "Format: /alarmclock <time> <message>");
             return SCRIPT_OVERRIDE;
         }
-        else 
+        else
         {
             Long time;
             try
             {
                 time = Long.valueOf(parsedText[0]);
                 alarmDelay = time;
-            }
-            catch(NumberFormatException err)
+            } catch (NumberFormatException err)
             {
                 sendSystemMessage(self, SID_ALARM_CLOCK_FORMAT);
                 LOG("LOG_CHANNEL", "Format: /alarmclock <time> <message>");
@@ -71,7 +78,7 @@ public class alarm_clock extends script.base_script
                 LOG("LOG_CHANNEL", "Alarm time must be from 1 to 1000 minutes");
                 return SCRIPT_OVERRIDE;
             }
-            else 
+            else
             {
                 StringBuilder sb = new StringBuilder();
                 for (int i = 1; i < parsedText.length; i++)
@@ -80,7 +87,7 @@ public class alarm_clock extends script.base_script
                     {
                         sb.append(parsedText[i]);
                     }
-                    else 
+                    else
                     {
                         sb.append(parsedText[i] + " ");
                     }
@@ -88,7 +95,7 @@ public class alarm_clock extends script.base_script
                 String alarmMessage = sb.toString();
                 LOG("LOG_CHANNEL", "Sending Alarm Clock Message (in " + alarmDelay + " minutes): " + alarmMessage);
                 prose_package ppAlarm = prose.getPackage(SID_ALARM_CLOCK_SET);
-                prose.setDI(ppAlarm, (int)alarmDelay);
+                prose.setDI(ppAlarm, (int) alarmDelay);
                 sendSystemMessageProse(self, ppAlarm);
                 dictionary dctMsg = new dictionary();
                 dctMsg.put("message", alarmMessage);

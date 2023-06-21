@@ -1,5 +1,11 @@
 package script.item.geiger;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.geiger;
 import script.library.sui;
@@ -101,7 +107,7 @@ public class base extends script.base_script
             return;
         }
         subscribeToSUIEvent(pid, sui_event_type.SET_onButton, "%buttonOK%", "geigerCallback");
-        setSUIProperty(pid, "%viewer%", "SetObject", "" + geigerObj);
+        setSUIProperty(pid, "%viewer%", "SetObject", String.valueOf(geigerObj));
         float value = geiger.calculateGeigerNumber(player);
         setSUIProperty(pid, "%info%", "Text", "\n\nEnemy Threat Level:  Detecting...");
         setSUIProperty(pid, "%title%", "Text", "Radiation Sensor");

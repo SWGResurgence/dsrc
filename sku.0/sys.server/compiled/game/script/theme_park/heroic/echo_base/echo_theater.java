@@ -1,5 +1,11 @@
 package script.theme_park.heroic.echo_base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.buff;
 import script.library.movement;
@@ -11,6 +17,7 @@ public class echo_theater extends script.base_script
     public echo_theater()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "posture"))
@@ -24,6 +31,7 @@ public class echo_theater extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHateTargetAdded(obj_id self, obj_id target) throws InterruptedException
     {
         if (isPlayer(target))
@@ -35,6 +43,7 @@ public class echo_theater extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int r1_st_death(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] cannon = trial.getObjectsInCellWithObjVar(trial.getTop(self), "r1", "cannon_1");
@@ -42,13 +51,14 @@ public class echo_theater extends script.base_script
         if (players == null || players.length == 0)
         {
         }
-        else 
+        else
         {
             createClientProjectileObjectToObject(players[0], "object/weapon/ranged/turret/shared_turret_energy.iff", cannon[0], "", self, "", 150.0f, 1.0f, false, 0, 0, 0, 0);
         }
         messageTo(self, "suicide", null, 0.25f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int r2_st_death(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] cannon = trial.getObjectsInCellWithObjVar(trial.getTop(self), "r1", "cannon_2");
@@ -56,19 +66,21 @@ public class echo_theater extends script.base_script
         if (players == null || players.length == 0)
         {
         }
-        else 
+        else
         {
             createClientProjectileObjectToObject(players[0], "object/weapon/ranged/turret/shared_turret_energy.iff", cannon[0], "", self, "", 150.0f, 1.0f, false, 0, 0, 0, 0);
         }
         messageTo(self, "suicide", null, 0.25f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int suicide(obj_id self, dictionary params) throws InterruptedException
     {
         kill(self);
         messageTo(self, "handleDelayedCleanup", null, 5.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int r1_st_show(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] cannon = trial.getObjectsInCellWithObjVar(trial.getTop(self), "r1", "cannon_1");
@@ -76,12 +88,13 @@ public class echo_theater extends script.base_script
         if (players == null || players.length == 0)
         {
         }
-        else 
+        else
         {
             createClientProjectileObjectToObject(players[0], "object/weapon/ranged/turret/shared_turret_energy.iff", cannon[0], "", self, "", 150.0f, 1.0f, false, 0, 0, 0, 0);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int r2_st_show(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] cannon = trial.getObjectsInCellWithObjVar(trial.getTop(self), "r1", "cannon_2");
@@ -89,12 +102,13 @@ public class echo_theater extends script.base_script
         if (players == null || players.length == 0)
         {
         }
-        else 
+        else
         {
             createClientProjectileObjectToObject(players[0], "object/weapon/ranged/turret/shared_turret_energy.iff", cannon[0], "", self, "", 150.0f, 1.0f, false, 0, 0, 0, 0);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int kill_scott(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] scott = trial.getObjectsInInstanceBySpawnId(trial.getParent(self), "tg_1");
@@ -102,11 +116,11 @@ public class echo_theater extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        String[] cells = 
-        {
-            "r1",
-            "r2"
-        };
+        String[] cells =
+                {
+                        "r1",
+                        "r2"
+                };
         obj_id[] players = trial.getPlayersInCellList(self, cells);
         messageTo(scott[0], "suicide", null, 0.25f, false);
         if (players == null || players.length == 0)
@@ -116,6 +130,7 @@ public class echo_theater extends script.base_script
         createClientProjectileObjectToObject(players[0], "object/weapon/ranged/rifle/shared_quest_rifle_flame_thrower.iff", self, "", scott[0], "", 75.0f, 2.0f, false, 0, 0, 0, 0);
         return SCRIPT_CONTINUE;
     }
+
     public int kill_downey(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] downey = trial.getObjectsInInstanceBySpawnId(trial.getParent(self), "tg_2");
@@ -123,11 +138,11 @@ public class echo_theater extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        String[] cells = 
-        {
-            "r1",
-            "r2"
-        };
+        String[] cells =
+                {
+                        "r1",
+                        "r2"
+                };
         obj_id[] players = trial.getPlayersInCellList(self, cells);
         messageTo(downey[0], "suicide", null, 0.25f, false);
         if (players == null || players.length == 0)
@@ -137,6 +152,7 @@ public class echo_theater extends script.base_script
         createClientProjectileObjectToObject(players[0], "object/weapon/ranged/rifle/shared_quest_rifle_flame_thrower.iff", self, "", downey[0], "", 75.0f, 2.0f, false, 0, 0, 0, 0);
         return SCRIPT_CONTINUE;
     }
+
     public void setNpcPosture(obj_id npc) throws InterruptedException
     {
         String posture = "";
@@ -214,6 +230,7 @@ public class echo_theater extends script.base_script
             setPosture(npc, POSTURE_COUNT);
         }
     }
+
     public int startRunning(obj_id self, dictionary params) throws InterruptedException
     {
         float rate = 1.0f;
@@ -224,6 +241,7 @@ public class echo_theater extends script.base_script
         setBaseRunSpeed(self, 6.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int startWalking(obj_id self, dictionary params) throws InterruptedException
     {
         movement.performWalk(self);

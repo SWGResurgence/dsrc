@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.deltadictionary;
 import script.library.utils;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class ai_combat_damage extends script.base_script
     public ai_combat_damage()
     {
     }
+
     public static void addAttack(obj_id attacker) throws InterruptedException
     {
         final obj_id self = getSelf();
@@ -17,18 +24,21 @@ public class ai_combat_damage extends script.base_script
         dict.put("ai.combat.attack_count." + attacker, attackCount + 1);
         dict.put("ai.combat.last_attack_time." + attacker, getGameTime());
     }
+
     public static int getTimeSinceLastAttack(obj_id attacker) throws InterruptedException
     {
         final obj_id self = getSelf();
         deltadictionary dict = self.getScriptVars();
         return getGameTime() - dict.getInt("ai.combat.last_attack_time." + attacker);
     }
+
     public static int getAttackCount(obj_id attacker) throws InterruptedException
     {
         final obj_id self = getSelf();
         deltadictionary dict = self.getScriptVars();
         return dict.getInt("ai.combat.attack_count." + attacker);
     }
+
     public static void clearAttackerList() throws InterruptedException
     {
         final obj_id self = getSelf();

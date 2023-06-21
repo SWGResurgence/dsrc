@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.combat_engine.effect_data;
 import script.obj_id;
 import script.string_id;
@@ -8,6 +14,7 @@ public class grenade extends script.base_script
 {
     public static final string_id SID_THROW_DELAY = new string_id("grenade", "throw_delay");
     public static final string_id SID_THROW_CLASS_DELAY = new string_id("grenade", "throw_class_delay");
+
     public grenade()
     {
     }

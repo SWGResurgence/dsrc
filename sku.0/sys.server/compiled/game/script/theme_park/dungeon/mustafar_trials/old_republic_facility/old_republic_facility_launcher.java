@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.old_republic_facility;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.library.instance;
 import script.menu_info;
@@ -9,9 +15,6 @@ import script.string_id;
 
 public class old_republic_facility_launcher extends script.base_script
 {
-    public old_republic_facility_launcher()
-    {
-    }
     public static final string_id SID_UNABLE_TO_FIND_DUNGEON = new string_id("dungeon/space_dungeon", "unable_to_find_dungeon");
     public static final string_id SID_NO_TICKET = new string_id("dungeon/space_dungeon", "no_ticket");
     public static final string_id SID_REQUEST_TRAVEL = new string_id("dungeon/space_dungeon", "request_travel");
@@ -20,6 +23,10 @@ public class old_republic_facility_launcher extends script.base_script
     public static final string_id SID_NO_PERMISSION = new string_id("travel/zone_transition", "default_no_access");
     public static final string_id SID_PLAYER_DEAD = new string_id("dungeon/space_dungeon", "player_dead");
     public static final string_id SID_PLAYER_INCAP = new string_id("dungeon/space_dungeon", "player_incap");
+    public old_republic_facility_launcher()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         if (getDistance(player, self) > 6.0f)
@@ -29,6 +36,7 @@ public class old_republic_facility_launcher extends script.base_script
         item.addRootMenu(menu_info_types.ITEM_USE, SID_UPLINK_CAVE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -38,17 +46,14 @@ public class old_republic_facility_launcher extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean doBackflagging(obj_id player) throws InterruptedException
     {
         if (instance.isFlaggedForInstance(player, "old_republic_facility"))
         {
             return true;
         }
-        boolean doFlagging = false;
-        if (groundquests.isTaskActive(player, "som_story_arc_chapter_one_03", "mustafar_uplink_two"))
-        {
-            doFlagging = true;
-        }
+        boolean doFlagging = groundquests.isTaskActive(player, "som_story_arc_chapter_one_03", "mustafar_uplink_two");
         if (groundquests.hasCompletedTask(player, "som_story_arc_chapter_one_03", "mustafar_uplink_two"))
         {
             doFlagging = true;

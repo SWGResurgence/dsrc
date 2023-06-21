@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.create;
 import script.location;
@@ -10,12 +16,14 @@ public class ai_debug extends script.base_script
     public ai_debug()
     {
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         healShockWound(self, getShockWound(self));
         setAttrib(self, HEALTH, getMaxAttrib(self, HEALTH));
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         LOG("debug_ai", "OnSpeaking: " + text);
@@ -73,7 +81,7 @@ public class ai_debug extends script.base_script
                     {
                         startCombat(target, self);
                     }
-                    else 
+                    else
                     {
                         debugSpeakMsg(self, "Specify a target");
                     }
@@ -89,7 +97,7 @@ public class ai_debug extends script.base_script
                 }
                 else if (command.equalsIgnoreCase("gangfight"))
                 {
-                    
+
                     {
                         for (int i = 0; i < 20; ++i)
                         {
@@ -99,7 +107,7 @@ public class ai_debug extends script.base_script
                             create.object("tusken_berserker", spawnLocation);
                         }
                     }
-                    
+
                     {
                         for (int i = 0; i < 10; ++i)
                         {
@@ -112,7 +120,7 @@ public class ai_debug extends script.base_script
                 }
                 else if (command.equalsIgnoreCase("group_tusken"))
                 {
-                    
+
                     {
                         for (int i = 0; i < 6; ++i)
                         {
@@ -125,7 +133,7 @@ public class ai_debug extends script.base_script
                 }
                 else if (command.equalsIgnoreCase("group_stormtrooper"))
                 {
-                    
+
                     {
                         for (int i = 0; i < 20; ++i)
                         {
@@ -161,7 +169,7 @@ public class ai_debug extends script.base_script
                         maxHealth = getMaxHealth(healTarget);
                         setHealth(healTarget, maxHealth);
                     }
-                    else 
+                    else
                     {
                         maxHealth = getMaxHitpoints(healTarget);
                         setHitpoints(healTarget, maxHealth);
@@ -175,11 +183,11 @@ public class ai_debug extends script.base_script
                     final obj_id leader = create.object("stormtrooper", anchorLocation);
                     final float radius = 20.0f;
                     final int points = 10;
-                    location path[] = new location[points];
+                    location[] path = new location[points];
                     for (int i = 0; i < points; ++i)
                     {
                         path[i] = new location();
-                        final float radian = (float)Math.PI * 2.0f * ((float)i / points);
+                        final float radian = (float) Math.PI * 2.0f * ((float) i / points);
                         path[i].x = anchorLocation.x + (float) StrictMath.sin(radian) * radius;
                         path[i].y = anchorLocation.y;
                         path[i].z = anchorLocation.z + (float) StrictMath.cos(radian) * radius;

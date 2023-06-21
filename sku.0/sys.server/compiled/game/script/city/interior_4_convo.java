@@ -1,5 +1,11 @@
 package script.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,16 +14,18 @@ public class interior_4_convo extends script.city.interior_convo_base
     public interior_4_convo()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
-        spawnGuy(self,"guy1");
-        spawnGuy(self,"guy2");
-        spawnGuy(self,"guy3");
-        spawnGuy(self,"guy4");
+        spawnGuy(self, "guy1");
+        spawnGuy(self, "guy2");
+        spawnGuy(self, "guy3");
+        spawnGuy(self, "guy4");
         messageTo(self, "checkForScripts", null, 5, false);
         messageTo(self, "handleChatting", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleChatting(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id guy1 = getObjIdObjVar(self, "guy1");

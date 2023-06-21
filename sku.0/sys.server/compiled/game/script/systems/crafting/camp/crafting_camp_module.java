@@ -1,5 +1,11 @@
 package script.systems.crafting.camp;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -152,6 +158,7 @@ public class crafting_camp_module extends script.systems.crafting.item.crafting_
                                     new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
                             })
             };
+
     public crafting_camp_module()
     {
     }

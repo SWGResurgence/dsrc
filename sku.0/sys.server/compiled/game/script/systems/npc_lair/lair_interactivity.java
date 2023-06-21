@@ -1,5 +1,11 @@
 package script.systems.npc_lair;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.buff;
 import script.library.resource;
@@ -31,6 +37,7 @@ public class lair_interactivity extends script.base_script
                     "object/tangible/fishing/bait/bait_worm.iff",
                     "object/tangible/fishing/bait/bait_insect.iff"
             };
+
     public lair_interactivity()
     {
     }
@@ -111,7 +118,7 @@ public class lair_interactivity extends script.base_script
             }
             for (obj_id obj_id : resourceList)
             {
-                blog("" + obj_id);
+                blog(String.valueOf(obj_id));
                 setLocation(obj_id, curloc);
                 putIn(obj_id, pInv, player);
             }

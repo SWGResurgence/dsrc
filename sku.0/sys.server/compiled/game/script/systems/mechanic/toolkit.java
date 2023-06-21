@@ -1,5 +1,11 @@
 package script.systems.mechanic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.callable;
 import script.library.sui;
@@ -434,6 +440,7 @@ public class toolkit extends script.base_script
         }
         return true;
     }
+
     public String getShortenTemplateName(obj_id self, obj_id vehicle)
     {
         String template = getTemplateName(vehicle);

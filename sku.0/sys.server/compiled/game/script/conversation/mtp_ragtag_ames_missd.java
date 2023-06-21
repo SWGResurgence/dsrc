@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -8,42 +14,47 @@ import script.library.utils;
 
 public class mtp_ragtag_ames_missd extends script.base_script
 {
+    public static String c_stringFile = "conversation/mtp_ragtag_ames_missd";
+
     public mtp_ragtag_ames_missd()
     {
     }
-    public static String c_stringFile = "conversation/mtp_ragtag_ames_missd";
+
     public boolean mtp_ragtag_ames_missd_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean mtp_ragtag_ames_missd_condition_canSpeak(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "mtp_hideout_ragtag") && groundquests.isTaskActive(player, "mtp_hideout_ragtag", "beatUpRagTag");
     }
+
     public boolean mtp_ragtag_ames_missd_condition_beatAnita(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "quest/mtp_hideout_ragtag", "speakAmesAnitaDone");
     }
+
     public boolean mtp_ragtag_ames_missd_condition_beatBox(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "quest/mtp_hideout_ragtag", "speakAmesBoxDone");
     }
+
     public boolean mtp_ragtag_ames_missd_condition_waveEventUnderway(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(npc, "waveEventCurrentWave"))
         {
             int wave = utils.getIntScriptVar(npc, "waveEventCurrentWave");
-            if (wave > 0)
-            {
-                return true;
-            }
+            return wave > 0;
         }
         return false;
     }
+
     public boolean mtp_ragtag_ames_missd_condition_doneWithAmes(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedTask(player, "quest/mtp_hideout_ragtag", "speakAmesBoxDone");
     }
+
     public void mtp_ragtag_ames_missd_action_rumbleFish(obj_id player, obj_id npc) throws InterruptedException
     {
         npcEndConversation(player);
@@ -54,6 +65,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
         startCombat(npc, player);
         clearCondition(npc, CONDITION_CONVERSABLE);
     }
+
     public void mtp_ragtag_ames_missd_action_spawnAnita(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "fightAnita");
@@ -61,8 +73,8 @@ public class mtp_ragtag_ames_missd extends script.base_script
         webster.put("player", player);
         webster.put("playerLevel", getLevel(player) - 10);
         messageTo(npc, "waveEventControllerNPCStart", webster, 1, false);
-        return;
     }
+
     public void mtp_ragtag_ames_missd_action_spawnBox(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "fightBox");
@@ -70,12 +82,13 @@ public class mtp_ragtag_ames_missd extends script.base_script
         webster.put("player", player);
         webster.put("playerLevel", getLevel(player) - 5);
         messageTo(npc, "waveEventControllerNPCStart", webster, 1, false);
-        return;
     }
+
     public void mtp_ragtag_ames_missd_action_sendCompletion(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "spokenAmes");
     }
+
     public int mtp_ragtag_ames_missd_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8"))
@@ -95,7 +108,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_12");
@@ -104,7 +117,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_ragtag_ames_missd.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -114,6 +127,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_ragtag_ames_missd_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_12"))
@@ -133,7 +147,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -142,7 +156,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_ragtag_ames_missd.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -152,6 +166,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_ragtag_ames_missd_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -171,7 +186,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -180,7 +195,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_ragtag_ames_missd.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -190,6 +205,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_ragtag_ames_missd_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -209,7 +225,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -218,7 +234,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_ragtag_ames_missd.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -228,6 +244,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_ragtag_ames_missd_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -247,7 +264,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -256,7 +273,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_ragtag_ames_missd.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -266,6 +283,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_ragtag_ames_missd_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_56"))
@@ -285,7 +303,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60");
@@ -294,7 +312,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_ragtag_ames_missd.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -304,6 +322,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_ragtag_ames_missd_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
@@ -326,6 +345,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_ragtag_ames_missd_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_73"))
@@ -348,6 +368,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_ragtag_ames_missd_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_76"))
@@ -367,7 +388,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -376,7 +397,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_ragtag_ames_missd.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -386,6 +407,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_ragtag_ames_missd_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -405,7 +427,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_83");
@@ -414,7 +436,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_ragtag_ames_missd.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -424,6 +446,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_ragtag_ames_missd_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_83"))
@@ -445,7 +468,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_85");
@@ -454,7 +477,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.mtp_ragtag_ames_missd.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -464,6 +487,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mtp_ragtag_ames_missd_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
@@ -481,6 +505,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -490,12 +515,14 @@ public class mtp_ragtag_ames_missd extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -504,18 +531,21 @@ public class mtp_ragtag_ames_missd extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.mtp_ragtag_ames_missd");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -551,7 +581,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_8");
@@ -559,7 +589,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                 utils.setScriptVar(player, "conversation.mtp_ragtag_ames_missd.branchId", 3);
                 npcStartConversation(player, npc, "mtp_ragtag_ames_missd", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -580,7 +610,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_73");
@@ -588,7 +618,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                 utils.setScriptVar(player, "conversation.mtp_ragtag_ames_missd.branchId", 12);
                 npcStartConversation(player, npc, "mtp_ragtag_ames_missd", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -609,7 +639,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -617,7 +647,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
                 utils.setScriptVar(player, "conversation.mtp_ragtag_ames_missd.branchId", 15);
                 npcStartConversation(player, npc, "mtp_ragtag_ames_missd", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -632,6 +662,7 @@ public class mtp_ragtag_ames_missd extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("mtp_ragtag_ames_missd"))

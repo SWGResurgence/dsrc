@@ -1,5 +1,11 @@
 package script.city.bestine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,9 +14,6 @@ import script.string_id;
 
 public class search_item extends script.base_script
 {
-    public search_item()
-    {
-    }
     public static final string_id SEARCH_ITEM = new string_id("bestine", "search_item");
     public static final string_id ALREADY_SEARCHED_MSG = new string_id("bestine", "already_searched");
     public static final string_id DEFAULT_RECEIVE_MSG = new string_id("bestine", "default_receive_msg");
@@ -21,6 +24,10 @@ public class search_item extends script.base_script
     public static final String RECEIVE_OBJECT_MSG_OBJVAR = "receiveMsg";
     public static final String VAR_ITEM_REQUEST_BASE = "item_request";
     public static final String VAR_ITEM_REQUEST_CATEGORY = VAR_ITEM_REQUEST_BASE + ".category";
+    public search_item()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canSearch(self, player))
@@ -29,6 +36,7 @@ public class search_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_ITEM_OPTIONS)
@@ -60,7 +68,7 @@ public class search_item extends script.base_script
                                     {
                                         receiveObjectMsg = utils.unpackString(receiveMsgObjvar);
                                     }
-                                    else 
+                                    else
                                     {
                                         sendSystemMessage(player, receiveMsgObjvar, null);
                                         setObjVar(player, ALREADY_SEARCHED_OBJVAR, 1);
@@ -71,7 +79,7 @@ public class search_item extends script.base_script
                                 setObjVar(player, ALREADY_SEARCHED_OBJVAR, 1);
                             }
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(player, INVENTORY_FULL_MSG);
                         }
@@ -81,6 +89,7 @@ public class search_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean canSearch(obj_id self, obj_id player) throws InterruptedException
     {
         boolean result = false;
@@ -94,6 +103,7 @@ public class search_item extends script.base_script
         }
         return result;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, RECEIVE_OBJECT_MSG_OBJVAR))

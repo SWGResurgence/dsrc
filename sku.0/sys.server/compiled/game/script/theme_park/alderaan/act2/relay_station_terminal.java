@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act2;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.badge;
 import script.library.factions;
 import script.library.utils;
@@ -7,15 +13,16 @@ import script.*;
 
 public class relay_station_terminal extends script.base_script
 {
-    public relay_station_terminal()
-    {
-    }
     public static final String REBEL_STF = "theme_park/alderaan/act2/rebel_missions";
     public static final String REBEL_SHARED_STF = "theme_park/alderaan/act2/shared_rebel_missions";
     public static final string_id MESSAGE_SENT = new string_id(REBEL_SHARED_STF, "message_sent");
     public static final string_id MISSION_COMPLETE = new string_id(REBEL_SHARED_STF, "mission_complete");
     public static final string_id TERMINAL_LOCKED = new string_id(REBEL_SHARED_STF, "terminal_locked");
     public static final string_id SID_USE = new string_id(REBEL_SHARED_STF, "use_terminal");
+    public relay_station_terminal()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         location loc = getLocation(self);
@@ -26,6 +33,7 @@ public class relay_station_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -42,7 +50,7 @@ public class relay_station_terminal extends script.base_script
                 playMusic(player, "sound/music_lando_theme.snd");
                 removeObjVar(player, "coa2.rebel");
             }
-            else 
+            else
             {
                 sendSystemMessage(player, TERMINAL_LOCKED);
             }

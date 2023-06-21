@@ -1,5 +1,11 @@
 package script.fishing;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.fishing;
 import script.library.minigame;
 import script.library.utils;
@@ -10,9 +16,6 @@ import script.string_id;
 
 public class pole extends script.base_script
 {
-    public pole()
-    {
-    }
     public static final String STF = "som/som_item";
     public static final string_id MNU_TACKLE = new string_id(minigame.STF_FISH, "mnu_open_tackle");
     public static final string_id MNU_BAIT = new string_id(minigame.STF_FISH, "mnu_set_bait");
@@ -22,6 +25,10 @@ public class pole extends script.base_script
     private static final string_id SID_NO_FISH_IN_SPACE = new string_id("space/space_interaction", "no_fish_in_space");
     private static final string_id ELUSIVE_FISH_LEADERBOARD = new string_id(minigame.STF_FISH, "mnu_fishing_record_elusive_fish");
     private static final String STF_FISH = "fishing";
+    public pole()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         String planetName = getCurrentSceneName();
@@ -46,7 +53,7 @@ public class pole extends script.base_script
                     mi.addRootMenu(menu_info_types.SERVER_MENU2, MNU_START_FISHING);
                 }
             }
-            else 
+            else
             {
                 mi.addRootMenu(menu_info_types.SERVER_MENU3, MNU_STOP_FISHING);
             }
@@ -54,6 +61,7 @@ public class pole extends script.base_script
         mi.addRootMenu(menu_info_types.SERVER_MENU30, ELUSIVE_FISH_LEADERBOARD);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -79,15 +87,20 @@ public class pole extends script.base_script
                 minigame.stopFishing(player);
             }
         }
-        if(item == menu_info_types.SERVER_MENU30) {
-            if(fishing.getElusiveFishRewardedCount() > 0) {
+        if (item == menu_info_types.SERVER_MENU30)
+        {
+            if (fishing.getElusiveFishRewardedCount() > 0)
+            {
                 fishing.showElusiveFishLeaderboard(player);
-            } else {
+            }
+            else
+            {
                 broadcast(player, "No ELUSIVE Fish have been captured yet so the Leaderboard is empty.");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(transferer) && getGameObjectType(item) != GOT_misc_fishing_bait)
@@ -97,6 +110,7 @@ public class pole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (utils.hasScriptVar(self, minigame.SCRIPTVAR_IN_USE))
@@ -106,7 +120,7 @@ public class pole extends script.base_script
             {
                 utils.removeScriptVar(self, minigame.SCRIPTVAR_IN_USE);
             }
-            else 
+            else
             {
                 sendSystemMessage(self, new string_id(STF_FISH, "cannot_remove_bait"));
                 return SCRIPT_OVERRIDE;
@@ -114,6 +128,7 @@ public class pole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

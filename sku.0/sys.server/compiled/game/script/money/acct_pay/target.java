@@ -1,25 +1,35 @@
 package script.money.acct_pay;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.money;
 import script.obj_id;
 
 public class target extends script.base_script
 {
+    public static final String HANDLER_DETACH_ME = "handleDetachMe";
+
     public target()
     {
     }
-    public static final String HANDLER_DETACH_ME = "handleDetachMe";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, money.SCRIPT_ACCT_PAY);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDetachMe(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, money.SCRIPT_ACCT_PAY);
         return SCRIPT_CONTINUE;
     }
+
     public int acctToPass(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -42,6 +52,7 @@ public class target extends script.base_script
         withdrawCashFromBank(target, amt, "withdrawPass", "xferFail", params);
         return SCRIPT_CONTINUE;
     }
+
     public int withdrawPass(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -55,6 +66,7 @@ public class target extends script.base_script
         messageTo(self, HANDLER_DETACH_ME, null, 0, isObjectPersisted(self));
         return SCRIPT_CONTINUE;
     }
+
     public int xferFail(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))

@@ -1,5 +1,11 @@
 package script.npc.static_npc;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.hue;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class binna_jode extends script.base_script
     public binna_jode()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id skirt = createObject("object/tangible/wearables/skirt/skirt_s04.iff", self, "");

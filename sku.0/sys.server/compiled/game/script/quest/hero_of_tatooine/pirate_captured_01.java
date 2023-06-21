@@ -1,5 +1,11 @@
 package script.quest.hero_of_tatooine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -9,10 +15,12 @@ import script.string_id;
 
 public class pirate_captured_01 extends script.base_script
 {
+    public static final String STF_FILE = "quest/pirates";
+
     public pirate_captured_01()
     {
     }
-    public static final String STF_FILE = "quest/pirates";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.ai_combat");
@@ -21,6 +29,7 @@ public class pirate_captured_01 extends script.base_script
         messageTo(self, "action01", null, 5.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         if (name.equals("wifeLoc") && !hasObjVar(self, "wifeReached"))
@@ -42,6 +51,7 @@ public class pirate_captured_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int action01(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -58,6 +68,7 @@ public class pirate_captured_01 extends script.base_script
         addLocationTarget("wifeLoc", wifeTarget, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int action02(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);

@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.callable;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class free_vehicle extends script.base_script
     public free_vehicle()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         int expirationTime = getIntObjVar(self, "mount_vendor.create");
@@ -18,6 +25,7 @@ public class free_vehicle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id currentPet = callable.getCDCallable(self);
@@ -32,6 +40,7 @@ public class free_vehicle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int expireAndCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id currentPet = callable.getCDCallable(self);

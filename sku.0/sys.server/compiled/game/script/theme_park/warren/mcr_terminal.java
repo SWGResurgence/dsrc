@@ -1,23 +1,31 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.colors;
 import script.library.utils;
 
 public class mcr_terminal extends script.base_script
 {
-    public mcr_terminal()
-    {
-    }
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public static final String DEACTIVATE = "mcr_term_deactivated";
     public static final String ACTIVATE = "mcr_term_active";
+    public mcr_terminal()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setName(self, "");
         setName(self, new string_id(SYSTEM_MESSAGES, "mcr_term_name_on"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         boolean isInactive = utils.getBooleanScriptVar(self, "warren.isInactive");
@@ -43,6 +51,7 @@ public class mcr_terminal extends script.base_script
         deactivateTerminal(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasPasskey(obj_id player, obj_id self) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -57,15 +66,18 @@ public class mcr_terminal extends script.base_script
             debugSpeakMsg(self, "I AM SUPPOSED TO HAVE A warren.passkeyNumber OBJVAR BUT I DON'T");
             return false;
         }
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             int passKeyNumber = getIntObjVar(content, "warren.passkeyNumber");
-            if (passKeyNumber == keyNum) {
+            if (passKeyNumber == keyNum)
+            {
                 destroyObject(content);
                 return true;
             }
         }
         return false;
     }
+
     public void deactivateTerminal(obj_id self) throws InterruptedException
     {
         utils.setScriptVar(self, "warren.isInactive", true);
@@ -75,8 +87,8 @@ public class mcr_terminal extends script.base_script
         messageTo(self, "handleReactiveTerminal", null, 1800, false);
         setName(self, "");
         setName(self, new string_id(SYSTEM_MESSAGES, "mcr_term_name_off"));
-        return;
     }
+
     public int handleReactiveTerminal(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "warren.isInactive");

@@ -1,58 +1,83 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class quharek_phase_2 extends script.base_script
 {
+    public static final String QUEST_MAIN = "fs_phase_2_craft_defenses_main";
+    public static final String QUEST_STEP_01 = "fs_phase_2_craft_defenses_01";
+    public static final String QUEST_STEP_02 = "fs_phase_2_craft_defenses_02";
+    public static final String QUEST_CLEANUP = "quest.force_sensitive.fs_craft_village_defenses";
+    public static final String DATATABLE_CRAFTING_QUESTS = "datatables/quest/force_sensitive/community_crafting.iff";
+    public static final String DATATABLE_CQ_PHASE = "phase";
+    public static final String DATATABLE_CQ_SCHEMATIC = "schematic";
+    public static final String DATATABLE_CQ_PRIZE = "prize";
+    public static final String DATATABLE_CQ_TRACK_QUANTITY = "track_quantity";
+    public static final String DATATABLE_CQ_TRACK_QUALTITY = "track_quality";
+    public static final String DATATABLE_CQ_TRACK_SLOTS = "track_slots";
+    public static final String DATATABLE_CQ_MIN_INGREDIENTS = "min_ingredients";
+    public static final String OBJVAR_CRAFTERS_COUNT = community_crafting.OBJVAR_COMMUNITY_CRAFTING_BASE + ".numCrafters";
+    public static final String OBJVAR_LAST_PHASE = community_crafting.OBJVAR_COMMUNITY_CRAFTING_BASE + ".lastPhase";
+    public static final String SCRIPTVAR_QTQC = "community_crafting.qtqc";
+    public static final String SCRIPT_INVENTORY = "systems.crafting.community_crafting.npc_inventory";
+    public static String c_stringFile = "conversation/quharek_phase_2";
+
     public quharek_phase_2()
     {
     }
-    public static String c_stringFile = "conversation/quharek_phase_2";
+
     public boolean quharek_phase_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean quharek_phase_2_condition_isPlayerCommunityCrafting(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id craftingTracker = utils.getObjIdScriptVar(npc, fs_quests_cc.SCRIPTVAR_CRAFTING_TRACKER);
         if (isIdValid(craftingTracker))
         {
-            if (community_crafting.isSessionActive(craftingTracker) && community_crafting.isPlayerCrafting(craftingTracker, player))
-            {
-                return true;
-            }
+            return community_crafting.isSessionActive(craftingTracker) && community_crafting.isPlayerCrafting(craftingTracker, player);
         }
         return false;
     }
+
     public boolean quharek_phase_2_condition_isCommunityCraftingEnabled(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests_cc.testCommunityCraftingEnabled(npc, 2);
     }
+
     public boolean quharek_phase_2_condition_canAddPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id craftingTracker = utils.getObjIdScriptVar(npc, fs_quests_cc.SCRIPTVAR_CRAFTING_TRACKER);
         if (isIdValid(craftingTracker))
         {
-            if (community_crafting.isSessionActive(craftingTracker) && getIntObjVar(craftingTracker, OBJVAR_CRAFTERS_COUNT) < community_crafting.getMaxPlayersPerProject() && !community_crafting.isPlayerCrafting(player))
-            {
-                return true;
-            }
+            return community_crafting.isSessionActive(craftingTracker) && getIntObjVar(craftingTracker, OBJVAR_CRAFTERS_COUNT) < community_crafting.getMaxPlayersPerProject() && !community_crafting.isPlayerCrafting(player);
         }
         return false;
     }
+
     public boolean quharek_phase_2_condition_isTrackingQuality(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getBooleanScriptVar(npc, fs_quests_cc.SCRIPTVAR_TRACKING_QUALITY);
     }
+
     public boolean quharek_phase_2_condition_isTrackingQuantity(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getBooleanScriptVar(npc, fs_quests_cc.SCRIPTVAR_TRACKING_QUANTITY);
     }
+
     public boolean quharek_phase_2_condition_isTrackingSlots(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getBooleanScriptVar(npc, fs_quests_cc.SCRIPTVAR_TRACKING_SLOTS);
     }
+
     public boolean quharek_phase_2_condition_isPlayerCraftingOrQuesting(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!isGod(player) && !fs_quests.isVillageEligible(player))
@@ -68,80 +93,94 @@ public class quharek_phase_2 extends script.base_script
         {
             return true;
         }
-        if (fs_quests.hasQuestAccepted(player))
-        {
-            return true;
-        }
-        return false;
+        return fs_quests.hasQuestAccepted(player);
     }
+
     public boolean quharek_phase_2_condition_isPlayerSkilled(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "crafting_artisan_novice");
     }
+
     public boolean quharek_phase_2_condition_canAddPlayerAndIsSkilled(obj_id player, obj_id npc) throws InterruptedException
     {
         return quharek_phase_2_condition_canAddPlayer(player, npc) && quharek_phase_2_condition_isPlayerSkilled(player, npc);
     }
+
     public boolean quharek_phase_2_condition_hasPlayerFinishedQuestAndNotCrafting(obj_id player, obj_id npc) throws InterruptedException
     {
         return isQuestComplete(player, quests.getQuestId(QUEST_STEP_02)) && !quharek_phase_2_condition_isPlayerCommunityCrafting(player, npc);
     }
+
     public boolean quharek_phase_2_condition_hasPlayerFinishedQuestAndIsCrafting(obj_id player, obj_id npc) throws InterruptedException
     {
         return isQuestComplete(player, quests.getQuestId(QUEST_STEP_02)) && quharek_phase_2_condition_isPlayerCommunityCrafting(player, npc);
     }
+
     public void quharek_phase_2_action_showPlayerSlot1Quality(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests_cc.showPlayerProjectStats(npc, player, 1, true, 2);
     }
+
     public void quharek_phase_2_action_showPlayerProjectAttributes(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests_cc.showPlayerProjectAttribs(npc, player, 2);
     }
+
     public void quharek_phase_2_action_showPlayerSlot2Quality(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests_cc.showPlayerProjectStats(npc, player, 2, true, 2);
     }
+
     public void quharek_phase_2_action_showPlayerSlot4Quality(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests_cc.showPlayerProjectStats(npc, player, 4, true, 2);
     }
+
     public void quharek_phase_2_action_showPlayerSlot5Quality(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests_cc.showPlayerProjectStats(npc, player, 5, true, 2);
     }
+
     public void quharek_phase_2_action_showPlayerProjectQuality(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests_cc.showPlayerProjectStats(npc, player, 0, true, 2);
     }
+
     public void quharek_phase_2_action_showPlayerSlot3Quality(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests_cc.showPlayerProjectStats(npc, player, 3, true, 2);
     }
+
     public void quharek_phase_2_action_showPlayerSlot1Quantity(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests_cc.showPlayerProjectStats(npc, player, 1, false, 2);
     }
+
     public void quharek_phase_2_action_showPlayerSlot2Quantity(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests_cc.showPlayerProjectStats(npc, player, 2, false, 2);
     }
+
     public void quharek_phase_2_action_showPlayerSlot4Quantity(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests_cc.showPlayerProjectStats(npc, player, 4, false, 2);
     }
+
     public void quharek_phase_2_action_showPlayerSlot5Quantity(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests_cc.showPlayerProjectStats(npc, player, 5, false, 2);
     }
+
     public void quharek_phase_2_action_showPlayerProjectQuantity(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests_cc.showPlayerProjectStats(npc, player, 0, false, 2);
     }
+
     public void quharek_phase_2_action_showPlayerSlot3Quantity(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests_cc.showPlayerProjectStats(npc, player, 3, false, 2);
     }
+
     public void quharek_phase_2_action_grantPlayerQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         quests.activate(QUEST_MAIN, player, npc);
@@ -164,26 +203,12 @@ public class quharek_phase_2 extends script.base_script
             }
         }
     }
+
     public int quharek_phase_2_tokenDI_minIngredientsRequired(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getIntScriptVar(npc, fs_quests_cc.SCRIPTVAR_MIN_INGREDIENTS);
     }
-    public static final String QUEST_MAIN = "fs_phase_2_craft_defenses_main";
-    public static final String QUEST_STEP_01 = "fs_phase_2_craft_defenses_01";
-    public static final String QUEST_STEP_02 = "fs_phase_2_craft_defenses_02";
-    public static final String QUEST_CLEANUP = "quest.force_sensitive.fs_craft_village_defenses";
-    public static final String DATATABLE_CRAFTING_QUESTS = "datatables/quest/force_sensitive/community_crafting.iff";
-    public static final String DATATABLE_CQ_PHASE = "phase";
-    public static final String DATATABLE_CQ_SCHEMATIC = "schematic";
-    public static final String DATATABLE_CQ_PRIZE = "prize";
-    public static final String DATATABLE_CQ_TRACK_QUANTITY = "track_quantity";
-    public static final String DATATABLE_CQ_TRACK_QUALTITY = "track_quality";
-    public static final String DATATABLE_CQ_TRACK_SLOTS = "track_slots";
-    public static final String DATATABLE_CQ_MIN_INGREDIENTS = "min_ingredients";
-    public static final String OBJVAR_CRAFTERS_COUNT = community_crafting.OBJVAR_COMMUNITY_CRAFTING_BASE + ".numCrafters";
-    public static final String OBJVAR_LAST_PHASE = community_crafting.OBJVAR_COMMUNITY_CRAFTING_BASE + ".lastPhase";
-    public static final String SCRIPTVAR_QTQC = "community_crafting.qtqc";
-    public static final String SCRIPT_INVENTORY = "systems.crafting.community_crafting.npc_inventory";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -194,12 +219,14 @@ public class quharek_phase_2 extends script.base_script
         initializeMe(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         initializeMe(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -208,12 +235,14 @@ public class quharek_phase_2 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.quharek_phase_2");
         return SCRIPT_CONTINUE;
     }
+
     public void initializeMe(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, fs_quests_cc.SCRIPTVAR_CRAFTING_TRACKER))
@@ -221,7 +250,7 @@ public class quharek_phase_2 extends script.base_script
             debugServerConsoleMsg(self, "quharek initMe asking for village manager");
             requestVillageMaster(self);
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "quharek initMe found village manager");
             if (initializeCraftingQuest(self))
@@ -230,6 +259,7 @@ public class quharek_phase_2 extends script.base_script
             }
         }
     }
+
     public void requestVillageMaster(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, fs_quests_cc.SCRIPTVAR_CRAFTING_TRACKER))
@@ -239,6 +269,7 @@ public class quharek_phase_2 extends script.base_script
             fs_dyn_village.getRegisteredObjIdFromClusterWideData(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER, "handleGetVillageManager", self);
         }
     }
+
     public int handleGetVillageManager(obj_id self, dictionary params) throws InterruptedException
     {
         boolean rslt = false;
@@ -273,11 +304,13 @@ public class quharek_phase_2 extends script.base_script
         messageTo(self, "handleRetryGetVillageManager", null, 30, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRetryGetVillageManager(obj_id self, dictionary params) throws InterruptedException
     {
         requestVillageMaster(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean initializeCraftingQuest(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, fs_quests_cc.SCRIPTVAR_CRAFTING_TRACKER))
@@ -343,6 +376,7 @@ public class quharek_phase_2 extends script.base_script
         }
         return currentPhase == 2;
     }
+
     public int handleReinitialize(obj_id self, dictionary params) throws InterruptedException
     {
         if (initializeCraftingQuest(self))
@@ -351,6 +385,7 @@ public class quharek_phase_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void cacheProjectData(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(null, "cacheProjectData enter");
@@ -366,8 +401,10 @@ public class quharek_phase_2 extends script.base_script
         String[] scripts = community_crafting.getSchematicScripts(craftingTracker);
         if (scripts != null)
         {
-            for (String script : scripts) {
-                if (script != null && !hasScript(craftingTracker, script)) {
+            for (String script : scripts)
+            {
+                if (script != null && !hasScript(craftingTracker, script))
+                {
                     attachScript(craftingTracker, script);
                 }
             }
@@ -386,16 +423,19 @@ public class quharek_phase_2 extends script.base_script
         utils.setScriptVar(self, fs_quests_cc.SCRIPTVAR_MIN_INGREDIENTS, community_crafting.getMinimumQuantity(craftingTracker));
         debugServerConsoleMsg(null, "Caching min ingredient count to " + community_crafting.getMinimumQuantity(craftingTracker));
     }
+
     public int getNumSlots(obj_id self) throws InterruptedException
     {
         return utils.getIntScriptVar(self, fs_quests_cc.SCRIPTVAR_TRACKING_NUM_SLOTS);
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -424,7 +464,7 @@ public class quharek_phase_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_955b2ddb");
@@ -436,7 +476,7 @@ public class quharek_phase_2 extends script.base_script
                 setObjVar(player, "conversation.quharek_phase_2.branchId", 3);
                 npcStartConversation(player, self, "quharek_phase_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -464,7 +504,7 @@ public class quharek_phase_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_955b2ddb");
@@ -476,7 +516,7 @@ public class quharek_phase_2 extends script.base_script
                 setObjVar(player, "conversation.quharek_phase_2.branchId", 3);
                 npcStartConversation(player, self, "quharek_phase_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -504,7 +544,7 @@ public class quharek_phase_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_955b2ddb");
@@ -516,7 +556,7 @@ public class quharek_phase_2 extends script.base_script
                 setObjVar(player, "conversation.quharek_phase_2.branchId", 3);
                 npcStartConversation(player, self, "quharek_phase_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -531,6 +571,7 @@ public class quharek_phase_2 extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("quharek_phase_2"))
@@ -562,7 +603,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99347a8f");
@@ -580,7 +621,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     prose_package pp = new prose_package();
@@ -643,7 +684,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -660,7 +701,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -695,7 +736,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99347a8f");
@@ -713,7 +754,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     prose_package pp = new prose_package();
@@ -776,7 +817,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -793,7 +834,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -828,7 +869,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99347a8f");
@@ -846,7 +887,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     prose_package pp = new prose_package();
@@ -909,7 +950,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -926,7 +967,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -961,7 +1002,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4f68f375");
@@ -974,7 +1015,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -1057,7 +1098,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1074,7 +1115,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -1137,7 +1178,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2a94bc85");
@@ -1166,7 +1207,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -1229,7 +1270,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2a94bc85");
@@ -1258,7 +1299,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -1301,7 +1342,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1318,7 +1359,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -1361,7 +1402,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1378,7 +1419,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -1421,7 +1462,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1438,7 +1479,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -1481,7 +1522,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1498,7 +1539,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -1541,7 +1582,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1558,7 +1599,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -1601,7 +1642,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1618,7 +1659,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -1661,7 +1702,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1678,7 +1719,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -1721,7 +1762,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1738,7 +1779,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -1781,7 +1822,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1798,7 +1839,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -1841,7 +1882,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1858,7 +1899,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -1901,7 +1942,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1918,7 +1959,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);
@@ -1961,7 +2002,7 @@ public class quharek_phase_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1978,7 +2019,7 @@ public class quharek_phase_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.quharek_phase_2.branchId");
                     npcSpeak(player, message);

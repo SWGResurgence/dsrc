@@ -5,6 +5,12 @@ package script.theme_park.dungeon.myyydril;/*
 */
 
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.static_item;
@@ -16,14 +22,17 @@ public class grievous_death extends script.base_script
     public grievous_death()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id corpseInventory = utils.getInventoryContainer(self);
@@ -39,13 +48,14 @@ public class grievous_death extends script.base_script
         System.out.println("Grievous Loot Created");
         return SCRIPT_CONTINUE;
     }
+
     public void createMyLoot(obj_id self) throws InterruptedException
     {
         obj_id corpseInventory = utils.getInventoryContainer(self);
-        if (corpseInventory == null)return;
+        if (corpseInventory == null) return;
         String mobType = ai_lib.getCreatureName(self);
-        if ( mobType == null )return;
-        int x = rand (1, 100);
+        if (mobType == null) return;
+        int x = rand(1, 100);
         if (x < 15)
         {
             static_item.createNewItemFunction("item_color_crystal_02_16", corpseInventory);
@@ -57,8 +67,8 @@ public class grievous_death extends script.base_script
         }
         String starfighter = "object/tangible/ship/crafted/chassis/grievous_starfighter_reward_deed.iff";
         String cybernetic = "object/tangible/wearables/cybernetic/s02/cybernetic_s02_arm_r.iff";
-        createObject(starfighter, corpseInventory, "" );
-        createObject(cybernetic, corpseInventory, "" );
+        createObject(starfighter, corpseInventory, "");
+        createObject(cybernetic, corpseInventory, "");
     }
 
 }

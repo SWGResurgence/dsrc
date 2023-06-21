@@ -1,5 +1,11 @@
 package script.quest.task;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.locations;
@@ -15,6 +21,7 @@ public class encounter_multi extends script.base_script
     public encounter_multi()
     {
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         if (quests.isMyQuest(questRow, "quest.task.encounter_multi"))
@@ -26,7 +33,7 @@ public class encounter_multi extends script.base_script
             {
                 target = getStringObjVar(self, objvarName);
             }
-            else 
+            else
             {
                 target = quests.getDataEntry(questRow, "TARGET");
             }
@@ -68,25 +75,25 @@ public class encounter_multi extends script.base_script
                             spawnEventParameters.put("location", l);
                             messageTo(self, "encounterMultiSpawnEvent", spawnEventParameters, 1.0f, false);
                         }
-                        else 
+                        else
                         {
                             LOG("newquests", "encounter_multi - OnQuestActivate() - failed to find suitable location for " + target + " for encounter spawn, failing task");
                             quests.complete(questName, self, false);
                         }
                     }
-                    else 
+                    else
                     {
                         LOG("newquests", "encounter_multi - OnQuestActivate() - no spawns defined in data table " + target + ", failing task");
                         quests.complete(questName, self, false);
                     }
                 }
-                else 
+                else
                 {
                     LOG("newquests", "encounter_multi - OnQuestActivate() - failed to retrieve data table information from " + target + " for encounter spawn, failing task");
                     quests.complete(questName, self, false);
                 }
             }
-            else 
+            else
             {
                 LOG("newquests", "encounter_multi - OnQuestActivated() - could not determine datatable to spawn encounter, failing task");
                 quests.complete(questName, self, false);
@@ -94,6 +101,7 @@ public class encounter_multi extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         Vector spawnedCreatures = utils.getResizeableObjIdArrayScriptVar(self, "encounter_multi_creatures");
@@ -102,11 +110,12 @@ public class encounter_multi extends script.base_script
             int iter = 0;
             for (iter = 0; iter < spawnedCreatures.size(); ++iter)
             {
-                messageTo(((obj_id)spawnedCreatures.get(iter)), "cleanup", null, 0.0f, false);
+                messageTo(((obj_id) spawnedCreatures.get(iter)), "cleanup", null, 0.0f, false);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int encounterMultiSpawnEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -154,7 +163,7 @@ public class encounter_multi extends script.base_script
                                         }
                                         setObjVar(creature, "quest.owner", self);
                                         setObjVar(creature, "quest.name", questName);
-                                        
+
                                         {
                                             startCombat(creature, self);
                                         }
@@ -175,58 +184,59 @@ public class encounter_multi extends script.base_script
                                             eventParameters.put("location", l);
                                             messageTo(self, "encounterMultiSpawnEvent", eventParameters, 1.0f, false);
                                         }
-                                        else 
+                                        else
                                         {
                                             LOG("newquests", "encounter_multi - encounterMultiSpawnEvent - currentRow(" + currentRow + ") >= numRows(" + dataTableGetNumRows(datatable) + ") stopping message pump");
                                         }
                                     }
-                                    else 
+                                    else
                                     {
                                         LOG("newquests", "encounter_multu - encounterMultiSpawnEvent - failed to spawn creature " + spawnEntry + " in data table " + datatable + " failing task");
                                         quests.complete(questName, self, false);
                                     }
                                 }
-                                else 
+                                else
                                 {
                                     LOG("newquests", "failed to retrieve spawn entry for task " + questName + " failing task");
                                     quests.complete(questName, self, false);
                                 }
                             }
-                            else 
+                            else
                             {
                                 LOG("newquests", "if(currentSpawn(" + currentSpawn + ") < totalSpawns(" + totalSpawns + ")) for row(" + currentRow + ") failed to get row spawn, this shouldn't happen. Look at the script and insure everything is working properly");
                                 quests.complete(questName, self, false);
                             }
                         }
-                        else 
+                        else
                         {
                             LOG("newquests", "can't determine current spawn entry. failing task");
                             quests.complete(questName, self, false);
                         }
                     }
-                    else 
+                    else
                     {
                         LOG("newquests", "can't determine current row(" + currentRow + ") . failing task");
                         quests.complete(questName, self, false);
                     }
                 }
-                else 
+                else
                 {
                     LOG("newquests", "can't get data table name for quest " + questName + ", failing task");
                     quests.complete(questName, self, false);
                 }
             }
-            else 
+            else
             {
                 LOG("newquests", "encounter_multi - encounterMultiSpawnEvent - spawn event isn't for me");
             }
         }
-        else 
+        else
         {
             LOG("newquests", "encounter_multi - encounterMultiSpawnEvent() - received null parameters");
         }
         return SCRIPT_CONTINUE;
     }
+
     public void failTasks(obj_id self) throws InterruptedException
     {
         String[] activeTasks = quests.getActiveQuestsWithScript("quest.task.encounter_multi", self);
@@ -236,16 +246,19 @@ public class encounter_multi extends script.base_script
             quests.complete(activeTasks[iter], self, false);
         }
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         failTasks(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         failTasks(self);
         return SCRIPT_CONTINUE;
     }
+
     public int destroyNotification(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -256,6 +269,7 @@ public class encounter_multi extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int deathNotification(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -280,13 +294,13 @@ public class encounter_multi extends script.base_script
             {
                 quests.complete(questName, self, true);
             }
-            else 
+            else
             {
                 objvarName = "quest." + questName + ".killCount";
                 setObjVar(self, objvarName, killCount);
             }
         }
-        else 
+        else
         {
             LOG("newquests", "encounter_multi - deathNotification() - received a message with null parameters");
         }

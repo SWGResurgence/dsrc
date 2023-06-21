@@ -1,5 +1,11 @@
 package script.developer.soe.working;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.buff;
 import script.library.create;
 import script.library.utils;

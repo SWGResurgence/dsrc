@@ -4,6 +4,12 @@ package script.event.wheres_watto;/*
 @Purpose: Watto conversation. DO NOT spawn more than one watto per galaxy. Rotate through the planets.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 

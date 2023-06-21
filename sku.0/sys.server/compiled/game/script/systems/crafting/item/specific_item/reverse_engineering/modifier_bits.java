@@ -1,33 +1,32 @@
 package script.systems.crafting.item.specific_item.reverse_engineering;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
-
 
 
 public class modifier_bits extends script.systems.crafting.item.crafting_base_item_component
 
 {
-    public modifier_bits()
-    {
-    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS =
             {
                     "crafting_artisan_novice"
             };
-
     public static final String[] ASSEMBLY_SKILL_MODS =
             {
 
                     "general_assembly"
             };
-
     public static final String[] EXPERIMENT_SKILL_MODS =
             {
                     "general_experimentation"
             };
-
     public static final resource_weight[] OBJ_ASSEMBLY_ATTRIBUTE_RESOURCES =
             {
                     new resource_weight("hitPoints", new resource_weight.weight[]
@@ -35,7 +34,6 @@ public class modifier_bits extends script.systems.crafting.item.crafting_base_it
                                     new resource_weight.weight(craftinglib.RESOURCE_DECAY_RESIST, 1)
                             })
             };
-
     public static final resource_weight[] OBJ_MAX_ATTRIBUTE_RESOURCES =
             {
                     new resource_weight("hitPoints", new resource_weight.weight[]
@@ -43,6 +41,10 @@ public class modifier_bits extends script.systems.crafting.item.crafting_base_it
                                     new resource_weight.weight(craftinglib.RESOURCE_DECAY_RESIST, 1)
                             })
             };
+
+    public modifier_bits()
+    {
+    }
 
     public String[] getRequiredSkills() throws InterruptedException
     {

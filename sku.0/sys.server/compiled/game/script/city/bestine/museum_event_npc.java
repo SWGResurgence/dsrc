@@ -1,22 +1,27 @@
 package script.city.bestine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.planetary_map;
 
 public class museum_event_npc extends script.base_script
 {
-    public museum_event_npc()
-    {
-    }
     public static final String FACE_TO_VOLUME_NAME = "faceToTriggerVolume";
-
     public static final String VARNAME_MUSEUM_STATUS = "strMuseumEventStatus";
     public static final String VARNAME_MUSEUM_WINNER = "strMuseumEventWinner";
     public static final String VARNAME_MUSEUM_NUM = "intMuseumEventNum";
     public static final String VARNAME_MUSEUM_WINNER_ARTWORK_INDEX = "intMuseumWinnerArtworkIndex";
     public static final String OBJVAR_MUSEUM_BUILDING = "bestine.objMuseumBuilding";
     public static final String DATATABLE_NAME = "datatables/city/bestine/bestine_museum_event.iff";
+    public museum_event_npc()
+    {
+    }
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
@@ -32,6 +37,7 @@ public class museum_event_npc extends script.base_script
         messageTo(self, "handleMuseumEventNpcSetup", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (isPlayer(breacher))
@@ -49,6 +55,7 @@ public class museum_event_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCuratorSetup(obj_id self, dictionary params) throws InterruptedException
     {
         if (!ai_lib.getCreatureName(self).equals("lilas_dinhint"))
@@ -61,6 +68,7 @@ public class museum_event_npc extends script.base_script
         messageTo(museumBuilding, "handleCuratorSetupRequest", msgData, 9, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCuratorSetupResponse(obj_id self, dictionary params) throws InterruptedException
     {
         clearMuseumEventObjvars(self);
@@ -101,6 +109,7 @@ public class museum_event_npc extends script.base_script
         messageTo(self, "handleCuratorDataStorage", null, 600, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCuratorDataStorage(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "bestine.museumEventStarted"))
@@ -131,6 +140,7 @@ public class museum_event_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMuseumEventStateChangeCuratorAlert(obj_id self, dictionary params) throws InterruptedException
     {
         clearMuseumEventObjvars(self);
@@ -143,7 +153,7 @@ public class museum_event_npc extends script.base_script
         {
             setObjVar(self, "bestine.timeNextEventStarts", timeNextEventStarts);
         }
-        else 
+        else
         {
             if (hasObjVar(self, "bestine.timeNextEventStarts"))
             {
@@ -242,7 +252,7 @@ public class museum_event_npc extends script.base_script
                         break;
                 }
             }
-            else 
+            else
             {
                 museumEventWinner = "none";
                 museumEventWinnerArtworkIndex = 0;
@@ -261,7 +271,7 @@ public class museum_event_npc extends script.base_script
                 setObjVar(self, "bestine.museumEventFeaturedArtwork", artworkTemplate);
                 setObjVar(self, "bestine.museumEventFeaturedSchematic", schematicTemplate);
             }
-            else 
+            else
             {
                 removeObjVar(self, "bestine.museumEventFeaturedArtwork");
                 removeObjVar(self, "bestine.museumEventFeaturedSchematic");
@@ -299,6 +309,7 @@ public class museum_event_npc extends script.base_script
         messageTo(getObjIdObjVar(self, OBJVAR_MUSEUM_BUILDING), "handleSetMuseumEventWinner", msgData, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMuseumEventNpcSetup(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, OBJVAR_MUSEUM_BUILDING))
@@ -310,12 +321,13 @@ public class museum_event_npc extends script.base_script
             listenToMessage(museumBuilding, "handleMuseumEventStatusResponse");
             messageTo(museumBuilding, "handleMuseumEventStatusRequest", msgData, 10, false);
         }
-        else 
+        else
         {
             messageTo(self, "checkForMuseumBuilding", null, 1, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkForMuseumBuilding(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
@@ -334,24 +346,25 @@ public class museum_event_npc extends script.base_script
                     messageTo(self, "checkForMuseumBuilding", null, 60, false);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     LOG("DESIGNER_FATAL", "city.bestine.museum_event_spawner: Could not find obj_id for a registered museum from here:" + here);
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 setObjVar(self, OBJVAR_MUSEUM_BUILDING, objMuseumBuilding);
                 dctScriptVars.put("objMuseumBuilding", objMuseumBuilding);
             }
         }
-        else 
+        else
         {
             LOG("DESIGNER_FATAL", "city.bestine.museum_event_spawner: Could not find a map_location for a registered museum from here: " + here);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMuseumEventStatusResponse(obj_id self, dictionary params) throws InterruptedException
     {
         clearMuseumEventObjvars(self);
@@ -364,7 +377,7 @@ public class museum_event_npc extends script.base_script
             setObjVar(self, "bestine.museumEventEntry02", params.getString("strMuseumEventEntry02"));
             setObjVar(self, "bestine.museumEventEntry03", params.getString("strMuseumEventEntry03"));
         }
-        else 
+        else
         {
             if (hasObjVar(self, "bestine.museumEventEntry01"))
             {
@@ -381,6 +394,7 @@ public class museum_event_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void clearMuseumEventObjvars(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "bestine.museumEventStarted"))

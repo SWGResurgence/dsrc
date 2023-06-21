@@ -1,5 +1,11 @@
 package script.systems.combat;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.spawning;
 import script.library.utils;
@@ -10,6 +16,7 @@ public class combat_mine_spawner extends script.base_script
 {
     public static final String dataTable = "datatables/combat/npc_landmines.iff";
     public static final boolean doLogging = false;
+
     public combat_mine_spawner()
     {
     }

@@ -1,5 +1,11 @@
 package script.item.publish_gift;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -26,6 +32,7 @@ public class gcw_mulit_image_painting extends script.base_script
                     "Reflect Planetary Control",
                     "Reflect Galactic Control"
             };
+
     public gcw_mulit_image_painting()
     {
     }

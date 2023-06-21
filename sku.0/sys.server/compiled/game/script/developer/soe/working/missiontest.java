@@ -1,5 +1,11 @@
 package script.developer.soe.working;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.space_quest;
 import script.location;
 import script.obj_id;
@@ -8,6 +14,7 @@ public class missiontest extends script.base_script
 {
     public static final String mission_type = "patrol";
     public static final String mission_name = "npe_easy_main_1";
+
     public missiontest()
     {
     }

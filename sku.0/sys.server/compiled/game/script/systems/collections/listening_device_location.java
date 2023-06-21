@@ -1,5 +1,11 @@
 package script.systems.collections;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 import script.string_id;
@@ -8,6 +14,7 @@ public class listening_device_location extends script.base_script
 {
     public static final float UPDATE_RADIUS = 5.0f;
     public static final string_id SID_ENTERED_GOOD_LOCATION = new string_id("collection", "entered_good_location");
+
     public listening_device_location()
     {
     }

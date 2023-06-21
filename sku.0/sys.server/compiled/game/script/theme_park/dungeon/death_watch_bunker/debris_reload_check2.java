@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class debris_reload_check2 extends script.base_script
     public debris_reload_check2()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         boolean empty = true;
@@ -18,13 +25,15 @@ public class debris_reload_check2 extends script.base_script
         int numInCell = cell_contents.length;
         if (cell_contents != null && numInCell > 0)
         {
-            for (obj_id cell_content : cell_contents) {
-                if (isIdValid(cell_content) && isPlayer(cell_content)) {
+            for (obj_id cell_content : cell_contents)
+            {
+                if (isIdValid(cell_content) && isPlayer(cell_content))
+                {
                     empty = false;
                 }
             }
         }
-        if (empty != true)
+        if (!empty)
         {
             destroyObject(self);
             int spawnNum = getIntObjVar(self, "spawn_number");
@@ -37,12 +46,13 @@ public class debris_reload_check2 extends script.base_script
                 messageTo(dad, "tellingMomIDied", info, 600, false);
             }
         }
-        else 
+        else
         {
             createTerminal(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void createTerminal(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -55,8 +65,8 @@ public class debris_reload_check2 extends script.base_script
         setObjVar(self, "term", term);
         setObjVar(term, "mom", self);
         attachScript(term, "theme_park.dungeon.death_watch_bunker.debris_terminal");
-        return;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "term"))

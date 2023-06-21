@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.location;
@@ -8,17 +14,19 @@ import script.string_id;
 
 public class mine_wave_03 extends script.base_script
 {
+    public static final String TBL_MINE_WAVE = "datatables/dungeon/death_watch/mine_wave.iff";
+    public static final string_id CALL_BACK_UP = new string_id("dungeon/death_watch", "call_back_up");
     public mine_wave_03()
     {
     }
-    public static final String TBL_MINE_WAVE = "datatables/dungeon/death_watch/mine_wave.iff";
-    public static final string_id CALL_BACK_UP = new string_id("dungeon/death_watch", "call_back_up");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleAttackerCleanUp", null, 300.0f, false);
         messageTo(self, "handleInvestigate", null, 5.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAttackerCleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -29,6 +37,7 @@ public class mine_wave_03 extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleInvestigate(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);

@@ -1,5 +1,11 @@
 package script.theme_park.dathomir.aurilia;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.location;
@@ -11,16 +17,19 @@ public class rohak_figurine_spawner extends script.base_script
     public rohak_figurine_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnFigurine", null, 9, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnFigurine", null, 19, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnFigurine(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "figurineSpawned"))
@@ -35,6 +44,7 @@ public class rohak_figurine_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int figurineDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "figurineSpawned");

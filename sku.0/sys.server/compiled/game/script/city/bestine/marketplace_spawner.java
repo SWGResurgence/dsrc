@@ -1,5 +1,11 @@
 package script.city.bestine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.location;
@@ -8,10 +14,12 @@ import script.string_id;
 
 public class marketplace_spawner extends script.base_script
 {
+    public static final String STF = "bestine";
+
     public marketplace_spawner()
     {
     }
-    public static final String STF = "bestine";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "city.bestine.politician_event_npc"))
@@ -25,6 +33,7 @@ public class marketplace_spawner extends script.base_script
         messageTo(self, "spawnMarketplaceNpcs", null, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "city.bestine.politician_event_npc"))
@@ -38,6 +47,7 @@ public class marketplace_spawner extends script.base_script
         messageTo(self, "spawnMarketplaceNpcs", null, 300, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnMarketplaceNpcs(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "marketplaceSpawned"))
@@ -77,11 +87,13 @@ public class marketplace_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePoliticianEventStatusResponse(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "checkSpawnStatus", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int checkSpawnStatus(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "bestine.electionWinner"))
@@ -108,7 +120,9 @@ public class marketplace_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    private obj_id createMerchant(obj_id self, String type, location loc, int yaw, string_id merchantName) throws InterruptedException{
+
+    private obj_id createMerchant(obj_id self, String type, location loc, int yaw, string_id merchantName) throws InterruptedException
+    {
         obj_id merchant = create.staticObject(type, loc);
         setYaw(merchant, yaw);
         setInvulnerable(merchant, true);

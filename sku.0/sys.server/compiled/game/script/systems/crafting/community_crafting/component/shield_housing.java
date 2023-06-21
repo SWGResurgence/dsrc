@@ -1,5 +1,11 @@
 package script.systems.crafting.community_crafting.component;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -34,6 +40,7 @@ public class shield_housing extends script.systems.crafting.community_crafting.c
                                     new resource_weight.weight(craftinglib.RESOURCE_DECAY_RESIST, 1)
                             })
             };
+
     public shield_housing()
     {
     }

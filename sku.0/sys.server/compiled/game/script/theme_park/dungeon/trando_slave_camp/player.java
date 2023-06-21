@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.trando_slave_camp;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.space_dungeon;
@@ -10,6 +16,7 @@ public class player extends script.base_script
     public player()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "setUpDungeon", null, 3, false);
@@ -19,6 +26,7 @@ public class player extends script.base_script
         CustomerServiceLog("DUNGEON_BlackscaleCompound", "*Entered_BlackscaleCompound - %TU", self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         String scene = getCurrentSceneName();
@@ -28,17 +36,20 @@ public class player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         groundquests.clearQuest(self, "ep3_slave_camp_control_room_access");
         return SCRIPT_CONTINUE;
     }
+
     public int setUpDungeon(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id controller = space_dungeon.getDungeonIdForPlayer(self);
         messageTo(controller, "beginSpawn", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgDungeonEjectConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("space_dungeon", "theme_park.dungeon.avatar_platform.player.msgDungeonEjectConfirmed()");
@@ -50,6 +61,7 @@ public class player extends script.base_script
         space_dungeon.ejectPlayerFromDungeon(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgDungeonLaunchConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         String button = params.getString("buttonPressed");
@@ -60,6 +72,7 @@ public class player extends script.base_script
         space_dungeon.launchPlayerFromDungeon(self);
         return SCRIPT_CONTINUE;
     }
+
     public int finishEntryQuest(obj_id self, dictionary params) throws InterruptedException
     {
         groundquests.sendSignal(self, "signalSlaverCampEntered");

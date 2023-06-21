@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,14 +14,17 @@ import script.*;
 
 public class tatooine_eisley_byxle extends script.base_script
 {
+    public static String c_stringFile = "conversation/tatooine_eisley_byxle";
+
     public tatooine_eisley_byxle()
     {
     }
-    public static String c_stringFile = "conversation/tatooine_eisley_byxle";
+
     public boolean tatooine_eisley_byxle_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean tatooine_eisley_byxle_condition_tdcOnTask1(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tatooine_eisley_tdc");
@@ -23,6 +32,7 @@ public class tatooine_eisley_byxle extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_eisley_tdc_e1, player);
         return onTask;
     }
+
     public boolean tatooine_eisley_byxle_condition_tdcOnTask2(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tatooine_eisley_tdc");
@@ -30,6 +40,7 @@ public class tatooine_eisley_byxle extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_eisley_tdc_e3, player);
         return onTask;
     }
+
     public boolean tatooine_eisley_byxle_condition_tdcOnTask3(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tatooine_eisley_tdc");
@@ -37,6 +48,7 @@ public class tatooine_eisley_byxle extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_eisley_tdc_e5, player);
         return onTask;
     }
+
     public boolean tatooine_eisley_byxle_condition_tdcOnTask4(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tatooine_eisley_tdc");
@@ -44,6 +56,7 @@ public class tatooine_eisley_byxle extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_eisley_tdc_e7, player);
         return onTask;
     }
+
     public boolean tatooine_eisley_byxle_condition_tdcTaskComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tatooine_eisley_tdc");
@@ -51,29 +64,35 @@ public class tatooine_eisley_byxle extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_eisley_tdc_e9, player);
         return onTask;
     }
+
     public boolean tatooine_eisley_byxle_condition_tdcQuestComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tatooine_eisley_tdc");
         boolean OnTask = (questIsQuestComplete(questId1, player));
         return OnTask;
     }
+
     public boolean tatooine_eisley_byxle_condition_blocker(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestDisabled("tatooine_eisley_tdc");
     }
+
     public void tatooine_eisley_byxle_action_grantTDCQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/tatooine_eisley_tdc");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void tatooine_eisley_byxle_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void tatooine_eisley_byxle_action_signalTDCReward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tat_eisley_tdc_e9");
     }
+
     public int tatooine_eisley_byxle_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -88,6 +107,7 @@ public class tatooine_eisley_byxle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_eisley_byxle_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -107,7 +127,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_69");
@@ -116,7 +136,7 @@ public class tatooine_eisley_byxle extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_eisley_byxle.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -126,6 +146,7 @@ public class tatooine_eisley_byxle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_eisley_byxle_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_69"))
@@ -141,6 +162,7 @@ public class tatooine_eisley_byxle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_eisley_byxle_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -160,7 +182,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -169,7 +191,7 @@ public class tatooine_eisley_byxle extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_eisley_byxle.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -179,6 +201,7 @@ public class tatooine_eisley_byxle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_eisley_byxle_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -198,7 +221,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -207,7 +230,7 @@ public class tatooine_eisley_byxle extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_eisley_byxle.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -217,6 +240,7 @@ public class tatooine_eisley_byxle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_eisley_byxle_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44"))
@@ -231,6 +255,7 @@ public class tatooine_eisley_byxle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_eisley_byxle_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -250,7 +275,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84");
@@ -259,7 +284,7 @@ public class tatooine_eisley_byxle extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_eisley_byxle.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -269,6 +294,7 @@ public class tatooine_eisley_byxle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_eisley_byxle_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_84"))
@@ -283,6 +309,7 @@ public class tatooine_eisley_byxle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_eisley_byxle_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34"))
@@ -297,6 +324,7 @@ public class tatooine_eisley_byxle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_eisley_byxle_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -311,6 +339,7 @@ public class tatooine_eisley_byxle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_eisley_byxle_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_58"))
@@ -330,7 +359,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -339,7 +368,7 @@ public class tatooine_eisley_byxle extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_eisley_byxle.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -349,6 +378,7 @@ public class tatooine_eisley_byxle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_eisley_byxle_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_62"))
@@ -375,7 +405,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_66");
@@ -388,7 +418,7 @@ public class tatooine_eisley_byxle extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_eisley_byxle.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -398,6 +428,7 @@ public class tatooine_eisley_byxle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_eisley_byxle_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_66"))
@@ -417,7 +448,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -426,7 +457,7 @@ public class tatooine_eisley_byxle extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_eisley_byxle.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -446,6 +477,7 @@ public class tatooine_eisley_byxle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_eisley_byxle_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_76"))
@@ -461,6 +493,7 @@ public class tatooine_eisley_byxle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -474,6 +507,7 @@ public class tatooine_eisley_byxle extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -483,6 +517,7 @@ public class tatooine_eisley_byxle extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -491,18 +526,21 @@ public class tatooine_eisley_byxle extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.tatooine_eisley_byxle");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -525,7 +563,7 @@ public class tatooine_eisley_byxle extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -533,7 +571,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_eisley_byxle.branchId", 1);
                 npcStartConversation(player, npc, "tatooine_eisley_byxle", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -555,7 +593,7 @@ public class tatooine_eisley_byxle extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -563,7 +601,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_eisley_byxle.branchId", 3);
                 npcStartConversation(player, npc, "tatooine_eisley_byxle", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -584,7 +622,7 @@ public class tatooine_eisley_byxle extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -592,7 +630,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_eisley_byxle.branchId", 6);
                 npcStartConversation(player, npc, "tatooine_eisley_byxle", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -613,7 +651,7 @@ public class tatooine_eisley_byxle extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -621,7 +659,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_eisley_byxle.branchId", 10);
                 npcStartConversation(player, npc, "tatooine_eisley_byxle", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -642,7 +680,7 @@ public class tatooine_eisley_byxle extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -650,7 +688,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_eisley_byxle.branchId", 13);
                 npcStartConversation(player, npc, "tatooine_eisley_byxle", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -672,7 +710,7 @@ public class tatooine_eisley_byxle extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -680,7 +718,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_eisley_byxle.branchId", 15);
                 npcStartConversation(player, npc, "tatooine_eisley_byxle", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -702,7 +740,7 @@ public class tatooine_eisley_byxle extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -710,7 +748,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_eisley_byxle.branchId", 17);
                 npcStartConversation(player, npc, "tatooine_eisley_byxle", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -719,6 +757,7 @@ public class tatooine_eisley_byxle extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("tatooine_eisley_byxle"))

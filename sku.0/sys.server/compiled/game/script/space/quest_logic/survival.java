@@ -1,17 +1,24 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class survival extends script.base_script
 {
-    public survival()
-    {
-    }
     public static final string_id SID_TARGETS_REMAINING = new string_id("space/quest", "destroy_duty_targets_remaining");
     public static final string_id SID_ABANDONED_SURVIVAL = new string_id("space/quest", "survival_abandoned");
     public static final String SOUND_SPAWN_WAVE = "clienteffect/ui_quest_spawn_wave.cef";
     public static final String SOUND_DESTROYED_WAVE = "clienteffect/ui_quest_destroyed_wave.cef";
+    public survival()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -56,6 +63,7 @@ public class survival extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int initializedQuestPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -112,6 +120,7 @@ public class survival extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void registerTransLocation(obj_id self, obj_id player, String destNav) throws InterruptedException
     {
         obj_id navPoint = space_quest.findQuestLocation(self, player, destNav, "nav");
@@ -146,6 +155,7 @@ public class survival extends script.base_script
         }
         setObjVar(self, "initialized", 1);
     }
+
     public int arrivedAtLocation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -177,6 +187,7 @@ public class survival extends script.base_script
         messageTo(self, "validateDistance", null, 30.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int beginTransmission(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -197,6 +208,7 @@ public class survival extends script.base_script
         messageTo(self, "updateTrans", outp, fifthLength, false);
         return SCRIPT_CONTINUE;
     }
+
     public int updateTrans(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -213,8 +225,8 @@ public class survival extends script.base_script
         if (updates < getIntObjVar(self, "numUpdates"))
         {
             time += fifth;
-            float pct_received = (float)time / total;
-            int ipct_received = (int)(pct_received * 100.0f);
+            float pct_received = (float) time / total;
+            int ipct_received = (int) (pct_received * 100.0f);
             string_id trans_update = new string_id("spacequest/" + questType + "/" + questName, "trans_update");
             prose_package pp = prose.getPackage(trans_update, ipct_received);
             space_quest.sendQuestMessage(player, pp);
@@ -222,7 +234,7 @@ public class survival extends script.base_script
             params.put("time", time);
             messageTo(self, "updateTrans", params, fifth, false);
         }
-        else 
+        else
         {
             string_id transmissionReceived = new string_id("spacequest/" + questType + "/" + questName, "transmission_received");
             space_quest.sendQuestMessage(player, transmissionReceived);
@@ -230,6 +242,7 @@ public class survival extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int endMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -248,6 +261,7 @@ public class survival extends script.base_script
         questCompleted(self);
         return SCRIPT_CONTINUE;
     }
+
     public int validateDistance(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -256,25 +270,21 @@ public class survival extends script.base_script
         obj_id pship = space_transition.getContainingShip(player);
         location loc = getLocationObjVar(self, "locl");
         float dist = getDistance(getLocation(pship), loc);
-        boolean ok = true;
-        if (dist > 2000.0f)
-        {
-            ok = false;
-        }
+        boolean ok = !(dist > 2000.0f);
         if (hasObjVar(self, "outofrange"))
         {
             if (ok)
             {
                 removeObjVar(self, "outofrange");
             }
-            else 
+            else
             {
                 string_id rangemsg = new string_id("spacequest/" + questType + "/" + questName, "outofrange_failed");
                 space_quest.sendQuestMessage(player, rangemsg);
                 questFailed(self);
             }
         }
-        else 
+        else
         {
             if (!ok)
             {
@@ -286,6 +296,7 @@ public class survival extends script.base_script
         messageTo(self, "validateDistance", null, 30.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void clearMissionWaypoint(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -302,24 +313,28 @@ public class survival extends script.base_script
             removeLocationTarget(player, loc);
         }
     }
+
     public void questCompleted(obj_id self) throws InterruptedException
     {
         clearMissionWaypoint(self);
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         space_quest.setQuestWon(player, self);
     }
+
     public void questFailed(obj_id self) throws InterruptedException
     {
         clearMissionWaypoint(self);
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         space_quest.setQuestFailed(player, self);
     }
+
     public void questAborted(obj_id self) throws InterruptedException
     {
         clearMissionWaypoint(self);
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         space_quest.setQuestAborted(player, self);
     }
+
     public int removeQuest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -333,6 +348,7 @@ public class survival extends script.base_script
         space_quest._removeQuest(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "noAbort"))
@@ -342,6 +358,7 @@ public class survival extends script.base_script
         questAborted(self);
         return SCRIPT_CONTINUE;
     }
+
     public void questUpdate(obj_id self, string_id update_id) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -351,6 +368,7 @@ public class survival extends script.base_script
         prose_package pp = prose.getPackage(update_prefix, update_id);
         space_quest.sendQuestMessage(player, pp);
     }
+
     public int launchFirstAttack(obj_id self, dictionary params) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -360,6 +378,7 @@ public class survival extends script.base_script
         messageTo(self, "launchAttack", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int launchAttack(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "initialized"))
@@ -379,7 +398,7 @@ public class survival extends script.base_script
         {
             wavenum = 2;
         }
-        else 
+        else
         {
             wavenum = 1;
         }
@@ -403,14 +422,11 @@ public class survival extends script.base_script
         {
             targets = new obj_id[count];
         }
-        else 
+        else
         {
             targets = new obj_id[count + oldtargets.length];
             k = oldtargets.length;
-            for (int i = 0; i < oldtargets.length; i++)
-            {
-                targets[i] = oldtargets[i];
-            }
+            System.arraycopy(oldtargets, 0, targets, 0, oldtargets.length);
         }
         int squad = ship_ai.squadCreateSquadId();
         int j = 0;
@@ -463,6 +479,7 @@ public class survival extends script.base_script
         messageTo(self, "launchAttack", null, attackPeriod, false);
         return SCRIPT_CONTINUE;
     }
+
     public int targetDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -474,24 +491,30 @@ public class survival extends script.base_script
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
         String questType = getStringObjVar(self, space_quest.QUEST_TYPE);
         obj_id deadship = params.getObjId("ship");
-        obj_id targets[] = getObjIdArrayObjVar(self, "targets");
+        obj_id[] targets = getObjIdArrayObjVar(self, "targets");
         int deadships = getIntObjVar(self, "deadships");
         boolean launchWave = false;
-        for (obj_id target : targets) {
-            if (deadship == target) {
+        for (obj_id target : targets)
+        {
+            if (deadship == target)
+            {
                 deadships++;
                 setObjVar(self, "deadships", deadships);
                 space_quest._removeMissionCriticalShip(player, self, deadship);
                 int shipswave = getIntObjVar(deadship, "wave");
                 int wavecount = getIntObjVar(self, "wave" + shipswave);
                 wavecount--;
-                if (wavecount <= 0) {
+                if (wavecount <= 0)
+                {
                     removeObjVar(self, "wave" + shipswave);
                     launchWave = true;
-                } else {
+                }
+                else
+                {
                     setObjVar(self, "wave" + shipswave, wavecount);
                 }
-                if (deadships == targets.length) {
+                if (deadships == targets.length)
+                {
                     playClientEffectObj(player, SOUND_DESTROYED_WAVE, player, "");
                     int rewardships = getIntObjVar(self, "rewardships");
                     rewardships += deadships;
@@ -515,6 +538,7 @@ public class survival extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int playerShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -528,6 +552,7 @@ public class survival extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int attackPlayerShip(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id playerShip = params.getObjId("player");
@@ -535,13 +560,16 @@ public class survival extends script.base_script
         ship_ai.spaceAttack(attackingShip, playerShip);
         return SCRIPT_CONTINUE;
     }
+
     public void cleanupShips(obj_id self) throws InterruptedException
     {
         obj_id[] targets = getObjIdArrayObjVar(self, "targets");
         if (targets != null)
         {
-            for (obj_id target : targets) {
-                if (isIdValid(target) && exists(target)) {
+            for (obj_id target : targets)
+            {
+                if (isIdValid(target) && exists(target))
+                {
                     destroyObjectHyperspace(target);
                 }
             }

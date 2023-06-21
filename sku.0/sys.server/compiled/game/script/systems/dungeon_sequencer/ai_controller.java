@@ -1,5 +1,11 @@
 package script.systems.dungeon_sequencer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -13,6 +19,7 @@ public class ai_controller extends script.base_script
     public static final String PATH = "patrol_path";
     public static final String MOVETO = "moveTo";
     public static final boolean LOGGING = true;
+
     public ai_controller()
     {
     }
@@ -303,7 +310,6 @@ public class ai_controller extends script.base_script
             setInvulnerable(self, true);
             messageTo(self, "handleDelayedCleanup", null, 1.0f, false);
         }
-        return;
     }
 
     public int OnEnteredCombat(obj_id self) throws InterruptedException
@@ -601,7 +607,6 @@ public class ai_controller extends script.base_script
     {
         location toPoint = getPointLocation(pointName);
         pathTo(self, toPoint);
-        return;
     }
 
     public void calculatePathPoint(obj_id self, String pointName) throws InterruptedException
@@ -699,7 +704,6 @@ public class ai_controller extends script.base_script
         {
             ai_lib.setPatrolRandomOncePath(self, ppl);
         }
-        return;
     }
 
     public int setLocationTarget(obj_id self, dictionary params) throws InterruptedException

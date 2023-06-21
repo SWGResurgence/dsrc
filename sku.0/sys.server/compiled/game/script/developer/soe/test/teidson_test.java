@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -11,13 +17,16 @@ public class teidson_test extends script.base_script
     public teidson_test()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {
+        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self))
+        {
             detachScript(self, "test.teidson_test");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
     {
         String[] strCommands = split(strText, ' ');
@@ -199,7 +208,8 @@ public class teidson_test extends script.base_script
                 broadcast(self, "No regions here.");
                 return SCRIPT_CONTINUE;
             }
-            for (region region : regions) {
+            for (region region : regions)
+            {
                 broadcast(self, "Region: " + region.getName());
             }
         }
@@ -287,13 +297,16 @@ public class teidson_test extends script.base_script
         {
             obj_id inv = utils.getInventoryContainer(self);
             obj_id[] contents = getContents(inv);
-            for (obj_id content : contents) {
-                if (!isIdValid(content)) {
+            for (obj_id content : contents)
+            {
+                if (!isIdValid(content))
+                {
                     continue;
                 }
-                String temp = "" + content;
+                String temp = String.valueOf(content);
                 int k = Integer.parseInt(temp);
-                if (k > 11000000) {
+                if (k > 11000000)
+                {
                     destroyObject(content);
                 }
             }
@@ -324,8 +337,10 @@ public class teidson_test extends script.base_script
         {
             broadcast(self, "Cleaning up encounters....");
             obj_id[] objectsInRange = getObjectsInRange(getLocation(self), 200.0f);
-            for (obj_id obj_id : objectsInRange) {
-                if (hasObjVar(obj_id, "grievous_encounter.active")) {
+            for (obj_id obj_id : objectsInRange)
+            {
+                if (hasObjVar(obj_id, "grievous_encounter.active"))
+                {
                     obj_id powerCell = obj_id;
                     destroyObject(powerCell);
                 }
@@ -392,9 +407,10 @@ public class teidson_test extends script.base_script
         if (strCommands[0].equals("clearCargo"))
         {
             obj_id objPlayerShip = getPilotedShip(self);
-            obj_id objs[] = getShipCargoHoldContentsResourceTypes(objPlayerShip);
-            int amounts[] = getShipCargoHoldContentsAmounts(objPlayerShip);
-            for (obj_id obj : objs) {
+            obj_id[] objs = getShipCargoHoldContentsResourceTypes(objPlayerShip);
+            int[] amounts = getShipCargoHoldContentsAmounts(objPlayerShip);
+            for (obj_id obj : objs)
+            {
                 setShipCargoHoldContent(objPlayerShip, obj, 0);
             }
         }
@@ -440,7 +456,8 @@ public class teidson_test extends script.base_script
             obj_id[] objTestObjects = getObjectsInRange(self, 1000);
             if (objTestObjects != null)
             {
-                for (obj_id objTestObject : objTestObjects) {
+                for (obj_id objTestObject : objTestObjects)
+                {
                     destroyObject(objTestObject);
                 }
             }
@@ -458,9 +475,11 @@ public class teidson_test extends script.base_script
             obj_id objCell = objCells[rand(0, objCells.length)];
             if (strCommands.length == 2)
             {
-                for (obj_id objCell1 : objCells) {
+                for (obj_id objCell1 : objCells)
+                {
                     String cellName = getCellName(objCell1);
-                    if (cellName.equals(strCommands[1])) {
+                    if (cellName.equals(strCommands[1]))
+                    {
                         objCell = objCell1;
                     }
                 }
@@ -494,7 +513,7 @@ public class teidson_test extends script.base_script
                 objStation = createObject("object/building/general/npe_hangar_1.iff", getLocation(self));
                 persistObject(objStation);
             }
-            else 
+            else
             {
                 objStation = objTestObjects[0];
             }
@@ -554,15 +573,19 @@ public class teidson_test extends script.base_script
         if (strCommands[0].equals("shipinfo"))
         {
             obj_id[] scds = callable.getDatapadCallablesByType(self, callable.CALLABLE_TYPE_SHIP);
-            for (obj_id scd : scds) {
-                if (isIdValid(scd)) {
+            for (obj_id scd : scds)
+            {
+                if (isIdValid(scd))
+                {
                     obj_id[] controlDeviceContents = getContents(scd);
                     LOG("shipcontents", "Ship: " + controlDeviceContents[0]);
-                    if (isIdValid(controlDeviceContents[0])) {
+                    if (isIdValid(controlDeviceContents[0]))
+                    {
                         int[] intRawSlots = getShipChassisSlots(controlDeviceContents[0]);
                         LOG("shipcontents", "Ship Control Device: " + getName(scd) + " first content: " + getName(controlDeviceContents[0]) + " slots: " + intRawSlots.length + " chassisType: " + getShipChassisType(controlDeviceContents[0]));
-                        for (int intRawSlot : intRawSlots) {
-                            LOG("shipcontents", "" + getName(controlDeviceContents[0]) + " Slot: " + space_crafting.getShipComponentStringType(intRawSlot));
+                        for (int intRawSlot : intRawSlots)
+                        {
+                            LOG("shipcontents", getName(controlDeviceContents[0]) + " Slot: " + space_crafting.getShipComponentStringType(intRawSlot));
                         }
                     }
                 }
@@ -610,14 +633,14 @@ public class teidson_test extends script.base_script
         if (strCommands[0].equals("engineReadout"))
         {
             String strDataTable = "datatables/ship/components/engine_balance_readout.tab";
-            String[] strHeaderTypes = 
-            {
-                "f"
-            };
-            String[] strHeaders = 
-            {
-                "speed"
-            };
+            String[] strHeaderTypes =
+                    {
+                            "f"
+                    };
+            String[] strHeaders =
+                    {
+                            "speed"
+                    };
             boolean boolTest = datatable.createDataTable(strDataTable, strHeaders, strHeaderTypes);
             if (!boolTest)
             {
@@ -672,14 +695,14 @@ public class teidson_test extends script.base_script
         }
         if (strCommands[0].equals("giveMeMass"))
         {
-            obj_id pcd[] = space_transition.findShipControlDevicesForPlayer(self);
+            obj_id[] pcd = space_transition.findShipControlDevicesForPlayer(self);
             obj_id ship = space_transition.getShipFromShipControlDevice(pcd[0]);
             setChassisComponentMassMaximum(ship, 10000000.0f);
             return SCRIPT_CONTINUE;
         }
         if (strCommands[0].equals("colorShip"))
         {
-            obj_id pcd[] = space_transition.findShipControlDevicesForPlayer(self);
+            obj_id[] pcd = space_transition.findShipControlDevicesForPlayer(self);
             obj_id ship = space_transition.getShipFromShipControlDevice(pcd[0]);
             if (isIdValid(ship))
             {
@@ -782,18 +805,18 @@ public class teidson_test extends script.base_script
         if (strCommands[0].equals("wwallaceValidateLoot"))
         {
             String strDataTable = "datatables/ship/components/loot_validation.tab";
-            String[] strHeaderTypes = 
-            {
-                "s",
-                "s",
-                "s"
-            };
-            String[] strHeaders = 
-            {
-                "objectTemplate",
-                "didItCreate",
-                "validStats"
-            };
+            String[] strHeaderTypes =
+                    {
+                            "s",
+                            "s",
+                            "s"
+                    };
+            String[] strHeaders =
+                    {
+                            "objectTemplate",
+                            "didItCreate",
+                            "validStats"
+                    };
             boolean boolTest = datatable.createDataTable(strDataTable, strHeaders, strHeaderTypes);
             if (!boolTest)
             {
@@ -815,14 +838,17 @@ public class teidson_test extends script.base_script
                 debugSpeakMsg(self, "Now doing " + strTables[intM]);
                 String strFileName = "datatables/ship/components/" + strTables[intM] + ".iff";
                 String[] strTemplates = dataTableGetStringColumn(strFileName, "strType");
-                for (String strTemplate : strTemplates) {
+                for (String strTemplate : strTemplates)
+                {
                     dictionary dctRow = new dictionary(2);
                     String created = "";
                     obj_id objTest = null;
-                    try {
+                    try
+                    {
                         objTest = createObject(strTemplate, getLocation(self));
                         created = "yes";
-                    } catch (Throwable err) {
+                    } catch (Throwable err)
+                    {
                         LOG("space_error", "OBJECT " + strTemplates[intM] + " in " + strFileName + " does not create!!!");
                         created = "no";
                     }
@@ -835,6 +861,7 @@ public class teidson_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleColorize(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -863,6 +890,7 @@ public class teidson_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int delayTeleport(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id newbieHall = getObjIdObjVar(self, "newbieHallId");

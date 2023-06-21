@@ -1,5 +1,11 @@
 package script.event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.badge;
 import script.library.utils;
 import script.obj_id;
@@ -8,17 +14,19 @@ import java.util.StringTokenizer;
 
 public class area_badge extends script.base_script
 {
+    private static final String[] HELP_TEXT =
+            {
+                    "------------------------------------",
+                    "USAGE: \"areabadge <RANGE> <BADGENUMBER>\"",
+                    "<RANGE>: Valid values are between 1 and 256",
+                    "<BADGENUMBER>: Valid badges are between 1 and 124",
+                    "------------------------------------"
+            };
+
     public area_badge()
     {
     }
-    private static final String[] HELP_TEXT =
-    {
-        "------------------------------------",
-        "USAGE: \"areabadge <RANGE> <BADGENUMBER>\"",
-        "<RANGE>: Valid values are between 1 and 256",
-        "<BADGENUMBER>: Valid badges are between 1 and 124",
-        "------------------------------------"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isPlayer(self))
@@ -43,6 +51,7 @@ public class area_badge extends script.base_script
         sendSystemMessage(self, "USAGE: \"areabadge <RANGE> <BADGENUMBER>\". Say \"Help\" for usage and options.", null);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (!isGod(self))
@@ -61,6 +70,7 @@ public class area_badge extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (objSpeaker != self)
@@ -111,10 +121,12 @@ public class area_badge extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
                 obj_id[] objPlayers = getPlayerCreaturesInRange(self, badgeRange);
-                if (objPlayers != null && objPlayers.length > 0)
+                if (objPlayers != null)
                 {
-                    for (obj_id objPlayer : objPlayers) {
-                        if (objPlayer != self) {
+                    for (obj_id objPlayer : objPlayers)
+                    {
+                        if (objPlayer != self)
+                        {
                             badge.grantBadge(objPlayer, badgeName);
                             sendSystemMessage(self, "Granting badge " + badgeNumber + " to player " + getName(objPlayer), null);
                         }
@@ -128,7 +140,8 @@ public class area_badge extends script.base_script
         }
         else if ((toLower(strText)).equals("help"))
         {
-            for (String helpText : HELP_TEXT) {
+            for (String helpText : HELP_TEXT)
+            {
                 sendSystemMessage(self, helpText, null);
             }
         }

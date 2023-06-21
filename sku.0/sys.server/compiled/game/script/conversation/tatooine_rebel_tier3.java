@@ -1,94 +1,81 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class tatooine_rebel_tier3 extends script.base_script
 {
+    public static String c_stringFile = "conversation/tatooine_rebel_tier3";
+
     public tatooine_rebel_tier3()
     {
     }
-    public static String c_stringFile = "conversation/tatooine_rebel_tier3";
+
     public boolean tatooine_rebel_tier3_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean tatooine_rebel_tier3_condition_isCorrectFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_novice"));
     }
+
     public boolean tatooine_rebel_tier3_condition_isReadyForTier3(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.hasCompletedTierTwo(player) && space_flags.hasSpaceFlag(player, "ekerPilot"))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.hasCompletedTierTwo(player) && space_flags.hasSpaceFlag(player, "ekerPilot");
     }
+
     public boolean tatooine_rebel_tier3_condition_isOnQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player));
     }
+
     public boolean tatooine_rebel_tier3_condition_failedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuestRecursive(player, "recovery", "tatooine_rebel_tier3_1") || space_quest.hasAbortedQuestRecursive(player, "recovery", "tatooine_rebel_tier3_1"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuestRecursive(player, "recovery", "tatooine_rebel_tier3_1") || space_quest.hasAbortedQuestRecursive(player, "recovery", "tatooine_rebel_tier3_1");
     }
+
     public boolean tatooine_rebel_tier3_condition_failedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuestRecursive(player, "inspect", "tatooine_rebel_tier3_2") || space_quest.hasAbortedQuestRecursive(player, "inspect", "tatooine_rebel_tier3_2"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuestRecursive(player, "inspect", "tatooine_rebel_tier3_2") || space_quest.hasAbortedQuestRecursive(player, "inspect", "tatooine_rebel_tier3_2");
     }
+
     public boolean tatooine_rebel_tier3_condition_failedQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuestRecursive(player, "delivery", "tatooine_rebel_tier3_3") || space_quest.hasAbortedQuestRecursive(player, "delivery", "tatooine_rebel_tier3_3"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuestRecursive(player, "delivery", "tatooine_rebel_tier3_3") || space_quest.hasAbortedQuestRecursive(player, "delivery", "tatooine_rebel_tier3_3");
     }
+
     public boolean tatooine_rebel_tier3_condition_failedQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuestRecursive(player, "assassinate", "tatooine_rebel_tier3_4") || space_quest.hasAbortedQuestRecursive(player, "assassinate", "tatooine_rebel_tier3_4"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuestRecursive(player, "assassinate", "tatooine_rebel_tier3_4") || space_quest.hasAbortedQuestRecursive(player, "assassinate", "tatooine_rebel_tier3_4");
     }
+
     public boolean tatooine_rebel_tier3_condition_isReadyForTier4(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.hasCompletedTierThree(player) && space_flags.hasSpaceFlag(player, "ekerPilot") && space_quest.hasReceivedReward(player, "assassinate", "tatooine_rebel_tier3_4"))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.hasCompletedTierThree(player) && space_flags.hasSpaceFlag(player, "ekerPilot") && space_quest.hasReceivedReward(player, "assassinate", "tatooine_rebel_tier3_4");
     }
+
     public boolean tatooine_rebel_tier3_condition_hasAllTier3Skills(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.hasCompletedTierThree(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.hasCompletedTierThree(player);
     }
+
     public boolean tatooine_rebel_tier3_condition_collectingQuestOneReward(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasCompletedQuestRecursive(player, "recovery", "tatooine_rebel_tier3_1"))
         {
             return false;
         }
-        if (hasSkill(player, "pilot_rebel_navy_starships_03") || hasSkill(player, "pilot_rebel_navy_procedures_03") || hasSkill(player, "pilot_rebel_navy_weapons_03") || hasSkill(player, "pilot_rebel_navy_droid_03"))
-        {
-            return false;
-        }
-        return true;
+        return !hasSkill(player, "pilot_rebel_navy_starships_03") && !hasSkill(player, "pilot_rebel_navy_procedures_03") && !hasSkill(player, "pilot_rebel_navy_weapons_03") && !hasSkill(player, "pilot_rebel_navy_droid_03");
     }
+
     public boolean tatooine_rebel_tier3_condition_collectingQuestTwoReward(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasCompletedQuestRecursive(player, "inspect", "tatooine_rebel_tier3_2"))
@@ -112,15 +99,9 @@ public class tatooine_rebel_tier3 extends script.base_script
         {
             skillCount++;
         }
-        if (skillCount < 2)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return skillCount < 2;
     }
+
     public boolean tatooine_rebel_tier3_condition_collectingQuestThreeReward(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasCompletedQuestRecursive(player, "delivery", "tatooine_rebel_tier3_3"))
@@ -144,15 +125,9 @@ public class tatooine_rebel_tier3 extends script.base_script
         {
             skillCount++;
         }
-        if (skillCount < 3)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return skillCount < 3;
     }
+
     public boolean tatooine_rebel_tier3_condition_collectingQuestFourReward(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasCompletedQuestRecursive(player, "assassinate", "tatooine_rebel_tier3_4"))
@@ -171,72 +146,84 @@ public class tatooine_rebel_tier3 extends script.base_script
         {
             return true;
         }
-        if (!hasSkill(player, "pilot_rebel_navy_droid_03"))
-        {
-            return true;
-        }
-        return false;
+        return !hasSkill(player, "pilot_rebel_navy_droid_03");
     }
+
     public boolean tatooine_rebel_tier3_condition_onMyTrack(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.isSpaceTrack(player, space_flags.REBEL_TATOOINE);
     }
+
     public boolean tatooine_rebel_tier3_condition_isPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.hasAnyPilotSkill(player);
     }
+
     public boolean tatooine_rebel_tier3_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuestRecursive(player, "recovery", "tatooine_rebel_tier3_1"));
     }
+
     public boolean tatooine_rebel_tier3_condition_hasCompletedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuestRecursive(player, "inspect", "tatooine_rebel_tier3_2"));
     }
+
     public boolean tatooine_rebel_tier3_condition_hasCompletedQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuestRecursive(player, "delivery", "tatooine_rebel_tier3_3"));
     }
+
     public boolean tatooine_rebel_tier3_condition_hasCompletedQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuestRecursive(player, "assassinate", "tatooine_rebel_tier3_4"));
     }
+
     public boolean tatooine_rebel_tier3_condition_hasNegativeFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         return (factions.getFactionStanding(player, factions.FACTION_REBEL) < 0.0f);
     }
+
     public boolean tatooine_rebel_tier3_condition_hasStarship03Skill(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_starships_03"));
     }
+
     public boolean tatooine_rebel_tier3_condition_hasProcedure03Skill(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_procedures_03"));
     }
+
     public boolean tatooine_rebel_tier3_condition_hasWeapon03Skill(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_weapons_03"));
     }
+
     public boolean tatooine_rebel_tier3_condition_hasDroid03Skill(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_droid_03"));
     }
+
     public void tatooine_rebel_tier3_action_grantQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "recovery", "tatooine_rebel_tier3_1");
     }
+
     public void tatooine_rebel_tier3_action_grantQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "inspect", "tatooine_rebel_tier3_2");
     }
+
     public void tatooine_rebel_tier3_action_grantQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "delivery", "tatooine_rebel_tier3_3");
     }
+
     public void tatooine_rebel_tier3_action_grantQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "assassinate", "tatooine_rebel_tier3_4");
     }
+
     public void tatooine_rebel_tier3_action_rewardForQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "recovery", "tatooine_rebel_tier3_1"))
@@ -245,6 +232,7 @@ public class tatooine_rebel_tier3 extends script.base_script
             factions.addFactionStanding(player, factions.FACTION_REBEL, 100.0f);
         }
     }
+
     public void tatooine_rebel_tier3_action_rewardForQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "inspect", "tatooine_rebel_tier3_2"))
@@ -253,6 +241,7 @@ public class tatooine_rebel_tier3 extends script.base_script
             factions.addFactionStanding(player, factions.FACTION_REBEL, 100.0f);
         }
     }
+
     public void tatooine_rebel_tier3_action_rewardForQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "delivery", "tatooine_rebel_tier3_3"))
@@ -261,6 +250,7 @@ public class tatooine_rebel_tier3 extends script.base_script
             factions.addFactionStanding(player, factions.FACTION_REBEL, 100.0f);
         }
     }
+
     public void tatooine_rebel_tier3_action_rewardForQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "assassinate", "tatooine_rebel_tier3_4"))
@@ -269,22 +259,27 @@ public class tatooine_rebel_tier3 extends script.base_script
             factions.addFactionStanding(player, factions.FACTION_REBEL, 100.0f);
         }
     }
+
     public void tatooine_rebel_tier3_action_grantProceduresSkill(obj_id player, obj_id npc) throws InterruptedException
     {
         skill.noisyGrantSkill(player, "pilot_rebel_navy_procedures_03");
     }
+
     public void tatooine_rebel_tier3_action_grantDroidSkill(obj_id player, obj_id npc) throws InterruptedException
     {
         skill.noisyGrantSkill(player, "pilot_rebel_navy_droid_03");
     }
+
     public void tatooine_rebel_tier3_action_grantWeaponSkill(obj_id player, obj_id npc) throws InterruptedException
     {
         skill.noisyGrantSkill(player, "pilot_rebel_navy_weapons_03");
     }
+
     public void tatooine_rebel_tier3_action_grantStarshipSkill(obj_id player, obj_id npc) throws InterruptedException
     {
         skill.noisyGrantSkill(player, "pilot_rebel_navy_starships_03");
     }
+
     public int tatooine_rebel_tier3_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ecb17e60"))
@@ -305,7 +300,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f8b02865");
@@ -314,7 +309,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -324,6 +319,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f8b02865"))
@@ -339,6 +335,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a68dfaa6"))
@@ -368,6 +365,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d85b3a9c"))
@@ -396,6 +394,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d454739a"))
@@ -424,6 +423,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b40f340"))
@@ -453,6 +453,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_661"))
@@ -492,6 +493,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_661"))
@@ -531,6 +533,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_661"))
@@ -570,6 +573,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_661"))
@@ -609,6 +613,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_783af10a"))
@@ -635,7 +640,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b9f4f973");
@@ -648,7 +653,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -674,7 +679,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d2d48b62");
@@ -683,7 +688,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -693,6 +698,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b9f4f973"))
@@ -720,7 +726,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79209e7");
@@ -733,7 +739,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -773,7 +779,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_130");
@@ -790,7 +796,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -800,6 +806,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79209e7"))
@@ -820,7 +827,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8e632a96");
@@ -829,7 +836,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -855,7 +862,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_53de9d8f");
@@ -864,7 +871,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -874,6 +881,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8e632a96"))
@@ -893,7 +901,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_75913251");
@@ -902,7 +910,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -912,6 +920,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_75913251"))
@@ -932,7 +941,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77e48d5b");
@@ -941,7 +950,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -951,6 +960,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77e48d5b"))
@@ -971,7 +981,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7f0ba495");
@@ -980,7 +990,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -990,6 +1000,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7f0ba495"))
@@ -1009,7 +1020,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3aa053cf");
@@ -1018,7 +1029,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1028,6 +1039,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3aa053cf"))
@@ -1047,7 +1059,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6a45ad00");
@@ -1056,7 +1068,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1066,6 +1078,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6a45ad00"))
@@ -1092,7 +1105,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d70dba34");
@@ -1105,7 +1118,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1115,6 +1128,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d70dba34"))
@@ -1135,7 +1149,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1bd3a505");
@@ -1144,7 +1158,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1171,7 +1185,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61657d0f");
@@ -1180,7 +1194,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1190,6 +1204,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1bd3a505"))
@@ -1210,7 +1225,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_25e98647");
@@ -1219,7 +1234,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1229,6 +1244,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25e98647"))
@@ -1245,6 +1261,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_61657d0f"))
@@ -1264,7 +1281,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -1273,7 +1290,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1283,6 +1300,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_76"))
@@ -1303,7 +1321,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_80");
@@ -1312,7 +1330,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1322,6 +1340,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_80"))
@@ -1338,6 +1357,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53de9d8f"))
@@ -1358,7 +1378,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c6594c52");
@@ -1367,7 +1387,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1377,6 +1397,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c6594c52"))
@@ -1397,7 +1418,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5c8eeafa");
@@ -1406,7 +1427,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1416,6 +1437,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5c8eeafa"))
@@ -1435,7 +1457,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92");
@@ -1444,7 +1466,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1454,6 +1476,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92"))
@@ -1473,7 +1496,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_96");
@@ -1482,7 +1505,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1492,6 +1515,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_96"))
@@ -1518,7 +1542,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -1531,7 +1555,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1541,6 +1565,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_100"))
@@ -1561,7 +1586,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -1570,7 +1595,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1596,7 +1621,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116");
@@ -1605,7 +1630,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1615,6 +1640,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_104"))
@@ -1635,7 +1661,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_108");
@@ -1644,7 +1670,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1654,6 +1680,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_108"))
@@ -1670,6 +1697,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116"))
@@ -1689,7 +1717,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -1698,7 +1726,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1708,6 +1736,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_120"))
@@ -1728,7 +1757,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_124");
@@ -1737,7 +1766,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1747,6 +1776,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_124"))
@@ -1763,6 +1793,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_130"))
@@ -1782,7 +1813,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4bbc7af6");
@@ -1791,7 +1822,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1817,7 +1848,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2787404a");
@@ -1826,7 +1857,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1853,7 +1884,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_221");
@@ -1862,7 +1893,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1872,6 +1903,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4bbc7af6"))
@@ -1892,7 +1924,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3899c4e1");
@@ -1901,7 +1933,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1911,6 +1943,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3899c4e1"))
@@ -1931,7 +1964,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_137");
@@ -1940,7 +1973,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1950,6 +1983,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_137"))
@@ -1969,7 +2003,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_141");
@@ -1978,7 +2012,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1988,6 +2022,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_141"))
@@ -2014,7 +2049,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_145");
@@ -2027,7 +2062,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2037,6 +2072,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_145"))
@@ -2057,7 +2093,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_149");
@@ -2066,7 +2102,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2092,7 +2128,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_161");
@@ -2101,7 +2137,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2111,6 +2147,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_149"))
@@ -2131,7 +2168,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -2140,7 +2177,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2150,6 +2187,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -2166,6 +2204,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_161"))
@@ -2185,7 +2224,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_165");
@@ -2194,7 +2233,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2204,6 +2243,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_165"))
@@ -2224,7 +2264,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_169");
@@ -2233,7 +2273,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2243,6 +2283,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_169"))
@@ -2259,6 +2300,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2787404a"))
@@ -2278,7 +2320,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3059f369");
@@ -2287,7 +2329,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2297,6 +2339,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch73(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3059f369"))
@@ -2317,7 +2360,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82f0aea5");
@@ -2326,7 +2369,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2336,6 +2379,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_82f0aea5"))
@@ -2356,7 +2400,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -2365,7 +2409,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2375,6 +2419,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5bd69df6"))
@@ -2394,7 +2439,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_183");
@@ -2403,7 +2448,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2413,6 +2458,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_183"))
@@ -2432,7 +2478,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_187");
@@ -2441,7 +2487,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2451,6 +2497,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_187"))
@@ -2477,7 +2524,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_191");
@@ -2490,7 +2537,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2500,6 +2547,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_191"))
@@ -2520,7 +2568,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_195");
@@ -2529,7 +2577,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2555,7 +2603,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_207");
@@ -2564,7 +2612,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2574,6 +2622,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch79(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_195"))
@@ -2594,7 +2643,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_199");
@@ -2603,7 +2652,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2613,6 +2662,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_199"))
@@ -2629,6 +2679,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_207"))
@@ -2648,7 +2699,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_211");
@@ -2657,7 +2708,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2667,6 +2718,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch83(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_211"))
@@ -2687,7 +2739,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_215");
@@ -2696,7 +2748,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2706,6 +2758,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch84(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_215"))
@@ -2722,6 +2775,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_221"))
@@ -2743,7 +2797,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59cd5207");
@@ -2752,7 +2806,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2762,6 +2816,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch87(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_59cd5207"))
@@ -2782,7 +2837,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b0da26cf");
@@ -2791,7 +2846,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2801,6 +2856,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch88(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b0da26cf"))
@@ -2820,7 +2876,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_228");
@@ -2829,7 +2885,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2839,6 +2895,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch89(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_228"))
@@ -2858,7 +2915,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_232");
@@ -2867,7 +2924,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2877,6 +2934,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch90(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_232"))
@@ -2897,7 +2955,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_236");
@@ -2906,7 +2964,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2916,6 +2974,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch91(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_236"))
@@ -2942,7 +3001,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_240");
@@ -2955,7 +3014,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2965,6 +3024,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch92(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_240"))
@@ -2985,7 +3045,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_244");
@@ -2994,7 +3054,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3020,7 +3080,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_256");
@@ -3029,7 +3089,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3039,6 +3099,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch93(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_244"))
@@ -3059,7 +3120,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_248");
@@ -3068,7 +3129,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3078,6 +3139,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch94(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_248"))
@@ -3094,6 +3156,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch96(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_256"))
@@ -3114,7 +3177,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_260");
@@ -3123,7 +3186,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3133,6 +3196,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch97(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_260"))
@@ -3153,7 +3217,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_264");
@@ -3162,7 +3226,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3172,6 +3236,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch98(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_264"))
@@ -3188,6 +3253,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch100(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d2d48b62"))
@@ -3208,7 +3274,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90875aed");
@@ -3217,7 +3283,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3227,6 +3293,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch101(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_90875aed"))
@@ -3246,7 +3313,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d6963a70");
@@ -3255,7 +3322,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3265,6 +3332,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch102(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d6963a70"))
@@ -3292,7 +3360,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3269c6d");
@@ -3305,7 +3373,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3315,6 +3383,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch103(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3269c6d"))
@@ -3335,7 +3404,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e6631bf8");
@@ -3348,7 +3417,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     prose_package pp = new prose_package();
@@ -3379,7 +3448,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2700bc9b");
@@ -3388,7 +3457,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3398,6 +3467,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch104(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e6631bf8"))
@@ -3417,7 +3487,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_280");
@@ -3426,7 +3496,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3436,6 +3506,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch105(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_280"))
@@ -3456,7 +3527,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_284");
@@ -3465,7 +3536,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3475,6 +3546,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch106(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_284"))
@@ -3501,7 +3573,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_288");
@@ -3514,7 +3586,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3524,6 +3596,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch107(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_288"))
@@ -3544,7 +3617,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_292");
@@ -3553,7 +3626,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3579,7 +3652,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_304");
@@ -3588,7 +3661,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3598,6 +3671,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch108(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_292"))
@@ -3618,7 +3692,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_296");
@@ -3627,7 +3701,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3637,6 +3711,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch109(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_296"))
@@ -3653,6 +3728,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch111(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_304"))
@@ -3673,7 +3749,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_308");
@@ -3682,7 +3758,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3692,6 +3768,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch112(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_308"))
@@ -3712,7 +3789,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_312");
@@ -3721,7 +3798,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3731,6 +3808,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch113(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_312"))
@@ -3747,6 +3825,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch115(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2700bc9b"))
@@ -3767,7 +3846,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_89dfa4de");
@@ -3776,7 +3855,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3786,6 +3865,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch116(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_89dfa4de"))
@@ -3806,7 +3886,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_323");
@@ -3815,7 +3895,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3825,6 +3905,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch117(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_323"))
@@ -3844,7 +3925,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_327");
@@ -3853,7 +3934,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3863,6 +3944,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch118(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_327"))
@@ -3889,7 +3971,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_331");
@@ -3902,7 +3984,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3912,6 +3994,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch119(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_331"))
@@ -3932,7 +4015,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_335");
@@ -3941,7 +4024,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3967,7 +4050,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_347");
@@ -3976,7 +4059,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3986,6 +4069,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch120(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_335"))
@@ -4006,7 +4090,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_339");
@@ -4015,7 +4099,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4025,6 +4109,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch121(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_339"))
@@ -4041,6 +4126,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch123(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_347"))
@@ -4061,7 +4147,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_351");
@@ -4070,7 +4156,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4080,6 +4166,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch124(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_351"))
@@ -4100,7 +4187,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_355");
@@ -4109,7 +4196,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4119,6 +4206,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch125(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_355"))
@@ -4135,6 +4223,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch127(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c4dbdf08"))
@@ -4163,7 +4252,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bf9961a9");
@@ -4176,7 +4265,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4208,7 +4297,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_821fd0ab");
@@ -4221,7 +4310,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4231,6 +4320,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch128(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_bf9961a9"))
@@ -4251,7 +4341,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7a9322d");
@@ -4260,7 +4350,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4294,7 +4384,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_43647dca");
@@ -4307,7 +4397,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4317,6 +4407,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch129(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7a9322d"))
@@ -4337,7 +4428,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_366");
@@ -4346,7 +4437,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4356,6 +4447,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch130(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_366"))
@@ -4376,7 +4468,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fd8741c0");
@@ -4385,7 +4477,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4395,6 +4487,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch131(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fd8741c0"))
@@ -4415,7 +4508,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_15e6c3e4");
@@ -4424,7 +4517,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4434,6 +4527,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch132(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_15e6c3e4"))
@@ -4454,7 +4548,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_373");
@@ -4463,7 +4557,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4473,6 +4567,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch133(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_373"))
@@ -4493,7 +4588,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_26c0af06");
@@ -4502,7 +4597,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4512,6 +4607,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch134(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_26c0af06"))
@@ -4532,7 +4628,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b84b366c");
@@ -4541,7 +4637,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4551,6 +4647,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch135(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b84b366c"))
@@ -4571,7 +4668,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_658f174d");
@@ -4580,7 +4677,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4590,6 +4687,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch136(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_658f174d"))
@@ -4610,7 +4708,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ca8f5dda");
@@ -4619,7 +4717,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4629,6 +4727,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch137(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ca8f5dda"))
@@ -4645,6 +4744,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch139(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_43647dca"))
@@ -4665,7 +4765,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4ffa3018");
@@ -4674,7 +4774,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4701,7 +4801,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c4f6eef8");
@@ -4710,7 +4810,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4720,6 +4820,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch140(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4ffa3018"))
@@ -4740,7 +4841,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2f6ac50d");
@@ -4749,7 +4850,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4759,6 +4860,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch141(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2f6ac50d"))
@@ -4779,7 +4881,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52d4385d");
@@ -4788,7 +4890,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4798,6 +4900,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch142(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52d4385d"))
@@ -4818,7 +4921,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a30c8590");
@@ -4827,7 +4930,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4837,6 +4940,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch143(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a30c8590"))
@@ -4857,7 +4961,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_396");
@@ -4866,7 +4970,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4876,6 +4980,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch144(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_396"))
@@ -4896,7 +5001,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_400");
@@ -4905,7 +5010,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4915,6 +5020,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch145(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_400"))
@@ -4931,6 +5037,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch147(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c4f6eef8"))
@@ -4951,7 +5058,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_408");
@@ -4960,7 +5067,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4970,6 +5077,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch148(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_408"))
@@ -4990,7 +5098,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_412");
@@ -4999,7 +5107,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5009,6 +5117,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch149(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_412"))
@@ -5029,7 +5138,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_416");
@@ -5038,7 +5147,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5048,6 +5157,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch150(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_416"))
@@ -5068,7 +5178,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_420");
@@ -5077,7 +5187,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5087,6 +5197,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch151(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_420"))
@@ -5103,6 +5214,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch153(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_821fd0ab"))
@@ -5123,7 +5235,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_527fe7c");
@@ -5132,7 +5244,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5171,7 +5283,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37402596");
@@ -5188,7 +5300,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5198,6 +5310,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch154(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_527fe7c"))
@@ -5218,7 +5331,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151b3d1");
@@ -5227,7 +5340,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5237,6 +5350,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch155(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_151b3d1"))
@@ -5258,7 +5372,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5f46c092");
@@ -5267,7 +5381,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5277,6 +5391,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch156(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5f46c092"))
@@ -5298,7 +5413,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3dc14ee3");
@@ -5307,7 +5422,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5317,6 +5432,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch157(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3dc14ee3"))
@@ -5337,7 +5453,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_436");
@@ -5346,7 +5462,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5356,6 +5472,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch158(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_436"))
@@ -5376,7 +5493,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_440");
@@ -5385,7 +5502,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5395,6 +5512,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch159(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_440"))
@@ -5415,7 +5533,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_444");
@@ -5424,7 +5542,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5434,6 +5552,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch160(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_444"))
@@ -5453,7 +5572,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_448");
@@ -5462,7 +5581,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5472,6 +5591,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch161(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_448"))
@@ -5488,6 +5608,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch163(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37402596"))
@@ -5509,7 +5630,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_51a30f3e");
@@ -5518,7 +5639,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5552,7 +5673,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_be155900");
@@ -5565,7 +5686,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5598,7 +5719,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ec3a4b5b");
@@ -5611,7 +5732,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5621,6 +5742,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch164(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_51a30f3e"))
@@ -5641,7 +5763,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_459");
@@ -5650,7 +5772,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5660,6 +5782,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch165(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_459"))
@@ -5680,7 +5803,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_463");
@@ -5689,7 +5812,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5699,6 +5822,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch166(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_463"))
@@ -5719,7 +5843,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_467");
@@ -5728,7 +5852,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5738,6 +5862,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch167(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_467"))
@@ -5758,7 +5883,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_471");
@@ -5767,7 +5892,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5777,6 +5902,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch168(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_471"))
@@ -5797,7 +5923,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_475");
@@ -5806,7 +5932,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5816,6 +5942,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch169(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_475"))
@@ -5832,6 +5959,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch171(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_be155900"))
@@ -5852,7 +5980,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9cddbcc");
@@ -5861,7 +5989,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5887,7 +6015,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_507");
@@ -5896,7 +6024,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5906,6 +6034,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch172(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a9cddbcc"))
@@ -5927,7 +6056,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_485");
@@ -5936,7 +6065,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5946,6 +6075,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch173(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_485"))
@@ -5965,7 +6095,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_489");
@@ -5974,7 +6104,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5984,6 +6114,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch174(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_489"))
@@ -6005,7 +6136,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_493");
@@ -6014,7 +6145,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6024,6 +6155,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch175(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_493"))
@@ -6044,7 +6176,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_497");
@@ -6053,7 +6185,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6063,6 +6195,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch176(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_497"))
@@ -6083,7 +6216,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_501");
@@ -6092,7 +6225,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6102,6 +6235,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch177(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_501"))
@@ -6118,6 +6252,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch179(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_507"))
@@ -6137,7 +6272,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_511");
@@ -6146,7 +6281,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6156,6 +6291,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch180(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_511"))
@@ -6177,7 +6313,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_515");
@@ -6186,7 +6322,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6196,6 +6332,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch181(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_515"))
@@ -6216,7 +6353,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_519");
@@ -6225,7 +6362,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6235,6 +6372,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch182(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_519"))
@@ -6255,7 +6393,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_522");
@@ -6264,7 +6402,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6274,6 +6412,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch183(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_522"))
@@ -6290,6 +6429,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch185(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ec3a4b5b"))
@@ -6310,7 +6450,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_530");
@@ -6319,7 +6459,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6345,7 +6485,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_552");
@@ -6354,7 +6494,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6364,6 +6504,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch186(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_530"))
@@ -6383,7 +6524,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_534");
@@ -6392,7 +6533,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6402,6 +6543,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch187(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_534"))
@@ -6423,7 +6565,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_538");
@@ -6432,7 +6574,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6442,6 +6584,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch188(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_538"))
@@ -6462,7 +6605,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_542");
@@ -6471,7 +6614,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6481,6 +6624,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch189(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_542"))
@@ -6501,7 +6645,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_546");
@@ -6510,7 +6654,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6520,6 +6664,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch190(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_546"))
@@ -6536,6 +6681,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch192(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_552"))
@@ -6555,7 +6701,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_556");
@@ -6564,7 +6710,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6574,6 +6720,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch193(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_556"))
@@ -6595,7 +6742,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_560");
@@ -6604,7 +6751,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6614,6 +6761,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch194(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_560"))
@@ -6634,7 +6782,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_564");
@@ -6643,7 +6791,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6653,6 +6801,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch195(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_564"))
@@ -6673,7 +6822,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_568");
@@ -6682,7 +6831,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6692,6 +6841,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch196(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_568"))
@@ -6708,6 +6858,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch198(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ed4e5e50"))
@@ -6728,7 +6879,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_841d27db");
@@ -6737,7 +6888,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6770,7 +6921,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2f463615");
@@ -6787,7 +6938,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     prose_package pp = new prose_package();
@@ -6801,6 +6952,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch199(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_841d27db"))
@@ -6820,7 +6972,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a0e63032");
@@ -6829,7 +6981,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6839,6 +6991,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch200(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a0e63032"))
@@ -6859,7 +7012,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_412e0683");
@@ -6868,7 +7021,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6878,6 +7031,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch201(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_412e0683"))
@@ -6895,6 +7049,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch203(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2f463615"))
@@ -6922,7 +7077,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_710aa637");
@@ -6935,7 +7090,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6961,7 +7116,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a8af09fc");
@@ -6970,7 +7125,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6980,6 +7135,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch204(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_710aa637"))
@@ -6999,7 +7155,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c265503e");
@@ -7008,7 +7164,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7034,7 +7190,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff50cabc");
@@ -7043,7 +7199,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7053,6 +7209,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch205(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c265503e"))
@@ -7073,7 +7230,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f6cd86be");
@@ -7082,7 +7239,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7092,6 +7249,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch206(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f6cd86be"))
@@ -7111,7 +7269,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42a9f4a3");
@@ -7120,7 +7278,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7130,6 +7288,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch207(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42a9f4a3"))
@@ -7150,7 +7309,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_593");
@@ -7159,7 +7318,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7169,6 +7328,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch208(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_593"))
@@ -7185,6 +7345,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch210(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ff50cabc"))
@@ -7204,7 +7365,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c2850e6");
@@ -7213,7 +7374,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7223,6 +7384,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch211(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c2850e6"))
@@ -7244,7 +7406,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fa38c858");
@@ -7253,7 +7415,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7263,6 +7425,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch212(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fa38c858"))
@@ -7284,7 +7447,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e5235eff");
@@ -7293,7 +7456,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7303,6 +7466,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch213(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e5235eff"))
@@ -7323,7 +7487,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52819991");
@@ -7332,7 +7496,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7342,6 +7506,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch214(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52819991"))
@@ -7361,7 +7526,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_129732ea");
@@ -7370,7 +7535,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7380,6 +7545,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch215(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_129732ea"))
@@ -7399,7 +7565,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_610");
@@ -7408,7 +7574,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7418,6 +7584,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch216(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_610"))
@@ -7433,6 +7600,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch218(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a8af09fc"))
@@ -7452,7 +7620,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_114c29a9");
@@ -7461,7 +7629,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7471,6 +7639,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch219(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_114c29a9"))
@@ -7491,7 +7660,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b7138aed");
@@ -7500,7 +7669,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7510,6 +7679,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch220(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b7138aed"))
@@ -7529,7 +7699,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2bc4bdb7");
@@ -7538,7 +7708,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7548,6 +7718,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch221(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2bc4bdb7"))
@@ -7568,7 +7739,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9e4da02c");
@@ -7577,7 +7748,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7587,6 +7758,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch222(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9e4da02c"))
@@ -7603,6 +7775,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch224(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a91e3c6b"))
@@ -7623,7 +7796,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_628181f3");
@@ -7632,7 +7805,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7657,7 +7830,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4ece8e4c");
@@ -7666,7 +7839,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7676,6 +7849,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch225(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_628181f3"))
@@ -7696,7 +7870,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_631");
@@ -7705,7 +7879,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7715,6 +7889,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch226(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_631"))
@@ -7734,7 +7909,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76340c2f");
@@ -7743,7 +7918,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7753,6 +7928,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch227(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_76340c2f"))
@@ -7774,7 +7950,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_636");
@@ -7783,7 +7959,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7793,6 +7969,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch228(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_636"))
@@ -7809,6 +7986,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch230(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4ece8e4c"))
@@ -7828,7 +8006,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90377ed4");
@@ -7837,7 +8015,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7847,6 +8025,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch231(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_90377ed4"))
@@ -7867,7 +8046,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4291c3cf");
@@ -7876,7 +8055,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7886,6 +8065,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch232(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4291c3cf"))
@@ -7906,7 +8086,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_648");
@@ -7915,7 +8095,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7925,6 +8105,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch233(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_648"))
@@ -7941,6 +8122,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch235(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a927c891"))
@@ -7960,7 +8142,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_eba35f17");
@@ -7969,7 +8151,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7994,7 +8176,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_658");
@@ -8003,7 +8185,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_rebel_tier3.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8013,6 +8195,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch236(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_eba35f17"))
@@ -8029,6 +8212,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_rebel_tier3_handleBranch238(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_658"))
@@ -8045,6 +8229,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -8057,6 +8242,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         factions.setFaction(self, factions.FACTION_REBEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -8065,6 +8251,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         factions.setFaction(self, factions.FACTION_REBEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -8073,18 +8260,21 @@ public class tatooine_rebel_tier3 extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.tatooine_rebel_tier3");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -8129,7 +8319,7 @@ public class tatooine_rebel_tier3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ecb17e60");
@@ -8141,7 +8331,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "tatooine_rebel_tier3", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -8187,7 +8377,7 @@ public class tatooine_rebel_tier3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_a68dfaa6");
@@ -8199,7 +8389,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_rebel_tier3.branchId", 9);
                 npcStartConversation(player, npc, "tatooine_rebel_tier3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8227,7 +8417,7 @@ public class tatooine_rebel_tier3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_d85b3a9c");
@@ -8239,7 +8429,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_rebel_tier3.branchId", 12);
                 npcStartConversation(player, npc, "tatooine_rebel_tier3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8267,7 +8457,7 @@ public class tatooine_rebel_tier3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_d454739a");
@@ -8279,7 +8469,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_rebel_tier3.branchId", 15);
                 npcStartConversation(player, npc, "tatooine_rebel_tier3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8307,7 +8497,7 @@ public class tatooine_rebel_tier3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b40f340");
@@ -8319,7 +8509,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_rebel_tier3.branchId", 18);
                 npcStartConversation(player, npc, "tatooine_rebel_tier3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8342,7 +8532,7 @@ public class tatooine_rebel_tier3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_661");
@@ -8350,7 +8540,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_rebel_tier3.branchId", 21);
                 npcStartConversation(player, npc, "tatooine_rebel_tier3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8372,7 +8562,7 @@ public class tatooine_rebel_tier3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_661");
@@ -8380,7 +8570,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_rebel_tier3.branchId", 21);
                 npcStartConversation(player, npc, "tatooine_rebel_tier3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8402,7 +8592,7 @@ public class tatooine_rebel_tier3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_661");
@@ -8410,7 +8600,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_rebel_tier3.branchId", 21);
                 npcStartConversation(player, npc, "tatooine_rebel_tier3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8433,7 +8623,7 @@ public class tatooine_rebel_tier3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_661");
@@ -8441,7 +8631,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_rebel_tier3.branchId", 21);
                 npcStartConversation(player, npc, "tatooine_rebel_tier3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8470,7 +8660,7 @@ public class tatooine_rebel_tier3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_783af10a");
@@ -8486,7 +8676,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "tatooine_rebel_tier3", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -8519,7 +8709,7 @@ public class tatooine_rebel_tier3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_c4dbdf08");
@@ -8531,7 +8721,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_rebel_tier3.branchId", 127);
                 npcStartConversation(player, npc, "tatooine_rebel_tier3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8560,7 +8750,7 @@ public class tatooine_rebel_tier3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ed4e5e50");
@@ -8572,7 +8762,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_rebel_tier3.branchId", 198);
                 npcStartConversation(player, npc, "tatooine_rebel_tier3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8601,7 +8791,7 @@ public class tatooine_rebel_tier3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_a91e3c6b");
@@ -8613,7 +8803,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_rebel_tier3.branchId", 224);
                 npcStartConversation(player, npc, "tatooine_rebel_tier3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8641,7 +8831,7 @@ public class tatooine_rebel_tier3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_a927c891");
@@ -8653,7 +8843,7 @@ public class tatooine_rebel_tier3 extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_rebel_tier3.branchId", 235);
                 npcStartConversation(player, npc, "tatooine_rebel_tier3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -8662,6 +8852,7 @@ public class tatooine_rebel_tier3 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("tatooine_rebel_tier3"))

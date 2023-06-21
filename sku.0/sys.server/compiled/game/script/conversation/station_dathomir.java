@@ -1,53 +1,65 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class station_dathomir extends script.base_script
 {
+    public static String c_stringFile = "conversation/station_dathomir";
+
     public station_dathomir()
     {
     }
-    public static String c_stringFile = "conversation/station_dathomir";
+
     public boolean station_dathomir_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean station_dathomir_condition_canAfford50(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 0.50f);
     }
+
     public boolean station_dathomir_condition_canAfford25(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 0.25f);
     }
+
     public boolean station_dathomir_condition_canAfford75(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 0.75f);
     }
+
     public boolean station_dathomir_condition_canAfford100(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 1.0f);
     }
+
     public boolean station_dathomir_condition_needRepairs(obj_id player, obj_id npc) throws InterruptedException
     {
         float fltDamage = space_crafting.getDamageTotal(player, getPilotedShip(player));
-        if (fltDamage > 0)
-        {
-            return true;
-        }
-        return false;
+        return fltDamage > 0;
     }
+
     public boolean station_dathomir_condition_isRebelPilotDath(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_novice") && !utils.hasScriptVar(player, "AuthorizedForDath"));
     }
+
     public boolean station_dathomir_condition_isTooFar(obj_id player, obj_id npc) throws InterruptedException
     {
         space_combat.playCombatTauntSound(player);
         obj_id containingShip = space_transition.getContainingShip(player);
         return (getDistance(npc, containingShip) > space_transition.STATION_COMM_MAX_DISTANCE);
     }
+
     public boolean station_dathomir_condition_gatedByTimer(obj_id player, obj_id npc) throws InterruptedException
     {
         int timeStamp = utils.getIntScriptVar(player, "lastDathomirRepair");
@@ -60,12 +72,13 @@ public class station_dathomir extends script.base_script
         {
             return true;
         }
-        else 
+        else
         {
             utils.removeScriptVar(player, "lastDathomirRepair");
             return false;
         }
     }
+
     public boolean station_dathomir_condition_WaitingButStillGated(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!utils.hasScriptVar(player, "waitingAtDathStation"))
@@ -74,6 +87,7 @@ public class station_dathomir extends script.base_script
         }
         return (station_dathomir_condition_gatedByTimer(player, npc));
     }
+
     public boolean station_dathomir_condition_waitingAndNowUngated(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!utils.hasScriptVar(player, "waitingAtDathStation"))
@@ -91,6 +105,7 @@ public class station_dathomir extends script.base_script
         }
         return false;
     }
+
     public boolean station_dathomir_condition_eligibleForPrivateerlQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_flags.isNeutralPilot(player))
@@ -105,6 +120,7 @@ public class station_dathomir extends script.base_script
         }
         return false;
     }
+
     public boolean station_dathomir_condition_eligibleForImperialQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_flags.isImperialPilot(player))
@@ -119,58 +135,62 @@ public class station_dathomir extends script.base_script
         }
         return false;
     }
+
     public boolean station_dathomir_condition_canDoImperialStoryQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return !space_quest.hasWonQuest(player, "assassinate", "dathomir_station_imp_storyquest_01_e");
     }
+
     public boolean station_dathomir_condition_canDoPrivateerStoryQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return !space_quest.hasWonQuest(player, "assassinate", "dathomir_station_priv_storyquest_01_d");
     }
+
     public boolean station_dathomir_condition_wonPrivStoryQuest_a(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "delivery", "dathomir_station_priv_storyquest_01_a");
     }
+
     public boolean station_dathomir_condition_wonPrivStoryQuest_b(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "recovery", "dathomir_station_priv_storyquest_01_b");
     }
+
     public boolean station_dathomir_condition_canTakeQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasQuest(player))
-        {
-            return false;
-        }
-        return true;
+        return !space_quest.hasQuest(player);
     }
+
     public boolean station_dathomir_condition_wonPrivStoryQuest_c(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "escort", "dathomir_station_priv_storyquest_01_c");
     }
+
     public boolean station_dathomir_condition_wonImpStoryQuest_d(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "recovery", "dathomir_station_imp_storyquest_01_d");
     }
+
     public boolean station_dathomir_condition_wonImpStoryQuest_c(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "assassinate", "dathomir_station_imp_storyquest_01_c");
     }
+
     public boolean station_dathomir_condition_wonImpStoryQuest_b(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "assassinate", "dathomir_station_imp_storyquest_01_b");
     }
+
     public boolean station_dathomir_condition_wonImpStoryQuest_a(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasWonQuest(player, "recovery", "dathomir_station_imp_storyquest_01_a");
     }
+
     public boolean station_dathomir_condition_canAttackImperial(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player);
     }
+
     public boolean station_dathomir_condition_canReceiveFullRepair(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasWonQuest(player, "assassinate", "dathomir_station_imp_storyquest_01_e"))
@@ -191,87 +211,103 @@ public class station_dathomir extends script.base_script
         }
         return false;
     }
+
     public boolean station_dathomir_condition_isOnPrivStoryQuest_01(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "station_dathomir.isOnPrivStoryQuest_01");
     }
+
     public boolean station_dathomir_condition_isOnImpStoryQuest_01(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "station_dathomir.isOnImpStoryQuest_01");
     }
+
     public boolean station_dathomir_condition_alreadyHasAQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player);
     }
+
     public boolean station_dathomir_condition_canAttackRebel(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player);
     }
+
     public boolean station_dathomir_condition_canHandleTier4(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.hasCompletedTierThree(player);
     }
+
     public void station_dathomir_action_landStation3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Dathomir Quarantine Zone");
     }
+
     public void station_dathomir_action_fix25(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.25f);
     }
+
     public void station_dathomir_action_fix50(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.50f);
     }
+
     public void station_dathomir_action_fix75(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.75f);
     }
+
     public void station_dathomir_action_fix100(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 1.0f);
     }
+
     public void station_dathomir_action_landStation1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Dathomir Outpost");
     }
+
     public void station_dathomir_action_landStation2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Science Outpost");
     }
+
     public void station_dathomir_action_flagPlayerClearedForLanding(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "AuthorizedForDath", true);
     }
+
     public void station_dathomir_action_timeStampRepairs(obj_id player, obj_id npc) throws InterruptedException
     {
         int timeStamp = getGameTime() + 360;
         utils.setScriptVar(player, "lastDathomirRepair", (timeStamp));
     }
+
     public void station_dathomir_action_flagPlayerAsWaiting(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "waitingAtDathStation", true);
     }
+
     public void station_dathomir_action_grantImperialDestroyDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "dathomir_station_imp_destroy_duty_tier3");
     }
+
     public void station_dathomir_action_grantImperialEscortDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort_duty", "dathomir_station_imp_escort_duty_tier3");
     }
+
     public void station_dathomir_action_grantPrivateerEscortDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort_duty", "dathomir_station_priv_escort_duty_tier3");
     }
+
     public void station_dathomir_action_grantPrivateerDestroyDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "dathomir_station_priv_destroy_duty_tier3");
     }
+
     public void station_dathomir_action_startImpStoryQuest_01(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "recovery", "dathomir_station_imp_storyquest_01_a");
@@ -280,104 +316,117 @@ public class station_dathomir extends script.base_script
         {
             setObjVar(player, "station_dathomir.isOnImpStoryQuest_01", true);
         }
-        return;
     }
+
     public void station_dathomir_action_startPrivStoryQuest_01(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "delivery", "dathomir_station_priv_storyquest_01_a");
         space_quest.grantQuest(player, "delivery", "dathomir_station_priv_storyquest_01_a");
         setObjVar(player, "station_dathomir.isOnPrivStoryQuest_01", true);
     }
+
     public void station_dathomir_action_grantImpStoryQuest_01_b(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "assassinate", "dathomir_station_imp_storyquest_01_b");
         space_quest.grantQuest(player, "assassinate", "dathomir_station_imp_storyquest_01_b");
-        return;
     }
+
     public void station_dathomir_action_grantImpStoryQuest_01_c(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "assassinate", "dathomir_station_imp_storyquest_01_c");
         space_quest.grantQuest(player, "assassinate", "dathomir_station_imp_storyquest_01_c");
-        return;
     }
+
     public void station_dathomir_action_grantImpStoryQuest_01_d(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "recovery", "dathomir_station_imp_storyquest_01_d");
         space_quest.grantQuest(player, "recovery", "dathomir_station_imp_storyquest_01_d");
-        return;
     }
+
     public void station_dathomir_action_grantImpStoryQuest_01_e(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "assassinate", "dathomir_station_imp_storyquest_01_e");
         space_quest.grantQuest(player, "assassinate", "dathomir_station_imp_storyquest_01_e");
-        return;
     }
+
     public void station_dathomir_action_grantPrivStoryQuest_01_b(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "recovery", "dathomir_station_priv_storyquest_01_b");
         space_quest.grantQuest(player, "recovery", "dathomir_station_priv_storyquest_01_b");
-        return;
     }
+
     public void station_dathomir_action_grantPrivStoryQuest_01_c(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "escort", "dathomir_station_priv_storyquest_01_c");
         space_quest.grantQuest(player, "escort", "dathomir_station_priv_storyquest_01_c");
-        return;
     }
+
     public void station_dathomir_action_grantPrivStoryQuest_01_d(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.clearQuestFlags(player, "assassinate", "dathomir_station_priv_storyquest_01_d");
         space_quest.grantQuest(player, "assassinate", "dathomir_station_priv_storyquest_01_d");
-        return;
     }
+
     public void station_dathomir_action_grantImperialDuty4(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "dathomir_imperial_tier4");
     }
+
     public void station_dathomir_action_grantImperialDuty5(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "kessel_imperial_tier5");
     }
+
     public void station_dathomir_action_grantRebelDuty4(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "dathomir_rebel_tier4");
     }
+
     public void station_dathomir_action_grantRebelDuty5(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "kessel_rebel_tier5");
     }
+
     public void station_dathomir_action_grantHiddenDaggerDuty4(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "dathomir_hidden_dagger_tier4");
     }
+
     public void station_dathomir_action_grantHiddenDaggerDuty5(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "dathomir_hidden_dagger_tier5");
     }
+
     public void station_dathomir_action_grantKesselPirateTier6(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "kessel_pirate_tier6");
     }
+
     public String station_dathomir_tokenTO_tokenTO0001(obj_id player, obj_id npc) throws InterruptedException
     {
-        return new String();
+        return "";
     }
+
     public int station_dathomir_tokenDI_getStationRepairCost25(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.25f);
     }
+
     public int station_dathomir_tokenDI_getStationRepairCost50(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.50f);
     }
+
     public int station_dathomir_tokenDI_getStationRepairCost75(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.75f);
     }
+
     public int station_dathomir_tokenDI_getStationRepairCost100(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 1.0f);
     }
+
     public int station_dathomir_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_769"))
@@ -411,7 +460,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_773");
@@ -428,7 +477,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -460,7 +509,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_801");
@@ -477,7 +526,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     prose_package pp = new prose_package();
@@ -524,7 +573,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_841");
@@ -545,7 +594,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -591,7 +640,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_903");
@@ -612,7 +661,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -648,7 +697,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_921");
@@ -665,7 +714,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -711,7 +760,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_933");
@@ -732,7 +781,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -768,7 +817,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_959");
@@ -785,7 +834,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -859,7 +908,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_201");
@@ -896,7 +945,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -913,6 +962,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_568"))
@@ -960,7 +1010,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_773");
@@ -977,7 +1027,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -987,6 +1037,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_578"))
@@ -1013,7 +1064,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_583");
@@ -1026,7 +1077,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1058,7 +1109,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_598");
@@ -1071,7 +1122,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1081,6 +1132,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_583"))
@@ -1107,7 +1159,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_598");
@@ -1120,7 +1172,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1140,6 +1192,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_598"))
@@ -1166,7 +1219,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_578");
@@ -1179,7 +1232,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1233,7 +1286,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_769");
@@ -1258,7 +1311,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1268,6 +1321,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_578"))
@@ -1294,7 +1348,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_583");
@@ -1307,7 +1361,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1339,7 +1393,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_598");
@@ -1352,7 +1406,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1362,6 +1416,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_769"))
@@ -1395,7 +1450,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_773");
@@ -1412,7 +1467,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1444,7 +1499,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_801");
@@ -1461,7 +1516,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     prose_package pp = new prose_package();
@@ -1508,7 +1563,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_841");
@@ -1529,7 +1584,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1575,7 +1630,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_903");
@@ -1596,7 +1651,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1632,7 +1687,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_921");
@@ -1649,7 +1704,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1695,7 +1750,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_933");
@@ -1716,7 +1771,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1752,7 +1807,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_959");
@@ -1769,7 +1824,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1843,7 +1898,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_201");
@@ -1880,7 +1935,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1897,6 +1952,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_769"))
@@ -1930,7 +1986,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_773");
@@ -1947,7 +2003,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1979,7 +2035,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_801");
@@ -1996,7 +2052,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     prose_package pp = new prose_package();
@@ -2043,7 +2099,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_841");
@@ -2064,7 +2120,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2110,7 +2166,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_903");
@@ -2131,7 +2187,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2167,7 +2223,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_921");
@@ -2184,7 +2240,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2230,7 +2286,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_933");
@@ -2251,7 +2307,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2287,7 +2343,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_959");
@@ -2304,7 +2360,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2378,7 +2434,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_201");
@@ -2415,7 +2471,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2432,6 +2488,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_613"))
@@ -2458,7 +2515,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_621");
@@ -2467,7 +2524,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2496,7 +2553,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_635");
@@ -2509,7 +2566,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2538,7 +2595,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_648");
@@ -2551,7 +2608,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2580,7 +2637,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_660");
@@ -2593,7 +2650,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2622,7 +2679,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_676");
@@ -2635,7 +2692,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2681,7 +2738,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_921");
@@ -2698,7 +2755,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2737,7 +2794,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_773");
@@ -2754,7 +2811,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2786,7 +2843,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_801");
@@ -2803,7 +2860,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     prose_package pp = new prose_package();
@@ -2850,7 +2907,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_841");
@@ -2871,7 +2928,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2881,6 +2938,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_621"))
@@ -2907,7 +2965,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_625");
@@ -2920,7 +2978,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2930,6 +2988,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_625"))
@@ -2955,6 +3014,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_635"))
@@ -2980,6 +3040,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_648"))
@@ -3005,6 +3066,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_660"))
@@ -3030,6 +3092,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_676"))
@@ -3055,6 +3118,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_921"))
@@ -3124,7 +3188,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_769");
@@ -3149,7 +3213,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3159,6 +3223,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_705"))
@@ -3192,7 +3257,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_711");
@@ -3205,7 +3270,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3234,7 +3299,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_727");
@@ -3247,7 +3312,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3276,7 +3341,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_739");
@@ -3289,7 +3354,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3318,7 +3383,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_749");
@@ -3331,7 +3396,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3377,7 +3442,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_959");
@@ -3394,7 +3459,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3433,7 +3498,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_773");
@@ -3450,7 +3515,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3482,7 +3547,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_801");
@@ -3499,7 +3564,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     prose_package pp = new prose_package();
@@ -3546,7 +3611,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_841");
@@ -3567,7 +3632,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3577,6 +3642,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_711"))
@@ -3602,6 +3668,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_727"))
@@ -3627,6 +3694,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_739"))
@@ -3652,6 +3720,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_749"))
@@ -3677,6 +3746,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_959"))
@@ -3746,7 +3816,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_769");
@@ -3771,7 +3841,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3781,6 +3851,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_769"))
@@ -3814,7 +3885,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_773");
@@ -3831,7 +3902,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3863,7 +3934,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_801");
@@ -3880,7 +3951,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     prose_package pp = new prose_package();
@@ -3927,7 +3998,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_841");
@@ -3948,7 +4019,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3994,7 +4065,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_903");
@@ -4015,7 +4086,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4051,7 +4122,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_921");
@@ -4068,7 +4139,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4114,7 +4185,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_933");
@@ -4135,7 +4206,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4171,7 +4242,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_959");
@@ -4188,7 +4259,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4262,7 +4333,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_201");
@@ -4299,7 +4370,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4316,6 +4387,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_773"))
@@ -4342,7 +4414,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_777");
@@ -4355,7 +4427,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4387,7 +4459,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_789");
@@ -4400,7 +4472,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4432,7 +4504,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_186");
@@ -4445,7 +4517,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4455,6 +4527,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_777"))
@@ -4480,6 +4553,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_789"))
@@ -4505,6 +4579,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_186"))
@@ -4530,6 +4605,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_801"))
@@ -4567,7 +4643,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_809");
@@ -4580,7 +4656,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4590,6 +4666,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_809"))
@@ -4630,7 +4707,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_817");
@@ -4643,7 +4720,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4653,6 +4730,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_817"))
@@ -4679,7 +4757,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_821");
@@ -4692,7 +4770,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4716,6 +4794,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_821"))
@@ -4742,7 +4821,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_825");
@@ -4755,7 +4834,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4779,6 +4858,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_825"))
@@ -4808,6 +4888,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_841"))
@@ -4834,7 +4915,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_845");
@@ -4852,7 +4933,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     prose_package pp = new prose_package();
@@ -4889,7 +4970,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_863");
@@ -4907,7 +4988,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     prose_package pp = new prose_package();
@@ -4951,7 +5032,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_873");
@@ -4973,7 +5054,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     prose_package pp = new prose_package();
@@ -5007,7 +5088,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_891");
@@ -5025,7 +5106,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     prose_package pp = new prose_package();
@@ -5062,7 +5143,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_853");
@@ -5075,7 +5156,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5085,6 +5166,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_845"))
@@ -5122,7 +5204,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_853");
@@ -5135,7 +5217,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5145,6 +5227,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_853"))
@@ -5178,7 +5261,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_773");
@@ -5195,7 +5278,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5215,6 +5298,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_863"))
@@ -5252,7 +5336,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_853");
@@ -5265,7 +5349,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5275,6 +5359,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_873"))
@@ -5313,7 +5398,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_881");
@@ -5331,7 +5416,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     prose_package pp = new prose_package();
@@ -5368,7 +5453,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_853");
@@ -5381,7 +5466,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5391,6 +5476,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_881"))
@@ -5429,7 +5515,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_853");
@@ -5442,7 +5528,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5452,6 +5538,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_891"))
@@ -5490,7 +5577,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_853");
@@ -5503,7 +5590,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5513,6 +5600,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_903"))
@@ -5593,7 +5681,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_769");
@@ -5618,7 +5706,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5628,6 +5716,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_769"))
@@ -5661,7 +5750,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_773");
@@ -5678,7 +5767,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5710,7 +5799,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_801");
@@ -5727,7 +5816,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     prose_package pp = new prose_package();
@@ -5774,7 +5863,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_841");
@@ -5795,7 +5884,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5841,7 +5930,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_903");
@@ -5862,7 +5951,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5898,7 +5987,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_921");
@@ -5915,7 +6004,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5961,7 +6050,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_933");
@@ -5982,7 +6071,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6018,7 +6107,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_959");
@@ -6035,7 +6124,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6109,7 +6198,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_201");
@@ -6146,7 +6235,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6163,6 +6252,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch87(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_921"))
@@ -6232,7 +6322,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_769");
@@ -6257,7 +6347,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6267,6 +6357,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch88(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_769"))
@@ -6300,7 +6391,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_773");
@@ -6317,7 +6408,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6349,7 +6440,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_801");
@@ -6366,7 +6457,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     prose_package pp = new prose_package();
@@ -6413,7 +6504,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_841");
@@ -6434,7 +6525,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6480,7 +6571,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_903");
@@ -6501,7 +6592,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6537,7 +6628,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_921");
@@ -6554,7 +6645,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6600,7 +6691,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_933");
@@ -6621,7 +6712,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6657,7 +6748,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_959");
@@ -6674,7 +6765,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6748,7 +6839,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_201");
@@ -6785,7 +6876,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6802,6 +6893,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch89(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_933"))
@@ -6850,7 +6942,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_945");
@@ -6863,7 +6955,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6916,7 +7008,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_769");
@@ -6941,7 +7033,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6951,6 +7043,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch92(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_945"))
@@ -7009,7 +7102,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_769");
@@ -7034,7 +7127,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7044,6 +7137,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch94(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_769"))
@@ -7077,7 +7171,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_773");
@@ -7094,7 +7188,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7126,7 +7220,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_801");
@@ -7143,7 +7237,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     prose_package pp = new prose_package();
@@ -7190,7 +7284,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_841");
@@ -7211,7 +7305,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7257,7 +7351,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_903");
@@ -7278,7 +7372,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7314,7 +7408,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_921");
@@ -7331,7 +7425,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7377,7 +7471,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_933");
@@ -7398,7 +7492,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7434,7 +7528,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_959");
@@ -7451,7 +7545,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7525,7 +7619,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_201");
@@ -7562,7 +7656,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7579,6 +7673,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch95(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_769"))
@@ -7612,7 +7707,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_773");
@@ -7629,7 +7724,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7661,7 +7756,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_801");
@@ -7678,7 +7773,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     prose_package pp = new prose_package();
@@ -7725,7 +7820,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_841");
@@ -7746,7 +7841,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7792,7 +7887,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_903");
@@ -7813,7 +7908,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7849,7 +7944,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_921");
@@ -7866,7 +7961,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7912,7 +8007,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_933");
@@ -7933,7 +8028,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -7969,7 +8064,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_959");
@@ -7986,7 +8081,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8060,7 +8155,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_201");
@@ -8097,7 +8192,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8114,6 +8209,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch96(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_959"))
@@ -8183,7 +8279,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_769");
@@ -8208,7 +8304,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8218,6 +8314,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch97(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_769"))
@@ -8251,7 +8348,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_773");
@@ -8268,7 +8365,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8300,7 +8397,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_801");
@@ -8317,7 +8414,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     prose_package pp = new prose_package();
@@ -8364,7 +8461,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_841");
@@ -8385,7 +8482,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8431,7 +8528,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_903");
@@ -8452,7 +8549,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8488,7 +8585,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_921");
@@ -8505,7 +8602,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8551,7 +8648,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_933");
@@ -8572,7 +8669,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8608,7 +8705,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_959");
@@ -8625,7 +8722,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8699,7 +8796,7 @@ public class station_dathomir extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_201");
@@ -8736,7 +8833,7 @@ public class station_dathomir extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_dathomir.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8753,6 +8850,7 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_dathomir_handleBranch98(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_201"))
@@ -8844,18 +8942,21 @@ public class station_dathomir extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_station_dathomir.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_station_dathomir.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -8864,18 +8965,21 @@ public class station_dathomir extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.station_dathomir");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -8932,7 +9036,7 @@ public class station_dathomir extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_769");
@@ -8960,7 +9064,7 @@ public class station_dathomir extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "station_dathomir", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -8992,7 +9096,7 @@ public class station_dathomir extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_568");
@@ -9008,7 +9112,7 @@ public class station_dathomir extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "station_dathomir", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -9040,7 +9144,7 @@ public class station_dathomir extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_578");
@@ -9052,7 +9156,7 @@ public class station_dathomir extends script.base_script
                 utils.setScriptVar(player, "conversation.station_dathomir.branchId", 5);
                 npcStartConversation(player, npc, "station_dathomir", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -9101,7 +9205,7 @@ public class station_dathomir extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_769");
@@ -9125,7 +9229,7 @@ public class station_dathomir extends script.base_script
                 utils.setScriptVar(player, "conversation.station_dathomir.branchId", 48);
                 npcStartConversation(player, npc, "station_dathomir", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -9167,7 +9271,7 @@ public class station_dathomir extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_613");
@@ -9187,7 +9291,7 @@ public class station_dathomir extends script.base_script
                 utils.setScriptVar(player, "conversation.station_dathomir.branchId", 12);
                 npcStartConversation(player, npc, "station_dathomir", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -9229,7 +9333,7 @@ public class station_dathomir extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_705");
@@ -9249,7 +9353,7 @@ public class station_dathomir extends script.base_script
                 utils.setScriptVar(player, "conversation.station_dathomir.branchId", 32);
                 npcStartConversation(player, npc, "station_dathomir", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -9298,7 +9402,7 @@ public class station_dathomir extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_769");
@@ -9322,7 +9426,7 @@ public class station_dathomir extends script.base_script
                 utils.setScriptVar(player, "conversation.station_dathomir.branchId", 48);
                 npcStartConversation(player, npc, "station_dathomir", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -9331,6 +9435,7 @@ public class station_dathomir extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("station_dathomir"))

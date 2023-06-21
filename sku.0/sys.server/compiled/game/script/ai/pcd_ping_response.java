@@ -1,14 +1,17 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.callable;
 import script.obj_id;
 
 public class pcd_ping_response extends script.base_script
 {
-    public pcd_ping_response()
-    {
-    }
     public static final String PCDPING_MESSAGE_PCD_ID_NAME = "pcdId";
     public static final String PCDPING_MESSAGE_PET_ID_NAME = "petId";
     public static final String PCDPING_MESSAGE_MESSAGE_ID_NAME = "messageId";
@@ -17,6 +20,10 @@ public class pcd_ping_response extends script.base_script
     public static final String PCDPING_PET_MESSAGEHANDLER_NEGATIVE_ACK_NAME = "handleNegativeAcknowledgementFromPcd";
     public static final String PCDPING_PET_MESSAGEHANDLER_PACK_REQUEST_NAME = "handlePackRequest";
     public static final boolean debug = false;
+    public pcd_ping_response()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (debug)
@@ -29,6 +36,7 @@ public class pcd_ping_response extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePetPing(obj_id self, dictionary params) throws InterruptedException
     {
         final obj_id pingPetId = params.getObjId(PCDPING_MESSAGE_PET_ID_NAME);
@@ -43,7 +51,7 @@ public class pcd_ping_response extends script.base_script
                 sendPositiveAcknowledgement(self, pingPetId, pingMessageNumber);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (isIdValid(riderId) && isRiderOkayForPcd(self, riderId))
                 {
@@ -52,13 +60,13 @@ public class pcd_ping_response extends script.base_script
                     callable.setCDCallable(self, pingPetId);
                     sendPositiveAcknowledgement(self, pingPetId, pingMessageNumber);
                 }
-                else 
+                else
                 {
                     sendNegativeAcknowledgement(self, pingPetId, pingMessageNumber, "PCD does not expect pet=[" + pingPetId + "] to be the called pet.  It thinks pet=[" + currentPetId + "] is called.");
                 }
             }
         }
-        else 
+        else
         {
             if (isIdValid(riderId) && isRiderOkayForPcd(self, riderId))
             {
@@ -66,13 +74,14 @@ public class pcd_ping_response extends script.base_script
                 callable.setCDCallable(self, pingPetId);
                 sendPositiveAcknowledgement(self, pingPetId, pingMessageNumber);
             }
-            else 
+            else
             {
                 sendNegativeAcknowledgement(self, pingPetId, pingMessageNumber, "PCD does not expecting its pet to exist");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public dictionary createResponseDictionary(obj_id pcdId, int messageNumber) throws InterruptedException
     {
         dictionary messageData = new dictionary();
@@ -80,6 +89,7 @@ public class pcd_ping_response extends script.base_script
         messageData.put(PCDPING_MESSAGE_MESSAGE_ID_NAME, messageNumber);
         return messageData;
     }
+
     public void sendPositiveAcknowledgement(obj_id pcdId, obj_id petId, int messageNumber) throws InterruptedException
     {
         dictionary messageData = createResponseDictionary(pcdId, messageNumber);
@@ -89,12 +99,14 @@ public class pcd_ping_response extends script.base_script
         }
         messageTo(petId, PCDPING_PET_MESSAGEHANDLER_POSITIVE_ACK_NAME, messageData, 1, false);
     }
+
     public void sendNegativeAcknowledgement(obj_id pcdId, obj_id petId, int messageNumber, String reason) throws InterruptedException
     {
         dictionary messageData = createResponseDictionary(pcdId, messageNumber);
         LOG("pcdping-pcd", "pcd_ping_response.sendNegativeAcknowledgement(): pcdId=[" + pcdId + "], petId=[" + petId + "], messageNumber=[" + messageNumber + "]: sending negative ack now: reason=[" + reason + "].");
         messageTo(petId, PCDPING_PET_MESSAGEHANDLER_NEGATIVE_ACK_NAME, messageData, 1, false);
     }
+
     public boolean isRiderOkayForPcd(obj_id pcdId, obj_id riderId) throws InterruptedException
     {
         if (!isIdValid(pcdId) || !isIdValid(riderId))

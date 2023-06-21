@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.old_republic_facility;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.sui;
 import script.*;
 
@@ -8,6 +14,7 @@ public class core_terminal extends script.base_script
     public core_terminal()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int id = mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("mustafar/old_republic_facility", "core_terminal_use"));
@@ -15,6 +22,7 @@ public class core_terminal extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -23,6 +31,7 @@ public class core_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void readTerminal(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);
@@ -42,6 +51,5 @@ public class core_terminal extends script.base_script
             prompt += "_b";
         }
         int pid = sui.msgbox(player, player, prompt, sui.OK_ONLY, title, "noHandler");
-        return;
     }
 }

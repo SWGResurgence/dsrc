@@ -1,5 +1,11 @@
 package script.systems.respec;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.respec;
 import script.obj_id;
 import script.string_id;
@@ -23,6 +29,7 @@ public class check_inform_respec extends script.base_script
     public static final String PROPERTY_SIZE = "Size";
     public static final String VALUE_SIZE = "450,375";
     public static final String SKILLS_RESPEC_ACTION = "/ui action skillsRespec";
+
     public check_inform_respec()
     {
     }

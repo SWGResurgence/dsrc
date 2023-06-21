@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class frog_test extends script.base_script
     public frog_test()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "sleepingquarters");

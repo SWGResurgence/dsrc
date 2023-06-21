@@ -1,5 +1,11 @@
 package script.npc.stormtrooper_respect;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.factions;
 import script.library.utils;
 import script.obj_id;
@@ -7,9 +13,6 @@ import script.string_id;
 
 public class overdue_fines extends script.base_script
 {
-    public overdue_fines()
-    {
-    }
     public static final String WARNING_SYS_MSG = "datatables/npc/stormtrooper_attitude/responsetext.iff";
     public static final String PP_FILE_LOC = "stormtrooper_attitude/st_response";
     public static final int ROW_FOR_SYS_WARNING = 41;
@@ -17,6 +20,10 @@ public class overdue_fines extends script.base_script
     public static final int SUBJECT_WARNING_MSG = 42;
     public static int WEEK_IN_SECONDS = 60 * 60 * 24 * 7;
     public static int DAY_IN_SECONDS = 60 * 60 * 24;
+    public overdue_fines()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -49,7 +56,7 @@ public class overdue_fines extends script.base_script
             string_id subject = new string_id(PP_FILE_LOC, utils.dataTableGetString(WARNING_SYS_MSG, SUBJECT_WARNING_MSG, 1));
             utils.sendMail(subject, body, self, "@stormtrooper_attitude/st_response:imperial_collection_email_t");
             int fineAmt = utils.getIntObjVar(self, "trooper_fine");
-            int factionLoss = (0 - (fineAmt / 1000));
+            int factionLoss = (-(fineAmt / 1000));
             if (factionLoss > -1)
             {
                 factionLoss = -1;

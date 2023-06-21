@@ -1,5 +1,11 @@
 package script.theme_park.heroic.axkva_min;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.trial;
 import script.library.utils;
@@ -8,12 +14,13 @@ import script.obj_id;
 
 public class force_storm extends script.base_script
 {
-    public force_storm()
-    {
-    }
     public static final float TARGET_SWITCH = 6.0f;
     public static final float STORM_PULSE = 1.0f;
     public static final float LIFESPAN = 18.0f;
+    public force_storm()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
@@ -22,6 +29,7 @@ public class force_storm extends script.base_script
         messageTo(self, "endLifeCycle", null, LIFESPAN, false);
         return SCRIPT_CONTINUE;
     }
+
     public int acquireTarget(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] hateList = utils.getObjIdArrayScriptVar(self, trial.KIMARU_HATE_LIST);
@@ -30,6 +38,7 @@ public class force_storm extends script.base_script
         messageTo(self, "acquireTarget", null, TARGET_SWITCH, false);
         return SCRIPT_CONTINUE;
     }
+
     public int forceStormPulse(obj_id self, dictionary params) throws InterruptedException
     {
         location leadLoc = utils.findLocInFrontOfTarget(self, 1.0f);
@@ -37,12 +46,13 @@ public class force_storm extends script.base_script
         if (targets != null && targets.length > 0)
         {
             location loc = getLocation(self);
-            String locationData = "" + loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
+            String locationData = loc.x + " " + loc.y + " " + loc.z + " " + loc.cell + " " + loc.x + " " + loc.y + " " + loc.z;
             queueCommand(getMaster(self), (-399812533), targets[0], locationData, COMMAND_PRIORITY_DEFAULT);
         }
         messageTo(self, "forceStormPulse", null, STORM_PULSE, false);
         return SCRIPT_CONTINUE;
     }
+
     public int endLifeCycle(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupObject(self);

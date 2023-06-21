@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -30,6 +36,16 @@ public class ai extends script.base_script
     public static final string_id SID_GAVE_RECRUIT_ITEM = new string_id("collection", "gave_recruit_item");
     public static final string_id SID_NPC_MEATLUMP_SPEAK = new string_id("collection", "npc_meatlump_speak");
     public static final string_id SID_NO_RECRUIT_REB_IMP = new string_id("collection", "no_recruit_reb_imp");
+    public String[] SPEECH_RESPONSES = {
+            "Hey.",
+            "Hello.",
+            "Greetings.",
+            "Hi.",
+            "Howdy.",
+            "What's up?",
+            "How are you?",
+            "Can't talk right now."
+    };
 
     public void initializeScript() throws InterruptedException
     {
@@ -765,6 +781,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSawEmote(obj_id self, obj_id performer, String emote) throws InterruptedException
     {
         boolean enableSlapDamage = false;
@@ -931,6 +948,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSawAttack(obj_id self, obj_id defender, obj_id[] attackers) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnSawAttack() self(" + self + ":" + getName(self) + ") defender (" + defender + ") attackers.length(" + attackers.length + ")");
@@ -1146,12 +1164,9 @@ public class ai extends script.base_script
             if (!kill(self))
             {
                 obj_id[] haters = getHateList(self);
-                if (haters.length > 0)
+                for (obj_id hater : haters)
                 {
-                    for (obj_id hater : haters)
-                    {
-                        removeHateTarget(hater, self);
-                    }
+                    removeHateTarget(hater, self);
                 }
                 destroyObject(self);
             }
@@ -2215,7 +2230,7 @@ public class ai extends script.base_script
         }
         if (nextWord.equals("gm_flee"))
         {
-            ai.flee(self,getTarget(speaker), 10, 15);
+            ai.flee(self, getTarget(speaker), 10, 15);
             showFlyText(self, new string_id("!"), 1.5f, colors.RED);
         }
         if (nextWord.equals("gm_test"))
@@ -2259,7 +2274,7 @@ public class ai extends script.base_script
             float angle = (float) (i * (360 / numMobs));
             x = loc.x + (float) Math.cos(angle) * radius;
             z = loc.z + (float) Math.sin(angle) * radius;
-            obj_id creatureObj = create.object(creatureName, new location(x, getHeightAtLocation(x,z), z, loc.area));
+            obj_id creatureObj = create.object(creatureName, new location(x, getHeightAtLocation(x, z), z, loc.area));
             faceTo(creatureObj, self);
         }
         return SCRIPT_CONTINUE;
@@ -2520,7 +2535,7 @@ public class ai extends script.base_script
             }
             for (obj_id obj_id : resourceList)
             {
-                blog("" + obj_id);
+                blog(String.valueOf(obj_id));
                 setLocation(obj_id, curloc);
                 putIn(obj_id, pInv, player);
             }
@@ -2867,16 +2882,7 @@ public class ai extends script.base_script
         LOG(LOGGING_CATEGORY, msg);
         return true;
     }
-    public String[] SPEECH_RESPONSES = {
-            "Hey.",
-            "Hello.",
-            "Greetings.",
-            "Hi.",
-            "Howdy.",
-            "What's up?",
-            "How are you?",
-            "Can't talk right now."
-    };
+
     public String getRandomArray(String[] array) throws InterruptedException
     {
         int random = rand(0, array.length - 1);

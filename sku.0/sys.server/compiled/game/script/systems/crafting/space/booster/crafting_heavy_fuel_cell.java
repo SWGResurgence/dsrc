@@ -1,5 +1,11 @@
 package script.systems.crafting.space.booster;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -44,6 +50,7 @@ public class crafting_heavy_fuel_cell extends script.systems.crafting.space.boos
                                     new resource_weight.weight(craftinglib.RESOURCE_DECAY_RESIST, 2)
                             })
             };
+
     public crafting_heavy_fuel_cell()
     {
     }

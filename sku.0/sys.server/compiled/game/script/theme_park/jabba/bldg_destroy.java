@@ -1,18 +1,27 @@
 package script.theme_park.jabba;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.chat;
 
 public class bldg_destroy extends script.base_script
 {
+    public static final String STF_FILE = "theme_park_jabba/bldg_destroy";
+
     public bldg_destroy()
     {
     }
-    public static final String STF_FILE = "theme_park_jabba/bldg_destroy";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.SELF_DESTRUCT, new string_id("self_destruct", "self_destruct"));
@@ -20,6 +29,7 @@ public class bldg_destroy extends script.base_script
         mi.addSubMenu(mnu, menu_info_types.FIFTEEN_SEC, new string_id("self_destruct", "fifteen"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.THIRTY_SEC)
@@ -48,6 +58,7 @@ public class bldg_destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int blowUp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id viewer = params.getObjId("player");
@@ -77,6 +88,7 @@ public class bldg_destroy extends script.base_script
         messageTo(self, "bldgCheck", destroyer, 1, true);
         return SCRIPT_CONTINUE;
     }
+
     public int firstPop(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id viewer = params.getObjId("player");
@@ -86,12 +98,14 @@ public class bldg_destroy extends script.base_script
         obj_id player = getObjIdObjVar(bldg, "player");
         return SCRIPT_CONTINUE;
     }
+
     public int bark(obj_id self, dictionary params) throws InterruptedException
     {
         debugSpeakMsg(self, "I'm right here at " + getLocation(self));
         messageTo(self, "bark", null, 10, true);
         return SCRIPT_CONTINUE;
     }
+
     public int bldgCheck(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id viewer = params.getObjId("player");
@@ -100,7 +114,7 @@ public class bldg_destroy extends script.base_script
         {
             sendSystemMessage(viewer, new string_id(STF_FILE, "bldg_destroy"));
         }
-        else 
+        else
         {
             messageTo(viewer, "finishQuest", null, 5, true);
             destroyObject(self);

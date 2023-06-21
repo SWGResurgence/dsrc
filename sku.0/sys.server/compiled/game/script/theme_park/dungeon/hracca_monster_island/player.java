@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.hracca_monster_island;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_dungeon;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class player extends script.base_script
     public player()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id controller = space_dungeon.getDungeonIdForPlayer(self);
@@ -19,20 +26,24 @@ public class player extends script.base_script
         CustomerServiceLog("DUNGEON_AvatarPlatform", "*Entered_AvatarPlatform - %TU", self);
         return SCRIPT_CONTINUE;
     }
+
     public int fiveMinuteTimer(obj_id self, dictionary params) throws InterruptedException
     {
         int timeLeft = params.getInt("timeLeft");
         sendSystemMessage(self, "You have " + timeLeft + " minutes left to complete your assignment.", null);
         return SCRIPT_CONTINUE;
     }
+
     public int dungeonEnds(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int setUpDungeon(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void groupSetObjVar(obj_id player, String objVarName) throws InterruptedException
     {
         setObjVar(player, objVarName, 1);
@@ -46,16 +57,18 @@ public class player extends script.base_script
         {
             return;
         }
-        for (obj_id thisMember : members) {
+        for (obj_id thisMember : members)
+        {
             setObjVar(thisMember, objVarName, 1);
         }
-        return;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         CustomerServiceLog("DUNGEON_HraccaGlade", "*Player Died: %TU died in the Hracca Glade.", self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         obj_id controller = space_dungeon.getDungeonIdForPlayer(self);
@@ -71,6 +84,7 @@ public class player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         LOG("space_dungeon", "*%TU had the Timer script detached from them.", self);
@@ -80,10 +94,11 @@ public class player extends script.base_script
         destroyExtras(self);
         return SCRIPT_CONTINUE;
     }
+
     public void destroyExtras(obj_id self) throws InterruptedException
     {
-        return;
     }
+
     public int recheckDungeonType(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id controller = space_dungeon.getDungeonIdForPlayer(self);
@@ -95,6 +110,7 @@ public class player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgDungeonEjectConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("space_dungeon", "theme_park.dungeon.hracca_monster_island.player.msgDungeonEjectConfirmed()");
@@ -106,6 +122,7 @@ public class player extends script.base_script
         space_dungeon.ejectPlayerFromDungeon(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgDungeonLaunchConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("space_dungeon", "theme_park.dungeon.hracca_monster_island.player.msgDungeonLaunchConfirmed()");

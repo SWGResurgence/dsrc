@@ -1,5 +1,11 @@
 package script.quest.task.ground.util;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.menu_info;
 import script.obj_id;
@@ -7,9 +13,6 @@ import script.string_id;
 
 public class som_kenobi_hidden_treasure_quest_plaque extends script.base_script
 {
-    public som_kenobi_hidden_treasure_quest_plaque()
-    {
-    }
     public static final string_id RADIAL_INSPECT = new string_id("quest/ground/util/quest_giver_object", "radial_inspect");
     public static final string_id OFFER_QUEST_MSG = new string_id("quest/ground/util/quest_giver_object", "offer_quest");
     public static final string_id SUI_TITLE = new string_id("quest/ground/util/quest_giver_object", "sui_title");
@@ -27,6 +30,10 @@ public class som_kenobi_hidden_treasure_quest_plaque extends script.base_script
     public static final String OFFER_TEXT_OBJVAR = "questGiver.offerText";
     public static final String IMPERIAL_ONLY_OBJVAR = "questGiver.imperialOnly";
     public static final String REBEL_ONLY_OBJVAR = "questGiver.rebelOnly";
+    public som_kenobi_hidden_treasure_quest_plaque()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, "som_kenobi_hidden_treasure_2") || groundquests.hasCompletedQuest(player, "som_kenobi_hidden_treasure_2"))

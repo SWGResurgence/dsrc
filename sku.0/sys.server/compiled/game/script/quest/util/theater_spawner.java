@@ -1,16 +1,23 @@
 package script.quest.util;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.base_class;
 import script.dictionary;
 import script.obj_id;
 
 public class theater_spawner extends script.base_script
 {
+    public static final String VAR_SPAWNER_CURRENT_POPULATION = "quest_spawner.current_pop";
+    public static final String VAR_SPAWNED_BY = "quest_spawner.spawned_by";
     public theater_spawner()
     {
     }
-    public static final String VAR_SPAWNER_CURRENT_POPULATION = "quest_spawner.current_pop";
-    public static final String VAR_SPAWNED_BY = "quest_spawner.spawned_by";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String spawner = base_class.getStringObjVar(self, "quest_spawner.type");
@@ -48,7 +55,7 @@ public class theater_spawner extends script.base_script
         {
             base_class.setObjVar(self, "quest_spawner.time_expired", expire + base_class.getGameTime());
         }
-        else 
+        else
         {
             base_class.setObjVar(self, "quest_spawner.time_expired", 0);
         }

@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.sui;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,17 +14,19 @@ import script.string_id;
 
 public class terminal_launch extends script.base_script
 {
+    public static final string_id SID_LAUNCH = new string_id("ep3/sidequests", "avatar_launch");
+    public static final string_id SID_EJECT = new string_id("ep3/sidequests", "avatar_eject");
     public terminal_launch()
     {
     }
-    public static final string_id SID_LAUNCH = new string_id("ep3/sidequests", "avatar_launch");
-    public static final string_id SID_EJECT = new string_id("ep3/sidequests", "avatar_eject");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_LAUNCH);
         mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_EJECT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         LOG("space_dungeon", "theme_park.dungeon.avatar_platform.terminal_launch.OnObjectMenuSelect()");
@@ -32,6 +40,7 @@ public class terminal_launch extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void confirmEject(obj_id player, obj_id terminal) throws InterruptedException
     {
         if (hasScript(player, "theme_park.dungeon.avatar_platform.player"))
@@ -40,11 +49,12 @@ public class terminal_launch extends script.base_script
             String prompt = "Really eject?";
             int pid = sui.msgbox(player, player, prompt, sui.YES_NO, "msgDungeonEjectConfirmed");
         }
-        else 
+        else
         {
             warpPlayer(player, "kashyyyk_main", -670, 18, -137, null, -670, 18, -137);
         }
     }
+
     public void confirmLaunch(obj_id player, obj_id terminal) throws InterruptedException
     {
         if (hasScript(player, "theme_park.dungeon.avatar_platform.player"))
@@ -53,7 +63,7 @@ public class terminal_launch extends script.base_script
             String prompt = "Really launch?";
             int pid = sui.msgbox(player, player, prompt, sui.YES_NO, "msgDungeonLaunchConfirmed");
         }
-        else 
+        else
         {
             warpPlayer(player, "kashyyyk_main", -670, 18, -137, null, -670, 18, -137);
         }

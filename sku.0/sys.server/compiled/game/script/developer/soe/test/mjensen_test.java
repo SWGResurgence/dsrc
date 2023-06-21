@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.obj_id;
 import script.string_id;
@@ -11,13 +17,16 @@ public class mjensen_test extends script.base_script
     public mjensen_test()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {
+        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self))
+        {
             detachScript(self, "test.mjensen_test");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         java.util.StringTokenizer tok = new java.util.StringTokenizer(text);
@@ -172,10 +181,12 @@ public class mjensen_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void logIt(String logText) throws InterruptedException
     {
         LOG("mikkel", logText);
     }
+
     public void sysMes(String sysMessage) throws InterruptedException
     {
         obj_id self = getSelf();

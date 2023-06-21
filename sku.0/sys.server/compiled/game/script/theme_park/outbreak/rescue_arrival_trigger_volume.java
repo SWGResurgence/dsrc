@@ -1,25 +1,33 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.attrib;
 import script.library.groundquests;
 import script.obj_id;
 
 public class rescue_arrival_trigger_volume extends script.base_script
 {
-    public rescue_arrival_trigger_volume()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_pathing";
     public static final String TRIGGER_NAME_PREFIX = "rescue_arrival_trigger_";
     public static final String UPDATE_SIGNAL = "update_signal";
     public static final float TRIGGER_RADIUS = 6.0f;
+    public rescue_arrival_trigger_volume()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setAttributeInterested(self, attrib.OUTBREAK_SURVIVOR);
         createTriggerVolume(TRIGGER_NAME_PREFIX + self, TRIGGER_RADIUS, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         blog("OnTriggerVolumeEntered INIT: " + whoTriggeredMe);
@@ -59,11 +67,13 @@ public class rescue_arrival_trigger_volume extends script.base_script
         groundquests.sendSignal(player, signalUpdate);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         blog("Exited trigger volume: " + whoTriggeredMe);
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

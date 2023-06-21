@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.combat_engine.combat_data;
 import script.library.*;
@@ -8,12 +14,13 @@ import java.util.Vector;
 
 public class creature_combat extends script.systems.combat.combat_base
 {
-    public creature_combat()
-    {
-    }
     public static final float MIN_MOVEMENT_DURING_COMBAT = 0.015f;
     public static final float MAX_MOVEMENT_DURING_COMBAT = 0.05f;
     public static final float TOO_CLOSE_DISTANCE = 3.0f;
+    public creature_combat()
+    {
+    }
+
     public void clog(String text) throws InterruptedException
     {
         if (text != null)
@@ -21,6 +28,7 @@ public class creature_combat extends script.systems.combat.combat_base
             LOGC(aiLoggingEnabled(getSelf()), "debug_ai", "creature_combat::" + text);
         }
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         clog("OnEnteredCombat() ----- unit(" + self + ":" + getName(self) + ")");
@@ -34,12 +42,12 @@ public class creature_combat extends script.systems.combat.combat_base
         ai_combat_movement.aiClearMoveMode();
         setMovementRun(self);
         deltadictionary dict = self.getScriptVars();
-        dict.put("ai.combat.cover.foundTarget", isPlayer(getHateTarget(self)) ? false : true);
+        dict.put("ai.combat.cover.foundTarget", !isPlayer(getHateTarget(self)));
         if (ai_combat_assist.isWaiting())
         {
             ai_combat_movement.aiIdle();
         }
-        else 
+        else
         {
             obj_id target = getHateTarget(self);
             boolean targetCovered = stealth.hasInvisibleBuff(target);
@@ -65,7 +73,7 @@ public class creature_combat extends script.systems.combat.combat_base
         {
             setRegenRate(self, ACTION, 20);
         }
-        else 
+        else
         {
             int actionRegen = 4;
             obj_id master = getMaster(self);
@@ -76,7 +84,7 @@ public class creature_combat extends script.systems.combat.combat_base
             }
             if (expertiseRegen > 0)
             {
-                actionRegen += (int)(actionRegen * (expertiseRegen / 100.0f));
+                actionRegen += (int) (actionRegen * (expertiseRegen / 100.0f));
             }
             setRegenRate(self, ACTION, actionRegen);
         }
@@ -86,6 +94,7 @@ public class creature_combat extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -106,10 +115,10 @@ public class creature_combat extends script.systems.combat.combat_base
             float actionRegenMod = hasObjVar(self, "regen_mod.action") ? getFloatObjVar(self, "regen_mod.action") : 1.0f;
             float healthRegen = (getMaxAttrib(self, HEALTH) / 10.0f) * healthRegenMod;
             float actionRegen = (getMaxAttrib(self, ACTION) / 10.0f) * actionRegenMod;
-            setRegenRate(self, HEALTH, (int)healthRegen);
-            setRegenRate(self, ACTION, (int)actionRegen);
+            setRegenRate(self, HEALTH, (int) healthRegen);
+            setRegenRate(self, ACTION, (int) actionRegen);
         }
-        else 
+        else
         {
             int healthRegen = 150;
             int actionRegen = 10;
@@ -121,8 +130,8 @@ public class creature_combat extends script.systems.combat.combat_base
             }
             if (expertiseRegen > 0)
             {
-                actionRegen += (int)(actionRegen * (expertiseRegen / 100.0f));
-                healthRegen += (int)(healthRegen * (expertiseRegen / 100.0f));
+                actionRegen += (int) (actionRegen * (expertiseRegen / 100.0f));
+                healthRegen += (int) (healthRegen * (expertiseRegen / 100.0f));
             }
             setRegenRate(self, HEALTH, healthRegen);
             setRegenRate(self, ACTION, actionRegen);
@@ -147,13 +156,13 @@ public class creature_combat extends script.systems.combat.combat_base
                 {
                     messageTo(self, "postCombatPathHome", null, 1, false);
                 }
-                else 
+                else
                 {
                     if (!hasObjVar(self, "forceNoMovement"))
                     {
                         aiTether(self);
                     }
-                    else 
+                    else
                     {
                         cleanupForTether(self);
                         pathTo(self, aiGetHomeLocation(self));
@@ -166,6 +175,7 @@ public class creature_combat extends script.systems.combat.combat_base
         messageTo(self, "ai_assist_check", null, 0.25f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int ai_assist_check(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -175,6 +185,7 @@ public class creature_combat extends script.systems.combat.combat_base
         ai_combat_assist.callForAssist();
         return SCRIPT_CONTINUE;
     }
+
     public void cleanupForTether(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -185,6 +196,7 @@ public class creature_combat extends script.systems.combat.combat_base
         ai_lib.clearCombatData();
         xp.cleanupCreditForKills();
     }
+
     public int OnAiTetherStart(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -194,6 +206,7 @@ public class creature_combat extends script.systems.combat.combat_base
         cleanupForTether(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAiTetherComplete(obj_id self) throws InterruptedException
     {
         clog("ai::OnAiTetherComplete() --- BEGIN --- self(" + self + ":" + getName(self) + ")");
@@ -201,6 +214,7 @@ public class creature_combat extends script.systems.combat.combat_base
         clog("ai::OnAiTetherComplete() --- END --- self(" + self + ":" + getName(self) + ")");
         return SCRIPT_CONTINUE;
     }
+
     public int OnHateTargetChanged(obj_id self, obj_id target) throws InterruptedException
     {
         clog("OnHateTargetChanged() self(" + self + ":" + getName(self) + ") target(" + target + ")");
@@ -220,11 +234,13 @@ public class creature_combat extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHateTargetAdded(obj_id self, obj_id target) throws InterruptedException
     {
         clog("creature_combat::OnHateTargetAdded() self(" + self + ":" + getName(self) + ") target(" + target + ")");
         return SCRIPT_CONTINUE;
     }
+
     public int OnHateTargetRemoved(obj_id self, obj_id target) throws InterruptedException
     {
         clog("creature_combat::OnHateTargetRemoved() self(" + self + ":" + getName(self) + ") target(" + target + ")");
@@ -243,7 +259,7 @@ public class creature_combat extends script.systems.combat.combat_base
                     pvpRemovePersonalEnemyFlags(self, target);
                 }
             }
-            else 
+            else
             {
                 pvpRemovePersonalEnemyFlags(self, target);
             }
@@ -258,22 +274,26 @@ public class creature_combat extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAiPrimaryWeaponEquipped(obj_id self, obj_id primaryWeapon) throws InterruptedException
     {
         clog("OnAiPrimaryWeaponEquipped() ai(" + self + ") primaryWeapon(" + primaryWeapon + ")");
         clearCombatActions();
         return SCRIPT_CONTINUE;
     }
+
     public int OnAiSecondaryWeaponEquipped(obj_id self, obj_id secondaryWeapon) throws InterruptedException
     {
         clog("OnAiSecondaryWeaponEquipped() ai(" + self + ") secondaryWeapon(" + secondaryWeapon + ")");
         clearCombatActions();
         return SCRIPT_CONTINUE;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAiCombatFrame(obj_id self) throws InterruptedException
     {
         boolean assistWaiting = ai_combat_assist.isWaiting();
@@ -286,12 +306,13 @@ public class creature_combat extends script.systems.combat.combat_base
                 ai_combat_assist.clearAssist();
             }
         }
-        else 
+        else
         {
             doCombatFrame();
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doCombatFrame() throws InterruptedException
     {
         final obj_id self = getSelf();
@@ -313,15 +334,17 @@ public class creature_combat extends script.systems.combat.combat_base
             {
                 Vector goodIds = new Vector();
                 goodIds.setSize(0);
-                for (obj_id hater : haters) {
-                    if (isIdValid(hater) && exists(hater)) {
+                for (obj_id hater : haters)
+                {
+                    if (isIdValid(hater) && exists(hater))
+                    {
                         utils.addElement(goodIds, hater);
                     }
                 }
                 if (goodIds != null & goodIds.size() > 0)
                 {
                     int targetIndex = rand(0, goodIds.size() - 1);
-                    forceHateTarget(self, ((obj_id)goodIds.get(targetIndex)));
+                    forceHateTarget(self, ((obj_id) goodIds.get(targetIndex)));
                     utils.setScriptVar(self, "hateListRetry", 1);
                     doCombatFrame();
                 }
@@ -337,7 +360,7 @@ public class creature_combat extends script.systems.combat.combat_base
                 {
                     beast_lib.beastFollowTarget(self, master);
                 }
-                else 
+                else
                 {
                     aiSetHomeLocation(self, getLocation(self));
                 }
@@ -352,7 +375,7 @@ public class creature_combat extends script.systems.combat.combat_base
             {
                 aiTether(self);
             }
-            else 
+            else
             {
                 cleanupForTether(self);
                 pathTo(self, aiGetHomeLocation(self));
@@ -419,7 +442,7 @@ public class creature_combat extends script.systems.combat.combat_base
             {
                 posture.stand(self);
             }
-            else 
+            else
             {
                 if (dict.getBoolean("ai.combat.cover.foundTarget"))
                 {
@@ -427,13 +450,13 @@ public class creature_combat extends script.systems.combat.combat_base
                 }
             }
         }
-        else 
+        else
         {
             if (!utils.hasScriptVar(self, "creature_combat.commandQueueTime"))
             {
                 utils.setScriptVar(self, "creature_combat.commandQueueTime", getGameTime());
             }
-            else 
+            else
             {
                 int time = utils.getIntScriptVar(self, "creature_combat.commandQueueTime");
                 if (getGameTime() - time > 2)
@@ -444,6 +467,7 @@ public class creature_combat extends script.systems.combat.combat_base
         }
         move(target);
     }
+
     public obj_id getBestTarget(obj_id self) throws InterruptedException
     {
         obj_id primaryTarget = getHateTarget(self);
@@ -458,23 +482,29 @@ public class creature_combat extends script.systems.combat.combat_base
         }
         float topHate = 0.0f;
         primaryTarget = null;
-        for (obj_id obj_id : hateList) {
-            if (!isIdValid(obj_id) || !exists(primaryTarget)) {
+        for (obj_id obj_id : hateList)
+        {
+            if (!isIdValid(obj_id) || !exists(primaryTarget))
+            {
                 continue;
             }
-            if (isDead(obj_id) || stealth.hasInvisibleBuff(obj_id)) {
+            if (isDead(obj_id) || stealth.hasInvisibleBuff(obj_id))
+            {
                 removeHateTarget(self, obj_id);
                 continue;
             }
-            if (hasObjVar(self, "noPursue") && !combat.cachedCanSee(self, obj_id)) {
+            if (hasObjVar(self, "noPursue") && !combat.cachedCanSee(self, obj_id))
+            {
                 continue;
             }
-            if (getHate(self, obj_id) > topHate) {
+            if (getHate(self, obj_id) > topHate)
+            {
                 primaryTarget = obj_id;
             }
         }
         return primaryTarget;
     }
+
     public void move(obj_id target) throws InterruptedException
     {
         final obj_id self = getSelf();
@@ -512,9 +542,9 @@ public class creature_combat extends script.systems.combat.combat_base
             }
             else if (!ai_combat_movement.aiIsFleeing(self))
             {
-                
+
             }
-            
+
             {
                 final float midRange = (weaponRange.maxRange - weaponRange.minRange) / 2.0f;
                 final float rangeVariation = midRange * 0.2f;
@@ -524,7 +554,7 @@ public class creature_combat extends script.systems.combat.combat_base
                 faceTo(self, target);
             }
         }
-        else 
+        else
         {
             float minFollowDistance = 1.5f;
             float maxFollowDistance = 3.0f;
@@ -532,7 +562,7 @@ public class creature_combat extends script.systems.combat.combat_base
             {
                 ai_combat_movement.aiFollow(target, minFollowDistance, maxFollowDistance);
             }
-            else 
+            else
             {
                 if (distanceToTarget > 64)
                 {
@@ -540,7 +570,7 @@ public class creature_combat extends script.systems.combat.combat_base
                     resumeMovement(self);
                     return;
                 }
-                else 
+                else
                 {
                     suspendMovement(self);
                 }
@@ -549,6 +579,7 @@ public class creature_combat extends script.systems.combat.combat_base
         }
         ai_combat_movement.aiEvade(target, self, weaponRange, MIN_MOVEMENT_DURING_COMBAT, MAX_MOVEMENT_DURING_COMBAT);
     }
+
     public void selectWeapon(obj_id target) throws InterruptedException
     {
         final obj_id self = getSelf();
@@ -602,6 +633,7 @@ public class creature_combat extends script.systems.combat.combat_base
             }
         }
     }
+
     public void attack(obj_id target) throws InterruptedException
     {
         final obj_id self = getSelf();
@@ -615,7 +647,7 @@ public class creature_combat extends script.systems.combat.combat_base
             forcedActionString = oneShotActionString;
             setObjVar(self, "oneShotActionComplete", 1);
         }
-        else 
+        else
         {
             if (oneShotActionString != null)
             {
@@ -635,14 +667,14 @@ public class creature_combat extends script.systems.combat.combat_base
             {
                 currentActionString = pendingActionString;
             }
-            else 
+            else
             {
                 removeObjVar(self, "ai.combat.pendingAction");
                 removeObjVar(self, "ai.combat.pendingActionTime");
                 currentActionString = DEFAULT_ATTACK;
             }
         }
-        else 
+        else
         {
             pendingActionString = aiGetCombatAction(self);
             if (pendingActionString != null)
@@ -651,7 +683,7 @@ public class creature_combat extends script.systems.combat.combat_base
                 setObjVar(self, "ai.combat.pendingAction", pendingActionString);
                 setObjVar(self, "ai.combat.pendingActionTime", getGameTime());
             }
-            else 
+            else
             {
                 currentActionString = DEFAULT_ATTACK;
             }
@@ -670,7 +702,7 @@ public class creature_combat extends script.systems.combat.combat_base
             {
                 clog("attack() self(" + self + ") target(" + target + ") ACTION(" + forcedActionString + ") TOO TIRED - WAITING TO ATTEMPT FORCED ACTION");
             }
-            else 
+            else
             {
                 if (pendingActionString != null)
                 {
@@ -691,7 +723,7 @@ public class creature_combat extends script.systems.combat.combat_base
             clearCombatActions();
             clog("attack() ERROR self(" + self + getName(self) + ") ACTION(" + currentActionString + ") weapon(" + (aiUsingPrimaryWeapon(self) ? "primary weapon" : "secondary weapon") + ") INVALID WEAPON FOR ACTION, FIX THE DATA");
         }
-        else 
+        else
         {
             clearCombatActions();
             clog("attack() ERROR self(" + self + getName(self) + ") ACTION(" + currentActionString + ") UNEXPECTED RESULT FROM combat.canPerformAction()");
@@ -728,6 +760,7 @@ public class creature_combat extends script.systems.combat.combat_base
             }
         }
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         int lastFrame = utils.getIntScriptVar(self, "creature_combat.lastCombatFrame");
@@ -760,7 +793,7 @@ public class creature_combat extends script.systems.combat.combat_base
                 sui.msgbox(attacker, attacker, "@spam:warn_special_forces_prompt", sui.OK_ONLY, "@spam:warn_special_forces_title", "handleNothing");
                 utils.setScriptVar(attacker, "gcw.specialForcesWarningTime", getGameTime());
             }
-            else 
+            else
             {
                 int warningTime = utils.getIntScriptVar(attacker, "gcw.specialForcesWarningTime");
                 int timeDelta = getGameTime() - warningTime;
@@ -771,13 +804,13 @@ public class creature_combat extends script.systems.combat.combat_base
                         sui.msgbox(attacker, attacker, "@spam:warn_special_forces_prompt", sui.OK_ONLY, "@spam:warn_special_forces_title", "handleNothing");
                         utils.setScriptVar(attacker, "gcw.specialForcesWarningTime", getGameTime());
                     }
-                    else 
+                    else
                     {
                         if (0 != factions.pvpGetAlignedFaction(attacker))
                         {
                             factions.goOvertWithDelay(attacker, 0.0f);
                         }
-                        else 
+                        else
                         {
                             int currentMercenaryFaction = factions.pvpNeutralGetMercenaryFaction(attacker);
                             if ((-615855020) == currentMercenaryFaction)
@@ -796,6 +829,7 @@ public class creature_combat extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnChangedPosture(obj_id self, int oldPosture, int newPosture) throws InterruptedException
     {
         if (newPosture == POSTURE_KNOCKED_DOWN)
@@ -805,10 +839,12 @@ public class creature_combat extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vocalizeEndCombat(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int postCombatPathHome(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -823,12 +859,13 @@ public class creature_combat extends script.systems.combat.combat_base
         {
             ai_lib.resumeFollow(self);
         }
-        else 
+        else
         {
             pathTo(self, aiGetHomeLocation(self));
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isNearLair(obj_id npc) throws InterruptedException
     {
         obj_id myLair = getObjIdObjVar(npc, "npc_lair.target");
@@ -842,13 +879,11 @@ public class creature_combat extends script.systems.combat.combat_base
         }
         if (isIdValid(myLair) && isInWorld(myLair) && exists(myLair))
         {
-            if (getDistance(npc, myLair) < 40.0f)
-            {
-                return true;
-            }
+            return getDistance(npc, myLair) < 40.0f;
         }
         return false;
     }
+
     public void killPlayer(obj_id npc, obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !isIncapacitated(target) || !isInWorld(target) || !exists(target) || ai_lib.isInCombat(npc))
@@ -871,11 +906,12 @@ public class creature_combat extends script.systems.combat.combat_base
             doAnimationAction(npc, "eat");
             pclib.coupDeGrace(target, npc);
         }
-        else 
+        else
         {
             pclib.coupDeGrace(target, npc, true);
         }
     }
+
     public int OnFleeTargetLost(obj_id self, obj_id target) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -886,6 +922,7 @@ public class creature_combat extends script.systems.combat.combat_base
         stopCombat(self);
         return SCRIPT_OVERRIDE;
     }
+
     public int OnFleeWaypoint(obj_id self, obj_id target) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -894,6 +931,7 @@ public class creature_combat extends script.systems.combat.combat_base
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnFleePathNotFound(obj_id self, obj_id target) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -904,6 +942,7 @@ public class creature_combat extends script.systems.combat.combat_base
         stopCombat(self);
         return SCRIPT_OVERRIDE;
     }
+
     public int OnFollowWaiting(obj_id self, obj_id target) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -919,6 +958,7 @@ public class creature_combat extends script.systems.combat.combat_base
         faceTo(self, target);
         return SCRIPT_OVERRIDE;
     }
+
     public int OnFollowMoving(obj_id self, obj_id followTarget) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -931,6 +971,7 @@ public class creature_combat extends script.systems.combat.combat_base
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnFollowTargetLost(obj_id self, obj_id target) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -941,6 +982,7 @@ public class creature_combat extends script.systems.combat.combat_base
         stopCombat(self);
         return SCRIPT_OVERRIDE;
     }
+
     public int OnFollowPathNotFound(obj_id self, obj_id target) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -951,6 +993,7 @@ public class creature_combat extends script.systems.combat.combat_base
         stopCombat(self);
         return SCRIPT_OVERRIDE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -968,6 +1011,7 @@ public class creature_combat extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMoveMoving(obj_id self) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -977,6 +1021,7 @@ public class creature_combat extends script.systems.combat.combat_base
         clog("OnMoveMoving() self(" + self + ") The AI is dead.");
         return SCRIPT_OVERRIDE;
     }
+
     public int OnMovePathNotFound(obj_id self) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -994,10 +1039,12 @@ public class creature_combat extends script.systems.combat.combat_base
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int handleMoveRandomClear(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handleTaunt(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -1014,6 +1061,7 @@ public class creature_combat extends script.systems.combat.combat_base
         setTarget(self, target);
         return SCRIPT_CONTINUE;
     }
+
     public int getConfusionDuration(obj_id npc, obj_id attacker) throws InterruptedException
     {
         if (getDistance(npc, attacker) < 10.0f)
@@ -1042,6 +1090,7 @@ public class creature_combat extends script.systems.combat.combat_base
         }
         return duration;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         clog("OnDestroy() unit(" + self + ":" + getName(self) + ")");
@@ -1065,7 +1114,7 @@ public class creature_combat extends script.systems.combat.combat_base
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             combatDestructionDelay = utils.getIntScriptVar(self, "combatDestructionDelay");
         }
@@ -1076,11 +1125,13 @@ public class creature_combat extends script.systems.combat.combat_base
         messageTo(self, "handleCombatDestructionDelay", null, 30, false);
         return SCRIPT_OVERRIDE;
     }
+
     public int handleCombatDestructionDelay(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDotPulse(obj_id self, dictionary params) throws InterruptedException
     {
         clog("OnDotPulse() self(" + self + ":" + getName(self) + ")");
@@ -1101,14 +1152,17 @@ public class creature_combat extends script.systems.combat.combat_base
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id player : players) {
-            if (isIdValid(player) && exists(player) && player != self) {
+        for (obj_id player : players)
+        {
+            if (isIdValid(player) && exists(player) && player != self)
+            {
                 startCombat(self, player);
                 return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitateTarget(obj_id self, obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1133,7 +1187,7 @@ public class creature_combat extends script.systems.combat.combat_base
                 clog("OnIncapacitateTarget() self(" + self + ":" + getName(self) + ") target(" + target + ":" + getName(target) + ") DEATH BLOW BEAST");
                 beast_lib.killBeast(target, self);
             }
-            else 
+            else
             {
                 clog("OnIncapacitateTarget() self(" + self + ":" + getName(self) + ") target(" + target + ":" + getName(target) + ") DEATH BLOW PLAYER");
                 pclib.coupDeGrace(target, self);
@@ -1141,19 +1195,22 @@ public class creature_combat extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id[] myHateList = getHateList(self);
-        if (myHateList == null || myHateList.length == 0)
+        if (myHateList == null)
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id obj_id : myHateList) {
+        for (obj_id obj_id : myHateList)
+        {
             removeHateTarget(self, obj_id);
             removeHateTarget(obj_id, self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAggroCheck(obj_id self, dictionary params) throws InterruptedException
     {
         final obj_id target = params.getObjId("target");
@@ -1165,6 +1222,7 @@ public class creature_combat extends script.systems.combat.combat_base
         ai_aggro.requestAggroCheck(target);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAggroStart(obj_id self, dictionary params) throws InterruptedException
     {
         if (beast_lib.isBeast(self))
@@ -1181,6 +1239,7 @@ public class creature_combat extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSawRecapacitation(obj_id self, dictionary params) throws InterruptedException
     {
         clog("handleSawRecapacitation() self(" + self + ":" + getName(self) + ")");
@@ -1188,19 +1247,22 @@ public class creature_combat extends script.systems.combat.combat_base
         stopListeningToMessage(player, "handleSawRecapacitation");
         return SCRIPT_CONTINUE;
     }
+
     public void clearCombatActions() throws InterruptedException
     {
         obj_id self = getSelf();
         removeObjVar(self, "ai.combat.forcedAction");
         removeObjVar(self, "ai.combat.pendingAction");
     }
+
     public int checkForSpecials(obj_id self, dictionary params) throws InterruptedException
     {
         if (!verifyMessage(self, params))
         {
             return SCRIPT_CONTINUE;
         }
-        if (!pet_lib.hasMaster(self)){
+        if (!pet_lib.hasMaster(self))
+        {
             return SCRIPT_CONTINUE;
         }
         String bestBeastAbility = beast_lib.getBestAutoRepeatAbility(self);
@@ -1216,6 +1278,7 @@ public class creature_combat extends script.systems.combat.combat_base
         messageTo(self, "checkForSpecials", stampMessage(self), 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public dictionary stampMessage(obj_id self) throws InterruptedException
     {
         int session = getMessageSession(self);
@@ -1224,22 +1287,26 @@ public class creature_combat extends script.systems.combat.combat_base
         dict.put("sessionId", session);
         return dict;
     }
+
     public int getMessageSession(obj_id self) throws InterruptedException
     {
         return utils.hasScriptVar(self, "messageStamp") ? utils.getIntScriptVar(self, "messageStamp") : 0;
     }
+
     public boolean verifyMessage(obj_id self, dictionary params) throws InterruptedException
     {
         int messageId = params.getInt("sessionId");
         int currentId = utils.getIntScriptVar(self, "messageStamp");
         return messageId == currentId;
     }
+
     public void bumpSession(obj_id self) throws InterruptedException
     {
         int session = getMessageSession(self);
         session++;
         utils.setScriptVar(self, "messageStamp", session);
     }
+
     public int checkForBeastSpecialsTakeOne(obj_id self, dictionary params) throws InterruptedException
     {
         if (beast_lib.isBeast(self))
@@ -1248,6 +1315,7 @@ public class creature_combat extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int persist_combat(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, combat.PERSIST_COMBAT))

@@ -1,5 +1,11 @@
 package script.event.ewok_festival;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -12,30 +18,36 @@ import java.util.Vector;
 
 public class loveday_cupid_spawner extends script.base_script
 {
+    public static final int CUPID_APPEARANCE_LENGTH = 900;
+
     public loveday_cupid_spawner()
     {
     }
-    public static final int CUPID_APPEARANCE_LENGTH = 900;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "registerLovedayCupidSpawner", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "registerLovedayCupidSpawner", null, 9, false);
         return SCRIPT_CONTINUE;
     }
+
     public int registerLovedayCupidSpawner(obj_id self, dictionary params) throws InterruptedException
     {
         registerCupidSpawner(self);
         return SCRIPT_CONTINUE;
     }
+
     public void registerCupidSpawner(obj_id self) throws InterruptedException
     {
         String spawnerId = holiday.LOVEDAY_CUPID_ELEMENT_NAME + getStringObjVar(self, holiday.LOVEDAY_CUPID_SPAWNER_CITY_VAR);
         getClusterWideData(holiday.LOVEDAY_CUPID_MANAGER_NAME, spawnerId, true, self);
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String name, int request_id, String[] element_name_list, dictionary[] data, int lock_key) throws InterruptedException
     {
         if (manage_name.equals(holiday.LOVEDAY_CUPID_MANAGER_NAME))
@@ -55,6 +67,7 @@ public class loveday_cupid_spawner extends script.base_script
         releaseClusterWideDataLock(manage_name, lock_key);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnHourlyCupidNPCs(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, holiday.LOVEDAY_CUPID_SPAWNER_CITY_VAR))
@@ -104,6 +117,7 @@ public class loveday_cupid_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int despawnHourlyCupidNPCs(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "cupidSpawned"))
@@ -112,9 +126,11 @@ public class loveday_cupid_spawner extends script.base_script
             if (theSpawned != null && theSpawned.size() > 0)
             {
                 obj_id spawnedNpc;
-                for (Object spawnedItem : theSpawned) {
+                for (Object spawnedItem : theSpawned)
+                {
                     spawnedNpc = ((obj_id) spawnedItem);
-                    if (isIdValid(spawnedNpc) && exists(spawnedNpc)) {
+                    if (isIdValid(spawnedNpc) && exists(spawnedNpc))
+                    {
                         messageTo(spawnedNpc, "prepareForDespawn", null, 1, false);
                     }
                 }
@@ -123,6 +139,7 @@ public class loveday_cupid_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!isGod(speaker) || !hasObjVar(speaker, "cupidTestingAuthorized"))

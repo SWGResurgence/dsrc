@@ -1,5 +1,11 @@
 package script.npc.junk_dealer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -13,12 +19,14 @@ public class junk_dealer_summon extends script.base_script
     public junk_dealer_summon()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "timeUp", null, 300, true);
         messageTo(self, "handleGreeting", null, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void buffParty(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -26,9 +34,9 @@ public class junk_dealer_summon extends script.base_script
             return;
         }
         String buffName = "sm_junk_dealer_1";
-        int precisionBonus = (int)getSkillStatisticModifier(player, "expertise_buff_under_the_counter");
-        int luckBonus = (int)getSkillStatisticModifier(player, "expertise_buff_under_the_counter");
-        int damageDecrease = (int)getSkillStatisticModifier(player, "expertise_buff_best_deal_ever");
+        int precisionBonus = getSkillStatisticModifier(player, "expertise_buff_under_the_counter");
+        int luckBonus = getSkillStatisticModifier(player, "expertise_buff_under_the_counter");
+        int damageDecrease = getSkillStatisticModifier(player, "expertise_buff_best_deal_ever");
         if (damageDecrease >= 10)
         {
             buffName = "sm_junk_dealer_5";
@@ -53,7 +61,7 @@ public class junk_dealer_summon extends script.base_script
         {
             buffName = "sm_junk_dealer_2";
         }
-        else 
+        else
         {
             buffName = "sm_junk_dealer_1";
         }
@@ -64,16 +72,17 @@ public class junk_dealer_summon extends script.base_script
             {
                 for (int i = 0; i < party.size(); i++)
                 {
-                    obj_id who = (obj_id)party.elementAt(i);
+                    obj_id who = (obj_id) party.elementAt(i);
                     buff.applyBuff(who, buffName);
                 }
             }
         }
-        else 
+        else
         {
             buff.applyBuff(player, buffName);
         }
     }
+
     public void totalProfits(obj_id self, obj_id player) throws InterruptedException
     {
         int totalProfits = utils.getIntScriptVar(self, "totalProfits");
@@ -85,6 +94,7 @@ public class junk_dealer_summon extends script.base_script
             sendSystemMessageProse(player, pp);
         }
     }
+
     public int handleGreeting(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = getMaster(self);
@@ -100,12 +110,13 @@ public class junk_dealer_summon extends script.base_script
             pp = prose.setTU(pp, name);
             chat.chat(self, master, chat.CHAT_SAY, null, chat.ChatFlag_targetGroupOnly, pp);
         }
-        else 
+        else
         {
             destroyObject(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int timeUp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "smugglerMaster");
@@ -118,6 +129,7 @@ public class junk_dealer_summon extends script.base_script
         totalProfits(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int dismissDealer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -132,11 +144,13 @@ public class junk_dealer_summon extends script.base_script
         totalProfits(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRunAway(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasScript(self, "conversation.junk_dealer_smuggler"))

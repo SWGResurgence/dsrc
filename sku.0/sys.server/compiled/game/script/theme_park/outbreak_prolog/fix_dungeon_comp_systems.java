@@ -1,13 +1,16 @@
 package script.theme_park.outbreak_prolog;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.*;
 
 public class fix_dungeon_comp_systems extends script.base_script
 {
-    public fix_dungeon_comp_systems()
-    {
-    }
     public static final String MENU_STRING_FILE = "theme_park/outbreak/outbreak";
     public static final String MENU_OBJ_VAR = "computer_system";
     public static final String NO_MENU_OBJ_VAR = "none";
@@ -19,6 +22,10 @@ public class fix_dungeon_comp_systems extends script.base_script
     public static final String OUTBREAK_KEY_SEARCH = "search_body_outbreak_key";
     public static final string_id SID_YOU_FIND_NOTHING = new string_id(MENU_STRING_FILE, "you_find_nothing");
     public static final string_id SID_THIS_NOT_FOR_YOU = new string_id(MENU_STRING_FILE, "you_need_parts");
+    public fix_dungeon_comp_systems()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -42,6 +49,7 @@ public class fix_dungeon_comp_systems extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id(MENU_STRING_FILE, menuObjVar));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))

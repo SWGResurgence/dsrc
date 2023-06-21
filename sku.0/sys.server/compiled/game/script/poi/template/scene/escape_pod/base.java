@@ -1,5 +1,11 @@
 package script.poi.template.scene.escape_pod;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.locations;
 import script.library.utils;
 import script.location;
@@ -9,61 +15,67 @@ import java.util.Vector;
 
 public class base extends script.base_script
 {
-    public base()
-    {
-    }
     public static final String VAR_THEATER_BASE = "theater";
     public static final String VAR_CHILDREN = VAR_THEATER_BASE + ".children";
     public static final String VAR_BEEN_INITIALIZED = "beenInitialized";
     public static final String POD_DOOR = "object/static/structure/general/escape_pod_door.iff";
     public static final int MAX_DEBRIS = 3;
-    public static final String[] DEBRIS = 
-    {
-        "object/static/structure/tatooine/debris_tatt_crate_1.iff",
-        "object/static/structure/tatooine/debris_tatt_crate_metal_1.iff",
-        "object/tangible/container/drum/tatt_drum_1.iff"
-    };
+    public static final String[] DEBRIS =
+            {
+                    "object/static/structure/tatooine/debris_tatt_crate_1.iff",
+                    "object/static/structure/tatooine/debris_tatt_crate_metal_1.iff",
+                    "object/tangible/container/drum/tatt_drum_1.iff"
+            };
     public static final int MAX_MISC = 3;
-    public static final String[] MISC = 
+    public static final String[] MISC =
+            {
+                    "object/tangible/camp/camp_cot.iff",
+                    "object/tangible/camp/camp_lawn_chair.iff",
+                    "object/tangible/camp/camp_stool_short.iff",
+                    "object/tangible/camp/camp_stool_tall.iff",
+                    "object/tangible/camp/camp_tent_s1.iff"
+            };
+    public base()
     {
-        "object/tangible/camp/camp_cot.iff",
-        "object/tangible/camp/camp_lawn_chair.iff",
-        "object/tangible/camp/camp_stool_short.iff",
-        "object/tangible/camp/camp_stool_tall.iff",
-        "object/tangible/camp/camp_tent_s1.iff"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         randomizeDebris(self);
         setupTheater(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         cleanupTheater(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         cleanupTheater(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, VAR_BEEN_INITIALIZED))
         {
             destroyObject(self);
         }
-        else 
+        else
         {
             setObjVar(self, VAR_BEEN_INITIALIZED, true);
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean setupTheater(obj_id self) throws InterruptedException
     {
         if ((self == null) || (self == obj_id.NULL_ID))
@@ -80,7 +92,7 @@ public class base extends script.base_script
             if ((door == null) || (door == obj_id.NULL_ID))
             {
             }
-            else 
+            else
             {
                 randomizeDebris(door);
                 children = utils.addElement(children, door);
@@ -98,7 +110,7 @@ public class base extends script.base_script
                 if ((debrisId == null) || (debrisId == obj_id.NULL_ID))
                 {
                 }
-                else 
+                else
                 {
                     randomizeDebris(debrisId);
                     children = utils.addElement(children, debrisId);
@@ -116,7 +128,7 @@ public class base extends script.base_script
                 if ((debrisId == null) || (debrisId == obj_id.NULL_ID))
                 {
                 }
-                else 
+                else
                 {
                     setYaw(debrisId, rand(0, 359));
                     children = utils.addElement(children, debrisId);
@@ -127,13 +139,14 @@ public class base extends script.base_script
         {
             debugSpeakMsg(self, "no children?!");
         }
-        else 
+        else
         {
             setObjVar(self, VAR_CHILDREN, children);
             return true;
         }
         return false;
     }
+
     public boolean cleanupTheater(obj_id self) throws InterruptedException
     {
         if ((self == null) || (self == obj_id.NULL_ID))
@@ -141,21 +154,26 @@ public class base extends script.base_script
             self = getSelf();
         }
         obj_id[] children = getObjIdArrayObjVar(self, VAR_CHILDREN);
-        if ((children == null) || (children.length == 0))
+        if (children == null)
         {
             return false;
         }
-        else 
+        else
         {
-            for (obj_id child : children) {
-                if ((child == null) || (child == obj_id.NULL_ID)) {
-                } else {
+            for (obj_id child : children)
+            {
+                if ((child == null) || (child == obj_id.NULL_ID))
+                {
+                }
+                else
+                {
                     destroyObject(child);
                 }
             }
         }
         return false;
     }
+
     public boolean randomizeDebris(obj_id target) throws InterruptedException
     {
         if ((target == null) || (target == obj_id.NULL_ID))

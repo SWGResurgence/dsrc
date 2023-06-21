@@ -1,5 +1,11 @@
 package script.item.trap;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.utils;
@@ -10,6 +16,7 @@ public class trap_flash_bomb extends script.item.trap.trap_base
 {
     public static final int TRAP_DIFF = 40;
     public static final string_id SID_SYS_EFFECT = new string_id("trap/trap", "trap_flash_bomb_effect");
+
     public trap_flash_bomb()
     {
     }

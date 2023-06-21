@@ -1,5 +1,11 @@
 package script.theme_park.tatooine.mos_taike;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.quests;
@@ -11,6 +17,7 @@ public class player_escort extends script.base_script
     public player_escort()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location questLoc = getLocationObjVar(self, "mos_taike.mayor.vip_loc");
@@ -18,6 +25,7 @@ public class player_escort extends script.base_script
         addLocationTarget("spawnGuy", questLoc, 100);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         int questNum = getIntObjVar(self, "mos_taike.mayor_quest");
@@ -50,6 +58,7 @@ public class player_escort extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int finishQuest(obj_id self, dictionary params) throws InterruptedException
     {
         location questGiver = getLocationObjVar(self, "mos_taike.mayor.mayorLoc");

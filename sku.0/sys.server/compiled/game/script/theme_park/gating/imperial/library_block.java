@@ -1,5 +1,11 @@
 package script.theme_park.gating.imperial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.string_id;
 
@@ -8,6 +14,7 @@ public class library_block extends script.base_script
     public library_block()
     {
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -18,7 +25,7 @@ public class library_block extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             string_id warning = new string_id("theme_park_imperial/warning", "loam_redge");
             sendSystemMessage(item, warning);

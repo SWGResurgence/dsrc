@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.utils;
@@ -7,20 +13,22 @@ import script.obj_id;
 
 public class wave_event_player extends script.quest.task.ground.base_task
 {
-    public wave_event_player()
-    {
-    }
     public static final String dataTableColumnServerTemplate = "SERVER_TEMPLATE";
     public static final String dataTableColumnMenuText = "RETRIEVE_MENU_TEXT";
     public static final String taskType = "wave_event";
     public static final String dot = ".";
     public static final String RETRIEVE_ITEM_MUSIC = "sound/ui_received_quest_item.snd";
+    public wave_event_player()
+    {
+    }
+
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         String baseObjVar = groundquests.setBaseObjVar(self, taskType, questGetQuestName(questCrc), taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskActivated", taskType + " task activated.");
         return super.OnTaskActivated(self, questCrc, taskId);
     }
+
     public int questWaveEventCompleted(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id source = params.getObjId("source");
@@ -36,13 +44,15 @@ public class wave_event_player extends script.quest.task.ground.base_task
             java.util.Enumeration keys = tasks.keys();
             while (keys.hasMoreElements())
             {
-                String questCrcString = (String)keys.nextElement();
+                String questCrcString = (String) keys.nextElement();
                 int questCrc = utils.stringToInt(questCrcString);
                 int[] tasksForCurrentQuest = tasks.getIntArray(questCrcString);
-                for (int taskId : tasksForCurrentQuest) {
+                for (int taskId : tasksForCurrentQuest)
+                {
                     String baseObjVar = groundquests.getBaseObjVar(self, taskType, questGetQuestName(questCrc), taskId);
                     String retrieveTemplateName = groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableColumnServerTemplate);
-                    if (sourceTemplateName.equals(retrieveTemplateName)) {
+                    if (sourceTemplateName.equals(retrieveTemplateName))
+                    {
                         questCompleteTask(questCrc, taskId, self);
                     }
                 }
@@ -50,32 +60,38 @@ public class wave_event_player extends script.quest.task.ground.base_task
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTaskCompleted(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCompleted", taskType + " task completed.");
         return super.OnTaskCompleted(self, questCrc, taskId);
     }
+
     public int OnTaskFailed(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskFailed", taskType + " task failed.");
         return super.OnTaskFailed(self, questCrc, taskId);
     }
+
     public int OnTaskCleared(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCleared", taskType + " task cleared.");
         return super.OnTaskCleared(self, questCrc, taskId);
     }
+
     public int handleClientLogin(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void cleanup(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.clearBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         removeObjVar(self, groundquests.getTaskTypeObjVar(self, taskType));

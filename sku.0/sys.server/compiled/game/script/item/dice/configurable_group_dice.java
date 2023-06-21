@@ -1,5 +1,11 @@
 package script.item.dice;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.craftinglib;
 import script.library.debug;
@@ -12,6 +18,7 @@ public class configurable_group_dice extends script.item.dice.base.base_dice
     public static final int DEFAULT_FACE_COUNT = 20;
     public static final int NUMBER_OF_DICE = 1;
     public static final String TYPE_NAME = "configurable_group_dice";
+
     public configurable_group_dice()
     {
     }

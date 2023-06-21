@@ -1,13 +1,16 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class spawn extends script.quest.task.ground.base_task
 {
-    public spawn()
-    {
-    }
     public static final String dataTableColumnCreatureType = "CREATURE_TYPE";
     public static final String dataTableColumnMinCount = "MIN_COUNT";
     public static final String dataTableColumnMaxCount = "MAX_COUNT";
@@ -38,6 +41,10 @@ public class spawn extends script.quest.task.ground.base_task
     public static final float cleanupRetryTime = 60.0f;
     public static final String scriptSpawnOnCreature = "quest.task.ground.spawn_on_creature";
     public static final String scriptSpawnOnShip = "quest.task.ground.spawn_on_ship";
+    public spawn()
+    {
+    }
+
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskActivated", taskType + " task activated.");
@@ -53,11 +60,12 @@ public class spawn extends script.quest.task.ground.base_task
         dictionary params = new dictionary();
         params.put("questCrc", questCrc);
         params.put("taskId", taskId);
-        float playerPlayedTimeWhenTimerEnds = (float)getPlayerPlayedTime(self) + timeLeft;
+        float playerPlayedTimeWhenTimerEnds = (float) getPlayerPlayedTime(self) + timeLeft;
         setObjVar(self, baseObjVar + "." + objvarPlayedTimeEnd, playerPlayedTimeWhenTimerEnds);
         messageTo(self, "messageStartQuestSpawn", params, timeLeft, true);
         return super.OnTaskActivated(self, questCrc, taskId);
     }
+
     public int messageStartQuestSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         int questCrc = params.getInt("questCrc");
@@ -83,13 +91,14 @@ public class spawn extends script.quest.task.ground.base_task
             {
                 startSpaceQuestSpawn(self, questCrc, taskId);
             }
-            else 
+            else
             {
                 startGroundQuestSpawn(self, questCrc, taskId);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void startGroundQuestSpawn(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         String creatureType = groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableColumnCreatureType);
@@ -146,7 +155,7 @@ public class spawn extends script.quest.task.ground.base_task
             {
                 l = groundquests.getRandom2DLocationAroundPlayer(player, minRadius, maxRadius);
             }
-            else 
+            else
             {
                 String strCell = getCellName(locTest.cell);
                 obj_id objBuilding = getTopMostContainer(player);
@@ -169,7 +178,7 @@ public class spawn extends script.quest.task.ground.base_task
                 }
                 creature = create.createCreature(creatureType, l, creatureLevel, true);
             }
-            else 
+            else
             {
                 creature = create.createCreature(creatureType, l, true);
             }
@@ -189,8 +198,8 @@ public class spawn extends script.quest.task.ground.base_task
             }
         }
         questCompleteTask(questCrc, taskId, player);
-        return;
     }
+
     public void startSpaceQuestSpawn(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(player, questCrc, taskId, taskType, "startSpaceQuestSpawn", "Space spawn started!");
@@ -254,43 +263,50 @@ public class spawn extends script.quest.task.ground.base_task
             ship_ai.squadSetFormationRandom(squad);
         }
         questCompleteTask(questCrc, taskId, player);
-        return;
     }
+
     public int OnTaskCompleted(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCompleted", taskType + " task completed.");
         return super.OnTaskCompleted(self, questCrc, taskId);
     }
+
     public int OnTaskFailed(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskFailed", taskType + " task failed.");
         return super.OnTaskFailed(self, questCrc, taskId);
     }
+
     public int OnTaskCleared(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCleared", taskType + " task cleared.");
         return super.OnTaskCleared(self, questCrc, taskId);
     }
+
     public void cleanup(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.clearBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         removeObjVar(self, groundquests.getTaskTypeObjVar(self, taskType));
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

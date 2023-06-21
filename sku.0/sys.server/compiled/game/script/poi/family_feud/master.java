@@ -1,5 +1,11 @@
 package script.poi.family_feud;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.scenario;
 import script.library.utils;
@@ -10,9 +16,6 @@ import java.util.Vector;
 
 public class master extends script.theme_park.poi.base
 {
-    public master()
-    {
-    }
     public static final String SCENARIO_NAME = "family_feud";
     public static final String BASE_PATH = "poi." + SCENARIO_NAME;
     public static final String SCRIPT_MASTER = BASE_PATH + ".master";
@@ -28,6 +31,10 @@ public class master extends script.theme_park.poi.base
     public static final String VAR_ONLINE_STATUS = "scenario.onlineStatus";
     public static final String VAR_MEDIATOR_ONLINE = VAR_ONLINE_STATUS + ".mediator";
     public static final String VAR_ANTAGONIST_ONLINE = VAR_ONLINE_STATUS + ".antagonist";
+    public master()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "************ POI LAUNCH: " + getGameTime() + " ************");
@@ -66,7 +73,7 @@ public class master extends script.theme_park.poi.base
             scenario.cleanup(self);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             persistObject(mStructure);
             attachScript(mStructure, SCRIPT_MEDIATOR_STRUCTURE);
@@ -76,11 +83,13 @@ public class master extends script.theme_park.poi.base
         messageTo(self, scenario.HANDLER_TIMER, null, 86400, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, VAR_UNLOAD_NEXT_INIT))
@@ -94,6 +103,7 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int initScenario(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(self, "initScenario: entered...");
@@ -117,7 +127,7 @@ public class master extends script.theme_park.poi.base
             scenario.cleanup(self);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             persistObject(aStructure);
             attachScript(aStructure, SCRIPT_ANTAGONIST_STRUCTURE);
@@ -127,22 +137,26 @@ public class master extends script.theme_park.poi.base
         debugServerConsoleMsg(self, "initScenario: exiting...");
         return SCRIPT_CONTINUE;
     }
+
     public int runScenario(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(self, "runScenario: entered...");
         debugServerConsoleMsg(self, "runScenario: exiting...");
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupScenario(obj_id self, dictionary params) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleActorDeath(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -170,7 +184,7 @@ public class master extends script.theme_park.poi.base
             setObjVar(self, scenario.VAR_ANTAGONIST_COUNT, cnt);
             victors = scenario.getActorsWithNamePrefix(self, scenario.MEDIATOR);
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "Unknown actor death!");
         }
@@ -181,19 +195,20 @@ public class master extends script.theme_park.poi.base
             if ((victors == null) || (victors.length == 0))
             {
             }
-            else 
+            else
             {
-                for (obj_id victor : victors) {
-                    switch (rand(1, 2)) {
-                        case 1:
-                            messageTo(victor, scenario.HANDLER_VICTORY, null, 1, false);
-                            break;
+                for (obj_id victor : victors)
+                {
+                    if (rand(1, 2) == 1)
+                    {
+                        messageTo(victor, scenario.HANDLER_VICTORY, null, 1, false);
                     }
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTimer(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, VAR_UNLOAD_NEXT_INIT))
@@ -205,13 +220,14 @@ public class master extends script.theme_park.poi.base
                 scenario.cleanup(self);
             }
         }
-        else 
+        else
         {
             setObjVar(self, VAR_UNLOAD_NEXT_INIT, true);
             messageTo(self, scenario.HANDLER_TIMER, null, 600 + rand(-300, 300), true);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleOnlineStatusUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -225,18 +241,17 @@ public class master extends script.theme_park.poi.base
         {
             varPath = VAR_ANTAGONIST_ONLINE;
         }
-        else 
+        else
         {
             varPath = VAR_MEDIATOR_ONLINE;
         }
-        switch (status)
+        if (status == scenario.ONLINE)
         {
-            case scenario.ONLINE:
             setObjVar(self, varPath, true);
-            break;
-            default:
+        }
+        else
+        {
             setObjVar(self, varPath, false);
-            break;
         }
         return SCRIPT_CONTINUE;
     }

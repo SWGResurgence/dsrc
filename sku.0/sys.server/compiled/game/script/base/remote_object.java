@@ -1,10 +1,13 @@
 package script.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 public class remote_object extends script.base_script
 {
-    public remote_object()
-    {
-    }
     public static final String REMOTE_OBJECT_MANAGER = "remote_object_manager";
     public static final String BASE_NAME = "remote_object";
     public static final String ATTACH_SCRIPTS = BASE_NAME + ".attachScripts";
@@ -23,14 +26,20 @@ public class remote_object extends script.base_script
     public static final String CREATE_REMOTE_OBJECT_RESPONSE = "createRemoteObjectResponse";
     public static final String RO = "RemoteObject";
     public static final boolean LOGS_ENABLED = false;
+    public remote_object()
+    {
+    }
+
     public void log(String text) throws InterruptedException
     {
         log(text, LOGS_ENABLED);
     }
+
     public void logError(String text) throws InterruptedException
     {
         log("Error:" + text, true);
     }
+
     public void log(String text, boolean force) throws InterruptedException
     {
         if (LOGS_ENABLED || force)
@@ -38,6 +47,7 @@ public class remote_object extends script.base_script
             LOG(RO, text);
         }
     }
+
     public boolean logsEnabled() throws InterruptedException
     {
         return LOGS_ENABLED;

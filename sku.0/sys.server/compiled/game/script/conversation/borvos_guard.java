@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -8,102 +14,87 @@ import script.library.utils;
 
 public class borvos_guard extends script.base_script
 {
+    public static String c_stringFile = "conversation/borvos_guard";
+
     public borvos_guard()
     {
     }
-    public static String c_stringFile = "conversation/borvos_guard";
+
     public boolean borvos_guard_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean borvos_guard_condition_finishedJobONe(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/borvos_guard_dagorel", "returningFromDagorel") || groundquests.hasCompletedQuest(player, "quest/borvos_guard_dagorel"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/borvos_guard_dagorel", "returningFromDagorel") || groundquests.hasCompletedQuest(player, "quest/borvos_guard_dagorel");
     }
+
     public boolean borvos_guard_condition_finishedJobTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/borvos_guard_frangee", "returningAfterKillingFrangee") || groundquests.hasCompletedQuest(player, "quest/borvos_guard_frangee"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/borvos_guard_frangee", "returningAfterKillingFrangee") || groundquests.hasCompletedQuest(player, "quest/borvos_guard_frangee");
     }
+
     public boolean borvos_guard_condition_onJobOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, "quest/borvos_guard_dagorel"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isQuestActive(player, "quest/borvos_guard_dagorel");
     }
+
     public boolean borvos_guard_condition_onJobTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, "quest/borvos_guard_frangee"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isQuestActive(player, "quest/borvos_guard_frangee");
     }
+
     public boolean borvos_guard_condition_onJobThree(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, "quest/borvos_guard_corellia"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isQuestActive(player, "quest/borvos_guard_corellia");
     }
+
     public boolean borvos_guard_condition_finishedJobThree(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "quest/borvos_guard_corellia", "returningWithBorvosStuff"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isTaskActive(player, "quest/borvos_guard_corellia", "returningWithBorvosStuff");
     }
+
     public boolean borvos_guard_condition_workingForBorvo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedQuest(player, "quest/borvos_guard_corellia"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedQuest(player, "quest/borvos_guard_corellia");
     }
+
     public boolean borvos_guard_condition_isOnHuffQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, "quest/huffs_guard_rifle"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isQuestActive(player, "quest/huffs_guard_rifle");
     }
+
     public void borvos_guard_action_giveJobOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/borvos_guard_dagorel");
     }
+
     public void borvos_guard_action_giveJobTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/borvos_guard_frangee");
     }
+
     public void borvos_guard_action_giveJobThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/borvos_guard_corellia");
     }
+
     public void borvos_guard_action_signalJobOneDone(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "finishedJobOne");
     }
+
     public void borvos_guard_action_signalJobTwoDone(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "finishedJobTwo");
     }
+
     public void borvos_guard_action_signalJobThreeDone(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "finishedJobThree");
     }
+
     public int borvos_guard_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_21"))
@@ -151,7 +142,7 @@ public class borvos_guard extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_26");
@@ -164,7 +155,7 @@ public class borvos_guard extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvos_guard.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -174,6 +165,7 @@ public class borvos_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvos_guard_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_26"))
@@ -199,6 +191,7 @@ public class borvos_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvos_guard_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_18"))
@@ -246,7 +239,7 @@ public class borvos_guard extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -259,7 +252,7 @@ public class borvos_guard extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvos_guard.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -269,6 +262,7 @@ public class borvos_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvos_guard_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -294,6 +288,7 @@ public class borvos_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvos_guard_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -320,7 +315,7 @@ public class borvos_guard extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -333,7 +328,7 @@ public class borvos_guard extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvos_guard.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -364,6 +359,7 @@ public class borvos_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvos_guard_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -389,6 +385,7 @@ public class borvos_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -398,11 +395,13 @@ public class borvos_guard extends script.base_script
         messageTo(self, "handleSetConversable", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleSetConversable", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetConversable(obj_id self, dictionary params) throws InterruptedException
     {
         if (isInvulnerable(self))
@@ -410,7 +409,7 @@ public class borvos_guard extends script.base_script
             setCondition(self, CONDITION_CONVERSABLE);
             setCondition(self, CONDITION_SPACE_INTERESTING);
         }
-        else 
+        else
         {
             clearCondition(self, CONDITION_CONVERSABLE);
             clearCondition(self, CONDITION_SPACE_INTERESTING);
@@ -418,6 +417,7 @@ public class borvos_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         if (isInvulnerable(self))
@@ -430,18 +430,21 @@ public class borvos_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.borvos_guard");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -498,7 +501,7 @@ public class borvos_guard extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_21");
@@ -514,7 +517,7 @@ public class borvos_guard extends script.base_script
                 utils.setScriptVar(player, "conversation.borvos_guard.branchId", 4);
                 npcStartConversation(player, npc, "borvos_guard", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -556,7 +559,7 @@ public class borvos_guard extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_18");
@@ -572,7 +575,7 @@ public class borvos_guard extends script.base_script
                 utils.setScriptVar(player, "conversation.borvos_guard.branchId", 8);
                 npcStartConversation(player, npc, "borvos_guard", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -613,7 +616,7 @@ public class borvos_guard extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -629,7 +632,7 @@ public class borvos_guard extends script.base_script
                 utils.setScriptVar(player, "conversation.borvos_guard.branchId", 12);
                 npcStartConversation(player, npc, "borvos_guard", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -644,6 +647,7 @@ public class borvos_guard extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("borvos_guard"))

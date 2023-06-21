@@ -1,5 +1,11 @@
 package script.gambling.wheel;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -8,31 +14,32 @@ import script.string_id;
 
 public class roulette extends script.gambling.base.wheel
 {
+    private static final String GAME_TYPE = "roulette";
+    private static final int[] RED_NUMBERS =
+            {
+                    1,
+                    3,
+                    5,
+                    7,
+                    9,
+                    12,
+                    14,
+                    16,
+                    18,
+                    19,
+                    21,
+                    23,
+                    25,
+                    27,
+                    30,
+                    32,
+                    34,
+                    36
+            };
     public roulette()
     {
     }
-    private static final String GAME_TYPE = "roulette";
-    private static final int[] RED_NUMBERS =
-    {
-        1,
-        3,
-        5,
-        7,
-        9,
-        12,
-        14,
-        16,
-        18,
-        19,
-        21,
-        23,
-        25,
-        27,
-        30,
-        32,
-        34,
-        36
-    };
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         cleanupWheelGame(self);
@@ -44,6 +51,7 @@ public class roulette extends script.gambling.base.wheel
         gambling.initializeTable(self, gameType);
         return super.OnInitialize(self);
     }
+
     public int handleBetPlaced(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -110,6 +118,7 @@ public class roulette extends script.gambling.base.wheel
         transferBankCreditsTo(self, player, amt, "noHandler", "noHandler", new dictionary());
         return SCRIPT_CONTINUE;
     }
+
     public int handleWheelSpinning(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -130,7 +139,8 @@ public class roulette extends script.gambling.base.wheel
             switch (cnt)
             {
                 case 2:
-                    for (obj_id player : players) {
+                    for (obj_id player : players)
+                    {
                         sendSystemMessage(player, new string_id(gambling.STF_INTERFACE, "wheel_begin_slow"));
                     }
                     break;
@@ -138,21 +148,23 @@ public class roulette extends script.gambling.base.wheel
                     int result = getResult();
                     String sResult = getResultString(result);
                     prose_package pp = prose.getPackage(new string_id(gambling.STF_INTERFACE, "prose_wheel_slow"), sResult, getResultColor(result));
-                    for (obj_id player : players) {
+                    for (obj_id player : players)
+                    {
                         sendSystemMessageProse(player, pp);
                     }
                     params.put("result", result);
                     delay = 10.0f;
                     break;
                 default:
-                    for (obj_id player : players) {
+                    for (obj_id player : players)
+                    {
                         sendSystemMessage(player, new string_id(gambling.STF_INTERFACE, "wheel_spinning"));
                     }
                     break;
             }
             messageTo(self, "handleWheelSpinning", params, delay, false);
         }
-        else 
+        else
         {
             int result = getResult();
             String newResult = getResultString(result);
@@ -160,7 +172,8 @@ public class roulette extends script.gambling.base.wheel
             prose_package pp = prose.getPackage(new string_id(gambling.STF_INTERFACE, "prose_result_change"), newResult, getResultColor(result));
             if (pp != null)
             {
-                for (obj_id player : players) {
+                for (obj_id player : players)
+                {
                     sendSystemMessageProse(player, pp);
                 }
             }
@@ -168,6 +181,7 @@ public class roulette extends script.gambling.base.wheel
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleParseResults(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -187,47 +201,62 @@ public class roulette extends script.gambling.base.wheel
         int gameTime = getGameTime();
         String ovpath;
         dictionary d;
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             int total = 0;
             CustomerServiceLog("gambling", gameTime + ": player = " + player + " : " + getName(player));
             int playerIdx = gambling.getGamePlayerIndex(self, player);
-            if (playerIdx > -1) {
+            if (playerIdx > -1)
+            {
                 ovpath = gambling.VAR_GAME_PLAYERS + "." + playerIdx + ".bet." + sResult;
-                if (hasObjVar(self, ovpath)) {
+                if (hasObjVar(self, ovpath))
+                {
                     int spotBet = getIntObjVar(self, ovpath);
                     int spotPayout = (spotBet * 36) + spotBet;
                     total += spotPayout;
                     CustomerServiceLog("gambling", gameTime + ": (" + player + ") has spot bet -> payout = " + spotPayout);
                 }
-                if (result > 0) {
+                if (result > 0)
+                {
                     ovpath = gambling.VAR_GAME_PLAYERS + "." + playerIdx + ".bet." + resultColor;
-                    if (hasObjVar(self, ovpath)) {
+                    if (hasObjVar(self, ovpath))
+                    {
                         int colorBet = getIntObjVar(self, ovpath);
                         int colorPayout = 2 * colorBet;
                         total += colorPayout;
                         CustomerServiceLog("gambling", gameTime + ": (" + player + ") has color bet -> payout = " + colorPayout);
                     }
                 }
-                if (result > 0) {
-                    if (result % 2 == 0) {
+                if (result > 0)
+                {
+                    if (result % 2 == 0)
+                    {
                         ovpath = gambling.VAR_GAME_PLAYERS + "." + playerIdx + ".bet.even";
-                    } else {
+                    }
+                    else
+                    {
                         ovpath = gambling.VAR_GAME_PLAYERS + "." + playerIdx + ".bet.odd";
                     }
-                    if (hasObjVar(self, ovpath)) {
+                    if (hasObjVar(self, ovpath))
+                    {
                         int evenOddBet = getIntObjVar(self, ovpath);
                         int evenOddPayout = 2 * evenOddBet;
                         total += evenOddPayout;
                         CustomerServiceLog("gambling", gameTime + ": (" + player + ") has even/odd bet -> payout = " + evenOddPayout);
                     }
                 }
-                if (result > 0) {
-                    if (result > 18) {
+                if (result > 0)
+                {
+                    if (result > 18)
+                    {
                         ovpath = gambling.VAR_GAME_PLAYERS + "." + playerIdx + ".bet.high";
-                    } else {
+                    }
+                    else
+                    {
                         ovpath = gambling.VAR_GAME_PLAYERS + "." + playerIdx + ".bet.low";
                     }
-                    if (hasObjVar(self, ovpath)) {
+                    if (hasObjVar(self, ovpath))
+                    {
                         int hiLoBet = getIntObjVar(self, ovpath);
                         int hiLoPayout = 2 * hiLoBet;
                         total += hiLoPayout;
@@ -236,12 +265,15 @@ public class roulette extends script.gambling.base.wheel
                 }
             }
             CustomerServiceLog("gambling", getGameTime() + ": (" + player + ") total payout = " + total);
-            if (total > 0) {
+            if (total > 0)
+            {
                 d = new dictionary();
                 d.put("player", player);
                 d.put("payout", total);
                 transferBankCreditsFromNamedAccount(money.ACCT_ROULETTE, player, total, "handleGamblingPayout", "noHandler", d);
-            } else {
+            }
+            else
+            {
                 broadcast(player, "Sorry, you did not win this round. Please try again.");
             }
         }
@@ -249,6 +281,7 @@ public class roulette extends script.gambling.base.wheel
         messageTo(self, "handleDelayedRestart", null, 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     private boolean isValidBet(obj_id self, String arg) throws InterruptedException
     {
         if (!isIdValid(self) || arg == null || arg.equals(""))
@@ -266,25 +299,29 @@ public class roulette extends script.gambling.base.wheel
         int tmp = utils.stringToInt(arg);
         return tmp >= 0 && tmp <= 36;
     }
+
     public int getResult() throws InterruptedException
     {
         return rand(-1, 36);
     }
+
     private String getResultString(int roll) throws InterruptedException
     {
         if (roll == -1)
         {
             return "00";
         }
-        else 
+        else
         {
             return Integer.toString(roll);
         }
     }
+
     public String getResultString() throws InterruptedException
     {
         return getResultString(getResult());
     }
+
     private String getResultColor(int result) throws InterruptedException
     {
         if (result == 0 || result == -1)
@@ -297,6 +334,7 @@ public class roulette extends script.gambling.base.wheel
         }
         return "black";
     }
+
     private void cleanupWheelGame(obj_id self) throws InterruptedException
     {
         int bank = getBankBalance(self);
@@ -308,15 +346,18 @@ public class roulette extends script.gambling.base.wheel
         if (players != null && players.length > 0)
         {
             String ovpath;
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 int idx = gambling.getGamePlayerIndex(self, player);
                 ovpath = gambling.VAR_GAME_PLAYERS + "." + player + ".pid";
-                if (utils.hasScriptVar(self, ovpath)) {
+                if (utils.hasScriptVar(self, ovpath))
+                {
                     int oldpid = utils.getIntScriptVar(self, ovpath);
                     sui.closeSUI(player, oldpid);
                 }
                 ovpath = gambling.VAR_GAME_PLAYERS + "." + idx + ".bet";
-                if (!hasObjVar(self, ovpath)) {
+                if (!hasObjVar(self, ovpath))
+                {
                     gambling.removeTablePlayer(self, player, "");
                 }
             }

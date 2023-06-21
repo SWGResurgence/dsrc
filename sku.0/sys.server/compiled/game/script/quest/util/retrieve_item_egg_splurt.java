@@ -1,5 +1,11 @@
 package script.quest.util;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.location;
 import script.menu_info_types;
@@ -10,6 +16,7 @@ public class retrieve_item_egg_splurt extends script.base_script
     public retrieve_item_egg_splurt()
     {
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         location here = getLocation(player);

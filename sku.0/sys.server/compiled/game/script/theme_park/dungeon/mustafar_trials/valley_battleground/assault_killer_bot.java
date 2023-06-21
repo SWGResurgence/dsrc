@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.valley_battleground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.trial;
@@ -11,16 +17,19 @@ import java.util.Vector;
 
 public class assault_killer_bot extends script.base_script
 {
+    public static final boolean LOGGING = false;
+
     public assault_killer_bot()
     {
     }
-    public static final boolean LOGGING = false;
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         trial.prepareCorpse(self);
         utils.setScriptVar(self, trial.BATTLEFIELD_DROID_CORPSE, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         findWayPoints(self);
@@ -30,9 +39,10 @@ public class assault_killer_bot extends script.base_script
         setHibernationDelay(self, 7200);
         return SCRIPT_CONTINUE;
     }
+
     public void findWayPoints(obj_id self) throws InterruptedException
     {
-        obj_id objects[] = getObjectsInRange(self, 400);
+        obj_id[] objects = getObjectsInRange(self, 400);
         if (objects == null || objects.length == 0)
         {
             doLogging("findWayPoints", "Contents list was empty, exiting");
@@ -43,7 +53,7 @@ public class assault_killer_bot extends script.base_script
         {
             pathNum = utils.getIntScriptVar(self, "path");
         }
-        else 
+        else
         {
             String[] paths = dataTableGetStringColumn(trial.VALLEY_DATA, "path");
             pathNum = rand(0, paths.length - 1);
@@ -57,10 +67,14 @@ public class assault_killer_bot extends script.base_script
         }
         Vector waypoints = new Vector();
         waypoints.setSize(0);
-        for (String s : pathList) {
-            for (obj_id object : objects) {
-                if (hasObjVar(object, "wp_name")) {
-                    if (s.equals(getStringObjVar(object, "wp_name"))) {
+        for (String s : pathList)
+        {
+            for (obj_id object : objects)
+            {
+                if (hasObjVar(object, "wp_name"))
+                {
+                    if (s.equals(getStringObjVar(object, "wp_name")))
+                    {
                         utils.addElement(waypoints, getLocation(object));
                     }
                 }
@@ -84,12 +98,14 @@ public class assault_killer_bot extends script.base_script
         }
         utils.setScriptVar(self, "patrolPoints", patrolPoints);
     }
+
     public int pathToNextPoint(obj_id self, dictionary params) throws InterruptedException
     {
         location[] patrolPoints = utils.getLocationArrayScriptVar(self, "patrolPoints");
         ai_lib.setPatrolOncePath(self, patrolPoints);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VALLEY_LOGGING)

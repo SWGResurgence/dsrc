@@ -1,5 +1,11 @@
 package script.developer.soe.e3demo;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ship_ai;
 import script.library.space_create;
@@ -10,45 +16,48 @@ import script.vector;
 
 public class spawner_nebulon extends script.base_script
 {
+    public static final String[] ATTACKER_LIST =
+            {
+                    "tiefighter",
+                    "tiefighter",
+                    "tiefighter",
+                    "tiefighter",
+                    "tiefighter",
+                    "tiefighter",
+                    "tiefighter",
+                    "tieinterceptor",
+                    "tieinterceptor",
+                    "tieinterceptor",
+                    "tiebomber",
+                    "tiebomber",
+                    "tiebomber",
+                    "tiebomber"
+            };
+    public static final String[] DEFENDER_LIST =
+            {
+                    "xwing",
+                    "xwing",
+                    "xwing",
+                    "xwing",
+                    "ywing_average",
+                    "ywing_average",
+                    "ywing_average"
+            };
     public spawner_nebulon()
     {
     }
-    public static final String[] ATTACKER_LIST = 
-    {
-        "tiefighter",
-        "tiefighter",
-        "tiefighter",
-        "tiefighter",
-        "tiefighter",
-        "tiefighter",
-        "tiefighter",
-        "tieinterceptor",
-        "tieinterceptor",
-        "tieinterceptor",
-        "tiebomber",
-        "tiebomber",
-        "tiebomber",
-        "tiebomber"
-    };
-    public static final String[] DEFENDER_LIST = 
-    {
-        "xwing",
-        "xwing",
-        "xwing",
-        "xwing",
-        "ywing_average",
-        "ywing_average",
-        "ywing_average"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         removeObjVar(self, "intNoDump");
         return SCRIPT_CONTINUE;
     }
+
     public int OnShipWasHit(obj_id self, obj_id objAttacker, int intWeaponIndex, boolean isMissile, int missileType, int intTargetedComponent, boolean fromPlayerAutoTurret, float hitLocationX_o, float hitLocationY_o, float hitLocationZ_o) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int spawnNebulon(obj_id self, dictionary params) throws InterruptedException
     {
         transform trMyTransform = getTransform_o2w(self);
@@ -65,14 +74,17 @@ public class spawner_nebulon extends script.base_script
         space_utils.notifyObject(self, "startNebulonAttack", dctParams);
         return SCRIPT_CONTINUE;
     }
+
     public int startNebulonAttack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objFoo = null;
         obj_id objFoo2 = null;
-        for (String s : DEFENDER_LIST) {
+        for (String s : DEFENDER_LIST)
+        {
             transform trNewTransform = space_utils.getRandomPositionInSphere(getTransform_o2w(self), 100, 150, true);
             obj_id objShip = space_create.createShip(s, trNewTransform, null);
-            if (isIdValid(objShip)) {
+            if (isIdValid(objShip))
+            {
                 objFoo = objShip;
                 setObjVar(objShip, "intNebulon", 1);
                 setObjVar(objShip, "strType", s);
@@ -80,7 +92,9 @@ public class spawner_nebulon extends script.base_script
                 setObjVar(objShip, "intNoDump", 1);
                 setObjVar(objShip, "objNebulon", self);
                 attachScript(objShip, "e3demo.nebulon_child_object");
-            } else {
+            }
+            else
+            {
                 LOG("space", "BAD DEFENDER NEBULON E3 SHIP OF TYPE " + s);
             }
         }
@@ -101,7 +115,7 @@ public class spawner_nebulon extends script.base_script
                 obj_id objBuddy = getObjIdObjVar(self, "objBuddy");
                 ship_ai.spaceAttack(objShip, objBuddy);
             }
-            else 
+            else
             {
                 LOG("space", "BAD DEFENDER NEBULON E3 SHIP OF TYPE " + DEFENDER_LIST[intI]);
             }
@@ -109,6 +123,7 @@ public class spawner_nebulon extends script.base_script
         ship_ai.spaceAttack(objFoo, objFoo2);
         return SCRIPT_CONTINUE;
     }
+
     public int shipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         String strType = params.getString("strType");

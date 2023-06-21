@@ -1,66 +1,87 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class outbreak_rodian_pilot extends script.base_script
 {
+    public static String c_stringFile = "conversation/outbreak_rodian_pilot";
+
     public outbreak_rodian_pilot()
     {
     }
-    public static String c_stringFile = "conversation/outbreak_rodian_pilot";
+
     public boolean outbreak_rodian_pilot_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean outbreak_rodian_pilot_condition_hasCollectionSlotAlpha(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollectionSlot(player, "exp_icon_deathtroopers_camp_alpha");
     }
+
     public boolean outbreak_rodian_pilot_condition_has100Credits(obj_id player, obj_id npc) throws InterruptedException
     {
         return money.hasFunds(player, money.MT_TOTAL, 100);
     }
+
     public boolean outbreak_rodian_pilot_condition_hasCollectionSlotEpsilon(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollectionSlot(player, "exp_icon_deathtroopers_camp_epsilon");
     }
+
     public boolean outbreak_rodian_pilot_condition_hasCollectionSlotDelta(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollectionSlot(player, "exp_icon_deathtroopers_camp_delta");
     }
+
     public boolean outbreak_rodian_pilot_condition_hasCollectionSlotBeta(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollectionSlot(player, "exp_icon_deathtroopers_camp_beta");
     }
+
     public boolean outbreak_rodian_pilot_condition_hasCollectionSlotGamma(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollectionSlot(player, "exp_icon_deathtroopers_camp_gamma");
     }
+
     public boolean outbreak_rodian_pilot_condition_has500Credits(obj_id player, obj_id npc) throws InterruptedException
     {
         return money.hasFunds(player, money.MT_TOTAL, 500);
     }
+
     public boolean outbreak_rodian_pilot_condition_has1000Credits(obj_id player, obj_id npc) throws InterruptedException
     {
         return money.hasFunds(player, money.MT_TOTAL, 1000);
     }
+
     public boolean outbreak_rodian_pilot_condition_has1500Credits(obj_id player, obj_id npc) throws InterruptedException
     {
         return money.hasFunds(player, money.MT_TOTAL, 1500);
     }
+
     public boolean outbreak_rodian_pilot_condition_has2000Credits(obj_id player, obj_id npc) throws InterruptedException
     {
         return money.hasFunds(player, money.MT_TOTAL, 2000);
     }
+
     public boolean outbreak_rodian_pilot_condition_hasFrequentFlyerBadge(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollection(player, "deathtrooper_rodian_frequent_flyer");
     }
+
     public boolean outbreak_rodian_pilot_condition_isEligibleForTrans(obj_id player, obj_id npc) throws InterruptedException
     {
         return outbreak_rodian_pilot_condition_hasCollectionSlotAlpha(player, npc) && (groundquests.hasCompletedQuest(player, "outbreak_quest_01_imperial") || groundquests.hasCompletedQuest(player, "outbreak_quest_01_rebel") || groundquests.hasCompletedQuest(player, "outbreak_quest_01_neutral")) || isGod(player);
     }
+
     public void outbreak_rodian_pilot_action_dropOffAlphaForCredits(obj_id player, obj_id npc) throws InterruptedException
     {
         if (money.requestPayment(player, npc, 100, "pass_fail", null, true))
@@ -73,6 +94,7 @@ public class outbreak_rodian_pilot extends script.base_script
             warpPlayer(player, "dathomir", -5925, 559, -6667, null, -5925, 559, -6667, null, true);
         }
     }
+
     public void outbreak_rodian_pilot_action_dropOffBetaForCredits(obj_id player, obj_id npc) throws InterruptedException
     {
         if (money.requestPayment(player, npc, 500, "pass_fail", null, true))
@@ -85,6 +107,7 @@ public class outbreak_rodian_pilot extends script.base_script
             warpPlayer(player, "dathomir", -6283, 561, -7521, null, -6283, 561, -7521, null, true);
         }
     }
+
     public void outbreak_rodian_pilot_action_dropOffGammaForCredits(obj_id player, obj_id npc) throws InterruptedException
     {
         if (money.requestPayment(player, npc, 1000, "pass_fail", null, true))
@@ -97,6 +120,7 @@ public class outbreak_rodian_pilot extends script.base_script
             warpPlayer(player, "dathomir", -6824, 553, -6456, null, -6824, 553, -6456, null, true);
         }
     }
+
     public void outbreak_rodian_pilot_action_dropOffDeltaForCredits(obj_id player, obj_id npc) throws InterruptedException
     {
         if (money.requestPayment(player, npc, 1500, "pass_fail", null, true))
@@ -109,6 +133,7 @@ public class outbreak_rodian_pilot extends script.base_script
             warpPlayer(player, "dathomir", -7145, 562, -6922, null, -7145, 562, -6922, null, true);
         }
     }
+
     public void outbreak_rodian_pilot_action_dropOffEpsilonForCredits(obj_id player, obj_id npc) throws InterruptedException
     {
         if (money.requestPayment(player, npc, 2000, "pass_fail", null, true))
@@ -121,37 +146,44 @@ public class outbreak_rodian_pilot extends script.base_script
             warpPlayer(player, "dathomir", -7448, 570, -7342, null, -7448, 570, -7342, null, true);
         }
     }
+
     public void outbreak_rodian_pilot_action_AlphaFree(obj_id player, obj_id npc) throws InterruptedException
     {
         outbreak_rodian_pilot_action_applyBuffs(player, npc);
         warpPlayer(player, "dathomir", -5925, 559, -6667, null, -5925, 559, -6667, null, true);
     }
+
     public void outbreak_rodian_pilot_action_EpsilonFree(obj_id player, obj_id npc) throws InterruptedException
     {
         outbreak_rodian_pilot_action_applyBuffs(player, npc);
         warpPlayer(player, "dathomir", -7448, 570, -7342, null, -7448, 570, -7342, null, true);
     }
+
     public void outbreak_rodian_pilot_action_DeltaFree(obj_id player, obj_id npc) throws InterruptedException
     {
         outbreak_rodian_pilot_action_applyBuffs(player, npc);
         warpPlayer(player, "dathomir", -7145, 562, -6922, null, -7145, 562, -6922, null, true);
     }
+
     public void outbreak_rodian_pilot_action_GammaFree(obj_id player, obj_id npc) throws InterruptedException
     {
         outbreak_rodian_pilot_action_applyBuffs(player, npc);
         warpPlayer(player, "dathomir", -6824, 553, -6456, null, -6824, 553, -6456, null, true);
     }
+
     public void outbreak_rodian_pilot_action_BetaFree(obj_id player, obj_id npc) throws InterruptedException
     {
         outbreak_rodian_pilot_action_applyBuffs(player, npc);
         warpPlayer(player, "dathomir", -6283, 561, -7521, null, -6283, 561, -7521, null, true);
     }
+
     public void outbreak_rodian_pilot_action_applyBuffs(obj_id player, obj_id npc) throws InterruptedException
     {
         messageTo(player, "death_troopers_apply_virus", null, 10.0f, false);
         setObjVar(player, "outbreak.usedGate", 1);
         buff.applyBuff(player, "death_troopers_no_vehicle");
     }
+
     public int outbreak_rodian_pilot_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_49"))
@@ -211,6 +243,7 @@ public class outbreak_rodian_pilot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int outbreak_rodian_pilot_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32"))
@@ -230,7 +263,7 @@ public class outbreak_rodian_pilot extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_75");
@@ -239,7 +272,7 @@ public class outbreak_rodian_pilot extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.outbreak_rodian_pilot.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -249,6 +282,7 @@ public class outbreak_rodian_pilot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int outbreak_rodian_pilot_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_75"))
@@ -296,7 +330,7 @@ public class outbreak_rodian_pilot extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_20");
@@ -321,7 +355,7 @@ public class outbreak_rodian_pilot extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.outbreak_rodian_pilot.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -331,6 +365,7 @@ public class outbreak_rodian_pilot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int outbreak_rodian_pilot_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_20"))
@@ -357,7 +392,7 @@ public class outbreak_rodian_pilot extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_35");
@@ -370,7 +405,7 @@ public class outbreak_rodian_pilot extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.outbreak_rodian_pilot.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -402,7 +437,7 @@ public class outbreak_rodian_pilot extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -415,7 +450,7 @@ public class outbreak_rodian_pilot extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.outbreak_rodian_pilot.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -447,7 +482,7 @@ public class outbreak_rodian_pilot extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -460,7 +495,7 @@ public class outbreak_rodian_pilot extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.outbreak_rodian_pilot.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -492,7 +527,7 @@ public class outbreak_rodian_pilot extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -505,7 +540,7 @@ public class outbreak_rodian_pilot extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.outbreak_rodian_pilot.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -537,7 +572,7 @@ public class outbreak_rodian_pilot extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_88");
@@ -550,7 +585,7 @@ public class outbreak_rodian_pilot extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.outbreak_rodian_pilot.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -560,6 +595,7 @@ public class outbreak_rodian_pilot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int outbreak_rodian_pilot_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_35"))
@@ -585,6 +621,7 @@ public class outbreak_rodian_pilot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int outbreak_rodian_pilot_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -610,6 +647,7 @@ public class outbreak_rodian_pilot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int outbreak_rodian_pilot_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_62"))
@@ -635,6 +673,7 @@ public class outbreak_rodian_pilot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int outbreak_rodian_pilot_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_74"))
@@ -660,6 +699,7 @@ public class outbreak_rodian_pilot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int outbreak_rodian_pilot_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_88"))
@@ -685,16 +725,19 @@ public class outbreak_rodian_pilot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -703,12 +746,14 @@ public class outbreak_rodian_pilot extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -761,7 +806,7 @@ public class outbreak_rodian_pilot extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_49");
@@ -789,7 +834,7 @@ public class outbreak_rodian_pilot extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "outbreak_rodian_pilot", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -815,7 +860,7 @@ public class outbreak_rodian_pilot extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_32");
@@ -823,7 +868,7 @@ public class outbreak_rodian_pilot extends script.base_script
                 utils.setScriptVar(player, "conversation.outbreak_rodian_pilot.branchId", 7);
                 npcStartConversation(player, npc, "outbreak_rodian_pilot", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -839,6 +884,7 @@ public class outbreak_rodian_pilot extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("outbreak_rodian_pilot"))

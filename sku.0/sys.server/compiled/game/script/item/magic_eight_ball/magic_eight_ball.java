@@ -1,5 +1,11 @@
 package script.item.magic_eight_ball;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 

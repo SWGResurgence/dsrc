@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -10,18 +16,20 @@ import script.string_id;
 
 public class avatar_wke_prisoner_01 extends script.base_script
 {
-    public avatar_wke_prisoner_01()
-    {
-    }
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id THANKS = new string_id(STF, "wke_thanks_01");
     public static final string_id NO_QUEST = new string_id(STF, "wke_no_quest_01");
+    public avatar_wke_prisoner_01()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
         setObjVar(structure, "avatar_platform.wke_prisoner_01", self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         if (name.equals("fleepoint"))
@@ -30,6 +38,7 @@ public class avatar_wke_prisoner_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleFireDeath(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -40,6 +49,7 @@ public class avatar_wke_prisoner_01 extends script.base_script
         messageTo(self, "handleCleanUp", null, 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleFreedom(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -49,7 +59,7 @@ public class avatar_wke_prisoner_01 extends script.base_script
         {
             chat.chat(self, NO_QUEST);
         }
-        else 
+        else
         {
             chat.chat(self, THANKS);
             groundquests.grantQuest(player, "ep3_avatar_wke_prisoner_01");
@@ -62,6 +72,7 @@ public class avatar_wke_prisoner_01 extends script.base_script
         addLocationTarget("fleepoint", escape, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

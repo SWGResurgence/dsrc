@@ -1,5 +1,11 @@
 package script.item;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.buff;
 import script.library.prose;
 import script.library.utils;
@@ -109,7 +115,6 @@ public class ig_88_head extends script.base_script
         {
             sendSystemMessage(player, new string_id("set_bonus", "ig_head_message_nothing"));
         }
-        return;
     }
 
     public void sendComToPlayer(obj_id player, int messageNum) throws InterruptedException
@@ -120,6 +125,5 @@ public class ig_88_head extends script.base_script
             prose.setStringId(pp, new string_id("set_bonus", "ig_head_message_" + messageNum));
             commPlayers(player, "object/mobile/ig_88.iff", "sound/sys_comm_other.snd", 5.0f, player, pp);
         }
-        return;
     }
 }

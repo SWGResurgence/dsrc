@@ -1,5 +1,11 @@
 package script.space.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.library.space_crafting;
 import script.library.sui;
@@ -11,9 +17,6 @@ import script.string_id;
 
 public class analysis_tool extends script.base_script
 {
-    public analysis_tool()
-    {
-    }
     public static final string_id LOOT_LIST = new string_id("sui", "analyze_loot");
     public static final String LOOT = "datatables/space_loot/reverse_engineering/reverse_loot.iff";
     public static final String LOOT_LOOKUP = "datatables/space_loot/reverse_engineering/reverse_loot_lookup.iff";
@@ -24,14 +27,20 @@ public class analysis_tool extends script.base_script
     public static final String ANALYZE_PROMPT = "@" + STF + ":analyze_prompt";
     public static final String NO_ITEMS_PROMPT = "@" + STF + ":no_items";
     public static final String BTN_ANALYZE = "@" + STF + ":analyze";
+    public analysis_tool()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (utils.hasLocalVar(self, "ctsBeingUnpacked"))
@@ -40,7 +49,7 @@ public class analysis_tool extends script.base_script
         }
         if (!hasObjVar(item, "firespray_schematic.part"))
         {
-            if (space_crafting.isValidShipComponent(item) == false)
+            if (!space_crafting.isValidShipComponent(item))
             {
                 string_id errormessage2 = new string_id(space_crafting.STF_COMPONENT_TOOL, "wrong_component_type");
                 sendSystemMessage(transferer, errormessage2);
@@ -51,7 +60,7 @@ public class analysis_tool extends script.base_script
         {
             int flags = getIntObjVar(item, "ship_comp.flags");
             boolean isBitSet = (flags & ship_component_flags.SCF_reverse_engineered) != 0;
-            if (isBitSet == true)
+            if (isBitSet)
             {
                 string_id errormessage = new string_id(space_crafting.STF_COMPONENT_TOOL, "already_engineered");
                 sendSystemMessage(transferer, errormessage);
@@ -69,7 +78,7 @@ public class analysis_tool extends script.base_script
                     {
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         string_id errormessage = new string_id(space_crafting.STF_COMPONENT_TOOL, "invalid");
                         sendSystemMessage(transferer, errormessage);
@@ -89,6 +98,7 @@ public class analysis_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -105,6 +115,7 @@ public class analysis_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -118,6 +129,7 @@ public class analysis_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -137,7 +149,7 @@ public class analysis_tool extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (toolContents[0] != null)
                 {
@@ -164,10 +176,12 @@ public class analysis_tool extends script.base_script
                     {
                         componentType = "firespray_schematic";
                     }
-                    switch (componentType) {
+                    switch (componentType)
+                    {
                         case "armor":
                             newComponent = reverseEngineerArmor(toolContents, player, level);
-                            if (newComponent != null) {
+                            if (newComponent != null)
+                            {
                                 charges--;
                                 setObjVar(self, "reverse_engineering.charges", charges);
                                 int flags = getIntObjVar(newComponent, "ship_comp.flags");
@@ -177,7 +191,8 @@ public class analysis_tool extends script.base_script
                             break;
                         case "booster":
                             newComponent = reverseEngineerBooster(toolContents, player, level);
-                            if (newComponent != null) {
+                            if (newComponent != null)
+                            {
                                 charges--;
                                 setObjVar(self, "reverse_engineering.charges", charges);
                                 int flags = getIntObjVar(newComponent, "ship_comp.flags");
@@ -187,7 +202,8 @@ public class analysis_tool extends script.base_script
                             break;
                         case "capacitor":
                             newComponent = reverseEngineerCapacitor(toolContents, player, level);
-                            if (newComponent != null) {
+                            if (newComponent != null)
+                            {
                                 charges--;
                                 setObjVar(self, "reverse_engineering.charges", charges);
                                 int flags = getIntObjVar(newComponent, "ship_comp.flags");
@@ -197,7 +213,8 @@ public class analysis_tool extends script.base_script
                             break;
                         case "droid_interface":
                             newComponent = reverseEngineerDroidInterface(toolContents, player, level);
-                            if (newComponent != null) {
+                            if (newComponent != null)
+                            {
                                 charges--;
                                 setObjVar(self, "reverse_engineering.charges", charges);
                                 int flags = getIntObjVar(newComponent, "ship_comp.flags");
@@ -207,7 +224,8 @@ public class analysis_tool extends script.base_script
                             break;
                         case "engine":
                             newComponent = reverseEngineerEngine(toolContents, player, level);
-                            if (newComponent != null) {
+                            if (newComponent != null)
+                            {
                                 charges--;
                                 setObjVar(self, "reverse_engineering.charges", charges);
                                 int flags = getIntObjVar(newComponent, "ship_comp.flags");
@@ -217,7 +235,8 @@ public class analysis_tool extends script.base_script
                             break;
                         case "reactor":
                             newComponent = reverseEngineerReactor(toolContents, player, level);
-                            if (newComponent != null) {
+                            if (newComponent != null)
+                            {
                                 charges--;
                                 setObjVar(self, "reverse_engineering.charges", charges);
                                 int flags = getIntObjVar(newComponent, "ship_comp.flags");
@@ -227,7 +246,8 @@ public class analysis_tool extends script.base_script
                             break;
                         case "shield":
                             newComponent = reverseEngineerShield(toolContents, player, level);
-                            if (newComponent != null) {
+                            if (newComponent != null)
+                            {
                                 charges--;
                                 setObjVar(self, "reverse_engineering.charges", charges);
                                 int flags = getIntObjVar(newComponent, "ship_comp.flags");
@@ -237,7 +257,8 @@ public class analysis_tool extends script.base_script
                             break;
                         case "weapon":
                             newComponent = reverseEngineerWeapon(toolContents, player, level);
-                            if (newComponent != null) {
+                            if (newComponent != null)
+                            {
                                 charges--;
                                 setObjVar(self, "reverse_engineering.charges", charges);
                                 int flags = getIntObjVar(newComponent, "ship_comp.flags");
@@ -246,7 +267,8 @@ public class analysis_tool extends script.base_script
                             }
                             break;
                         case "firespray_schematic":
-                            if (toolContents.length != 8) {
+                            if (toolContents.length != 8)
+                            {
                                 string_id notEnough = new string_id(space_crafting.STF_COMPONENT_TOOL, "not_enough");
                                 sendSystemMessage(player, notEnough);
                                 return SCRIPT_CONTINUE;
@@ -260,19 +282,24 @@ public class analysis_tool extends script.base_script
                             allPieces[5] = false;
                             allPieces[6] = false;
                             allPieces[7] = false;
-                            for (obj_id toolContent1 : toolContents) {
+                            for (obj_id toolContent1 : toolContents)
+                            {
                                 int piece = utils.getIntObjVar(toolContent1, "firespray_schematic.part");
                                 allPieces[piece - 1] = true;
                             }
-                            if (allPieces[0] == true && allPieces[1] == true && allPieces[2] == true && allPieces[3] == true && allPieces[4] == true && allPieces[5] == true && allPieces[6] == true && allPieces[7] == true) {
+                            if (allPieces[0] && allPieces[1] && allPieces[2] && allPieces[3] && allPieces[4] && allPieces[5] && allPieces[6] && allPieces[7])
+                            {
                                 obj_id schematic = create.object("object/tangible/space/special_loot/firespray_schematic.iff", playerInv, false, false);
                                 string_id gotSchematic = new string_id(space_crafting.STF_COMPONENT_TOOL, "gotschematic");
                                 sendSystemMessage(player, gotSchematic);
-                                for (obj_id toolContent : toolContents) {
+                                for (obj_id toolContent : toolContents)
+                                {
                                     destroyObject(toolContent);
                                 }
                                 return SCRIPT_CONTINUE;
-                            } else {
+                            }
+                            else
+                            {
                                 string_id notUniquePieces = new string_id(space_crafting.STF_COMPONENT_TOOL, "notunique");
                                 sendSystemMessage(player, notUniquePieces);
                                 return SCRIPT_CONTINUE;
@@ -284,7 +311,7 @@ public class analysis_tool extends script.base_script
                     }
                 }
             }
-            if (giveFiresprayPiece == true)
+            if (giveFiresprayPiece)
             {
                 if (isIdValid(newComponent))
                 {
@@ -303,13 +330,16 @@ public class analysis_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean calculateFiresprayGrant(obj_id[] contents, obj_id player) throws InterruptedException
     {
         int numKuat = 0;
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             String template = utils.getTemplateName(content);
             int isKuat = dataTableGetInt(LOOT, template, "isKuat");
-            if (isKuat == 1) {
+            if (isKuat == 1)
+            {
                 numKuat++;
             }
         }
@@ -335,15 +365,9 @@ public class analysis_tool extends script.base_script
             pctChance = 5;
         }
         int roll = rand(0, 100);
-        if (roll <= pctChance)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return roll <= pctChance;
     }
+
     public float getReverseEngineeringExpertiseBonus(obj_id player) throws InterruptedException
     {
         float skillMod = getEnhancedSkillStatisticModifier(player, "expertise_reverse_engineering_bonus");
@@ -353,6 +377,7 @@ public class analysis_tool extends script.base_script
         }
         return skillMod;
     }
+
     public float getLevelBonus(obj_id player, int level) throws InterruptedException
     {
         float fltBonus = 0;
@@ -383,6 +408,7 @@ public class analysis_tool extends script.base_script
         fltBonus += Math.round(getReverseEngineeringExpertiseBonus(player)) * 0.001;
         return fltBonus;
     }
+
     public obj_id createLegendaryLoot(obj_id player, obj_id tool, String category) throws InterruptedException
     {
         String[] items = dataTableGetStringColumn(LOOT_LOOKUP, category);
@@ -394,6 +420,7 @@ public class analysis_tool extends script.base_script
         destroyObject(tool);
         return null;
     }
+
     public obj_id reverseEngineerArmor(obj_id[] objComponents, obj_id player, int level) throws InterruptedException
     {
         int revSkill = getSkillStatisticModifier(player, "engineering_reverse");
@@ -406,17 +433,21 @@ public class analysis_tool extends script.base_script
         float fltArmorHpAverage = space_crafting.getComponentMaximumArmorHitpoints(objComponents[0]);
         float fltHpAverage = space_crafting.getComponentMaximumHitpoints(objComponents[0]);
         float fltMassAverage = space_crafting.getComponentMass(objComponents[0]);
-        for (obj_id objComponent : objComponents) {
+        for (obj_id objComponent : objComponents)
+        {
             float armor = space_crafting.getComponentMaximumArmorHitpoints(objComponent);
-            if (armor > fltArmorHpAverage) {
+            if (armor > fltArmorHpAverage)
+            {
                 fltArmorHpAverage = armor;
             }
             float hp = space_crafting.getComponentMaximumHitpoints(objComponent);
-            if (hp > fltHpAverage) {
+            if (hp > fltHpAverage)
+            {
                 fltHpAverage = hp;
             }
             float mass = space_crafting.getComponentMass(objComponent);
-            if (mass < fltMassAverage && mass > 0) {
+            if (mass < fltMassAverage && mass > 0)
+            {
                 fltMassAverage = mass;
             }
         }
@@ -434,7 +465,7 @@ public class analysis_tool extends script.base_script
             space_crafting.setComponentMaximumHitpoints(newComponent, fltHp);
             space_crafting.setComponentCurrentHitpoints(newComponent, fltHp);
             space_crafting.setComponentMass(newComponent, fltMass);
-            String entries[] = new String[3];
+            String[] entries = new String[3];
             String strMassAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "massavg"));
             String strHpAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "hpavg"));
             String strArmorHpAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "armorhpavg"));
@@ -445,7 +476,7 @@ public class analysis_tool extends script.base_script
             entries[2] = strArmorHpAvg + " " + fltArmorHpAverage + " --- " + strBonusApplied + " " + (fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltArmorHp;
             finishReverseEngineering(newComponent, player, objComponents, entries);
         }
-        else 
+        else
         {
             string_id error = new string_id(space_crafting.STF_COMPONENT_TOOL, "invfull");
             sendSystemMessage(player, error);
@@ -453,6 +484,7 @@ public class analysis_tool extends script.base_script
         }
         return newComponent;
     }
+
     public obj_id reverseEngineerBooster(obj_id[] objComponents, obj_id player, int level) throws InterruptedException
     {
         int revSkill = getSkillStatisticModifier(player, "propulsion_reverse");
@@ -471,41 +503,51 @@ public class analysis_tool extends script.base_script
         float fltBoosterAccelAverage = space_crafting.getBoosterAcceleration(objComponents[0]);
         float fltBoosterSpeedAverage = space_crafting.getBoosterMaximumSpeed(objComponents[0]);
         float fltEnergyMaintenance = space_crafting.getComponentEnergyMaintenance(objComponents[0]);
-        for (obj_id objComponent : objComponents) {
+        for (obj_id objComponent : objComponents)
+        {
             float armor = space_crafting.getComponentMaximumArmorHitpoints(objComponent);
-            if (armor > fltArmorHpAverage) {
+            if (armor > fltArmorHpAverage)
+            {
                 fltArmorHpAverage = armor;
             }
             float hp = space_crafting.getComponentMaximumHitpoints(objComponent);
-            if (hp > fltHpAverage) {
+            if (hp > fltHpAverage)
+            {
                 fltHpAverage = hp;
             }
             float mass = space_crafting.getComponentMass(objComponent);
-            if (mass < fltMassAverage) {
+            if (mass < fltMassAverage)
+            {
                 fltMassAverage = mass;
             }
             float energy = space_crafting.getBoosterMaximumEnergy(objComponent);
-            if (energy > fltBoosterEnergyAverage) {
+            if (energy > fltBoosterEnergyAverage)
+            {
                 fltBoosterEnergyAverage = energy;
             }
             float recharge = space_crafting.getBoosterEnergyRechargeRate(objComponent);
-            if (recharge > fltBoosterRechargeAverage) {
+            if (recharge > fltBoosterRechargeAverage)
+            {
                 fltBoosterRechargeAverage = recharge;
             }
             float consumption = space_crafting.getboosterEnergyConsumptionRate(objComponent);
-            if (consumption < fltBoosterConsumptionAverage) {
+            if (consumption < fltBoosterConsumptionAverage)
+            {
                 fltBoosterConsumptionAverage = consumption;
             }
             float accel = space_crafting.getBoosterAcceleration(objComponent);
-            if (accel > fltBoosterAccelAverage) {
+            if (accel > fltBoosterAccelAverage)
+            {
                 fltBoosterAccelAverage = accel;
             }
             float speed = space_crafting.getBoosterMaximumSpeed(objComponent);
-            if (speed > fltBoosterSpeedAverage) {
+            if (speed > fltBoosterSpeedAverage)
+            {
                 fltBoosterSpeedAverage = speed;
             }
             float maintenance = space_crafting.getComponentEnergyMaintenance(objComponent);
-            if (maintenance < fltEnergyMaintenance) {
+            if (maintenance < fltEnergyMaintenance)
+            {
                 fltEnergyMaintenance = maintenance;
             }
         }
@@ -536,7 +578,7 @@ public class analysis_tool extends script.base_script
             space_crafting.setBoosterEnergyConsumptionRate(newComponent, fltBoosterConsumption);
             space_crafting.setBoosterAcceleration(newComponent, fltBoosterAccel);
             space_crafting.setBoosterMaximumSpeed(newComponent, fltBoosterSpeed);
-            String entries[] = new String[9];
+            String[] entries = new String[9];
             String strMassAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "massavg"));
             String strHpAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "hpavg"));
             String strArmorHpAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "armorhpavg"));
@@ -559,7 +601,7 @@ public class analysis_tool extends script.base_script
             entries[8] = strBoosterSpeed + " " + fltBoosterSpeedAverage + " --- " + strBonusApplied + " " + (fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltBoosterSpeed;
             finishReverseEngineering(newComponent, player, objComponents, entries);
         }
-        else 
+        else
         {
             string_id error = new string_id(space_crafting.STF_COMPONENT_TOOL, "invfull");
             sendSystemMessage(player, error);
@@ -567,6 +609,7 @@ public class analysis_tool extends script.base_script
         }
         return newComponent;
     }
+
     public obj_id reverseEngineerCapacitor(obj_id[] objComponents, obj_id player, int level) throws InterruptedException
     {
         int revSkill = getSkillStatisticModifier(player, "systems_reverse");
@@ -582,29 +625,36 @@ public class analysis_tool extends script.base_script
         float fltEnergyMaintenance = space_crafting.getComponentEnergyMaintenance(objComponents[0]);
         float fltCapEnergyAverage = space_crafting.getWeaponCapacitorMaximumEnergy(objComponents[0]);
         float fltCapRechargeAverage = space_crafting.getWeaponCapacitorRechargeRate(objComponents[0]);
-        for (obj_id objComponent : objComponents) {
+        for (obj_id objComponent : objComponents)
+        {
             float armor = space_crafting.getComponentMaximumArmorHitpoints(objComponent);
-            if (armor > fltArmorHpAverage) {
+            if (armor > fltArmorHpAverage)
+            {
                 fltArmorHpAverage = armor;
             }
             float hp = space_crafting.getComponentMaximumHitpoints(objComponent);
-            if (hp > fltHpAverage) {
+            if (hp > fltHpAverage)
+            {
                 fltHpAverage = hp;
             }
             float mass = space_crafting.getComponentMass(objComponent);
-            if (mass < fltMassAverage) {
+            if (mass < fltMassAverage)
+            {
                 fltMassAverage = mass;
             }
             float maintenance = space_crafting.getComponentEnergyMaintenance(objComponent);
-            if (maintenance < fltEnergyMaintenance) {
+            if (maintenance < fltEnergyMaintenance)
+            {
                 fltEnergyMaintenance = maintenance;
             }
             float energy = space_crafting.getWeaponCapacitorMaximumEnergy(objComponent);
-            if (energy > fltCapEnergyAverage) {
+            if (energy > fltCapEnergyAverage)
+            {
                 fltCapEnergyAverage = energy;
             }
             float recharge = space_crafting.getWeaponCapacitorRechargeRate(objComponent);
-            if (recharge > fltCapRechargeAverage) {
+            if (recharge > fltCapRechargeAverage)
+            {
                 fltCapRechargeAverage = recharge;
             }
         }
@@ -629,7 +679,7 @@ public class analysis_tool extends script.base_script
             space_crafting.setWeaponCapacitorRechargeRate(newComponent, fltCapRecharge);
             space_crafting.setWeaponCapacitorMaximumEnergy(newComponent, fltCapEnergy);
             space_crafting.setWeaponCapacitorCurrentEnergy(newComponent, fltCapEnergy);
-            String entries[] = new String[6];
+            String[] entries = new String[6];
             String strMassAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "massavg"));
             String strHpAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "hpavg"));
             String strArmorHpAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "armorhpavg"));
@@ -646,7 +696,7 @@ public class analysis_tool extends script.base_script
             entries[5] = strCapRecharge + " " + fltCapRechargeAverage + " --- " + strBonusApplied + " " + (fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltCapRecharge;
             finishReverseEngineering(newComponent, player, objComponents, entries);
         }
-        else 
+        else
         {
             string_id error = new string_id(space_crafting.STF_COMPONENT_TOOL, "invfull");
             sendSystemMessage(player, error);
@@ -654,6 +704,7 @@ public class analysis_tool extends script.base_script
         }
         return newComponent;
     }
+
     public obj_id reverseEngineerDroidInterface(obj_id[] objComponents, obj_id player, int level) throws InterruptedException
     {
         int revSkill = getSkillStatisticModifier(player, "systems_reverse");
@@ -668,25 +719,31 @@ public class analysis_tool extends script.base_script
         float fltHpAverage = space_crafting.getComponentMaximumHitpoints(objComponents[0]);
         float fltEnergyMaintenance = space_crafting.getComponentEnergyMaintenance(objComponents[0]);
         float fltDroidInterfaceSpeedAverage = space_crafting.getDroidInterfaceCommandSpeed(objComponents[0]);
-        for (obj_id objComponent : objComponents) {
+        for (obj_id objComponent : objComponents)
+        {
             float armor = space_crafting.getComponentMaximumArmorHitpoints(objComponent);
-            if (armor > fltArmorHpAverage) {
+            if (armor > fltArmorHpAverage)
+            {
                 fltArmorHpAverage = armor;
             }
             float hp = space_crafting.getComponentMaximumHitpoints(objComponent);
-            if (hp > fltHpAverage) {
+            if (hp > fltHpAverage)
+            {
                 fltHpAverage = hp;
             }
             float mass = space_crafting.getComponentMass(objComponent);
-            if (mass < fltMassAverage) {
+            if (mass < fltMassAverage)
+            {
                 fltMassAverage = mass;
             }
             float maintenance = space_crafting.getComponentEnergyMaintenance(objComponent);
-            if (maintenance < fltEnergyMaintenance) {
+            if (maintenance < fltEnergyMaintenance)
+            {
                 fltEnergyMaintenance = maintenance;
             }
             float speed = space_crafting.getDroidInterfaceCommandSpeed(objComponent);
-            if (speed < fltDroidInterfaceSpeedAverage) {
+            if (speed < fltDroidInterfaceSpeedAverage)
+            {
                 fltDroidInterfaceSpeedAverage = speed;
             }
         }
@@ -708,7 +765,7 @@ public class analysis_tool extends script.base_script
             space_crafting.setComponentMass(newComponent, fltMass);
             space_crafting.setComponentEnergyMaintenance(newComponent, fltEnergyMaintenanceFinal);
             space_crafting.setDroidInterfaceCommandSpeed(newComponent, fltDroidInterfaceSpeed);
-            String entries[] = new String[5];
+            String[] entries = new String[5];
             String strMassAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "massavg"));
             String strHpAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "hpavg"));
             String strArmorHpAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "armorhpavg"));
@@ -723,7 +780,7 @@ public class analysis_tool extends script.base_script
             entries[4] = strDroidInterfaceSpeed + " " + fltDroidInterfaceSpeedAverage + " --- " + strBonusApplied + " " + (fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltDroidInterfaceSpeed;
             finishReverseEngineering(newComponent, player, objComponents, entries);
         }
-        else 
+        else
         {
             string_id error = new string_id(space_crafting.STF_COMPONENT_TOOL, "invfull");
             sendSystemMessage(player, error);
@@ -731,6 +788,7 @@ public class analysis_tool extends script.base_script
         }
         return newComponent;
     }
+
     public obj_id reverseEngineerEngine(obj_id[] objComponents, obj_id player, int level) throws InterruptedException
     {
         int revSkill = getSkillStatisticModifier(player, "propulsion_reverse");
@@ -750,45 +808,56 @@ public class analysis_tool extends script.base_script
         float fltEngineYawAvg = space_crafting.getEngineMaximumYaw(objComponents[0]);
         float fltEngineRollAvg = space_crafting.getEngineMaximumRoll(objComponents[0]);
         float fltEngineSpeedAvg = space_crafting.getEngineMaximumSpeed(objComponents[0]);
-        for (obj_id objComponent : objComponents) {
+        for (obj_id objComponent : objComponents)
+        {
             float armor = space_crafting.getComponentMaximumArmorHitpoints(objComponent);
-            if (armor > fltArmorHpAverage) {
+            if (armor > fltArmorHpAverage)
+            {
                 fltArmorHpAverage = armor;
             }
             float hp = space_crafting.getComponentMaximumHitpoints(objComponent);
-            if (hp > fltHpAverage) {
+            if (hp > fltHpAverage)
+            {
                 fltHpAverage = hp;
             }
             float mass = space_crafting.getComponentMass(objComponent);
-            if (mass < fltMassAverage) {
+            if (mass < fltMassAverage)
+            {
                 fltMassAverage = mass;
             }
             float maintenance = space_crafting.getComponentEnergyMaintenance(objComponent);
-            if (maintenance < fltEnergyMaintenance) {
+            if (maintenance < fltEnergyMaintenance)
+            {
                 fltEnergyMaintenance = maintenance;
             }
             float accel = space_crafting.getEngineAcceleration(objComponent);
-            if (accel > fltEngineAccelAvg) {
+            if (accel > fltEngineAccelAvg)
+            {
                 fltEngineAccelAvg = accel;
             }
             float decel = space_crafting.getEngineDeceleration(objComponent);
-            if (decel > fltEngineDecelAvg) {
+            if (decel > fltEngineDecelAvg)
+            {
                 fltEngineDecelAvg = decel;
             }
             float pitch = space_crafting.getEngineMaximumPitch(objComponent);
-            if (pitch > fltEnginePitchAvg) {
+            if (pitch > fltEnginePitchAvg)
+            {
                 fltEnginePitchAvg = pitch;
             }
             float yaw = space_crafting.getEngineMaximumYaw(objComponent);
-            if (yaw > fltEngineYawAvg) {
+            if (yaw > fltEngineYawAvg)
+            {
                 fltEngineYawAvg = yaw;
             }
             float roll = space_crafting.getEngineMaximumRoll(objComponent);
-            if (roll > fltEngineRollAvg) {
+            if (roll > fltEngineRollAvg)
+            {
                 fltEngineRollAvg = roll;
             }
             float speed = space_crafting.getEngineMaximumSpeed(objComponent);
-            if (speed > fltEngineSpeedAvg) {
+            if (speed > fltEngineSpeedAvg)
+            {
                 fltEngineSpeedAvg = speed;
             }
         }
@@ -820,7 +889,7 @@ public class analysis_tool extends script.base_script
             space_crafting.setEngineMaximumYaw(newComponent, fltEngineYaw);
             space_crafting.setEngineMaximumRoll(newComponent, fltEngineRoll);
             space_crafting.setEngineMaximumSpeed(newComponent, fltEngineSpeed);
-            String entries[] = new String[8];
+            String[] entries = new String[8];
             String strMassAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "massavg"));
             String strHpAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "hpavg"));
             String strArmorHpAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "armorhpavg"));
@@ -841,7 +910,7 @@ public class analysis_tool extends script.base_script
             entries[7] = strEngineSpeed + " " + fltEngineSpeedAvg + " --- " + strBonusApplied + " " + (fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltEngineSpeed;
             finishReverseEngineering(newComponent, player, objComponents, entries);
         }
-        else 
+        else
         {
             string_id error = new string_id(space_crafting.STF_COMPONENT_TOOL, "invfull");
             sendSystemMessage(player, error);
@@ -849,6 +918,7 @@ public class analysis_tool extends script.base_script
         }
         return newComponent;
     }
+
     public obj_id reverseEngineerReactor(obj_id[] objComponents, obj_id player, int level) throws InterruptedException
     {
         int revSkill = getSkillStatisticModifier(player, "systems_reverse");
@@ -862,21 +932,26 @@ public class analysis_tool extends script.base_script
         float fltArmorHpAverage = space_crafting.getComponentMaximumArmorHitpoints(objComponents[0]);
         float fltHpAverage = space_crafting.getComponentMaximumHitpoints(objComponents[0]);
         float fltReactorEnergyAvg = space_crafting.getReactorEnergyGeneration(objComponents[0]);
-        for (obj_id objComponent : objComponents) {
+        for (obj_id objComponent : objComponents)
+        {
             float armor = space_crafting.getComponentMaximumArmorHitpoints(objComponent);
-            if (armor > fltArmorHpAverage) {
+            if (armor > fltArmorHpAverage)
+            {
                 fltArmorHpAverage = armor;
             }
             float hp = space_crafting.getComponentMaximumHitpoints(objComponent);
-            if (hp > fltHpAverage) {
+            if (hp > fltHpAverage)
+            {
                 fltHpAverage = hp;
             }
             float mass = space_crafting.getComponentMass(objComponent);
-            if (mass < fltMassAverage) {
+            if (mass < fltMassAverage)
+            {
                 fltMassAverage = mass;
             }
             float energy = space_crafting.getReactorEnergyGeneration(objComponent);
-            if (energy > fltReactorEnergyAvg) {
+            if (energy > fltReactorEnergyAvg)
+            {
                 fltReactorEnergyAvg = energy;
             }
         }
@@ -896,7 +971,7 @@ public class analysis_tool extends script.base_script
             space_crafting.setComponentCurrentHitpoints(newComponent, fltHp);
             space_crafting.setComponentMass(newComponent, fltMass);
             space_crafting.setReactorEnergyGeneration(newComponent, fltReactorEnergy);
-            String entries[] = new String[4];
+            String[] entries = new String[4];
             String strMassAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "massavg"));
             String strHpAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "hpavg"));
             String strArmorHpAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "armorhpavg"));
@@ -909,7 +984,7 @@ public class analysis_tool extends script.base_script
             entries[3] = strReactorEnergy + " " + fltReactorEnergyAvg + " --- " + strBonusApplied + " " + (fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltReactorEnergy;
             finishReverseEngineering(newComponent, player, objComponents, entries);
         }
-        else 
+        else
         {
             string_id error = new string_id(space_crafting.STF_COMPONENT_TOOL, "invfull");
             sendSystemMessage(player, error);
@@ -917,6 +992,7 @@ public class analysis_tool extends script.base_script
         }
         return newComponent;
     }
+
     public obj_id reverseEngineerShield(obj_id[] objComponents, obj_id player, int level) throws InterruptedException
     {
         int revSkill = getSkillStatisticModifier(player, "defense_reverse");
@@ -933,33 +1009,41 @@ public class analysis_tool extends script.base_script
         float fltShdBackHpAvg = space_crafting.getShieldGeneratorMaximumBackHitpoints(objComponents[0]);
         float fltShdFrontHpAvg = space_crafting.getShieldGeneratorMaximumFrontHitpoints(objComponents[0]);
         float fltShdRechargeAvg = space_crafting.getShieldGeneratorRechargeRate(objComponents[0]);
-        for (obj_id objComponent : objComponents) {
+        for (obj_id objComponent : objComponents)
+        {
             float armor = space_crafting.getComponentMaximumArmorHitpoints(objComponent);
-            if (armor > fltArmorHpAverage) {
+            if (armor > fltArmorHpAverage)
+            {
                 fltArmorHpAverage = armor;
             }
             float hp = space_crafting.getComponentMaximumHitpoints(objComponent);
-            if (hp > fltHpAverage) {
+            if (hp > fltHpAverage)
+            {
                 fltHpAverage = hp;
             }
             float mass = space_crafting.getComponentMass(objComponent);
-            if (mass < fltMassAverage) {
+            if (mass < fltMassAverage)
+            {
                 fltMassAverage = mass;
             }
             float maintenance = space_crafting.getComponentEnergyMaintenance(objComponent);
-            if (maintenance < fltEnergyMaintenance) {
+            if (maintenance < fltEnergyMaintenance)
+            {
                 fltEnergyMaintenance = maintenance;
             }
             float back = space_crafting.getShieldGeneratorMaximumBackHitpoints(objComponent);
-            if (back > fltShdBackHpAvg) {
+            if (back > fltShdBackHpAvg)
+            {
                 fltShdBackHpAvg = back;
             }
             float front = space_crafting.getShieldGeneratorMaximumFrontHitpoints(objComponent);
-            if (front > fltShdFrontHpAvg) {
+            if (front > fltShdFrontHpAvg)
+            {
                 fltShdFrontHpAvg = front;
             }
             float recharge = space_crafting.getShieldGeneratorRechargeRate(objComponent);
-            if (recharge > fltShdRechargeAvg) {
+            if (recharge > fltShdRechargeAvg)
+            {
                 fltShdRechargeAvg = recharge;
             }
         }
@@ -987,7 +1071,7 @@ public class analysis_tool extends script.base_script
             space_crafting.setShieldGeneratorMaximumBackHitpoints(newComponent, fltShdBackHp);
             space_crafting.setShieldGeneratorCurrentBackHitpoints(newComponent, fltShdBackHp);
             space_crafting.setShieldGeneratorRechargeRate(newComponent, fltShdRecharge);
-            String entries[] = new String[7];
+            String[] entries = new String[7];
             String strMassAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "massavg"));
             String strHpAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "hpavg"));
             String strArmorHpAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "armorhpavg"));
@@ -1006,7 +1090,7 @@ public class analysis_tool extends script.base_script
             entries[6] = strShdRecharge + " " + fltShdRechargeAvg + " --- " + strBonusApplied + " " + (fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltShdRecharge;
             finishReverseEngineering(newComponent, player, objComponents, entries);
         }
-        else 
+        else
         {
             string_id error = new string_id(space_crafting.STF_COMPONENT_TOOL, "invfull");
             sendSystemMessage(player, error);
@@ -1014,6 +1098,7 @@ public class analysis_tool extends script.base_script
         }
         return newComponent;
     }
+
     public obj_id reverseEngineerWeapon(obj_id[] objComponents, obj_id player, int level) throws InterruptedException
     {
         int revSkill = getSkillStatisticModifier(player, "defense_reverse");
@@ -1033,45 +1118,56 @@ public class analysis_tool extends script.base_script
         float fltWpnArmEffectivenessAvg = space_crafting.getWeaponArmorEffectiveness(objComponents[0]);
         float fltWpnEnergyPerShotAvg = space_crafting.getWeaponEnergyPerShot(objComponents[0]);
         float fltWpnRefireRateAvg = space_crafting.getWeaponRefireRate(objComponents[0]);
-        for (obj_id objComponent : objComponents) {
+        for (obj_id objComponent : objComponents)
+        {
             float armor = space_crafting.getComponentMaximumArmorHitpoints(objComponent);
-            if (armor > fltArmorHpAverage) {
+            if (armor > fltArmorHpAverage)
+            {
                 fltArmorHpAverage = armor;
             }
             float hp = space_crafting.getComponentMaximumHitpoints(objComponent);
-            if (hp > fltHpAverage) {
+            if (hp > fltHpAverage)
+            {
                 fltHpAverage = hp;
             }
             float mass = space_crafting.getComponentMass(objComponent);
-            if (mass < fltMassAverage) {
+            if (mass < fltMassAverage)
+            {
                 fltMassAverage = mass;
             }
             float maintenance = space_crafting.getComponentEnergyMaintenance(objComponent);
-            if (maintenance < fltEnergyMaintenance) {
+            if (maintenance < fltEnergyMaintenance)
+            {
                 fltEnergyMaintenance = maintenance;
             }
             float max = space_crafting.getWeaponMaximumDamage(objComponent);
-            if (max > fltWpnMaxDamageAvg) {
+            if (max > fltWpnMaxDamageAvg)
+            {
                 fltWpnMaxDamageAvg = max;
             }
             float min = space_crafting.getWeaponMinimumDamage(objComponent);
-            if (min > fltWpnMinDamageAvg) {
+            if (min > fltWpnMinDamageAvg)
+            {
                 fltWpnMinDamageAvg = min;
             }
             float shd = space_crafting.getWeaponShieldEffectiveness(objComponent);
-            if (shd > fltWpnShdEffectivenessAvg) {
+            if (shd > fltWpnShdEffectivenessAvg)
+            {
                 fltWpnShdEffectivenessAvg = shd;
             }
             float arm = space_crafting.getWeaponArmorEffectiveness(objComponent);
-            if (arm > fltWpnArmEffectivenessAvg) {
+            if (arm > fltWpnArmEffectivenessAvg)
+            {
                 fltWpnArmEffectivenessAvg = arm;
             }
             float energy = space_crafting.getWeaponEnergyPerShot(objComponent);
-            if (energy < fltWpnEnergyPerShotAvg) {
+            if (energy < fltWpnEnergyPerShotAvg)
+            {
                 fltWpnEnergyPerShotAvg = energy;
             }
             float refire = space_crafting.getWeaponRefireRate(objComponent);
-            if (refire < fltWpnRefireRateAvg) {
+            if (refire < fltWpnRefireRateAvg)
+            {
                 fltWpnRefireRateAvg = refire;
             }
         }
@@ -1103,7 +1199,7 @@ public class analysis_tool extends script.base_script
             space_crafting.setWeaponArmorEffectiveness(newComponent, fltWpnArmEffectiveness);
             space_crafting.setWeaponEnergyPerShot(newComponent, fltWpnEnergyPerShot);
             space_crafting.setWeaponRefireRate(newComponent, fltWpnRefireRate);
-            String entries[] = new String[10];
+            String[] entries = new String[10];
             String strMassAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "massavg"));
             String strHpAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "hpavg"));
             String strArmorHpAvg = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "armorhpavg"));
@@ -1119,17 +1215,17 @@ public class analysis_tool extends script.base_script
             entries[0] = strMassAvg + " " + fltMassAverage + " --- " + strBonusApplied + " " + (fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltMass;
             entries[1] = strHpAvg + " " + fltHpAverage + " --- " + strBonusApplied + " " + (fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltHp;
             entries[2] = strArmorHpAvg + " " + fltArmorHpAverage + " --- " + strBonusApplied + " " + (fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltArmorHp;
-            entries[3] = strEnergyMaintenance + " " + fltEnergyMaintenance + " --- " + strBonusApplied + " " + (int)(fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltEnergyMaintenanceFinal;
+            entries[3] = strEnergyMaintenance + " " + fltEnergyMaintenance + " --- " + strBonusApplied + " " + (int) (fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltEnergyMaintenanceFinal;
             entries[4] = strWpnMaxDamage + " " + fltWpnMaxDamageAvg + " --- " + strBonusApplied + " " + (fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltWpnMaxDamage;
             entries[5] = strWpnMinDamage + " " + fltWpnMinDamageAvg + " --- " + strBonusApplied + " " + (fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltWpnMinDamage;
-            
+
             entries[6] = strWpnShdEffectiveness + " " + fltWpnShdEffectivenessAvg + " --- " + strBonusApplied + " " + (fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltWpnShdEffectiveness;
             entries[7] = strWpnArmEffectiveness + " " + fltWpnArmEffectivenessAvg + " --- " + strBonusApplied + " " + (fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltWpnArmEffectiveness;
             entries[8] = strWpnEnergyPerShot + " " + fltWpnEnergyPerShotAvg + " --- " + strBonusApplied + " " + (fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltWpnEnergyPerShot;
             entries[9] = strWpnRefireRate + " " + fltWpnRefireRateAvg + " --- " + strBonusApplied + " " + (fltBonus * 100) + "%" + " --- " + strFinalOutput + " " + fltWpnRefireRate;
             finishReverseEngineering(newComponent, player, objComponents, entries);
         }
-        else 
+        else
         {
             string_id error = new string_id(space_crafting.STF_COMPONENT_TOOL, "invfull");
             sendSystemMessage(player, error);
@@ -1137,6 +1233,7 @@ public class analysis_tool extends script.base_script
         }
         return newComponent;
     }
+
     public void finishReverseEngineering(obj_id newComponent, obj_id player, obj_id[] objComponents, String[] entries) throws InterruptedException
     {
         String prompt = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "prompt"));
@@ -1150,12 +1247,13 @@ public class analysis_tool extends script.base_script
         {
             showSUIPage(pid);
         }
-        else 
+        else
         {
             string_id error = new string_id(space_crafting.STF_COMPONENT_TOOL, "bad_data");
             sendSystemMessage(player, error);
         }
-        for (obj_id objComponent : objComponents) {
+        for (obj_id objComponent : objComponents)
+        {
             destroyObject(objComponent);
         }
     }

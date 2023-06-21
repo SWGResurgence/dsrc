@@ -1,5 +1,11 @@
 package script.theme_park.utils;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class npcdeath extends script.base_script
     public npcdeath()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "quests.target"))
@@ -16,6 +23,7 @@ public class npcdeath extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "quests.target"))
@@ -28,12 +36,14 @@ public class npcdeath extends script.base_script
         messageTo(target, msgHandlerName, null, 0, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         setHealth(self, -5000);
         messageTo(self, "killMe", null, 5, true);
         return SCRIPT_CONTINUE;
     }
+
     public int killMe(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

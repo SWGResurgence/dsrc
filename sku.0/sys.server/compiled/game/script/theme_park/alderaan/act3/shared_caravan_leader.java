@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -11,79 +17,80 @@ import java.util.Vector;
 
 public class shared_caravan_leader extends script.base_script
 {
+    public static final String[] TEMPLATE_LIST =
+            {
+                    "object/building/poi/generic_flatten_medium.iff",
+                    "object/static/vehicle/e3/landspeeder.iff",
+                    "object/static/vehicle/e3/landspeeder.iff",
+                    "coa3_caravan_thug",
+                    "coa3_caravan_thug",
+                    "coa3_caravan_thug",
+                    "coa3_caravan_thug",
+                    "coa3_caravan_thug"
+            };
+    public static final float[][] LOCATION_LIST =
+            {
+
+                    {
+                            0.0f,
+                            0.0f,
+                            0.0f,
+                            0.0f
+                    },
+
+                    {
+                            8.0f,
+                            0.0f,
+                            2.0f,
+                            25.0f
+                    },
+
+                    {
+                            1.0f,
+                            0.0f,
+                            6.0f,
+                            50.0f
+                    },
+
+                    {
+                            10.0f,
+                            0.0f,
+                            0.0f,
+                            0.0f
+                    },
+
+                    {
+                            -5.0f,
+                            0.0f,
+                            10.0f,
+                            0.0f
+                    },
+
+                    {
+                            -5.0f,
+                            0.0f,
+                            -5.0f,
+                            0.0f
+                    },
+
+                    {
+                            10.0f,
+                            0.0f,
+                            -5.0f,
+                            0.0f
+                    },
+
+                    {
+                            -8.0f,
+                            0.0f,
+                            -2.0f,
+                            0.0f
+                    }
+            };
     public shared_caravan_leader()
     {
     }
-    public static final String[] TEMPLATE_LIST = 
-    {
-        "object/building/poi/generic_flatten_medium.iff",
-        "object/static/vehicle/e3/landspeeder.iff",
-        "object/static/vehicle/e3/landspeeder.iff",
-        "coa3_caravan_thug",
-        "coa3_caravan_thug",
-        "coa3_caravan_thug",
-        "coa3_caravan_thug",
-        "coa3_caravan_thug"
-    };
-    public static final float[][] LOCATION_LIST = 
-    {
-        
-        {
-            0.0f,
-            0.0f,
-            0.0f,
-            0.0f
-        },
-        
-        {
-            8.0f,
-            0.0f,
-            2.0f,
-            25.0f
-        },
-        
-        {
-            1.0f,
-            0.0f,
-            6.0f,
-            50.0f
-        },
-        
-        {
-            10.0f,
-            0.0f,
-            0.0f,
-            0.0f
-        },
-        
-        {
-            -5.0f,
-            0.0f,
-            10.0f,
-            0.0f
-        },
-        
-        {
-            -5.0f,
-            0.0f,
-            -5.0f,
-            0.0f
-        },
-        
-        {
-            10.0f,
-            0.0f,
-            -5.0f,
-            0.0f
-        },
-        
-        {
-            -8.0f,
-            0.0f,
-            -2.0f,
-            0.0f
-        }
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -93,6 +100,7 @@ public class shared_caravan_leader extends script.base_script
         messageTo(self, "spawnNextObject", params, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnNextObject(obj_id self, dictionary params) throws InterruptedException
     {
         int objectNum = params.getInt("index");

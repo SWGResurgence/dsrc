@@ -1,5 +1,11 @@
 package script.systems.skills.stealth;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.stealth;
 import script.library.utils;
 import script.menu_info;
@@ -23,9 +29,9 @@ public class hep extends script.base_script
             return SCRIPT_CONTINUE;
         }
         names[free] = "power";
-        attribs[free++] = "" + getCount(self);
+        attribs[free++] = String.valueOf(getCount(self));
         names[free] = "effectiveness";
-        attribs[free++] = "" + floatFormat.format(getIntObjVar(self, stealth.HEP_EFFECTIVENESS) / 10) + "%";
+        attribs[free++] = floatFormat.format(getIntObjVar(self, stealth.HEP_EFFECTIVENESS) / 10) + "%";
         utils.addClassRequirementAttributes(player, self, names, attribs, free, "");
         return SCRIPT_CONTINUE;
     }

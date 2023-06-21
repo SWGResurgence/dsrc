@@ -1,28 +1,33 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.qa;
 import script.library.sui;
 import script.library.utils;
 import script.obj_id;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.StringTokenizer;
-import java.util.Vector;
+import java.util.*;
 
 public class qawearables extends script.base_script
 {
+    public static final String DATATABLE_LOCATION = "datatables/test/qa_wearables.iff";
+
     public qawearables()
     {
     }
-    public static final String DATATABLE_LOCATION = "datatables/test/qa_wearables.iff";
+
     public String[] populateArray(obj_id player, String datatableName, String choice, String column1, String column2, boolean filtered, boolean allFunction) throws InterruptedException
     {
-        String[] errorZeroLengthArray = 
-        {
-            "The Array was empty, could be that you passed the wrong type"
-        };
+        String[] errorZeroLengthArray =
+                {
+                        "The Array was empty, could be that you passed the wrong type"
+                };
         String[] firstColumnArray = dataTableGetStringColumn(datatableName, column1);
         String[] secondColumnArray = dataTableGetStringColumn(datatableName, column2);
         int listingLength = firstColumnArray.length;
@@ -35,7 +40,7 @@ public class qawearables extends script.base_script
             Thread.dumpStack();
             return errorZeroLengthArray;
         }
-        else 
+        else
         {
             for (int y = 0; y < listingLength; y++)
             {
@@ -46,41 +51,45 @@ public class qawearables extends script.base_script
                 }
             }
         }
-        Integer[] rowNumArray = (Integer[])rowNumVector.toArray(new Integer[listCounter]);
+        Integer[] rowNumArray = (Integer[]) rowNumVector.toArray(new Integer[listCounter]);
         int arrayLength = rowNumArray.length;
         if (!filtered)
         {
             String previousString = secondColumnArray[rowNumArray[0]];
             wearablesListVector.addElement(previousString);
-            for (Integer integer : rowNumArray) {
-                if (!secondColumnArray[integer].equals(previousString)) {
+            for (Integer integer : rowNumArray)
+            {
+                if (!secondColumnArray[integer].equals(previousString))
+                {
                     wearablesListVector.addElement(secondColumnArray[integer]);
                     previousString = secondColumnArray[integer];
                 }
             }
         }
-        else 
+        else
         {
-            for (Integer integer : rowNumArray) {
+            for (Integer integer : rowNumArray)
+            {
                 wearablesListVector.addElement(secondColumnArray[integer] + " Ref.# " + integer);
             }
             if (!allFunction)
             {
             }
-            else 
+            else
             {
                 wearablesListVector.addElement("All Items Displayed");
             }
         }
-        String[] wearablesArray = (String[])wearablesListVector.toArray(new String[wearablesListVector.size()]);
+        String[] wearablesArray = (String[]) wearablesListVector.toArray(new String[wearablesListVector.size()]);
         return wearablesArray;
     }
+
     public String[] populateArray(obj_id player, String datatableName, String column) throws InterruptedException
     {
-        String[] errorZeroLengthArray = 
-        {
-            "The Array was empty, could be that you passed the wrong type"
-        };
+        String[] errorZeroLengthArray =
+                {
+                        "The Array was empty, could be that you passed the wrong type"
+                };
         String[] columnArray = dataTableGetStringColumn(datatableName, column);
         int listingLength = columnArray.length;
         if (listingLength == 0)
@@ -88,18 +97,17 @@ public class qawearables extends script.base_script
             broadcast(player, "Tool Not Functioning because the Datatable Rows equal ZERO!");
             return errorZeroLengthArray;
         }
-        else 
+        else
         {
             HashSet theSet = new HashSet();
-            for (String s : columnArray) {
-                theSet.add(s);
-            }
+            Collections.addAll(theSet, columnArray);
             String[] menuArray = new String[theSet.size()];
             theSet.toArray(menuArray);
             Arrays.sort(menuArray);
             return menuArray;
         }
     }
+
     public void constructSUI(obj_id player, String prompt, String title, String[] menuArray, String nextHandler, String scriptVarName, boolean backButton) throws InterruptedException
     {
         if (!backButton)
@@ -108,7 +116,7 @@ public class qawearables extends script.base_script
             setWindowPid(player, pid);
             utils.setScriptVar(player, scriptVarName, menuArray);
         }
-        else 
+        else
         {
             int pid = sui.listbox(player, player, prompt, sui.OK_CANCEL_REFRESH, title, menuArray, nextHandler, false, false);
             sui.listboxUseOtherButton(pid, "Back");
@@ -117,6 +125,7 @@ public class qawearables extends script.base_script
             utils.setScriptVar(player, scriptVarName, menuArray);
         }
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -133,6 +142,7 @@ public class qawearables extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         obj_id player = self;
@@ -145,7 +155,7 @@ public class qawearables extends script.base_script
                 {
                     broadcast(player, "Species UI creation failed.");
                 }
-                else 
+                else
                 {
                     constructSUI(player, "Choose the species", "Wearables Spawner", mainMenuArray, "wearableTypeOptionSelect", "qawearable.mainMenu", false);
                 }
@@ -154,6 +164,7 @@ public class qawearables extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wearableTypeOptionSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -161,7 +172,7 @@ public class qawearables extends script.base_script
         {
             if (utils.hasScriptVar(self, "qawearable.pid"))
             {
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, "qawearable.mainMenu");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "qawearable.mainMenu");
                 if ((params == null) || (params.isEmpty()))
                 {
                     broadcast(player, "Failing, params empty");
@@ -174,43 +185,43 @@ public class qawearables extends script.base_script
                 switch (btn)
                 {
                     case sui.BP_CANCEL:
-                    utils.removeScriptVarTree(player, "qawearable");
-                    utils.removeScriptVarTree(player, "qatool");
-                    closeOldWindow(player);
-                    return SCRIPT_CONTINUE;
-                    case sui.BP_REVERT:
-                    String[] options = utils.getStringArrayScriptVar(player, "qatool.toolMainMenu");
-                    String mainTitle = utils.getStringScriptVar(player, "qatool.title");
-                    String mainPrompt = utils.getStringScriptVar(player, "qatool.prompt");
-                    if (options == null)
-                    {
-                        broadcast(player, "You didn't start from the main tool menu");
-                        String[] mainMenuArray = populateArray(player, DATATABLE_LOCATION, "wearable_specie");
-                        qa.refreshMenu(player, "Choose the species", "Wearables Spawner", mainMenuArray, "wearableTypeOptionSelect", true, "qawearable.pid");
-                        return SCRIPT_CONTINUE;
-                    }
-                    else 
-                    {
-                        qa.refreshMenu(self, mainPrompt, mainTitle, options, "toolMainMenu", true, "qatool.pid");
-                        utils.removeScriptVarTree(player, "qawearable");
-                        return SCRIPT_CONTINUE;
-                    }
-                    case sui.BP_OK:
-                    if (idx < 0)
-                    {
                         utils.removeScriptVarTree(player, "qawearable");
                         utils.removeScriptVarTree(player, "qatool");
-                        broadcast(player, "You didnt have anything selected");
+                        closeOldWindow(player);
                         return SCRIPT_CONTINUE;
-                    }
-                    break;
+                    case sui.BP_REVERT:
+                        String[] options = utils.getStringArrayScriptVar(player, "qatool.toolMainMenu");
+                        String mainTitle = utils.getStringScriptVar(player, "qatool.title");
+                        String mainPrompt = utils.getStringScriptVar(player, "qatool.prompt");
+                        if (options == null)
+                        {
+                            broadcast(player, "You didn't start from the main tool menu");
+                            String[] mainMenuArray = populateArray(player, DATATABLE_LOCATION, "wearable_specie");
+                            qa.refreshMenu(player, "Choose the species", "Wearables Spawner", mainMenuArray, "wearableTypeOptionSelect", true, "qawearable.pid");
+                            return SCRIPT_CONTINUE;
+                        }
+                        else
+                        {
+                            qa.refreshMenu(self, mainPrompt, mainTitle, options, "toolMainMenu", true, "qatool.pid");
+                            utils.removeScriptVarTree(player, "qawearable");
+                            return SCRIPT_CONTINUE;
+                        }
+                    case sui.BP_OK:
+                        if (idx < 0)
+                        {
+                            utils.removeScriptVarTree(player, "qawearable");
+                            utils.removeScriptVarTree(player, "qatool");
+                            broadcast(player, "You didnt have anything selected");
+                            return SCRIPT_CONTINUE;
+                        }
+                        break;
                 }
                 String specieChoice = previousMainMenuArray[idx];
                 if (specieChoice.equals(""))
                 {
                     broadcast(self, "The Script failed because the previous menu did not pass a string.");
                 }
-                else 
+                else
                 {
                     utils.setScriptVar(player, "qawearable.specieChoiceVar", specieChoice);
                     String[] wearablesArray = populateArray(player, DATATABLE_LOCATION, specieChoice, "wearable_specie", "wearable_type", false, false);
@@ -218,19 +229,20 @@ public class qawearables extends script.base_script
                     {
                         broadcast(player, "Wearables UI creation failed.");
                     }
-                    else 
+                    else
                     {
                         constructSUI(player, "Choose the wearable type", "Wearables Spawner", wearablesArray, "wearablesOptionSelect", "qawearable.wearablesMenu", true);
                     }
                 }
             }
         }
-        else 
+        else
         {
             broadcast(player, "Godmode needed for this command.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wearablesOptionSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -238,7 +250,7 @@ public class qawearables extends script.base_script
         {
             if (utils.hasScriptVar(self, "qawearable.pid"))
             {
-                String previousWearablesArray[] = utils.getStringArrayScriptVar(self, "qawearable.wearablesMenu");
+                String[] previousWearablesArray = utils.getStringArrayScriptVar(self, "qawearable.wearablesMenu");
                 if ((params == null) || (params.isEmpty()))
                 {
                     broadcast(player, "Failing, params empty");
@@ -251,33 +263,33 @@ public class qawearables extends script.base_script
                 switch (btn)
                 {
                     case sui.BP_REVERT:
-                    String[] mainMenuArray = populateArray(player, DATATABLE_LOCATION, "wearable_specie");
-                    if (mainMenuArray.length < 1)
-                    {
-                        broadcast(player, "Specie UI creation failed.");
-                        utils.removeScriptVarTree(player, "qawearable");
-                        utils.removeScriptVarTree(player, "qatool");
+                        String[] mainMenuArray = populateArray(player, DATATABLE_LOCATION, "wearable_specie");
+                        if (mainMenuArray.length < 1)
+                        {
+                            broadcast(player, "Specie UI creation failed.");
+                            utils.removeScriptVarTree(player, "qawearable");
+                            utils.removeScriptVarTree(player, "qatool");
+                            return SCRIPT_CONTINUE;
+                        }
+                        else
+                        {
+                            qa.refreshMenu(player, "Choose the species", "Wearables Spawner", mainMenuArray, "wearableTypeOptionSelect", "qabadge.pid", sui.OK_CANCEL_REFRESH);
+                        }
                         return SCRIPT_CONTINUE;
-                    }
-                    else 
-                    {
-                        qa.refreshMenu(player, "Choose the species", "Wearables Spawner", mainMenuArray, "wearableTypeOptionSelect", "qabadge.pid", sui.OK_CANCEL_REFRESH);
-                    }
-                    return SCRIPT_CONTINUE;
                     case sui.BP_OK:
-                    if (idx < 0)
-                    {
+                        if (idx < 0)
+                        {
+                            utils.removeScriptVarTree(player, "qawearable");
+                            utils.removeScriptVarTree(player, "qatool");
+                            broadcast(player, "You didnt have anything selected");
+                            return SCRIPT_CONTINUE;
+                        }
+                        break;
+                    case sui.BP_CANCEL:
                         utils.removeScriptVarTree(player, "qawearable");
                         utils.removeScriptVarTree(player, "qatool");
-                        broadcast(player, "You didnt have anything selected");
+                        closeOldWindow(player);
                         return SCRIPT_CONTINUE;
-                    }
-                    break;
-                    case sui.BP_CANCEL:
-                    utils.removeScriptVarTree(player, "qawearable");
-                    utils.removeScriptVarTree(player, "qatool");
-                    closeOldWindow(player);
-                    return SCRIPT_CONTINUE;
                 }
                 String wearableChoice = previousWearablesArray[idx];
                 if (!wearableChoice.equals(""))
@@ -287,19 +299,20 @@ public class qawearables extends script.base_script
                     {
                         broadcast(player, "Wearables Name UI creation failed.");
                     }
-                    else 
+                    else
                     {
                         constructSUI(player, "Choose the wearable item", "Wearables Spawner", wearablesNameArray, "wearablesTemplateSelect", "qawearable.spawnItem", true);
                     }
                 }
             }
         }
-        else 
+        else
         {
             broadcast(player, "Godmode needed for this command.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int wearablesTemplateSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -307,7 +320,7 @@ public class qawearables extends script.base_script
         {
             if (utils.hasScriptVar(self, "qawearable.pid"))
             {
-                String previousWearablesNameArray[] = utils.getStringArrayScriptVar(self, "qawearable.spawnItem");
+                String[] previousWearablesNameArray = utils.getStringArrayScriptVar(self, "qawearable.spawnItem");
                 if ((params == null) || (params.isEmpty()))
                 {
                     broadcast(player, "Failing, params empty");
@@ -321,44 +334,44 @@ public class qawearables extends script.base_script
                 switch (btn)
                 {
                     case sui.BP_REVERT:
-                    String specieChoice = utils.getStringScriptVar(player, "qawearable.specieChoiceVar");
-                    if (specieChoice != null)
-                    {
-                        String[] wearablesArray = populateArray(player, DATATABLE_LOCATION, specieChoice, "wearable_specie", "wearable_type", false, false);
-                        if (wearablesArray.length < 1)
+                        String specieChoice = utils.getStringScriptVar(player, "qawearable.specieChoiceVar");
+                        if (specieChoice != null)
                         {
-                            broadcast(player, "Specie UI creation failed.");
+                            String[] wearablesArray = populateArray(player, DATATABLE_LOCATION, specieChoice, "wearable_specie", "wearable_type", false, false);
+                            if (wearablesArray.length < 1)
+                            {
+                                broadcast(player, "Specie UI creation failed.");
+                            }
+                            else
+                            {
+                                constructSUI(player, "Choose the wearable type", "Wearables Spawner", wearablesArray, "wearablesOptionSelect", "qawearable.wearablesMenu", true);
+                            }
                         }
-                        else 
+                        else
                         {
-                            constructSUI(player, "Choose the wearable type", "Wearables Spawner", wearablesArray, "wearablesOptionSelect", "qawearable.wearablesMenu", true);
+                            broadcast(player, "The previous specie selection could not be retrieved.");
                         }
-                    }
-                    else 
-                    {
-                        broadcast(player, "The previous specie selection could not be retrieved.");
-                    }
-                    return SCRIPT_CONTINUE;
+                        return SCRIPT_CONTINUE;
                     case sui.BP_OK:
-                    if (idx < 0)
-                    {
+                        if (idx < 0)
+                        {
+                            utils.removeScriptVarTree(player, "qawearable");
+                            utils.removeScriptVarTree(player, "qatool");
+                            broadcast(player, "You didnt have anything selected");
+                            return SCRIPT_CONTINUE;
+                        }
+                        break;
+                    case sui.BP_CANCEL:
                         utils.removeScriptVarTree(player, "qawearable");
                         utils.removeScriptVarTree(player, "qatool");
-                        broadcast(player, "You didnt have anything selected");
+                        closeOldWindow(player);
                         return SCRIPT_CONTINUE;
-                    }
-                    break;
-                    case sui.BP_CANCEL:
-                    utils.removeScriptVarTree(player, "qawearable");
-                    utils.removeScriptVarTree(player, "qatool");
-                    closeOldWindow(player);
-                    return SCRIPT_CONTINUE;
                 }
                 String wearableNameChoice = previousWearablesNameArray[idx];
-                String wearablesName = new String();
-                String indexNum = new String();
-                String refString = new String();
-                String templateData = new String();
+                String wearablesName = "";
+                String indexNum = "";
+                String refString = "";
+                String templateData = "";
                 if (!wearableNameChoice.equals(""))
                 {
                     String[] wearable_name = dataTableGetStringColumn(DATATABLE_LOCATION, 2);
@@ -371,7 +384,7 @@ public class qawearables extends script.base_script
                     int z = 0;
                     boolean haveFound = false;
                     boolean allSelected = false;
-                    while (haveFound == false)
+                    while (!haveFound)
                     {
                         if (z < listingLength)
                         {
@@ -382,7 +395,7 @@ public class qawearables extends script.base_script
                             }
                             z++;
                         }
-                        else 
+                        else
                         {
                             allSelected = true;
                             haveFound = true;
@@ -392,7 +405,7 @@ public class qawearables extends script.base_script
                     {
                         qa.templateObjectSpawner(player, templateData);
                     }
-                    else if (allSelected == true)
+                    else if (allSelected)
                     {
                         for (int x = 0; x < (previousWearablesNameArray.length - 1); x++)
                         {
@@ -409,23 +422,24 @@ public class qawearables extends script.base_script
                     {
                         broadcast(player, "Specie UI creation failed.");
                     }
-                    else 
+                    else
                     {
                         qa.refreshMenu(player, "Choose the species", "Wearables Spawner", mainMenuArray, "wearableTypeOptionSelect", "qabadge.pid", sui.OK_CANCEL_REFRESH);
                     }
                 }
-                else 
+                else
                 {
                     broadcast(player, "The script failed to pass the string from the previous menu.");
                 }
             }
         }
-        else 
+        else
         {
             broadcast(player, "Godmode needed for this command.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public void cleanScriptVars(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -433,6 +447,7 @@ public class qawearables extends script.base_script
         utils.removeScriptVarTree(self, "qawearable");
         setObjVar(player, "qawearable", true);
     }
+
     public void closeOldWindow(obj_id player) throws InterruptedException
     {
         String playerPath = "qawearable.";
@@ -443,6 +458,7 @@ public class qawearables extends script.base_script
             utils.removeScriptVar(player, "qawearable.pid");
         }
     }
+
     public void setWindowPid(obj_id player, int pid) throws InterruptedException
     {
         if (pid > -1)

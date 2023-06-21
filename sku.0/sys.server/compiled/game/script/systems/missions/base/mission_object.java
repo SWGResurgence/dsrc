@@ -1,5 +1,11 @@
 package script.systems.missions.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -65,13 +71,13 @@ public class mission_object extends script.systems.missions.base.mission_dynamic
         attribs[i] = getMissionCreator(self);
         ++i;
         names[i] = "@" + new string_id("ui_mission", "attribs_reward");
-        attribs[i] = "" + getMissionReward(self);
+        attribs[i] = String.valueOf(getMissionReward(self));
         ++i;
         int difficulty = getMissionDifficulty(self);
         if (difficulty > 0)
         {
             names[i] = "@" + new string_id("ui_mission", "attribs_difficulty");
-            attribs[i] = "" + difficulty;
+            attribs[i] = String.valueOf(difficulty);
             ++i;
         }
         return SCRIPT_CONTINUE;

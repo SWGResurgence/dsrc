@@ -1,5 +1,11 @@
 package script.systems.combat;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.attrib_mod;
 import script.obj_id;
 
@@ -72,7 +78,7 @@ public class combat_test extends script.base_script
         else if (message.equals("com report"))
         {
             String report = reportAttribs(self);
-            debugSpeakMsg(self, "My stats are currently: " + report + "");
+            debugSpeakMsg(self, "My stats are currently: " + report);
         }
         return SCRIPT_CONTINUE;
     }
@@ -99,7 +105,7 @@ public class combat_test extends script.base_script
             setAttrib(self, MIND, -5);
         }
         String report = reportAttribs(self);
-        debugServerConsoleMsg(self, "My stats are currently: " + report + "");
+        debugServerConsoleMsg(self, "My stats are currently: " + report);
         return SCRIPT_CONTINUE;
     }
 
@@ -187,7 +193,7 @@ public class combat_test extends script.base_script
                 newAttributeLevel = (curAttributeLevel - damPoints);
                 if (!damType.equals("none"))
                 {
-                    String damageElement = "" + damPoints + " of " + damType + " (" + newAttributeLevel + "/" + maxAttributeLevel + "), ";
+                    String damageElement = damPoints + " of " + damType + " (" + newAttributeLevel + "/" + maxAttributeLevel + "), ";
                     damageReport = join(damageReport, damageElement);
                 }
             }
@@ -265,15 +271,15 @@ public class combat_test extends script.base_script
         String attribname = "";
         int curAttributeLevel = getAttrib(target, HEALTH);
         attribname = returnDamType(HEALTH);
-        element = ("" + attribname + " = " + curAttributeLevel + ",");
+        element = (attribname + " = " + curAttributeLevel + ",");
         reportsum = join(reportsum, element);
         curAttributeLevel = getAttrib(target, ACTION);
         attribname = returnDamType(ACTION);
-        element = ("" + attribname + " = " + curAttributeLevel + ",");
+        element = (attribname + " = " + curAttributeLevel + ",");
         reportsum = join(reportsum, element);
         curAttributeLevel = getAttrib(target, MIND);
         attribname = returnDamType(MIND);
-        element = ("" + attribname + " = " + curAttributeLevel + ",");
+        element = (attribname + " = " + curAttributeLevel + ",");
         reportsum = join(reportsum, element);
         return reportsum;
     }

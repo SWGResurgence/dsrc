@@ -1,18 +1,27 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class yavin_fallenstar_pt_1_osae extends script.base_script
 {
+    public static String c_stringFile = "conversation/yavin_fallenstar_pt_1_osae";
+
     public yavin_fallenstar_pt_1_osae()
     {
     }
-    public static String c_stringFile = "conversation/yavin_fallenstar_pt_1_osae";
+
     public boolean yavin_fallenstar_pt_1_osae_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean yavin_fallenstar_pt_1_osae_condition_questActiveorComplete_pt_1(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/yavin_fallenStar_pt1");
@@ -20,6 +29,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         boolean OnTask = (questIsQuestActive(questId1, player)) || (questIsQuestComplete(questId1, player)) || (questIsQuestActive(questId2, player)) || (questIsQuestComplete(questId2, player));
         return OnTask;
     }
+
     public boolean yavin_fallenstar_pt_1_osae_condition_questComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/yavin_fallenstar_pt1");
@@ -28,6 +38,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         boolean OnTask = (questIsQuestComplete(questId1, player)) && (questIsQuestComplete(questId2, player)) && (questIsQuestComplete(questId3, player));
         return OnTask;
     }
+
     public boolean yavin_fallenstar_pt_1_osae_condition_MeganWarned(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/yavin_fallenstar_pt1");
@@ -35,6 +46,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         boolean OnTask = questIsTaskActive(questId1, yavin_fallenstar_e7_getreward, player);
         return OnTask;
     }
+
     public boolean yavin_fallenstar_pt_1_osae_condition_questNotDone(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/yavin_fallenstar_pt1");
@@ -43,12 +55,14 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         boolean OnTask = questIsTaskActive(questId1, yavin_fallenstar_e3_warn_megan, player) || questIsTaskActive(questId1, yavin_fallenstar_e4_fight_yak, player);
         return OnTask;
     }
+
     public boolean yavin_fallenstar_pt_1_osae_condition_Pt1_questComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/yavin_fallenstar_pt1");
         boolean OnTask = questIsQuestComplete(questId1, player);
         return OnTask;
     }
+
     public boolean yavin_fallenstar_pt_1_osae_condition_questNotDone_pt_2_Wuioe(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/yavin_fallenstar_pt2");
@@ -57,14 +71,12 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         boolean OnTask = questIsTaskActive(questId1, yavin_fallenstar_e11_kill_robbers, player) || questIsTaskActive(questId1, yavin_fallenstar_e12_kill_smugglers, player);
         return OnTask;
     }
+
     public boolean yavin_fallenstar_pt_1_osae_condition_spaceCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "recovery", "yavin_fallenstar_pt_2_recovery"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasWonQuest(player, "recovery", "yavin_fallenstar_pt_2_recovery");
     }
+
     public boolean yavin_fallenstar_pt_1_osae_condition_questNotDone_pt_3_ship(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/yavin_fallenstar_pt3");
@@ -72,6 +84,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         boolean OnTask = questIsTaskActive(questId1, yavin_fallenstar_e14_interception, player) && !(space_quest.hasWonQuest(player, "recovery", "yavin_fallenstar_pt_2_recovery"));
         return OnTask;
     }
+
     public boolean yavin_fallenstar_pt_1_osae_condition_opcaCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/yavin_fallenstar_pt2");
@@ -79,6 +92,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         boolean OnTask = questIsTaskActive(questId1, yavin_fallenstar_e14_return_osae, player);
         return OnTask;
     }
+
     public boolean yavin_fallenstar_pt_1_osae_condition_HasJTL(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/yavin_fallenstar_pt1");
@@ -86,6 +100,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         boolean OnTask = (questIsQuestComplete(questId1, player)) && (questIsQuestComplete(questId2, player)) && (features.isSpaceEdition(player));
         return OnTask;
     }
+
     public boolean yavin_fallenstar_pt_1_osae_condition_onQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/yavin_meganjobs_lostworker");
@@ -94,48 +109,59 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         boolean OnTask = (questIsQuestActive(questId1, player)) || (questIsQuestActive(questId2, player)) || (questIsQuestActive(questId3, player));
         return OnTask;
     }
+
     public boolean yavin_fallenstar_pt_1_osae_condition_spaceFailed(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasFailedQuest(player, "recovery", "yavin_fallenstar_pt_2_recovery") || space_quest.hasAbortedQuest(player, "recovery", "yavin_fallenstar_pt_2_recovery");
     }
+
     public void yavin_fallenstar_pt_1_osae_action_rewardSignal_pt_1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "yavin_fallenstar_launch_e8");
     }
+
     public void yavin_fallenstar_pt_1_osae_action_giveQuest_pt_1(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/yavin_fallenstar_pt1");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void yavin_fallenstar_pt_1_osae_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void yavin_fallenstar_pt_1_osae_action_giveQuest_pt_2(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/yavin_fallenstar_pt2");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void yavin_fallenstar_pt_1_osae_action_rewardSignal_pt_2_Opca(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "yavin_fallenstar_launch_e26");
     }
+
     public void yavin_fallenstar_pt_1_osae_action_spaceSignal_pt(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "yavin_fallenStar_launch_e14");
     }
+
     public void yavin_fallenstar_pt_1_osae_action_rewardSignal_pt_3_Imperial(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "yavin_fallenStar_launch_e22");
     }
+
     public void yavin_fallenstar_pt_1_osae_action_rewardSignal_pt_3_chose(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "yavin_fallenStar_launch_e19");
     }
+
     public void yavin_fallenstar_pt_1_osae_action_rewardSignal_pt_3_Rebel(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "yavin_fallenStar_launch_e21");
     }
+
     public void yavin_fallenstar_pt_1_osae_action_giveQuest_pt_3(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "yavin_fallenstar_pt3");
@@ -143,10 +169,12 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         space_quest.clearQuestFlags(player, "recovery", "yavin_fallenstar_pt_2_recovery");
         space_quest.grantQuest(player, "recovery", "yavin_fallenstar_pt_2_recovery");
     }
+
     public void yavin_fallenstar_pt_1_osae_action_rewardSignal_pt_3_walkaway(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "yavin_fallenstar_launch_e35");
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_120"))
@@ -204,7 +232,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_124");
@@ -221,7 +249,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -231,6 +259,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_124"))
@@ -287,7 +316,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -304,7 +333,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -314,6 +343,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -351,6 +381,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_106"))
@@ -377,6 +408,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -401,6 +433,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_103"))
@@ -426,6 +459,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_835"))
@@ -450,6 +484,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_845"))
@@ -488,7 +523,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_853");
@@ -501,7 +536,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -511,6 +546,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_853"))
@@ -537,6 +573,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_59"))
@@ -561,6 +598,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -577,6 +615,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_54"))
@@ -614,7 +653,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -627,7 +666,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -637,6 +676,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_67"))
@@ -663,7 +703,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -676,7 +716,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -710,7 +750,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_86");
@@ -723,7 +763,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -733,6 +773,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -761,7 +802,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_86");
@@ -774,7 +815,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -795,6 +836,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_86"))
@@ -821,6 +863,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_807"))
@@ -854,7 +897,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_811");
@@ -871,7 +914,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -881,6 +924,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_811"))
@@ -917,7 +961,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_819");
@@ -930,7 +974,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -962,7 +1006,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_827");
@@ -975,7 +1019,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -985,6 +1029,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_819"))
@@ -1011,7 +1056,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_827");
@@ -1024,7 +1069,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1044,6 +1089,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int yavin_fallenstar_pt_1_osae_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_827"))
@@ -1069,6 +1115,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1082,6 +1129,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1091,6 +1139,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1099,18 +1148,21 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.yavin_fallenstar_pt_1_osae");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1156,7 +1208,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -1172,7 +1224,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId", 2);
                 npcStartConversation(player, npc, "yavin_fallenstar_pt_1_osae", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1201,7 +1253,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -1213,7 +1265,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId", 8);
                 npcStartConversation(player, npc, "yavin_fallenstar_pt_1_osae", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1241,7 +1293,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -1253,7 +1305,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId", 10);
                 npcStartConversation(player, npc, "yavin_fallenstar_pt_1_osae", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1282,7 +1334,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -1294,7 +1346,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId", 12);
                 npcStartConversation(player, npc, "yavin_fallenstar_pt_1_osae", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1322,7 +1374,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_835");
@@ -1334,7 +1386,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId", 15);
                 npcStartConversation(player, npc, "yavin_fallenstar_pt_1_osae", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1363,7 +1415,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_845");
@@ -1375,7 +1427,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId", 18);
                 npcStartConversation(player, npc, "yavin_fallenstar_pt_1_osae", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1403,7 +1455,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -1415,7 +1467,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId", 21);
                 npcStartConversation(player, npc, "yavin_fallenstar_pt_1_osae", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1438,7 +1490,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -1446,7 +1498,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId", 24);
                 npcStartConversation(player, npc, "yavin_fallenstar_pt_1_osae", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1475,7 +1527,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -1487,7 +1539,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId", 26);
                 npcStartConversation(player, npc, "yavin_fallenstar_pt_1_osae", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1509,7 +1561,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_807");
@@ -1517,7 +1569,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
                 utils.setScriptVar(player, "conversation.yavin_fallenstar_pt_1_osae.branchId", 32);
                 npcStartConversation(player, npc, "yavin_fallenstar_pt_1_osae", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1526,6 +1578,7 @@ public class yavin_fallenstar_pt_1_osae extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("yavin_fallenstar_pt_1_osae"))

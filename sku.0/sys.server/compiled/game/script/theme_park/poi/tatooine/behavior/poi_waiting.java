@@ -1,5 +1,11 @@
 package script.theme_park.poi.tatooine.behavior;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.obj_id;
@@ -9,11 +15,13 @@ public class poi_waiting extends script.base_script
     public poi_waiting()
     {
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         detachScript(self, "theme_park.tatooine.behavior.poi_waiting");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         stop(self);
@@ -22,6 +30,7 @@ public class poi_waiting extends script.base_script
         messageTo(self, "playAnimation", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int playAnimation(obj_id self, dictionary params) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -32,20 +41,20 @@ public class poi_waiting extends script.base_script
             switch (move)
             {
                 case 1:
-                action = "check_wrist_device";
-                break;
+                    action = "check_wrist_device";
+                    break;
                 case 2:
-                action = "cough_polite";
-                break;
+                    action = "cough_polite";
+                    break;
                 case 3:
-                action = "rub_belly";
-                break;
+                    action = "rub_belly";
+                    break;
                 case 4:
-                action = "scratch_head";
-                break;
+                    action = "scratch_head";
+                    break;
                 case 5:
-                action = "check_wrist_device";
-                break;
+                    action = "check_wrist_device";
+                    break;
             }
             doAnimationAction(self, action);
             if (anims < 10)
@@ -55,13 +64,14 @@ public class poi_waiting extends script.base_script
                 anims = anims + 1;
                 setObjVar(self, "animsLeft", anims);
             }
-            else 
+            else
             {
                 removeObjVar(self, "animsLeft");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int killTarget(obj_id self, dictionary params) throws InterruptedException
     {
         debugSpeakMsg(self, "That's it! Now you die!");
@@ -69,6 +79,7 @@ public class poi_waiting extends script.base_script
         startCombat(self, target);
         return SCRIPT_CONTINUE;
     }
+
     public int doFacing(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id face = params.getObjId("target");

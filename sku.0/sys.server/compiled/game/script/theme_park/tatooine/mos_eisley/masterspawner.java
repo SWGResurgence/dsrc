@@ -1,5 +1,11 @@
 package script.theme_park.tatooine.mos_eisley;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -15,6 +21,7 @@ public class masterspawner extends script.base_script
         messageTo(self, "spawnThings", null, 2, true);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         spawnPadawanTrialsNpc(self);
@@ -30,6 +37,7 @@ public class masterspawner extends script.base_script
         spawnCheatedGambler(self);
         spawnJunkDealer(self);
     }
+
     public void spawnHanandChewie(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "cantina");
@@ -42,6 +50,7 @@ public class masterspawner extends script.base_script
         setCreatureStatic(han, true);
         setCreatureStatic(chewie, true);
     }
+
     public void spawnPadawanTrialsNpc(obj_id self) throws InterruptedException
     {
         obj_id npc = create.object("patron_human_male_01", new location(-9.34f, 1.0f, 5.66f, "tatooine", getCellId(self, "cantina")));
@@ -54,6 +63,7 @@ public class masterspawner extends script.base_script
         attachScript(npc, "conversation.padawan_old_musician_02");
         setObjVar(self, "cantinaInhabitants.padawanTrialsNpc", npc);
     }
+
     public void spawnChadraFans(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "cantina");
@@ -68,6 +78,7 @@ public class masterspawner extends script.base_script
         ai_lib.setDefaultCalmMood(c1, "conversation");
         ai_lib.setDefaultCalmMood(c2, "conversation");
     }
+
     public void spawnFoyer(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "foyer2");
@@ -97,6 +108,7 @@ public class masterspawner extends script.base_script
         ai_lib.setDefaultCalmMood(f4, "npc_sitting_chair");
         ai_lib.setDefaultCalmMood(f5, "npc_sitting_chair");
     }
+
     public void spawnClosePatrons(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "cantina");
@@ -131,6 +143,7 @@ public class masterspawner extends script.base_script
         ai_lib.setDefaultCalmMood(s5, "npc_sitting_chair");
         ai_lib.setDefaultCalmMood(s6, "npc_sitting_chair");
     }
+
     public void spawnStandingConvoGroup(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "cantina");
@@ -145,6 +158,7 @@ public class masterspawner extends script.base_script
         ai_lib.setDefaultCalmMood(itho, "nervous");
         ai_lib.setDefaultCalmMood(greeata, "conversation");
     }
+
     public void spawnAudience(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "cantina");
@@ -189,6 +203,7 @@ public class masterspawner extends script.base_script
         ai_lib.setDefaultCalmMood(a7, "npc_sad");
         ai_lib.setDefaultCalmMood(a8, "npc_consoling");
     }
+
     public void spawnBarPatronsRight(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "cantina");
@@ -255,6 +270,7 @@ public class masterspawner extends script.base_script
         obj_id cup14 = createObject("object/tangible/item/con_drinking_glass_01.iff", p14, "");
         equip(cup14, p14);
     }
+
     public void spawnSittingPatrons(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "cantina");
@@ -284,6 +300,7 @@ public class masterspawner extends script.base_script
         ai_lib.setDefaultCalmMood(p7, "npc_sitting_table_eating");
         ai_lib.setDefaultCalmMood(p8, "npc_sitting_chair");
     }
+
     public void spawnWuher(obj_id self) throws InterruptedException
     {
         obj_id wuher = create.object("wuher", new location(8.46f, 1.0f, 0.35f, "tatooine", getCellId(self, "cantina")));
@@ -297,6 +314,7 @@ public class masterspawner extends script.base_script
         attachScript(wuher, "npc.bartender.base");
         attachScript(wuher, "npc.bartender.listen");
     }
+
     public void spawnBithBand(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "alcove3");
@@ -340,21 +358,25 @@ public class masterspawner extends script.base_script
         equip(createObject("object/tangible/instrument/fizz.iff", fizz, ""), fizz);
         equip(createObject("object/tangible/instrument/bandfill.iff", bandfill, ""), bandfill);
     }
+
     public int spawnThings(obj_id self, dictionary params) throws InterruptedException
     {
         spawnEveryone(self);
         return SCRIPT_CONTINUE;
     }
+
     public int peopleDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnEveryone(self);
         return SCRIPT_CONTINUE;
     }
+
     public int wuherDied(obj_id self, dictionary params) throws InterruptedException
     {
         spawnWuher(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!hasObjVar(speaker, "gm_testing"))
@@ -375,12 +397,14 @@ public class masterspawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void spawnCheatedGambler(obj_id self) throws InterruptedException
     {
         obj_id gambler = create.object("ep3_cheated_gambler", new location(-6.5f, -0.9f, -20.7f, "tatooine", getCellId(self, "stage")));
         setYaw(gambler, 60);
         ai_lib.setDefaultCalmMood(gambler, "npc_sad");
     }
+
     public void spawnJunkDealer(obj_id self) throws InterruptedException
     {
         obj_id junkDealer = create.object("junk_dealer", new location(-30.9152f, -0.52f, 6.8631f, "tatooine", getCellId(self, "private_room2")));

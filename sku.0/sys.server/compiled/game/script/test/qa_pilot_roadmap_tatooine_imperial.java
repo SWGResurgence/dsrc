@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -8,87 +14,84 @@ import script.string_id;
 
 public class qa_pilot_roadmap_tatooine_imperial extends script.base_script
 {
-    public qa_pilot_roadmap_tatooine_imperial()
-    {
-    }
     public static final String TOOL_TITLE = "Tatooine Imperial Pilot";
     public static final String TOOL_PROMPT = "Tatooine Imperial Pilot\nSelect the pilot roadmap quest or function to complete.";
     public static final String SCRIPTVAR = "pilotimptat";
-    public static final String[][] MAIN_TOOL_MENU = 
-    {
-        
-        {
-            "Get Novice Tatooine Imperial Pilot and ship",
-            "Complete First 2 Missions (patrol/tatooine_imperial_1 & destroy_surpriseattack/tatooine_imperial_1)",
-            "Complete Second Mission (destroy/tatooine_imperial_2)",
-            "Complete Third Mission Set (patrol/tatooine_imperial_3 & spacequest/escort/tatooine_imperial_3)",
-            "Complete Fourth Mission (assassinate/tatooine_imperial_4)",
-            "Train Tier 1 Pilot Skills",
-            "Complete Fifth Mission (space_quest/inspect/imperial_ss_1)",
-            "Complete Sixth Mission (space_quest/recovery/imperial_ss_2)",
-            "Train Naval Pilot 2",
-            "Complete Seventh Mission (spacequest/assassinate/imperial_ss_3)",
-            "Train Naval Weapons 2",
-            "Complete Eighth Mission (spacequest/inspect/imperial_ss_4)",
-            "Complete Ninth Mission (spacequest/escort/imperial_ss_5)",
-            "Train Naval Procedures 2 and Droid 2",
-            "Complete Tenth Mission (spacequest/recovery/imperial_ss_6)",
-            "Complete Tier 3, Mission Set 1 (spacequest/escort/tatooine_imperial_tier3_1)",
-            "Train Navy Starships 3",
-            "Complete Tier 3, Mission Set 2 (spacequest/inspect/tatooine_imperial_tier3_2)",
-            "Train Naval Weapons 3",
-            "Complete Tier 3, Mission Set 3 (spacequest/delivery/tatooine_imperial_tier3_3)",
-            "Train Naval Procedures 3",
-            "Complete Tier 3, Mission Set 4 (spacequest/assassinate/tatooine_imperial_tier3_4)",
-            "Train Naval Droid 3",
-            "Train Naval Starships 4",
-            "Complete Tier 4, Mission Set 1 (spacequest/patrol/tatooine_imperial_tier4_1)",
-            "Train Naval Weapons 4",
-            "Complete Tier 4, Mission Set 2 (spacequest/recovery/tatooine_imperial_tier4_2)",
-            "Train Naval Procedures 4",
-            "Complete Tier 4, Mission Set 3 (spacequest/escort/tatooine_imperial_tier4_3)",
-            "Train Naval Droid 4",
-            "Complete Tier 4, Mission Set 4 (spacequest/assassinate/tatooine_imperial_tier4_4)",
-            "Complete 1st Master Mission (spacequest/destroy/master_imperial_1)",
-            "Complete 2nd Master Mission (spacequest/destroy/master_imperial_2)"
-        },
-        
-        {
-            "",
-            "spacequest/patrol/tatooine_imperial_1;spacequest/destroy_surpriseattack/tatooine_imperial_1",
-            "spacequest/destroy/tatooine_imperial_2",
-            "spacequest/patrol/tatooine_imperial_3;spacequest/escort/tatooine_imperial_3",
-            "spacequest/assassinate/tatooine_imperial_4",
-            "pilot_imperial_navy_starships_01;pilot_imperial_navy_weapons_01;pilot_imperial_navy_procedures_01;pilot_imperial_navy_droid_01",
-            "spacequest/inspect/imperial_ss_1",
-            "spacequest/recovery/imperial_ss_2",
-            "pilot_imperial_navy_starships_02",
-            "spacequest/assassinate/imperial_ss_3",
-            "pilot_imperial_navy_weapons_02",
-            "spacequest/inspect/imperial_ss_4",
-            "spacequest/escort/imperial_ss_5",
-            "pilot_imperial_navy_procedures_02;pilot_imperial_navy_droid_02",
-            "spacequest/recovery/imperial_ss_6",
-            "spacequest/escort/tatooine_imperial_tier3_1;spacequest/recovery/tatooine_imperial_tier3_1_a;spacequest/inspect/tatooine_imperial_tier3_1_b;spacequest/rescue/tatooine_imperial_tier3_1_c;spacequest/delivery_no_pickup/tatooine_imperial_tier3_1_d",
-            "pilot_imperial_navy_starships_03",
-            "spacequest/inspect/tatooine_imperial_tier3_2;spacequest/destroy_surpriseattack/tatooine_imperial_tier3_2_a;spacequest/inspect/tatooine_imperial_tier3_2_b;spacequest/delivery_no_pickup/tatooine_imperial_tier3_2_c;spacequest/patrol/tatooine_imperial_tier3_2_d;spacequest/space_battle/tatooine_imperial_tier3_2_e",
-            "pilot_imperial_navy_weapons_03",
-            "spacequest/delivery/tatooine_imperial_tier3_3;spacequest/destroy/tatooine_imperial_tier3_3_b;spacequest/escort/tatooine_imperial_tier3_3_a;spacequest/destroy_surpriseattack/tatooine_imperial_tier3_3_d;spacequest/survival/tatooine_imperial_tier3_3_c",
-            "pilot_imperial_navy_procedures_03",
-            "spacequest/assassinate/tatooine_imperial_tier3_4;spacequest/rescue/tatooine_imperial_tier3_4_a;spacequest/inspect/tatooine_imperial_tier3_4_b;spacequest/assassinate/tatooine_imperial_tier3_4_c",
-            "pilot_imperial_navy_droid_03",
-            "pilot_imperial_navy_starships_04",
-            "spacequest/patrol/tatooine_imperial_tier4_1;spacequest/destroy_surpriseattack/tatooine_imperial_tier4_1_a;spacequest/space_battle/tatooine_imperial_tier4_1_b;spacequest/inspect/tatooine_imperial_tier4_1_c;spacequest/delivery_no_pickup/tatooine_imperial_tier4_1_d",
-            "pilot_imperial_navy_weapons_04",
-            "spacequest/recovery/tatooine_imperial_tier4_2;spacequest/recovery/tatooine_imperial_tier4_2_a;spacequest/delivery/tatooine_imperial_tier4_2_b;spacequest/delivery_no_pickup/tatooine_imperial_tier4_2_c",
-            "pilot_imperial_navy_procedures_04",
-            "spacequest/escort/tatooine_imperial_tier4_3;spacequest/rescue/tatooine_imperial_tier4_3_a;spacequest/space_battle/tatooine_imperial_tier4_3_b",
-            "pilot_imperial_navy_droid_04",
-            "spacequest/assassinate/tatooine_imperial_tier4_4;spacequest/assassinate/tatooine_imperial_tier4_4_a;spacequest/recovery/tatooine_imperial_tier4_4_b;spacequest/assassinate/tatooine_imperial_tier4_4_c",
-            "spacequest/destroy/master_imperial_1",
-            "pilot_imperial_navy_master"
-        }
-    };
+    public static final String[][] MAIN_TOOL_MENU =
+            {
+
+                    {
+                            "Get Novice Tatooine Imperial Pilot and ship",
+                            "Complete First 2 Missions (patrol/tatooine_imperial_1 & destroy_surpriseattack/tatooine_imperial_1)",
+                            "Complete Second Mission (destroy/tatooine_imperial_2)",
+                            "Complete Third Mission Set (patrol/tatooine_imperial_3 & spacequest/escort/tatooine_imperial_3)",
+                            "Complete Fourth Mission (assassinate/tatooine_imperial_4)",
+                            "Train Tier 1 Pilot Skills",
+                            "Complete Fifth Mission (space_quest/inspect/imperial_ss_1)",
+                            "Complete Sixth Mission (space_quest/recovery/imperial_ss_2)",
+                            "Train Naval Pilot 2",
+                            "Complete Seventh Mission (spacequest/assassinate/imperial_ss_3)",
+                            "Train Naval Weapons 2",
+                            "Complete Eighth Mission (spacequest/inspect/imperial_ss_4)",
+                            "Complete Ninth Mission (spacequest/escort/imperial_ss_5)",
+                            "Train Naval Procedures 2 and Droid 2",
+                            "Complete Tenth Mission (spacequest/recovery/imperial_ss_6)",
+                            "Complete Tier 3, Mission Set 1 (spacequest/escort/tatooine_imperial_tier3_1)",
+                            "Train Navy Starships 3",
+                            "Complete Tier 3, Mission Set 2 (spacequest/inspect/tatooine_imperial_tier3_2)",
+                            "Train Naval Weapons 3",
+                            "Complete Tier 3, Mission Set 3 (spacequest/delivery/tatooine_imperial_tier3_3)",
+                            "Train Naval Procedures 3",
+                            "Complete Tier 3, Mission Set 4 (spacequest/assassinate/tatooine_imperial_tier3_4)",
+                            "Train Naval Droid 3",
+                            "Train Naval Starships 4",
+                            "Complete Tier 4, Mission Set 1 (spacequest/patrol/tatooine_imperial_tier4_1)",
+                            "Train Naval Weapons 4",
+                            "Complete Tier 4, Mission Set 2 (spacequest/recovery/tatooine_imperial_tier4_2)",
+                            "Train Naval Procedures 4",
+                            "Complete Tier 4, Mission Set 3 (spacequest/escort/tatooine_imperial_tier4_3)",
+                            "Train Naval Droid 4",
+                            "Complete Tier 4, Mission Set 4 (spacequest/assassinate/tatooine_imperial_tier4_4)",
+                            "Complete 1st Master Mission (spacequest/destroy/master_imperial_1)",
+                            "Complete 2nd Master Mission (spacequest/destroy/master_imperial_2)"
+                    },
+
+                    {
+                            "",
+                            "spacequest/patrol/tatooine_imperial_1;spacequest/destroy_surpriseattack/tatooine_imperial_1",
+                            "spacequest/destroy/tatooine_imperial_2",
+                            "spacequest/patrol/tatooine_imperial_3;spacequest/escort/tatooine_imperial_3",
+                            "spacequest/assassinate/tatooine_imperial_4",
+                            "pilot_imperial_navy_starships_01;pilot_imperial_navy_weapons_01;pilot_imperial_navy_procedures_01;pilot_imperial_navy_droid_01",
+                            "spacequest/inspect/imperial_ss_1",
+                            "spacequest/recovery/imperial_ss_2",
+                            "pilot_imperial_navy_starships_02",
+                            "spacequest/assassinate/imperial_ss_3",
+                            "pilot_imperial_navy_weapons_02",
+                            "spacequest/inspect/imperial_ss_4",
+                            "spacequest/escort/imperial_ss_5",
+                            "pilot_imperial_navy_procedures_02;pilot_imperial_navy_droid_02",
+                            "spacequest/recovery/imperial_ss_6",
+                            "spacequest/escort/tatooine_imperial_tier3_1;spacequest/recovery/tatooine_imperial_tier3_1_a;spacequest/inspect/tatooine_imperial_tier3_1_b;spacequest/rescue/tatooine_imperial_tier3_1_c;spacequest/delivery_no_pickup/tatooine_imperial_tier3_1_d",
+                            "pilot_imperial_navy_starships_03",
+                            "spacequest/inspect/tatooine_imperial_tier3_2;spacequest/destroy_surpriseattack/tatooine_imperial_tier3_2_a;spacequest/inspect/tatooine_imperial_tier3_2_b;spacequest/delivery_no_pickup/tatooine_imperial_tier3_2_c;spacequest/patrol/tatooine_imperial_tier3_2_d;spacequest/space_battle/tatooine_imperial_tier3_2_e",
+                            "pilot_imperial_navy_weapons_03",
+                            "spacequest/delivery/tatooine_imperial_tier3_3;spacequest/destroy/tatooine_imperial_tier3_3_b;spacequest/escort/tatooine_imperial_tier3_3_a;spacequest/destroy_surpriseattack/tatooine_imperial_tier3_3_d;spacequest/survival/tatooine_imperial_tier3_3_c",
+                            "pilot_imperial_navy_procedures_03",
+                            "spacequest/assassinate/tatooine_imperial_tier3_4;spacequest/rescue/tatooine_imperial_tier3_4_a;spacequest/inspect/tatooine_imperial_tier3_4_b;spacequest/assassinate/tatooine_imperial_tier3_4_c",
+                            "pilot_imperial_navy_droid_03",
+                            "pilot_imperial_navy_starships_04",
+                            "spacequest/patrol/tatooine_imperial_tier4_1;spacequest/destroy_surpriseattack/tatooine_imperial_tier4_1_a;spacequest/space_battle/tatooine_imperial_tier4_1_b;spacequest/inspect/tatooine_imperial_tier4_1_c;spacequest/delivery_no_pickup/tatooine_imperial_tier4_1_d",
+                            "pilot_imperial_navy_weapons_04",
+                            "spacequest/recovery/tatooine_imperial_tier4_2;spacequest/recovery/tatooine_imperial_tier4_2_a;spacequest/delivery/tatooine_imperial_tier4_2_b;spacequest/delivery_no_pickup/tatooine_imperial_tier4_2_c",
+                            "pilot_imperial_navy_procedures_04",
+                            "spacequest/escort/tatooine_imperial_tier4_3;spacequest/rescue/tatooine_imperial_tier4_3_a;spacequest/space_battle/tatooine_imperial_tier4_3_b",
+                            "pilot_imperial_navy_droid_04",
+                            "spacequest/assassinate/tatooine_imperial_tier4_4;spacequest/assassinate/tatooine_imperial_tier4_4_a;spacequest/recovery/tatooine_imperial_tier4_4_b;spacequest/assassinate/tatooine_imperial_tier4_4_c",
+                            "spacequest/destroy/master_imperial_1",
+                            "pilot_imperial_navy_master"
+                    }
+            };
     public static final int GET_NOVICE_PILOT_AND_SHIP = 0;
     public static final int COMPLETE_FIRST_MISSION = 1;
     public static final int COMPLETE_SECOND_MISSION = 2;
@@ -122,6 +125,10 @@ public class qa_pilot_roadmap_tatooine_imperial extends script.base_script
     public static final int COMPLETE_TIER_4_4 = 30;
     public static final int COMPLETE_MASTER_1 = 31;
     public static final int COMPLETE_MASTER_2 = 32;
+    public qa_pilot_roadmap_tatooine_imperial()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -138,6 +145,7 @@ public class qa_pilot_roadmap_tatooine_imperial extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -150,6 +158,7 @@ public class qa_pilot_roadmap_tatooine_imperial extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnQuestActivated(obj_id self, int questId) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SCRIPTVAR + ".useTrigger") && isGod(self))
@@ -327,10 +336,12 @@ public class qa_pilot_roadmap_tatooine_imperial extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int delay(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handleImperialPilotMainMenuOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -352,7 +363,7 @@ public class qa_pilot_roadmap_tatooine_imperial extends script.base_script
                     qa.refreshMenu(self, "Choose the tool you want to use", "QA Tools", tool_options, "toolMainMenu", true, "qatool.pid");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     if (hasSkill(self, "pilot_imperial_navy_novice") || hasSkill(self, "pilot_rebel_navy_novice") || hasSkill(self, "pilot_neutral_novice"))
                     {
@@ -366,6 +377,7 @@ public class qa_pilot_roadmap_tatooine_imperial extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean stepThroughPilot(obj_id self, int step) throws InterruptedException
     {
         if (step >= 0)
@@ -592,17 +604,20 @@ public class qa_pilot_roadmap_tatooine_imperial extends script.base_script
         }
         return false;
     }
+
     public void showToolMainMenu(obj_id self) throws InterruptedException
     {
         utils.setScriptVar(self, SCRIPTVAR + ".useTrigger", true);
         qa.refreshMenu(self, TOOL_PROMPT, TOOL_TITLE, MAIN_TOOL_MENU, "handleImperialPilotMainMenuOptions", true, SCRIPTVAR + ".pid", SCRIPTVAR + ".mainMenu");
     }
+
     public void cleanAllScriptVars(obj_id self) throws InterruptedException
     {
         qa.removeScriptVars(self, SCRIPTVAR);
         utils.removeScriptVarTree(self, SCRIPTVAR);
         detachScript(self, "test.qa_pilot_roadmap_tatooine_imperial");
     }
+
     public void detachAndcleanAllScriptVars(obj_id self) throws InterruptedException
     {
         utils.removeScriptVarTree(self, SCRIPTVAR);

@@ -1,5 +1,11 @@
 package script.item.camp;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.camping;
@@ -14,6 +20,7 @@ public class camp_base extends script.base_script
     public static final string_id SID_SYS_DEPLOY = new string_id("camp", "sys_deploy");
     public static final string_id SID_SYS_NOT_IN_COMBAT = new string_id("camp", "sys_not_in_combat");
     public static final string_id SID_SYS_NSF_SKILL = new string_id("camp", "sys_nsf_skill");
+
     public camp_base()
     {
     }

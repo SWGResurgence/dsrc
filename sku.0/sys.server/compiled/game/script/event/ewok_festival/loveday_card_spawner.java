@@ -1,5 +1,11 @@
 package script.event.ewok_festival;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.static_item;
@@ -10,11 +16,13 @@ public class loveday_card_spawner extends script.base_script
     public loveday_card_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "initializeCardSpawner", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int initializeCardSpawner(obj_id self, dictionary params) throws InterruptedException
     {
         modifyPitch(self, 90);
@@ -23,6 +31,7 @@ public class loveday_card_spawner extends script.base_script
         setLocation(self, here);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, false, false, 15, true))
@@ -31,6 +40,7 @@ public class loveday_card_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (canManipulate(player, self, false, false, 15, true))

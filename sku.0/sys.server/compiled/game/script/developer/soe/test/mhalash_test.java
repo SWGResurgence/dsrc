@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.static_item;
 import script.library.utils;
@@ -10,13 +16,16 @@ public class mhalash_test extends script.base_script
     public mhalash_test()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {
+        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self))
+        {
             detachScript(self, "test.mhalash_test");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -71,16 +80,16 @@ public class mhalash_test extends script.base_script
                 String modValStr2 = tok.nextToken();
                 int modVal1 = utils.stringToInt(modValStr1);
                 int modVal2 = utils.stringToInt(modValStr2);
-                String[] modNames = 
-                {
-                    modName1,
-                    modName2
-                };
-                float[] modVals = 
-                {
-                    modVal1,
-                    modVal2
-                };
+                String[] modNames =
+                        {
+                                modName1,
+                                modName2
+                        };
+                float[] modVals =
+                        {
+                                modVal1,
+                                modVal2
+                        };
                 utils.setScriptVar(self, "performance.buildabuff.modNames", modNames);
                 utils.setScriptVar(self, "performance.buildabuff.modValues", modVals);
                 broadcast(self, "buildabuff!" + modName1 + modVal1 + modName2 + modVal2);

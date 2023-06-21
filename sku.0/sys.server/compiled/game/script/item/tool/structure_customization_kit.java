@@ -1,5 +1,11 @@
 package script.item.tool;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -16,6 +22,7 @@ public class structure_customization_kit extends script.base_script
     public static final string_id SID_MUST_BE_INSIDE_STRUCTURE = new string_id("tool/customizer", "inside_structure_that_you_own");
     public static final string_id SID_MUST_BE_INSIDE_INVENTORY = new string_id("tool/customizer", "must_be_in_inventory");
     public static final string_id SID_STRUCTURE_PAINTING_FAILED = new string_id("tool/customizer", "there_was_a_problem_with_structure_kit");
+
     public structure_customization_kit()
     {
     }

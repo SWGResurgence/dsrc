@@ -1,14 +1,22 @@
 package script.theme_park.dungeon.geonosian_madbio_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.utils;
 
 public class door_open extends script.base_script
 {
+    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public door_open()
     {
     }
-    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -19,6 +27,7 @@ public class door_open extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -27,6 +36,7 @@ public class door_open extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void keypad(obj_id player) throws InterruptedException
     {
         boolean playersKeyCard = hasKeyCard(player);
@@ -34,13 +44,13 @@ public class door_open extends script.base_script
         int pid = createSUIPage("Script.Keypad", self, player, "KeypadCallback");
         subscribeToSUIProperty(pid, "result.numberBox", "localtext");
         subscribeToSUIProperty(pid, "buttonEnter", "ButtonPressed");
-        if (playersKeyCard == false)
+        if (!playersKeyCard)
         {
             setSUIProperty(pid, "buttonKeyCard", "enabled", "false");
         }
         showSUIPage(pid);
-        return;
     }
+
     public int KeypadCallback(obj_id self, dictionary params) throws InterruptedException
     {
         String result = params.getString("result.numberBox" + "." + "localtext");
@@ -87,7 +97,7 @@ public class door_open extends script.base_script
             if (keyCard == null)
             {
             }
-            else 
+            else
             {
                 String room = getStringObjVar(self, "room");
                 obj_id mom = getTopMostContainer(self);
@@ -106,6 +116,7 @@ public class door_open extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasKeyCard(obj_id player) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(player);
@@ -114,6 +125,7 @@ public class door_open extends script.base_script
         hadIt = utils.playerHasItemByTemplate(player, passcard);
         return hadIt;
     }
+
     public obj_id keyCardObjId(obj_id objPlayer, String strTemplate) throws InterruptedException
     {
         obj_id objInventory = utils.getInventoryContainer(objPlayer);
@@ -122,9 +134,11 @@ public class door_open extends script.base_script
             obj_id[] objContents = getContents(objInventory);
             if (objContents != null)
             {
-                for (obj_id objContent : objContents) {
+                for (obj_id objContent : objContents)
+                {
                     String strItemTemplate = getTemplateName(objContent);
-                    if (strItemTemplate.equals(strTemplate)) {
+                    if (strItemTemplate.equals(strTemplate))
+                    {
                         obj_id keycard = objContent;
                         return keycard;
                     }

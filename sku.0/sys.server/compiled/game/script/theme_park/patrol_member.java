@@ -1,5 +1,11 @@
 package script.theme_park;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.location;
@@ -7,18 +13,25 @@ import script.obj_id;
 
 public class patrol_member extends script.base_script
 {
-    public patrol_member(){}
-    public void startPatrol(obj_id self, dictionary params) throws InterruptedException{
-        if(!isValidId(self) || !exists(self) || !getBooleanObjVar(self, "isLeader")) return;
+    public patrol_member()
+    {
+    }
+
+    public void startPatrol(obj_id self, dictionary params) throws InterruptedException
+    {
+        if (!isValidId(self) || !exists(self) || !getBooleanObjVar(self, "isLeader")) return;
         location[] patrolPts = params.getLocationArray("patrolPoints");
 
-        if(params.getBoolean("flipPaths")){
+        if (params.getBoolean("flipPaths"))
+        {
             ai_lib.setPatrolFlipPath(self, patrolPts);
         }
-        else {
+        else
+        {
             ai_lib.setPatrolPath(self, patrolPts);
         }
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id spawner = getObjIdObjVar(self, "spawner");

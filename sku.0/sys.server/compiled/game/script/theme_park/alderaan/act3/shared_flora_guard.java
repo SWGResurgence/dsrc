@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class shared_flora_guard extends script.base_script
@@ -7,6 +13,7 @@ public class shared_flora_guard extends script.base_script
     public shared_flora_guard()
     {
     }
+
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         obj_id warehouse = getObjIdObjVar(self, "coa3.shared.warehouse");

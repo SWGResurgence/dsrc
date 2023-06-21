@@ -1,5 +1,11 @@
 package script.space.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,18 +13,20 @@ import java.util.Vector;
 
 public class texture_kit extends script.base_script
 {
-    public texture_kit()
-    {
-    }
     public static final String STF = "texture_kit";
     public static final string_id MNU_TEXTURE = new string_id("sui", "set_texture");
     public static final String BTN_TEXTURE = "@" + STF + ":btn_texture";
     public static final String PICK_A_SHIP_TITLE = "@" + STF + ":pick_a_ship_title";
     public static final String PICK_A_SHIP = "@" + STF + ":pick_a_ship";
+    public texture_kit()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -32,6 +40,7 @@ public class texture_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -41,12 +50,12 @@ public class texture_kit extends script.base_script
         String template = utils.getTemplateFilenameNoPath(self);
         if (item == menu_info_types.SERVER_MENU1)
         {
-            if (isSpaceScene() == true)
+            if (isSpaceScene())
             {
                 sendSystemMessage(player, new string_id(STF, "inspace"));
                 return SCRIPT_CONTINUE;
             }
-            if (utils.getBooleanScriptVar(self, "paint_kit.inuse") == true)
+            if (utils.getBooleanScriptVar(self, "paint_kit.inuse"))
             {
                 return SCRIPT_CONTINUE;
             }
@@ -58,19 +67,21 @@ public class texture_kit extends script.base_script
             }
             Vector validControlDevices = new Vector();
             validControlDevices.setSize(0);
-            for (obj_id shipControlDevice : shipControlDevices) {
+            for (obj_id shipControlDevice : shipControlDevices)
+            {
                 obj_id objShip = space_transition.getShipFromShipControlDevice(shipControlDevice);
-                if (space_utils.isShipTextureable(objShip)) {
+                if (space_utils.isShipTextureable(objShip))
+                {
                     validControlDevices = utils.addElement(validControlDevices, shipControlDevice);
                 }
             }
-            String entries[] = new String[validControlDevices.size()];
+            String[] entries = new String[validControlDevices.size()];
             for (int i = 0; i < validControlDevices.size(); i++)
             {
-                entries[i] = getAssignedName(((obj_id)validControlDevices.get(i)));
+                entries[i] = getAssignedName(((obj_id) validControlDevices.get(i)));
                 if (entries[i] == null || entries[i].equals(""))
                 {
-                    entries[i] = "@" + getName(((obj_id)validControlDevices.get(i)));
+                    entries[i] = "@" + getName(((obj_id) validControlDevices.get(i)));
                 }
             }
             if (validControlDevices != null && validControlDevices.size() > 0)
@@ -82,12 +93,12 @@ public class texture_kit extends script.base_script
                     setSUIProperty(pid, sui.LISTBOX_BTN_OK, sui.PROP_TEXT, BTN_TEXTURE);
                     showSUIPage(pid);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(self, "paint_kit.inuse");
                 }
             }
-            else 
+            else
             {
                 string_id message = new string_id(STF, "ships_not_paintable");
                 sendSystemMessage(player, message);
@@ -96,6 +107,7 @@ public class texture_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTextureShip(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -135,19 +147,21 @@ public class texture_kit extends script.base_script
                 if (utils.getContainingPlayer(shipId) == player && isIdValid(shipId))
                 {
                     String index = "/shared_owner/index_texture_1";
-                    if(hue.setRangedIntCustomVar(shipId, index, texture)) {
+                    if (hue.setRangedIntCustomVar(shipId, index, texture))
+                    {
                         string_id message = new string_id(STF, "changed_paint_job");
                         sendSystemMessage(player, message);
                         destroyObject(self);
                     }
-                    else{
+                    else
+                    {
                         sendSystemMessage(player, "Sorry, we were unable to paint this ship.", null);
                         utils.removeScriptVar(self, "paint_kit.inuse");
                     }
                 }
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 string_id message = new string_id(STF, "cantpaint");
                 sendSystemMessage(player, message);

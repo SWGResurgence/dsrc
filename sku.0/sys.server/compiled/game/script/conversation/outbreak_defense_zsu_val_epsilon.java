@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -10,30 +16,37 @@ import java.util.Vector;
 
 public class outbreak_defense_zsu_val_epsilon extends script.base_script
 {
+    public static String c_stringFile = "conversation/outbreak_defense_zsu_val_epsilon";
+
     public outbreak_defense_zsu_val_epsilon()
     {
     }
-    public static String c_stringFile = "conversation/outbreak_defense_zsu_val_epsilon";
+
     public boolean outbreak_defense_zsu_val_epsilon_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean outbreak_defense_zsu_val_epsilon_condition_hasCompletedDefenseQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "camp_epsilon_defense_01") || groundquests.hasCompletedQuest(player, "camp_epsilon_defense_02") || groundquests.hasCompletedQuest(player, "camp_epsilon_defense_03") || groundquests.hasCompletedQuest(player, "camp_epsilon_defense_04") && outbreak_defense_zsu_val_epsilon_condition_hasAvailableGuardPosts(player, npc));
     }
+
     public boolean outbreak_defense_zsu_val_epsilon_condition_isWaitingForRewardSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "camp_epsilon_defense_01", "collectRewardEpsilon") || groundquests.isTaskActive(player, "camp_epsilon_defense_02", "collectRewardEpsilon") || groundquests.isTaskActive(player, "camp_epsilon_defense_03", "collectRewardEpsilon") || groundquests.isTaskActive(player, "camp_epsilon_defense_04", "collectRewardEpsilon");
     }
+
     public boolean outbreak_defense_zsu_val_epsilon_condition_hasNeverSpoken(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasCompletedCollectionSlot(player, "exp_icon_deathtroopers_camp_epsilon") && !groundquests.isQuestActiveOrComplete(player, "camp_epsilon_defense_01") && !groundquests.isQuestActiveOrComplete(player, "camp_epsilon_defense_02") && !groundquests.isQuestActiveOrComplete(player, "camp_epsilon_defense_03") && !groundquests.isQuestActiveOrComplete(player, "camp_epsilon_defense_04") && outbreak_defense_zsu_val_epsilon_condition_hasAvailableGuardPosts(player, npc);
     }
+
     public boolean outbreak_defense_zsu_val_epsilon_condition_isGodPlayerTester(obj_id player, obj_id npc) throws InterruptedException
     {
         return isGod(player);
     }
+
     public boolean outbreak_defense_zsu_val_epsilon_condition_hasAvailableGuardPosts(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!utils.hasScriptVar(npc, "guardPostList"))
@@ -47,28 +60,35 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
             CustomerServiceLog("outbreak_themepark", "camp_defense.hasAvailableGuardPosts() the npc, " + npc + " has an invalid guardPostList script var.");
             return false;
         }
-        for (obj_id obj_id : guardPostList) {
-            if (!isValidId(obj_id) || !exists(obj_id)) {
+        for (obj_id obj_id : guardPostList)
+        {
+            if (!isValidId(obj_id) || !exists(obj_id))
+            {
                 continue;
             }
-            if (!utils.hasScriptVar(obj_id, "occupied")) {
+            if (!utils.hasScriptVar(obj_id, "occupied"))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public boolean outbreak_defense_zsu_val_epsilon_condition_levelTooLow(obj_id player, obj_id npc) throws InterruptedException
     {
         return getLevel(player) < 80;
     }
+
     public boolean outbreak_defense_zsu_val_epsilon_condition_noAntiVirus(obj_id player, obj_id npc) throws InterruptedException
     {
         return (!groundquests.hasCompletedQuest(player, "outbreak_quest_01_imperial") && !groundquests.hasCompletedQuest(player, "outbreak_quest_01_rebel") && !groundquests.hasCompletedQuest(player, "outbreak_quest_01_neutral"));
     }
+
     public boolean outbreak_defense_zsu_val_epsilon_condition_hasDefenseQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "camp_epsilon_defense_01") || groundquests.isQuestActive(player, "camp_epsilon_defense_02") || groundquests.isQuestActive(player, "camp_epsilon_defense_03") || groundquests.isQuestActive(player, "camp_epsilon_defense_04"));
     }
+
     public void outbreak_defense_zsu_val_epsilon_action_giveQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.hasCompletedQuest(player, "camp_epsilon_defense_01"))
@@ -91,24 +111,30 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
         {
             CustomerServiceLog("outbreak_themepark", "camp_defense.giveQuest() the npc, " + npc + " has no guardPostList script var.");
         }
-        else 
+        else
         {
             obj_id[] guardPostList = utils.getObjIdArrayScriptVar(npc, "guardPostList");
             if (guardPostList == null || guardPostList.length <= 0)
             {
                 CustomerServiceLog("outbreak_themepark", "camp_defense.giveQuest() the npc, " + npc + " has an invalid guardPostList script var.");
             }
-            else 
+            else
             {
-                for (obj_id obj_id : guardPostList) {
-                    if (!isValidId(obj_id) || !exists(obj_id)) {
+                for (obj_id obj_id : guardPostList)
+                {
+                    if (!isValidId(obj_id) || !exists(obj_id))
+                    {
                         continue;
                     }
-                    if (!utils.hasScriptVar(obj_id, "occupied")) {
+                    if (!utils.hasScriptVar(obj_id, "occupied"))
+                    {
                         String questName = getStringObjVar(obj_id, "questObject");
-                        if (questName == null || questName.length() <= 0) {
+                        if (questName == null || questName.length() <= 0)
+                        {
                             CustomerServiceLog("outbreak_themepark", "camp_defense.giveQuest() the npc, " + npc + " has an invalid guardPostList script var.");
-                        } else {
+                        }
+                        else
+                        {
                             CustomerServiceLog("outbreak_themepark", "camp_defense.giveQuest() the npc, " + npc + " is granting the player: " + player + " has an invalid guardPostList script var.");
                             groundquests.grantQuest(player, questName);
                         }
@@ -117,6 +143,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
             }
         }
     }
+
     public void outbreak_defense_zsu_val_epsilon_action_sendQuestSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasCompletedEpsilon");
@@ -126,22 +153,27 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
             modifyCollectionSlotValue(player, "defend_camp_epsilon", 1);
         }
     }
+
     public void outbreak_defense_zsu_val_epsilon_action_action0001(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "camp_epsilon_defense_01");
     }
+
     public void outbreak_defense_zsu_val_epsilon_action_action0002(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "camp_epsilon_defense_02");
     }
+
     public void outbreak_defense_zsu_val_epsilon_action_action0003(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "camp_epsilon_defense_03");
     }
+
     public void outbreak_defense_zsu_val_epsilon_action_action0004(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "camp_epsilon_defense_04");
     }
+
     public int outbreak_defense_zsu_val_epsilon_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -156,6 +188,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int outbreak_defense_zsu_val_epsilon_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_22"))
@@ -204,6 +237,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int outbreak_defense_zsu_val_epsilon_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_62"))
@@ -223,7 +257,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -232,7 +266,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.outbreak_defense_zsu_val_epsilon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -242,6 +276,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int outbreak_defense_zsu_val_epsilon_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_59"))
@@ -257,6 +292,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int outbreak_defense_zsu_val_epsilon_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38"))
@@ -276,7 +312,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -285,7 +321,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.outbreak_defense_zsu_val_epsilon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -295,6 +331,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int outbreak_defense_zsu_val_epsilon_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -314,7 +351,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_53");
@@ -323,7 +360,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.outbreak_defense_zsu_val_epsilon.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -333,6 +370,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int outbreak_defense_zsu_val_epsilon_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53"))
@@ -348,6 +386,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -355,6 +394,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
         messageTo(self, "findGuardPosts", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -362,6 +402,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
         messageTo(self, "findGuardPosts", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -370,6 +411,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int findGuardPosts(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] guardPostList = getAllObjectsWithObjVar(getLocation(self), 200, "questObject");
@@ -379,13 +421,16 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
             return SCRIPT_CONTINUE;
         }
         Vector guardPostsFound = null;
-        for (obj_id obj_id : guardPostList) {
+        for (obj_id obj_id : guardPostList)
+        {
             String spawnerQuestNameMatch = getStringObjVar(obj_id, "questObject");
-            if (spawnerQuestNameMatch == null || spawnerQuestNameMatch.length() <= 0) {
+            if (spawnerQuestNameMatch == null || spawnerQuestNameMatch.length() <= 0)
+            {
                 CustomerServiceLog("outbreak_themepark", "camp_defense.findGuardPosts() the npc, " + self + " found a guard post object that did not have a quest string. Guard Post: " + obj_id);
                 continue;
             }
-            if (!spawnerQuestNameMatch.startsWith("camp_epsilon_defense")) {
+            if (!spawnerQuestNameMatch.startsWith("camp_epsilon_defense"))
+            {
                 continue;
             }
             CustomerServiceLog("outbreak_themepark", "camp_defense.findGuardPosts() the npc, " + self + " found a guard post object. Adding the object to the list. Guard Post: " + obj_id);
@@ -405,12 +450,14 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
         CustomerServiceLog("outbreak_themepark", "camp_defense.findGuardPosts() the npc, " + self + " has a list of guard posts as scriptvar.");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -440,7 +487,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -448,7 +495,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
                 utils.setScriptVar(player, "conversation.outbreak_defense_zsu_val_epsilon.branchId", 2);
                 npcStartConversation(player, npc, "outbreak_defense_zsu_val_epsilon", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -497,7 +544,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_22");
@@ -517,7 +564,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
                 utils.setScriptVar(player, "conversation.outbreak_defense_zsu_val_epsilon.branchId", 5);
                 npcStartConversation(player, npc, "outbreak_defense_zsu_val_epsilon", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -538,7 +585,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -546,7 +593,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
                 utils.setScriptVar(player, "conversation.outbreak_defense_zsu_val_epsilon.branchId", 10);
                 npcStartConversation(player, npc, "outbreak_defense_zsu_val_epsilon", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -574,7 +621,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_38");
@@ -582,7 +629,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
                 utils.setScriptVar(player, "conversation.outbreak_defense_zsu_val_epsilon.branchId", 14);
                 npcStartConversation(player, npc, "outbreak_defense_zsu_val_epsilon", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -603,6 +650,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("outbreak_defense_zsu_val_epsilon"))

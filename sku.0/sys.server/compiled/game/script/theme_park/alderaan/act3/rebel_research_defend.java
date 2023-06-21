@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -10,98 +16,99 @@ import java.util.Vector;
 
 public class rebel_research_defend extends script.base_script
 {
-    public rebel_research_defend()
-    {
-    }
-    public static final String[] TEMPLATE_LIST = 
-    {
-        "object/building/poi/generic_flatten_medium.iff",
-        "object/tangible/furniture/imperial/data_terminal_s1.iff",
-        "coa3_rebel_research_captain",
-        "coa3_rebel_research_captain",
-        "coa3_rebel_research_guard",
-        "coa3_rebel_research_guard",
-        "coa3_rebel_research_guard",
-        "coa3_rebel_research_guard",
-        "coa3_rebel_research_guard",
-        "coa3_rebel_research_guard"
-    };
-    public static final float[][] LOCATION_LIST = 
-    {
-        
-        {
-            0.00f,
-            0.0f,
-            0.0f,
-            0.0f
-        },
-        
-        {
-            -8.00f,
-            0.0f,
-            3.40f,
-            -90.0f
-        },
-        
-        {
-            -10.00f,
-            0.0f,
-            3.00f,
-            -90.0f
-        },
-        
-        {
-            -10.00f,
-            0.0f,
-            -3.00f,
-            -90.0f
-        },
-        
-        {
-            -15.00f,
-            0.0f,
-            10.00f,
-            -90.0f
-        },
-        
-        {
-            -15.00f,
-            0.0f,
-            -10.00f,
-            -90.0f
-        },
-        
-        {
-            12.00f,
-            0.0f,
-            15.00f,
-            45.0f
-        },
-        
-        {
-            12.50f,
-            0.0f,
-            -15.00f,
-            135.0f
-        },
-        
-        {
-            -7.00f,
-            0.0f,
-            20.00f,
-            -45.0f
-        },
-        
-        {
-            -7.00f,
-            0.0f,
-            -20.00f,
-            -135.0f
-        }
-    };
+    public static final String[] TEMPLATE_LIST =
+            {
+                    "object/building/poi/generic_flatten_medium.iff",
+                    "object/tangible/furniture/imperial/data_terminal_s1.iff",
+                    "coa3_rebel_research_captain",
+                    "coa3_rebel_research_captain",
+                    "coa3_rebel_research_guard",
+                    "coa3_rebel_research_guard",
+                    "coa3_rebel_research_guard",
+                    "coa3_rebel_research_guard",
+                    "coa3_rebel_research_guard",
+                    "coa3_rebel_research_guard"
+            };
+    public static final float[][] LOCATION_LIST =
+            {
+
+                    {
+                            0.00f,
+                            0.0f,
+                            0.0f,
+                            0.0f
+                    },
+
+                    {
+                            -8.00f,
+                            0.0f,
+                            3.40f,
+                            -90.0f
+                    },
+
+                    {
+                            -10.00f,
+                            0.0f,
+                            3.00f,
+                            -90.0f
+                    },
+
+                    {
+                            -10.00f,
+                            0.0f,
+                            -3.00f,
+                            -90.0f
+                    },
+
+                    {
+                            -15.00f,
+                            0.0f,
+                            10.00f,
+                            -90.0f
+                    },
+
+                    {
+                            -15.00f,
+                            0.0f,
+                            -10.00f,
+                            -90.0f
+                    },
+
+                    {
+                            12.00f,
+                            0.0f,
+                            15.00f,
+                            45.0f
+                    },
+
+                    {
+                            12.50f,
+                            0.0f,
+                            -15.00f,
+                            135.0f
+                    },
+
+                    {
+                            -7.00f,
+                            0.0f,
+                            20.00f,
+                            -45.0f
+                    },
+
+                    {
+                            -7.00f,
+                            0.0f,
+                            -20.00f,
+                            -135.0f
+                    }
+            };
     public static final String REBEL_SHARED_STF = "theme_park/alderaan/act3/shared_rebel_missions";
     public static final string_id MISSION_COMPLETE = new string_id(REBEL_SHARED_STF, "mission_complete");
     public static final string_id MISSION_FAILED = new string_id(REBEL_SHARED_STF, "mission_failed");
+    public rebel_research_defend()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -109,6 +116,7 @@ public class rebel_research_defend extends script.base_script
         messageTo(self, "spawnNextObject", params, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnNextObject(obj_id self, dictionary params) throws InterruptedException
     {
         int objectNum = params.getInt("index");
@@ -150,12 +158,13 @@ public class rebel_research_defend extends script.base_script
             params.put("index", objectNum);
             messageTo(self, "spawnNextObject", params, 0, false);
         }
-        else 
+        else
         {
             initFacility();
         }
         return SCRIPT_CONTINUE;
     }
+
     public void initFacility() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -163,6 +172,7 @@ public class rebel_research_defend extends script.base_script
         int waitTime = rand(60, 90);
         messageTo(self, "assaultWave", null, waitTime, false);
     }
+
     public int guardKilled(obj_id self, dictionary params) throws InterruptedException
     {
         int numGuards = getIntObjVar(self, "coa3.rebel.numGuards");
@@ -182,6 +192,7 @@ public class rebel_research_defend extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void explodeFacility(obj_id self, obj_id player) throws InterruptedException
     {
         location death = getLocation(self);
@@ -195,30 +206,37 @@ public class rebel_research_defend extends script.base_script
         death.z = death.z - 10;
         playClientEffectLoc(player, "clienteffect/combat_explosion_lair_large.cef", death, 10.0f);
     }
+
     public int cleanup(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         Vector objectList = getResizeableObjIdArrayObjVar(self, "coa3.rebel.obj_list");
-        for (Object o1 : objectList) {
-            if (isIdValid(((obj_id) o1))) {
+        for (Object o1 : objectList)
+        {
+            if (isIdValid(((obj_id) o1)))
+            {
                 destroyObject(((obj_id) o1));
             }
         }
         Vector enemyList = getResizeableObjIdArrayObjVar(self, "coa3.rebel.enemyList");
         if (enemyList != null)
         {
-            for (Object o : enemyList) {
-                if (isIdValid(((obj_id) o))) {
+            for (Object o : enemyList)
+            {
+                if (isIdValid(((obj_id) o)))
+                {
                     destroyObject(((obj_id) o));
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int assaultWave(obj_id self, dictionary params) throws InterruptedException
     {
         if (getIntObjVar(self, "coa3.rebel.failure") == 1)
@@ -238,12 +256,13 @@ public class rebel_research_defend extends script.base_script
             int waitTime = rand(5, 8) * 60;
             messageTo(self, "assaultWave", null, waitTime, false);
         }
-        else 
+        else
         {
             messageTo(self, "handleVictory", null, 15 * 60, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int attackerKilled(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id attacker = params.getObjId("attacker");
@@ -255,7 +274,7 @@ public class rebel_research_defend extends script.base_script
             {
                 setObjVar(self, "coa3.rebel.enemyList", enemyList);
             }
-            else 
+            else
             {
                 removeObjVar(self, "coa3.rebel.enemyList");
                 int waveNum = getIntObjVar(self, "coa3,rebel.waveNum");
@@ -265,7 +284,7 @@ public class rebel_research_defend extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             int waveNum = getIntObjVar(self, "coa3,rebel.waveNum");
             if (waveNum >= 3)
@@ -275,6 +294,7 @@ public class rebel_research_defend extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleVictory(obj_id self, dictionary params) throws InterruptedException
     {
         if (getIntObjVar(self, "coa3.rebel.failure") == 1)
@@ -296,20 +316,21 @@ public class rebel_research_defend extends script.base_script
         messageTo(player, "createReturnMission", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnNewWave(obj_id self, Vector enemyList, int waveNum) throws InterruptedException
     {
-        int enemyWeakCount[] = 
-        {
-            3,
-            4,
-            5
-        };
-        int enemyStrongCount[] = 
-        {
-            1,
-            2,
-            3
-        };
+        int[] enemyWeakCount =
+                {
+                        3,
+                        4,
+                        5
+                };
+        int[] enemyStrongCount =
+                {
+                        1,
+                        2,
+                        3
+                };
         obj_id player = getObjIdObjVar(self, "coa3.rebel.playerId");
         for (int i = 0; i < enemyWeakCount[waveNum]; i++)
         {
@@ -341,6 +362,7 @@ public class rebel_research_defend extends script.base_script
         }
         setObjVar(self, "coa3.rebel.enemyList", enemyList);
     }
+
     public location getSpawnLoc(obj_id self) throws InterruptedException
     {
         location center = getLocation(self);

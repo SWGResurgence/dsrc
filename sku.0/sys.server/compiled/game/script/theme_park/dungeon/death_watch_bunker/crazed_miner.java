@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.buff;
@@ -10,13 +16,14 @@ import script.string_id;
 
 public class crazed_miner extends script.base_script
 {
-    public crazed_miner()
-    {
-    }
     public static final String FACETO_VOLUME_NAME = "faceToTriggerVolume";
     public static final string_id HELP_ME = new string_id("dungeon/death_watch", "help_me");
     public static final string_id RECOVERED_BATTERY = new string_id("dungeon/death_watch", "recovered_battery");
     public static final string_id HALDO_FAILED = new string_id("dungeon/death_watch", "haldo_failed");
+    public crazed_miner()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setAnimationMood(self, "nervous");
@@ -24,6 +31,7 @@ public class crazed_miner extends script.base_script
         messageTo(self, "handleHaldoTimeOut", null, 1800.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         if (hasObjVar(self, "death_watch.already_spoke"))
@@ -36,6 +44,7 @@ public class crazed_miner extends script.base_script
         chat.chat(self, HELP_ME);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -60,6 +69,7 @@ public class crazed_miner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCrazedCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -69,6 +79,7 @@ public class crazed_miner extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCrazedAttack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -79,6 +90,7 @@ public class crazed_miner extends script.base_script
         startCombat(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleHaldoTimeOut(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -92,6 +104,7 @@ public class crazed_miner extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int makeCrazedMinerInvulnerable(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "ai.combat.isInCombat");

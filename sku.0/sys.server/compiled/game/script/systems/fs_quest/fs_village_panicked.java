@@ -1,5 +1,11 @@
 package script.systems.fs_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -14,6 +20,7 @@ public class fs_village_panicked extends script.base_script
     public static final String PP_FILE_LOC = "quest/force_sensitive/fs_panicked";
     public static final String RESPONSE_TEXT = "datatables/fs_quests/fs_panicked.iff";
     public static int INITIAL_DELAY = 10;
+
     public fs_village_panicked()
     {
     }

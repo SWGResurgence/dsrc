@@ -1,5 +1,11 @@
 package script.systems.event_perk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.prose;
 import script.library.sui;
@@ -396,13 +402,12 @@ public class scavenger_droid extends script.base_script
         setObjVar(self, "event_perk.scavenger.item_name_list", itemNameList);
         setObjVar(self, "event_perk.scavenger.name_type_list", nameTypeList);
         sendSystemMessage(player, new string_id("event_perk", "scavenger_list_reset_msg"));
-        return;
     }
 
     public void announceStatusToPlayers(obj_id self, String messageId) throws InterruptedException
     {
         obj_id[] objPlayers = getPlayerCreaturesInRange(self, 256.0f);
-        if (objPlayers != null && objPlayers.length > 0)
+        if (objPlayers != null)
         {
             for (obj_id objPlayer : objPlayers)
             {

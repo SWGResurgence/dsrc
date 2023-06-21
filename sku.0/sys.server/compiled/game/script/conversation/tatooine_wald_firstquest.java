@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,46 +14,57 @@ import script.*;
 
 public class tatooine_wald_firstquest extends script.base_script
 {
+    public static String c_stringFile = "conversation/tatooine_wald_firstquest";
+
     public tatooine_wald_firstquest()
     {
     }
-    public static String c_stringFile = "conversation/tatooine_wald_firstquest";
+
     public boolean tatooine_wald_firstquest_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean tatooine_wald_firstquest_condition_task1_active(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "tatooine_wald_firstquest", "tatooine_wald_firstquest_kill_greatermynock");
     }
+
     public boolean tatooine_wald_firstquest_condition_task1_complete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "tatooine_wald_firstquest", "tatooine_wald_firstquest_returntowald1");
     }
+
     public boolean tatooine_wald_firstquest_condition_task2_3_active(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "tatooine_wald_firstquest", "tatooine_wald_firstquest_task_two_and_three_complete_WFT");
     }
+
     public boolean tatooine_wald_firstquest_condition_task2_3_complete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "tatooine_wald_firstquest", "tatooine_wald_firstquest_returntowald2");
     }
+
     public boolean tatooine_wald_firstquest_condition_quest_complete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "tatooine_wald_firstquest");
     }
+
     public void tatooine_wald_firstquest_action_grant_quest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "tatooine_wald_firstquest");
     }
+
     public void tatooine_wald_firstquest_action_task1_complete_signal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tatooine_wald_firstquest_finished_task1");
     }
+
     public void tatooine_wald_firstquest_action_task2_3_complete_signal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tatooine_wald_firstquest_finished_task2_and_3");
     }
+
     public int tatooine_wald_firstquest_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_76"))
@@ -91,6 +108,7 @@ public class tatooine_wald_firstquest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_wald_firstquest_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_18"))
@@ -120,7 +138,7 @@ public class tatooine_wald_firstquest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -133,7 +151,7 @@ public class tatooine_wald_firstquest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_wald_firstquest.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -167,7 +185,7 @@ public class tatooine_wald_firstquest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -180,7 +198,7 @@ public class tatooine_wald_firstquest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_wald_firstquest.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -190,6 +208,7 @@ public class tatooine_wald_firstquest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_wald_firstquest_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_61"))
@@ -219,7 +238,7 @@ public class tatooine_wald_firstquest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_65");
@@ -232,7 +251,7 @@ public class tatooine_wald_firstquest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_wald_firstquest.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -266,7 +285,7 @@ public class tatooine_wald_firstquest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -279,7 +298,7 @@ public class tatooine_wald_firstquest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_wald_firstquest.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -289,6 +308,7 @@ public class tatooine_wald_firstquest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_wald_firstquest_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_65"))
@@ -318,7 +338,7 @@ public class tatooine_wald_firstquest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -331,7 +351,7 @@ public class tatooine_wald_firstquest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_wald_firstquest.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -365,7 +385,7 @@ public class tatooine_wald_firstquest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -378,7 +398,7 @@ public class tatooine_wald_firstquest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_wald_firstquest.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -388,6 +408,7 @@ public class tatooine_wald_firstquest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_wald_firstquest_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_67"))
@@ -429,7 +450,7 @@ public class tatooine_wald_firstquest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -442,7 +463,7 @@ public class tatooine_wald_firstquest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_wald_firstquest.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -452,6 +473,7 @@ public class tatooine_wald_firstquest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_wald_firstquest_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34"))
@@ -481,7 +503,7 @@ public class tatooine_wald_firstquest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_65");
@@ -494,7 +516,7 @@ public class tatooine_wald_firstquest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_wald_firstquest.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -516,6 +538,7 @@ public class tatooine_wald_firstquest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_wald_firstquest_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44"))
@@ -544,7 +567,7 @@ public class tatooine_wald_firstquest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -557,7 +580,7 @@ public class tatooine_wald_firstquest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_wald_firstquest.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -579,6 +602,7 @@ public class tatooine_wald_firstquest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_wald_firstquest_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -607,7 +631,7 @@ public class tatooine_wald_firstquest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -620,7 +644,7 @@ public class tatooine_wald_firstquest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_wald_firstquest.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -642,6 +666,7 @@ public class tatooine_wald_firstquest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_wald_firstquest_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -670,7 +695,7 @@ public class tatooine_wald_firstquest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -683,7 +708,7 @@ public class tatooine_wald_firstquest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_wald_firstquest.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -705,6 +730,7 @@ public class tatooine_wald_firstquest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_wald_firstquest_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_56"))
@@ -727,7 +753,7 @@ public class tatooine_wald_firstquest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82");
@@ -736,7 +762,7 @@ public class tatooine_wald_firstquest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tatooine_wald_firstquest.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -758,6 +784,7 @@ public class tatooine_wald_firstquest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatooine_wald_firstquest_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_82"))
@@ -774,6 +801,7 @@ public class tatooine_wald_firstquest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -783,6 +811,7 @@ public class tatooine_wald_firstquest extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -790,6 +819,7 @@ public class tatooine_wald_firstquest extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -798,18 +828,21 @@ public class tatooine_wald_firstquest extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.tatooine_wald_firstquest");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -854,7 +887,7 @@ public class tatooine_wald_firstquest extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -870,7 +903,7 @@ public class tatooine_wald_firstquest extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_wald_firstquest.branchId", 2);
                 npcStartConversation(player, npc, "tatooine_wald_firstquest", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -906,7 +939,7 @@ public class tatooine_wald_firstquest extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_18");
@@ -918,7 +951,7 @@ public class tatooine_wald_firstquest extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_wald_firstquest.branchId", 7);
                 npcStartConversation(player, npc, "tatooine_wald_firstquest", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -954,7 +987,7 @@ public class tatooine_wald_firstquest extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -966,7 +999,7 @@ public class tatooine_wald_firstquest extends script.base_script
                 utils.setScriptVar(player, "conversation.tatooine_wald_firstquest.branchId", 15);
                 npcStartConversation(player, npc, "tatooine_wald_firstquest", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -975,6 +1008,7 @@ public class tatooine_wald_firstquest extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("tatooine_wald_firstquest"))

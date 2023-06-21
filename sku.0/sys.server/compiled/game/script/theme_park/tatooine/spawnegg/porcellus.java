@@ -1,19 +1,26 @@
 package script.theme_park.tatooine.spawnegg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
 public class porcellus extends script.base_script
 {
+    public static final String SCRIPTPATH = "theme_park.tatooine.";
+    public static final String TEMPLATE = "object/creature/npc/theme_park/generic_human_male.iff";
+    public static final String[] SCRIPTS =
+            {
+                    "max_rebo_quest_1.porcellus"
+            };
     public porcellus()
     {
     }
-    public static final String SCRIPTPATH = "theme_park.tatooine.";
-    public static final String TEMPLATE = "object/creature/npc/theme_park/generic_human_male.iff";
-    public static final String[] SCRIPTS = 
-    {
-        "max_rebo_quest_1.porcellus"
-    };
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "theme_park.spawn_egg_npc"))
@@ -22,11 +29,13 @@ public class porcellus extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int NPCDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "makeNPC", null, 1, true);
         return SCRIPT_CONTINUE;
     }
+
     public int makeNPC(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id myNPC = createObjectAt(TEMPLATE, self);

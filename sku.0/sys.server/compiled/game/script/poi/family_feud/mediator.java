@@ -1,5 +1,11 @@
 package script.poi.family_feud;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.poi;
@@ -13,9 +19,6 @@ import java.util.Vector;
 
 public class mediator extends script.poi.base.scenario_actor
 {
-    public mediator()
-    {
-    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String VAR_EN_ROUTE = scenario.VAR_SCENARIO_BASE + ".enRoute";
     public static final String HANDLER_TIMER = "handleTimer";
@@ -25,26 +28,34 @@ public class mediator extends script.poi.base.scenario_actor
     public static final String DICT_FACTION_ID = "factionId";
     public static final int TIME_WAIT = 120;
     public static final String MY_TARGET_LOCATION = scenario.ANTAGONIST + "_loc";
+    public mediator()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, SCRIPT_CONVERSE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         attachScript(self, SCRIPT_CONVERSE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, scenario.HANDLER_INCAPACITATION, null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         messageTo(self, scenario.HANDLER_INCAPACITATION, null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -68,13 +79,13 @@ public class mediator extends script.poi.base.scenario_actor
         if (cnt > 0)
         {
         }
-        else 
+        else
         {
             if (poi.isGrantedCredit(poiMaster, speaker))
             {
                 scenario.say(self, convo, "m_thank_combat");
             }
-            else 
+            else
             {
                 scenario.say(self, convo, "m_brushoff");
             }
@@ -86,7 +97,7 @@ public class mediator extends script.poi.base.scenario_actor
         if ((leader == null) || (leader == obj_id.NULL_ID))
         {
         }
-        else 
+        else
         {
             if (leader == self)
             {
@@ -98,24 +109,24 @@ public class mediator extends script.poi.base.scenario_actor
         {
             if (isLeaderEnRoute)
             {
-                switch (rand(1, 4))
+                if (rand(1, 4) == 1)
                 {
-                    case 1:
                     obj_id[] members = scenario.getActorsWithNamePrefix(poiMaster, scenario.MEDIATOR);
                     if ((members == null) || (members.length == 0))
                     {
                     }
-                    else 
+                    else
                     {
                         scenario.sayNoAct(self, convo, "m_cadence");
-                        for (obj_id member : members) {
+                        for (obj_id member : members)
+                        {
                             messageTo(member, HANDLER_CADENCE, null, 1, false);
                         }
                     }
-                    break;
-                    default:
+                }
+                else
+                {
                     scenario.sayNoAct(self, convo, "m_enroute");
-                    break;
                 }
                 npcEndConversation(speaker);
                 return SCRIPT_CONTINUE;
@@ -128,38 +139,38 @@ public class mediator extends script.poi.base.scenario_actor
             {
                 case 0:
                 case 4:
-                responses = utils.addElement(responses, new string_id(convo, "response_yes"));
-                responses = utils.addElement(responses, new string_id(convo, "response_no"));
-                break;
+                    responses = utils.addElement(responses, new string_id(convo, "response_yes"));
+                    responses = utils.addElement(responses, new string_id(convo, "response_no"));
+                    break;
                 case 3:
                 case 6:
-                scenario.say(self, convo, "m_mad");
-                npcEndConversation(speaker);
-                scenario.groupAttack(self, speaker);
-                return SCRIPT_CONTINUE;
+                    scenario.say(self, convo, "m_mad");
+                    npcEndConversation(speaker);
+                    scenario.groupAttack(self, speaker);
+                    return SCRIPT_CONTINUE;
                 case 1:
-                scenario.say(self, convo, "m_preparing");
-                npcEndConversation(speaker);
-                return SCRIPT_CONTINUE;
+                    scenario.say(self, convo, "m_preparing");
+                    npcEndConversation(speaker);
+                    return SCRIPT_CONTINUE;
                 case 2:
-                scenario.say(self, convo, "m_rejected");
-                npcEndConversation(speaker);
-                return SCRIPT_CONTINUE;
+                    scenario.say(self, convo, "m_rejected");
+                    npcEndConversation(speaker);
+                    return SCRIPT_CONTINUE;
                 case 5:
-                scenario.say(self, convo, "m_runaround");
-                npcEndConversation(speaker);
-                scenario.groupAttack(self, speaker);
-                break;
+                    scenario.say(self, convo, "m_runaround");
+                    npcEndConversation(speaker);
+                    scenario.groupAttack(self, speaker);
+                    break;
             }
             if ((responses == null) || (responses.size() == 0))
             {
             }
-            else 
+            else
             {
                 npcStartConversation(speaker, self, convo, msg, responses);
             }
         }
-        else 
+        else
         {
             int idx = rand(1, 5);
             scenario.say(self, convo, "m_minion_" + idx);
@@ -167,6 +178,7 @@ public class mediator extends script.poi.base.scenario_actor
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convoName, obj_id speaker, string_id response) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -215,6 +227,7 @@ public class mediator extends script.poi.base.scenario_actor
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         if (name.equals(MY_TARGET_LOCATION))
@@ -237,13 +250,13 @@ public class mediator extends script.poi.base.scenario_actor
             if ((npcsInRange == null) || (npcsInRange.length == 0))
             {
             }
-            else 
+            else
             {
                 obj_id enemyLeader = poi.findObject(scenario.ANTAGONIST + "_0");
                 if ((enemyLeader == null) || (enemyLeader == obj_id.NULL_ID))
                 {
                 }
-                else 
+                else
                 {
                     int idx = utils.getElementPositionInArray(npcsInRange, enemyLeader);
                     if (idx > -1)
@@ -261,12 +274,16 @@ public class mediator extends script.poi.base.scenario_actor
                 if ((enemies == null) || (enemies.length == 0))
                 {
                 }
-                else 
+                else
                 {
-                    for (obj_id enemy : enemies) {
-                        if (target == obj_id.NULL_ID) {
-                            if (utils.getElementPositionInArray(npcsInRange, enemy) > -1) {
-                                if (!isIncapacitated(enemy) && !isDead(enemy)) {
+                    for (obj_id enemy : enemies)
+                    {
+                        if (target == obj_id.NULL_ID)
+                        {
+                            if (utils.getElementPositionInArray(npcsInRange, enemy) > -1)
+                            {
+                                if (!isIncapacitated(enemy) && !isDead(enemy))
+                                {
                                     target = enemy;
                                 }
                             }
@@ -277,7 +294,7 @@ public class mediator extends script.poi.base.scenario_actor
             if ((target == null) || (target == obj_id.NULL_ID))
             {
             }
-            else 
+            else
             {
                 dictionary d = new dictionary();
                 d.put(scenario.DICT_OBJID, target);
@@ -286,11 +303,13 @@ public class mediator extends script.poi.base.scenario_actor
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleIncapacitation(obj_id self, dictionary params) throws InterruptedException
     {
         scenario.actorIncapacitated(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCadence(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -306,6 +325,7 @@ public class mediator extends script.poi.base.scenario_actor
         scenario.sayNoAct(self, convo, "m_cadence_response");
         return SCRIPT_CONTINUE;
     }
+
     public int handleFollowTimer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId(scenario.DICT_OBJID);
@@ -327,6 +347,7 @@ public class mediator extends script.poi.base.scenario_actor
         pathTo(self, loc);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePrepTimer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId(scenario.DICT_OBJID);
@@ -353,7 +374,7 @@ public class mediator extends script.poi.base.scenario_actor
         {
             debugSpeakMsg(self, "target loc = null... aborting target loc!");
         }
-        else 
+        else
         {
             addLocationTarget(MY_TARGET_LOCATION, loc, 25.0f);
         }
@@ -366,6 +387,7 @@ public class mediator extends script.poi.base.scenario_actor
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCharge(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -377,9 +399,10 @@ public class mediator extends script.poi.base.scenario_actor
         if ((members == null) || (members.length == 0))
         {
         }
-        else 
+        else
         {
-            for (obj_id member : members) {
+            for (obj_id member : members)
+            {
                 ai_lib.aiStopFollowing(member);
             }
         }
@@ -393,7 +416,7 @@ public class mediator extends script.poi.base.scenario_actor
         {
             queueCommand(self, (1780871594), null, "scratch", COMMAND_PRIORITY_DEFAULT);
         }
-        else 
+        else
         {
             scenario.sayNoAct(self, convo, "m_charge");
             params.put(scenario.DICT_OBJID, self);
@@ -402,6 +425,7 @@ public class mediator extends script.poi.base.scenario_actor
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleEnemyAttack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -419,13 +443,14 @@ public class mediator extends script.poi.base.scenario_actor
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             scenario.sayNoAct(self, convo, "m_enemy_attack");
             scenario.groupAttack(self, target);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleVictory(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -442,13 +467,13 @@ public class mediator extends script.poi.base.scenario_actor
         if ((leader == null) || (leader == obj_id.NULL_ID))
         {
         }
-        else 
+        else
         {
             if (leader == self)
             {
                 scenario.say(self, convo, "m_victory");
             }
-            else 
+            else
             {
                 scenario.say(self, convo, "m_minion_victory_" + rand(1, 5));
             }

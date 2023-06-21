@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.stealth;
 import script.library.utils;
@@ -10,6 +16,7 @@ public class random_player_target extends script.base_script
     public random_player_target()
     {
     }
+
     public void addHateToTarget(obj_id self) throws InterruptedException
     {
         if (ai_lib.isDead(self))
@@ -34,6 +41,7 @@ public class random_player_target extends script.base_script
         utils.setScriptVar(self, "lastTargetSwitchTime", getGameTime());
         addHate(self, target, 5000);
     }
+
     public int OnAiCombatFrame(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))

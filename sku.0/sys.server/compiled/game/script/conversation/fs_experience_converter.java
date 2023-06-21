@@ -1,42 +1,57 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class fs_experience_converter extends script.base_script
 {
+    public static String c_stringFile = "conversation/fs_experience_converter";
+
     public fs_experience_converter()
     {
     }
-    public static String c_stringFile = "conversation/fs_experience_converter";
+
     public boolean fs_experience_converter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean fs_experience_converter_condition_canConvertXP(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests.isVillageEligible(player);
     }
+
     public boolean fs_experience_converter_condition_isConvertEligible(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests.hasFreeUnlockBranches(player);
     }
+
     public void fs_experience_converter_action_showSUICrafting(obj_id player, obj_id npc) throws InterruptedException
     {
         xp.displayForceSensitiveXP(player, "crafting");
     }
+
     public void fs_experience_converter_action_showSUICombat(obj_id player, obj_id npc) throws InterruptedException
     {
         xp.displayForceSensitiveXP(player, "combat");
     }
+
     public void fs_experience_converter_action_showSUISenses(obj_id player, obj_id npc) throws InterruptedException
     {
         xp.displayForceSensitiveXP(player, "senses");
     }
+
     public void fs_experience_converter_action_showSUIReflexes(obj_id player, obj_id npc) throws InterruptedException
     {
         xp.displayForceSensitiveXP(player, "reflex");
     }
+
     public void fs_experience_converter_action_closeConversionSUI(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "force_sensitive.sui_pid"))
@@ -48,10 +63,12 @@ public class fs_experience_converter extends script.base_script
             forceCloseSUIPage(utils.getIntScriptVar(player, fs_quests.SCRIPT_VAR_BRANCH_SELECT_SUI));
         }
     }
+
     public void fs_experience_converter_action_showSUIUnlock(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests.showBranchUnlockSUI(player);
     }
+
     public String fs_experience_converter_tokenTO_branchList(obj_id player, obj_id npc) throws InterruptedException
     {
         String branch_list = "\nNothing";
@@ -69,7 +86,7 @@ public class fs_experience_converter extends script.base_script
                         branch_list = "\n" + branch_name;
                         has_branch = true;
                     }
-                    else 
+                    else
                     {
                         branch_list += "\n" + branch_name;
                     }
@@ -78,6 +95,7 @@ public class fs_experience_converter extends script.base_script
         }
         return branch_list;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -87,11 +105,13 @@ public class fs_experience_converter extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -100,18 +120,21 @@ public class fs_experience_converter extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.fs_experience_converter");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -170,7 +193,7 @@ public class fs_experience_converter extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_73ab6ff4");
@@ -198,7 +221,7 @@ public class fs_experience_converter extends script.base_script
                 setObjVar(player, "conversation.fs_experience_converter.branchId", 1);
                 npcStartConversation(player, self, "fs_experience_converter", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -214,6 +237,7 @@ public class fs_experience_converter extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("fs_experience_converter"))

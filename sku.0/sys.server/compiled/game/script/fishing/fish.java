@@ -1,5 +1,11 @@
 package script.fishing;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.fishing;
 import script.library.minigame;
 import script.library.utils;
@@ -7,11 +13,12 @@ import script.*;
 
 public class fish extends script.base_script
 {
+    public static final string_id SID_TROPHY = new string_id(minigame.STF_FISH, "mnu_trophy");
+    private static final string_id SID_FILET = new string_id(minigame.STF_FISH, "mnu_filet");
     public fish()
     {
     }
-    private static final string_id SID_FILET = new string_id(minigame.STF_FISH, "mnu_filet");
-    public static final string_id SID_TROPHY = new string_id(minigame.STF_FISH, "mnu_trophy");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(player);
@@ -29,6 +36,7 @@ public class fish extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(player);
@@ -42,6 +50,7 @@ public class fish extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnOpenedContainer(obj_id self, obj_id who) throws InterruptedException
     {
         if (isPlayer(who) && !isGod(who))
@@ -50,6 +59,7 @@ public class fish extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(transferer) && !isGod(transferer))
@@ -58,6 +68,7 @@ public class fish extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(transferer) && !isGod(transferer))
@@ -66,6 +77,7 @@ public class fish extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (hasObjVar(self, minigame.VAR_FISH_BASE))

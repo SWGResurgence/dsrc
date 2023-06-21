@@ -1,5 +1,11 @@
 package script.gambling.saarlac;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,75 +13,72 @@ import java.util.Vector;
 
 public class saarlac_wheel extends script.gambling.base.wheel
 {
-    public saarlac_wheel()
-    {
-    }
-    public static final String[] WHEEL_OUTCOMES = 
-    {
-        "Bestine",
-        "Anchorhead",
-        "Mos Eisely",
-        "Arch Mesa",
-        "Grand Arena Flats",
-        "Dune Sea",
-        "Spice Fields",
-        "Mines",
-        "Jabba's Palace",
-        "Fort Tusken",
-        "Jawa Stronghold",
-        "Oasis",
-        "Imperial Raid",
-        "Krayt Dragon Attack",
-        "Saarlac Pit",
-        "Bestine(2 Push)",
-        "Bestine(1 Push)",
-        "Anchorhead(1 Push)",
-        "Arch Mesa(2 Push)",
-        "Arch Mesa(1 Push)",
-        "Grand Arena Flats(1 Push)"
-    };
-    private static final int[] WHEEL_PROBABILITIES = 
-    {
-        500,
-        1000,
-        2000,
-        500,
-        1000,
-        2000,
-        500,
-        500,
-        100,
-        500,
-        500,
-        100,
-        400,
-        400,
-        1
-    };
-    private static final float[] PAYOUTS = 
-    {
-        8.0f,
-        2.67f,
-        1.16f,
-        8.0f,
-        2.67f,
-        1.16f,
-        3.0f,
-        3.0f,
-        250.0f,
-        3.0f,
-        3.0f,
-        250.0f,
-        22.0f,
-        22.0f,
-        10000.0f,
-        1.16f,
-        2.67f,
-        1.16f,
-        1.16f,
-        2.67f,
-        1.16f
-    };
+    public static final String[] WHEEL_OUTCOMES =
+            {
+                    "Bestine",
+                    "Anchorhead",
+                    "Mos Eisely",
+                    "Arch Mesa",
+                    "Grand Arena Flats",
+                    "Dune Sea",
+                    "Spice Fields",
+                    "Mines",
+                    "Jabba's Palace",
+                    "Fort Tusken",
+                    "Jawa Stronghold",
+                    "Oasis",
+                    "Imperial Raid",
+                    "Krayt Dragon Attack",
+                    "Saarlac Pit",
+                    "Bestine(2 Push)",
+                    "Bestine(1 Push)",
+                    "Anchorhead(1 Push)",
+                    "Arch Mesa(2 Push)",
+                    "Arch Mesa(1 Push)",
+                    "Grand Arena Flats(1 Push)"
+            };
+    private static final int[] WHEEL_PROBABILITIES =
+            {
+                    500,
+                    1000,
+                    2000,
+                    500,
+                    1000,
+                    2000,
+                    500,
+                    500,
+                    100,
+                    500,
+                    500,
+                    100,
+                    400,
+                    400,
+                    1
+            };
+    private static final float[] PAYOUTS =
+            {
+                    8.0f,
+                    2.67f,
+                    1.16f,
+                    8.0f,
+                    2.67f,
+                    1.16f,
+                    3.0f,
+                    3.0f,
+                    250.0f,
+                    3.0f,
+                    3.0f,
+                    250.0f,
+                    22.0f,
+                    22.0f,
+                    10000.0f,
+                    1.16f,
+                    2.67f,
+                    1.16f,
+                    1.16f,
+                    2.67f,
+                    1.16f
+            };
     private static final int TIMER_BETTING = 40;
     private static final String VAR_JABBA_POOL = "gambling.table.jabba_pool";
     private static final String VAR_OASIS_POOL = "gambling.table.oasis_pool";
@@ -126,11 +129,16 @@ public class saarlac_wheel extends script.gambling.base.wheel
     private static final string_id SID_MNU_POOL_MINIMUM_JABBA = new string_id("gambling/saarlac_wheel", "menu_pool_minimum_jabba");
     private static final string_id SID_MNU_POOL_MINIMUM_OASIS = new string_id("gambling/saarlac_wheel", "menu_pool_minimum_oasis");
     private static final string_id SID_MNU_POOL_MINIMUM_SAARLAC = new string_id("gambling/saarlac_wheel", "menu_pool_minimum_saarlac");
+    public saarlac_wheel()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         reseed(getGameTime());
         return super.OnInitialize(self);
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);
@@ -148,6 +156,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);
@@ -228,6 +237,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleWheelSpinning(obj_id self, dictionary params) throws InterruptedException
     {
         int spin = rand(1, 10001);
@@ -248,6 +258,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBetPlaced(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -288,13 +299,13 @@ public class saarlac_wheel extends script.gambling.base.wheel
                     bet_success = false;
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_INVALID_BET);
                 bet_success = false;
             }
         }
-        else 
+        else
         {
             bet_success = false;
         }
@@ -304,6 +315,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBetVerified(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "saarlac_wheel::handleBetVerified");
@@ -326,6 +338,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         completeBet(self, bet_index, amt, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBetVerifiedFailed(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "saarlac_wheel::handleBetVerifiedFailed");
@@ -341,18 +354,21 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tableTransferSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "saarlac_wheel::tableTransferSuccess");
         startWheelGame(self);
         return SCRIPT_CONTINUE;
     }
+
     public int tableTransferFailed(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "saarlac_wheel::tableTransferFailed");
         sendTableMessage(self, SID_INSUFFICIENT_FUNDS_START, null);
         return SCRIPT_CONTINUE;
     }
+
     public int msgSetJabbaMinimum(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "saarlac_wheel::msgSetJabbaMinimum");
@@ -382,6 +398,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgSetOasisMinimum(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "saarlac_wheel::msgSetOasisMinimum");
@@ -411,6 +428,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgSetSaarlacMinimum(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "saarlac_wheel::msgSetSaarlacMinimum");
@@ -440,6 +458,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return SCRIPT_CONTINUE;
     }
+
     public String wheelRollToName(int roll) throws InterruptedException
     {
         int low_roll = 0;
@@ -454,6 +473,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return null;
     }
+
     private int wheelRollToIndex(int roll) throws InterruptedException
     {
         int low_roll = 0;
@@ -468,6 +488,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return -1;
     }
+
     private String wheelIndexToName(int idx) throws InterruptedException
     {
         if (idx >= WHEEL_OUTCOMES.length)
@@ -476,6 +497,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return WHEEL_OUTCOMES[idx];
     }
+
     private int wheelNameToIndex(String name) throws InterruptedException
     {
         if (name == null)
@@ -491,6 +513,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return -1;
     }
+
     private boolean sendTableMessage(obj_id table, prose_package pp, obj_id ommit_player) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -504,26 +527,31 @@ public class saarlac_wheel extends script.gambling.base.wheel
         obj_id[] players = getObjIdArrayObjVar(table, gambling.VAR_TABLE_PLAYERS);
         if (players != null)
         {
-            for (obj_id player : players) {
-                if (player != ommit_player) {
+            for (obj_id player : players)
+            {
+                if (player != ommit_player)
+                {
                     sendSystemMessageProse(player, pp);
                 }
             }
         }
-        else 
+        else
         {
             return false;
         }
         return true;
     }
+
     private boolean sendTableMessage(obj_id table, prose_package pp) throws InterruptedException
     {
         return sendTableMessage(table, pp, null);
     }
+
     private boolean sendTableMessage(obj_id table, string_id message, obj_id ommit_player) throws InterruptedException
     {
         return sendTableMessage(table, prose.getPackage(message, table), ommit_player);
     }
+
     private int getJabbaPool(obj_id table) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -532,6 +560,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return getIntObjVar(table, VAR_JABBA_POOL);
     }
+
     private int getOasisPool(obj_id table) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -540,6 +569,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return getIntObjVar(table, VAR_OASIS_POOL);
     }
+
     private int getSaarlacPool(obj_id table) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -548,6 +578,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return getIntObjVar(table, VAR_SAARLAC_POOL);
     }
+
     private int adjustJabbaPool(obj_id table, int amt) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -567,6 +598,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         setObjVar(table, VAR_JABBA_POOL, current_amt);
         return current_amt;
     }
+
     private int adjustOasisPool(obj_id table, int amt) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -586,6 +618,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         setObjVar(table, VAR_OASIS_POOL, current_amt);
         return current_amt;
     }
+
     private int adjustSaarlacPool(obj_id table, int amt) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -605,6 +638,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         setObjVar(table, VAR_SAARLAC_POOL, current_amt);
         return current_amt;
     }
+
     private boolean resetJabbaPool(obj_id table) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -619,6 +653,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         setObjVar(table, VAR_JABBA_POOL, jabba_pool_min);
         return true;
     }
+
     private boolean resetOasisPool(obj_id table) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -633,6 +668,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         setObjVar(table, VAR_OASIS_POOL, oasis_pool_min);
         return true;
     }
+
     private boolean resetSaarlacPool(obj_id table) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -647,6 +683,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         setObjVar(table, VAR_SAARLAC_POOL, saarlac_pool_min);
         return true;
     }
+
     private int getTotalBetAmount(obj_id table) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -659,6 +696,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return 0;
     }
+
     private boolean hasBetBeenPlaced(obj_id table, int wheel_index) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -678,8 +716,10 @@ public class saarlac_wheel extends script.gambling.base.wheel
                 String[] bets = getPlayerBets(table, i);
                 if (bets != null)
                 {
-                    for (String bet : bets) {
-                        if (bet.equals(wheel_name)) {
+                    for (String bet : bets)
+                    {
+                        if (bet.equals(wheel_name))
+                        {
                             return true;
                         }
                     }
@@ -688,6 +728,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return false;
     }
+
     private String[] getPlayerBets(obj_id table, int player_index) throws InterruptedException
     {
         if (!isIdValid(table) || player_index < 0)
@@ -710,6 +751,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return null;
     }
+
     private Vector getPlayerBetIndices(obj_id table, int player_index) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "getPlayerBetIndicies -- table ->" + table + " player_index ->" + player_index);
@@ -728,11 +770,15 @@ public class saarlac_wheel extends script.gambling.base.wheel
             bet_idx.setSize(0);
             Vector push_bet_idx = new Vector();
             push_bet_idx.setSize(0);
-            for (String bet1 : bets) {
+            for (String bet1 : bets)
+            {
                 int bet = wheelNameToIndex(bet1);
-                if (bet <= 14) {
+                if (bet <= 14)
+                {
                     utils.addElement(bet_idx, bet);
-                } else {
+                }
+                else
+                {
                     utils.addElement(push_bet_idx, bet);
                 }
             }
@@ -748,6 +794,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return null;
     }
+
     private int validateBet(obj_id table, int wheel_index, int amt, obj_id player) throws InterruptedException
     {
         String wheel_name = wheelIndexToName(wheel_index);
@@ -771,7 +818,8 @@ public class saarlac_wheel extends script.gambling.base.wheel
             sendSystemMessage(player, SID_NO_CASINO);
             return -1;
         }
-        if (wheel_index < 1 || wheel_index > 6) {
+        if (wheel_index < 1 || wheel_index > 6)
+        {
             if (hasBetBeenPlaced(table, wheel_index))
             {
                 sendSystemMessageProse(player, prose.getPackage(SID_BET_ALREADY_PLACED, wheel_name));
@@ -788,7 +836,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
                     }
                     if (amt * PAYOUTS[8] > jabba_pool)
                     {
-                        int max_bet = (int)(jabba_pool / PAYOUTS[8]);
+                        int max_bet = (int) (jabba_pool / PAYOUTS[8]);
                         if (max_bet < 1)
                         {
                             max_bet = 1;
@@ -807,7 +855,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
                     }
                     if (amt * PAYOUTS[11] > oasis_pool)
                     {
-                        int max_bet = (int)(oasis_pool / PAYOUTS[11]);
+                        int max_bet = (int) (oasis_pool / PAYOUTS[11]);
                         if (max_bet < 1)
                         {
                             max_bet = 1;
@@ -826,7 +874,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
                     }
                     if (amt * PAYOUTS[14] > saarlac_pool)
                     {
-                        int max_bet = (int)(saarlac_pool / PAYOUTS[14]);
+                        int max_bet = (int) (saarlac_pool / PAYOUTS[14]);
                         if (max_bet < 1)
                         {
                             max_bet = 1;
@@ -842,10 +890,10 @@ public class saarlac_wheel extends script.gambling.base.wheel
         {
             return amt;
         }
-        else 
+        else
         {
-            int max_payout = (int)(amt * PAYOUTS[wheel_index]);
-            int bet_cover = (int)((getJabbaPool(table) + getOasisPool(table) + getSaarlacPool(table)) * 1.05) + getTotalBetAmount(table);
+            int max_payout = (int) (amt * PAYOUTS[wheel_index]);
+            int bet_cover = (int) ((getJabbaPool(table) + getOasisPool(table) + getSaarlacPool(table)) * 1.05) + getTotalBetAmount(table);
             int table_balance = getBankBalance(table);
             LOG("LOG_CHANNEL", "max_payout ->" + max_payout + " bet_cover ->" + bet_cover + " table_balance ->" + table_balance);
             if (bet_cover + max_payout > table_balance)
@@ -860,12 +908,13 @@ public class saarlac_wheel extends script.gambling.base.wheel
                 }
                 return -2;
             }
-            else 
+            else
             {
                 return amt;
             }
         }
     }
+
     private boolean completeBet(obj_id table, int bet_index, int amt, obj_id player) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "saarlac_wheel::completeBet");
@@ -906,7 +955,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         setObjVar(table, ovpath, amt);
         int total_bets = getTotalBetAmount(table);
-        total_bets += (int)(amt * PAYOUTS[bet_index]);
+        total_bets += (int) (amt * PAYOUTS[bet_index]);
         utils.setScriptVar(table, VAR_TOTAL_BETS, total_bets);
         prose_package pp = prose.getPackage(SID_BET_PLACED_SELF, bet_name, amt);
         sendSystemMessageProse(player, pp);
@@ -924,6 +973,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         messageTo(table, "handleRequestUpdatedUI", d, 0.0f, false);
         return true;
     }
+
     private boolean resolveSpin(obj_id table, int wheel_index) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -939,146 +989,224 @@ public class saarlac_wheel extends script.gambling.base.wheel
         if (player_ids != null)
         {
             Vector bets;
-            for (obj_id player_id : player_ids) {
+            for (obj_id player_id : player_ids)
+            {
                 bets = getPlayerBetIndices(table, gambling.getGamePlayerIndex(table, player_id));
-                if (bets != null) {
-                    for (int j = 0; j < bets.size(); j++) {
+                if (bets != null)
+                {
+                    for (int j = 0; j < bets.size(); j++)
+                    {
                         Integer betVal = (Integer) bets.get(j);
-                        if (betVal == -1) {
+                        if (betVal == -1)
+                        {
                             continue;
                         }
                         LOG("LOG_CHANNEL", "bets[" + j + "] ->" + betVal + " wheel_index ->" + wheel_index + " player ->" + player_id);
-                        switch (wheel_index) {
+                        switch (wheel_index)
+                        {
                             case 0:
-                                if (betVal == 0 || betVal == 15 || betVal == 16) {
+                                if (betVal == 0 || betVal == 15 || betVal == 16)
+                                {
                                     payBet(table, betVal, player_id);
-                                } else if (betVal == 3 || betVal == 4 || betVal == 5 || betVal == 18 || betVal == 19 || betVal == 20) {
+                                }
+                                else if (betVal == 3 || betVal == 4 || betVal == 5 || betVal == 18 || betVal == 19 || betVal == 20)
+                                {
                                     pushBet(table, betVal, player_id);
-                                } else if (betVal == 8 || betVal == 11 || betVal == 12 || betVal == 13 || betVal == 14) {
+                                }
+                                else if (betVal == 8 || betVal == 11 || betVal == 12 || betVal == 13 || betVal == 14)
+                                {
                                     loseBet(table, betVal, player_id);
                                 }
                                 break;
                             case 1:
-                                if (betVal == 1 || betVal == 17) {
+                                if (betVal == 1 || betVal == 17)
+                                {
                                     payBet(table, betVal, player_id);
-                                } else if (betVal == 3 || betVal == 4 || betVal == 5 || betVal == 18 || betVal == 19 || betVal == 20) {
+                                }
+                                else if (betVal == 3 || betVal == 4 || betVal == 5 || betVal == 18 || betVal == 19 || betVal == 20)
+                                {
                                     pushBet(table, betVal, player_id);
-                                } else if (betVal == 8 || betVal == 11 || betVal == 12 || betVal == 13 || betVal == 14) {
+                                }
+                                else if (betVal == 8 || betVal == 11 || betVal == 12 || betVal == 13 || betVal == 14)
+                                {
                                     loseBet(table, betVal, player_id);
                                 }
                                 break;
                             case 2:
-                                if (betVal == 2) {
+                                if (betVal == 2)
+                                {
                                     payBet(table, betVal, player_id);
-                                } else if (betVal == 3 || betVal == 4 || betVal == 5 || betVal == 18 || betVal == 19 || betVal == 20) {
+                                }
+                                else if (betVal == 3 || betVal == 4 || betVal == 5 || betVal == 18 || betVal == 19 || betVal == 20)
+                                {
                                     pushBet(table, betVal, player_id);
-                                } else if (betVal == 8 || betVal == 11 || betVal == 12 || betVal == 13 || betVal == 14) {
+                                }
+                                else if (betVal == 8 || betVal == 11 || betVal == 12 || betVal == 13 || betVal == 14)
+                                {
                                     loseBet(table, betVal, player_id);
                                 }
                                 break;
                             case 3:
-                                if (betVal == 3 || betVal == 18 || betVal == 19) {
+                                if (betVal == 3 || betVal == 18 || betVal == 19)
+                                {
                                     payBet(table, betVal, player_id);
-                                } else if (betVal == 0 || betVal == 1 || betVal == 2 || betVal == 15 || betVal == 16 || betVal == 17) {
+                                }
+                                else if (betVal == 0 || betVal == 1 || betVal == 2 || betVal == 15 || betVal == 16 || betVal == 17)
+                                {
                                     pushBet(table, betVal, player_id);
-                                } else if (betVal == 8 || betVal == 11 || betVal == 12 || betVal == 13 || betVal == 14) {
+                                }
+                                else if (betVal == 8 || betVal == 11 || betVal == 12 || betVal == 13 || betVal == 14)
+                                {
                                     loseBet(table, betVal, player_id);
                                 }
                                 break;
                             case 4:
-                                if (betVal == 4 || betVal == 20) {
+                                if (betVal == 4 || betVal == 20)
+                                {
                                     payBet(table, betVal, player_id);
-                                } else if (betVal == 0 || betVal == 1 || betVal == 2 || betVal == 15 || betVal == 16 || betVal == 17) {
+                                }
+                                else if (betVal == 0 || betVal == 1 || betVal == 2 || betVal == 15 || betVal == 16 || betVal == 17)
+                                {
                                     pushBet(table, betVal, player_id);
-                                } else if (betVal == 8 || betVal == 11 || betVal == 12 || betVal == 13 || betVal == 14) {
+                                }
+                                else if (betVal == 8 || betVal == 11 || betVal == 12 || betVal == 13 || betVal == 14)
+                                {
                                     loseBet(table, betVal, player_id);
                                 }
                                 break;
                             case 5:
-                                if (betVal == 5) {
+                                if (betVal == 5)
+                                {
                                     payBet(table, betVal, player_id);
-                                } else if ((betVal >= 0 && betVal <= 2) || (betVal >= 15 && betVal <= 17)) {
+                                }
+                                else if ((betVal >= 0 && betVal <= 2) || (betVal >= 15 && betVal <= 17))
+                                {
                                     pushBet(table, betVal, player_id);
-                                } else if (betVal == 8 || (betVal >= 11 && betVal <= 14)) {
+                                }
+                                else if (betVal == 8 || (betVal >= 11 && betVal <= 14))
+                                {
                                     loseBet(table, betVal, player_id);
                                 }
                                 break;
                             case 6:
-                                if (betVal == 6) {
+                                if (betVal == 6)
+                                {
                                     payBet(table, betVal, player_id);
-                                } else if ((betVal >= 3 && betVal <= 5) || (betVal >= 18 && betVal <= 20)) {
+                                }
+                                else if ((betVal >= 3 && betVal <= 5) || (betVal >= 18 && betVal <= 20))
+                                {
                                     pushBet(table, betVal, player_id);
-                                } else if (betVal >= 8 && betVal <= 14) {
+                                }
+                                else if (betVal >= 8 && betVal <= 14)
+                                {
                                     loseBet(table, betVal, player_id);
                                 }
                                 break;
                             case 7:
-                                if (betVal == 7) {
+                                if (betVal == 7)
+                                {
                                     payBet(table, betVal, player_id);
-                                } else if ((betVal >= 3 && betVal <= 5) || (betVal >= 18 && betVal <= 20)) {
+                                }
+                                else if ((betVal >= 3 && betVal <= 5) || (betVal >= 18 && betVal <= 20))
+                                {
                                     pushBet(table, betVal, player_id);
-                                } else if (betVal >= 8 && betVal <= 14) {
+                                }
+                                else if (betVal >= 8 && betVal <= 14)
+                                {
                                     loseBet(table, betVal, player_id);
                                 }
                                 break;
                             case 8:
-                                if (betVal >= 6 || betVal <= 8) {
+                                if (betVal >= 6 || betVal <= 8)
+                                {
                                     payPoolBet(table, betVal, player_id);
-                                } else if ((betVal >= 3 && betVal <= 5) || (betVal >= 18 && betVal <= 20)) {
+                                }
+                                else if ((betVal >= 3 && betVal <= 5) || (betVal >= 18 && betVal <= 20))
+                                {
                                     pushBet(table, betVal, player_id);
-                                } else if (betVal >= 9 && betVal <= 14) {
+                                }
+                                else if (betVal >= 9 && betVal <= 14)
+                                {
                                     loseBet(table, betVal, player_id);
                                 }
                                 break;
                             case 9:
-                                if (betVal == 9) {
+                                if (betVal == 9)
+                                {
                                     payBet(table, betVal, player_id);
-                                } else if ((betVal >= 0 && betVal <= 2) || (betVal >= 15 && betVal <= 17)) {
+                                }
+                                else if ((betVal >= 0 && betVal <= 2) || (betVal >= 15 && betVal <= 17))
+                                {
                                     pushBet(table, betVal, player_id);
-                                } else if ((betVal >= 6 && betVal <= 8) || (betVal >= 11 && betVal <= 14)) {
+                                }
+                                else if ((betVal >= 6 && betVal <= 8) || (betVal >= 11 && betVal <= 14))
+                                {
                                     loseBet(table, betVal, player_id);
                                 }
                                 break;
                             case 10:
-                                if (betVal == 10) {
+                                if (betVal == 10)
+                                {
                                     payBet(table, betVal, player_id);
-                                } else if ((betVal >= 0 && betVal <= 2) || (betVal >= 15 && betVal <= 17)) {
+                                }
+                                else if ((betVal >= 0 && betVal <= 2) || (betVal >= 15 && betVal <= 17))
+                                {
                                     pushBet(table, betVal, player_id);
-                                } else if ((betVal >= 6 && betVal <= 8) || (betVal >= 11 && betVal <= 14)) {
+                                }
+                                else if ((betVal >= 6 && betVal <= 8) || (betVal >= 11 && betVal <= 14))
+                                {
                                     loseBet(table, betVal, player_id);
                                 }
                                 break;
                             case 11:
-                                if (betVal >= 9 && betVal <= 11){
+                                if (betVal >= 9 && betVal <= 11)
+                                {
                                     payPoolBet(table, betVal, player_id);
-                                } else if ((betVal >= 0 && betVal <= 2) || (betVal >= 15 && betVal <= 17)) {
+                                }
+                                else if ((betVal >= 0 && betVal <= 2) || (betVal >= 15 && betVal <= 17))
+                                {
                                     pushBet(table, betVal, player_id);
-                                } else if ((betVal >= 6 && betVal <= 8) || (betVal >= 12 && betVal <= 14)) {
+                                }
+                                else if ((betVal >= 6 && betVal <= 8) || (betVal >= 12 && betVal <= 14))
+                                {
                                     loseBet(table, betVal, player_id);
                                 }
                                 break;
                             case 12:
-                                if (betVal == 12) {
+                                if (betVal == 12)
+                                {
                                     payBet(table, betVal, player_id);
-                                } else if ((betVal >= 0 && betVal <= 2) || (betVal >= 6 || betVal <= 8) || betVal == 11 || (betVal >= 13 && betVal <= 17)) {
+                                }
+                                else if ((betVal >= 0 && betVal <= 2) || (betVal >= 6 || betVal <= 8) || betVal == 11 || (betVal >= 13 && betVal <= 17))
+                                {
                                     loseBet(table, betVal, player_id);
-                                } else if ((betVal >= 3 && betVal <= 5) || (betVal >= 18 && betVal <= 20)) {
+                                }
+                                else if ((betVal >= 3 && betVal <= 5) || (betVal >= 18 && betVal <= 20))
+                                {
                                     pushBet(table, betVal, player_id);
                                 }
                                 break;
                             case 13:
-                                if (betVal == 13) {
+                                if (betVal == 13)
+                                {
                                     payBet(table, betVal, player_id);
-                                } else if ((betVal >= 3 && betVal <= 5) || (betVal >= 8 && betVal <= 12) || betVal == 14 || (betVal >= 18 && betVal <= 20)) {
+                                }
+                                else if ((betVal >= 3 && betVal <= 5) || (betVal >= 8 && betVal <= 12) || betVal == 14 || (betVal >= 18 && betVal <= 20))
+                                {
                                     loseBet(table, betVal, player_id);
-                                } else if ((betVal >= 0 && betVal <= 2) || (betVal >= 15 && betVal <= 17)) {
+                                }
+                                else if ((betVal >= 0 && betVal <= 2) || (betVal >= 15 && betVal <= 17))
+                                {
                                     pushBet(table, betVal, player_id);
                                 }
                                 break;
                             case 14:
-                                if (betVal == 14) {
+                                if (betVal == 14)
+                                {
                                     payPoolBet(table, betVal, player_id);
-                                } else if (betVal == 8 || betVal == 11 || betVal == 12) {
+                                }
+                                else if (betVal == 8 || betVal == 11 || betVal == 12)
+                                {
                                     loseBet(table, betVal, player_id);
                                 }
                                 break;
@@ -1089,6 +1217,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return true;
     }
+
     private boolean setBet(obj_id table, int bet_index, int player_index, int amt) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -1113,15 +1242,16 @@ public class saarlac_wheel extends script.gambling.base.wheel
         {
             return false;
         }
-        else 
+        else
         {
             setObjVar(table, bet_path, amt);
             int total_bets = getTotalBetAmount(table);
-            total_bets += (int)(amt * PAYOUTS[bet_index]);
+            total_bets += (int) (amt * PAYOUTS[bet_index]);
             utils.setScriptVar(table, VAR_TOTAL_BETS, total_bets);
             return true;
         }
     }
+
     private boolean removeBet(obj_id table, int bet_index, int player_index) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -1141,7 +1271,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         if (hasObjVar(table, bet_path))
         {
             int total_bets = getTotalBetAmount(table);
-            total_bets -= (int)(getIntObjVar(table, bet_path) * PAYOUTS[bet_index]);
+            total_bets -= (int) (getIntObjVar(table, bet_path) * PAYOUTS[bet_index]);
             utils.setScriptVar(table, VAR_TOTAL_BETS, total_bets);
             removeObjVar(table, bet_path);
             obj_id[] player_ids = getObjIdArrayObjVar(table, gambling.VAR_GAME_PLAYERS_IDS);
@@ -1156,6 +1286,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return false;
     }
+
     private boolean payBet(obj_id table, int bet_index, obj_id player) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -1191,7 +1322,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
             int amt = getIntObjVar(table, bet_path);
             if (amt > 0)
             {
-                int winnings = (int)(amt * payout);
+                int winnings = (int) (amt * payout);
                 int total_amt = amt + winnings;
                 LOG("LOG_CHANNEL", "player ->" + player + " bet_index ->" + bet_index + " amt ->" + amt + " winnings ->" + winnings);
                 transferBankCreditsTo(table, player, total_amt, "noHandler", "noHandler", new dictionary());
@@ -1209,17 +1340,18 @@ public class saarlac_wheel extends script.gambling.base.wheel
                 sendTableMessage(table, pp, player);
                 return true;
             }
-            else 
+            else
             {
                 removeBet(table, bet_index, player_index);
                 return false;
             }
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     private boolean payPoolBet(obj_id table, int bet_index, obj_id player) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -1255,7 +1387,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
             int amt = getIntObjVar(table, bet_path);
             if (amt > 0)
             {
-                int winnings = (int)(amt * payout);
+                int winnings = (int) (amt * payout);
                 if (bet_index == 6 || bet_index == 7 || bet_index == 8)
                 {
                     int jabba_pool = getJabbaPool(table);
@@ -1263,7 +1395,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
                     {
                         jabba_pool = jabba_pool / 2;
                     }
-                    else 
+                    else
                     {
                         winnings = amt * 50;
                         jabba_pool = jabba_pool / 4;
@@ -1281,7 +1413,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
                     {
                         oasis_pool = oasis_pool / 2;
                     }
-                    else 
+                    else
                     {
                         winnings = amt * 50;
                         oasis_pool = oasis_pool / 4;
@@ -1311,17 +1443,18 @@ public class saarlac_wheel extends script.gambling.base.wheel
                 sendTableMessage(table, pp, player);
                 return true;
             }
-            else 
+            else
             {
                 removeBet(table, bet_index, player_index);
                 return false;
             }
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     private boolean loseBet(obj_id table, int bet_index, obj_id player) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "loseBet -- table ->" + table + " bet_index ->" + bet_index + " player ->" + player);
@@ -1359,43 +1492,44 @@ public class saarlac_wheel extends script.gambling.base.wheel
                 sendTableMessage(table, pp, player);
                 if (bet_index == 6 || bet_index == 7)
                 {
-                    adjustOasisPool(table, (int)(amt * 0.1));
-                    pp = prose.getPackage(SID_BET_PUSH_TO_OASIS_SELF, bet_name, (int)(amt * 0.1));
+                    adjustOasisPool(table, (int) (amt * 0.1));
+                    pp = prose.getPackage(SID_BET_PUSH_TO_OASIS_SELF, bet_name, (int) (amt * 0.1));
                     sendSystemMessageProse(player, pp);
-                    pp = prose.getPackage(SID_BET_PUSH_TO_OASIS_SELF, player, null, bet_name, (int)(amt * 0.1));
+                    pp = prose.getPackage(SID_BET_PUSH_TO_OASIS_SELF, player, null, bet_name, (int) (amt * 0.1));
                     sendTableMessage(table, pp, player);
                 }
                 if (bet_index == 9 || bet_index == 10)
                 {
-                    adjustJabbaPool(table, (int)(amt * 0.1));
-                    pp = prose.getPackage(SID_BET_PUSH_TO_JABBA_SELF, bet_name, (int)(amt * 0.1));
+                    adjustJabbaPool(table, (int) (amt * 0.1));
+                    pp = prose.getPackage(SID_BET_PUSH_TO_JABBA_SELF, bet_name, (int) (amt * 0.1));
                     sendSystemMessageProse(player, pp);
-                    pp = prose.getPackage(SID_BET_PUSH_TO_JABBA_SELF, player, null, bet_name, (int)(amt * 0.1));
+                    pp = prose.getPackage(SID_BET_PUSH_TO_JABBA_SELF, player, null, bet_name, (int) (amt * 0.1));
                     sendTableMessage(table, pp, player);
                 }
                 if (bet_index == 14)
                 {
-                    adjustSaarlacPool(table, (int)(amt * 0.5));
-                    pp = prose.getPackage(SID_BET_PUSH_TO_PIT_SELF, bet_name, (int)(amt * 0.5));
+                    adjustSaarlacPool(table, (int) (amt * 0.5));
+                    pp = prose.getPackage(SID_BET_PUSH_TO_PIT_SELF, bet_name, (int) (amt * 0.5));
                     sendSystemMessageProse(player, pp);
-                    pp = prose.getPackage(SID_BET_PUSH_TO_PIT_OTHER, player, null, bet_name, (int)(amt * 0.5));
+                    pp = prose.getPackage(SID_BET_PUSH_TO_PIT_OTHER, player, null, bet_name, (int) (amt * 0.5));
                     sendTableMessage(table, pp, player);
                 }
                 removeBet(table, bet_index, player_index);
                 return true;
             }
-            else 
+            else
             {
                 removeBet(table, bet_index, player_index);
                 return false;
             }
         }
-        else 
+        else
         {
             removeBet(table, bet_index, player_index);
             return false;
         }
     }
+
     private boolean pushBet(obj_id table, int bet_index, obj_id player) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -1462,7 +1596,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
                     d.put("player", player);
                     messageTo(table, "handleRequestUpdatedUI", d, 0.0f, false);
                 }
-                else 
+                else
                 {
                     loseBet(table, bet_index, player);
                     float saarlac_mult = 0.20f;
@@ -1478,54 +1612,55 @@ public class saarlac_wheel extends script.gambling.base.wheel
                         saarlac_mult = saarlac_mult - 0.09f;
                         oasis_mult = 0.09f;
                     }
-                    int saarlac_pool_adjust = (int)(amt * saarlac_mult);
+                    int saarlac_pool_adjust = (int) (amt * saarlac_mult);
                     if (saarlac_pool_adjust > 0)
                     {
                         adjustSaarlacPool(table, saarlac_pool_adjust);
-                        prose_package pp = prose.getPackage(SID_BET_PUSH_TO_PIT_SELF, bet_name, (int)(amt * saarlac_mult));
+                        prose_package pp = prose.getPackage(SID_BET_PUSH_TO_PIT_SELF, bet_name, (int) (amt * saarlac_mult));
                         sendSystemMessageProse(player, pp);
-                        pp = prose.getPackage(SID_BET_PUSH_TO_PIT_OTHER, player, null, bet_name, (int)(amt * saarlac_mult));
+                        pp = prose.getPackage(SID_BET_PUSH_TO_PIT_OTHER, player, null, bet_name, (int) (amt * saarlac_mult));
                         sendTableMessage(table, pp, player);
                     }
                     if (jabba_mult > 0.0f)
                     {
-                        int jabba_pool_adjust = (int)(amt * jabba_mult);
+                        int jabba_pool_adjust = (int) (amt * jabba_mult);
                         if (jabba_pool_adjust > 0)
                         {
                             adjustJabbaPool(table, jabba_pool_adjust);
-                            prose_package pp = prose.getPackage(SID_BET_PUSH_TO_JABBA_SELF, bet_name, (int)(amt * jabba_mult));
+                            prose_package pp = prose.getPackage(SID_BET_PUSH_TO_JABBA_SELF, bet_name, (int) (amt * jabba_mult));
                             sendSystemMessageProse(player, pp);
-                            pp = prose.getPackage(SID_BET_PUSH_TO_JABBA_OTHER, player, null, bet_name, (int)(amt * jabba_mult));
+                            pp = prose.getPackage(SID_BET_PUSH_TO_JABBA_OTHER, player, null, bet_name, (int) (amt * jabba_mult));
                             sendTableMessage(table, pp, player);
                         }
                     }
                     if (oasis_mult > 0.0f)
                     {
-                        int oasis_pool_adjust = (int)(amt * oasis_mult);
+                        int oasis_pool_adjust = (int) (amt * oasis_mult);
                         if (oasis_pool_adjust > 0)
                         {
                             adjustOasisPool(table, oasis_pool_adjust);
-                            prose_package pp = prose.getPackage(SID_BET_PUSH_TO_OASIS_SELF, bet_name, (int)(amt * oasis_mult));
+                            prose_package pp = prose.getPackage(SID_BET_PUSH_TO_OASIS_SELF, bet_name, (int) (amt * oasis_mult));
                             sendSystemMessageProse(player, pp);
-                            pp = prose.getPackage(SID_BET_PUSH_TO_OASIS_OTHER, player, null, bet_name, (int)(amt * oasis_mult));
+                            pp = prose.getPackage(SID_BET_PUSH_TO_OASIS_OTHER, player, null, bet_name, (int) (amt * oasis_mult));
                             sendTableMessage(table, pp, player);
                         }
                     }
                 }
                 return true;
             }
-            else 
+            else
             {
                 removeBet(table, bet_index, player_index);
                 return false;
             }
         }
-        else 
+        else
         {
             removeBet(table, bet_index, player_index);
             return false;
         }
     }
+
     public void showBetUi(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(player))
@@ -1593,6 +1728,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         utils.setScriptVar(self, gambling.VAR_GAME_PLAYERS + "." + player + ".pid", pid);
     }
+
     public void startWheelGame(obj_id self) throws InterruptedException
     {
         obj_id[] players = getObjIdArrayObjVar(self, gambling.VAR_TABLE_PLAYERS);
@@ -1611,7 +1747,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
             sendTableMessage(self, SID_NO_CASINO, null);
             return;
         }
-        int pools = (int)((getJabbaPool(self) + getOasisPool(self) + getSaarlacPool(self)) * 1.05);
+        int pools = (int) ((getJabbaPool(self) + getOasisPool(self) + getSaarlacPool(self)) * 1.05);
         int balance = getBankBalance(self);
         int transfer = balance - pools;
         LOG("LOG_CHANNEL", "startWheelGame -- pools ->" + pools + " balance ->" + balance + " transfer ->" + transfer);
@@ -1623,8 +1759,10 @@ public class saarlac_wheel extends script.gambling.base.wheel
         setObjVar(self, gambling.VAR_GAME_PLAYERS_IDS, players);
         int stampTime = getGameTime() + TIMER_BETTING;
         utils.setScriptVar(self, gambling.VAR_TABLE_BET_ACCEPT, stampTime);
-        for (obj_id player : players) {
-            if (!utils.hasScriptVar(self, gambling.VAR_GAME_PLAYERS + "." + player + ".pid")) {
+        for (obj_id player : players)
+        {
+            if (!utils.hasScriptVar(self, gambling.VAR_GAME_PLAYERS + "." + player + ".pid"))
+            {
                 showBetUi(self, player);
             }
             sendSystemMessage(player, gambling.SID_PLACE_BETS);
@@ -1633,6 +1771,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         d.put("stamp", stampTime);
         messageTo(self, "handleBetTimer", d, 30.0f, false);
     }
+
     public void stopWheelGame(obj_id self) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);

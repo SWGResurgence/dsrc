@@ -1,47 +1,54 @@
 package script.theme_park.racing.keren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class race_coordinator extends script.base_script
 {
+    public static final String RACING_STF = "theme_park/racing/racing";
+    public static final int[] CHECK_POINT =
+            {
+                    1523,
+                    0,
+                    2731,
+                    1604,
+                    0,
+                    2693,
+                    1862,
+                    0,
+                    2706,
+                    1931,
+                    0,
+                    2708,
+                    1806,
+                    0,
+                    2493,
+                    1899,
+                    0,
+                    2615,
+                    1990,
+                    0,
+                    2683,
+                    1992,
+                    0,
+                    2797,
+                    1815,
+                    0,
+                    2808,
+                    1663,
+                    0,
+                    2786
+            };
     public race_coordinator()
     {
     }
-    public static final String RACING_STF = "theme_park/racing/racing";
-    public static final int[] CHECK_POINT = 
-    {
-        1523,
-        0,
-        2731,
-        1604,
-        0,
-        2693,
-        1862,
-        0,
-        2706,
-        1931,
-        0,
-        2708,
-        1806,
-        0,
-        2493,
-        1899,
-        0,
-        2615,
-        1990,
-        0,
-        2683,
-        1992,
-        0,
-        2797,
-        1815,
-        0,
-        2808,
-        1663,
-        0,
-        2786
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -55,6 +62,7 @@ public class race_coordinator extends script.base_script
         messageTo(self, "resetDailyTime", null, 60 * 60 * 24, false);
         return SCRIPT_CONTINUE;
     }
+
     public int resetDailyTime(obj_id self, dictionary params) throws InterruptedException
     {
         float topRecord = 420.0f;
@@ -64,6 +72,7 @@ public class race_coordinator extends script.base_script
         messageTo(self, "resetDailyTime", null, 60 * 60 * 24, false);
         return SCRIPT_CONTINUE;
     }
+
     public int messageStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -83,7 +92,7 @@ public class race_coordinator extends script.base_script
         {
             returnLoc = getLocation(npc);
         }
-        else 
+        else
         {
             returnLoc = getLocation(building);
         }
@@ -108,12 +117,13 @@ public class race_coordinator extends script.base_script
         {
             messageTo(player, "handleRestartMission", params, 0, false);
         }
-        else 
+        else
         {
             attachScript(player, "theme_park.racing.keren.player_racing");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int messageRegisterBest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -137,9 +147,9 @@ public class race_coordinator extends script.base_script
             {
                 if (!badge.hasBadge(player, "bdg_racing_keren_city"))
                 {
-                    
+
                 }
-                
+
                 {
                     badge.grantBadge(player, "bdg_racing_keren_city");
                 }
@@ -189,6 +199,7 @@ public class race_coordinator extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int messageDisplayLeader(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -197,9 +208,10 @@ public class race_coordinator extends script.base_script
         String playerName = getStringObjVar(npc, "racing.keren.topRecordName");
         string_id currentRecordHolder = new string_id(RACING_STF, "current_record_holder");
         sendSystemMessage(player, currentRecordHolder);
-        sendSystemMessage(player, "" + playerName + " with a time of " + topRecord + " seconds.", null);
+        sendSystemMessage(player, playerName + " with a time of " + topRecord + " seconds.", null);
         return SCRIPT_CONTINUE;
     }
+
     public int messageWhatsMyTime(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -214,6 +226,7 @@ public class race_coordinator extends script.base_script
         chat.publicChat(self, null, null, null, myBestTime);
         return SCRIPT_CONTINUE;
     }
+
     public int messageErasePersonalBest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

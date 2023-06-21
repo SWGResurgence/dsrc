@@ -1,5 +1,11 @@
 package script.ai.imperial_presence;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -9,10 +15,12 @@ import script.string_id;
 
 public class harass_backup extends script.base_script
 {
+    public static final String STF = "imperial_presence/contraband_search";
+
     public harass_backup()
     {
     }
-    public static final String STF = "imperial_presence/contraband_search";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "goingToFight", null, 1, false);
@@ -20,6 +28,7 @@ public class harass_backup extends script.base_script
         messageTo(self, "cleanUp", null, x, false);
         return SCRIPT_CONTINUE;
     }
+
     public int goingToFight(obj_id self, dictionary params) throws InterruptedException
     {
         location goFight = getLocationObjVar(self, "whereToFight");
@@ -29,6 +38,7 @@ public class harass_backup extends script.base_script
         addLocationTarget("fight", goFight, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         if (name.equals("fight"))
@@ -40,7 +50,7 @@ public class harass_backup extends script.base_script
                 {
                     chat.chat(self, new string_id(STF, "containment_team_jedi_" + getStringObjVar(self, "faction")));
                 }
-                else 
+                else
                 {
                     chat.chat(self, new string_id(STF, "containment_team_" + getStringObjVar(self, "faction")));
                 }
@@ -54,6 +64,7 @@ public class harass_backup extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         location home = getLocationObjVar(self, "home");
@@ -62,11 +73,13 @@ public class harass_backup extends script.base_script
         messageTo(self, "handleBadLeaving", null, 120, false);
         return SCRIPT_CONTINUE;
     }
+
     public int leaveWorld(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBadLeaving(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "leaveWorld", null, 7, false);

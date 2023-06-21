@@ -1,5 +1,11 @@
 package script.space_mining;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -8,12 +14,14 @@ public class mining_asteroid_static extends script.base_script
     public mining_asteroid_static()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "mining_asteroid.numShipsSpawned", 0);
         setObjVar(self, "dynamicCount", 0);
         return SCRIPT_CONTINUE;
     }
+
     public int OnShipInternalDamageOverTimeRemoved(obj_id self, int chassisSlot, float damageRate, float damageThreshold) throws InterruptedException
     {
         obj_id pilot = getPilotId(self);
@@ -22,6 +30,7 @@ public class mining_asteroid_static extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnShipWasHit(obj_id self, obj_id attacker, int weaponIndex, boolean isMissile, int missileType, int chassisSlot, boolean isPlayerAutoTurret, float hitLocationX_o, float hitLocationY_o, float hitLocationZ_o) throws InterruptedException
     {
         String strAsteroidTable = "datatables/space_mining/mining_asteroids.iff";
@@ -45,13 +54,13 @@ public class mining_asteroid_static extends script.base_script
             fltDamage = fltDamage / 100;
             int maxHitpoints = getMaxHitpoints(self);
             int oldHitpoints = getHitpoints(self);
-            setHitpoints(self, oldHitpoints - (int)fltDamage);
+            setHitpoints(self, oldHitpoints - (int) fltDamage);
             int newHitpoints = getHitpoints(self);
             if (newHitpoints <= 0)
             {
                 handleShipDestruction(self, 1.0f);
             }
-            else 
+            else
             {
                 vector hitLocation_o = new vector(hitLocationX_o, hitLocationY_o, hitLocationZ_o);
                 notifyShipHit(self, attackingLocation_o, hitLocation_o, ship_hit_type.HT_chassis, 0.5f, 1.0f);
@@ -84,7 +93,7 @@ public class mining_asteroid_static extends script.base_script
                     {
                         spawnDirection_o = spawnDirection_o.multiply(45.0f + (random.rand() * 20.0f));
                     }
-                    else 
+                    else
                     {
                         spawnDirection_o = spawnDirection_o.multiply(40.0f + (random.rand() * 20.0f));
                     }
@@ -149,6 +158,7 @@ public class mining_asteroid_static extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "objParent"))
@@ -157,12 +167,14 @@ public class mining_asteroid_static extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePirateKilled(obj_id self, dictionary params) throws InterruptedException
     {
         int spawnCount = getIntObjVar(self, "mining_asteroid.numShipsSpawned");
         setObjVar(self, "mining_asteroid.numShipsSpawned", spawnCount - 1);
         return SCRIPT_CONTINUE;
     }
+
     public int decrementCount(obj_id self, dictionary params) throws InterruptedException
     {
         int count = getIntObjVar(self, "dynamicCount");

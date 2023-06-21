@@ -1,146 +1,132 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class story_loot_espa extends script.base_script
 {
+    public static String c_stringFile = "conversation/story_loot_espa";
+
     public story_loot_espa()
     {
     }
-    public static String c_stringFile = "conversation/story_loot_espa";
+
     public boolean story_loot_espa_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean story_loot_espa_condition_checkAll(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "story_loot.planet"))
         {
             String planet = utils.getStringScriptVar(player, "story_loot.planet");
-            if (planet.equals("all"))
-            {
-                return true;
-            }
+            return planet.equals("all");
         }
         return false;
     }
+
     public boolean story_loot_espa_condition_checkTatooine(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "story_loot.planet"))
         {
             String planet = utils.getStringScriptVar(player, "story_loot.planet");
-            if (planet.equals("tatooine"))
-            {
-                return true;
-            }
+            return planet.equals("tatooine");
         }
         return false;
     }
+
     public boolean story_loot_espa_condition_checkNaboo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "story_loot.planet"))
         {
             String planet = utils.getStringScriptVar(player, "story_loot.planet");
-            if (planet.equals("naboo"))
-            {
-                return true;
-            }
+            return planet.equals("naboo");
         }
         return false;
     }
+
     public boolean story_loot_espa_condition_checkCorellia(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "story_loot.planet"))
         {
             String planet = utils.getStringScriptVar(player, "story_loot.planet");
-            if (planet.equals("corellia"))
-            {
-                return true;
-            }
+            return planet.equals("corellia");
         }
         return false;
     }
+
     public boolean story_loot_espa_condition_checkLok(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "story_loot.planet"))
         {
             String planet = utils.getStringScriptVar(player, "story_loot.planet");
-            if (planet.equals("lok"))
-            {
-                return true;
-            }
+            return planet.equals("lok");
         }
         return false;
     }
+
     public boolean story_loot_espa_condition_checkDantooine(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "story_loot.planet"))
         {
             String planet = utils.getStringScriptVar(player, "story_loot.planet");
-            if (planet.equals("dantooine"))
-            {
-                return true;
-            }
+            return planet.equals("dantooine");
         }
         return false;
     }
+
     public boolean story_loot_espa_condition_checkYavin4(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "story_loot.planet"))
         {
             String planet = utils.getStringScriptVar(player, "story_loot.planet");
-            if (planet.equals("yavin4"))
-            {
-                return true;
-            }
+            return planet.equals("yavin4");
         }
         return false;
     }
+
     public boolean story_loot_espa_condition_checkEndor(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "story_loot.planet"))
         {
             String planet = utils.getStringScriptVar(player, "story_loot.planet");
-            if (planet.equals("endor"))
-            {
-                return true;
-            }
+            return planet.equals("endor");
         }
         return false;
     }
+
     public boolean story_loot_espa_condition_checkDathomir(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "story_loot.planet"))
         {
             String planet = utils.getStringScriptVar(player, "story_loot.planet");
-            if (planet.equals("dathomir"))
-            {
-                return true;
-            }
+            return planet.equals("dathomir");
         }
         return false;
     }
+
     public boolean story_loot_espa_condition_hasSpaceExp(obj_id player, obj_id npc) throws InterruptedException
     {
         return features.isSpaceEdition(player);
     }
+
     public boolean story_loot_espa_condition_checkRem(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (utils.hasScriptVar(player, "story_loot.rem"))
-        {
-            return true;
-        }
-        return false;
+        return utils.hasScriptVar(player, "story_loot.rem");
     }
+
     public boolean story_loot_espa_condition_hasQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuestRecursive(player, "destroy_surpriseattack", "sidequest_jabba_attack") || space_quest.hasAbortedQuestRecursive(player, "destroy_surpriseattack", "sidequest_jabba_attack") || space_quest.hasCompletedQuestRecursive(player, "destroy_surpriseattack", "sidequest_jabba_attack"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuestRecursive(player, "destroy_surpriseattack", "sidequest_jabba_attack") || space_quest.hasAbortedQuestRecursive(player, "destroy_surpriseattack", "sidequest_jabba_attack") || space_quest.hasCompletedQuestRecursive(player, "destroy_surpriseattack", "sidequest_jabba_attack");
     }
+
     public void story_loot_espa_action_Tatooine(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id item = utils.getObjIdScriptVar(player, "story_loot.item");
@@ -155,8 +141,8 @@ public class story_loot_espa extends script.base_script
         prose_package pp = prose.getPackage(new string_id("space/story_loot_d", "systemmessage"), amount);
         sendSystemMessageProse(player, pp);
         money.systemPayout(money.ACCT_RELIC_DEALER, player, amount, "noHandler", null);
-        return;
     }
+
     public void story_loot_espa_action_Naboo(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id item = utils.getObjIdScriptVar(player, "story_loot.item");
@@ -171,8 +157,8 @@ public class story_loot_espa extends script.base_script
         prose_package pp = prose.getPackage(new string_id("space/story_loot_d", "systemmessage"), amount);
         sendSystemMessageProse(player, pp);
         money.systemPayout(money.ACCT_RELIC_DEALER, player, amount, "noHandler", null);
-        return;
     }
+
     public void story_loot_espa_action_Corellia(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id item = utils.getObjIdScriptVar(player, "story_loot.item");
@@ -187,8 +173,8 @@ public class story_loot_espa extends script.base_script
         prose_package pp = prose.getPackage(new string_id("space/story_loot_d", "systemmessage"), amount);
         sendSystemMessageProse(player, pp);
         money.systemPayout(money.ACCT_RELIC_DEALER, player, amount, "noHandler", null);
-        return;
     }
+
     public void story_loot_espa_action_Dantooine(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id item = utils.getObjIdScriptVar(player, "story_loot.item");
@@ -203,8 +189,8 @@ public class story_loot_espa extends script.base_script
         prose_package pp = prose.getPackage(new string_id("space/story_loot_d", "systemmessage"), amount);
         sendSystemMessageProse(player, pp);
         money.systemPayout(money.ACCT_RELIC_DEALER, player, amount, "noHandler", null);
-        return;
     }
+
     public void story_loot_espa_action_Lok(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id item = utils.getObjIdScriptVar(player, "story_loot.item");
@@ -219,8 +205,8 @@ public class story_loot_espa extends script.base_script
         prose_package pp = prose.getPackage(new string_id("space/story_loot_d", "systemmessage"), amount);
         sendSystemMessageProse(player, pp);
         money.systemPayout(money.ACCT_RELIC_DEALER, player, amount, "noHandler", null);
-        return;
     }
+
     public void story_loot_espa_action_Yavin4(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id item = utils.getObjIdScriptVar(player, "story_loot.item");
@@ -235,8 +221,8 @@ public class story_loot_espa extends script.base_script
         prose_package pp = prose.getPackage(new string_id("space/story_loot_d", "systemmessage"), amount);
         sendSystemMessageProse(player, pp);
         money.systemPayout(money.ACCT_RELIC_DEALER, player, amount, "noHandler", null);
-        return;
     }
+
     public void story_loot_espa_action_Endor(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id item = utils.getObjIdScriptVar(player, "story_loot.item");
@@ -251,8 +237,8 @@ public class story_loot_espa extends script.base_script
         prose_package pp = prose.getPackage(new string_id("space/story_loot_d", "systemmessage"), amount);
         sendSystemMessageProse(player, pp);
         money.systemPayout(money.ACCT_RELIC_DEALER, player, amount, "noHandler", null);
-        return;
     }
+
     public void story_loot_espa_action_Dathomir(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id item = utils.getObjIdScriptVar(player, "story_loot.item");
@@ -267,8 +253,8 @@ public class story_loot_espa extends script.base_script
         prose_package pp = prose.getPackage(new string_id("space/story_loot_d", "systemmessage"), amount);
         sendSystemMessageProse(player, pp);
         money.systemPayout(money.ACCT_RELIC_DEALER, player, amount, "noHandler", null);
-        return;
     }
+
     public void story_loot_espa_action_All(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id item = utils.getObjIdScriptVar(player, "story_loot.item");
@@ -283,20 +269,23 @@ public class story_loot_espa extends script.base_script
         prose_package pp = prose.getPackage(new string_id("space/story_loot_d", "systemmessage"), amount);
         sendSystemMessageProse(player, pp);
         money.systemPayout(money.ACCT_RELIC_DEALER, player, amount, "noHandler", null);
-        return;
     }
+
     public void story_loot_espa_action_animBow(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "bow");
     }
+
     public void story_loot_espa_action_storyLoot(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "story_loot.rem", true);
     }
+
     public void story_loot_espa_action_giveQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_surpriseattack", "sidequest_jabba_attack");
     }
+
     public String story_loot_espa_tokenTO_species(obj_id player, obj_id npc) throws InterruptedException
     {
         int speciesNum = getSpecies(player);
@@ -304,38 +293,39 @@ public class story_loot_espa extends script.base_script
         switch (speciesNum)
         {
             case SPECIES_HUMAN:
-            speciesName = "name_human";
-            break;
+                speciesName = "name_human";
+                break;
             case SPECIES_ZABRAK:
-            speciesName = "name_zabrak";
-            break;
+                speciesName = "name_zabrak";
+                break;
             case SPECIES_WOOKIEE:
-            speciesName = "name_wookie";
-            break;
+                speciesName = "name_wookie";
+                break;
             case SPECIES_TWILEK:
-            speciesName = "name_twilek";
-            break;
+                speciesName = "name_twilek";
+                break;
             case SPECIES_TRANDOSHAN:
-            speciesName = "name_trandoshan";
-            break;
+                speciesName = "name_trandoshan";
+                break;
             case SPECIES_ITHORIAN:
-            speciesName = "name_ithorian";
-            break;
+                speciesName = "name_ithorian";
+                break;
             case SPECIES_SULLUSTAN:
-            speciesName = "name_sullustan";
-            break;
+                speciesName = "name_sullustan";
+                break;
             case SPECIES_MON_CALAMARI:
-            speciesName = "name_moncal";
-            break;
+                speciesName = "name_moncal";
+                break;
             case SPECIES_RODIAN:
-            speciesName = "name_rodian";
-            break;
+                speciesName = "name_rodian";
+                break;
             case SPECIES_BOTHAN:
-            speciesName = "name_bothan";
-            break;
+                speciesName = "name_bothan";
+                break;
         }
-        return new String(utils.packStringId(new string_id("player_species", speciesName)));
+        return utils.packStringId(new string_id("player_species", speciesName));
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -348,6 +338,7 @@ public class story_loot_espa extends script.base_script
         setName(self, "Rakkim Warstai");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -356,6 +347,7 @@ public class story_loot_espa extends script.base_script
         setName(self, "Rakkim Warstai");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -364,12 +356,14 @@ public class story_loot_espa extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.story_loot_espa");
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         if (hasObjVar(item, "story_loot.planet"))
@@ -381,12 +375,14 @@ public class story_loot_espa extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -495,7 +491,7 @@ public class story_loot_espa extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_bad36576");
@@ -507,7 +503,7 @@ public class story_loot_espa extends script.base_script
                 setObjVar(player, "conversation.story_loot_espa.branchId", 11);
                 npcStartConversation(player, self, "story_loot_espa", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, player, message);
             }
@@ -523,6 +519,7 @@ public class story_loot_espa extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("story_loot_espa"))
@@ -554,7 +551,7 @@ public class story_loot_espa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e7b0189e");
@@ -567,7 +564,7 @@ public class story_loot_espa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.story_loot_espa.branchId");
                     npcSpeak(player, message);
@@ -608,7 +605,7 @@ public class story_loot_espa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_abaa5f2c");
@@ -617,7 +614,7 @@ public class story_loot_espa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.story_loot_espa.branchId");
                     npcSpeak(player, message);
@@ -673,7 +670,7 @@ public class story_loot_espa extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9a1df5f5");
@@ -682,7 +679,7 @@ public class story_loot_espa extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.story_loot_espa.branchId");
                     npcSpeak(player, message);

@@ -1,5 +1,11 @@
 package script.theme_park.restuss_event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,13 +14,14 @@ public class comm_array_spawn_died_imperial extends script.base_script
     public comm_array_spawn_died_imperial()
     {
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (hasObjVar(self, "respawn_called"))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             setObjVar(self, "respawn_called", 1);
         }
@@ -36,9 +43,9 @@ public class comm_array_spawn_died_imperial extends script.base_script
         int momfaction = getIntObjVar(mom, "faction");
         if (getIntObjVar(self, "faction") == momfaction)
         {
-            
+
         }
-        
+
         {
             messageTo(mom, "tellingMomIDied", info, respawnTime, false);
         }

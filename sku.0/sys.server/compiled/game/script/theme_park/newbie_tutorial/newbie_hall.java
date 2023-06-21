@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -12,11 +18,13 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
     public newbie_hall()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkForDestroy", null, 300.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int checkForDestroy(obj_id self, dictionary params) throws InterruptedException
     {
         if (!containsPlayer(self))
@@ -26,6 +34,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "checkForDestroy", null, 20, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleHallSetup(obj_id self, dictionary params) throws InterruptedException
     {
         int setupStep = getIntObjVar(self, "newbie.hallSetupStep");
@@ -33,61 +42,62 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         switch (setupStep)
         {
             case 1:
-            spawnGreeters(self);
-            spawnTroopers(self);
-            break;
+                spawnGreeters(self);
+                spawnTroopers(self);
+                break;
             case 2:
-            spawnRoomTwoCrate(self);
-            spawnCommoners(self);
-            break;
+                spawnRoomTwoCrate(self);
+                spawnCommoners(self);
+                break;
             case 3:
-            spawnBankTerminal(self);
-            break;
+                spawnBankTerminal(self);
+                break;
             case 4:
-            spawnBanker(self);
-            break;
+                spawnBanker(self);
+                break;
             case 5:
-            spawnCloneNpc(self);
-            break;
+                spawnCloneNpc(self);
+                break;
             case 6:
-            spawnCloneTerminal(self);
-            break;
+                spawnCloneTerminal(self);
+                break;
             case 7:
-            spawnInsuranceTerminal(self);
-            spawnInsuranceUser(self);
-            break;
+                spawnInsuranceTerminal(self);
+                spawnInsuranceUser(self);
+                break;
             case 8:
-            spawnMouseDroid(self);
-            break;
+                spawnMouseDroid(self);
+                break;
             case 9:
-            spawnCombatExplainer(self);
-            spawnPanicGuy(self);
-            break;
+                spawnCombatExplainer(self);
+                spawnPanicGuy(self);
+                break;
             case 10:
-            spawnPirate(self);
-            spawnDebris(self);
-            break;
+                spawnPirate(self);
+                spawnDebris(self);
+                break;
             case 11:
-            spawnMissionTerminal(self);
-            spawnMissionNpc(self);
-            break;
+                spawnMissionTerminal(self);
+                spawnMissionNpc(self);
+                break;
             case 12:
-            spawnTravelTerminal(self);
-            break;
+                spawnTravelTerminal(self);
+                break;
             case 13:
-            spawnTravelNpc(self);
-            break;
+                spawnTravelNpc(self);
+                break;
             case 14:
-            spawnPilotNpc(self);
-            break;
+                spawnPilotNpc(self);
+                break;
             default:
-            removeObjVar(self, "newbie.hallSetupStep");
-            return SCRIPT_CONTINUE;
+                removeObjVar(self, "newbie.hallSetupStep");
+                return SCRIPT_CONTINUE;
         }
         setObjVar(self, "newbie.hallSetupStep", setupStep);
         messageTo(self, "handleHallSetup", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -105,6 +115,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public void spawnGreeters(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, GREETER))
@@ -145,6 +156,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         attachScript(greeter, ROOM1_GREETER_SCRIPT);
         setObjVar(bldg, ROOM1_GREETER, greeter);
     }
+
     public void spawnRoomTwoCrate(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, CRATE))
@@ -161,6 +173,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         attachScript(box, CRATE_SCRIPT);
         setObjVar(bldg, CRATE, box);
     }
+
     public void spawnBazaarTerminal(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, BAZAAR))
@@ -178,6 +191,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         setYaw(terminal, BAZAAR_YAW);
         setObjVar(bldg, BAZAAR, terminal);
     }
+
     public void spawnBankTerminal(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, BANK))
@@ -195,6 +209,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         setYaw(terminal, BANK_YAW);
         setObjVar(bldg, BANK, terminal);
     }
+
     public void spawnBanker(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, BANKER))
@@ -246,6 +261,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         attachScript(banker, BANK_USER1_SCRIPT);
         setObjVar(bldg, BANK_USER2, banker);
     }
+
     public void spawnTroopers(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, TROOPER1))
@@ -312,6 +328,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         attachScript(trooper4, TROOPER4_SCRIPT);
         setObjVar(bldg, TROOPER4, trooper4);
     }
+
     public void spawnCommoners(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, COMMONER1))
@@ -349,6 +366,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         faceToBehavior(commoner, commoner2);
         faceToBehavior(commoner2, commoner);
     }
+
     public void spawnCloneTerminal(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, CLONE_TERMINAL))
@@ -367,6 +385,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         detachScript(terminal, "terminal.cloning");
         attachScript(terminal, CLONE_TERMINAL_SCRIPT);
     }
+
     public void spawnInsuranceTerminal(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, INSURANCE))
@@ -385,6 +404,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         detachScript(terminal, "terminal.insurance");
         attachScript(terminal, INSURANCE_SCRIPT);
     }
+
     public void spawnInsuranceUser(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, INS_USER))
@@ -405,6 +425,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         attachScript(insUser, INS_USER_SCRIPT);
         setObjVar(bldg, INS_USER, insUser);
     }
+
     public void spawnCloneNpc(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, CLONE_NPC))
@@ -429,6 +450,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         setName(cloneNpc, DROID_NAME);
         setCondition(cloneNpc, CONDITION_SPACE_INTERESTING);
     }
+
     public void spawnMouseDroid(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, MOUSE_DROID))
@@ -463,6 +485,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         attachScript(mouseDroid, MOUSE_DROID2_SCRIPT);
         setObjVar(bldg, MOUSE_DROID2, mouseDroid);
     }
+
     public void spawnCombatExplainer(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, COMBAT_EXPLAINER))
@@ -489,6 +512,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         setInvulnerable(newNpc, true);
         setCondition(newNpc, CONDITION_SPACE_INTERESTING);
     }
+
     public void spawnDebris(obj_id bldg) throws InterruptedException
     {
         obj_id player = getPlayer(bldg);
@@ -510,6 +534,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         setYaw(newBox, DEBRIS_YAW);
         setObjVar(bldg, DEBRIS, newBox);
     }
+
     public void spawnPanicGuy(obj_id bldg) throws InterruptedException
     {
         obj_id player = getPlayer(bldg);
@@ -553,6 +578,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
             setInvulnerable(newNpc, true);
         }
     }
+
     public void spawnPirate(obj_id bldg) throws InterruptedException
     {
         obj_id player = getPlayer(bldg);
@@ -581,6 +607,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         attachScript(newNpc, PIRATE_SCRIPT);
         setObjVar(bldg, PIRATE, newNpc);
     }
+
     public void spawnMissionTerminal(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, MISSION))
@@ -599,10 +626,11 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         detachScript(terminal, "systems.missions.base.mission_terminal");
         attachScript(terminal, MISSION_SCRIPT);
     }
+
     public void spawnMissionNpc(obj_id bldg) throws InterruptedException
     {
-        return;
     }
+
     public void spawnTravelTerminal(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, TRAVEL_TERMINAL))
@@ -620,6 +648,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         attachScript(terminal, TRAVEL_TERMINAL_SCRIPT);
         detachScript(terminal, "terminal.terminal_travel");
     }
+
     public void spawnTravelNpc(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, TRAVEL_NPC))
@@ -644,6 +673,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         setYaw(newNpc, 92.0f);
         setCondition(newNpc, CONDITION_SPACE_INTERESTING);
     }
+
     public void spawnPilotNpc(obj_id bldg) throws InterruptedException
     {
         if (hasObjVar(bldg, PILOT))
@@ -665,6 +695,7 @@ public class newbie_hall extends script.theme_park.newbie_tutorial.tutorial_base
         setObjVar(bldg, PILOT, newNpc);
         setYaw(newNpc, PILOT_YAW);
     }
+
     public int handleEndTutorial(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

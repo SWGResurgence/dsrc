@@ -8,6 +8,12 @@
 
 package script.item.tool;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.menu_info;
 import script.menu_info_types;
 import script.obj_id;

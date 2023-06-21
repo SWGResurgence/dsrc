@@ -1,5 +1,11 @@
 package script.item.container;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.slicing;
 import script.library.utils;
@@ -11,6 +17,7 @@ public class locked_slicable extends script.base_script
     public static final string_id SID_BROKEN = new string_id("slicing/slicing", "broken");
     public static final string_id SID_SUCCESS = new string_id("slicing/slicing", "container_success");
     public static final string_id SID_FAIL = new string_id("slicing/slicing", "container_fail");
+
     public locked_slicable()
     {
     }

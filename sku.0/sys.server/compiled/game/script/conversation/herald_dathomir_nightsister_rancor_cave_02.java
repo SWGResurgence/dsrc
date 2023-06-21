@@ -1,34 +1,47 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.*;
 
 public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_script
 {
+    public static String c_stringFile = "conversation/herald_dathomir_nightsister_rancor_cave_02";
+
     public herald_dathomir_nightsister_rancor_cave_02()
     {
     }
-    public static String c_stringFile = "conversation/herald_dathomir_nightsister_rancor_cave_02";
+
     public boolean herald_dathomir_nightsister_rancor_cave_02_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean herald_dathomir_nightsister_rancor_cave_02_condition_hasWayPoint(obj_id player, obj_id npc) throws InterruptedException
     {
         location loc;
         obj_id[] waypoints = getWaypointsInDatapad(player);
-        for (obj_id waypoint : waypoints) {
+        for (obj_id waypoint : waypoints)
+        {
             loc = getWaypointLocation(waypoint);
-            if (loc.x == -4010.0f && loc.z == -43.0f) {
+            if (loc.x == -4010.0f && loc.z == -43.0f)
+            {
                 return true;
             }
         }
         return false;
     }
+
     public void herald_dathomir_nightsister_rancor_cave_02_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void herald_dathomir_nightsister_rancor_cave_02_action_grantWayPoint(obj_id player, obj_id npc) throws InterruptedException
     {
         location cave = new location(-4010, 0, -43, "dathomir", null);
@@ -38,10 +51,12 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
         setWaypointVisible(waypoint, true);
         setWaypointActive(waypoint, true);
     }
+
     public void herald_dathomir_nightsister_rancor_cave_02_action_faceto(obj_id player, obj_id npc) throws InterruptedException
     {
         faceToBehavior(npc, player);
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -51,11 +66,13 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -64,12 +81,14 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.herald_dathomir_nightsister_rancor_cave_02");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -99,7 +118,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_fa7218cd");
@@ -107,7 +126,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                 setObjVar(player, "conversation.herald_dathomir_nightsister_rancor_cave_02.branchId", 2);
                 npcStartConversation(player, self, "herald_dathomir_nightsister_rancor_cave_02", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -116,6 +135,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("herald_dathomir_nightsister_rancor_cave_02"))
@@ -140,7 +160,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fa7b107c");
@@ -149,7 +169,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.herald_dathomir_nightsister_rancor_cave_02.branchId");
                     npcSpeak(player, message);
@@ -177,7 +197,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bc7d951b");
@@ -186,7 +206,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.herald_dathomir_nightsister_rancor_cave_02.branchId");
                     npcSpeak(player, message);
@@ -214,7 +234,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_15ce71c7");
@@ -223,7 +243,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.herald_dathomir_nightsister_rancor_cave_02.branchId");
                     npcSpeak(player, message);
@@ -251,7 +271,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6f6a022");
@@ -260,7 +280,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.herald_dathomir_nightsister_rancor_cave_02.branchId");
                     npcSpeak(player, message);
@@ -288,7 +308,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30a1b3c3");
@@ -297,7 +317,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.herald_dathomir_nightsister_rancor_cave_02.branchId");
                     npcSpeak(player, message);
@@ -325,7 +345,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81490116");
@@ -334,7 +354,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.herald_dathomir_nightsister_rancor_cave_02.branchId");
                     npcSpeak(player, message);
@@ -362,7 +382,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84c686b2");
@@ -371,7 +391,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.herald_dathomir_nightsister_rancor_cave_02.branchId");
                     npcSpeak(player, message);
@@ -399,7 +419,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_622c6840");
@@ -408,7 +428,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.herald_dathomir_nightsister_rancor_cave_02.branchId");
                     npcSpeak(player, message);
@@ -436,7 +456,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_15885220");
@@ -445,7 +465,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.herald_dathomir_nightsister_rancor_cave_02.branchId");
                     npcSpeak(player, message);
@@ -473,7 +493,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_50ea3acc");
@@ -482,7 +502,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.herald_dathomir_nightsister_rancor_cave_02.branchId");
                     npcSpeak(player, message);
@@ -510,7 +530,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8cd440d3");
@@ -519,7 +539,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.herald_dathomir_nightsister_rancor_cave_02.branchId");
                     npcSpeak(player, message);
@@ -554,7 +574,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8e266a60");
@@ -567,7 +587,7 @@ public class herald_dathomir_nightsister_rancor_cave_02 extends script.base_scri
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.herald_dathomir_nightsister_rancor_cave_02.branchId");
                     npcSpeak(player, message);

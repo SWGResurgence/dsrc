@@ -1,15 +1,22 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class recovery_duty extends script.space.quest_logic.recovery
 {
+    public static final string_id SID_RECOVERY_REWARD = new string_id("space/quest", "recovery_reward");
+    public static final string_id SID_ABANDONED_DUTY = new string_id("space/quest", "destroy_abandoned");
     public recovery_duty()
     {
     }
-    public static final string_id SID_RECOVERY_REWARD = new string_id("space/quest", "recovery_reward");
-    public static final string_id SID_ABANDONED_DUTY = new string_id("space/quest", "destroy_abandoned");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -43,6 +50,7 @@ public class recovery_duty extends script.space.quest_logic.recovery
         }
         return SCRIPT_CONTINUE;
     }
+
     public int initializedQuestPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -106,6 +114,7 @@ public class recovery_duty extends script.space.quest_logic.recovery
         }
         return SCRIPT_OVERRIDE;
     }
+
     public void buildRandomNavList(obj_id self, String path) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -131,11 +140,12 @@ public class recovery_duty extends script.space.quest_logic.recovery
             System.arraycopy(preSortPoints, 0, sortedPoints, 0, preSortPoints.length - 1 + 1);
             setObjVar(self, path, sortedPoints);
         }
-        else 
+        else
         {
             setObjVar(self, path, preSortPoints);
         }
     }
+
     public obj_id createTargetShip(obj_id self) throws InterruptedException
     {
         String[] shipTypes = getStringArrayObjVar(self, "targetShipTypes");
@@ -144,6 +154,7 @@ public class recovery_duty extends script.space.quest_logic.recovery
         transform spawnLoc = space_quest.getRandomPositionInSphere(trans, 100, 200);
         return space_create.createShipHyperspace(shipType, spawnLoc);
     }
+
     public int recoveryComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -188,21 +199,25 @@ public class recovery_duty extends script.space.quest_logic.recovery
         }
         return SCRIPT_OVERRIDE;
     }
+
     public String getCompletePhrase(obj_id self) throws InterruptedException
     {
         int reasons = getIntObjVar(self, "numResponses");
         return "complete_" + rand(1, reasons);
     }
+
     public String getCapturePhrase1(obj_id self) throws InterruptedException
     {
         int reasons = getIntObjVar(self, "numResponses");
         return "capture_phase_1_" + rand(1, reasons);
     }
+
     public String getCapturePhrase2(obj_id self) throws InterruptedException
     {
         int reasons = getIntObjVar(self, "numResponses");
         return "capture_phase_2_" + rand(1, reasons);
     }
+
     public void questAborted(obj_id self) throws InterruptedException
     {
         clearMissionWaypoint(self);

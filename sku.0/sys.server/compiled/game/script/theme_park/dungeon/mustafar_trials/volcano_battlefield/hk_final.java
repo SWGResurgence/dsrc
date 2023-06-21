@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.volcano_battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -10,22 +16,25 @@ import script.obj_id;
 
 public class hk_final extends script.base_script
 {
-    public hk_final()
-    {
-    }
     public static final String BOSS = "som_volcano_final_hk47";
     public static final String SQUAD_LEADER = "som_volcano_final_squadleader";
     public static final boolean LOGGING = false;
+    public hk_final()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         spawnEvent(self);
         return SCRIPT_CONTINUE;
     }
+
     public int activateEvent(obj_id self, dictionary params) throws InterruptedException
     {
         setTriggerVolume(self);
         return SCRIPT_CONTINUE;
     }
+
     public void setTriggerVolume(obj_id self) throws InterruptedException
     {
         if (!hasTriggerVolume(self, "activateVolume"))
@@ -33,6 +42,7 @@ public class hk_final extends script.base_script
             createTriggerVolume("activateVolume", 95, true);
         }
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (isPlayer(breacher) && !isIncapacitated(breacher))
@@ -44,6 +54,7 @@ public class hk_final extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void activateEncounter(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnSquadLeaders", null, 0, false);
@@ -53,6 +64,7 @@ public class hk_final extends script.base_script
         messageTo(trial.getParent(self), "doHkTaunt", dict, 0, false);
         removeTriggerVolume("activateVolume");
     }
+
     public void spawnEvent(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -67,19 +79,19 @@ public class hk_final extends script.base_script
         ai_lib.setDefaultCalmBehavior(eventBoss, ai_lib.BEHAVIOR_SENTINEL);
         trial.setParent(self, eventBoss, false);
         utils.setScriptVar(self, "eventBoss", eventBoss);
-        String[] offSet = 
-        {
-            "55:34",
-            "9:48",
-            "-18:18",
-            "23:-30",
-            "15:-1",
-            "-18:3",
-            "-2:46",
-            "27:33",
-            "39:4",
-            "-21:28"
-        };
+        String[] offSet =
+                {
+                        "55:34",
+                        "9:48",
+                        "-18:18",
+                        "23:-30",
+                        "15:-1",
+                        "-18:3",
+                        "-2:46",
+                        "27:33",
+                        "39:4",
+                        "-21:28"
+                };
         for (int i = 0; i < offSet.length; i++)
         {
             String[] parse = split(offSet[i], ':');
@@ -102,29 +114,32 @@ public class hk_final extends script.base_script
             {
                 setObjVar(item, "hk_walker", true);
             }
-            else 
+            else
             {
                 setObjVar(item, "hk_septipod", true);
             }
         }
     }
+
     public int spawnSquadLeaders(obj_id self, dictionary params) throws InterruptedException
     {
         utils.setScriptVar(self, "sl_guard", 0);
         utils.setScriptVar(self, "corpseIdx", 0);
         location here = getLocation(self);
-        String[] guardOffset = 
+        String[] guardOffset =
+                {
+                        "-1:32",
+                        "32:25"
+                };
+        for (String s : guardOffset)
         {
-            "-1:32",
-            "32:25"
-        };
-        for (String s : guardOffset) {
             String[] parse = split(s, ':');
             float guardX = here.x + utils.stringToFloat(parse[0]);
             float guardZ = here.z + utils.stringToFloat(parse[1]);
             location guardLoc = new location(guardX, here.y, guardZ, here.area, here.cell);
             obj_id eventGuard = create.object(SQUAD_LEADER, guardLoc);
-            if (!isIdValid(eventGuard)) {
+            if (!isIdValid(eventGuard))
+            {
                 doLogging("spawnEvent", "Tried to create invalid item(" + SQUAD_LEADER + ")");
                 return SCRIPT_CONTINUE;
             }
@@ -135,6 +150,7 @@ public class hk_final extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int eventMobDied(obj_id self, dictionary params) throws InterruptedException
     {
         String type = params.getString("type");
@@ -160,25 +176,26 @@ public class hk_final extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void placeGuardCorpse(obj_id self) throws InterruptedException
     {
-        String[] offSet = 
-        {
-            "7:26",
-            "-10:34",
-            "0:18",
-            "-5:46",
-            "10:35",
-            "26:32",
-            "-18:23",
-            "6:39",
-            "24:38",
-            "18:27",
-            "31:19",
-            "5:26",
-            "11:21",
-            "-3:31"
-        };
+        String[] offSet =
+                {
+                        "7:26",
+                        "-10:34",
+                        "0:18",
+                        "-5:46",
+                        "10:35",
+                        "26:32",
+                        "-18:23",
+                        "6:39",
+                        "24:38",
+                        "18:27",
+                        "31:19",
+                        "5:26",
+                        "11:21",
+                        "-3:31"
+                };
         int idx = 0;
         if (utils.hasScriptVar(self, "corpseIdx"))
         {
@@ -198,6 +215,7 @@ public class hk_final extends script.base_script
         setInvulnerable(corpse, true);
         trial.setParent(utils.getObjIdScriptVar(self, "eventBoss"), corpse, false);
     }
+
     public void activateHK(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "eventBoss"))
@@ -212,11 +230,13 @@ public class hk_final extends script.base_script
         }
         messageTo(eventBoss, "activate", null, 3, false);
     }
+
     public void winEncounter(obj_id self) throws InterruptedException
     {
         obj_id top = trial.getParent(self);
         messageTo(top, "hkDefeated", null, 0, false);
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VOLCANO_LOGGING)

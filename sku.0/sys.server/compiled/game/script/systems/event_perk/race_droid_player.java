@@ -1,5 +1,11 @@
 package script.systems.event_perk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.colors;
 import script.library.prose;
@@ -203,7 +209,6 @@ public class race_droid_player extends script.base_script
             }
             removeObjVar(player, "event_perk.racing.volume");
         }
-        return;
     }
 
     public int OnWaypointGetAttributes(obj_id self, obj_id waypoint, obj_id player, String[] names, String[] attribs) throws InterruptedException

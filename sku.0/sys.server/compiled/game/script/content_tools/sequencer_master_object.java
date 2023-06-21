@@ -1,5 +1,11 @@
 package script.content_tools;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -11,14 +17,17 @@ public class sequencer_master_object extends script.base_script
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnPreloadComplete(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int doEvents(obj_id self, dictionary params) throws InterruptedException
     {
         String strIndexScriptVar = "";
@@ -30,7 +39,7 @@ public class sequencer_master_object extends script.base_script
                 utils.removeScriptVar(self, "intSequenceStopped");
                 utils.removeScriptVar(self, "intSequenceContinue");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "I have STOPPED!");
                 utils.removeScriptVar(self, "intSequenceStopped");
@@ -69,12 +78,14 @@ public class sequencer_master_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int interruptSequence(obj_id self, dictionary params) throws InterruptedException
     {
         utils.setScriptVar(self, "intSequenceStopped", 1);
         stopSequence(self);
         return SCRIPT_CONTINUE;
     }
+
     public void stopSequence(obj_id self) throws InterruptedException
     {
         String strTable = "";
@@ -84,7 +95,7 @@ public class sequencer_master_object extends script.base_script
             strIndexScriptVar = "intSecondIndex";
             strTable = utils.getStringScriptVar(self, "strSecondaryTable");
         }
-        else 
+        else
         {
             strIndexScriptVar = "intMainIndex";
             strTable = getStringObjVar(self, "strSequenceTable");
@@ -103,6 +114,7 @@ public class sequencer_master_object extends script.base_script
             utils.setScriptVar(self, strIndexScriptVar, intIndex);
         }
     }
+
     public float runSequenceEvents(obj_id self) throws InterruptedException
     {
         String strIndexScriptVar = "";
@@ -112,7 +124,7 @@ public class sequencer_master_object extends script.base_script
             strIndexScriptVar = "intSecondIndex";
             strTable = utils.getStringScriptVar(self, "strSecondaryTable");
         }
-        else 
+        else
         {
             strIndexScriptVar = "intMainIndex";
             strTable = getStringObjVar(self, "strSequenceTable");
@@ -137,7 +149,7 @@ public class sequencer_master_object extends script.base_script
                     strIndexScriptVar = "intSecondIndex";
                 }
             }
-            else 
+            else
             {
                 if (intIndex == sequencer.STOP_SEQUENCE)
                 {
@@ -165,7 +177,7 @@ public class sequencer_master_object extends script.base_script
         {
             fltDelay = fltTimes[intIndex];
         }
-        else 
+        else
         {
             LOG("npe", "fltTimes[intIndex] is " + fltTimes[intIndex]);
             LOG("npe", "fltTimes[intIndex-1] is " + fltTimes[intIndex - 1]);
@@ -179,10 +191,12 @@ public class sequencer_master_object extends script.base_script
         LOG("npe", "Returning " + fltDelay);
         return -1.0f;
     }
+
     public int processEvents(dictionary dctEventToRun, int intIndex) throws InterruptedException
     {
         obj_id self = getSelf();
-        if(!isIdValid(self) || !exists(self) || self == null || self == obj_id.NULL_ID){
+        if (!isIdValid(self) || !exists(self) || self == null || self == obj_id.NULL_ID)
+        {
             return SCRIPT_CONTINUE;
         }
         String strActor = dctEventToRun.getString("strActor");
@@ -201,9 +215,11 @@ public class sequencer_master_object extends script.base_script
             objTarget = sequencer.getSequenceObject(strTarget);
         }
         LOG("han_solo_event", "Doing event line --- Actor is " + strActor + ", ID is " + objActor + " doing action " + strAction + " at target " + strTarget + ", ID " + objTarget);
-        switch (strAction) {
+        switch (strAction)
+        {
             case "combatanimation":
-                if (isIdValid(objActor) && !isDead(objActor) && exists(objActor) && isIdValid(objTarget) && !isDead(objTarget) && exists(objTarget)) {
+                if (isIdValid(objActor) && !isDead(objActor) && exists(objActor) && isIdValid(objTarget) && !isDead(objTarget) && exists(objTarget))
+                {
                     startCombat(objActor, objTarget);
                     setTarget(objActor, objTarget);
                     sequencer.doCombatAnimation(objActor, objTarget, strData1);
@@ -212,11 +228,14 @@ public class sequencer_master_object extends script.base_script
             case "combatanimationmultiple":
                 String[] strTargets = split(strTarget, ',');
                 obj_id[] objTargets = new obj_id[strTargets.length];
-                for (int i = 0; i < strTargets.length; i++) {
+                for (int i = 0; i < strTargets.length; i++)
+                {
                     objTargets[i] = sequencer.getSequenceObject(strTargets[i]);
                 }
-                for (obj_id objTarget1 : objTargets) {
-                    if (isIdValid(objActor) && !isDead(objActor) && isIdValid(objTarget1) && !isDead(objTarget1) && exists(objTarget1) && exists(objActor)) {
+                for (obj_id objTarget1 : objTargets)
+                {
+                    if (isIdValid(objActor) && !isDead(objActor) && isIdValid(objTarget1) && !isDead(objTarget1) && exists(objTarget1) && exists(objActor))
+                    {
                         startCombat(objActor, objTarget1);
                         setTarget(objActor, objTarget1);
                         sequencer.doCombatAnimation(objActor, objTarget1, strData1);
@@ -225,9 +244,12 @@ public class sequencer_master_object extends script.base_script
                 }
                 break;
             case "moveto":
-                if (strData1.equals("run")) {
+                if (strData1.equals("run"))
+                {
                     sequencer.runToSequenceObject(objActor, objTarget);
-                } else if (strData1.equals("walk")) {
+                }
+                else if (strData1.equals("walk"))
+                {
                     sequencer.walkToSequenceObject(objActor, objTarget);
                 }
                 break;
@@ -235,7 +257,8 @@ public class sequencer_master_object extends script.base_script
                 faceTo(objActor, objTarget);
                 break;
             case "posture":
-                switch (strData1) {
+                switch (strData1)
+                {
                     case "stand":
                         setPosture(objActor, POSTURE_UPRIGHT);
                         sequencer.doCombatAnimation(objActor, objTarget, "posture_scramble");
@@ -257,76 +280,90 @@ public class sequencer_master_object extends script.base_script
                 play2dNonLoopingMusic(objActor, strData1);
                 break;
             case "spacechat":
-                if (objTarget != null && objActor != null && isValidId(objActor)) {
+                if (objTarget != null && objActor != null && isValidId(objActor))
+                {
                     String stf = getStringObjVar(self, "strSequenceTable");
                     string_id strChat = new string_id(stf, strData1);
-                    if (strData2.equals("") || strData2 == null) {
+                    if (strData2.equals("") || strData2 == null)
+                    {
                         strData2 = "sound/sys_comm_generic.snd";
                     }
-					int intTime = dctEventToRun.getInt("intTime");
+                    int intTime = dctEventToRun.getInt("intTime");
                     npe.commTutorialPlayer(objActor, objTarget, intTime, strChat, strData2, "");
                 }
                 break;
             case "tutorialcomm":
-                if (objTarget != null && objActor != null && isValidId(objActor)) {
+                if (objTarget != null && objActor != null && isValidId(objActor))
+                {
                     String stf = getStringObjVar(self, "strSequenceTable");
                     string_id strChat = new string_id(stf, strData1);
-                    if (strData2.equals("") || strData2 == null) {
+                    if (strData2.equals("") || strData2 == null)
+                    {
                         strData2 = "sound/sys_comm_generic.snd";
                     }
-					int intTime = dctEventToRun.getInt("intTime");
+                    int intTime = dctEventToRun.getInt("intTime");
                     npe.commTutorialPlayer(objActor, objTarget, intTime, strChat, strData2, "object/mobile/c_3po.iff");
                 }
                 break;
             case "jabbacomm":
-                if (objTarget != null && objActor != null && isValidId(objActor)) {
+                if (objTarget != null && objActor != null && isValidId(objActor))
+                {
                     String stf = getStringObjVar(self, "strSequenceTable");
                     string_id strChat = new string_id(stf, strData1);
-                    if (strData2.equals("") || strData2 == null) {
+                    if (strData2.equals("") || strData2 == null)
+                    {
                         strData2 = "sound/sys_comm_generic.snd";
                     }
-					int intTime = dctEventToRun.getInt("intTime");
+                    int intTime = dctEventToRun.getInt("intTime");
                     npe.commTutorialPlayer(objActor, objTarget, intTime, strChat, strData2, "object/mobile/jabba_the_hutt.iff");
                 }
                 break;
             case "hancomm":
-                if (objTarget != null && objActor != null && isValidId(objActor)) {
+                if (objTarget != null && objActor != null && isValidId(objActor))
+                {
                     String stf = getStringObjVar(self, "strSequenceTable");
                     string_id strChat = new string_id(stf, strData1);
-                    if (strData2.equals("") || strData2 == null) {
+                    if (strData2.equals("") || strData2 == null)
+                    {
                         strData2 = "sound/sys_comm_generic.snd";
                     }
-					int intTime = dctEventToRun.getInt("intTime");
+                    int intTime = dctEventToRun.getInt("intTime");
                     npe.commTutorialPlayer(objActor, objTarget, intTime, strChat, strData2, "object/mobile/npe/npe_han_solo.iff");
                 }
                 break;
             case "vadercomm":
-                if (objTarget != null && objActor != null && isValidId(objActor)) {
+                if (objTarget != null && objActor != null && isValidId(objActor))
+                {
                     String stf = getStringObjVar(self, "strSequenceTable");
                     string_id strChat = new string_id(stf, strData1);
-                    if (strData2 == null || strData2.equals("")) {
+                    if (strData2 == null || strData2.equals(""))
+                    {
                         strData2 = "sound/sys_comm_generic.snd";
                     }
-					int intTime = dctEventToRun.getInt("intTime");
+                    int intTime = dctEventToRun.getInt("intTime");
                     npe.commTutorialPlayer(objActor, objTarget, intTime, strChat, strData2, "object/mobile/darth_vader.iff");
                 }
                 break;
             case "wookieecomm":
-                if (objTarget != null && objActor != null && isValidId(objActor)) {
+                if (objTarget != null && objActor != null && isValidId(objActor))
+                {
                     String stf = getStringObjVar(self, "strSequenceTable");
                     string_id strChat = new string_id(stf, strData1);
-                    if (getSpecies(objTarget) == SPECIES_WOOKIEE) {
+                    if (getSpecies(objTarget) == SPECIES_WOOKIEE)
+                    {
                         strChat = new string_id(stf, strData1 + "_w");
                     }
-                    if (strData2.equals("") || strData2 == null) {
+                    if (strData2.equals("") || strData2 == null)
+                    {
                         strData2 = "sound/sys_comm_generic.snd";
                     }
-					int intTime = dctEventToRun.getInt("intTime");
+                    int intTime = dctEventToRun.getInt("intTime");
                     npe.commTutorialPlayer(objActor, objTarget, intTime, strChat, strData2, "object/mobile/npe/npe_chewbacca.iff");
                 }
                 break;
             case "spacechatship":
-                if (objTarget != null) {
+                if (objTarget != null)
+                {
                     String stf = getStringObjVar(self, "strSequenceTable");
                     string_id strChat = new string_id(stf, strData1);
                     space_utils.tauntPilot(objTarget, objActor, strChat);
@@ -341,14 +378,16 @@ public class sequencer_master_object extends script.base_script
             case "destroy":
                 destroyObject(objTarget);
                 break;
-            case "popup": {
+            case "popup":
+            {
                 String stf = getStringObjVar(self, "strSequenceTable");
                 string_id strChat = new string_id(stf, strData1);
                 addNotification(objActor, utils.packStringId(strChat), false, 0, 0, 0, strData2);
                 break;
             }
             case "messageto":
-                if (strTarget.equals("self")) {
+                if (strTarget.equals("self"))
+                {
                     objTarget = self;
                 }
                 messageTo(objTarget, strData1, null, 0, true);
@@ -363,17 +402,20 @@ public class sequencer_master_object extends script.base_script
                 break;
             case "checkforitem":
                 obj_id foundItem = utils.getItemPlayerHasByTemplate(objActor, strData1);
-                if (isIdValid(foundItem)) {
+                if (isIdValid(foundItem))
+                {
                     messageTo(self, strData2, null, 0, true);
                 }
                 break;
-            case "say": {
+            case "say":
+            {
                 String stf = getStringObjVar(self, "strSequenceTable");
                 string_id strChat = new string_id(stf, strData1);
                 chat.chat(objActor, strChat);
                 break;
             }
-            case "saysound": {
+            case "saysound":
+            {
                 String stf = getStringObjVar(self, "strSequenceTable");
                 string_id strChat = new string_id(stf, strData1);
                 chat.chat(objActor, strChat);
@@ -399,6 +441,7 @@ public class sequencer_master_object extends script.base_script
         intIndex = intIndex + 1;
         return intIndex;
     }
+
     public int continueMainTable(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("npe", "CLEANUP OF SECONDARY TABLE!");

@@ -4,6 +4,12 @@ package script.structure.gating;/*
 @Purpose: Restricts entry if player does not have the required command. [/meditate for example]
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class gating_command extends script.base_script

@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.myyydril;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,10 +14,12 @@ import script.string_id;
 
 public class magic_stone extends script.base_script
 {
+    public static final string_id TELEPORT = new string_id("dungeon/myyydril", "teleport");
+
     public magic_stone()
     {
     }
-    public static final string_id TELEPORT = new string_id("dungeon/myyydril", "teleport");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -21,6 +29,7 @@ public class magic_stone extends script.base_script
         int teleport = mi.addRootMenu(menu_info_types.SERVER_MENU1, TELEPORT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -35,7 +44,7 @@ public class magic_stone extends script.base_script
             {
                 template = getTemplateName(container);
             }
-            else 
+            else
             {
                 return SCRIPT_CONTINUE;
             }
@@ -43,7 +52,7 @@ public class magic_stone extends script.base_script
             {
                 warpPlayer(player, "kashyyyk_main", -568, 0, -100, null, 0, 0, 0, null, false);
             }
-            else 
+            else
             {
                 string_id msg = new string_id("dungeon/myyydril", "cantusestone");
                 sendSystemMessage(player, msg);

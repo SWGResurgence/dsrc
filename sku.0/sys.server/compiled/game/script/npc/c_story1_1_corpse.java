@@ -1,5 +1,11 @@
 package script.npc;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.menu_info;
 import script.menu_info_data;
 import script.menu_info_types;
@@ -10,6 +16,7 @@ public class c_story1_1_corpse extends script.base_script
     public c_story1_1_corpse()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -21,6 +28,7 @@ public class c_story1_1_corpse extends script.base_script
         setAnimationMood(self, "npc_dead_03");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
@@ -28,6 +36,7 @@ public class c_story1_1_corpse extends script.base_script
         setAnimationMood(self, "npc_dead_03");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.EXAMINE, null);
@@ -35,6 +44,7 @@ public class c_story1_1_corpse extends script.base_script
         menuInfoData.setServerNotify(false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         detachScript(self, "conversation.c_story1_1_corpse");

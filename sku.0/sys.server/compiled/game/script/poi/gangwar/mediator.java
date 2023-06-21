@@ -1,5 +1,11 @@
 package script.poi.gangwar;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.pclib;
@@ -9,22 +15,25 @@ import script.obj_id;
 
 public class mediator extends script.poi.base.scenario_actor
 {
+    public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
+    public static final String LOG_NAME = "poiGangWar Mediator";
     public mediator()
     {
     }
-    public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
-    public static final String LOG_NAME = "poiGangWar Mediator";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "armWeapon", null, 2, false);
         detachScript(self, SCRIPT_CONVERSE);
         return SCRIPT_CONTINUE;
     }
+
     public int armWeapon(obj_id self, dictionary params) throws InterruptedException
     {
         aiEquipPrimaryWeapon(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -35,10 +44,12 @@ public class mediator extends script.poi.base.scenario_actor
         messageTo(poiMaster, scenario.HANDLER_ACTOR_DEATH, null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;
     }
+
     public int vocalizeEndCombat(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isDead(self) || ai_lib.isInCombat(self))
@@ -46,8 +57,10 @@ public class mediator extends script.poi.base.scenario_actor
             return SCRIPT_OVERRIDE;
         }
         obj_id[] players = getPlayerCreaturesInRange(self, 80.0f);
-        for (obj_id player : players) {
-            if (isIncapacitated(player) && getPosture(player) != POSTURE_DEAD) {
+        for (obj_id player : players)
+        {
+            if (isIncapacitated(player) && getPosture(player) != POSTURE_DEAD)
+            {
                 pclib.coupDeGrace(player, self);
                 return SCRIPT_OVERRIDE;
             }
@@ -58,8 +71,10 @@ public class mediator extends script.poi.base.scenario_actor
             return SCRIPT_CONTINUE;
         }
         obj_id[] antagonists = scenario.getTeamMembers(poiMaster, "antagonist");
-        for (obj_id antagonist : antagonists) {
-            if (isIncapacitated(antagonist) || ai_lib.isDead(antagonist)) {
+        for (obj_id antagonist : antagonists)
+        {
+            if (isIncapacitated(antagonist) || ai_lib.isDead(antagonist))
+            {
                 continue;
             }
             startCombat(self, antagonist);
@@ -72,7 +87,7 @@ public class mediator extends script.poi.base.scenario_actor
             {
                 doAnimationAction(self, "celebrate");
             }
-            else 
+            else
             {
                 doAnimationAction(self, "vocalize");
             }
@@ -81,6 +96,7 @@ public class mediator extends script.poi.base.scenario_actor
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_LOITER);
         return SCRIPT_OVERRIDE;
     }
+
     public int OnTargeted(obj_id self, obj_id attacker) throws InterruptedException
     {
         if (hasObjVar(self, "attackedByElse"))
@@ -94,8 +110,10 @@ public class mediator extends script.poi.base.scenario_actor
             return SCRIPT_CONTINUE;
         }
         obj_id[] antagonists = scenario.getTeamMembers(poiMaster, "antagonist");
-        for (obj_id antagonist : antagonists) {
-            if (antagonist == attacker) {
+        for (obj_id antagonist : antagonists)
+        {
+            if (antagonist == attacker)
+            {
                 return SCRIPT_CONTINUE;
             }
         }

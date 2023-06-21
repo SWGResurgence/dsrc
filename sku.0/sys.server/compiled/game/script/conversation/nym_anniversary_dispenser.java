@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.static_item;
@@ -8,48 +14,47 @@ import script.*;
 
 public class nym_anniversary_dispenser extends script.base_script
 {
+    public static String c_stringFile = "conversation/nym_anniversary_dispenser";
+
     public nym_anniversary_dispenser()
     {
     }
-    public static String c_stringFile = "conversation/nym_anniversary_dispenser";
+
     public boolean nym_anniversary_dispenser_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean nym_anniversary_dispenser_condition_notEligable(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean nym_anniversary_dispenser_condition_newRewardEligable(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "event.last_timed_reward"))
         {
             float lastRewardTime = getFloatObjVar(player, "event.last_timed_reward");
             float rightNow = getGameTime();
-            if (rightNow - lastRewardTime > 3600)
-            {
-                return true;
-            }
+            return rightNow - lastRewardTime > 3600;
         }
         return false;
     }
+
     public boolean nym_anniversary_dispenser_condition_firstRewardEligable(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!hasObjVar(player, "event.last_timed_reward"))
-        {
-            return true;
-        }
-        return false;
+        return !hasObjVar(player, "event.last_timed_reward");
     }
+
     public void nym_anniversary_dispenser_action_randomReward(obj_id player, obj_id npc) throws InterruptedException
     {
-        String[] itemList = 
-        {
-            "item_event_dance_party_device_03_01",
-            "item_event_firework_show_04_01",
-            "item_event_air_cake_01_02",
-            "item_event_energy_drink_01_02"
-        };
+        String[] itemList =
+                {
+                        "item_event_dance_party_device_03_01",
+                        "item_event_firework_show_04_01",
+                        "item_event_air_cake_01_02",
+                        "item_event_energy_drink_01_02"
+                };
         String itemName = itemList[rand(0, itemList.length)];
         obj_id reward = null;
         obj_id playerInventory = utils.getInventoryContainer(player);
@@ -57,7 +62,7 @@ public class nym_anniversary_dispenser extends script.base_script
         {
             reward = static_item.createNewItemFunction(itemName, playerInventory);
         }
-        else 
+        else
         {
             reward = createObject("object/tangible/furniture/decorative/30th_anniversary_painting_01.iff", playerInventory, "");
         }
@@ -67,6 +72,7 @@ public class nym_anniversary_dispenser extends script.base_script
             setObjVar(player, "event.last_timed_reward", rightNow);
         }
     }
+
     public int nym_anniversary_dispenser_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6"))
@@ -82,6 +88,7 @@ public class nym_anniversary_dispenser extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_anniversary_dispenser_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_12"))
@@ -97,6 +104,7 @@ public class nym_anniversary_dispenser extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_anniversary_dispenser_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_18"))
@@ -111,6 +119,7 @@ public class nym_anniversary_dispenser extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -120,11 +129,13 @@ public class nym_anniversary_dispenser extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -133,18 +144,21 @@ public class nym_anniversary_dispenser extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.nym_anniversary_dispenser");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -167,7 +181,7 @@ public class nym_anniversary_dispenser extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6");
@@ -175,7 +189,7 @@ public class nym_anniversary_dispenser extends script.base_script
                 utils.setScriptVar(player, "conversation.nym_anniversary_dispenser.branchId", 1);
                 npcStartConversation(player, npc, "nym_anniversary_dispenser", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -196,7 +210,7 @@ public class nym_anniversary_dispenser extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_12");
@@ -204,7 +218,7 @@ public class nym_anniversary_dispenser extends script.base_script
                 utils.setScriptVar(player, "conversation.nym_anniversary_dispenser.branchId", 3);
                 npcStartConversation(player, npc, "nym_anniversary_dispenser", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -225,7 +239,7 @@ public class nym_anniversary_dispenser extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_18");
@@ -233,7 +247,7 @@ public class nym_anniversary_dispenser extends script.base_script
                 utils.setScriptVar(player, "conversation.nym_anniversary_dispenser.branchId", 5);
                 npcStartConversation(player, npc, "nym_anniversary_dispenser", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -242,6 +256,7 @@ public class nym_anniversary_dispenser extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("nym_anniversary_dispenser"))

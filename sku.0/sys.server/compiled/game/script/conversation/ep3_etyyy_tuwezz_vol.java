@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,73 +14,90 @@ import script.*;
 
 public class ep3_etyyy_tuwezz_vol extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_etyyy_tuwezz_vol";
+
     public ep3_etyyy_tuwezz_vol()
     {
     }
-    public static String c_stringFile = "conversation/ep3_etyyy_tuwezz_vol";
+
     public boolean ep3_etyyy_tuwezz_vol_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_etyyy_tuwezz_vol_condition_hasCompletedTuwezzQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_hunt_tuwezz_collect_uller_horns"));
     }
+
     public boolean ep3_etyyy_tuwezz_vol_condition_killedSpiketop(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "ep3_hunt_loot_spiketop_killed");
     }
+
     public boolean ep3_etyyy_tuwezz_vol_condition_finishedHuntingDiseasedUller(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_hunt_tuwezz_kill_diseased_ullers", "tuwezz_diseasedUllersDone") || groundquests.hasCompletedQuest(player, "ep3_hunt_tuwezz_kill_diseased_ullers"));
     }
+
     public boolean ep3_etyyy_tuwezz_vol_condition_isHuntingDiseasedUller(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_hunt_tuwezz_kill_diseased_ullers", "tuwezz_huntingDiseasedUllers"));
     }
+
     public boolean ep3_etyyy_tuwezz_vol_condition_isCollectingUllerHorns(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_hunt_tuwezz_collect_uller_horns", "tuwezz_collectUllerHorns"));
     }
+
     public boolean ep3_etyyy_tuwezz_vol_condition_hasToSpeakToTuwezz(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_hunt_tuwezz_kill_diseased_ullers", "tuwezz_talkToTuwezz"));
     }
+
     public boolean ep3_etyyy_tuwezz_vol_condition_finishedCollectingUllerHorns(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_hunt_tuwezz_collect_uller_horns", "tuwezz_elderUllerHorns"));
     }
+
     public boolean ep3_etyyy_tuwezz_vol_condition_killedSpiketopPlusAll(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_hunt_loot_brightclaw_killed") && groundquests.hasCompletedQuest(player, "ep3_hunt_loot_silkthrower_killed") && groundquests.hasCompletedQuest(player, "ep3_hunt_loot_stoneleg_killed") && groundquests.hasCompletedQuest(player, "ep3_hunt_loot_paleclaw_killed") && groundquests.hasCompletedQuest(player, "ep3_hunt_loot_greyclimber_killed");
     }
+
     public void ep3_etyyy_tuwezz_vol_action_spiketopReward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "lootQuest_defeatedSpiketop");
     }
+
     public void ep3_etyyy_tuwezz_vol_action_doneHuntingDiseasedUller(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tuwezz_diseasedUllersDone");
     }
+
     public void ep3_etyyy_tuwezz_vol_action_huntDiseasedUller(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tuwezz_talkToTuwezz");
     }
+
     public void ep3_etyyy_tuwezz_vol_action_collectUllerHorns(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_hunt_tuwezz_collect_uller_horns");
     }
+
     public void ep3_etyyy_tuwezz_vol_action_speakWithSordaan(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tuwezz_elderUllerHorns");
         groundquests.grantQuest(player, "ep3_hunt_sordaan_seek_sordaan");
         groundquests.sendSignal(player, "sordaan_tuwezzSendsYou");
     }
+
     public void ep3_etyyy_tuwezz_vol_action_spiketopRewardPlusAll(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "lootQuest_defeatedSpiketop");
         groundquests.grantQuest(player, "ep3_hunt_loot_completed_all");
     }
+
     public int ep3_etyyy_tuwezz_vol_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1623"))
@@ -95,7 +118,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1691");
@@ -104,7 +127,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_etyyy_tuwezz_vol.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -122,6 +145,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_tuwezz_vol_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1627"))
@@ -163,7 +187,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1691");
@@ -172,7 +196,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_etyyy_tuwezz_vol.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -190,6 +214,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_tuwezz_vol_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1639"))
@@ -220,7 +245,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1691");
@@ -229,7 +254,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_etyyy_tuwezz_vol.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -247,6 +272,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_tuwezz_vol_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1647"))
@@ -288,7 +314,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1691");
@@ -297,7 +323,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_etyyy_tuwezz_vol.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -315,6 +341,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_tuwezz_vol_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1659"))
@@ -345,7 +372,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1691");
@@ -354,7 +381,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_etyyy_tuwezz_vol.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -372,6 +399,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_tuwezz_vol_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1667"))
@@ -398,7 +426,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1671");
@@ -411,7 +439,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_etyyy_tuwezz_vol.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -447,7 +475,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1691");
@@ -456,7 +484,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_etyyy_tuwezz_vol.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -474,6 +502,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_tuwezz_vol_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1671"))
@@ -499,6 +528,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_tuwezz_vol_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1687"))
@@ -519,7 +549,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1691");
@@ -528,7 +558,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_etyyy_tuwezz_vol.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -546,6 +576,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_tuwezz_vol_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1691"))
@@ -560,6 +591,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -570,12 +602,14 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -585,18 +619,21 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_etyyy_tuwezz_vol");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -619,7 +656,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1623");
@@ -627,7 +664,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_etyyy_tuwezz_vol.branchId", 1);
                 npcStartConversation(player, npc, "ep3_etyyy_tuwezz_vol", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -662,7 +699,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1627");
@@ -678,7 +715,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_etyyy_tuwezz_vol.branchId", 2);
                 npcStartConversation(player, npc, "ep3_etyyy_tuwezz_vol", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -706,7 +743,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1639");
@@ -718,7 +755,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_etyyy_tuwezz_vol.branchId", 5);
                 npcStartConversation(player, npc, "ep3_etyyy_tuwezz_vol", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -754,7 +791,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1647");
@@ -770,7 +807,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_etyyy_tuwezz_vol.branchId", 7);
                 npcStartConversation(player, npc, "ep3_etyyy_tuwezz_vol", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -798,7 +835,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1659");
@@ -810,7 +847,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_etyyy_tuwezz_vol.branchId", 10);
                 npcStartConversation(player, npc, "ep3_etyyy_tuwezz_vol", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -846,7 +883,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1667");
@@ -862,7 +899,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_etyyy_tuwezz_vol.branchId", 12);
                 npcStartConversation(player, npc, "ep3_etyyy_tuwezz_vol", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -883,7 +920,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1687");
@@ -891,7 +928,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_etyyy_tuwezz_vol.branchId", 17);
                 npcStartConversation(player, npc, "ep3_etyyy_tuwezz_vol", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -900,6 +937,7 @@ public class ep3_etyyy_tuwezz_vol extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_etyyy_tuwezz_vol"))

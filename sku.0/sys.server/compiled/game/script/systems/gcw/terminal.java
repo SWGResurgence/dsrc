@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.hq;
 import script.library.player_structure;
@@ -12,6 +18,7 @@ public class terminal extends script.base_script
     public static final string_id MNU_SHUTDOWN = new string_id("hq", "mnu_shutdown");
     public static final string_id MNU_DONATE = new string_id("hq", "mnu_donate");
     public static final String SCRIPTVAR_COUNTDOWN = "countdownInProgress";
+
     public terminal()
     {
     }
@@ -135,7 +142,7 @@ public class terminal extends script.base_script
         float delay = 300.0f + 300.0f * (100.0f - (meleemod + rangemod)) / 100.0f;
         int minutes = Math.round(delay / 60.0f);
         obj_id[] players = player_structure.getPlayersInBuilding(getTopMostContainer(self));
-        if (players != null && players.length > 0)
+        if (players != null)
         {
             for (obj_id player1 : players)
             {
@@ -153,7 +160,7 @@ public class terminal extends script.base_script
     {
         utils.removeScriptVar(self, SCRIPTVAR_COUNTDOWN);
         obj_id[] players = player_structure.getPlayersInBuilding(getTopMostContainer(self));
-        if (players != null && players.length > 0)
+        if (players != null)
         {
             for (obj_id player : players)
             {
@@ -171,7 +178,7 @@ public class terminal extends script.base_script
             hq.enableHqTerminals(structure);
         }
         obj_id[] players = player_structure.getPlayersInBuilding(getTopMostContainer(self));
-        if (players != null && players.length > 0)
+        if (players != null)
         {
             for (obj_id player : players)
             {
@@ -220,7 +227,7 @@ public class terminal extends script.base_script
         else if (minutes < cnt)
         {
             obj_id[] players = player_structure.getPlayersInBuilding(structure);
-            if (players != null && players.length > 0)
+            if (players != null)
             {
                 for (obj_id player1 : players)
                 {

@@ -1,5 +1,11 @@
 package script.quest.hero_of_tatooine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -7,9 +13,6 @@ import script.string_id;
 
 public class ferocious_beast extends script.base_script
 {
-    public ferocious_beast()
-    {
-    }
     public static final String SCRIPT_NAME = "quest.hero_of_tatooine.ferocious_beast";
     public static final String NOMOVE_SCRIPT = "item.special.nomove_furniture";
     public static final String NOMOVE_OBJVAR = "noTrade";
@@ -18,6 +21,10 @@ public class ferocious_beast extends script.base_script
     public static final String COURAGE_COMPLETE = COURAGE_OBJVAR + ".complete";
     public static final string_id NOTICE_OBJECT = new string_id("quest/hero_of_tatooine/system_messages", "courage_notice_object");
     public static final string_id ALREADY_HAVE_MARK = new string_id("quest/hero_of_tatooine/system_messages", "courage_already_have_mark");
+    public ferocious_beast()
+    {
+    }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isIdValid(item))
@@ -48,6 +55,7 @@ public class ferocious_beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isIdValid(item))
@@ -70,6 +78,7 @@ public class ferocious_beast extends script.base_script
         attachScript(item, NOMOVE_SCRIPT);
         return SCRIPT_CONTINUE;
     }
+
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(self);
@@ -95,23 +104,26 @@ public class ferocious_beast extends script.base_script
             {
                 members = getGroupMemberIds(winner);
             }
-            else 
+            else
             {
                 members = new obj_id[1];
                 members[0] = winner;
             }
-            if ((members == null) || (members.length == 0))
+            if (members == null)
             {
                 return SCRIPT_CONTINUE;
             }
-            for (obj_id member : members) {
-                if (isIdValid(member)) {
+            for (obj_id member : members)
+            {
+                if (isIdValid(member))
+                {
                     sendSystemMessage(member, NOTICE_OBJECT);
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePrepItem(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id item = params.getObjId("item");

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Iterator;
@@ -89,6 +95,7 @@ public class space_dungeon extends script.base_script
     public static final string_id SID_NO_LOCKOUT = new string_id(DUNGEON_STF, "no_lockouts");
     public static final String LIST_DUNGEON_LOCKOUT = "space_dungeon.lockout_timer.";
     public static final boolean LOGGING = false;
+
     public space_dungeon()
     {
     }

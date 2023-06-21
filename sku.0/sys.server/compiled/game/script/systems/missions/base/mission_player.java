@@ -1,5 +1,11 @@
 package script.systems.missions.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -15,6 +21,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
                     "object/mobile/dressed_rebel_trooper_sullustan_male_01.iff"
             };
     public static final string_id IMPROVED_JOB_MARKET_MESSAGE = new string_id("city/city", "improved_job_market_message");
+
     public mission_player()
     {
     }

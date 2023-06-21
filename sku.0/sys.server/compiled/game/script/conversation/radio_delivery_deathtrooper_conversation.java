@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,14 +14,17 @@ import script.*;
 
 public class radio_delivery_deathtrooper_conversation extends script.base_script
 {
+    public static String c_stringFile = "conversation/radio_delivery_deathtrooper_conversation";
+
     public radio_delivery_deathtrooper_conversation()
     {
     }
-    public static String c_stringFile = "conversation/radio_delivery_deathtrooper_conversation";
+
     public boolean radio_delivery_deathtrooper_conversation_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean radio_delivery_deathtrooper_conversation_condition_hasDeliveryQuestActive(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean returnVal = false;
@@ -35,66 +44,82 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return returnVal;
     }
+
     public boolean radio_delivery_deathtrooper_conversation_condition_hasRadioQuest1Complete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "outbreak_radio_delivery_01");
     }
+
     public boolean radio_delivery_deathtrooper_conversation_condition_hasNeverSpoken(obj_id player, obj_id npc) throws InterruptedException
     {
         return !groundquests.isQuestActiveOrComplete(player, "outbreak_radio_delivery_01");
     }
+
     public boolean radio_delivery_deathtrooper_conversation_condition_hasRadioOneDelivered(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "outbreak_radio_delivery_01", "talkToMaris");
     }
+
     public boolean radio_delivery_deathtrooper_conversation_condition_hasRadioTwoDelivered(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "outbreak_radio_delivery_02", "talkToMaris");
     }
+
     public boolean radio_delivery_deathtrooper_conversation_condition_hasRadioQuest2Complete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "outbreak_radio_delivery_02");
     }
+
     public boolean radio_delivery_deathtrooper_conversation_condition_noAntiVirus(obj_id player, obj_id npc) throws InterruptedException
     {
         return !groundquests.hasCompletedQuest(player, "outbreak_quest_01_imperial") && !groundquests.hasCompletedQuest(player, "outbreak_quest_01_rebel") && !groundquests.hasCompletedQuest(player, "outbreak_quest_01_neutral");
     }
+
     public boolean radio_delivery_deathtrooper_conversation_condition_hasLastRadiosDelivered(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "outbreak_radio_delivery_03", "talkToMaris");
     }
+
     public boolean radio_delivery_deathtrooper_conversation_condition_hasCompletedAll(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "outbreak_radio_delivery_03");
     }
+
     public boolean radio_delivery_deathtrooper_conversation_condition_hasHelmet(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "outbreak_bomber_helmet_hidden_content", "hasHelmet");
     }
+
     public void radio_delivery_deathtrooper_conversation_action_giveFirstDeliveryQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_radio_delivery_01");
     }
+
     public void radio_delivery_deathtrooper_conversation_action_deliveryOneCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "spokenToZebMaris");
     }
+
     public void radio_delivery_deathtrooper_conversation_action_giveSecondDeliveryQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_radio_delivery_02");
     }
+
     public void radio_delivery_deathtrooper_conversation_action_giveThirdDeliveryQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "outbreak_radio_delivery_03");
     }
+
     public void radio_delivery_deathtrooper_conversation_action_deliverTwoCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "spokenToZebMarisGamma");
     }
+
     public void radio_delivery_deathtrooper_conversation_action_deliverThreeCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "spokenToZebMarisDelta");
     }
+
     public void radio_delivery_deathtrooper_conversation_action_hasDeliveredHelmet(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasDeliveredHelmet");
@@ -103,6 +128,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
             modifyCollectionSlotValue(player, "hidden_content_tie_helmet", 1);
         }
     }
+
     public int radio_delivery_deathtrooper_conversation_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92"))
@@ -123,6 +149,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int radio_delivery_deathtrooper_conversation_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -149,6 +176,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int radio_delivery_deathtrooper_conversation_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -168,7 +196,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -177,7 +205,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.radio_delivery_deathtrooper_conversation.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -187,6 +215,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int radio_delivery_deathtrooper_conversation_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -206,7 +235,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_66");
@@ -215,7 +244,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.radio_delivery_deathtrooper_conversation.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -225,6 +254,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int radio_delivery_deathtrooper_conversation_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_66"))
@@ -240,6 +270,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int radio_delivery_deathtrooper_conversation_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_55"))
@@ -259,7 +290,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_57");
@@ -268,7 +299,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.radio_delivery_deathtrooper_conversation.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -278,6 +309,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int radio_delivery_deathtrooper_conversation_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57"))
@@ -297,7 +329,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -306,7 +338,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.radio_delivery_deathtrooper_conversation.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -316,6 +348,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int radio_delivery_deathtrooper_conversation_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_59"))
@@ -335,7 +368,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -344,7 +377,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.radio_delivery_deathtrooper_conversation.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -354,6 +387,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int radio_delivery_deathtrooper_conversation_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_62"))
@@ -369,6 +403,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int radio_delivery_deathtrooper_conversation_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -388,7 +423,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -397,7 +432,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.radio_delivery_deathtrooper_conversation.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -407,6 +442,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int radio_delivery_deathtrooper_conversation_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -426,7 +462,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -435,7 +471,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.radio_delivery_deathtrooper_conversation.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -445,6 +481,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int radio_delivery_deathtrooper_conversation_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -464,7 +501,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -473,7 +510,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.radio_delivery_deathtrooper_conversation.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -483,6 +520,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int radio_delivery_deathtrooper_conversation_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50"))
@@ -502,7 +540,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -511,7 +549,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.radio_delivery_deathtrooper_conversation.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -521,6 +559,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int radio_delivery_deathtrooper_conversation_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -540,7 +579,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81");
@@ -549,7 +588,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.radio_delivery_deathtrooper_conversation.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -559,6 +598,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int radio_delivery_deathtrooper_conversation_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_81"))
@@ -578,7 +618,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_85");
@@ -587,7 +627,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.radio_delivery_deathtrooper_conversation.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -597,6 +637,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int radio_delivery_deathtrooper_conversation_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
@@ -616,7 +657,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_89");
@@ -625,7 +666,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.radio_delivery_deathtrooper_conversation.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -635,6 +676,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int radio_delivery_deathtrooper_conversation_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_89"))
@@ -650,18 +692,21 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -670,12 +715,14 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -698,7 +745,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_92");
@@ -706,7 +753,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                 utils.setScriptVar(player, "conversation.radio_delivery_deathtrooper_conversation.branchId", 1);
                 npcStartConversation(player, npc, "radio_delivery_deathtrooper_conversation", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -746,7 +793,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -758,7 +805,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                 utils.setScriptVar(player, "conversation.radio_delivery_deathtrooper_conversation.branchId", 5);
                 npcStartConversation(player, npc, "radio_delivery_deathtrooper_conversation", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -779,7 +826,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -787,7 +834,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                 utils.setScriptVar(player, "conversation.radio_delivery_deathtrooper_conversation.branchId", 8);
                 npcStartConversation(player, npc, "radio_delivery_deathtrooper_conversation", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -815,7 +862,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_55");
@@ -823,7 +870,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                 utils.setScriptVar(player, "conversation.radio_delivery_deathtrooper_conversation.branchId", 13);
                 npcStartConversation(player, npc, "radio_delivery_deathtrooper_conversation", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -857,7 +904,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -865,7 +912,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
                 utils.setScriptVar(player, "conversation.radio_delivery_deathtrooper_conversation.branchId", 20);
                 npcStartConversation(player, npc, "radio_delivery_deathtrooper_conversation", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -880,6 +927,7 @@ public class radio_delivery_deathtrooper_conversation extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("radio_delivery_deathtrooper_conversation"))

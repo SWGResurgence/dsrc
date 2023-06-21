@@ -1,5 +1,11 @@
 package script.faction_perk.hq;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -9,17 +15,19 @@ import java.util.Vector;
 
 public class spawn_egg extends script.base_script
 {
-    public spawn_egg()
-    {
-    }
     private static final String VAR_SPAWN_PATHPOINTS = hq.VAR_SPAWN_BASE + ".pathPoints";
     private static final String VAR_SPAWN_FORMATION = hq.VAR_SPAWN_BASE + ".formation";
     private static final String VAR_CLEANING_UP = hq.VAR_SPAWN_BASE + ".cleaningUp";
+    public spawn_egg()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createPatrolPathPoints(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         setObjVar(self, VAR_CLEANING_UP, 1);
@@ -31,6 +39,7 @@ public class spawn_egg extends script.base_script
         utils.destroyObjects(children);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnRequest(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, hq.VAR_SPAWN_CHILDREN))
@@ -44,6 +53,7 @@ public class spawn_egg extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleLeaderIncapacitated(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, VAR_CLEANING_UP))
@@ -67,21 +77,30 @@ public class spawn_egg extends script.base_script
             obj_id leader = null;
             int formation = getIntObjVar(self, VAR_SPAWN_FORMATION);
             location[] pathpoints = null;
-            if (hasObjVar(self, VAR_SPAWN_PATHPOINTS)) {
+            if (hasObjVar(self, VAR_SPAWN_PATHPOINTS))
+            {
                 pathpoints = getLocationArrayObjVar(self, VAR_SPAWN_PATHPOINTS);
             }
             boolean hasPathPoints = (pathpoints != null && pathpoints.length > 0);
-            for (Object child : children) {
-                if (!ai_lib.aiIsDead(((obj_id) child))) {
-                    if (!isIdValid(leader)) {
+            for (Object child : children)
+            {
+                if (!ai_lib.aiIsDead(((obj_id) child)))
+                {
+                    if (!isIdValid(leader))
+                    {
                         leader = ((obj_id) child);
                         setObjVar(leader, hq.VAR_SPAWN_LEADER, true);
-                        if (hasPathPoints) {
+                        if (hasPathPoints)
+                        {
                             ai_lib.setPatrolPath(leader, pathpoints);
-                        } else {
+                        }
+                        else
+                        {
                             ai_lib.setDefaultCalmBehavior(leader, ai_lib.BEHAVIOR_LOITER);
                         }
-                    } else {
+                    }
+                    else
+                    {
                         ai_lib.followInFormation(((obj_id) child), leader, formation, pos);
                     }
                     pos++;
@@ -90,6 +109,7 @@ public class spawn_egg extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleChildDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, VAR_CLEANING_UP))
@@ -118,12 +138,13 @@ public class spawn_egg extends script.base_script
             }
             messageTo(self, "handleSpawnRequest", null, delay, false);
         }
-        else 
+        else
         {
             setObjVar(self, hq.VAR_SPAWN_CHILDREN, children);
         }
         return SCRIPT_CONTINUE;
     }
+
     private obj_id[] loadSpawns(obj_id self) throws InterruptedException
     {
         String faction = toLower(factions.getFaction(self));
@@ -194,7 +215,7 @@ public class spawn_egg extends script.base_script
                 return null;
             }
             Vector keys = new Vector();
-            int formation = utils.stringToInt(((String)keys.get(0)));
+            int formation = utils.stringToInt(((String) keys.get(0)));
             if (formation < ai_lib.FORMATION_COLUMN)
             {
                 return null;
@@ -211,7 +232,8 @@ public class spawn_egg extends script.base_script
             obj_id spawn;
             location[] pathpoints = null;
             boolean hasPathPoints = false;
-            if(hasObjVar(self, VAR_SPAWN_PATHPOINTS)) {
+            if (hasObjVar(self, VAR_SPAWN_PATHPOINTS))
+            {
                 pathpoints = getLocationArrayObjVar(self, VAR_SPAWN_PATHPOINTS);
                 hasPathPoints = (pathpoints != null && pathpoints.length > 0);
             }
@@ -222,11 +244,11 @@ public class spawn_egg extends script.base_script
                 {
                     baseLoc = spawnLoc;
                 }
-                else 
+                else
                 {
                     spawnLoc = utils.rotatePointXZ(baseLoc, 0.75f, dtheta * i);
                 }
-                spawn = createSpawn(((String)keys.get(i)), spawnLoc);
+                spawn = createSpawn(((String) keys.get(i)), spawnLoc);
                 if (isIdValid(spawn))
                 {
                     spawns = utils.addElement(spawns, spawn);
@@ -234,27 +256,28 @@ public class spawn_egg extends script.base_script
                     {
                         ai_lib.followInFormation(spawn, leader, formation, i);
                     }
-                    else 
+                    else
                     {
                         leader = spawn;
                         setObjVar(spawn, hq.VAR_SPAWN_LEADER, true);
-                        if (hasPathPoints){
+                        if (hasPathPoints)
+                        {
                             ai_lib.setPatrolPath(leader, pathpoints);
                         }
-                        else 
+                        else
                         {
                             ai_lib.setDefaultCalmBehavior(leader, ai_lib.BEHAVIOR_LOITER);
                         }
                     }
                 }
-                else 
+                else
                 {
                     LOG("hq", "unable to create formation spawn: " + keys.get(i));
                 }
                 spawnLoc = null;
             }
         }
-        else 
+        else
         {
             obj_id spawn = createSpawn(spawnKey, spawnLoc);
             if (isIdValid(spawn))
@@ -276,6 +299,7 @@ public class spawn_egg extends script.base_script
         spawns.toArray(_spawns);
         return _spawns;
     }
+
     private obj_id createSpawn(String type, location there) throws InterruptedException
     {
         if (type == null || type.equals(""))
@@ -295,6 +319,7 @@ public class spawn_egg extends script.base_script
         }
         return null;
     }
+
     private void createPatrolPathPoints(obj_id self) throws InterruptedException
     {
         if (getTopMostContainer(self) != self)
@@ -330,7 +355,8 @@ public class spawn_egg extends script.base_script
             for (int i = 0; i < pathpoints.length; i++)
             {
                 int idx = i + closeIndex;
-                if (idx >= pathpoints.length) {
+                if (idx >= pathpoints.length)
+                {
                     idx -= pathpoints.length;
                 }
                 toUse[i] = pathpoints[idx];
@@ -338,6 +364,7 @@ public class spawn_egg extends script.base_script
             setObjVar(self, VAR_SPAWN_PATHPOINTS, toUse);
         }
     }
+
     public int handleParentCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, hq.VAR_SPAWN_CHILDREN))
@@ -351,8 +378,10 @@ public class spawn_egg extends script.base_script
             destroyObject(self);
             return SCRIPT_CONTINUE;
         }
-        for (Object child : children) {
-            if (ai_lib.isInCombat(((obj_id) child))) {
+        for (Object child : children)
+        {
+            if (ai_lib.isInCombat(((obj_id) child)))
+            {
                 messageTo(self, "handleParentCleanup", null, 600, false);
                 return SCRIPT_CONTINUE;
             }

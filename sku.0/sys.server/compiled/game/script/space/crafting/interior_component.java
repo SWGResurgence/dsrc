@@ -1,5 +1,11 @@
 package script.space.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.space_crafting;
 import script.library.space_transition;
@@ -12,6 +18,7 @@ public class interior_component extends script.base_script
     public interior_component()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("space", "ONATTACH GOING OFF ON INTERIOR COMPONETNES");
@@ -50,7 +57,7 @@ public class interior_component extends script.base_script
                     setInvulnerableHitpoints(self, 1);
                 }
             }
-            else 
+            else
             {
                 LOG("space", "Component " + intSlot + " is not installed on " + objShip + " cleaning up interior piece");
                 if (utils.checkConfigFlag("ScriptFlags", "liveSpaceServer"))
@@ -59,7 +66,7 @@ public class interior_component extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             LOG("space", "NON REAL COMPONENT");
             if (intSlot == space_crafting.PLASMA_CONDUIT)
@@ -72,7 +79,7 @@ public class interior_component extends script.base_script
                     utils.setScriptVar(objShip, "objPlasmaConduits", objPlasmaConduits);
                     LOG("space", "plasma already has a conduit");
                 }
-                else 
+                else
                 {
                     LOG("space", "no conduits ");
                     Vector objPlasmaConduits = new Vector();
@@ -107,7 +114,7 @@ public class interior_component extends script.base_script
                     utils.setScriptVar(objShip, "objHullPanels", objHullPanels);
                     LOG("space", "plasma already has a conduit");
                 }
-                else 
+                else
                 {
                     LOG("space", "no objHullPanels ");
                     Vector objHullPanels = new Vector();
@@ -127,6 +134,7 @@ public class interior_component extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (hasObjVar(self, "intSlot"))
@@ -137,6 +145,7 @@ public class interior_component extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id objPlayer, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -183,23 +192,23 @@ public class interior_component extends script.base_script
                         {
                             space_crafting.fixPlasmaConduit(self, space_transition.getContainingShip(objPlayer), getLocation(self));
                             utils.setScriptVar(objPlayer, "component_repair_time", getGameTime());
-                            int intCount = getCount(((obj_id)objKits.get(0)));
+                            int intCount = getCount(((obj_id) objKits.get(0)));
                             intCount = intCount - 1;
                             if (intCount < 1)
                             {
                                 string_id strSpam = new string_id("space/space_interaction", "fix_plasma_conduit_destroy");
                                 sendSystemMessage(objPlayer, strSpam);
-                                destroyObject(((obj_id)objKits.get(0)));
+                                destroyObject(((obj_id) objKits.get(0)));
                             }
-                            else 
+                            else
                             {
                                 string_id strSpam = new string_id("space/space_interaction", "fix_plasma_conduit");
                                 sendSystemMessage(objPlayer, strSpam);
-                                setCount(((obj_id)objKits.get(0)), intCount);
+                                setCount(((obj_id) objKits.get(0)), intCount);
                             }
                             return SCRIPT_CONTINUE;
                         }
-                        else 
+                        else
                         {
                             string_id strSpam = new string_id("space/space_interaction", "no_damage_to_repair");
                             sendSystemMessage(objPlayer, strSpam);
@@ -208,7 +217,7 @@ public class interior_component extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 LOG("space", "name is " + getShipComponentName(space_transition.getContainingShip(objPlayer), intSlot));
                 space_crafting.repairComponentOnShip(intSlot, objKits, objPlayer, space_transition.getContainingShip(objPlayer));

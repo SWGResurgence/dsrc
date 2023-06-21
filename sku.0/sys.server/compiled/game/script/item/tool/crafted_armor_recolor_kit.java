@@ -1,5 +1,11 @@
 package script.item.tool;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.hue;
 import script.library.metrics;
@@ -31,6 +37,7 @@ public class crafted_armor_recolor_kit extends script.base_script
     public static final String COLOR_OBJECT = VAR_PREFIX + ".color_object";
     public static final String PREVIOUS_BUTTON_VISIBILITIY = VAR_PREFIX + ".previous_button";
     public static final String NEXT_BUTTON_VISIBILITIY = VAR_PREFIX + ".next_button";
+
     public crafted_armor_recolor_kit()
     {
     }
@@ -92,7 +99,7 @@ public class crafted_armor_recolor_kit extends script.base_script
         Vector items = new Vector();
         obj_id[] equippedItems = metrics.getWornItems(player);
         blog("equippedItems.length: " + equippedItems.length);
-        if (equippedItems != null && equippedItems.length > 0)
+        if (equippedItems != null)
         {
             for (obj_id equippedItem : equippedItems)
             {
@@ -104,7 +111,7 @@ public class crafted_armor_recolor_kit extends script.base_script
         }
         obj_id[] invItems = utils.getContents(utils.getInventoryContainer(player), true);
         blog("invItems.length: " + invItems.length);
-        if (invItems != null && invItems.length > 0)
+        if (invItems != null)
         {
             for (obj_id invItem : invItems)
             {

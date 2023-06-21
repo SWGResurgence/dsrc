@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.time.LocalTime;
@@ -42,6 +48,7 @@ public class storyteller extends script.base_script
     public static final int DEFAULT_PROP_CLEANUP_TIME = 16 * 60 * 60;
     public static final int DEFAULT_NPC_CLEANUP_TIME = 16 * 60 * 60;
     public static final String VAR_AUTODECLINE_STORY_INVITES = "decline_story_invites";
+
     public storyteller()
     {
     }

@@ -1,5 +1,11 @@
 package script.item.dna;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.static_item;
 import script.library.utils;
@@ -9,6 +15,7 @@ public class unstable_reek_dna extends script.base_script
 {
     public static final String UNSTABLE_REEK_DNA_LOOT_ITEM = "item_cs_dna_reek";
     public static final int UNSTABLE_REEK_DNA_LOOT_CHANCE = 5;
+
     public unstable_reek_dna()
     {
     }

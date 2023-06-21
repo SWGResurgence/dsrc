@@ -1,5 +1,11 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.attrib_mod;
 import script.dictionary;
 import script.library.utils;
@@ -11,6 +17,7 @@ public class player_spice extends script.base_script
     public player_spice()
     {
     }
+
     public int OnAttribModDone(obj_id self, String modName, boolean isDead) throws InterruptedException
     {
         String name = utils.getStringScriptVar(self, "spice.name");
@@ -42,7 +49,7 @@ public class player_spice extends script.base_script
                             newMod = new attrib_mod("spice." + name + ".down", i, val, dur, 0, 0, false, true, true);
                             buffIcon = true;
                         }
-                        else 
+                        else
                         {
                             newMod = new attrib_mod(null, i, val, dur, 0, 0, false, false, false);
                         }
@@ -54,7 +61,7 @@ public class player_spice extends script.base_script
                 string_id cmsg = new string_id("spice/spice", name + "_downer");
                 sendSystemMessage(self, cmsg);
             }
-            else 
+            else
             {
                 string_id cmsg = new string_id("spice/spice", name + "_done");
                 sendSystemMessage(self, cmsg);
@@ -65,6 +72,7 @@ public class player_spice extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spicePuke(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasAttribModifier(self, "spice"))

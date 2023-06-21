@@ -1,5 +1,11 @@
 package script.poi.mysteriousdisk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.poi;
@@ -12,24 +18,27 @@ import java.util.Vector;
 
 public class mediator extends script.poi.base.scenario_actor
 {
-    public mediator()
-    {
-    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiMysteriousDisk Mediator";
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public static final int CONV_GREET = 0;
     public static final int CONV_TALKMEDIATOR = 1;
+    public mediator()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, SCRIPT_CONVERSE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         attachScript(self, SCRIPT_CONVERSE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -40,6 +49,7 @@ public class mediator extends script.poi.base.scenario_actor
         messageTo(poiMaster, scenario.HANDLER_ACTOR_DEATH, null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (hasObjVar(breacher, "gm"))
@@ -81,6 +91,7 @@ public class mediator extends script.poi.base.scenario_actor
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int runToTarget(obj_id self, dictionary params) throws InterruptedException
     {
         ai_lib.aiFollow(self, getObjIdObjVar(self, "breacher"));
@@ -88,6 +99,7 @@ public class mediator extends script.poi.base.scenario_actor
         messageTo(self, "tryToGetHelp1", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int tryToGetHelp1(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "inChat"))
@@ -98,6 +110,7 @@ public class mediator extends script.poi.base.scenario_actor
         messageTo(self, "tryToGetHelp2", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int tryToGetHelp2(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "inChat"))
@@ -109,6 +122,7 @@ public class mediator extends script.poi.base.scenario_actor
         messageTo(self, "begForHelp", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int begForHelp(obj_id self, dictionary params) throws InterruptedException
     {
         queueCommand(self, (1780871594), null, "grovel", COMMAND_PRIORITY_DEFAULT);
@@ -120,6 +134,7 @@ public class mediator extends script.poi.base.scenario_actor
         messageTo(poiMaster, "startFight", null, 20, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -144,12 +159,13 @@ public class mediator extends script.poi.base.scenario_actor
             responses = utils.addElement(responses, new string_id(convo, "r_m_greet_who"));
             npcStartConversation(speaker, self, convo, msg, responses);
         }
-        else 
+        else
         {
             npcEndConversation(speaker);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convoName, obj_id speaker, string_id response) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))

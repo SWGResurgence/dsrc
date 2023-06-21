@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -34,6 +40,7 @@ public class pvp_battlefield extends script.base_script
     public static final int BATTLEFIELD_MAXIMUM_TEAM_SIZE = 16;
     public static final int BATTLEFIELD_PLAYER_KILL_VALUE = 10;
     public static final int BATTLEFIELD_TERMINAL_CAPTURE_VALUE = 500;
+
     public pvp_battlefield()
     {
     }
@@ -113,7 +120,7 @@ public class pvp_battlefield extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        if (element_name_list != null && element_name_list.length > 0 && data != null && data.length > 0)
+        if (element_name_list != null && element_name_list.length > 0 && data != null)
         {
             for (dictionary datum : data)
             {
@@ -513,7 +520,7 @@ public class pvp_battlefield extends script.base_script
             int assists = utils.getIntScriptVar(player, "battlefield.assists");
             int oldCaptures = utils.stringToInt(playerInfo[7]);
             totalNewCaptures += captures - oldCaptures;
-            activeMembers.set(i, "" + player + "^" + calendarTime + "^" + name + "^" + kills + "^" + deaths + "^" + damage + "^" + healing + "^" + captures + "^" + assists);
+            activeMembers.set(i, player + "^" + calendarTime + "^" + name + "^" + kills + "^" + deaths + "^" + damage + "^" + healing + "^" + captures + "^" + assists);
         }
         int imperialScore = utils.getIntScriptVar(controller, "battlefield.imperialScore");
         int rebelScore = utils.getIntScriptVar(controller, "battlefield.rebelScore");
@@ -804,7 +811,7 @@ public class pvp_battlefield extends script.base_script
         blog(controller, "bfActiveAddPlayer !!!!!!!! player to add: " + player);
         if (activeTeam == null || activeTeam.size() < 1)
         {
-            utils.addElement(newRecordList, "" + player + "^" + getCalendarTime() + "^" + name + "^0^0^0^0^0^0");
+            utils.addElement(newRecordList, player + "^" + getCalendarTime() + "^" + name + "^0^0^0^0^0^0");
         }
         else
         {
@@ -842,7 +849,7 @@ public class pvp_battlefield extends script.base_script
                 else if (invitedList.get(i) == player)
                 {
                     blog(controller, "bfActiveAddPlayer invitedList[" + i + "]: " + invitedList.get(i) + " == player: " + player);
-                    utils.addElement(newRecordList, "" + player + "^" + getCalendarTime() + "^" + name + "^0^0^0^0^0^0");
+                    utils.addElement(newRecordList, player + "^" + getCalendarTime() + "^" + name + "^0^0^0^0^0^0");
                 }
             }
         }
@@ -1272,7 +1279,7 @@ public class pvp_battlefield extends script.base_script
         if (recordList == null || recordList.size() < 1 || getPlayerDataFromList(player, recordList) == null)
         {
             utils.removeBatchScriptVar(controller, factionScriptVar);
-            String newEntry = "" + player + "^" + getCalendarTime();
+            String newEntry = player + "^" + getCalendarTime();
             utils.addElement(newRecordList, newEntry);
             for (Object o : recordList)
             {
@@ -1302,7 +1309,7 @@ public class pvp_battlefield extends script.base_script
         if (recordList == null || recordList.size() < 1 || getPlayerDataFromList(player, recordList) == null)
         {
             utils.removeBatchScriptVar(controller, factionScriptVar);
-            String newEntry = "" + player + "^" + getCalendarTime();
+            String newEntry = player + "^" + getCalendarTime();
             utils.addElement(recordList, newEntry);
             utils.setBatchScriptVar(controller, factionScriptVar, recordList);
             blog(controller, "addPlayerToQueueList newEntry: " + newEntry);
@@ -1427,7 +1434,7 @@ public class pvp_battlefield extends script.base_script
             }
             if (!skipPlayer)
             {
-                String newEntry = "" + member + "^" + getCalendarTime();
+                String newEntry = member + "^" + getCalendarTime();
                 utils.addElement(recordList, newEntry);
                 blog(controller, "bfQueueAddGroup newEntry: " + newEntry);
             }
@@ -2008,7 +2015,7 @@ public class pvp_battlefield extends script.base_script
             return recordList;
         }
         doLogging("xx", "Player is " + faction);
-        String newEntry = "" + player + "^" + faction + "^" + uniqueHits + "^" + deaths;
+        String newEntry = player + "^" + faction + "^" + uniqueHits + "^" + deaths;
         utils.addElement(recordList, newEntry);
         doLogging("xx", "Adding element to array: " + newEntry);
         return recordList;
@@ -2078,7 +2085,7 @@ public class pvp_battlefield extends script.base_script
         String[] parse = split(((String) recordList.get(playerData)), '^');
         int uniqueHits = utils.stringToInt(parse[2]);
         uniqueHits += 1;
-        String updatedData = "" + parse[0] + "^" + parse[1] + "^" + uniqueHits + "^" + parse[3];
+        String updatedData = parse[0] + "^" + parse[1] + "^" + uniqueHits + "^" + parse[3];
         doLogging("incrementUpdateHitsByPlayer", "Updating Data: " + recordList.get(playerData) + " to " + updatedData);
         recordList.set(playerData, updatedData);
         return recordList;
@@ -2094,7 +2101,7 @@ public class pvp_battlefield extends script.base_script
         {
             deaths = gcw.MAX_DEATH_BY_PLAYER;
         }
-        String updatedData = "" + parse[0] + "^" + parse[1] + "^" + parse[2] + "^" + deaths;
+        String updatedData = parse[0] + "^" + parse[1] + "^" + parse[2] + "^" + deaths;
         doLogging("incrementDeathsByPlayer", "updating Data: " + recordList.get(playerData) + " to " + updatedData);
         recordList.set(playerData, updatedData);
         return recordList;

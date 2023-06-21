@@ -1,26 +1,33 @@
 package script.grouping;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class group_member extends script.base_script
 {
-    public group_member()
-    {
-    }
+    public static final String SCRIPT_ME = group.SCRIPT_GROUP_MEMBER;
     private static final string_id SID_GROUP_CREDIT_SPLIT_FAILED = new string_id("group", "credit_split_failed");
     private static final string_id SID_LOOT_FREE_FOR_ALL = new string_id("group", "loot_free_for_all");
     private static final string_id SID_LOOT_MASTER_LOOTER = new string_id("group", "loot_master_looter");
     private static final string_id SID_LOOT_LOTTERY = new string_id("group", "loot_lottery");
     private static final string_id SID_LOOT_RANDOM = new string_id("group", "loot_random");
-    public static final String SCRIPT_ME = group.SCRIPT_GROUP_MEMBER;
     private static final string_id[] LOOT_OPTIONS =
+            {
+                    SID_LOOT_FREE_FOR_ALL,
+                    SID_LOOT_MASTER_LOOTER,
+                    SID_LOOT_LOTTERY,
+                    SID_LOOT_RANDOM
+            };
+    public group_member()
     {
-        SID_LOOT_FREE_FOR_ALL,
-        SID_LOOT_MASTER_LOOTER,
-        SID_LOOT_LOTTERY,
-        SID_LOOT_RANDOM
-    };
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!isIdValid(getGroupObject(self)))
@@ -29,6 +36,7 @@ public class group_member extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id groupObject = getGroupObject(self);
@@ -40,6 +48,7 @@ public class group_member extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id myGroup = getGroupObject(self);
@@ -51,6 +60,7 @@ public class group_member extends script.base_script
         group.notifyIncapacitation(myGroup, self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         group.destroyGroupWaypoint(self);
@@ -61,11 +71,13 @@ public class group_member extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         detachScript(self, SCRIPT_ME);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         deltadictionary scriptVars = self.getScriptVars();
@@ -81,9 +93,9 @@ public class group_member extends script.base_script
             {
                 obj_id target = utils.getObjIdScriptVar(groupObject, combat.VAR_GROUP_VOLLEY_TARGET);
                 stopClientEffectObjByLabel(new obj_id[]
-                {
-                    self
-                }, target, combat.ID_VOLLEY_FIRE_PARTICLE);
+                        {
+                                self
+                        }, target, combat.ID_VOLLEY_FIRE_PARTICLE);
             }
             dictionary msgData = new dictionary();
             msgData.put("sender", self);
@@ -91,6 +103,7 @@ public class group_member extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int volleyTargetDone(obj_id self, dictionary params) throws InterruptedException
     {
         if (!params.containsKey("objTarget"))
@@ -99,11 +112,12 @@ public class group_member extends script.base_script
         }
         obj_id target = params.getObjId("objTarget");
         stopClientEffectObjByLabel(new obj_id[]
-        {
-            self
-        }, target, combat.ID_VOLLEY_FIRE_PARTICLE);
+                {
+                        self
+                }, target, combat.ID_VOLLEY_FIRE_PARTICLE);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCloneRespawn(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("grouping", "HANDLER:handleCloneRespawn:: (" + self + ") " + getName(self));
@@ -116,6 +130,7 @@ public class group_member extends script.base_script
         group.notifyCloned(myGroup, self);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSplitCreditsWithGroup(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (params != null && !params.equals(""))
@@ -129,6 +144,7 @@ public class group_member extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRequestSplitShare(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null && !params.equals(""))
@@ -142,6 +158,7 @@ public class group_member extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRequestPayoutShare(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null && !params.equals(""))
@@ -155,6 +172,7 @@ public class group_member extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePayoutRequest(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -169,6 +187,7 @@ public class group_member extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePayoutComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -188,6 +207,7 @@ public class group_member extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSplitSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -215,7 +235,7 @@ public class group_member extends script.base_script
             prose_package ppSplit = prose.getPackage(new string_id("group", "prose_split"), dividend);
             sendSystemMessageProse(self, ppSplit);
         }
-        else 
+        else
         {
             if (reasonId != null)
             {
@@ -223,7 +243,7 @@ public class group_member extends script.base_script
                 prose_package ppSplit = prose.getPackage(new string_id("group", "prose_split"), dividend);
                 sendSystemMessageProse(self, ppSplit);
             }
-            else 
+            else
             {
                 prose_package ppSplitReason = prose.getPackage(new string_id("group", "prose_split_reason"), reason, dividend);
                 sendSystemMessageProse(self, ppSplitReason);
@@ -231,6 +251,7 @@ public class group_member extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSplitFailure(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -250,11 +271,13 @@ public class group_member extends script.base_script
         sendSystemMessage(self, SID_GROUP_CREDIT_SPLIT_FAILED);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSquadLeaderXpNotify(obj_id self, dictionary params) throws InterruptedException
     {
         xp.notifySquadLeaderXp(self);
         return SCRIPT_CONTINUE;
     }
+
     public int updateGroupWaypoint(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -276,7 +299,7 @@ public class group_member extends script.base_script
                         {
                             setWaypointLocation(groupWaypoint, newWaypointLocation);
                         }
-                        else 
+                        else
                         {
                             groupWaypoint = createWaypointInDatapad(self, newWaypointLocation);
                             setObjVar(self, "groupWaypoint", groupWaypoint);
@@ -290,6 +313,7 @@ public class group_member extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int missionWaypointUpdated(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -306,6 +330,7 @@ public class group_member extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int waitForMissionObjectDestruction(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -328,6 +353,7 @@ public class group_member extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int missionObjectDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -336,11 +362,13 @@ public class group_member extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroyGroupWaypoint(obj_id self, dictionary params) throws InterruptedException
     {
         group.destroyGroupWaypoint(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGroupLootSet(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!group.isGrouped(self))
@@ -357,7 +385,8 @@ public class group_member extends script.base_script
         if (leader != self)
         {
             String leader_only;
-            switch(getGroupLootRule(group.getGroupObject(leader))){
+            switch (getGroupLootRule(group.getGroupObject(leader)))
+            {
                 case 0:
                     leader_only = "leader_only_free4all";
                     break;
@@ -376,6 +405,7 @@ public class group_member extends script.base_script
         groupLootSui(self);//TODO: This is getting called regardless of group perms
         return SCRIPT_CONTINUE;
     }
+
     private int groupLootSui(obj_id self) throws InterruptedException
     {
         int pid = createSUIPage(sui.SUI_LISTBOX, self, self, "handleLootOptionSelected");
@@ -395,7 +425,7 @@ public class group_member extends script.base_script
         {
             title = "CHOOSE GROUP LOOT TYPE";
         }
-        String loot_options[] = new String[LOOT_OPTIONS.length];
+        String[] loot_options = new String[LOOT_OPTIONS.length];
         for (int i = 0; i < LOOT_OPTIONS.length; i++)
         {
             loot_options[i] = utils.packStringId(LOOT_OPTIONS[i]);
@@ -411,6 +441,7 @@ public class group_member extends script.base_script
         subscribeToSUIProperty(pid, sui.LISTBOX_TITLE, sui.PROP_TEXT);
         return pid;
     }
+
     public int handleLootOptionSelected(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -457,14 +488,17 @@ public class group_member extends script.base_script
         dictionary param = new dictionary();
         param.put("selection", "selected_" + newTypeString);
         string_id message = new string_id(group.GROUP_STF, "selected_" + newTypeString);
-        for (obj_id objMember : objMembersWhoExist) {
-            if (objMember != player) {
+        for (obj_id objMember : objMembersWhoExist)
+        {
+            if (objMember != player)
+            {
                 messageTo(objMember, "groupLootChangedSui", param, 1, true);
             }
         }
         sendSystemMessage(self, message);
         return SCRIPT_CONTINUE;
     }
+
     public int groupLootChangedSui(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -500,6 +534,7 @@ public class group_member extends script.base_script
         showSUIPage(pid);
         return SCRIPT_CONTINUE;
     }
+
     public int lootTypeReset(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))

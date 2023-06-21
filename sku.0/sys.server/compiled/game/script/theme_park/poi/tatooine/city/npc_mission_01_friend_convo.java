@@ -1,5 +1,11 @@
 package script.theme_park.poi.tatooine.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.obj_id;
 import script.string_id;
@@ -9,6 +15,7 @@ public class npc_mission_01_friend_convo extends script.base_script
     public npc_mission_01_friend_convo()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         stop(self);
@@ -16,6 +23,7 @@ public class npc_mission_01_friend_convo extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(speaker))
@@ -25,19 +33,20 @@ public class npc_mission_01_friend_convo extends script.base_script
         if (hasObjVar(speaker, "knowsFriend"))
         {
             string_id greeting = new string_id("npc_mission/npc_mission_01", "npc_msn_01_friend_greeting_02");
-            string_id response[] = new string_id[1];
+            string_id[] response = new string_id[1];
             response[0] = new string_id("npc_mission/npc_mission_01", "npc_msn_01_presp_greeting_01");
             npcStartConversation(speaker, self, "recruiting/imperial_recruit", greeting, response);
         }
-        else 
+        else
         {
             string_id greeting = new string_id("npc_mission/npc_mission_01", "npc_msn_01_friend_greeting_01");
-            string_id response[] = new string_id[1];
+            string_id[] response = new string_id[1];
             response[0] = new string_id("npc_mission/npc_mission_01", "npc_msn_01_presp_greeting_01");
             npcStartConversation(speaker, self, "recruiting/imperial_recruit", greeting, response);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if ((response.getAsciiId()).equals("npc_msn_01_presp_greeting_01") || (response.getAsciiId()).equals("npc_msn_01_presp_greeting_02"))

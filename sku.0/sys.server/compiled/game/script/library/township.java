@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Vector;
@@ -32,6 +38,7 @@ public class township extends script.base_script
     public static final String NOVA_ORION_OBJECT_FOR_SALE_SCRIPT = "theme_park.dungeon.nova_orion_station.nova_orion_object_for_sale";
     public static final String MTP_LUMP = "item_meatlump_lump_01_01";
     public static final String MTP_OBJECT_FOR_SALE_SCRIPT = "theme_park.meatlump.mtp_object_for_sale";
+
     public township()
     {
     }

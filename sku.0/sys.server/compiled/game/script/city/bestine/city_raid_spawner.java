@@ -1,5 +1,11 @@
 package script.city.bestine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.deltadictionary;
 import script.dictionary;
 import script.library.create;
@@ -9,12 +15,13 @@ import script.obj_id;
 
 public class city_raid_spawner extends script.base_script
 {
-    public city_raid_spawner()
-    {
-    }
     public static final float SPAWN_DELAY = 1.0f;
     public static final int ONE_DAY_IN_SECS = 86400;
     public static final int EIGHT_HOURS_IN_SECS = 28800;
+    public city_raid_spawner()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "city.bestine.politician_event_npc"))
@@ -28,6 +35,7 @@ public class city_raid_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "city.bestine.politician_event_npc"))
@@ -40,6 +48,7 @@ public class city_raid_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startRaid(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "raidAlreadyStarted"))
@@ -81,6 +90,7 @@ public class city_raid_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnWave(obj_id self, dictionary params) throws InterruptedException
     {
         deltadictionary dctScriptVars = self.getScriptVars();
@@ -106,10 +116,10 @@ public class city_raid_spawner extends script.base_script
         int intSpawnChoice = rand(0, (strSpawns.length - 1));
         obj_id objMob = create.object(strSpawns[intSpawnChoice], locSpawnLocation);
         if (isIdValid(objMob))
-		{
-			attachScript(objMob, "city.bestine.city_raid_mob");
-			setObjVar(objMob, "objRaidSpawner", self);
-		}
+        {
+            attachScript(objMob, "city.bestine.city_raid_mob");
+            setObjVar(objMob, "objRaidSpawner", self);
+        }
         intIndex = intIndex + 1;
         dctScriptVars.put("intIndex", intIndex);
         if (intIndex < intWaveSize)
@@ -119,6 +129,7 @@ public class city_raid_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int continueSpawns(obj_id self, dictionary params) throws InterruptedException
     {
         deltadictionary dctScriptVars = self.getScriptVars();
@@ -140,10 +151,10 @@ public class city_raid_spawner extends script.base_script
         int intSpawnChoice = rand(0, (strSpawns.length - 1));
         obj_id objMob = create.object(strSpawns[intSpawnChoice], locSpawnLocation);
         if (isIdValid(objMob))
-		{
-			attachScript(objMob, "city.bestine.city_raid_mob");
-			setObjVar(objMob, "objRaidSpawner", self);
-		}
+        {
+            attachScript(objMob, "city.bestine.city_raid_mob");
+            setObjVar(objMob, "objRaidSpawner", self);
+        }
         intIndex = intIndex + 1;
         dctScriptVars.put("intIndex", intIndex);
         int intWaveSize = dctScriptVars.getInt("intWaveSize");
@@ -153,6 +164,7 @@ public class city_raid_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int elementDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         deltadictionary dctScriptVars = self.getScriptVars();
@@ -163,12 +175,13 @@ public class city_raid_spawner extends script.base_script
         {
             resetWave(self);
         }
-        else 
+        else
         {
             dctScriptVars.put("intNumKilled", intNumKilled);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void resetWave(obj_id objRaidSpawner) throws InterruptedException
     {
         deltadictionary dctScriptVars = objRaidSpawner.getScriptVars();
@@ -188,7 +201,7 @@ public class city_raid_spawner extends script.base_script
             dctScriptVars.put("intWave", 1);
             messageTo(objRaidSpawner, "startRaid", null, rand(intMinRecycleTime, intMaxRecycleTime), true);
         }
-        else 
+        else
         {
             int intMinWaveDelay = dctScriptVars.getInt("intMinWaveDelay");
             int intMaxWaveDelay = dctScriptVars.getInt("intMaxWaveDelay");
@@ -196,6 +209,7 @@ public class city_raid_spawner extends script.base_script
             messageTo(objRaidSpawner, "spawnWave", null, rand(intMinWaveDelay, intMaxWaveDelay), false);
         }
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!isGod(speaker))

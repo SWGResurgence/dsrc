@@ -1,5 +1,11 @@
 package script.theme_park.heroic.axkva_min;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.combat;
 import script.library.trial;
@@ -11,11 +17,13 @@ public class lelli_hi extends script.base_script
     public lelli_hi()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_AXKVA_LILLI_HI);
         return SCRIPT_CONTINUE;
     }
+
     public int performAmbush(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "ambush"))
@@ -33,6 +41,7 @@ public class lelli_hi extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dropMines(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "ambush"))
@@ -42,6 +51,7 @@ public class lelli_hi extends script.base_script
         queueCommand(self, (1876436203), getTarget(self), "", COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         trial.bumpSession(self, "ambush");
@@ -50,14 +60,16 @@ public class lelli_hi extends script.base_script
         setCreatureCoverVisibility(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         obj_id[] players = trial.getPlayersInDungeon(trial.getTop(self));
-        if (players == null || players.length == 0)
+        if (players == null)
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             addHate(self, player, 1);
         }
         return SCRIPT_CONTINUE;

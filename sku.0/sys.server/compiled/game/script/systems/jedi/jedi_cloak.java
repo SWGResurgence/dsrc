@@ -1,5 +1,11 @@
 package script.systems.jedi;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.jedi;
 import script.library.reverse_engineering;
 import script.library.static_item;
@@ -12,6 +18,7 @@ public class jedi_cloak extends script.base_script
     public static final string_id SID_USE_HOOD_DOWN = new string_id("spam", "hood_down");
     public static final string_id SID_NO_TWO_CLOAK = new string_id("spam", "no_two_cloak");
     public static final String OBJVAR_BEING_REPLACED = "aboutToBeReplaced";
+
     public jedi_cloak()
     {
     }

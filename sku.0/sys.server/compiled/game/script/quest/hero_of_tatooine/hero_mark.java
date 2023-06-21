@@ -1,5 +1,11 @@
 package script.quest.hero_of_tatooine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.pclib;
 import script.library.prose;
@@ -9,16 +15,17 @@ import script.*;
 public class hero_mark extends script.base_script
 {
 
-    public static int BUFF_TIME = 5400; // 1.5 hours
-    public static int BUFF_TIME_VANILLA = 82800; // 23 hours
-    public static int REVIVE_HEALTH = 15000;
-    public static int REVIVE_ACTION = 12000;
     public static final string_id SID_MENU_RESTORE = new string_id("quest/hero_of_tatooine/system_messages", "menu_restore");
     public static final string_id SID_RESTORE_MSG = new string_id("quest/hero_of_tatooine/system_messages", "restore_msg");
     public static final string_id SID_RESTORE_NOT_YET = new string_id("quest/hero_of_tatooine/system_messages", "restore_not_yet");
     public static final string_id SID_RESTORE_NOT_EQUIPPED = new string_id("quest/hero_of_tatooine/system_messages", "restore_not_equipped");
     public static final string_id SID_RESTORE_NOT_DEAD = new string_id("quest/hero_of_tatooine/system_messages", "restore_not_dead");
     public static final string_id SID_RESTORE = new string_id("quest/hero_of_tatooine/system_messages", "restore");
+    public static int BUFF_TIME = 5400; // 1.5 hours
+    public static int BUFF_TIME_VANILLA = 82800; // 23 hours
+    public static int REVIVE_HEALTH = 15000;
+    public static int REVIVE_ACTION = 12000;
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -40,7 +47,7 @@ public class hero_mark extends script.base_script
         if (hasObjVar(self, "owner"))
         {
             names[idx] = utils.packStringId(new string_id("Owner"));
-            attribs[idx] = "\\#00FF00" +  getName(getObjIdObjVar(self, "owner"));
+            attribs[idx] = "\\#00FF00" + getName(getObjIdObjVar(self, "owner"));
             idx++;
         }
         if (idx >= names.length)
@@ -61,10 +68,12 @@ public class hero_mark extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int id = mi.addRootMenu(menu_info_types.SERVER_MENU10, SID_MENU_RESTORE);
@@ -74,6 +83,7 @@ public class hero_mark extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU10)
@@ -88,7 +98,7 @@ public class hero_mark extends script.base_script
                     sendSystemMessageProse(player, pp);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     removeObjVar(self, "lastUsed");
                 }
@@ -117,14 +127,15 @@ public class hero_mark extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int[] parseTimeRemaining(int seconds) throws InterruptedException
     {
-        int[] time = 
-        {
-            0,
-            0,
-            0
-        };
+        int[] time =
+                {
+                        0,
+                        0,
+                        0
+                };
         int minutes = seconds / 60;
         time[2] = seconds % 60;
         if (minutes == 0)
@@ -140,6 +151,7 @@ public class hero_mark extends script.base_script
         time[0] = hours;
         return time;
     }
+
     public String parseTimeMsg(int[] time, boolean verbose) throws InterruptedException
     {
         String h = "h";
@@ -151,7 +163,7 @@ public class hero_mark extends script.base_script
             {
                 h = " hour";
             }
-            else 
+            else
             {
                 h = " hours";
             }
@@ -159,7 +171,7 @@ public class hero_mark extends script.base_script
             {
                 m = " minute";
             }
-            else 
+            else
             {
                 m = " minutes";
             }
@@ -167,7 +179,7 @@ public class hero_mark extends script.base_script
             {
                 s = " second";
             }
-            else 
+            else
             {
                 s = " seconds";
             }

@@ -1,5 +1,11 @@
 package script.theme_park.outbreak;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.groundquests;
@@ -9,9 +15,6 @@ import script.string_id;
 
 public class camp_defense extends script.base_script
 {
-    public camp_defense()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String TRIGGER_NAME_PREFIX = "camp_defense_trigger_";
     public static final String SCRIPT_LOG = "outbreak_trigger";
@@ -28,6 +31,10 @@ public class camp_defense extends script.base_script
     public static final int FAIL_TIMER = 480;
     public static final String MENU_STRING_FILE = "theme_park/outbreak/outbreak";
     public static final string_id SID_COME_BACK_LATER = new string_id(MENU_STRING_FILE, "guard_post_occupied_come_back_later");
+    public camp_defense()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "camp_defense.OnInitialize() initializing a camp defense controller.");
@@ -39,6 +46,7 @@ public class camp_defense extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         if (!hasObjVar(self, "questObject"))
@@ -91,14 +99,14 @@ public class camp_defense extends script.base_script
         {
             utils.setScriptVar(whoTriggeredMe, "campDefenseKey", 0);
         }
-        else 
+        else
         {
             campDefenseKey = utils.getIntScriptVar(whoTriggeredMe, "campDefenseKey");
             if (campDefenseKey >= 0)
             {
                 campDefenseKey = campDefenseKey + 1;
             }
-            else 
+            else
             {
                 campDefenseKey = 0;
             }
@@ -115,6 +123,7 @@ public class camp_defense extends script.base_script
         messageTo(self, "failPlayerDefense", webster, FAIL_TIMER, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         if (!hasObjVar(self, "questObject"))
@@ -155,6 +164,7 @@ public class camp_defense extends script.base_script
         messageTo(self, "failPlayerDefense", webster, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int updatePlayerDefense(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "camp_defense.updatePlayerDefense() initialized.");
@@ -229,6 +239,7 @@ public class camp_defense extends script.base_script
         utils.setScriptVar(player, GUARD_OCCUPIED, self);
         return SCRIPT_CONTINUE;
     }
+
     public int failPlayerDefense(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -286,7 +297,7 @@ public class camp_defense extends script.base_script
                 CustomerServiceLog("outbreak_themepark", "camp_defense.failPlayerDefense() Player " + player + " did not have the appropriate quest campDefenseKey on their character. Continuing anyway.");
                 playerCampDefenseKey = campDefenseKey;
             }
-            else 
+            else
             {
                 playerCampDefenseKey = utils.getIntScriptVar(player, "campDefenseKey");
                 if (playerCampDefenseKey < 0)
@@ -325,6 +336,7 @@ public class camp_defense extends script.base_script
         utils.removeScriptVar(player, "givenMoreDefenseTime");
         return SCRIPT_CONTINUE;
     }
+
     public int triggerVolFailsafe(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "camp_defense.triggerVolFailsafe() initializing triggerVolFailsafe to make sure the object has a volume trigger on " + self);
@@ -336,6 +348,7 @@ public class camp_defense extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int findPathNodes(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "questObject"))
@@ -356,13 +369,16 @@ public class camp_defense extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id ourSpawner = obj_id.NULL_ID;
-        for (obj_id obj_id : spawnerList) {
+        for (obj_id obj_id : spawnerList)
+        {
             String spawnerQuestNameMatch = getStringObjVar(obj_id, SPAWNER_OBJVAR);
-            if (spawnerQuestNameMatch == null || spawnerQuestNameMatch.length() <= 0) {
+            if (spawnerQuestNameMatch == null || spawnerQuestNameMatch.length() <= 0)
+            {
                 CustomerServiceLog("outbreak_themepark", "camp_defense.findPathNodes() the controller, " + self + " found a spawner object that did not have a quest string. Spawner: " + obj_id);
                 continue;
             }
-            if (!spawnerQuestNameMatch.equals(questName)) {
+            if (!spawnerQuestNameMatch.equals(questName))
+            {
                 continue;
             }
             ourSpawner = obj_id;
@@ -376,6 +392,7 @@ public class camp_defense extends script.base_script
         utils.setScriptVar(self, "ourSpawner", ourSpawner);
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

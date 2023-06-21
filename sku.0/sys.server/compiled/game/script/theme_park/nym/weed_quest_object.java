@@ -1,13 +1,16 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class weed_quest_object extends script.base_script
 {
-    public weed_quest_object()
-    {
-    }
     public static final String QUEST_NAME = "u16_nym_themepark_weed_pulling_ver2";
     public static final String GENERAL_QUEST_TASK = "fulfillRequisition";
     public static final String TASK_WEED_TYPE_1 = "lowGrowingWeeds";
@@ -35,6 +38,10 @@ public class weed_quest_object extends script.base_script
     public static final string_id SID_ALRDY_COMPLETED_QUEST = new string_id(THEMEPARK, "weed_already_completed_quest");
     public static final int COUNTDOWN_TIMER = 3;
     public static final int CASH_AMOUNT = 25;
+    public weed_quest_object()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -52,6 +59,7 @@ public class weed_quest_object extends script.base_script
         int mnu2 = mi.addRootMenu(menu_info_types.ITEM_USE, SID_MNU_USE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -97,22 +105,22 @@ public class weed_quest_object extends script.base_script
         switch (weedType)
         {
             case 1:
-            zipBar = SID_ZIP_BAR_LOW;
-            break;
+                zipBar = SID_ZIP_BAR_LOW;
+                break;
             case 2:
-            zipBar = SID_ZIP_BAR_TALL;
-            break;
+                zipBar = SID_ZIP_BAR_TALL;
+                break;
             case 3:
-            zipBar = SID_ZIP_BAR_PADDLE;
-            break;
+                zipBar = SID_ZIP_BAR_PADDLE;
+                break;
             case 4:
-            zipBar = SID_ZIP_BAR_YELLOW;
-            break;
+                zipBar = SID_ZIP_BAR_YELLOW;
+                break;
             case 5:
-            zipBar = SID_ZIP_BAR_FLOWER;
-            break;
+                zipBar = SID_ZIP_BAR_FLOWER;
+                break;
             default:
-            break;
+                break;
         }
         int startTime = 0;
         int range = 3;
@@ -124,6 +132,7 @@ public class weed_quest_object extends script.base_script
         CustomerServiceLog("nyms_themepark", "weed_quest_object.OnObjectMenuSelect() Player: " + player + " is destroying Nym Weed: " + self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleObjectSwapTimer(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -194,27 +203,27 @@ public class weed_quest_object extends script.base_script
         switch (weedType)
         {
             case 1:
-            questTask = TASK_WEED_TYPE_1;
-            questSignal = SIGNAL_WEED_TYPE_1;
-            break;
+                questTask = TASK_WEED_TYPE_1;
+                questSignal = SIGNAL_WEED_TYPE_1;
+                break;
             case 2:
-            questTask = TASK_WEED_TYPE_2;
-            questSignal = SIGNAL_WEED_TYPE_2;
-            break;
+                questTask = TASK_WEED_TYPE_2;
+                questSignal = SIGNAL_WEED_TYPE_2;
+                break;
             case 3:
-            questTask = TASK_WEED_TYPE_3;
-            questSignal = SIGNAL_WEED_TYPE_3;
-            break;
+                questTask = TASK_WEED_TYPE_3;
+                questSignal = SIGNAL_WEED_TYPE_3;
+                break;
             case 4:
-            questTask = TASK_WEED_TYPE_4;
-            questSignal = SIGNAL_WEED_TYPE_4;
-            break;
+                questTask = TASK_WEED_TYPE_4;
+                questSignal = SIGNAL_WEED_TYPE_4;
+                break;
             case 5:
-            questTask = TASK_WEED_TYPE_5;
-            questSignal = SIGNAL_WEED_TYPE_5;
-            break;
+                questTask = TASK_WEED_TYPE_5;
+                questSignal = SIGNAL_WEED_TYPE_5;
+                break;
             default:
-            break;
+                break;
         }
         if (questTask == null || questTask.length() <= 0)
         {
@@ -230,7 +239,7 @@ public class weed_quest_object extends script.base_script
         {
             groundquests.sendSignal(player, questSignal);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_DONT_NEED_WEED);
             if (!utils.hasScriptVar(player, "commPlayerWeeds"))
@@ -248,6 +257,7 @@ public class weed_quest_object extends script.base_script
         messageTo(self, "destroySelf", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "mySpawner"))

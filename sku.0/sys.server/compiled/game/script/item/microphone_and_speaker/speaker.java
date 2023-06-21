@@ -1,5 +1,11 @@
 package script.item.microphone_and_speaker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.chat;
 import script.library.debug;
@@ -11,6 +17,7 @@ public class speaker extends script.base_script
     public static final string_id SID_ACTIVATE = new string_id("sui", "speaker_activate");
     public static final string_id SID_ACTIVATE_MSG = new string_id("sui", "speaker_activate_msg");
     public static final string_id SID_DEACTIVATE_MSG = new string_id("sui", "speaker_deactivate_msg");
+
     public speaker()
     {
     }

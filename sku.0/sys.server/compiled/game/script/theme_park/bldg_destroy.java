@@ -1,5 +1,11 @@
 package script.theme_park;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.chat;
 
@@ -8,10 +14,12 @@ public class bldg_destroy extends script.base_script
     public bldg_destroy()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.SELF_DESTRUCT, new string_id("self_destruct", "self_destruct"));
@@ -19,6 +27,7 @@ public class bldg_destroy extends script.base_script
         mi.addSubMenu(mnu, menu_info_types.FIFTEEN_SEC, new string_id("self_destruct", "fifteen"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.THIRTY_SEC)
@@ -55,6 +64,7 @@ public class bldg_destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int blowUp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id viewer = params.getObjId("player");
@@ -76,6 +86,7 @@ public class bldg_destroy extends script.base_script
         messageTo(self, "bldgCheck", destroyer, 1, true);
         return SCRIPT_CONTINUE;
     }
+
     public int firstPop(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id viewer = params.getObjId("player");
@@ -90,12 +101,14 @@ public class bldg_destroy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int bark(obj_id self, dictionary params) throws InterruptedException
     {
         debugSpeakMsg(self, "I'm right here at " + getLocation(self));
         messageTo(self, "bark", null, 10, true);
         return SCRIPT_CONTINUE;
     }
+
     public int bldgCheck(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id viewer = params.getObjId("player");
@@ -104,7 +117,7 @@ public class bldg_destroy extends script.base_script
         {
             sendSystemMessage(viewer, "System detects lifeforms inside building, shutting down self destruct", null);
         }
-        else 
+        else
         {
             destroyObject(self);
         }

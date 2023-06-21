@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,55 +13,63 @@ import script.*;
 
 public class static_quests_record_keeper_dantooine extends script.base_script
 {
+    public static String c_stringFile = "conversation/static_quests_record_keeper_dantooine";
+
     public static_quests_record_keeper_dantooine()
     {
     }
-    public static String c_stringFile = "conversation/static_quests_record_keeper_dantooine";
+
     public boolean static_quests_record_keeper_dantooine_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean static_quests_record_keeper_dantooine_condition_static_quests_on_player(obj_id player, obj_id npc) throws InterruptedException
     {
         String datatable = "datatables/npc/static_quest/static_quest_records_dantooine.iff";
         String[] static_quest = dataTableGetStringColumn(datatable, "static_quest");
-        for (String s : static_quest) {
-            if (hasObjVar(player, "static." + s)) {
+        for (String s : static_quest)
+        {
+            if (hasObjVar(player, "static." + s))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public boolean static_quests_record_keeper_dantooine_condition_already_reset(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(player, "static_quests_reset.dantooine"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "static_quests_reset.dantooine");
     }
+
     public void static_quests_record_keeper_dantooine_action_reset_gating(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "static_quests_reset.dantooine", true);
         String datatable = "datatables/npc/static_quest/static_quest_records_dantooine.iff";
         String[] static_quest = dataTableGetStringColumn(datatable, "static_quest");
-        for (String s : static_quest) {
-            if (hasObjVar(player, "static." + s)) {
+        for (String s : static_quest)
+        {
+            if (hasObjVar(player, "static." + s))
+            {
                 removeObjVar(player, "static." + s);
             }
         }
         int gating = getIntObjVar(player, "static_quests_reset.dantooine");
         CustomerServiceLog("StaticQuestDantooine", "RESET OPTION: Static quests on Dantooine -- " + getName(player) + " (" + player + ") has opted to RESET his/her Dantooine static quest obj vars [" + gating + "] and START OVER");
     }
+
     public void static_quests_record_keeper_dantooine_action_set_redo(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "static_quests_reset.dantooine", true);
         CustomerServiceLog("StaticQuestDantooine", "RESET OPTION: Static quests on Dantooine -- " + getName(player) + " (" + player + ") has opted to NOT RESET his/her Dantooine static quest obj vars and CONTINUE");
     }
+
     public void static_quests_record_keeper_dantooine_action_face_to(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public int static_quests_record_keeper_dantooine_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f51b07ff"))
@@ -82,7 +96,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_edb238bc");
@@ -95,7 +109,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -115,6 +129,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int static_quests_record_keeper_dantooine_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_edb238bc"))
@@ -141,7 +156,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_12936cce");
@@ -154,7 +169,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -174,6 +189,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int static_quests_record_keeper_dantooine_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_12936cce"))
@@ -200,7 +216,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9ef848f9");
@@ -213,7 +229,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -233,6 +249,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int static_quests_record_keeper_dantooine_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9ef848f9"))
@@ -280,7 +297,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b1f6ba02");
@@ -305,7 +322,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -325,6 +342,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int static_quests_record_keeper_dantooine_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b1f6ba02"))
@@ -365,7 +383,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14693cf1");
@@ -386,7 +404,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -432,7 +450,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a76f22bf");
@@ -453,7 +471,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -485,7 +503,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d0902f5e");
@@ -498,7 +516,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -530,7 +548,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5db2d1c9");
@@ -543,7 +561,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -563,6 +581,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int static_quests_record_keeper_dantooine_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_14693cf1"))
@@ -603,7 +622,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a76f22bf");
@@ -624,7 +643,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -656,7 +675,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d0902f5e");
@@ -669,7 +688,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -701,7 +720,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5db2d1c9");
@@ -714,7 +733,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -734,6 +753,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int static_quests_record_keeper_dantooine_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a76f22bf"))
@@ -774,7 +794,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14693cf1");
@@ -795,7 +815,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -827,7 +847,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d0902f5e");
@@ -840,7 +860,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -872,7 +892,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5db2d1c9");
@@ -885,7 +905,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -905,6 +925,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int static_quests_record_keeper_dantooine_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d0902f5e"))
@@ -963,7 +984,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b1f6ba02");
@@ -988,7 +1009,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -998,6 +1019,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int static_quests_record_keeper_dantooine_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b1f6ba02"))
@@ -1038,7 +1060,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14693cf1");
@@ -1059,7 +1081,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1105,7 +1127,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a76f22bf");
@@ -1126,7 +1148,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1158,7 +1180,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d0902f5e");
@@ -1171,7 +1193,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1203,7 +1225,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5db2d1c9");
@@ -1216,7 +1238,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1236,6 +1258,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int static_quests_record_keeper_dantooine_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5db2d1c9"))
@@ -1294,7 +1317,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b1f6ba02");
@@ -1319,7 +1342,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1329,6 +1352,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int static_quests_record_keeper_dantooine_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b1f6ba02"))
@@ -1369,7 +1393,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14693cf1");
@@ -1390,7 +1414,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1436,7 +1460,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a76f22bf");
@@ -1457,7 +1481,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1489,7 +1513,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d0902f5e");
@@ -1502,7 +1526,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1534,7 +1558,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5db2d1c9");
@@ -1547,7 +1571,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1567,6 +1591,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1577,12 +1602,14 @@ public class static_quests_record_keeper_dantooine extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1591,18 +1618,21 @@ public class static_quests_record_keeper_dantooine extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.static_quests_record_keeper_dantooine");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1640,7 +1670,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_f51b07ff");
@@ -1652,7 +1682,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
                 utils.setScriptVar(player, "conversation.static_quests_record_keeper_dantooine.branchId", 2);
                 npcStartConversation(player, npc, "static_quests_record_keeper_dantooine", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1668,6 +1698,7 @@ public class static_quests_record_keeper_dantooine extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("static_quests_record_keeper_dantooine"))

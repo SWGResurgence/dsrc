@@ -1,16 +1,23 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class vehicle_vendor extends script.base_script
 {
-    public vehicle_vendor()
-    {
-    }
     public static final String VEHICLE_VENDOR_CONVO = "beta/vehicle_vendor";
     public static final int EXPIRATION_TIME = 60 * 60 * 24 * 16;
     public static final int VEHICLE_EXPIRATION_TIME = 60 * 60 * 24 * 16;
+    public vehicle_vendor()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
@@ -23,6 +30,7 @@ public class vehicle_vendor extends script.base_script
         messageTo(self, "expireAndCleanup", null, EXPIRATION_TIME, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         int expirationTime = getIntObjVar(self, "vehicle_vendor.create");
@@ -32,11 +40,13 @@ public class vehicle_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int expireAndCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -44,17 +54,19 @@ public class vehicle_vendor extends script.base_script
         mdata.setServerNotify(false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         chat.setGoodMood(self);
         faceToBehavior(self, speaker);
         string_id greeting = new string_id(VEHICLE_VENDOR_CONVO, "start");
-        string_id response[] = new string_id[2];
+        string_id[] response = new string_id[2];
         response[0] = new string_id(VEHICLE_VENDOR_CONVO, "yes");
         response[1] = new string_id(VEHICLE_VENDOR_CONVO, "no");
         npcStartConversation(speaker, self, VEHICLE_VENDOR_CONVO, greeting, response);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if (!convo.equals(VEHICLE_VENDOR_CONVO))
@@ -64,7 +76,7 @@ public class vehicle_vendor extends script.base_script
         npcRemoveConversationResponse(player, response);
         if ((response.getAsciiId()).equals("yes"))
         {
-            if (getBooleanObjVar(player, "hasTestVehicle") == true)
+            if (getBooleanObjVar(player, "hasTestVehicle"))
             {
                 string_id message = new string_id(VEHICLE_VENDOR_CONVO, "toomany");
                 npcSpeak(player, message);
@@ -90,7 +102,8 @@ public class vehicle_vendor extends script.base_script
         }
         String mountType = response.getAsciiId();
         String diction = "";
-        switch (mountType) {
+        switch (mountType)
+        {
             case "x34":
                 mountType = "landspeeder_x34";
                 break;
@@ -113,6 +126,7 @@ public class vehicle_vendor extends script.base_script
         npcEndConversation(player);
         return SCRIPT_CONTINUE;
     }
+
     public obj_id createCraftedCreatureDevice(obj_id player, String vehicle) throws InterruptedException
     {
         debugServerConsoleMsg(player, "+++ VEHICLE_DEED . createCraftedCreatureDevice +++ Entered PCD/Pet creation function.");
@@ -143,7 +157,7 @@ public class vehicle_vendor extends script.base_script
             broadcast(player, "Failed to create pet control device for vehicle");
             return null;
         }
-        else 
+        else
         {
             setObjVar(petControlDevice, "pet.crafted", true);
             setObjVar(petControlDevice, "vehicle.template", vehicle);
@@ -171,7 +185,7 @@ public class vehicle_vendor extends script.base_script
             debugServerConsoleMsg(null, "+++ VEHICLE . onAttach +++ makePetMountable(pet) returned FALSE.");
             return pet;
         }
-        else 
+        else
         {
             setObjVar(petControlDevice, "ai.pet.trainedMount", 1);
         }

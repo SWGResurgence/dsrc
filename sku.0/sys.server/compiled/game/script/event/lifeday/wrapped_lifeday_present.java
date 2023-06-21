@@ -1,5 +1,11 @@
 package script.event.lifeday;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.static_item;
 import script.library.utils;
 import script.*;
@@ -9,6 +15,7 @@ public class wrapped_lifeday_present extends script.base_script
     public wrapped_lifeday_present()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -19,6 +26,7 @@ public class wrapped_lifeday_present extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id containingPlayer = utils.getContainingPlayer(self);
@@ -38,6 +46,7 @@ public class wrapped_lifeday_present extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void unwrapMe(obj_id self, obj_id player) throws InterruptedException
     {
         int which_one = rand(1, 9);
@@ -45,32 +54,32 @@ public class wrapped_lifeday_present extends script.base_script
         switch (which_one)
         {
             case 1:
-            gift = "item_lifeday_bunting_01_01";
-            break;
+                gift = "item_lifeday_bunting_01_01";
+                break;
             case 2:
-            gift = "item_lifeday_wreath_01_01";
-            break;
+                gift = "item_lifeday_wreath_01_01";
+                break;
             case 3:
-            gift = "item_lifeday_incense_burner_01_01";
-            break;
+                gift = "item_lifeday_incense_burner_01_01";
+                break;
             case 4:
-            gift = "item_lifeday_mini_tree_01_01";
-            break;
+                gift = "item_lifeday_mini_tree_01_01";
+                break;
             case 5:
-            gift = "item_lifeday_painting_01_01_01";
-            break;
+                gift = "item_lifeday_painting_01_01_01";
+                break;
             case 6:
-            gift = "item_lifeday_painting_02_01_01";
-            break;
+                gift = "item_lifeday_painting_02_01_01";
+                break;
             case 7:
-            gift = "item_lifeday_painting_03_01_01";
-            break;
+                gift = "item_lifeday_painting_03_01_01";
+                break;
             case 8:
-            gift = "item_lifeday_painting_04_01_01";
-            break;
+                gift = "item_lifeday_painting_04_01_01";
+                break;
             case 9:
-            gift = "item_lifeday_painting_05_01_01";
-            break;
+                gift = "item_lifeday_painting_05_01_01";
+                break;
         }
         obj_id item = static_item.createNewItemFunction(gift, player);
         if (isIdValid(item))

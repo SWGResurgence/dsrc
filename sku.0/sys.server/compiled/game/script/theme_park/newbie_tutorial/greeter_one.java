@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -13,6 +19,7 @@ public class greeter_one extends script.theme_park.newbie_tutorial.tutorial_base
     public greeter_one()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setHomeLocation(self, getLocation(self));
@@ -20,6 +27,7 @@ public class greeter_one extends script.theme_park.newbie_tutorial.tutorial_base
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleNewArrival(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "newbie.greeting"))
@@ -43,6 +51,7 @@ public class greeter_one extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleOne", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleOne(obj_id self, dictionary params) throws InterruptedException
     {
         faceToBehavior(self, getPlayer(self));
@@ -50,6 +59,7 @@ public class greeter_one extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleTwo", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTwo(obj_id self, dictionary params) throws InterruptedException
     {
         faceToBehavior(self, getPlayer(self));
@@ -57,6 +67,7 @@ public class greeter_one extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handleThree", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleThree(obj_id self, dictionary params) throws InterruptedException
     {
         faceToBehavior(self, getPlayer(self));
@@ -64,6 +75,7 @@ public class greeter_one extends script.theme_park.newbie_tutorial.tutorial_base
         messageTo(self, "handlePathToNextRoom", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePathToNextRoom(obj_id self, dictionary params) throws InterruptedException
     {
         location destLoc = new location(getLocation(self));
@@ -78,6 +90,7 @@ public class greeter_one extends script.theme_park.newbie_tutorial.tutorial_base
         setObjVar(self, "newbie.movingToRoom2", true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "newbie.movingToRoom2"))
@@ -89,6 +102,7 @@ public class greeter_one extends script.theme_park.newbie_tutorial.tutorial_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePathHome(obj_id self, dictionary params) throws InterruptedException
     {
         location destLoc = getLocation(self);

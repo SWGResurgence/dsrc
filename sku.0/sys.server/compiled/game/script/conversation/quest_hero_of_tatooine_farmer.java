@@ -1,93 +1,86 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class quest_hero_of_tatooine_farmer extends script.base_script
 {
+    public static String c_stringFile = "conversation/quest_hero_of_tatooine_farmer";
+
     public quest_hero_of_tatooine_farmer()
     {
     }
-    public static String c_stringFile = "conversation/quest_hero_of_tatooine_farmer";
+
     public boolean quest_hero_of_tatooine_farmer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean quest_hero_of_tatooine_farmer_condition_has_credits(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (money.hasFunds(player, money.MT_CASH, 10000))
-        {
-            return true;
-        }
-        return false;
+        return money.hasFunds(player, money.MT_CASH, 10000);
     }
+
     public boolean quest_hero_of_tatooine_farmer_condition_already_helped(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (utils.hasScriptVar(npc, "already_been_helped"))
-        {
-            return true;
-        }
-        return false;
+        return utils.hasScriptVar(npc, "already_been_helped");
     }
+
     public boolean quest_hero_of_tatooine_farmer_condition_quest_complete(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.hero_of_tatooine.complete"))
         {
             return true;
         }
-        else if (hasObjVar(player, "quest.hero_of_tatooine.altruism.complete"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        else return hasObjVar(player, "quest.hero_of_tatooine.altruism.complete");
     }
+
     public boolean quest_hero_of_tatooine_farmer_condition_lost_waypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         location loc;
         obj_id[] waypoints = getWaypointsInDatapad(player);
-        for (obj_id waypoint : waypoints) {
+        for (obj_id waypoint : waypoints)
+        {
             loc = getWaypointLocation(waypoint);
-            if (loc.x == 6522.0f && loc.z == -1350.0f && loc.area.equals("tatooine")) {
+            if (loc.x == 6522.0f && loc.z == -1350.0f && loc.area.equals("tatooine"))
+            {
                 return false;
             }
         }
         return true;
     }
+
     public boolean quest_hero_of_tatooine_farmer_condition_on_quest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(player, "quest.hero_of_tatooine.altruism"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "quest.hero_of_tatooine.altruism");
     }
+
     public boolean quest_hero_of_tatooine_farmer_condition_already_helped_player(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(npc, "already_been_helped"))
         {
             obj_id helper = utils.getObjIdScriptVar(npc, "already_been_helped");
-            if (helper == player)
-            {
-                return true;
-            }
+            return helper == player;
         }
         return false;
     }
+
     public boolean quest_hero_of_tatooine_farmer_condition_quest_stuck(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.hero_of_tatooine.altruism") || !badge.hasBadge(player, "poi_factoryliberation"))
         {
             int status = getIntObjVar(player, "quest.hero_of_tatooine.altruism");
-            if (status > 1)
-            {
-                return true;
-            }
+            return status > 1;
         }
         return false;
     }
+
     public void quest_hero_of_tatooine_farmer_action_paid_ransom(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!money.hasFunds(player, money.MT_CASH, 10000))
@@ -106,6 +99,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
             money.covertDeposit(player, bank_delta, "noHandler", null);
         }
     }
+
     public void quest_hero_of_tatooine_farmer_action_will_help(obj_id player, obj_id npc) throws InterruptedException
     {
         location cave = new location(6522, 0, -1350);
@@ -117,6 +111,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         setObjVar(player, "quest.hero_of_tatooine.altruism", 1);
         setObjVar(player, "quest.hero_of_tatooine.altruism_waypoint", waypoint);
     }
+
     public void quest_hero_of_tatooine_farmer_action_been_helped(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(npc, "already_been_helped", player);
@@ -125,6 +120,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         ai_lib.pathAwayFrom(npc, player);
         messageTo(npc, "handleDestroy", null, 20.0f, false);
     }
+
     public void quest_hero_of_tatooine_farmer_action_give_waypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         location cave = new location(6522, 0, -1350);
@@ -135,6 +131,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         setWaypointActive(waypoint, true);
         setObjVar(player, "quest.hero_of_tatooine.altruism_waypoint", waypoint);
     }
+
     public void quest_hero_of_tatooine_farmer_action_reset_quest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.hero_of_tatooine.altruism_waypoint"))
@@ -156,8 +153,8 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         setWaypointActive(waypoint, true);
         setObjVar(player, "quest.hero_of_tatooine.altruism", 1);
         setObjVar(player, "quest.hero_of_tatooine.altruism_waypoint", waypoint);
-        return;
     }
+
     public int quest_hero_of_tatooine_farmer_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53686a92"))
@@ -183,6 +180,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_farmer_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9e0bb613"))
@@ -223,7 +221,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28fe80fc");
@@ -244,7 +242,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -276,7 +274,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ba7f35a5");
@@ -289,7 +287,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -309,6 +307,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_farmer_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28fe80fc"))
@@ -349,7 +348,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_53fb3746");
@@ -370,7 +369,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -409,7 +408,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -426,7 +425,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -465,7 +464,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -482,7 +481,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -502,6 +501,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_farmer_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53fb3746"))
@@ -535,7 +535,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c6144200");
@@ -552,7 +552,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -591,7 +591,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -608,7 +608,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -647,7 +647,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -664,7 +664,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -684,6 +684,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_farmer_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c6144200"))
@@ -717,7 +718,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28");
@@ -734,7 +735,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -773,7 +774,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -790,7 +791,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -810,6 +811,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_farmer_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28"))
@@ -843,7 +845,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_12d39d30");
@@ -860,7 +862,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -899,7 +901,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9930ca3d");
@@ -916,7 +918,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -936,6 +938,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_farmer_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_12d39d30"))
@@ -969,7 +972,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7d18c26");
@@ -986,7 +989,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1025,7 +1028,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9930ca3d");
@@ -1042,7 +1045,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1062,6 +1065,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_farmer_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9930ca3d"))
@@ -1095,7 +1099,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c1d778b6");
@@ -1112,7 +1116,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1151,7 +1155,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_17089ea4");
@@ -1168,7 +1172,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1188,6 +1192,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_farmer_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c1d778b6"))
@@ -1221,7 +1226,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5cdaed70");
@@ -1238,7 +1243,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1277,7 +1282,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_17089ea4");
@@ -1294,7 +1299,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1314,6 +1319,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_farmer_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5cdaed70"))
@@ -1352,7 +1358,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2f051629");
@@ -1365,7 +1371,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1404,7 +1410,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_17089ea4");
@@ -1421,7 +1427,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1431,6 +1437,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_farmer_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2f051629"))
@@ -1464,7 +1471,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_17089ea4");
@@ -1481,7 +1488,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1501,6 +1508,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_farmer_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_17089ea4"))
@@ -1546,7 +1554,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c1d778b6");
@@ -1563,7 +1571,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1583,6 +1591,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_farmer_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_67"))
@@ -1616,7 +1625,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7d18c26");
@@ -1633,7 +1642,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1672,7 +1681,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9930ca3d");
@@ -1689,7 +1698,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1709,6 +1718,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_farmer_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f7d18c26"))
@@ -1742,7 +1752,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_12d39d30");
@@ -1759,7 +1769,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1798,7 +1808,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9930ca3d");
@@ -1815,7 +1825,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1835,6 +1845,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_farmer_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ba7f35a5"))
@@ -1875,7 +1886,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_28fe80fc");
@@ -1896,7 +1907,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1916,6 +1927,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1929,12 +1941,14 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         attachScript(self, "quest.hero_of_tatooine.altruism_farmer");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1943,12 +1957,14 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.quest_hero_of_tatooine_farmer");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasScript(self, "systems.spawning.spawned_tracker"))
@@ -1963,12 +1979,14 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2011,7 +2029,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_53686a92");
@@ -2023,7 +2041,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId", 3);
                 npcStartConversation(player, npc, "quest_hero_of_tatooine_farmer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2070,7 +2088,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_9e0bb613");
@@ -2086,7 +2104,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_hero_of_tatooine_farmer.branchId", 8);
                 npcStartConversation(player, npc, "quest_hero_of_tatooine_farmer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2095,6 +2113,7 @@ public class quest_hero_of_tatooine_farmer extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("quest_hero_of_tatooine_farmer"))

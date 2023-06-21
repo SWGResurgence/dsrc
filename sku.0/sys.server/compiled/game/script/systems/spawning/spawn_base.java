@@ -1,5 +1,11 @@
 package script.systems.spawning;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -32,6 +38,7 @@ public class spawn_base extends script.base_script
             {
                     "tutorial"
             };
+
     public spawn_base()
     {
     }

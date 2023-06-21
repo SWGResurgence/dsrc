@@ -1,5 +1,11 @@
 package script.event.emp_day;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.location;
 import script.obj_id;
@@ -8,16 +14,18 @@ import script.string_id;
 
 public class rescue_faction_npc_trigger_volume extends script.base_script
 {
+    public static final boolean LOGGING_ON = false;
+    public static final String MEATLUMP_LOG = "empire_day_trigger";
     public rescue_faction_npc_trigger_volume()
     {
     }
-    public static final boolean LOGGING_ON = false;
-    public static final String MEATLUMP_LOG = "empire_day_trigger";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume(holiday.VOL_TRIGGER_NAME_PREFIX + self, holiday.VOL_TRIGGER_RADIUS, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         blog("OnTriggerVolumeEntered INIT: " + whoTriggeredMe);
@@ -123,11 +131,13 @@ public class rescue_faction_npc_trigger_volume extends script.base_script
         chat.publicChat(mob, whoTriggeredMe, null, null, prose.getPackage(new string_id("event/empire_day", "rescue_me_breacher"), whoTriggeredMe));
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         blog("Exited trigger volume: " + whoTriggeredMe);
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)

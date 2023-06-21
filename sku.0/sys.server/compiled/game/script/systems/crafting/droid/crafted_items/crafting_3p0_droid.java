@@ -1,5 +1,11 @@
 package script.systems.crafting.droid.crafted_items;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.draft_schematic;
 import script.library.craftinglib;
 import script.obj_id;
@@ -153,6 +159,7 @@ public class crafting_3p0_droid extends script.systems.crafting.droid.crafting_b
                                     new resource_weight.weight(craftinglib.RESOURCE_TOUGHNESS, 1)
                             })
             };
+
     public crafting_3p0_droid()
     {
     }

@@ -1,5 +1,11 @@
 package script.systems.battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.battlefield;
 import script.library.player_structure;
 import script.library.sui;
@@ -15,6 +21,7 @@ public class barracks extends script.base_script
 {
     public static final string_id SID_BUILD_REINFORCEMENT = new string_id("battlefield", "build_reinforcement");
     public static final string_id SID_BUILD_REINFORCEMENT_STATUS = new string_id("battlefield", "build_reinforcement_status");
+
     public barracks()
     {
     }

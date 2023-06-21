@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.decrepit_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.attrib;
 import script.library.buff;
@@ -10,11 +16,12 @@ import script.obj_id;
 
 public class observation_droid extends script.base_script
 {
+    public static final boolean LOGGING = true;
+    public static final String TRIGGER_DETONATE = "trigger_volume_duality_detonate";
     public observation_droid()
     {
     }
-    public static final boolean LOGGING = true;
-    public static final String TRIGGER_DETONATE = "trigger_volume_duality_detonate";
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "cleanup"))
@@ -39,16 +46,19 @@ public class observation_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, "destroySelf", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
@@ -57,6 +67,7 @@ public class observation_droid extends script.base_script
         setAttributeInterested(self, attrib.ALL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breecher) throws InterruptedException
     {
         doLogging("xx", "otve");
@@ -73,17 +84,18 @@ public class observation_droid extends script.base_script
                 buff.removeBuff(breecher, "beshDuality");
                 sendSystemMessage(breecher, trial.WORKING_OBSERVER_DETONATE);
             }
-            else 
+            else
             {
                 doLogging("xx", "Breecher did not have a buff to detonate");
             }
         }
-        else 
+        else
         {
             doLogging("xx", "was not trigger volume");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int locatePatrolPoints(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] objects = utils.getSharedContainerObjects(self);
@@ -97,9 +109,12 @@ public class observation_droid extends script.base_script
         location[] patrolPoints = new location[parse.length];
         for (int i = 0; i < parse.length; i++)
         {
-            for (obj_id object : objects) {
-                if (hasObjVar(object, "patrol_wp")) {
-                    if (parse[i].equals(getStringObjVar(object, "patrol_wp"))) {
+            for (obj_id object : objects)
+            {
+                if (hasObjVar(object, "patrol_wp"))
+                {
+                    if (parse[i].equals(getStringObjVar(object, "patrol_wp")))
+                    {
                         patrolPoints[i] = getLocation(object);
                     }
                 }
@@ -114,6 +129,7 @@ public class observation_droid extends script.base_script
         messageTo(self, "pathToNextPoint", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int pathToNextPoint(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "patrolPoints"))
@@ -124,11 +140,13 @@ public class observation_droid extends script.base_script
         patrol(self, patrolPoints);
         return SCRIPT_CONTINUE;
     }
+
     public void handlePatrolTypeReset(obj_id self, location[] patrolPoints) throws InterruptedException
     {
         utils.setScriptVar(self, "pathIndex", 0);
         messageTo(self, "pathToNextPoint", null, 1, false);
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

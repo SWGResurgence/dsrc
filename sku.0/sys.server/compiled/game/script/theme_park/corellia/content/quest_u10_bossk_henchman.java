@@ -1,5 +1,11 @@
 package script.theme_park.corellia.content;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -11,12 +17,14 @@ public class quest_u10_bossk_henchman extends script.base_script
     public quest_u10_bossk_henchman()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         chat.setChatMood(self, chat.MOOD_PETULANT);
         chat.setChatType(self, chat.CHAT_COMPLAIN);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         float damageThreshold = 0.3f;
@@ -37,6 +45,7 @@ public class quest_u10_bossk_henchman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         setAttrib(self, HEALTH, getUnmodifiedMaxAttrib(self, HEALTH));
@@ -52,6 +61,7 @@ public class quest_u10_bossk_henchman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int makeNpcStopCombat(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "ai.combat.isInCombat");
@@ -61,10 +71,12 @@ public class quest_u10_bossk_henchman extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         buff.removeAllBuffs(self);
         obj_id[] players = getAllPlayers(getLocation(self), 25.0f);
-        if (players != null && players.length > 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
-                if (isIdValid(player) && groundquests.isTaskActive(player, "quest_u10_03", "quest_u10_03_04")) {
+            for (obj_id player : players)
+            {
+                if (isIdValid(player) && groundquests.isTaskActive(player, "quest_u10_03", "quest_u10_03_04"))
+                {
                     groundquests.sendSignal(player, "quest_u10_03_04");
                 }
             }
@@ -75,6 +87,7 @@ public class quest_u10_bossk_henchman extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int makeNpcDisappear(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
@@ -82,14 +95,16 @@ public class quest_u10_bossk_henchman extends script.base_script
         messageTo(self, "handleDestroySelf", null, 0.25f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         stopCombat(self);
         clearHateList(self);
         obj_id[] players = getPlayerCreaturesInRange(getLocation(self), 20.0f);
-        if (players != null && players.length > 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 npcEndConversation(player);
             }
         }

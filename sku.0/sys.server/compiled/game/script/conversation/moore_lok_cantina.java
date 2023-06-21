@@ -1,38 +1,51 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class moore_lok_cantina extends script.base_script
 {
+    public static String c_stringFile = "conversation/moore_lok_cantina";
+
     public moore_lok_cantina()
     {
     }
-    public static String c_stringFile = "conversation/moore_lok_cantina";
+
     public boolean moore_lok_cantina_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean moore_lok_cantina_condition_hasMooreTask(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_interview_moore", "findSgtMoore");
     }
+
     public boolean moore_lok_cantina_condition_has2ndInterviewTask(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_second_interview_moore", "findSgtMoore2nd");
     }
+
     public boolean moore_lok_cantina_condition_hasCompletedMoore(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.isTaskActive(player, "u16_nym_themepark_interview_moore", "tellJinkinsMoore") || groundquests.hasCompletedQuest(player, "u16_nym_themepark_interview_moore"));
     }
+
     public boolean moore_lok_cantina_condition_hasCompleted2ndMoore(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.isTaskActive(player, "u16_nym_themepark_second_interview_moore", "tellKoleMoore") || groundquests.hasCompletedQuest(player, "u16_nym_themepark_second_interview_moore"));
     }
+
     public void moore_lok_cantina_action_pay50(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -44,11 +57,13 @@ public class moore_lok_cantina extends script.base_script
             utils.setScriptVar(player, "pay50", true);
         }
     }
+
     public void moore_lok_cantina_action_finishMooreInterview(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.sendSignal(player, "hasSpokenSgtMoore");
     }
+
     public void moore_lok_cantina_action_pay100(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -59,6 +74,7 @@ public class moore_lok_cantina extends script.base_script
             utils.setScriptVar(player, "pay100", true);
         }
     }
+
     public void moore_lok_cantina_action_pay150(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -70,6 +86,7 @@ public class moore_lok_cantina extends script.base_script
             utils.setScriptVar(player, "payLast", true);
         }
     }
+
     public void moore_lok_cantina_action_pay200(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -81,11 +98,13 @@ public class moore_lok_cantina extends script.base_script
             utils.setScriptVar(player, "payLast", true);
         }
     }
+
     public void moore_lok_cantina_action_finish2ndMooreInterview(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.sendSignal(player, "hasSpokenSgtMoore2nd");
     }
+
     public int moore_lok_cantina_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32"))
@@ -119,7 +138,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -136,7 +155,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -146,6 +165,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34"))
@@ -166,7 +186,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_49");
@@ -175,7 +195,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -200,7 +220,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -209,7 +229,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -248,7 +268,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -265,7 +285,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -275,6 +295,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_49"))
@@ -294,7 +315,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_51");
@@ -303,7 +324,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -313,6 +334,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -333,7 +355,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_49");
@@ -342,7 +364,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -352,6 +374,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_49"))
@@ -371,7 +394,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_51");
@@ -380,7 +403,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -390,6 +413,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_51"))
@@ -409,7 +433,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_63");
@@ -418,7 +442,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -428,6 +452,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63"))
@@ -447,7 +472,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_65");
@@ -456,7 +481,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -466,6 +491,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_65"))
@@ -485,7 +511,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -494,7 +520,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -504,6 +530,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_67"))
@@ -523,7 +550,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -532,7 +559,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -542,6 +569,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_100"))
@@ -561,7 +589,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -570,7 +598,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -580,6 +608,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_103"))
@@ -595,6 +624,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -614,7 +644,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -623,7 +653,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -648,7 +678,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -657,7 +687,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -682,7 +712,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -691,7 +721,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -701,6 +731,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -720,7 +751,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -729,7 +760,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -739,6 +770,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_56"))
@@ -758,7 +790,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -767,7 +799,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -777,6 +809,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
@@ -803,7 +836,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73");
@@ -816,7 +849,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -826,6 +859,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_73"))
@@ -853,7 +887,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -866,7 +900,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -898,7 +932,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73");
@@ -911,7 +945,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -921,6 +955,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -947,7 +982,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82");
@@ -960,7 +995,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -992,7 +1027,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -1005,7 +1040,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1015,6 +1050,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_82"))
@@ -1041,7 +1077,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -1054,7 +1090,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1079,7 +1115,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_117");
@@ -1088,7 +1124,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1098,6 +1134,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_117"))
@@ -1132,7 +1169,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_119");
@@ -1149,7 +1186,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1159,6 +1196,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_109"))
@@ -1185,7 +1223,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82");
@@ -1198,7 +1236,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1223,7 +1261,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_114");
@@ -1232,7 +1270,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1242,6 +1280,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_114"))
@@ -1276,7 +1315,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_119");
@@ -1293,7 +1332,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1303,6 +1342,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_119"))
@@ -1333,7 +1373,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_125");
@@ -1342,7 +1382,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1381,7 +1421,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_119");
@@ -1398,7 +1438,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1408,6 +1448,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_125"))
@@ -1423,6 +1464,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_119"))
@@ -1453,7 +1495,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_125");
@@ -1462,7 +1504,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1501,7 +1543,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_119");
@@ -1518,7 +1560,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1528,6 +1570,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moore_lok_cantina_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_73"))
@@ -1555,7 +1598,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -1568,7 +1611,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1600,7 +1643,7 @@ public class moore_lok_cantina extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73");
@@ -1613,7 +1656,7 @@ public class moore_lok_cantina extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.moore_lok_cantina.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1623,6 +1666,7 @@ public class moore_lok_cantina extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -1632,11 +1676,13 @@ public class moore_lok_cantina extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1645,18 +1691,21 @@ public class moore_lok_cantina extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.moore_lok_cantina");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1685,7 +1734,7 @@ public class moore_lok_cantina extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_32");
@@ -1693,7 +1742,7 @@ public class moore_lok_cantina extends script.base_script
                 utils.setScriptVar(player, "conversation.moore_lok_cantina.branchId", 2);
                 npcStartConversation(player, npc, "moore_lok_cantina", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1720,7 +1769,7 @@ public class moore_lok_cantina extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_60");
@@ -1728,7 +1777,7 @@ public class moore_lok_cantina extends script.base_script
                 utils.setScriptVar(player, "conversation.moore_lok_cantina.branchId", 18);
                 npcStartConversation(player, npc, "moore_lok_cantina", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1743,6 +1792,7 @@ public class moore_lok_cantina extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("moore_lok_cantina"))

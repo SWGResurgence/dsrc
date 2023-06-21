@@ -1,14 +1,22 @@
 package script.waypoint;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.utils;
 
 public class base_waypoint extends script.base_script
 {
+    public static final string_id MNU_SET_COLOR = new string_id("sui", "set_color");
+
     public base_waypoint()
     {
     }
-    public static final string_id MNU_SET_COLOR = new string_id("sui", "set_color");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnuSetColor = mi.addRootMenu(menu_info_types.SERVER_MENU1, MNU_SET_COLOR);
@@ -18,6 +26,7 @@ public class base_waypoint extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         int max = menu_info_types.SERVER_MENU1 + utils.WAYPOINT_COLORS.length + 1;
@@ -28,16 +37,19 @@ public class base_waypoint extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         clearClientPath(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         clearClientPath(self);
         return SCRIPT_CONTINUE;
     }
+
     public void clearClientPath(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "hasClientPath"))
@@ -49,6 +61,7 @@ public class base_waypoint extends script.base_script
             }
         }
     }
+
     public int OnSetWaypointActive(obj_id self, dictionary params) throws InterruptedException
     {
         boolean isActive = params.getBoolean("isActive");
@@ -59,6 +72,7 @@ public class base_waypoint extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSetWaypointRegion(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id w = params.getObjId("waypoint");
@@ -71,6 +85,7 @@ public class base_waypoint extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSetWaypoinVisible(obj_id self, dictionary params) throws InterruptedException
     {
         boolean isVisible = params.getBoolean("isVisible");

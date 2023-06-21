@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.space_quest;
@@ -8,60 +14,52 @@ import script.*;
 
 public class ep3_trandoshan_fezrik_bendledon extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_trandoshan_fezrik_bendledon";
+
     public ep3_trandoshan_fezrik_bendledon()
     {
     }
-    public static String c_stringFile = "conversation/ep3_trandoshan_fezrik_bendledon";
+
     public boolean ep3_trandoshan_fezrik_bendledon_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_trandoshan_fezrik_bendledon_condition_hasFailedMission(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuestRecursive(player, "delivery_no_pickup", "ep3_trando_fezrik_01") || space_quest.hasAbortedQuestRecursive(player, "delivery_no_pickup", "ep3_trando_fezrik_01"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuestRecursive(player, "delivery_no_pickup", "ep3_trando_fezrik_01") || space_quest.hasAbortedQuestRecursive(player, "delivery_no_pickup", "ep3_trando_fezrik_01");
     }
+
     public boolean ep3_trandoshan_fezrik_bendledon_condition_hasWonMission(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasWonQuestRecursive(player, "delivery_no_pickup", "ep3_trando_fezrik_01"));
     }
+
     public boolean ep3_trandoshan_fezrik_bendledon_condition_hasRecievedReward(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasReceivedReward(player, "delivery_no_pickup", "ep3_trando_fezrik_01"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasReceivedReward(player, "delivery_no_pickup", "ep3_trando_fezrik_01");
     }
+
     public boolean ep3_trandoshan_fezrik_bendledon_condition_isOnMission(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player));
     }
+
     public boolean ep3_trandoshan_fezrik_bendledon_condition_canTakeSpaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasSkill(player, "pilot_rebel_navy_novice") || (hasSkill(player, "pilot_imperial_navy_novice") || (hasSkill(player, "pilot_neutral_novice"))))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasSkill(player, "pilot_rebel_navy_novice") || (hasSkill(player, "pilot_imperial_navy_novice") || (hasSkill(player, "pilot_neutral_novice")));
     }
+
     public void ep3_trandoshan_fezrik_bendledon_action_grantMission(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "delivery_no_pickup", "ep3_trando_fezrik_01");
     }
+
     public void ep3_trandoshan_fezrik_bendledon_action_grantReward(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "delivery_no_pickup", "ep3_trando_fezrik_01", 10000);
     }
+
     public int ep3_trandoshan_fezrik_bendledon_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_843"))
@@ -91,6 +89,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_fezrik_bendledon_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_855"))
@@ -111,7 +110,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_859");
@@ -120,7 +119,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_fezrik_bendledon.branchId");
                     chat.chat(npc, player, message);
@@ -143,6 +142,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_fezrik_bendledon_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_859"))
@@ -163,7 +163,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_863");
@@ -172,7 +172,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_fezrik_bendledon.branchId");
                     chat.chat(npc, player, message);
@@ -183,6 +183,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_fezrik_bendledon_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_863"))
@@ -203,7 +204,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_867");
@@ -212,7 +213,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_fezrik_bendledon.branchId");
                     chat.chat(npc, player, message);
@@ -223,6 +224,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_fezrik_bendledon_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_867"))
@@ -250,7 +252,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_871");
@@ -263,7 +265,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_fezrik_bendledon.branchId");
                     chat.chat(npc, player, message);
@@ -274,6 +276,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_fezrik_bendledon_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_871"))
@@ -302,6 +305,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -314,6 +318,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
         setName(self, "Fezrik Bendledon");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -322,6 +327,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
         setName(self, "Fezrik Bendledon");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -331,18 +337,21 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_trandoshan_fezrik_bendledon");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -388,7 +397,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_843");
@@ -400,7 +409,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_trandoshan_fezrik_bendledon.branchId", 3);
                 npcStartConversation(player, npc, "ep3_trandoshan_fezrik_bendledon", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -436,7 +445,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_855");
@@ -448,7 +457,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_trandoshan_fezrik_bendledon.branchId", 7);
                 npcStartConversation(player, npc, "ep3_trandoshan_fezrik_bendledon", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -464,6 +473,7 @@ public class ep3_trandoshan_fezrik_bendledon extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_trandoshan_fezrik_bendledon"))

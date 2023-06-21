@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -13,6 +19,7 @@ public class terminal_travel_instant_ttgm extends script.base_script
     public static final String TRAVEL_LOC_REGIONS_VAR = "teleportToGroupMember.groupieRegions";
     public static final String VAR_TREE_NAME = "teleportToGroupMember";
     public static final string_id SID_WHILE_DEAD = new string_id("spam", "while_dead");
+
     public terminal_travel_instant_ttgm()
     {
     }
@@ -135,7 +142,6 @@ public class terminal_travel_instant_ttgm extends script.base_script
                 sendSystemMessageProse(player, pp);
             }
         }
-        return;
     }
 
     public void closeOldWindow(obj_id player) throws InterruptedException

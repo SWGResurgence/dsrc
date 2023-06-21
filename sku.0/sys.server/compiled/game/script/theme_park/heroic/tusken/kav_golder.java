@@ -1,5 +1,11 @@
 package script.theme_park.heroic.tusken;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.factions;
@@ -12,6 +18,7 @@ public class kav_golder extends script.base_script
     public kav_golder()
     {
     }
+
     public int OnArrivedAtLocation(obj_id self, String location) throws InterruptedException
     {
         if (location.equals("kav_final"))
@@ -20,22 +27,27 @@ public class kav_golder extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int findAllies(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] allObj = getObjectsInRange(getLocation(self), 30.0f);
         Vector allies = new Vector();
         allies.setSize(0);
-        for (obj_id obj_id : allObj) {
-            if (hasObjVar(obj_id, "faction")) {
+        for (obj_id obj_id : allObj)
+        {
+            if (hasObjVar(obj_id, "faction"))
+            {
 
             }
 
             {
                 String fac = factions.getFaction(obj_id);
-                if (fac == null || fac.equals("")) {
+                if (fac == null || fac.equals(""))
+                {
                     continue;
                 }
-                if (fac.equals("espa") || fac.equals("espa_guard")) {
+                if (fac.equals("espa") || fac.equals("espa_guard"))
+                {
                     allies.add(obj_id);
                 }
             }

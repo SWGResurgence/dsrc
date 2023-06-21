@@ -1,5 +1,11 @@
 package script.creature_spawner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class death_msg extends script.base_script
     public death_msg()
     {
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         LOG("Newbie_Spawn", "Message in onDestroy: Creature died of type - " + getTemplateName(self));

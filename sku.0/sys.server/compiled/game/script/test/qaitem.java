@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.qa;
 import script.library.sui;
@@ -8,14 +14,12 @@ import script.obj_id;
 import script.string_id;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Vector;
 
 public class qaitem extends script.base_script
 {
-    public qaitem()
-    {
-    }
     public static final String SCRIPTVAR = "qaitem";
     public static final String EQUIPMENT_TOOL_TITLE = "QA MASTER ITEM TOOL";
     public static final String EQUIPMENT_TOOL_PROMPT = "This tool allows the tester to find items such as reward armor and weapons.";
@@ -23,49 +27,49 @@ public class qaitem extends script.base_script
     public static final String ROADMAP_TOOL_PROMPT = "This tool allows the tester to spawn all profession roadmap items regardless of what their current test character profession is.";
     public static final String CATEGORY_TOOL_TITLE = "QA ITEM CATEGORIES";
     public static final String CATEGORY_TOOL_PROMPT = "This tool allows the tester to browse the master item table dynamically, based on item categories specified in the template name of the item.  To use this tool you may need to know what category the item belongs to.  For instance, a ranged weapon belongs to the weapon category.";
-    public static final String[] EQUIPMENT_TOOL_MENU = 
-    {
-        "Armor",
-        "Best Weapons",
-        "Get all Certified Weapons",
-        "Get Roadmap Items",
-        "List Every Item by Category"
-    };
-    public static final String[] LENGTHY_CATEGORY_LIST = 
-    {
-        "armor",
-        "loot",
-        "weapon",
-        "wearables",
-        "ranged"
-    };
-    public static final String[] ERROR_MESSAGE_IN_ARRAY = 
-    {
-        "The list came back blank.  Please inform the tool team."
-    };
-    public static final String[] ARMOR_CLASSES = 
-    {
-        "Assault",
-        "Battle",
-        "Recon",
-        "Robe",
-        "Mandalorian (Restuss)",
-        "Clothing"
-    };
+    public static final String[] EQUIPMENT_TOOL_MENU =
+            {
+                    "Armor",
+                    "Best Weapons",
+                    "Get all Certified Weapons",
+                    "Get Roadmap Items",
+                    "List Every Item by Category"
+            };
+    public static final String[] LENGTHY_CATEGORY_LIST =
+            {
+                    "armor",
+                    "loot",
+                    "weapon",
+                    "wearables",
+                    "ranged"
+            };
+    public static final String[] ERROR_MESSAGE_IN_ARRAY =
+            {
+                    "The list came back blank.  Please inform the tool team."
+            };
+    public static final String[] ARMOR_CLASSES =
+            {
+                    "Assault",
+                    "Battle",
+                    "Recon",
+                    "Robe",
+                    "Mandalorian (Restuss)",
+                    "Clothing"
+            };
     public static final int ASSAULT = 0;
     public static final int BATTLE = 1;
     public static final int RECON = 2;
     public static final int ROBE = 3;
     public static final int MANDALORIAN = 4;
     public static final int CLOTHING = 5;
-    public static final String[] MAND_COLORS = 
-    {
-        "Black",
-        "Blue",
-        "Green",
-        "Red",
-        "White"
-    };
+    public static final String[] MAND_COLORS =
+            {
+                    "Black",
+                    "Blue",
+                    "Green",
+                    "Red",
+                    "White"
+            };
     public static final int BLACK = 0;
     public static final int BLUE = 1;
     public static final int GREEN = 2;
@@ -75,6 +79,10 @@ public class qaitem extends script.base_script
     public static final String STAT_EXPLANATION = "If Applicable:\n'con' = constitution\n'sta' = stamina\n'stat' = multiple stats\n'pre' = precision\n'agi' = agility\n'lck' = luck";
     public static final String STATIC_LOOT_TABLE = "datatables/item/master_item/master_item.iff";
     public static final String ITEM_REWARD_TABLE = "datatables/roadmap/item_rewards.iff";
+    public qaitem()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -91,6 +99,7 @@ public class qaitem extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -103,6 +112,7 @@ public class qaitem extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMainMenuOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -124,36 +134,37 @@ public class qaitem extends script.base_script
                     utils.removeScriptVarTree(player, SCRIPTVAR);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     switch (idx)
                     {
                         case 0:
-                        toolArmorMainMenu(self);
-                        break;
+                            toolArmorMainMenu(self);
+                            break;
                         case 1:
-                        getEquipment(self, 5);
-                        break;
+                            getEquipment(self, 5);
+                            break;
                         case 2:
-                        getEquipment(self, 1);
-                        break;
+                            getEquipment(self, 1);
+                            break;
                         case 3:
-                        String[] professionList = getProfessionList(self);
-                        qa.refreshMenu(self, ROADMAP_TOOL_PROMPT, ROADMAP_TOOL_TITLE, professionList, "handleProfessionOptions", SCRIPTVAR + ".pid", SCRIPTVAR + ".professions", sui.OK_CANCEL_REFRESH);
-                        break;
+                            String[] professionList = getProfessionList(self);
+                            qa.refreshMenu(self, ROADMAP_TOOL_PROMPT, ROADMAP_TOOL_TITLE, professionList, "handleProfessionOptions", SCRIPTVAR + ".pid", SCRIPTVAR + ".professions", sui.OK_CANCEL_REFRESH);
+                            break;
                         case 4:
-                        String[] staticItemCategoryList = getAllStaticItemCategories(self);
-                        qa.refreshMenu(self, CATEGORY_TOOL_PROMPT, CATEGORY_TOOL_TITLE, staticItemCategoryList, "handleCategorySelection", SCRIPTVAR + ".pid", SCRIPTVAR + ".categories", sui.OK_CANCEL_REFRESH);
-                        break;
+                            String[] staticItemCategoryList = getAllStaticItemCategories(self);
+                            qa.refreshMenu(self, CATEGORY_TOOL_PROMPT, CATEGORY_TOOL_TITLE, staticItemCategoryList, "handleCategorySelection", SCRIPTVAR + ".pid", SCRIPTVAR + ".categories", sui.OK_CANCEL_REFRESH);
+                            break;
                         default:
-                        qa.removePlayer(player, SCRIPTVAR, "Default Option on Switch");
-                        return SCRIPT_CONTINUE;
+                            qa.removePlayer(player, SCRIPTVAR, "Default Option on Switch");
+                            return SCRIPT_CONTINUE;
                     }
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleProfessionOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -174,7 +185,7 @@ public class qaitem extends script.base_script
                     toolMainMenu(self);
                     return SCRIPT_CONTINUE;
                 }
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".professions");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".professions");
                 String previousSelection = previousMainMenuArray[idx];
                 if (!previousSelection.equals(""))
                 {
@@ -184,6 +195,7 @@ public class qaitem extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleEquipementOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -204,8 +216,8 @@ public class qaitem extends script.base_script
                     toolMainMenu(self);
                     return SCRIPT_CONTINUE;
                 }
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".foundComboStrings");
-                String codeStringArray[] = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".foundStrings");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".foundComboStrings");
+                String[] codeStringArray = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".foundStrings");
                 String previousSelection = previousMainMenuArray[idx];
                 String theSpawnCode = codeStringArray[idx];
                 if (previousMainMenuArray.length < 0)
@@ -213,7 +225,7 @@ public class qaitem extends script.base_script
                     qa.removePlayer(player, SCRIPTVAR, "There was an error in the tool.  Exiting.");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     qa.spawnStaticItemInInventory(self, theSpawnCode, previousSelection);
                     rebuildTheSUI(self, previousMainMenuArray, codeStringArray);
@@ -223,6 +235,7 @@ public class qaitem extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCategorySelection(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -243,14 +256,16 @@ public class qaitem extends script.base_script
                     toolMainMenu(self);
                     return SCRIPT_CONTINUE;
                 }
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".categories");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".categories");
                 String previousSelection = previousMainMenuArray[idx];
                 if (!previousSelection.equals(""))
                 {
                     boolean filterSelectionFurther = false;
                     String selection = "/" + previousSelection + "/";
-                    for (String s : LENGTHY_CATEGORY_LIST) {
-                        if (previousSelection.equals(s)) {
+                    for (String s : LENGTHY_CATEGORY_LIST)
+                    {
+                        if (previousSelection.equals(s))
+                        {
                             filterSelectionFurther = true;
                             break;
                         }
@@ -260,7 +275,7 @@ public class qaitem extends script.base_script
                         String[] allSelected = getSelectedCategory(self, selection);
                         qa.refreshMenu(self, "List of all Static Items labeled " + previousSelection, CATEGORY_TOOL_TITLE, allSelected, "handleStaticItemSpawn", SCRIPTVAR + ".pid", SCRIPTVAR + ".selectedList", sui.OK_CANCEL_REFRESH);
                     }
-                    else 
+                    else
                     {
                         filterSelection(self, selection);
                     }
@@ -269,6 +284,7 @@ public class qaitem extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleStaticItemSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -289,7 +305,7 @@ public class qaitem extends script.base_script
                     toolMainMenu(self);
                     return SCRIPT_CONTINUE;
                 }
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".selectedList");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".selectedList");
                 String previousSelection = previousMainMenuArray[idx];
                 if (!previousSelection.equals(""))
                 {
@@ -304,6 +320,7 @@ public class qaitem extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleArmorOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -329,37 +346,38 @@ public class qaitem extends script.base_script
             switch (idx)
             {
                 case ASSAULT:
-                utils.setScriptVar(player, SCRIPTVAR + ".armorChoice", "armor_assault");
-                getLevelsToDisplay(player, "armor_assault");
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".armorChoice", "armor_assault");
+                    getLevelsToDisplay(player, "armor_assault");
+                    break;
                 case BATTLE:
-                utils.setScriptVar(player, SCRIPTVAR + ".armorChoice", "armor_battle");
-                getLevelsToDisplay(player, "armor_battle");
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".armorChoice", "armor_battle");
+                    getLevelsToDisplay(player, "armor_battle");
+                    break;
                 case RECON:
-                utils.setScriptVar(player, SCRIPTVAR + ".armorChoice", "armor_recon");
-                getLevelsToDisplay(player, "armor_recon");
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".armorChoice", "armor_recon");
+                    getLevelsToDisplay(player, "armor_recon");
+                    break;
                 case ROBE:
-                utils.setScriptVar(player, SCRIPTVAR + ".armorChoice", "item_jedi_robe");
-                getLevelsToDisplay(player, "item_jedi_robe");
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".armorChoice", "item_jedi_robe");
+                    getLevelsToDisplay(player, "item_jedi_robe");
+                    break;
                 case MANDALORIAN:
-                utils.setScriptVar(player, SCRIPTVAR + ".armorChoice", "armor_mandalorian");
-                getLevelsToDisplay(player, "armor_mandalorian");
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".armorChoice", "armor_mandalorian");
+                    getLevelsToDisplay(player, "armor_mandalorian");
+                    break;
                 case CLOTHING:
-                utils.setScriptVar(player, SCRIPTVAR + ".armorChoice", "item_clothing");
-                getLevelsToDisplay(player, "item_clothing");
-                break;
+                    utils.setScriptVar(player, SCRIPTVAR + ".armorChoice", "item_clothing");
+                    getLevelsToDisplay(player, "item_clothing");
+                    break;
                 default:
-                broadcast(player, "That Armor is not currently available.");
-                toolArmorMainMenu(player);
-                return SCRIPT_CONTINUE;
+                    broadcast(player, "That Armor is not currently available.");
+                    toolArmorMainMenu(player);
+                    return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleLevelOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -388,7 +406,7 @@ public class qaitem extends script.base_script
                 int idxValue = utils.stringToInt(levelList[idx]);
                 getArmorList(player, idxValue);
             }
-            else 
+            else
             {
                 qa.removePlayer(player, SCRIPTVAR, "There was an error with the previous selection - please try again");
                 toolArmorMainMenu(player);
@@ -396,6 +414,7 @@ public class qaitem extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -428,14 +447,14 @@ public class qaitem extends script.base_script
                     utils.setScriptVar(player, SCRIPTVAR + ".armorChoice", armorChoice + "_" + factionString);
                     mandalorianColor(player);
                 }
-                else 
+                else
                 {
                     String[] armorModSet = utils.getStringArrayScriptVar(player, SCRIPTVAR + ".statArray");
                     String idxString = armorModSet[idx];
                     spawnItems(player, idxString);
                 }
             }
-            else 
+            else
             {
                 broadcast(player, "There was an error with the previous selection - please try again");
                 qa.refreshMenu(player, "Select an Armor Class", "Armor Tool", ARMOR_CLASSES, "handleArmorOptions", SCRIPTVAR + ".armorType.pid", SCRIPTVAR + ".armorTypeMenu", sui.OK_CANCEL_REFRESH);
@@ -443,6 +462,7 @@ public class qaitem extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMandalorianColorOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -469,37 +489,39 @@ public class qaitem extends script.base_script
             switch (idx)
             {
                 case BLACK:
-                myColor = "black";
-                spawnItems(player, myColor);
-                break;
+                    myColor = "black";
+                    spawnItems(player, myColor);
+                    break;
                 case BLUE:
-                myColor = "blue";
-                spawnItems(player, myColor);
-                break;
+                    myColor = "blue";
+                    spawnItems(player, myColor);
+                    break;
                 case GREEN:
-                myColor = "green";
-                spawnItems(player, myColor);
-                break;
+                    myColor = "green";
+                    spawnItems(player, myColor);
+                    break;
                 case RED:
-                myColor = "red";
-                spawnItems(player, myColor);
-                break;
+                    myColor = "red";
+                    spawnItems(player, myColor);
+                    break;
                 case WHITE:
-                myColor = "white";
-                spawnItems(player, myColor);
-                break;
+                    myColor = "white";
+                    spawnItems(player, myColor);
+                    break;
                 default:
-                broadcast(player, "This Armor is not currently available.");
-                qa.refreshMenu(player, "Select an Armor Class", "Armor Tool", ARMOR_CLASSES, "handleArmorOptions", SCRIPTVAR + ".armorType.pid", SCRIPTVAR + ".armorTypeMenu", sui.OK_CANCEL_REFRESH);
-                return SCRIPT_CONTINUE;
+                    broadcast(player, "This Armor is not currently available.");
+                    qa.refreshMenu(player, "Select an Armor Class", "Armor Tool", ARMOR_CLASSES, "handleArmorOptions", SCRIPTVAR + ".armorType.pid", SCRIPTVAR + ".armorTypeMenu", sui.OK_CANCEL_REFRESH);
+                    return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void toolMainMenu(obj_id player) throws InterruptedException
     {
         qa.refreshMenu(player, EQUIPMENT_TOOL_PROMPT, EQUIPMENT_TOOL_TITLE, EQUIPMENT_TOOL_MENU, "handleMainMenuOptions", SCRIPTVAR + ".pid", SCRIPTVAR + ".mainMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void getRoadmapItems(obj_id self, String previousSelection) throws InterruptedException
     {
         Vector foundRows = new Vector();
@@ -513,24 +535,26 @@ public class qaitem extends script.base_script
         }
         String[] allRoadmapItems = new String[foundRows.size()];
         foundRows.toArray(allRoadmapItems);
-        for (String allRoadmapItem : allRoadmapItems) {
-            if (!allRoadmapItem.equals("")) {
+        for (String allRoadmapItem : allRoadmapItems)
+        {
+            if (!allRoadmapItem.equals(""))
+            {
                 qa.spawnStaticItemInInventory(self, allRoadmapItem, "none");
             }
         }
     }
+
     public String[] getProfessionList(obj_id self) throws InterruptedException
     {
         HashSet professionNames = new HashSet();
         String[] datatableProfessionNames = dataTableGetStringColumn(ITEM_REWARD_TABLE, "roadmapTemplateName");
-        for (String datatableProfessionName : datatableProfessionNames) {
-            professionNames.add(datatableProfessionName);
-        }
+        Collections.addAll(professionNames, datatableProfessionNames);
         String[] oneOfEachProfession = new String[professionNames.size()];
         professionNames.toArray(oneOfEachProfession);
         Arrays.sort(oneOfEachProfession);
         return oneOfEachProfession;
     }
+
     public void getEquipment(obj_id self, int searchInt) throws InterruptedException
     {
         int combatLevel = getLevel(self);
@@ -557,21 +581,22 @@ public class qaitem extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     qa.removePlayer(self, SCRIPTVAR, "error");
                 }
             }
-            else 
+            else
             {
                 qa.removePlayer(self, SCRIPTVAR, "error");
             }
         }
-        else 
+        else
         {
             qa.removePlayer(self, SCRIPTVAR, "error");
         }
     }
+
     public void rebuildTheSUI(obj_id self, String[] comboArray, String[] codeStrings) throws InterruptedException
     {
         if (comboArray.length > -1 && codeStrings.length > -1)
@@ -579,16 +604,18 @@ public class qaitem extends script.base_script
             utils.setScriptVar(self, SCRIPTVAR + ".foundStrings", codeStrings);
             qa.refreshMenu(self, EQUIPMENT_TOOL_PROMPT + "\n\nRECORDS RETURNED: " + comboArray.length, EQUIPMENT_TOOL_TITLE, comboArray, "handleEquipementOptions", SCRIPTVAR + ".pid", SCRIPTVAR + ".foundComboStrings", sui.OK_CANCEL_REFRESH);
         }
-        else 
+        else
         {
             qa.removePlayer(self, SCRIPTVAR, "There was a tool failure.");
         }
     }
+
     public void buildTheSUI(obj_id self, dictionary[] allRows) throws InterruptedException
     {
         Vector codeStrings = new Vector();
         Vector comboStrings = new Vector();
-        for (dictionary allRow : allRows) {
+        for (dictionary allRow : allRows)
+        {
             codeStrings.add(allRow.getString("name"));
         }
         String[] allCodeStrings = new String[codeStrings.size()];
@@ -608,11 +635,12 @@ public class qaitem extends script.base_script
             utils.setScriptVar(self, SCRIPTVAR + ".foundStrings", allCodeStrings);
             qa.refreshMenu(self, EQUIPMENT_TOOL_PROMPT + "\n\nRECORDS RETURNED: " + suiArray.length, EQUIPMENT_TOOL_TITLE, suiArray, "handleEquipementOptions", SCRIPTVAR + ".pid", SCRIPTVAR + ".foundComboStrings", sui.OK_CANCEL_REFRESH);
         }
-        else 
+        else
         {
             qa.removePlayer(self, SCRIPTVAR, "There was a tool failure.");
         }
     }
+
     public dictionary[] searchForSpeciesArmor(obj_id self, dictionary[] allRows, String speciesSearch) throws InterruptedException
     {
         Vector foundRows = new Vector();
@@ -623,7 +651,7 @@ public class qaitem extends script.base_script
             if (armorCodeString.contains(speciesSearch))
             {
                 armorCodeString = allRows[i].getString("loops");
-                foundRows.add("" + i);
+                foundRows.add(String.valueOf(i));
             }
         }
         String[] allArmorOfSpecies = new String[foundRows.size()];
@@ -635,6 +663,7 @@ public class qaitem extends script.base_script
         }
         return armorBasedOnSpecies;
     }
+
     public dictionary[] searchForProfessionArmorType(obj_id self, dictionary[] allRows, String armorType) throws InterruptedException
     {
         Vector foundRows = new Vector();
@@ -644,7 +673,7 @@ public class qaitem extends script.base_script
             armorCodeString = allRows[i].getString("name");
             if (armorCodeString.contains(armorType))
             {
-                foundRows.add("" + i);
+                foundRows.add(String.valueOf(i));
             }
         }
         String[] allArmorOfType = new String[foundRows.size()];
@@ -656,6 +685,7 @@ public class qaitem extends script.base_script
         }
         return armorBasedOnType;
     }
+
     public String getSpeciesSearchString(obj_id self) throws InterruptedException
     {
         String speciesSearchString = "";
@@ -669,6 +699,7 @@ public class qaitem extends script.base_script
         }
         return speciesSearchString;
     }
+
     public dictionary[] getAllEquipmentOfProfession(obj_id self, dictionary[] allRows, String classTemplate) throws InterruptedException
     {
         Vector foundRows = new Vector();
@@ -678,7 +709,7 @@ public class qaitem extends script.base_script
             reqProfession = allRows[i].getString("required_skill");
             if (reqProfession.equals("") || classTemplate.startsWith(reqProfession))
             {
-                foundRows.add("" + i);
+                foundRows.add(String.valueOf(i));
             }
         }
         String[] allEquipOfProfession = new String[foundRows.size()];
@@ -690,6 +721,7 @@ public class qaitem extends script.base_script
         }
         return equipmentBasedOnProfession;
     }
+
     public dictionary[] getAllEquipmentOfType(obj_id self, int searchInt) throws InterruptedException
     {
         if (searchInt == 4)
@@ -706,7 +738,7 @@ public class qaitem extends script.base_script
         {
             if (allTypesInDatatable[a] == searchInt)
             {
-                foundItemRowNumbers.add("" + a);
+                foundItemRowNumbers.add(String.valueOf(a));
             }
         }
         String[] allEquipRow = new String[foundItemRowNumbers.size()];
@@ -718,6 +750,7 @@ public class qaitem extends script.base_script
         }
         return equipmentRows;
     }
+
     public dictionary[] getAllEquipmentOfCombatLevelOrBelow(obj_id self, dictionary[] allRows, int combatLevel) throws InterruptedException
     {
         Vector foundRows = new Vector();
@@ -727,7 +760,7 @@ public class qaitem extends script.base_script
             reqLevel = allRows[i].getInt("required_level");
             if (reqLevel == 0 || reqLevel <= combatLevel)
             {
-                foundRows.add("" + i);
+                foundRows.add(String.valueOf(i));
             }
         }
         String[] allEquipOfCombatLvl = new String[foundRows.size()];
@@ -739,6 +772,7 @@ public class qaitem extends script.base_script
         }
         return equipmentPerCombatLevel;
     }
+
     public dictionary[] getHighestTierItems(obj_id self, dictionary[] listOfItems) throws InterruptedException
     {
         Vector foundRows = new Vector();
@@ -746,8 +780,10 @@ public class qaitem extends script.base_script
         int tempTier = 0;
         if (listOfItems.length > -1)
         {
-            for (dictionary listOfItem : listOfItems) {
-                if (listOfItem.getInt("tier") > getHighest) {
+            for (dictionary listOfItem : listOfItems)
+            {
+                if (listOfItem.getInt("tier") > getHighest)
+                {
                     getHighest = listOfItem.getInt("tier");
                 }
             }
@@ -758,7 +794,7 @@ public class qaitem extends script.base_script
             {
                 if (listOfItems[a].getInt("tier") == getHighest)
                 {
-                    foundRows.add("" + a);
+                    foundRows.add(String.valueOf(a));
                 }
             }
         }
@@ -771,24 +807,31 @@ public class qaitem extends script.base_script
         }
         return returnedHighestTier;
     }
+
     public String[] getAllStaticItemCategories(obj_id self) throws InterruptedException
     {
         HashSet allCategories = new HashSet();
         String[] entireTemplateColumn = dataTableGetStringColumn(STATIC_LOOT_TABLE, "template_name");
         utils.setScriptVar(self, SCRIPTVAR + ".template_name", entireTemplateColumn);
-        for (String s : entireTemplateColumn) {
+        for (String s : entireTemplateColumn)
+        {
             String armorSearch = "object/tangible/wearables/armor/";
             String tangibleSearch = "object/tangible/";
             String objectString = "object/";
             int stringLength = s.length();
-            if (s.indexOf(armorSearch) == 0) {
+            if (s.indexOf(armorSearch) == 0)
+            {
                 allCategories.add("armor");
-            } else if (s.indexOf(tangibleSearch) == 0) {
+            }
+            else if (s.indexOf(tangibleSearch) == 0)
+            {
                 int tangibleSearchLength = tangibleSearch.length();
                 String preParsedCategory = s.substring(tangibleSearchLength, stringLength);
                 int nextSlash = preParsedCategory.indexOf("/");
                 allCategories.add(preParsedCategory.substring(0, nextSlash));
-            } else {
+            }
+            else
+            {
                 int objectStringLength = objectString.length();
                 String preParsedCategory = s.substring(objectStringLength, stringLength);
                 int nextSlash = preParsedCategory.indexOf("/");
@@ -804,6 +847,7 @@ public class qaitem extends script.base_script
         }
         return ERROR_MESSAGE_IN_ARRAY;
     }
+
     public String[] getSelectedCategory(obj_id self, String searchString) throws InterruptedException
     {
         HashSet staticNameList = new HashSet();
@@ -825,17 +869,18 @@ public class qaitem extends script.base_script
                 staticNameList.toArray(spawnMenu);
                 return spawnMenu;
             }
-            else 
+            else
             {
                 qa.removePlayer(self, SCRIPTVAR, "The tool failed to list your selection. Notify the tool team.");
             }
         }
-        else 
+        else
         {
             qa.removePlayer(self, SCRIPTVAR, "The tool failed to list your selection. Notify the tool team.");
         }
         return ERROR_MESSAGE_IN_ARRAY;
     }
+
     public void filterSelection(obj_id self, String searchString) throws InterruptedException
     {
         HashSet templatesFound = new HashSet();
@@ -844,14 +889,17 @@ public class qaitem extends script.base_script
         String[] arrayOfTemplates = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".template_name");
         if (arrayOfTemplates.length > 0)
         {
-            for (String arrayOfTemplate : arrayOfTemplates) {
+            for (String arrayOfTemplate : arrayOfTemplates)
+            {
                 int indexNumber = arrayOfTemplate.indexOf(searchString);
-                if (indexNumber > -1) {
+                if (indexNumber > -1)
+                {
                     int stringLength = arrayOfTemplate.length();
                     int subStringStart = indexNumber + searchStringLength;
                     String preParsedCategory = arrayOfTemplate.substring(subStringStart, stringLength);
                     int newCategoryEnd = preParsedCategory.indexOf("/");
-                    if (newCategoryEnd > -1) {
+                    if (newCategoryEnd > -1)
+                    {
                         String newCategory = preParsedCategory.substring(0, newCategoryEnd);
                         templatesFound.add(newCategory);
                     }
@@ -864,33 +912,38 @@ public class qaitem extends script.base_script
                 Arrays.sort(subMenu);
                 qa.refreshMenu(self, CATEGORY_TOOL_PROMPT, CATEGORY_TOOL_TITLE, subMenu, "handleCategorySelection", SCRIPTVAR + ".pid", SCRIPTVAR + ".categories", sui.OK_CANCEL_REFRESH);
             }
-            else 
+            else
             {
                 qa.removePlayer(self, SCRIPTVAR, "The tool failed to list your selection. Notify the tool team.");
             }
         }
-        else 
+        else
         {
             qa.removePlayer(self, SCRIPTVAR, "The tool failed to list your selection. Notify the tool team.");
         }
     }
+
     public void toolArmorMainMenu(obj_id player) throws InterruptedException
     {
         utils.setScriptVar(player, SCRIPTVAR + ".armorChoice", "main");
         qa.refreshMenu(player, "Select an Armor Class", "Armor Tool", ARMOR_CLASSES, "handleArmorOptions", SCRIPTVAR + ".armorType.pid", SCRIPTVAR + ".armorTypeMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void armorLevelMenu(obj_id player, String[] displayArray) throws InterruptedException
     {
         qa.refreshMenu(player, "Select what level Armor you want.", "Armor Tool", displayArray, "handleLevelOptions", SCRIPTVAR + ".armorLevel.pid", SCRIPTVAR + ".armorLevelMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void listArmorChoiceStats(obj_id player, String[] displayArray) throws InterruptedException
     {
         qa.refreshMenu(player, STAT_EXPLANATION, "Armor Tool", displayArray, "handleSpawnOptions", SCRIPTVAR + ".armorMod.pid", SCRIPTVAR + ".armorModMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void mandalorianColor(obj_id player) throws InterruptedException
     {
         qa.refreshMenu(player, "Mandalorian Color makes you look pretty", "Armor Tool", MAND_COLORS, "handleMandalorianColorOptions", SCRIPTVAR + ".mandMenu.pid", SCRIPTVAR + ".mandMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void getArmorList(obj_id player, int level) throws InterruptedException
     {
         Vector Armor = new Vector();
@@ -911,12 +964,13 @@ public class qaitem extends script.base_script
             utils.setScriptVar(player, SCRIPTVAR + ".nameArray", ArmorArray);
             listSelectedArmor(player, ArmorArray, armorType);
         }
-        else 
+        else
         {
             broadcast(player, "No Armor is available for this Class/Level Combination");
             toolArmorMainMenu(player);
         }
     }
+
     public void listSelectedArmor(obj_id player, String[] ArmorArray, String armorType) throws InterruptedException
     {
         String[] idxName = new String[ArmorArray.length];
@@ -931,14 +985,13 @@ public class qaitem extends script.base_script
             }
         }
         HashSet armorSets = new HashSet();
-        for (String s : idxName) {
-            armorSets.add(s);
-        }
+        Collections.addAll(armorSets, idxName);
         String[] displayArray = new String[armorSets.size()];
         armorSets.toArray(displayArray);
         utils.setScriptVar(player, SCRIPTVAR + ".statArray", displayArray);
         listArmorChoiceStats(player, displayArray);
     }
+
     public void spawnItems(obj_id player, String idxString) throws InterruptedException
     {
         String armorChoice = utils.getStringScriptVar(player, SCRIPTVAR + ".armorChoice");
@@ -946,13 +999,16 @@ public class qaitem extends script.base_script
         String spawnString = armorChoice + "_" + idxString;
         obj_id inventory = utils.getInventoryContainer(player);
         qa.findOrCreateAndEquipQABag(player, inventory, true);
-        for (String s : ArmorNameArray) {
-            if (s.startsWith(spawnString)) {
+        for (String s : ArmorNameArray)
+        {
+            if (s.startsWith(spawnString))
+            {
                 qa.spawnStaticItemInInventory(player, s, "Your selection");
             }
         }
         qa.removePlayer(player, SCRIPTVAR, "");
     }
+
     public void getLevelsToDisplay(obj_id player, String armorChoice) throws InterruptedException
     {
         String[] namesFromTable = dataTableGetStringColumn(STATIC_LOOT_TABLE, "name");
@@ -961,7 +1017,7 @@ public class qaitem extends script.base_script
         {
             if (namesFromTable[i].startsWith(armorChoice))
             {
-                ChoiceRows.add("" + dataTableGetIntColumn(STATIC_LOOT_TABLE, "required_level")[i]);
+                ChoiceRows.add(String.valueOf(dataTableGetIntColumn(STATIC_LOOT_TABLE, "required_level")[i]));
             }
         }
         String[] stringLevelDisplayArray = new String[ChoiceRows.size()];

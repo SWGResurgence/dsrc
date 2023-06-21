@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.volcano_battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -10,21 +16,24 @@ import script.obj_id;
 
 public class event_four extends script.base_script
 {
+    public static final String BOSS = "som_volcano_four_cym_prototype";
+    public static final boolean LOGGING = false;
     public event_four()
     {
     }
-    public static final String BOSS = "som_volcano_four_cym_prototype";
-    public static final boolean LOGGING = false;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         spawnEvent(self);
         return SCRIPT_CONTINUE;
     }
+
     public int activateEvent(obj_id self, dictionary params) throws InterruptedException
     {
         setTriggerVolume(self);
         return SCRIPT_CONTINUE;
     }
+
     public void setTriggerVolume(obj_id self) throws InterruptedException
     {
         if (!hasTriggerVolume(self, "activateVolume"))
@@ -32,6 +41,7 @@ public class event_four extends script.base_script
             createTriggerVolume("activateVolume", 45, true);
         }
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (isPlayer(breacher) && !isIncapacitated(breacher))
@@ -43,11 +53,13 @@ public class event_four extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void activateEncounter(obj_id self) throws InterruptedException
     {
         obj_id eventBoss = utils.getObjIdScriptVar(self, "eventBoss");
         messageTo(eventBoss, "activate", null, 0, false);
     }
+
     public void spawnEvent(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -62,20 +74,22 @@ public class event_four extends script.base_script
         ai_lib.setDefaultCalmBehavior(eventBoss, ai_lib.BEHAVIOR_SENTINEL);
         trial.setParent(self, eventBoss, false);
         utils.setScriptVar(self, "eventBoss", eventBoss);
-        String[] offSet = 
+        String[] offSet =
+                {
+                        "16:-24",
+                        "-29:-16",
+                        "-1:11",
+                        "29:-6"
+                };
+        for (String s : offSet)
         {
-            "16:-24",
-            "-29:-16",
-            "-1:11",
-            "29:-6"
-        };
-        for (String s : offSet) {
             String[] parse = split(s, ':');
             float locX = here.x + utils.stringToFloat(parse[0]);
             float locZ = here.z + utils.stringToFloat(parse[1]);
             location spawnLoc = new location(locX, here.y, locZ, here.area, here.cell);
             obj_id item = createObject(trial.WP_OBJECT, spawnLoc);
-            if (!isIdValid(item)) {
+            if (!isIdValid(item))
+            {
                 doLogging("spawnActors", "Tried to create invalid item(" + trial.WP_OBJECT + ")");
                 return;
             }
@@ -84,6 +98,7 @@ public class event_four extends script.base_script
             setObjVar(item, "event_5_spawn_point", true);
         }
     }
+
     public int eventMobDied(obj_id self, dictionary params) throws InterruptedException
     {
         String type = params.getString("type");
@@ -93,6 +108,7 @@ public class event_four extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void winEncounter(obj_id self) throws InterruptedException
     {
         obj_id top = trial.getParent(self);
@@ -103,6 +119,7 @@ public class event_four extends script.base_script
         }
         messageTo(top, "eventDefeated", null, 0, false);
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VOLCANO_LOGGING)

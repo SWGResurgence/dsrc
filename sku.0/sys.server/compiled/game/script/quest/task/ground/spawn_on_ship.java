@@ -1,21 +1,29 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ship_ai;
 import script.obj_id;
 
 public class spawn_on_ship extends script.base_script
 {
+    public static final int maxRetries = 5;
+    public static final String retryCountName = "retryCount";
     public spawn_on_ship()
     {
     }
-    public static final int maxRetries = 5;
-    public static final String retryCountName = "retryCount";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "pendingWarp", null, spawn.cleanupTime, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnAttackPlayerShip(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id playerShip = params.getObjId("player");
@@ -23,6 +31,7 @@ public class spawn_on_ship extends script.base_script
         ship_ai.spaceAttack(self, playerShip);
         return SCRIPT_CONTINUE;
     }
+
     public int pendingWarp(obj_id self, dictionary params) throws InterruptedException
     {
         if (ship_ai.spaceIsInCombat(self))
@@ -34,7 +43,7 @@ public class spawn_on_ship extends script.base_script
                 params.put(retryCountName, retryCount);
                 messageTo(self, "pendingWarp", params, spawn.cleanupRetryTime, false);
             }
-            else 
+            else
             {
                 LOG("QUEST_SPAWN_LOG", "Ship in combat - no more retries left.");
             }
@@ -44,14 +53,17 @@ public class spawn_on_ship extends script.base_script
         destroyObjectHyperspace(self);
         return SCRIPT_CONTINUE;
     }
+
     public int objectDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int missionAbort(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

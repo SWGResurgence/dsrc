@@ -1,19 +1,28 @@
 package script.quest.corellia;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.*;
 
 public class slaver_elevator_down_1 extends script.base_script
 {
+    public static final String STF_FILE = "elevator_text";
+
     public slaver_elevator_down_1()
     {
     }
-    public static final String STF_FILE = "elevator_text";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu2 = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id(STF_FILE, "down"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         location here = getLocation(player);

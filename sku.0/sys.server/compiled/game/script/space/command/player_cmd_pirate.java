@@ -1,5 +1,11 @@
 package script.space.command;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ship_ai;
 import script.library.space_combat;
@@ -11,12 +17,14 @@ public class player_cmd_pirate extends script.base_script
     public player_cmd_pirate()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         dictionary outparams = new dictionary();
         messageTo(self, "pirateTimeout", outparams, 1200.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "evacuate"))
@@ -33,6 +41,7 @@ public class player_cmd_pirate extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpaceUnitMoveToComplete(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(null, "ONsPACEuNITmOVEtOcOMPLETE - space pirate script");
@@ -42,15 +51,17 @@ public class player_cmd_pirate extends script.base_script
         {
             squaddyList = ship_ai.squadGetUnitList(squadId);
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id obj_id : squaddyList) {
+        for (obj_id obj_id : squaddyList)
+        {
             space_combat.destroyObjectHyperspace(obj_id);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int pirateTimeout(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
