@@ -52,10 +52,6 @@ public class republic_assembly_tool extends script.base_script
         double ingredientCRC = 0;
         if (utils.hasScriptVar(self, "ingredientCRC"))
         {
-
-        }
-
-        {
             ingredientCRC = utils.getDoubleScriptVar(self, "ingredientCRC");
             debugLogging("OnReceivedItem", "found a pre-existing CRC. It was: " + ingredientCRC);
         }
