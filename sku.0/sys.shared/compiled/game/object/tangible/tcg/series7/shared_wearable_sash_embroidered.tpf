@@ -11,4 +11,4 @@ detailedDescription = "static_item_d" "item_tcg_loot_reward_series7_embroidered_
 
 appearanceFilename = "appearance/sash_02_f.sat"
 
-containerVolumeLimit = 60
+containerVolumeLimit = 100

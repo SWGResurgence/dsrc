@@ -6,7 +6,7 @@ heroic_tusken_army	"321,0,52,none"		"-3051,0,2611,tatooine"				heroic_tusken_arm
 heroic_star_destroyer	"0,173,30,secondaryhangar"		"-137,0,-4723,corellia"				heroic_star_destroyer			7200	12hr	
 heroic_exar_kun	"-11,0,-131.69,r1"		"5096,0,5511,yavin4"				heroic_exar_kun			7200	12hr	
 uplink_cave	"-85,0,128,mainroom"		"-3601,158,3486,mustafar"				uplink_cave		theme_park.dungeon.mustafar_trials.establish_the_link.link_player		12hr	
-old_republic_facility	"12,0,0,entrance"		"-768,87,6078,mustafar"				old_republic_facility				12hr	
+old_republic_facility	12,0,0,entrance		"-768,87,6078,mustafar"				old_republic_facility			7200	none
 decrepit_droid_factory	"0,0,4,hall1"		"515,64,1991,mustafar"				decrepit_droid_factory		theme_park.dungeon.mustafar_trials.decrepit_droid_factory.decrepit_player		12hr	
 working_droid_factory	"0,0,4,hall1"		"515,64,1991,mustafar"				working_droid_factory		theme_park.dungeon.mustafar_trials.working_droid_factory.working_player		12hr	
 mustafar_droid_army	"-79,12,-152,none"		"541,155,-160,mustafar"				mustafar_droid_army				12hr	

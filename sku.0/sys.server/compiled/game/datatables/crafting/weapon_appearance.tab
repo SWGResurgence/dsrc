@@ -2063,7 +2063,7 @@ slot																																		template	0	barrel_rifle_projectile	object/
 slot																																		template	0	weapon_core	object/tangible/component/weapon/core/weapon_core_ranged_base.iff	1																												
 slot																																		template	1	scope	object/tangible/component/weapon/scope_weapon_base.iff	1	scope																											
 slot																																		template	1	stock	object/tangible/component/weapon/stock_base.iff	1	stock																											
-weapon	heavy	weapon_heavy_blast_cannon_legendary		systems.crafting.weapon.core.crafting_new_weapon_final	0	weapon	8	weapon_crafting		object/weapon/ranged/heavy/heavy_blast_cannon_legendary.iff	object/weapon/ranged/heavy/heavy_blast_cannon_legendary.iff	20	450	925	1225	0	0	0	0	0	0	kinetic	cold	-1	-1	heavy	heavy	1	1	100	100		64							sys.server/compiled/game/object/draft_schematic/weapon/appearance/																							0	500	0	400
+weapon	heavy	weapon_appearance_blast_cannon_legendary		systems.crafting.weapon.core.crafting_new_weapon_final	0	weapon	8	weapon_crafting		object/weapon/ranged/heavy/heavy_blast_cannon_legendary.iff	object/weapon/ranged/heavy/heavy_blast_cannon_legendary.iff	20	450	925	1225	0	0	0	0	0	0	kinetic	cold	-1	-1	heavy	heavy	1	1	100	100		64							sys.server/compiled/game/object/draft_schematic/weapon/appearance/																							0	500	0	400
 slot																																		resource	0	frame_assembly	steel_duralloy	300
 slot																																		resource	0	receiver_assembly	iron_kammris	80
 slot																																		resource	0	grip_assembly	petrochem_inert_polymer	40
