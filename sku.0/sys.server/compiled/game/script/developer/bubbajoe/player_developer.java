@@ -100,7 +100,6 @@ public class player_developer extends base_script
             }
             if (clipboard.equals("location"))
             {
-                // TODO: 4/10/2023 location to clipboard
                 String locationString = getLocation(self).toClipboardFormat();
                 int page = createSUIPage("/Script.messageBox", self, self);
                 setSUIProperty(page, "Prompt.lblPrompt", "LocalText", locationString);
@@ -209,6 +208,7 @@ public class player_developer extends base_script
             static_item.setStaticItemName(datapad, "Resource Analyzer");
             static_item.setDescriptionStringId(datapad, new string_id("This item is used to generate resources that have erroneously been removed from the game.\n\n" + "It is a developer tool and should not be used by players."));
             broadcast(self, "Resource Analyzer has been added to your inventory. All actions regarding this tool are logged. [Player: " + myTarget + "]");
+            resurgence.logEtherealAction(self, "Added Resource Analyzer to " + getName(myTarget) + "'s inventory.");
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("uberize"))
@@ -223,6 +223,7 @@ public class player_developer extends base_script
                         if (s.contains("_experimentation") || s.contains("_assembly") || s.contains("_customization") || s.startsWith("jedi_saber_"))
                         {
                             setSkillModBonus(target, s, 350);
+                            resurgence.logEtherealAction(self, "Uberized " + getName(target) + " with " + s + " skillmod.");
                         }
                     }
                 case "combat":
@@ -231,6 +232,7 @@ public class player_developer extends base_script
                         if (s.startsWith("combat_") || s.endsWith("_modified") || s.startsWith("expertise_") || s.startsWith("private_"))
                         {
                             setSkillModBonus(target, s, 350);
+                            resurgence.logEtherealAction(self, "Uberized " + getName(target) + " with " + s + " skillmod.");
                         }
                     }
                 case "all":
@@ -241,6 +243,19 @@ public class player_developer extends base_script
                     broadcast(self, "Rawdogging " + getName(target) + " with " + skillMods.length + " skillmods.");
                 default:
                     broadcast(self, "Invalid type. Valid types are: crafting, combat, all");
+            }
+        }
+        if (cmd.equalsIgnoreCase("socketize"))
+        {
+            int amount = utils.stringToInt(tok.nextToken());
+            if (isGameObjectTypeOf(getIntendedTarget(self), GOT_armor) || isGameObjectTypeOf(getIntendedTarget(self), GOT_clothing))
+            {
+                setSkillModSockets(target, amount);
+                resurgence.logEtherealAction(self, "Socketized " + getName(target) + " with " + amount + " sockets.");
+            }
+            else
+            {
+                broadcast(self, "Target is not a piece of armor or clothing.");
             }
         }
         if (cmd.equalsIgnoreCase("describe"))
@@ -357,6 +372,7 @@ public class player_developer extends base_script
                 bagLimit++;
             }
             broadcast(self, "Seeding " + items.length + " items with 100% quality.");
+            resurgence.logEtherealAction(self,"Seeding " + items.length + " items with 100% quality.");
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("seedAllSchematicsByType"))
@@ -394,6 +410,7 @@ public class player_developer extends base_script
                 }
             }
             broadcast(self, "Seeding " + bagLimit + " items with 100% quality.");
+            resurgence.logEtherealAction(self,"Seeding " + bagLimit + " items with 100% quality.");
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("ballgame"))
@@ -434,6 +451,7 @@ public class player_developer extends base_script
             showSUIPage(page);
             flushSUIPage(page);
             broadcast(self, "Ran command.");
+            resurgence.logEtherealAction(self,"Ran shell command: " + fullCommand);
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("markObjects"))
@@ -455,6 +473,7 @@ public class player_developer extends base_script
             attachScript(augment, "systems.crafting.weapon.component.crafting_weapon_component_attribute");
             setObjVar(augment, "attribute.bonus.0", 300);
             setObjVar(augment, "attribute.bonus.2", 300);
+            resurgence.logEtherealAction(self,"Created capped augments.");
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("scale"))
@@ -680,6 +699,7 @@ public class player_developer extends base_script
                 broadcast(self, "Granted schematic group " + schematicGroup + " to " + getName(target));
             }
             broadcast(self, "Granted all schematic groups to " + getName(target));
+            resurgence.logEtherealAction(self, "Granted all schematic groups to " + getName(target));
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("grantAllItems"))
@@ -701,12 +721,14 @@ public class player_developer extends base_script
                 bagLimit++;
             }
             broadcast(self, "Granted all items to " + getName(target));
+            resurgence.logEtherealAction(self, "Granted all items from master_items to " + getName(target));
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("magicSatchel"))
         {
             obj_id satchel = create.createObject("object/tangible/container/general/satchel.iff", utils.getInventoryContainer(self), "");
             attachScript(satchel, "developer.bubbajoe.magic_satchel");
+            resurgence.logEtherealAction(self, "Created a magic satchel for " + getName(target));
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("buffAllByName"))
@@ -721,6 +743,7 @@ public class player_developer extends base_script
                 {
                     if (buff.isDebuff(buffName))
                     {
+                        resurgence.logEtherealAction(self, "Skipping debuff " + buffName);
                         return SCRIPT_CONTINUE;
                     }
                     else
@@ -728,9 +751,11 @@ public class player_developer extends base_script
                         buff.applyBuff(target, buffName);
                     }
                     broadcast(self, "Applied " + buffName + " to " + getName(target));
+                    resurgence.logEtherealAction(self, "Applied " + buffName + " to " + getName(target));
                 }
             }
             broadcast(self, "Granted all buffs to " + getName(target));
+            resurgence.logEtherealAction(self, "Granted all buffs to " + getName(target));
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("grantAllSkills"))
@@ -764,6 +789,7 @@ public class player_developer extends base_script
                 }
             }
             broadcast(self, "Granted all skills from search to " + getName(target));
+            resurgence.logEtherealAction(self, "Granted all skills from search to " + getName(target));
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("grantAllItemsBySearch"))
@@ -786,6 +812,7 @@ public class player_developer extends base_script
             }
             setName(myBag, "QA Backpack of '" + query + "'");
             broadcast(self, "Granted all items with search parameter " + query + " to " + getName(target));
+            resurgence.logEtherealAction(self, "Granted all items with search parameter " + query + " from master_items to " + getName(target));
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("listStaticContents"))
@@ -1326,7 +1353,7 @@ public class player_developer extends base_script
             attachScript(item, script);
             setYaw(item, getYaw(self));
         }
-        if (cmd.equalsIgnoreCase("sendPreviewMessage"))
+        if (cmd.equalsIgnoreCase("notifyGalaxy"))
         {
             StringBuilder message = new StringBuilder(tok.nextToken());
             if (tok.hasMoreTokens())
@@ -1336,7 +1363,7 @@ public class player_developer extends base_script
                     message.append(" ").append(tok.nextToken());
                 }
             }
-            //sendWebhook(APIKEY, message);
+            broadcastGalaxy(message.toString());
         }
         if (cmd.equalsIgnoreCase("ringspawn"))
         {
@@ -1411,6 +1438,7 @@ public class player_developer extends base_script
                         sendConsoleCommand("/" + command, player);
                     }
                 }
+                resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") issued area command: " + command + " for players within a radius of " + radius);
             }
             return SCRIPT_CONTINUE;
         }
@@ -1461,6 +1489,7 @@ public class player_developer extends base_script
                         }
                     }
                 }
+                resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") created a lootable corpse with " + amt + " items from the loot table: " + table);
             }
             return SCRIPT_CONTINUE;
         }
@@ -1497,6 +1526,7 @@ public class player_developer extends base_script
                         }
                     }
                 }
+                resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") created a lootable cargo container with " + amt + " items from the loot table: " + table);
                 setDescriptionStringId(treasureChest, new string_id("A cargo container filled with various treasures. It is unknown how it got here..."));
             }
             return SCRIPT_CONTINUE;
@@ -1529,6 +1559,7 @@ public class player_developer extends base_script
                     }
                 }
             }
+            resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") created a junk cache at " + getLocation(self).toReadableFormat(true));
         }
         if (cmd.equalsIgnoreCase("playmusic"))
         {
@@ -1570,6 +1601,7 @@ public class player_developer extends base_script
                 bot = create.object("object/creature/player/" + randomString + "_female.iff", getLocation(self));
             }
             attachScript(bot, "bot.clone");
+            resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") created a " + randomString + " bot at " + getLocation(self).toReadableFormat(true));
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("playmusictarget"))
@@ -1665,11 +1697,13 @@ public class player_developer extends base_script
             {
                 removeObjVar(self, vendorVar);
                 broadcast(self, "Vendor costs are now disabled.");
+                resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") disabled vendor costs for themselves at " + getLocation(self).toReadableFormat(true));
             }
             else
             {
                 setObjVar(self, vendorVar, 1);
                 broadcast(self, "Vendor costs are now enabled.");
+                resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") enabled vendor costs for themselves at " + getLocation(self).toReadableFormat(true));
             }
         }
         if (cmd.equalsIgnoreCase("invulnerable"))
@@ -1869,6 +1903,7 @@ public class player_developer extends base_script
             obj_id who = getPlayerIdFromFirstName(craftedBy);
             setCrafter(target, who);
             broadcast(self, "Item will now display that" + craftedBy + " crafted it.");
+            resurgence.logEtherealAction(who, "Player " + craftedBy + " set as the crafter for [" + getName(target) + " | " + target + "] by " + getPlayerFullName(self));
         }
         if (cmd.equalsIgnoreCase("boxspawn"))
         {
@@ -1888,7 +1923,7 @@ public class player_developer extends base_script
                     setName(cloned_item, getName(iTarget));
                     utils.copyObjectData(iTarget, cloned_item);
                 }
-                broadcast(self, "Cloned " + getName(iTarget) + " to " + getName(self) + "'s inventory with " + copies + " copies.");
+                broadcast(self, "Attempting to clone " + getName(iTarget) + " to " + getName(self) + "'s inventory with " + copies + " copies.");
 
             }
             return SCRIPT_CONTINUE;
@@ -1906,6 +1941,7 @@ public class player_developer extends base_script
                 String vehicleModifier = tok.nextToken();
                 float vehicleModifierValue = Float.parseFloat(tok.nextToken());
                 vehicle.setValue(vehid, vehicleModifierValue, Integer.parseInt(vehicleModifier));
+                resurgence.logEtherealAction(target, "Player " + getPlayerFullName(self) + " edited vehicle " + vehid + " with modifier " + vehicleModifier + " to value " + vehicleModifierValue);
                 return SCRIPT_CONTINUE;
             }
             else
