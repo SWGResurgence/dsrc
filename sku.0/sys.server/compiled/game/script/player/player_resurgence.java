@@ -10,12 +10,8 @@ package script.player;/*
  * Unauthorized usage, viewing or sharing of this file is prohibited.
  */
 
+import script.*;
 import script.library.*;
-import script.obj_id;
-import script.location;
-import script.menu_info_types;
-import script.menu_info_data;
-import script.dictionary;
 
 import java.util.Arrays;
 import java.util.StringTokenizer;
@@ -370,6 +366,16 @@ public class player_resurgence extends script.base_script
             dungeonStatus = "\\#EDBB17Engaged\\#.";
         }
         return dungeonStatus;
+    }
+
+    public int OnCraftedPrototype(obj_id self, obj_id prototypeObject, draft_schematic manufacturingSchematic) throws InterruptedException
+    {
+        if (!isGod(self))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") crafted a prototype of " + getTemplateName(prototypeObject) + " while in godmode using the schematic " + (manufacturingSchematic));
+        return SCRIPT_CONTINUE;
     }
 
     public int cmdTapeMeasure(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
